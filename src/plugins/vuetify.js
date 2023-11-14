@@ -4,6 +4,13 @@ import * as components from "vuetify/components"
 import * as directives from "vuetify/directives"
 import { aliases, mdi } from "vuetify/iconsets/mdi-svg"
 
+const baseTheme = {
+  dark: false,
+  colors: {
+    success: "#00C853",
+  },
+}
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -41,10 +48,16 @@ const vuetify = createVuetify({
       variant: "outlined",
     },
     VCardText: {
-      class: "text-body-1",
+      class: "text-body-1 ",
     },
     VListItemTitle: {
       class: "text-body-1",
+    },
+  },
+  theme: {
+    defaultTheme: "baseTheme",
+    themes: {
+      baseTheme,
     },
   },
 })
