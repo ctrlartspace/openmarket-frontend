@@ -40,6 +40,9 @@ const vuetify = createVuetify({
       density: "compact",
       variant: "outlined",
     },
+    VCardText: {
+      class: "text-body-1",
+    },
     VListItemTitle: {
       class: "text-body-1",
     },

@@ -6,13 +6,16 @@
       </v-col>
       <v-col>
         <v-select></v-select>
+        <cart-total-value></cart-total-value>
         <!--  -->
       </v-col>
     </v-row>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import CartTotalValue from "@/components/CartTotalValue.vue"
+</script>
 
 <style scoped>
 .content {
