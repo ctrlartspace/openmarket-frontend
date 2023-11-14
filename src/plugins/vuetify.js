@@ -8,7 +8,7 @@ import "@mdi/font/css/materialdesignicons.css"
 const baseTheme = {
   dark: false,
   colors: {
-    success: "#69F0AE",
+    success: "#30DB5B",
   },
 }
 
