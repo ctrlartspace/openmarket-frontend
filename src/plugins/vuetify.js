@@ -7,7 +7,7 @@ import { aliases, mdi } from "vuetify/iconsets/mdi-svg"
 const baseTheme = {
   dark: false,
   colors: {
-    success: "#00C853",
+    success: "#69F0AE",
   },
 }
 
