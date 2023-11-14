@@ -4,6 +4,6 @@
       <span class="font-weight-bold"> 1. Кабель Borofone ZX 400, </span>
       1 шт
     </span>
-    <span class="font-weight-bold"> 1000 </span>
+    <span> 1000 </span>
   </div>
 </template>
