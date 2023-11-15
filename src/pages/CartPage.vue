@@ -41,6 +41,7 @@ const inputValue = ref(null)
 
 const addCartItem = () => {
   store.addItem(inputValue.value)
+  inputValue.value = ""
 }
 </script>
 

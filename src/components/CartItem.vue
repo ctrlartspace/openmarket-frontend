@@ -2,13 +2,10 @@
   <v-menu location="bottom">
     <template v-slot:activator="{ props }">
       <div v-bind="props" class="cart-item d-flex">
-        <span class="me-auto">
-          <span class="font-weight-bold">
-            {{ `${item.brand} ${item.model}` }},
-          </span>
-          1 шт.
+        <span class="me-auto font-weight-bold">
+          {{ `${item.brand} ${item.model}` }}
         </span>
-        <span> {{ item.price }}</span>
+        <span> 1 шт, {{ item.price }}</span>
       </div>
     </template>
     <v-list class="border elevation-0">
