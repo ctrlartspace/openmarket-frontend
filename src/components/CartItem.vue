@@ -1,40 +1,29 @@
 <template>
-  <v-menu location="bottom">
-    <template v-slot:activator="{ props }">
-      <div v-bind="props" class="cart-item d-flex">
-        <v-icon
-          class="align-self-center text-red"
-          size="sm"
-          icon="mdi-minus"
-        ></v-icon>
-        <span class="me-auto ml-2 font-weight-bold">
-          {{ `${item.brand} ${item.model}` }}
-        </span>
-        <span> 1 шт, {{ item.price }}</span>
-      </div>
-    </template>
-    <v-list class="border elevation-0">
-      <v-list-item
-        v-for="(item, i) in menuItems"
-        :prepend-icon="item.icon"
-        @click=""
-        :key="i"
-      >
-        <v-list-item-title>{{ item.title }}</v-list-item-title>
-      </v-list-item>
-    </v-list>
-  </v-menu>
+  <div class="cart-item d-flex">
+    <v-icon
+      class="align-self-center text-red"
+      size="sm"
+      icon="mdi-minus"
+      @click="onRemoveClick"
+    ></v-icon>
+    <span class="me-auto ml-2 font-weight-bold">
+      {{ `${item.brand} ${item.model}` }}
+    </span>
+    <span> 1 шт, {{ item.price }}</span>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue"
 
-defineProps({
+const props = defineProps({
   item: {
     type: Object,
     required: true,
   },
 })
+
+const emit = defineEmits(["onRemoveClick"])
 
 const menuItems = ref([
   {
@@ -46,6 +35,11 @@ const menuItems = ref([
     title: "Удалить",
   },
 ])
+
+const onRemoveClick = () => {
+  emit("onRemoveClick", props.item.id)
+  console.log("remove item")
+}
 </script>
 
 <style scoped>

@@ -23,8 +23,8 @@ export const useCartStore = defineStore("cart", () => {
     }
   }
 
-  const removeItem = (id) => {
-    cartItems.value.remove(id)
+  const removeItem = (index) => {
+    cartItems.value.splice(index, 1)
   }
 
   return { cartItems, getTotalAmount, addItem, removeItem }

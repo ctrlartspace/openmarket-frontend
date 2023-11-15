@@ -9,6 +9,7 @@
           v-for="(item, i) in store.cartItems"
           :item="item"
           @click=""
+          @on-remove-click="store.removeItem(i)"
           :key="i"
         />
       </v-col>
