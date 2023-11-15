@@ -6,9 +6,11 @@
         <cart-item v-for="(item, i) in items" :item="item" @click="" :key="i" />
       </v-col>
       <v-col>
-        <v-select></v-select>
+        <v-select v-model="paymentType" :items="paymentTypes"></v-select>
         <cart-total-value @click=""></cart-total-value>
-        <!--  -->
+        <div class="mt-4" v-if="paymentType === 'cash'">
+          <v-text-field placeholder="Сумма"> </v-text-field>
+        </div>
       </v-col>
     </v-row>
   </div>
@@ -19,7 +21,9 @@ import CartItem from "@/components/CartItem.vue"
 import CartTotalValue from "@/components/CartTotalValue.vue"
 
 import { ref } from "vue"
+import { paymentTypes } from "@/utils/base-data"
 
+const paymentType = ref(paymentTypes[1])
 const items = ref([
   {
     code: 123124124,
