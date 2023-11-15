@@ -2,7 +2,12 @@
   <v-menu location="bottom">
     <template v-slot:activator="{ props }">
       <div v-bind="props" class="cart-item d-flex">
-        <span class="me-auto font-weight-bold">
+        <v-icon
+          class="align-self-center text-red"
+          size="sm"
+          icon="mdi-minus"
+        ></v-icon>
+        <span class="me-auto ml-2 font-weight-bold">
           {{ `${item.brand} ${item.model}` }}
         </span>
         <span> 1 шт, {{ item.price }}</span>
