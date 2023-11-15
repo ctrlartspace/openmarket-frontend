@@ -6,7 +6,9 @@
         size="large"
         icon="mdi-cart-outline"
       ></v-icon>
-      <span class="text-h5 font-weight-bold me-auto"> 1 000 </span>
+      <span class="text-h5 font-weight-bold me-auto">
+        {{ store.getTotalAmount }}
+      </span>
       <span class="text-h5 font-weight-bold"> KZT </span>
     </v-card-text>
   </v-card>
@@ -14,6 +16,9 @@
 </template>
 
 <script setup>
+import { useCartStore } from "@/stores/cart.store"
+
+const store = useCartStore()
 //
 </script>
 
