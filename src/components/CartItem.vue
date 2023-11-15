@@ -3,8 +3,10 @@
     <template v-slot:activator="{ props }">
       <div v-bind="props" class="cart-item d-flex">
         <span class="me-auto">
-          <span class="font-weight-bold"> {{ item.title }}, </span>
-          {{ item.count }} шт.
+          <span class="font-weight-bold">
+            {{ `${item.brand} ${item.model}` }},
+          </span>
+          1 шт.
         </span>
         <span> {{ item.price }}</span>
       </div>

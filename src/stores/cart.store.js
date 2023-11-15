@@ -13,7 +13,12 @@ export const useCartStore = defineStore("cart", () => {
   )
 
   const addItem = (id) => {
-    const resultItem = items.filter((item) => item.id === id)
+    const resultItem = items.find((item) => {
+      console.log(String(item.id), id)
+
+      return String(item.id) === id
+    })
+    console.log(id, resultItem, items)
     cartItems.value.push(resultItem)
   }
 
