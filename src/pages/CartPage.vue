@@ -7,10 +7,12 @@
       </v-col>
       <v-col>
         <v-select v-model="paymentType" :items="paymentTypes"></v-select>
-        <cart-total-value @click=""></cart-total-value>
-        <div class="mt-4" v-if="paymentType === 'cash'">
+        <div v-if="paymentType === 'cash'">
           <v-text-field placeholder="Сумма"> </v-text-field>
+          <v-text-field placeholder="Сдача" readonly value="Сдача: 550">
+          </v-text-field>
         </div>
+        <cart-total-value @click=""></cart-total-value>
       </v-col>
     </v-row>
   </div>
