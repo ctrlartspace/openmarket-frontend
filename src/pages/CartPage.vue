@@ -2,8 +2,15 @@
   <div class="content">
     <v-row>
       <v-col cols="8">
-        <v-text-field placeholder="Код товара"></v-text-field>
-        <cart-item v-for="(item, i) in items" :item="item" @click="" :key="i" />
+        <v-form @submit.prevent="addCartItem">
+          <v-text-field v-model="inputValue" placeholder="Код товара" />
+        </v-form>
+        <cart-item
+          v-for="(item, i) in store.cartItems"
+          :item="item"
+          @click=""
+          :key="i"
+        />
       </v-col>
       <v-col>
         <v-select v-model="paymentType" :items="paymentTypes"></v-select>
@@ -24,22 +31,17 @@ import CartTotalValue from "@/components/CartTotalValue.vue"
 
 import { ref } from "vue"
 import { paymentTypes } from "@/utils/base-data"
+import { useCartStore } from "@/stores/cart.store"
+
+const store = useCartStore()
+console.log(store.cartItems)
 
 const paymentType = ref(paymentTypes[1])
-const items = ref([
-  {
-    code: 123124124,
-    title: "Кабель Borofone ZX 2000",
-    count: 2,
-    price: 2000,
-  },
-  {
-    code: 325436346,
-    title: "ЗУ Hoco TX 23",
-    count: 2,
-    price: 1500,
-  },
-])
+const inputValue = ref(null)
+
+const addCartItem = () => {
+  store.addItem(inputValue.value)
+}
 </script>
 
 <style scoped>
