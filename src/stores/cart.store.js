@@ -18,8 +18,9 @@ export const useCartStore = defineStore("cart", () => {
 
       return String(item.id) === id
     })
-    console.log(id, resultItem, items)
-    cartItems.value.push(resultItem)
+    if (resultItem) {
+      cartItems.value.push(resultItem)
+    }
   }
 
   const removeItem = (id) => {
