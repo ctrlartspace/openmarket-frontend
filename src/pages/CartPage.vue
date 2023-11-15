@@ -14,13 +14,8 @@
         />
       </v-col>
       <v-col>
-        <v-select v-model="paymentType" :items="paymentTypes"></v-select>
-        <div v-if="paymentType === 'cash'">
-          <v-text-field placeholder="Сумма"> </v-text-field>
-          <v-text-field placeholder="Сдача" readonly value="Сдача: 550">
-          </v-text-field>
-        </div>
-        <cart-total-value @click=""></cart-total-value>
+        <cart-change />
+        <cart-total-value @click="" />
       </v-col>
     </v-row>
   </div>
@@ -28,16 +23,14 @@
 
 <script setup>
 import CartItem from "@/components/CartItem.vue"
+import CartChange from "@/components/CartChange.vue"
 import CartTotalValue from "@/components/CartTotalValue.vue"
 
 import { ref } from "vue"
-import { paymentTypes } from "@/utils/base-data"
 import { useCartStore } from "@/stores/cart.store"
 
 const store = useCartStore()
-console.log(store.cartItems)
 
-const paymentType = ref(paymentTypes[1])
 const inputValue = ref(null)
 
 const addCartItem = () => {
