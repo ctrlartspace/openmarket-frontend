@@ -4,6 +4,12 @@ import { ref, computed } from "vue"
 export const useCartStore = defineStore("cart", () => {
   const cartItems = ref([])
 
+  const getTotalAmount = computed(() =>
+    cartItems.value.reduce((acc, obj) => {
+      return acc + obj["price"]
+    }, 0)
+  )
+
   const addItem = (item) => {
     cartItems.value.push(item)
   }
@@ -12,5 +18,5 @@ export const useCartStore = defineStore("cart", () => {
     cartItems.value.remove(id)
   }
 
-  return { cartItems, addItem, removeItem }
+  return { cartItems, getTotalAmount, addItem, removeItem }
 })
