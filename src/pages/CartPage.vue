@@ -3,7 +3,12 @@
     <v-row>
       <v-col cols="8">
         <v-form @submit.prevent="addCartItem">
-          <v-text-field v-model="inputValue" placeholder="Код товара" />
+          <v-text-field
+            class="mb-4 font-weight-bold"
+            v-model="inputValue"
+            placeholder="Код товара"
+            hide-details
+          />
         </v-form>
         <cart-item
           v-for="(item, i) in store.cartItems"

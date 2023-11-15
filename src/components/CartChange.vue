@@ -1,5 +1,9 @@
 <template>
-  <v-select v-model="paymentType" :items="paymentTypes"></v-select>
+  <v-select
+    v-model="paymentType"
+    class="font-weight-bold"
+    :items="paymentTypes"
+  ></v-select>
   <div v-if="paymentType === 'cash'">
     <v-text-field
       v-model="inputAmount"
