@@ -2,6 +2,11 @@
   <div class="content">
     <v-row>
       <v-col cols="8">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
+        >
+          Button
+        </button>
         <search-field
           class="mb-4"
           v-model="inputValue"
