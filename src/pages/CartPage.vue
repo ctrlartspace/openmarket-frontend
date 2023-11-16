@@ -8,6 +8,7 @@
           :search-items="['esfs', 'sdfdsf']"
           @submit="addCartItem"
           @change="console.log($event)"
+          autoclear
         />
         <cart-item
           v-for="(item, i) in store.cartItems"
@@ -31,16 +32,17 @@ import CartItem from "@/components/CartItem.vue"
 import CartChange from "@/components/CartChange.vue"
 import CartTotalValue from "@/components/CartTotalValue.vue"
 
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 
 const store = useCartStore()
 
 const inputValue = ref(null)
 
+const searchItems = computed(() => {})
+
 const addCartItem = () => {
   store.addItem(inputValue.value)
-  inputValue.value = ""
 }
 </script>
 
