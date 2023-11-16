@@ -2,14 +2,13 @@
   <div class="content">
     <v-row>
       <v-col cols="8">
-        <v-form @submit.prevent="addCartItem">
-          <v-text-field
-            class="mb-4 font-weight-bold"
-            v-model="inputValue"
-            placeholder="Код товара"
-            hide-details
-          />
-        </v-form>
+        <search-field
+          class="mb-4"
+          v-model="inputValue"
+          :search-items="['esfs', 'sdfdsf']"
+          @submit="addCartItem"
+          @change="console.log($event)"
+        />
         <cart-item
           v-for="(item, i) in store.cartItems"
           :item="item"
@@ -27,6 +26,7 @@
 </template>
 
 <script setup>
+import SearchField from "@/components/SearchField.vue"
 import CartItem from "@/components/CartItem.vue"
 import CartChange from "@/components/CartChange.vue"
 import CartTotalValue from "@/components/CartTotalValue.vue"
