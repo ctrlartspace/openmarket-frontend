@@ -6,10 +6,10 @@
         size="large"
         icon="mdi-cart-outline"
       ></v-icon>
-      <span class="text-h5 font-weight-bold me-auto">
+      <span class="font-weight-bold me-auto">
         {{ store.getTotalAmount }}
       </span>
-      <span class="text-h5 font-weight-bold"> KZT </span>
+      <span class="font-weight-bold"> KZT </span>
     </v-card-text>
   </v-card>
   <!--  -->
