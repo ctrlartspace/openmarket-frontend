@@ -5,9 +5,10 @@
         <search-field
           class="mb-4"
           v-model="inputValue"
-          :search-items="['esfs', 'sdfdsf']"
+          :search-items="searchItems"
           @submit="addCartItem"
-          @change="console.log($event)"
+          @change="search"
+          @on-search-item-click="addCartItem"
           autoclear
         />
         <cart-item
@@ -32,17 +33,23 @@ import CartItem from "@/components/CartItem.vue"
 import CartChange from "@/components/CartChange.vue"
 import CartTotalValue from "@/components/CartTotalValue.vue"
 
-import { ref, computed } from "vue"
+import { ref } from "vue"
 import { useCartStore } from "@/stores/cart.store"
+import { getItems } from "@/services/ItemSearch"
 
 const store = useCartStore()
 
 const inputValue = ref(null)
 
-const searchItems = computed(() => {})
+const searchItems = ref(null)
 
-const addCartItem = () => {
-  store.addItem(inputValue.value)
+const search = () => {
+  searchItems.value = getItems(inputValue.value)
+}
+
+const addCartItem = (id) => {
+  console.log(id)
+  store.addItem(id)
 }
 </script>
 

@@ -17,17 +17,23 @@
       v-bind="$attrs"
     >
     </v-text-field>
-    <v-menu activator="parent">
+    <v-menu v-if="value" v-model="isMenu" activator="parent">
       <v-list
-        v-if="value && searchItems && searchItems.length > 0"
+        v-if="searchItems && searchItems.length > 0"
         class="border elevation-0"
       >
         <v-list-item
           v-for="(item, index) in searchItems"
           :key="index"
           :value="index"
+          @click="onSearchItemClick(item.id)"
         >
-          <v-list-item-title>{{ item }}</v-list-item-title>
+          <v-list-item-title>{{ item.model }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+      <v-list v-else class="border elevation-0">
+        <v-list-item>
+          <v-list-item-title>Не найдено</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -52,9 +58,15 @@ const props = defineProps({
   modelValue: {},
 })
 
-const emit = defineEmits(["submit", "update:modelValue", "change"])
+const emit = defineEmits([
+  "submit",
+  "update:modelValue",
+  "change",
+  "onSearchItemClick",
+])
 const searchInput = ref(null)
 const isPrinting = ref(false)
+const isMenu = ref(true)
 
 const value = computed({
   get() {
@@ -71,15 +83,19 @@ const onInputChange = (event) => {
     return
   }
   isPrinting.value = true
+  isMenu.value = true
   setTimeout(() => {
     isPrinting.value = false
     emit("change", value.value)
-    console.log(value.value)
   }, 2500)
 }
 
+const onSearchItemClick = (id) => {
+  console.log(id)
+  emit("onSearchItemClick", id)
+}
 const submit = () => {
-  emit("submit", value)
+  emit("submit", value.value)
 
   if (props.autoclear) {
     value.value = ""
