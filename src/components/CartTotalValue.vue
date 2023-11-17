@@ -1,18 +1,11 @@
 <template>
-  <v-card class="border" variant="elevated" color="success">
-    <v-card-text class="d-flex text-white">
-      <v-icon
-        class="mr-4 align-self-center"
-        size="large"
-        icon="mdi-cart-outline"
-      ></v-icon>
-      <span class="font-weight-bold me-auto">
-        {{ store.getTotalAmount }}
-      </span>
-      <span class="font-weight-bold"> KZT </span>
-    </v-card-text>
-  </v-card>
-  <!--  -->
+  <div
+    class="flex bg-green-400 text-white text-xl font-semibold p-4 border border-green-600 rounded hover:brightness-95 cursor-pointer font-mono shadow"
+  >
+    <span class="material-icons self-center">shopping_cart</span>
+    <span class="ml-4 flex-auto"> {{ store.getTotalAmount }} </span>
+    <span class="">KZT</span>
+  </div>
 </template>
 
 <script setup>
