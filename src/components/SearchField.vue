@@ -1,42 +1,42 @@
 <template>
   <v-form @submit.prevent="submit">
-    <v-text-field
-      ref="searchInput"
-      v-model="value"
-      label="Поиск"
-      density="compact"
-      hide-details
-      clearable
-      single-line
-      variant="outlined"
-      hint="Нажмите Enter для поиска"
-      :loading="loading"
-      :disabled="loading"
-      @click:append-inner="submit"
-      @input="onInputChange"
-      v-bind="$attrs"
-    >
-    </v-text-field>
-    <v-menu v-if="value" v-model="isMenu" activator="parent">
-      <v-list
-        v-if="searchItems && searchItems.length > 0"
-        class="border elevation-0"
-      >
-        <v-list-item
-          v-for="(item, index) in searchItems"
-          :key="index"
-          :value="index"
-          @click="onSearchItemClick(item.id)"
+    <div class="relative">
+      <input
+        ref="searchInput"
+        v-model="value"
+        class="bg-white mb-0 text-lg placeholder:font-normal appearance-none border border-gray-400 font-semibold rounded w-full py-2 px-4 text-gray-700 focus:outline-2 focus:outline-black"
+        placeholder="Код товара"
+        type="text"
+        @input="onInputChange"
+        v-bind="$attrs"
+        @focus=""
+      />
+      <div v-if="value" class="absolute inset-y-0 right-2 flex items-center">
+        <span
+          class="material-icons text-gray-400 hover:text-gray-800 cursor-pointer"
+          @click="onClearClick"
+          >close</span
         >
-          <v-list-item-title>{{ item.model }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-      <v-list v-else class="border elevation-0">
-        <v-list-item>
-          <v-list-item-title>Не найдено</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+      </div>
+      <div
+        class="absolute mt-2 w-full bg-white py-2 text-lg border border-gray-400 rounded"
+        :class="value ? 'block' : 'hidden'"
+      >
+        <ul>
+          <li
+            v-if="searchItems && searchItems.length > 0"
+            class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            v-for="(item, index) in searchItems"
+            :key="index"
+            :value="index"
+            @click="onSearchItemClick(item.id)"
+          >
+            {{ item.model }}
+          </li>
+          <li v-else class="px-4 py-2 text-gray-400">Ничего не найдено</li>
+        </ul>
+      </div>
+    </div>
   </v-form>
 </template>
 
@@ -66,7 +66,6 @@ const emit = defineEmits([
 ])
 const searchInput = ref(null)
 const isPrinting = ref(false)
-const isMenu = ref(true)
 
 const value = computed({
   get() {
@@ -83,7 +82,6 @@ const onInputChange = (event) => {
     return
   }
   isPrinting.value = true
-  isMenu.value = true
   setTimeout(() => {
     isPrinting.value = false
     emit("change", value.value)
@@ -92,6 +90,7 @@ const onInputChange = (event) => {
 
 const onSearchItemClick = (id) => {
   console.log(id)
+  value.value = ""
   emit("onSearchItemClick", id)
 }
 const submit = () => {
@@ -100,6 +99,10 @@ const submit = () => {
   if (props.autoclear) {
     value.value = ""
   }
+}
+
+const onClearClick = () => {
+  value.value = ""
 }
 
 // каждый раз когда изменяется loading

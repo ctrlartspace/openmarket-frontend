@@ -10,7 +10,6 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  linkActiveClass: "app-router-link-active",
 })
 
 router.beforeEach((to, from, next) => {

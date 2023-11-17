@@ -1,12 +1,20 @@
 <template>
   <router-link
     v-for="(item, i) in menuItems"
-    class="app-router-link"
-    :class="{ 'ml-4': i != 0 }"
+    v-slot="{ isActive }"
     :to="item.path"
     :key="i"
   >
-    {{ item.title }}
+    <span
+      class="font-semibold"
+      :class="{
+        'ml-4': i != 0,
+        'text-black': isActive,
+        'text-gray-400': !isActive,
+      }"
+    >
+      {{ item.title }}
+    </span>
   </router-link>
 </template>
 
@@ -28,18 +36,4 @@ const menuItems = ref([
 ])
 </script>
 
-<style scoped>
-.app-router-link :first-child {
-  margin-left: 0;
-}
-.app-router-link {
-  color: #bdbdbd;
-  text-decoration: none;
-  font-weight: 700;
-}
-.app-router-link-active {
-  color: #000;
-  text-decoration: none;
-  font-weight: 700;
-}
-</style>
+<style scoped></style>
