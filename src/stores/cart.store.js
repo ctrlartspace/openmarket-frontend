@@ -6,6 +6,8 @@ import { items } from "@/utils/db"
 export const useCartStore = defineStore("cart", () => {
   const cartItems = ref([])
 
+  const isEmpty = computed(() => cartItems.value.length === 0)
+
   const getTotalAmount = computed(() =>
     cartItems.value.reduce((acc, obj) => {
       return acc + obj["price"]
@@ -25,5 +27,5 @@ export const useCartStore = defineStore("cart", () => {
     cartItems.value.splice(index, 1)
   }
 
-  return { cartItems, getTotalAmount, addItem, removeItem }
+  return { cartItems, isEmpty, getTotalAmount, addItem, removeItem }
 })
