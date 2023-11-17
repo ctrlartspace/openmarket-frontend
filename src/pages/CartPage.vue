@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-6 gap-4 mt-32">
     <div class="col-span-4">
-      <div class="h-96 overflow-hidden">
+      <div class="bg-red-100">
         <search-field
           class="mb-4"
           v-model="inputValue"
@@ -11,6 +11,8 @@
           @on-search-item-click="addCartItem"
           autoclear
         />
+      </div>
+      <div class="h-96 overflow-hidden">
         <cart-item
           v-for="(item, i) in store.cartItems"
           :item="item"
@@ -18,6 +20,15 @@
           @on-remove-click="store.removeItem(i)"
           :key="i"
         />
+
+        <div
+          v-if="store.cartItems.length === 0"
+          class="flex align-middle justify-center h-full"
+        >
+          <span class="material-icons self-center text-8xl text-gray-100"
+            >add_shopping_cart</span
+          >
+        </div>
       </div>
       <hr class="h-px bg-gray-200 border-0" />
       <div>
@@ -33,9 +44,11 @@
           </div>
         </div>
         <div
-          class="inline-block text-lg text-gray-300 px-4 py-2 cursor-pointer border-b border-r hover:bg-gray-100 first:rounded-br-none first:border-l first:rounded-bl last:rounded-br"
+          class="inline-block text-lg text-gray-300 px-4 py-2 cursor-pointer border-b border-r hover:bg-gray-100 first:rounded-br-none first:border-l first:rounded-bl last:rounded-br first:text-black"
         >
-          <span class="text-lg self-center">+</span>
+          <div class="flex">
+            <span class="self-center material-icons text-lg"> add</span>
+          </div>
         </div>
       </div>
     </div>
