@@ -1,14 +1,12 @@
 <template>
-  <v-container class="pa-0 container">
-    <v-app>
-      <header class="pa-2">
-        <app-header></app-header>
-      </header>
-      <main class="pa-2 fill-height">
-        <router-view></router-view>
-      </main>
-    </v-app>
-  </v-container>
+  <div class="max-w-[800px] mx-auto">
+    <header class="p-2">
+      <app-header></app-header>
+    </header>
+    <main class="p-2 h-full">
+      <router-view></router-view>
+    </main>
+  </div>
 </template>
 <script setup>
 import AppHeader from "@/components/AppHeader.vue"

@@ -1,29 +1,27 @@
 <template>
-  <div class="content">
-    <v-row>
-      <v-col cols="8">
-        <search-field
-          class="mb-4"
-          v-model="inputValue"
-          :search-items="searchItems"
-          @submit="addCartItem"
-          @change="search"
-          @on-search-item-click="addCartItem"
-          autoclear
-        />
-        <cart-item
-          v-for="(item, i) in store.cartItems"
-          :item="item"
-          @click=""
-          @on-remove-click="store.removeItem(i)"
-          :key="i"
-        />
-      </v-col>
-      <v-col>
-        <cart-change />
-        <cart-total-value @click="" />
-      </v-col>
-    </v-row>
+  <div class="grid grid-cols-6 gap-4 h-full max-h-96 mt-32 overflow-hidden">
+    <div class="col-span-4">
+      <search-field
+        class="mb-4"
+        v-model="inputValue"
+        :search-items="searchItems"
+        @submit="addCartItem"
+        @change="search"
+        @on-search-item-click="addCartItem"
+        autoclear
+      />
+      <cart-item
+        v-for="(item, i) in store.cartItems"
+        :item="item"
+        @click=""
+        @on-remove-click="store.removeItem(i)"
+        :key="i"
+      />
+    </div>
+    <div class="col-span-2">
+      <cart-change />
+      <cart-total-value @click="" />
+    </div>
   </div>
 </template>
 
@@ -52,9 +50,3 @@ const addCartItem = (id) => {
   store.addItem(id)
 }
 </script>
-
-<style scoped>
-.content {
-  margin-top: 90px;
-}
-</style>
