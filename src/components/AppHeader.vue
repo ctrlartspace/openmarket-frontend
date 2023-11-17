@@ -6,11 +6,11 @@
     :key="i"
   >
     <span
-      class="font-semibold"
+      class="font-semibold text-lg"
       :class="{
         'ml-4': i != 0,
         'text-black': isActive,
-        'text-gray-400': !isActive,
+        'text-gray-300': !isActive,
       }"
     >
       {{ item.title }}

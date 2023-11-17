@@ -1,12 +1,16 @@
 <template>
-  <div class="cart-item d-flex">
-    <v-icon
-      class="align-self-center text-red"
-      size="sm"
-      icon="mdi-minus"
+  <div class="flex cursor-pointer text-lg">
+    <span
+      class="material-icons self-center rounded hover:bg-red-100 hover:text-red-700"
       @click="onRemoveClick"
-    ></v-icon>
-    <span class="me-auto ml-2 font-weight-bold">
+    >
+      remove
+    </span>
+
+    <span
+      class="ml-2 font-semibold flex-auto hover:underline"
+      @click="onItemClick"
+    >
       {{ `${item.brand} ${item.model}` }}
     </span>
     <span> 1 шт, {{ item.price }}</span>
@@ -41,11 +45,3 @@ const onRemoveClick = () => {
   console.log("remove item")
 }
 </script>
-
-<style scoped>
-.cart-item :hover {
-  text-decoration: underline;
-  cursor: pointer;
-  user-select: none;
-}
-</style>

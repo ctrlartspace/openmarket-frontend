@@ -1,10 +1,10 @@
 <template>
   <v-form @submit.prevent="submit">
-    <div class="relative">
+    <div class="relative text-lg">
       <input
         ref="searchInput"
         v-model="value"
-        class="bg-white mb-0 text-lg placeholder:font-normal appearance-none border border-gray-400 font-semibold rounded w-full py-2 px-4 text-gray-700 focus:outline-2 focus:outline-black"
+        class="bg-white mb-0 placeholder:font-normal appearance-none border border-gray-400 font-semibold rounded w-full py-2 px-4 text-gray-700 focus:outline-2 focus:outline-black"
         placeholder="Код товара"
         type="text"
         @input="onInputChange"
@@ -19,7 +19,7 @@
         >
       </div>
       <div
-        class="absolute mt-2 w-full bg-white py-2 text-lg border border-gray-400 rounded"
+        class="absolute mt-2 w-full bg-white py-2 border border-gray-400 rounded"
         :class="value ? 'block' : 'hidden'"
       >
         <ul>
