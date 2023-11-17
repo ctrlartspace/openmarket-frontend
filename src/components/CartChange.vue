@@ -1,30 +1,27 @@
 <template>
-  <v-select
-    v-model="paymentType"
-    class="font-weight-bold"
-    :items="paymentTypes"
-  ></v-select>
-  <div v-if="paymentType === 'cash'">
-    <v-text-field
-      v-model="inputAmount"
-      class="mb-2"
-      hide-details
-      placeholder="Сумма"
+  <div
+    class="px-2 mb-4 rounded border border-gray-400 cursor-pointer hover:bg-gray-100"
+  >
+    <div
+      class="p-2 text-lg font-semibold text-center select-none"
+      @click="onChangePaymentType"
     >
-    </v-text-field>
-    <v-text-field class="mb-2" hide-details readonly :value="cartChange">
-    </v-text-field>
+      {{ isCash ? "Наличные" : "Перевод" }}
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue"
-import { paymentTypes } from "@/utils/base-data"
 import { useCartStore } from "@/stores/cart.store"
 
 const store = useCartStore()
 const inputAmount = ref(null)
-const paymentType = ref(paymentTypes[1])
+const isCash = ref(false)
 
 const cartChange = computed(() => inputAmount.value - store.getTotalAmount)
+
+const onChangePaymentType = () => {
+  isCash.value = !isCash.value
+}
 </script>
