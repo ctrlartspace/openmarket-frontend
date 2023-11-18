@@ -1,12 +1,28 @@
 <template>
-  <div
-    class="px-2 mb-4 rounded border border-gray-300 cursor-pointer hover:bg-gray-100"
-  >
+  <div>
+    <div class="relative">
+      <input
+        v-model="inputAmount"
+        class="mb-0 border border-gray-300 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
+        placeholder="Наличные"
+        type="text"
+      />
+      <div
+        v-if="inputAmount"
+        class="absolute inset-y-0 right-2 flex items-center"
+      >
+        <span
+          class="material-icons text-gray-400 hover:text-gray-800 cursor-pointer"
+          @click="inputAmount = ''"
+          >close</span
+        >
+      </div>
+    </div>
     <div
-      class="p-2 text-lg font-semibold text-center select-none"
-      @click="onChangePaymentType"
+      v-if="inputAmount"
+      class="mt-4 px-4 py-2 border border-gray-300 rounded"
     >
-      {{ isCash ? "Наличные" : "Перевод" }}
+      <span class="text-lg font-semibold text-blue-400">{{ cartChange }}</span>
     </div>
   </div>
 </template>
@@ -17,11 +33,6 @@ import { useCartStore } from "@/stores/cart.store"
 
 const store = useCartStore()
 const inputAmount = ref(null)
-const isCash = ref(false)
 
 const cartChange = computed(() => inputAmount.value - store.getTotalAmount)
-
-const onChangePaymentType = () => {
-  isCash.value = !isCash.value
-}
 </script>
