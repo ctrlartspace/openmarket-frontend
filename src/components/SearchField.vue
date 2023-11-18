@@ -4,14 +4,14 @@
       <input
         ref="searchInput"
         v-model="value"
-        class="bg-white mb-0 placeholder:font-normal appearance-none border border-gray-400 font-semibold rounded w-full py-2 px-4 text-gray-700 focus:outline-2 focus:outline-black"
+        class="mb-0 text-2xl placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full py-2 focus:outline-none"
         placeholder="Код товара"
         type="text"
         @input="onInputChange"
         v-bind="$attrs"
         @focus=""
       />
-      <div v-if="value" class="absolute inset-y-0 right-2 flex items-center">
+      <div v-if="value" class="absolute inset-y-0 right-0 flex items-center">
         <span
           class="material-icons text-gray-400 hover:text-gray-800 cursor-pointer"
           @click="onClearClick"
@@ -19,7 +19,7 @@
         >
       </div>
       <div
-        class="absolute mt-2 w-full bg-white py-2 border border-gray-400 rounded"
+        class="absolute mt-2 w-full bg-white py-2 border border-gray-400 rounded shadow"
         :class="value ? 'block' : 'hidden'"
       >
         <ul>
