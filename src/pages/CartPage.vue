@@ -1,7 +1,7 @@
 <template>
-  <div class="grid grid-cols-6 gap-4 mt-16">
+  <div class="grid grid-cols-6 gap-4 mt-16 h-80">
     <div
-      class="col-span-4 bg-white border border-gray-300 p-4 rounded shadow-sm min-h-[20rem]"
+      class="col-span-4 bg-white border border-gray-300 p-4 rounded shadow-sm h-80"
     >
       <div class="flex flex-col h-full">
         <search-field
@@ -14,7 +14,7 @@
           autoclear
         />
         <div
-          class="mb-4 transition-colors"
+          class="mb-4 transition-colors overflow-auto"
           :class="{ 'bg-gray-50': store.isEmpty }"
         >
           <cart-item
@@ -26,7 +26,7 @@
           />
         </div>
 
-        <div class="sticky bottom-6 mt-auto">
+        <div class="mt-auto">
           <div
             v-for="i in 2"
             class="inline-block bg-white text-lg text-gray-300 px-4 py-2 cursor-pointer border-t border-b border-r border-gray-300 hover:bg-gray-100 first:rounded-br-none first:border-l first:rounded-bl first:rounded-tl last:rounded-tr last:rounded-br first:text-black"
@@ -49,7 +49,7 @@
       </div>
     </div>
     <div
-      class="col-span-2 bg-white border border-gray-300 p-4 rounded shadow-sm sticky top-16 max-h-[20rem]"
+      class="col-span-2 bg-white border border-gray-300 p-4 rounded shadow-sm sticky top-16"
     >
       <div class="flex flex-col h-full">
         <cart-change class="" />
