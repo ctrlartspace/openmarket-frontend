@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-2 mb-4 rounded border border-gray-400 cursor-pointer hover:bg-gray-100"
+    class="px-2 mb-4 rounded border border-gray-300 cursor-pointer hover:bg-gray-100"
   >
     <div
       class="p-2 text-lg font-semibold text-center select-none"

@@ -4,14 +4,14 @@
       <input
         ref="searchInput"
         v-model="value"
-        class="mb-0 text-2xl placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full py-2 focus:outline-none"
-        placeholder="Код товара"
+        class="mb-0 border border-gray-300 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
+        placeholder="Код товара, название, модель"
         type="text"
         @input="onInputChange"
         v-bind="$attrs"
         @focus=""
       />
-      <div v-if="value" class="absolute inset-y-0 right-0 flex items-center">
+      <div v-if="value" class="absolute inset-y-0 right-2 flex items-center">
         <span
           class="material-icons text-gray-400 hover:text-gray-800 cursor-pointer"
           @click="onClearClick"
@@ -19,7 +19,7 @@
         >
       </div>
       <div
-        class="absolute mt-2 w-full bg-white py-2 border border-gray-400 rounded shadow"
+        class="absolute mt-2 w-full bg-white py-2 border border-gray-300 rounded shadow"
         :class="value ? 'block' : 'hidden'"
       >
         <ul>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick, onMounted } from "vue"
+import { ref, computed, nextTick, onMounted } from "vue"
 
 const props = defineProps({
   searchItems: {
@@ -105,15 +105,10 @@ const onClearClick = () => {
   value.value = ""
 }
 
-// каждый раз когда изменяется loading
-// ставим фокус на поле вводе::w
-watch(value, async () => {
-  await nextTick()
-  searchInput.value.focus()
-})
-
 onMounted(async () => {
-  await nextTick()
-  searchInput.value.focus()
+  window.addEventListener("keypress", async () => {
+    await nextTick()
+    searchInput.value.focus()
+  })
 })
 </script>
