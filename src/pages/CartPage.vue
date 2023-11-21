@@ -5,16 +5,14 @@
     >
       <div class="flex flex-col h-full">
         <search-field
-          class="mb-4"
           v-model="inputValue"
           :search-items="searchItems"
           @submit="addCartItem"
-          @change="search"
           @on-search-item-click="addCartItem"
           autoclear
         />
         <div
-          class="mb-4 transition-colors overflow-auto"
+          class="mb-2 mt-2 transition-colors overflow-auto"
           :class="{ 'bg-gray-50': store.isEmpty }"
         >
           <cart-item
@@ -53,7 +51,7 @@
     >
       <div class="flex flex-col h-full">
         <cart-change class="" />
-        <cart-total-value class="mt-auto" @click="" />
+        <cart-total class="mt-auto" @click="" />
       </div>
     </div>
   </div>
@@ -63,11 +61,11 @@
 import SearchField from "@/components/SearchField.vue"
 import CartItem from "@/components/CartItem.vue"
 import CartChange from "@/components/CartChange.vue"
-import CartTotalValue from "@/components/CartTotalValue.vue"
+import CartTotal from "@/components/CartTotal.vue"
 
 import { ref } from "vue"
 import { useCartStore } from "@/stores/cart.store"
-import { getItems } from "@/services/ItemSearch"
+import { getItem } from "@/services/ItemSearch"
 
 const store = useCartStore()
 
@@ -75,12 +73,13 @@ const inputValue = ref(null)
 
 const searchItems = ref(null)
 
-const search = () => {
-  searchItems.value = getItems(inputValue.value)
-}
-
-const addCartItem = (id) => {
-  console.log(id)
-  store.addItem(id)
+const addCartItem = async (code) => {
+  try {
+    const response = await getItem(code)
+    const item = await response.json()
+    store.addItem(item)
+  } catch (error) {
+    console.error(error)
+  }
 }
 </script>

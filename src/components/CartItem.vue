@@ -11,9 +11,9 @@
       class="ml-2 font-semibold flex-auto hover:underline"
       @click="onItemClick"
     >
-      {{ `${item.brand} ${item.model}` }}
+      {{ `${item.brand} ${item.name}` }}
     </span>
-    <span> 1 шт, {{ item.price }}</span>
+    <span> 1 шт, {{ item.selling_price }}</span>
   </div>
 </template>
 
