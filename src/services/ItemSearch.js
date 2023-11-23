@@ -1,9 +1,11 @@
-import { items } from "@/utils/db"
-
 const getItems = async () => {
   try {
-    const response = await fetch("localhost:3000/api/items")
-    return Promise.resolve(response)
+    const response = await fetch("http://localhost:3000/api/items")
+    if (response.ok) {
+      return Promise.resolve(response)
+    } else {
+      throw new Error("error")
+    }
   } catch (error) {
     return Promise.reject(error)
   }
