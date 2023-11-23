@@ -1,7 +1,7 @@
 <template>
-  <div class="grid grid-cols-6 gap-4 mt-16 h-80">
+  <div class="grid grid-cols-6 gap-4 mt-16 h-96">
     <div
-      class="col-span-4 bg-white border border-gray-300 p-4 rounded shadow-sm h-80"
+      class="col-span-4 bg-white border border-gray-300 p-4 rounded shadow-sm h-96"
     >
       <div class="flex flex-col h-full">
         <search-field
@@ -77,6 +77,7 @@ const addCartItem = async (code) => {
   try {
     const response = await getItem(code)
     const item = await response.json()
+    console.log(item)
     store.addItem(item)
   } catch (error) {
     console.error(error)

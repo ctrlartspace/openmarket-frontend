@@ -22,7 +22,7 @@
       v-if="inputAmount"
       class="mt-4 px-4 py-2 border border-gray-300 rounded"
     >
-      <span class="text-lg font-semibold text-blue-400">{{ cartChange }}</span>
+      <span class="text-lg font-semibold text-blue-500">{{ cartChange }}</span>
     </div>
   </div>
 </template>

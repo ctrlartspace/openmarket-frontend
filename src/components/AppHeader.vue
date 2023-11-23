@@ -33,6 +33,10 @@ const menuItems = ref([
     title: "Продажи",
     path: "/sales",
   },
+  {
+    title: "База",
+    path: "/base",
+  },
 ])
 </script>
 
