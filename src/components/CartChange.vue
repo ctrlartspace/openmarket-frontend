@@ -1,28 +1,63 @@
 <template>
   <div>
-    <div class="relative">
-      <input
-        v-model="inputAmount"
-        class="mb-0 border border-gray-300 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
-        placeholder="Наличные"
-        type="text"
-      />
-      <div
-        v-if="inputAmount"
-        class="absolute inset-y-0 right-2 flex items-center"
-      >
-        <span
-          class="material-icons text-gray-400 hover:text-gray-800 cursor-pointer"
-          @click="inputAmount = ''"
-          >close</span
-        >
-      </div>
-    </div>
     <div
-      v-if="inputAmount"
-      class="mt-4 px-4 py-2 border border-gray-300 rounded"
+      class="flex px-4 py-2 border border-gray-200 rounded text-center font-semibold cursor-pointer select-none justify-center shadow"
+      :class="{
+        'bg-blue-400 text-white border-blue-600':
+          currentPaymentType.value === 'cash',
+        'bg-red-400 text-white border-red-600':
+          currentPaymentType.value === 'kaspi',
+      }"
+      @click="changePaymentType()"
     >
-      <span class="text-lg font-semibold text-blue-500">{{ cartChange }}</span>
+      <span class="ml-2 text-lg"> {{ currentPaymentType.label }} </span>
+    </div>
+    <div v-if="currentPaymentType.value === 'cash'">
+      <div class="relative">
+        <input
+          v-model="inputAmount"
+          class="mt-2 mb-0 border border-gray-200 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
+          placeholder="Внесено"
+          type="text"
+        />
+        <div
+          v-if="inputAmount"
+          class="absolute inset-y-0 top-2 right-2 flex items-center"
+        >
+          <span
+            class="material-icons text-gray-400 hover:text-gray-800 cursor-pointer"
+            @click="inputAmount = ''"
+            >close</span
+          >
+        </div>
+      </div>
+      <div class="mt-2 px-4 py-2 border border-gray-200 rounded flex">
+        <span class="text-lg text-gray-300 flex-auto">Сдача</span>
+        <span class="text-lg font-semibold text-blue-500">{{
+          cartChange
+        }}</span>
+      </div>
+      <div class="grid grid-cols-3 gap-2 mt-2 mb-2 font-semibold text-xl">
+        <div
+          v-for="i in 9"
+          class="py-4 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          @click="onKeyboardClick(i)"
+        >
+          {{ i }}
+        </div>
+        <div
+          class="py-4 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          @click="onKeyboardClick(0)"
+        >
+          0
+        </div>
+        <div
+          class="col-start-2 col-end-4 py-4 bg-gray-100 text-red-400 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          @click="onClearClick"
+        >
+          C
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +67,37 @@ import { ref, computed } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 
 const store = useCartStore()
-const inputAmount = ref(null)
+const inputAmount = ref("")
+const paymentTypes = ref([
+  {
+    id: 1,
+    value: "cash",
+    label: "Наличные",
+  },
+  {
+    id: 2,
+    value: "kaspi",
+    label: "Перевод",
+  },
+])
+
+const currentPaymentType = ref(paymentTypes.value[1])
 
 const cartChange = computed(() => inputAmount.value - store.getTotalAmount)
+
+const onKeyboardClick = (value) => {
+  inputAmount.value = inputAmount.value + "" + value
+}
+const onClearClick = () => {
+  inputAmount.value = ""
+}
+
+const changePaymentType = () => {
+  inputAmount.value = store.getTotalAmount
+  if (currentPaymentType.value.id < paymentTypes.value.length) {
+    currentPaymentType.value = paymentTypes.value[currentPaymentType.value.id]
+  } else {
+    currentPaymentType.value = paymentTypes.value[0]
+  }
+}
 </script>

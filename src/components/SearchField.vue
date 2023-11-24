@@ -4,7 +4,7 @@
       <input
         ref="searchInput"
         v-model="value"
-        class="mb-0 border border-gray-300 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
+        class="mb-0 border border-gray-200 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
         placeholder="Код товара, название, модель"
         type="text"
         @input="onInputChange"
@@ -19,7 +19,7 @@
         >
       </div>
       <div
-        class="absolute mt-2 w-full bg-white py-2 border border-gray-300 rounded shadow"
+        class="absolute mt-2 w-full bg-white py-2 border border-gray-200 rounded shadow-sm"
         :class="value ? 'block' : 'hidden'"
       >
         <ul>
@@ -33,7 +33,7 @@
           >
             {{ item.model }}
           </li>
-          <li v-else class="px-4 py-2 text-gray-400">Ничего не найдено</li>
+          <li v-else class="px-4 py-2 text-gray-300">Ничего не найдено</li>
         </ul>
       </div>
     </div>
