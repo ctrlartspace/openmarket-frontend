@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-10 gap-4">
-    <div class="col-span-2">
+    <div class="col-span-3 bg-white border border-gray-200 rounded px-4 py-2">
       <p class="text-lg font-semibold">Категория</p>
       <span
         v-for="item in categories"
@@ -37,9 +37,8 @@
         {{ item.name }}
         <br />
       </span>
-      <br />
     </div>
-    <div class="col-span-8 bg-white border rounded overflow-auto">
+    <div class="col-span-7 bg-white border rounded overflow-auto">
       <table class="table-auto w-full text-lg text-left bg-white">
         <!-- <thead>
           <tr class="border-b">
