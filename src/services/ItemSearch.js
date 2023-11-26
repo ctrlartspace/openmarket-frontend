@@ -40,4 +40,30 @@ const getBrands = async () => {
   }
 }
 
-export { getItems, getItem, getBrands }
+const getCategories = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/categories`)
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+const getSubcategories = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/subcategories`)
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export { getItems, getItem, getBrands, getCategories, getSubcategories }
