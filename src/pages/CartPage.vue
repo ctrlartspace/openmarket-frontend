@@ -15,41 +15,26 @@
             <tbody>
               <tr
                 v-for="(item, i) in store.cartItems"
-                class="cursor-pointer hover:bg-gray-100 border-b"
+                class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between"
                 :key="i"
               >
-                <td class="py-2 flex justify-center">
+                <td class="flex p-2">
                   <span
                     class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
-                    @click="onRemoveClick"
+                    @click="store.removeItem(i)"
                   >
                     remove
                   </span>
                 </td>
-                <td class="py-2 font-semibold">
+                <td class="py-2 flex-1 font-semibold">
                   {{ `${item.item_brand.name} ${item.item_name}` }}
                 </td>
-                <td class="px-4 py-2">{{ item.item_category }}</td>
-                <td class="px-4 py-2">{{ item.item_subcategory }}</td>
-                <td class="px-4 py-2">{{ item.item_purchase_price }}</td>
+                <td class="px-4 py-2 text-gray-300">1 шт.</td>
+                <td class="px-4 py-2">{{ item.item_purchase_price }} KZT</td>
               </tr>
             </tbody>
           </table>
-          <!-- <base-data-item v-for="(item, i) in items" :item="item" :key="i" /> -->
         </div>
-
-        <!-- <div
-          class="mb-2 mt-2 transition-colors overflow-auto"
-          :class="{ 'bg-gray-50': store.isEmpty }"
-        >
-          <cart-item
-            v-for="(item, i) in store.cartItems"
-            :item="item"
-            @click=""
-            @on-remove-click="store.removeItem(i)"
-            :key="i"
-          />
-        </div> -->
 
         <div class="mt-auto">
           <div
