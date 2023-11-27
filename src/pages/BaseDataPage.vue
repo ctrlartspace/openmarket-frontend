@@ -59,11 +59,11 @@
     </div>
     <div class="col-span-7 bg-white border rounded overflow-auto">
       <div class="flex cursor-pointer border-b">
-        <div class="p-2 flex-1 flex hover:bg-gray-100">
+        <div class="flex-1 flex px-4 py-2 hover:bg-gray-100">
           <span class="self-center material-icons">add</span>
           <div class="ml-2 text-lg flex-auto">Добавить новый товар</div>
         </div>
-        <div class="p-2 flex hover:bg-gray-100">
+        <div class="flex px-4 py-2 hover:bg-gray-100">
           <span class="self-center material-icons">edit</span>
         </div>
       </div>
@@ -71,15 +71,15 @@
         <tbody>
           <tr
             v-for="item in items"
-            class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-2 py-2"
+            class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-4 py-2"
           >
-            <td class="flex items-center">
+            <!-- <td class="flex items-center">
               <span
                 class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
               >
                 remove
               </span>
-            </td>
+            </td> -->
             <td class="font-semibold flex-1">
               {{ `${item.item_brand.name} ${item.item_name}` }}
             </td>
