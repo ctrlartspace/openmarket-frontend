@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex px-4 py-2 border border-gray-200 rounded text-center font-semibold cursor-pointer select-none justify-center shadow"
+      class="flex px-4 py-2 border rounded text-center font-semibold cursor-pointer select-none justify-center shadow"
       :class="{
         'bg-blue-400 text-white border-blue-600':
           currentPaymentType.value === 'cash',
