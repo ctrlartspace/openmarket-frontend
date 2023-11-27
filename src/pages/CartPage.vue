@@ -15,10 +15,10 @@
             <tbody>
               <tr
                 v-for="(item, i) in store.cartItems"
-                class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between"
+                class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 p-2"
                 :key="i"
               >
-                <td class="flex p-2">
+                <td class="flex items-center">
                   <span
                     class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
                     @click="store.removeItem(i)"
@@ -26,11 +26,11 @@
                     remove
                   </span>
                 </td>
-                <td class="py-2 flex-1 font-semibold">
+                <td class="flex-1 font-semibold">
                   {{ `${item.item_brand.name} ${item.item_name}` }}
                 </td>
-                <td class="px-4 py-2 text-gray-300">1 шт.</td>
-                <td class="px-4 py-2">{{ item.item_purchase_price }} KZT</td>
+                <td class="text-gray-300">1 шт.</td>
+                <td>{{ item.item_purchase_price }} KZT</td>
               </tr>
             </tbody>
           </table>

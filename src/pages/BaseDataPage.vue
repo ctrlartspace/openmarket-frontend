@@ -1,6 +1,7 @@
 <template>
   <div class="grid grid-cols-10 gap-4">
     <div class="col-span-3 bg-white border border-gray-200 rounded px-4 py-2">
+      <!-- Categories -->
       <div>
         <p class="text-lg font-semibold">Категория</p>
         <span
@@ -14,21 +15,9 @@
           {{ item.name }}
           <br />
         </span>
-        <div class="relative text-gray-300">
-          <input
-            class="w-full text-lg text-black placeholder:text-gray-300 focus:outline-none"
-            placeholder="Добавить"
-            type="text"
-            @keyup.enter="addCategory"
-          />
-          <div class="absolute inset-y-0 right-0 flex items-center">
-            <span class="material-icons cursor-pointer" @click="addCategory"
-              >add</span
-            >
-          </div>
-        </div>
       </div>
-      <div class="mt-4">
+      <!-- Subcategories -->
+      <div class="mt-2">
         <p class="text-lg font-semibold">Подкатегория</p>
         <span
           v-for="item in subcategories"
@@ -43,22 +32,10 @@
           {{ item.name }}
           <br />
         </span>
-        <div class="relative text-gray-300">
-          <input
-            class="w-full text-lg text-black placeholder:text-gray-300 focus:outline-none"
-            placeholder="Добавить"
-            type="text"
-            @keyup.enter="addSubcategory"
-          />
-          <div class="absolute inset-y-0 right-0 flex items-center">
-            <span class="material-icons cursor-pointer" @click="addSubcategory"
-              >add</span
-            >
-          </div>
-        </div>
       </div>
-      <div class="mt-4">
-        <p class="flex-auto text-lg font-semibold">Бренд</p>
+      <!-- Brands -->
+      <div class="mt-2">
+        <p class="text-lg font-semibold">Бренд</p>
         <span
           v-for="item in brands"
           class="text-lg cursor-pointer"
@@ -70,20 +47,8 @@
           {{ item.name }}
           <br />
         </span>
-        <div class="relative text-gray-300">
-          <input
-            class="w-full text-lg text-black placeholder:text-gray-300 focus:outline-none"
-            placeholder="Добавить"
-            type="text"
-            @keyup.enter="addBrand"
-          />
-          <div class="absolute inset-y-0 right-0 flex items-center">
-            <span class="material-icons cursor-pointer" @click="addBrand"
-              >add</span
-            >
-          </div>
-        </div>
       </div>
+      <!-- Filter Reset -->
       <div class="mt-4">
         <span
           class="text-lg text-gray-300 cursor-pointer hover:underline"
@@ -93,22 +58,34 @@
       </div>
     </div>
     <div class="col-span-7 bg-white border rounded overflow-auto">
-      <div class="flex cursor-pointer hover:bg-gray-100 border-b">
-        <span class="ml-2 self-center material-icons">add</span>
-        <div class="px-2 py-2 text-lg">Добавить новый товар</div>
+      <div class="flex cursor-pointer border-b">
+        <div class="p-2 flex-1 flex hover:bg-gray-100">
+          <span class="self-center material-icons">add</span>
+          <div class="ml-2 text-lg flex-auto">Добавить новый товар</div>
+        </div>
+        <div class="p-2 flex hover:bg-gray-100">
+          <span class="self-center material-icons">edit</span>
+        </div>
       </div>
       <table class="table-auto w-full text-lg text-left bg-white">
         <tbody>
           <tr
             v-for="item in items"
-            class="cursor-pointer hover:bg-gray-100 border-b"
+            class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-2 py-2"
           >
-            <td class="px-4 py-2 font-semibold">
+            <td class="flex items-center">
+              <span
+                class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
+              >
+                remove
+              </span>
+            </td>
+            <td class="font-semibold flex-1">
               {{ `${item.item_brand.name} ${item.item_name}` }}
             </td>
-            <td class="px-4 py-2">{{ item.item_category.name }}</td>
-            <td class="px-4 py-2">{{ item.item_subcategory.name }}</td>
-            <td class="px-4 py-2">{{ item.item_purchase_price }}</td>
+            <td>{{ item.item_category.name }}</td>
+            <td>1 шт</td>
+            <td>{{ item.item_purchase_price }} KZT</td>
           </tr>
         </tbody>
       </table>
@@ -118,7 +95,6 @@
 </template>
 
 <script setup>
-import BaseDataItem from "@/components/BaseDataItem.vue"
 import { ref, computed, onMounted } from "vue"
 
 import {
@@ -137,6 +113,12 @@ const filters = ref({
   brandId: 0,
   categoryId: 0,
   subcategoryId: 0,
+})
+
+const editMode = ref({
+  category: false,
+  subcategory: false,
+  brand: false,
 })
 
 const queryParams = computed(() => {
@@ -179,18 +161,6 @@ const resetFilters = () => {
     filters.value[key] = 0
   })
   updateItems()
-}
-
-const addCategory = () => {
-  console.log("add category")
-}
-
-const addSubcategory = () => {
-  console.log("add subcategory")
-}
-
-const addBrand = () => {
-  console.log("add brand")
 }
 
 onMounted(async () => {
