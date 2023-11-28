@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="col-span-7 bg-white border rounded overflow-auto">
-      <div class="px-4 py-2 flex border-b">
+      <div v-if="selectedItems.length === 0" class="px-4 py-2 flex border-b">
         <div class="flex-1 flex items-center">
           <span class="material-icons text-gray-300">search</span>
           <input
@@ -82,10 +82,7 @@
           <div class="ml-2 text-lg flex-auto">Новый товар</div>
         </div>
       </div>
-      <div
-        v-if="selectedItems.length > 0"
-        class="flex justify-between px-4 py-2 border-b"
-      >
+      <div v-else class="flex justify-between px-4 py-2 border-b">
         <div class="flex items-center hover:text-red-400 cursor-pointer">
           <span class="material-icons">remove</span>
           <span class="ml-2 text-lg">Удалить</span>
@@ -108,6 +105,7 @@
                 type="checkbox"
                 class="w-4 h-4 text-lg rounded"
                 :value="item.id"
+                @click.stop
               />
             </td>
             <td class="font-semibold flex-1">
