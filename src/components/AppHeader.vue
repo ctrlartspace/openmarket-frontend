@@ -30,8 +30,20 @@ const menuItems = ref([
     path: "/cart",
   },
   {
+    title: "Касса",
+    path: "/cash",
+  },
+  {
     title: "Продажи",
     path: "/sales",
+  },
+  {
+    title: "Возврат",
+    path: "/returns",
+  },
+  {
+    title: "Поступления",
+    path: "/income",
   },
   {
     title: "База",
