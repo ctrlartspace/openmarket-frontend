@@ -86,6 +86,7 @@
           <tr
             v-for="item in items"
             class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-4 py-2"
+            @click="onItemClick(item.id)"
           >
             <td class="flex items-center p-1">
               <input
@@ -111,6 +112,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue"
+import { useRouter } from "vue-router"
 
 import {
   getBrands,
@@ -118,6 +120,8 @@ import {
   getSubcategories,
   getItems,
 } from "@/services/ItemSearch"
+
+const router = useRouter()
 
 const brands = ref([])
 const categories = ref([])
@@ -172,6 +176,10 @@ const resetFilters = () => {
     filters.value[key] = 0
   })
   updateItems()
+}
+
+const onItemClick = (id) => {
+  router.push(`/item/${id}`)
 }
 
 onMounted(async () => {
