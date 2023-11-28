@@ -1,56 +1,70 @@
 <template>
   <div class="grid grid-cols-10 gap-4">
-    <div class="col-span-3 bg-white border border-gray-200 rounded px-4 py-2">
+    <div class="col-span-3 bg-white border border-gray-200 rounded">
       <!-- Categories -->
       <div>
-        <p class="text-lg font-semibold">Категория</p>
-        <span
+        <div class="px-4 py-2 border-b">
+          <p class="text-lg font-semibold">Категория</p>
+        </div>
+        <div
           v-for="item in categories"
-          class="text-lg cursor-pointer"
-          :class="
-            filters.categoryId === item.id ? 'text-black' : 'text-gray-300'
-          "
+          class="px-4 py-2 border-b cursor-pointer hover:bg-gray-100"
           @click="onCategoryClick(item.id)"
         >
-          {{ item.name }}
-          <br />
-        </span>
+          <span
+            class="text-lg"
+            :class="
+              filters.categoryId === item.id ? 'text-black' : 'text-gray-300'
+            "
+            >{{ item.name }}</span
+          >
+        </div>
       </div>
       <!-- Subcategories -->
-      <div class="mt-2">
-        <p class="text-lg font-semibold">Подкатегория</p>
-        <span
+      <div>
+        <div class="px-4 py-2 border-b">
+          <p class="text-lg font-semibold">Подкатегория</p>
+        </div>
+        <div
           v-for="item in subcategories"
-          class="text-lg cursor-pointer"
-          :class="
-            filters.subcategoryId === item.id ? 'text-black' : 'text-gray-300'
-          "
+          class="px-4 py-2 border-b cursor-pointer hover:bg-gray-100"
           @click="onSubcategoryClick(item.id)"
         >
-          {{ item.name }}
-          <br />
-        </span>
+          <span
+            class="text-lg"
+            :class="
+              filters.subcategoryId === item.id ? 'text-black' : 'text-gray-300'
+            "
+            >{{ item.name }}</span
+          >
+        </div>
       </div>
       <!-- Brands -->
-      <div class="mt-2">
-        <p class="text-lg font-semibold">Бренд</p>
-        <span
+      <div>
+        <div class="px-4 py-2 border-b">
+          <p class="text-lg font-semibold">Бренд</p>
+        </div>
+        <div
           v-for="item in brands"
-          class="text-lg cursor-pointer"
-          :class="filters.brandId === item.id ? 'text-black' : 'text-gray-300'"
+          class="px-4 py-2 border-b cursor-pointer hover:bg-gray-100"
           @click="onBrandClick(item.id)"
         >
-          {{ item.name }}
-          <br />
-        </span>
+          <span
+            class="text-lg"
+            :class="
+              filters.brandId === item.id ? 'text-black' : 'text-gray-300'
+            "
+            >{{ item.name }}</span
+          >
+        </div>
       </div>
       <!-- Filter Reset -->
-      <div class="mt-4">
-        <span
-          class="text-lg text-gray-300 cursor-pointer hover:underline"
-          @click="resetFilters"
-          >Сбросить</span
-        >
+      <div class="px-4 py-2 bg-gray-50 border-b"></div>
+      <div
+        class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+        @click="resetFilters"
+      >
+        <span class="text-lg text-gray-300">Сбросить</span>
       </div>
     </div>
     <div class="col-span-7 bg-white border rounded overflow-auto">
