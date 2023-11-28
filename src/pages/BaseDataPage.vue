@@ -8,7 +8,7 @@
           v-for="item in categories"
           class="text-lg cursor-pointer"
           :class="
-            filters.categoryId === item.id ? 'text-green-400' : 'text-gray-300'
+            filters.categoryId === item.id ? 'text-black' : 'text-gray-300'
           "
           @click="onCategoryClick(item.id)"
         >
@@ -23,9 +23,7 @@
           v-for="item in subcategories"
           class="text-lg cursor-pointer"
           :class="
-            filters.subcategoryId === item.id
-              ? 'text-green-400'
-              : 'text-gray-300'
+            filters.subcategoryId === item.id ? 'text-black' : 'text-gray-300'
           "
           @click="onSubcategoryClick(item.id)"
         >
@@ -39,9 +37,7 @@
         <span
           v-for="item in brands"
           class="text-lg cursor-pointer"
-          :class="
-            filters.brandId === item.id ? 'text-green-400' : 'text-gray-300'
-          "
+          :class="filters.brandId === item.id ? 'text-black' : 'text-gray-300'"
           @click="onBrandClick(item.id)"
         >
           {{ item.name }}
@@ -58,13 +54,31 @@
       </div>
     </div>
     <div class="col-span-7 bg-white border rounded overflow-auto">
-      <div class="flex cursor-pointer border-b">
-        <div class="flex-1 flex px-4 py-2 hover:bg-gray-100">
-          <span class="self-center material-icons">add</span>
-          <div class="ml-2 text-lg flex-auto">Добавить новый товар</div>
+      <div class="px-4 py-2 flex border-b">
+        <div class="flex-1 flex items-center">
+          <span class="material-icons text-gray-300">search</span>
+          <input
+            type="text"
+            class="ml-2 w-full h-full text-lg placeholder:text-gray-300 focus:outline-none"
+            placeholder="Код товара, наименование"
+          />
         </div>
-        <div class="flex px-4 py-2 hover:bg-gray-100">
-          <span class="self-center material-icons">edit</span>
+        <div class="flex cursor-pointer hover:text-blue-400">
+          <span class="self-center material-icons">add</span>
+          <div class="ml-2 text-lg flex-auto">Новый товар</div>
+        </div>
+      </div>
+      <div
+        v-if="selectedItems.length > 0"
+        class="flex justify-between px-4 py-2 border-b"
+      >
+        <div class="flex items-center hover:text-red-400 cursor-pointer">
+          <span class="material-icons">remove</span>
+          <span class="ml-2 text-lg">Удалить</span>
+        </div>
+        <div class="ml-4 flex items-center hover:text-blue-400 cursor-pointer">
+          <span class="material-icons-outlined">shopping_bag</span>
+          <span class="ml-2 text-lg">Показать в магазине</span>
         </div>
       </div>
       <table class="table-auto w-full text-lg text-left bg-white">
@@ -73,13 +87,14 @@
             v-for="item in items"
             class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-4 py-2"
           >
-            <!-- <td class="flex items-center">
-              <span
-                class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
-              >
-                remove
-              </span>
-            </td> -->
+            <td class="flex items-center p-1">
+              <input
+                v-model="selectedItems"
+                type="checkbox"
+                class="w-4 h-4 text-lg rounded"
+                :value="item.id"
+              />
+            </td>
             <td class="font-semibold flex-1">
               {{ `${item.item_brand.name} ${item.item_name}` }}
             </td>
@@ -115,11 +130,7 @@ const filters = ref({
   subcategoryId: 0,
 })
 
-const editMode = ref({
-  category: false,
-  subcategory: false,
-  brand: false,
-})
+const selectedItems = ref([])
 
 const queryParams = computed(() => {
   const queryString = Object.keys(filters.value)
