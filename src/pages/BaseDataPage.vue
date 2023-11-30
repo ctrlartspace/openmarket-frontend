@@ -8,16 +8,16 @@
         </div>
         <div
           v-for="item in categories"
-          class="px-4 py-2 border-b cursor-pointer hover:bg-gray-100"
-          @click="onCategoryClick(item.id)"
+          class="flex items-center gap-3 px-4 py-2 border-b"
         >
-          <span
-            class="text-lg"
-            :class="
-              filters.categoryId === item.id ? 'text-black' : 'text-gray-300'
-            "
-            >{{ item.name }}</span
-          >
+          <input
+            v-model="filters.categoryId"
+            type="checkbox"
+            class="w-4 h-4 text-lg rounded"
+            :value="item.id"
+            @click.stop
+          />
+          <span class="text-lg">{{ item.name }}</span>
         </div>
       </div>
       <!-- Subcategories -->
@@ -27,16 +27,16 @@
         </div>
         <div
           v-for="item in subcategories"
-          class="px-4 py-2 border-b cursor-pointer hover:bg-gray-100"
-          @click="onSubcategoryClick(item.id)"
+          class="flex items-center gap-3 px-4 py-2 border-b"
         >
-          <span
-            class="text-lg"
-            :class="
-              filters.subcategoryId === item.id ? 'text-black' : 'text-gray-300'
-            "
-            >{{ item.name }}</span
-          >
+          <input
+            v-model="filters.subcategoryId"
+            type="checkbox"
+            class="w-4 h-4 text-lg rounded"
+            :value="item.id"
+            @click.stop
+          />
+          <span class="text-lg">{{ item.name }}</span>
         </div>
       </div>
       <!-- Brands -->
@@ -46,16 +46,16 @@
         </div>
         <div
           v-for="item in brands"
-          class="px-4 py-2 border-b cursor-pointer hover:bg-gray-100"
-          @click="onBrandClick(item.id)"
+          class="flex items-center gap-3 px-4 py-2 border-b"
         >
-          <span
-            class="text-lg"
-            :class="
-              filters.brandId === item.id ? 'text-black' : 'text-gray-300'
-            "
-            >{{ item.name }}</span
-          >
+          <input
+            v-model="filters.brandId"
+            type="checkbox"
+            class="w-4 h-4 text-lg rounded"
+            :value="item.id"
+            @click.stop
+          />
+          <span class="text-lg">{{ item.name }}</span>
         </div>
       </div>
       <!-- Filter Reset -->
@@ -99,7 +99,7 @@
             class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-4 py-2"
             @click="onItemClick(item.id)"
           >
-            <td class="flex items-center p-1">
+            <td class="flex items-center">
               <input
                 v-model="selectedItems"
                 type="checkbox"
@@ -123,7 +123,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue"
+import { ref, watch, computed, onMounted } from "vue"
 import { useRouter } from "vue-router"
 
 import {
@@ -141,25 +141,17 @@ const subcategories = ref([])
 const items = ref([])
 
 const filters = ref({
-  brandId: 0,
-  categoryId: 0,
-  subcategoryId: 0,
+  brandId: [],
+  categoryId: [],
+  subcategoryId: [],
 })
 
 const selectedItems = ref([])
 
 const queryParams = computed(() => {
   const queryString = Object.keys(filters.value)
-    .filter(
-      (key) =>
-        filters.value[key] !== null &&
-        filters.value[key] !== undefined &&
-        filters.value[key] !== 0
-    )
-    .map(
-      (key) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(filters.value[key])}`
-    )
+    .filter((key) => filters.value[key].length > 0)
+    .map((key) => `${key}=${filters.value[key].toString()}`)
     .join("&")
 
   return queryString ? `${queryString}` : ""
@@ -169,23 +161,9 @@ const updateItems = async () => {
   items.value = await getItems(queryParams.value)
 }
 
-const onBrandClick = (id) => {
-  filters.value.brandId = filters.value.brandId === id ? 0 : id
-  updateItems()
-}
-const onCategoryClick = (id) => {
-  filters.value.categoryId = filters.value.categoryId === id ? 0 : id
-  updateItems()
-}
-
-const onSubcategoryClick = (id) => {
-  filters.value.subcategoryId = filters.value.subcategoryId === id ? 0 : id
-  updateItems()
-}
-
 const resetFilters = () => {
   Object.keys(filters.value).forEach((key) => {
-    filters.value[key] = 0
+    filters.value[key] = []
   })
   updateItems()
 }
@@ -193,6 +171,10 @@ const resetFilters = () => {
 const onItemClick = (id) => {
   router.push(`/item/${id}`)
 }
+
+watch(queryParams, () => {
+  updateItems()
+})
 
 onMounted(async () => {
   items.value = await getItems()
