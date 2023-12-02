@@ -1,11 +1,6 @@
 <template>
   <div class="grid grid-cols-10 bg-white rounded border border-gray-200">
-    <form
-      v-if="item"
-      class="col-span-4 border-r"
-      @submit.prevent="saveItemData"
-    >
-      <input v-show="false" type="submit" />
+    <div v-if="item" class="col-span-4 border-r">
       <div class="px-4 py-2 border-b">
         <span class="text-lg">Штрихкод</span>
       </div>
@@ -46,7 +41,17 @@
         item-value="id"
         item-title="name"
       />
-    </form>
+    </div>
+    <div class="col-span-6 px-4 py-2 flex">
+      <button
+        class="px-4 py-2 text-lg font-semibold text-white bg-blue-400 border border-blue-600 rounded self-end flex items-center gap-2 hover:brightness-95"
+        type="submit"
+        @click="saveItemData"
+      >
+        <span class="material-icons-outlined">save</span>
+        Сохранить
+      </button>
+    </div>
   </div>
 </template>
 
@@ -68,7 +73,6 @@ const route = useRoute()
 
 const item = ref({})
 const isEditMode = ref(true)
-const itemCategory = ref(null)
 
 const brands = ref([])
 const categories = ref([])
