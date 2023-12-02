@@ -1,12 +1,12 @@
 <template>
   <div
     class="relative flex items-center border-b border-gray-200 cursor-pointer"
-    @click=";(isActive = true), console.log('1')"
+    @click="isActive = true"
     @blur="isActive = false"
     tabindex="1"
   >
     <div class="block w-full px-4 py-2 text-lg text-blue-600 bg-inherit">
-      <span v-if="!selectedItem" class="text-gray-300 select-none">
+      <span v-if="!selectedItem" class="text-gray-300">
         {{ placeholder }}
       </span>
       <span v-else>{{ selectedItem[itemTitle] }}</span>

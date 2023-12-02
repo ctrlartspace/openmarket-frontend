@@ -9,13 +9,6 @@
       <div class="px-4 py-2 border-b">
         <span class="text-lg">Штрихкод</span>
       </div>
-      <select-field
-        v-model="item.item_category_id"
-        :items="categories"
-        placeholder="Категория"
-        item-value="id"
-        item-title="name"
-      />
       <input-field v-model="item.item_code" placeholder="123456789" />
 
       <div class="px-4 py-2 border-b">
@@ -25,9 +18,12 @@
       <div class="px-4 py-2 border-b">
         <span class="text-lg">Категория</span>
       </div>
-      <input-field
+      <select-field
         v-model="item.item_category_id"
+        :items="categories"
         placeholder="Защитные стекла"
+        item-value="id"
+        item-title="name"
       />
 
       <div class="px-4 py-2 border-b">
