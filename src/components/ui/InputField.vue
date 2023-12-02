@@ -12,7 +12,7 @@
     <span
       v-if="modelValue"
       class="text-black material-icons-outlined cursor-pointer hover:text-gray-600"
-      @click="modelValue = ''"
+      @click=";(modelValue = ''), $emit('update:modelValue', '')"
       >close</span
     >
   </div>

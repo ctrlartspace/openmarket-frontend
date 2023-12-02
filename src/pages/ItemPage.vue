@@ -9,6 +9,13 @@
       <div class="px-4 py-2 border-b">
         <span class="text-lg">Штрихкод</span>
       </div>
+      <select-field
+        v-model="item.item_category_id"
+        :items="categories"
+        placeholder="Категория"
+        item-value="id"
+        item-title="name"
+      />
       <input-field v-model="item.item_code" placeholder="123456789" />
 
       <div class="px-4 py-2 border-b">
@@ -40,6 +47,7 @@
 
 <script setup>
 import InputField from "@/components/ui/InputField.vue"
+import SelectField from "../components/ui/SelectField.vue"
 
 import { ref, onMounted } from "vue"
 import { useRoute } from "vue-router"
@@ -55,6 +63,7 @@ const route = useRoute()
 
 const item = ref({})
 const isEditMode = ref(true)
+const itemCategory = ref(null)
 
 const brands = ref([])
 const categories = ref([])
