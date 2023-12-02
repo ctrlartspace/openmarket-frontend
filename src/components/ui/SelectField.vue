@@ -1,7 +1,7 @@
 <template>
   <div
-    class="relative flex items-center border-b border-gray-200 cursor-pointer"
-    @click="isActive = true"
+    class="relative flex items-center border-b border-gray-200 cursor-pointer last:border-none"
+    @click="isActive = !isActive"
     @blur="isActive = false"
     tabindex="1"
   >
@@ -17,7 +17,7 @@
     >
     <div
       v-if="isActive"
-      class="absolute w-full left-0 top-full bg-white border-t rounded-b border-gray-200 shadow-xl"
+      class="absolute z-10 w-full left-0 top-full bg-white border-t rounded-b border-gray-200 shadow-xl"
     >
       <ul class="text-lg">
         <li

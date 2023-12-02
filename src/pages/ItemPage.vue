@@ -29,14 +29,23 @@
       <div class="px-4 py-2 border-b">
         <span class="text-lg">Подкатегория</span>
       </div>
-      <input-field
+      <select-field
         v-model="item.item_subcategory_id"
+        :items="subcategories"
         placeholder="Противоударные"
+        item-value="id"
+        item-title="name"
       />
       <div class="px-4 py-2 border-b">
         <span class="text-lg">Бренд</span>
       </div>
-      <input-field v-model="item.item_brand_id" placeholder="Противоударные" />
+      <select-field
+        v-model="item.item_brand_id"
+        :items="brands"
+        placeholder="Hoco"
+        item-value="id"
+        item-title="name"
+      />
     </form>
   </div>
 </template>
