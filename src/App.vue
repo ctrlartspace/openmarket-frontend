@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[800px] mx-auto">
+  <div class="max-w-[800px] mx-auto h-full">
     <header class="p-2">
       <app-header></app-header>
     </header>
