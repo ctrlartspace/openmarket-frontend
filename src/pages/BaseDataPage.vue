@@ -3,27 +3,71 @@
     <div class="col-span-3 bg-white border border-gray-200 rounded">
       <!-- Categories -->
       <div>
-        <div class="px-4 py-2 border-b">
+        <div class="px-4 py-2 border-b flex items-center justify-between">
           <p class="text-lg font-semibold">Категория</p>
+        </div>
+        <div
+          v-if="isEditMode"
+          class="flex items-center gap-3 px-4 py-2 border-b"
+        >
+          <input
+            class="text-lg w-full focus:outline-none"
+            type="text"
+            placeholder="Название"
+          />
+          <span
+            class="material-icons-outlined cursor-pointer hover:text-blue-400"
+            >check</span
+          >
         </div>
         <div
           v-for="item in categories"
           class="flex items-center gap-3 px-4 py-2 border-b"
         >
           <input
+            v-if="!isEditMode"
             v-model="filters.categoryId"
             type="checkbox"
             class="w-4 h-4 text-lg rounded"
             :value="item.id"
             @click.stop
           />
-          <span class="text-lg">{{ item.name }}</span>
+          <input
+            class="w-full text-lg bg-inherit focus:outline-none"
+            type="text"
+            :value="item.name"
+            :disabled="!isEditMode"
+          />
+          <span
+            v-if="isEditMode"
+            class="material-icons-outlined cursor-pointer hover:text-red-400"
+            >remove</span
+          >
+          <!-- <span class="text-lg">{{ item.name }}</span> -->
         </div>
       </div>
       <!-- Subcategories -->
       <div>
         <div class="px-4 py-2 border-b">
           <p class="text-lg font-semibold">Подкатегория</p>
+        </div>
+        <div
+          v-if="isEditMode"
+          class="flex items-center gap-3 px-4 py-2 border-b"
+        >
+          <input
+            class="text-lg w-full focus:outline-none"
+            type="text"
+            placeholder="Название"
+          />
+          <span
+            class="material-icons-outlined cursor-pointer hover:text-gray-400"
+            >close</span
+          >
+          <span
+            class="material-icons-outlined cursor-pointer hover:text-blue-400"
+            >check</span
+          >
         </div>
         <div
           v-for="item in subcategories"
@@ -43,6 +87,24 @@
       <div>
         <div class="px-4 py-2 border-b">
           <p class="text-lg font-semibold">Бренд</p>
+        </div>
+        <div
+          v-if="isEditMode"
+          class="flex items-center gap-3 px-4 py-2 border-b"
+        >
+          <input
+            class="text-lg w-full focus:outline-none"
+            type="text"
+            placeholder="Название"
+          />
+          <span
+            class="material-icons-outlined cursor-pointer hover:text-gray-400"
+            >close</span
+          >
+          <span
+            class="material-icons-outlined cursor-pointer hover:text-blue-400"
+            >check</span
+          >
         </div>
         <div
           v-for="item in brands"
@@ -68,7 +130,17 @@
       </div>
     </div>
     <div class="col-span-7 bg-white border rounded overflow-auto">
-      <div v-if="selectedItems.length === 0" class="px-4 py-2 flex border-b">
+      <div v-if="isEditMode" class="flex justify-between px-4 py-2 border-b">
+        <div class="flex items-center hover:text-red-400 cursor-pointer">
+          <span class="material-icons">remove</span>
+          <span class="ml-2 text-lg">Удалить</span>
+        </div>
+        <div class="ml-4 flex items-center hover:text-blue-400 cursor-pointer">
+          <span class="material-icons-outlined">shopping_bag</span>
+          <span class="ml-2 text-lg">Показать в магазине</span>
+        </div>
+      </div>
+      <div v-else class="px-4 py-2 flex border-b">
         <div class="flex-1 flex items-center">
           <span class="material-icons text-gray-300">search</span>
           <input
@@ -82,16 +154,6 @@
           <div class="ml-2 text-lg flex-auto">Новый товар</div>
         </div>
       </div>
-      <div v-else class="flex justify-between px-4 py-2 border-b">
-        <div class="flex items-center hover:text-red-400 cursor-pointer">
-          <span class="material-icons">remove</span>
-          <span class="ml-2 text-lg">Удалить</span>
-        </div>
-        <div class="ml-4 flex items-center hover:text-blue-400 cursor-pointer">
-          <span class="material-icons-outlined">shopping_bag</span>
-          <span class="ml-2 text-lg">Показать в магазине</span>
-        </div>
-      </div>
       <table class="table-auto w-full text-lg text-left bg-white">
         <tbody>
           <tr
@@ -99,7 +161,7 @@
             class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-4 py-2"
             @click="onItemClick(item.id)"
           >
-            <td class="flex items-center">
+            <td v-if="isEditMode" class="flex items-center">
               <input
                 v-model="selectedItems"
                 type="checkbox"
@@ -119,6 +181,13 @@
       </table>
       <!-- <base-data-item v-for="(item, i) in items" :item="item" :key="i" /> -->
     </div>
+  </div>
+  <div
+    class="mt-4 px-4 py-2 text-gray-300 bg-white rounded border border-gray-200 flex items-center gap-2 justify-center hover:text-blue-400 cursor-pointer"
+    @click="isEditMode = !isEditMode"
+  >
+    <span class="text-lg">Режим редактирования</span>
+    <span class="material-icons-outlined">edit_note</span>
   </div>
 </template>
 
@@ -147,6 +216,8 @@ const filters = ref({
 })
 
 const selectedItems = ref([])
+
+const isEditMode = ref(false)
 
 const queryParams = computed(() => {
   const queryString = Object.keys(filters.value)
