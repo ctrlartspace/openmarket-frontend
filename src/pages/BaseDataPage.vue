@@ -3,71 +3,29 @@
     <div class="col-span-3 bg-white border border-gray-200 rounded">
       <!-- Categories -->
       <div>
-        <div class="px-4 py-2 border-b flex items-center justify-between">
-          <p class="text-lg font-semibold">Категория</p>
-        </div>
         <div
-          v-if="isEditMode"
-          class="flex items-center gap-3 px-4 py-2 border-b"
+          class="px-4 py-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer"
         >
-          <input
-            class="text-lg w-full focus:outline-none"
-            type="text"
-            placeholder="Название"
-          />
-          <span
-            class="material-icons-outlined cursor-pointer hover:text-blue-400"
-            >check</span
-          >
+          <p class="text-lg font-semibold">Категория</p>
         </div>
         <div
           v-for="item in categories"
           class="flex items-center gap-3 px-4 py-2 border-b"
         >
           <input
-            v-if="!isEditMode"
             v-model="filters.categoryId"
             type="checkbox"
             class="w-4 h-4 text-lg rounded"
             :value="item.id"
             @click.stop
           />
-          <input
-            class="w-full text-lg bg-inherit focus:outline-none"
-            type="text"
-            :value="item.name"
-            :disabled="!isEditMode"
-          />
-          <span
-            v-if="isEditMode"
-            class="material-icons-outlined cursor-pointer hover:text-red-400"
-            >remove</span
-          >
-          <!-- <span class="text-lg">{{ item.name }}</span> -->
+          <span class="text-lg">{{ item.name }}</span>
         </div>
       </div>
       <!-- Subcategories -->
       <div>
         <div class="px-4 py-2 border-b">
           <p class="text-lg font-semibold">Подкатегория</p>
-        </div>
-        <div
-          v-if="isEditMode"
-          class="flex items-center gap-3 px-4 py-2 border-b"
-        >
-          <input
-            class="text-lg w-full focus:outline-none"
-            type="text"
-            placeholder="Название"
-          />
-          <span
-            class="material-icons-outlined cursor-pointer hover:text-gray-400"
-            >close</span
-          >
-          <span
-            class="material-icons-outlined cursor-pointer hover:text-blue-400"
-            >check</span
-          >
         </div>
         <div
           v-for="item in subcategories"
@@ -89,24 +47,6 @@
           <p class="text-lg font-semibold">Бренд</p>
         </div>
         <div
-          v-if="isEditMode"
-          class="flex items-center gap-3 px-4 py-2 border-b"
-        >
-          <input
-            class="text-lg w-full focus:outline-none"
-            type="text"
-            placeholder="Название"
-          />
-          <span
-            class="material-icons-outlined cursor-pointer hover:text-gray-400"
-            >close</span
-          >
-          <span
-            class="material-icons-outlined cursor-pointer hover:text-blue-400"
-            >check</span
-          >
-        </div>
-        <div
           v-for="item in brands"
           class="flex items-center gap-3 px-4 py-2 border-b"
         >
@@ -123,71 +63,77 @@
       <!-- Filter Reset -->
       <div class="px-4 py-2 bg-gray-50 border-b"></div>
       <div
-        class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+        class="px-4 py-2 text-gray-300 cursor-pointer flex items-center gap-2 hover:bg-gray-100 hover:text-black"
         @click="resetFilters"
       >
-        <span class="text-lg text-gray-300">Сбросить</span>
+        <span class="material-icons-outlined">filter_list_off</span>
+        <span class="text-lg">Сбросить</span>
       </div>
     </div>
-    <div class="col-span-7 bg-white border rounded overflow-auto">
-      <div v-if="isEditMode" class="flex justify-between px-4 py-2 border-b">
-        <div class="flex items-center hover:text-red-400 cursor-pointer">
-          <span class="material-icons">remove</span>
-          <span class="ml-2 text-lg">Удалить</span>
-        </div>
-        <div class="ml-4 flex items-center hover:text-blue-400 cursor-pointer">
-          <span class="material-icons-outlined">shopping_bag</span>
-          <span class="ml-2 text-lg">Показать в магазине</span>
-        </div>
-      </div>
-      <div v-else class="px-4 py-2 flex border-b">
-        <div class="flex-1 flex items-center">
-          <span class="material-icons text-gray-300">search</span>
-          <input
-            type="text"
-            class="ml-2 w-full h-full text-lg placeholder:text-gray-300 focus:outline-none"
-            placeholder="Код товара, наименование"
-          />
-        </div>
-        <div class="flex cursor-pointer hover:text-blue-400">
-          <span class="self-center material-icons">add</span>
-          <div class="ml-2 text-lg flex-auto">Новый товар</div>
-        </div>
-      </div>
-      <table class="table-auto w-full text-lg text-left bg-white">
-        <tbody>
-          <tr
-            v-for="item in items"
-            class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-4 py-2"
-            @click="onItemClick(item.id)"
+    <div class="col-span-7">
+      <div class="bg-white border rounded overflow-auto">
+        <div
+          v-if="selectedItems && selectedItems.length > 0"
+          class="flex gap-2 justify-between px-4 py-2 border-b"
+        >
+          <div
+            class="flex gap-2 items-center hover:text-red-600 cursor-pointer"
           >
-            <td v-if="isEditMode" class="flex items-center">
-              <input
-                v-model="selectedItems"
-                type="checkbox"
-                class="w-4 h-4 text-lg rounded"
-                :value="item.id"
-                @click.stop
-              />
-            </td>
-            <td class="font-semibold flex-1">
-              {{ `${item.item_brand.name} ${item.item_name}` }}
-            </td>
-            <td>{{ item.item_category.name }}</td>
-            <td>1 шт</td>
-            <td>{{ item.item_purchase_price }} KZT</td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- <base-data-item v-for="(item, i) in items" :item="item" :key="i" /> -->
+            <span class="material-icons">remove</span>
+            <span class="text-lg">Удалить</span>
+          </div>
+          <div
+            class="flex gap-2 items-center hover:text-blue-600 cursor-pointer"
+          >
+            <span class="material-icons-outlined">shopping_bag</span>
+            <span class="text-lg">Показать в магазине</span>
+          </div>
+        </div>
+        <div v-else class="px-4 py-2 flex border-b">
+          <div class="flex-1 flex gap-2 items-center">
+            <span class="material-icons text-gray-300">search</span>
+            <input
+              type="text"
+              class="w-full h-full text-lg placeholder:text-gray-300 focus:outline-none"
+              placeholder="Код товара, наименование"
+            />
+          </div>
+          <div
+            class="flex items-center gap-2 cursor-pointer hover:text-blue-600"
+            @click="newItemClick"
+          >
+            <span class="text-lg">Добавить</span>
+            <span class="material-icons-outlined">add</span>
+          </div>
+        </div>
+        <table class="table-auto w-full text-lg text-left bg-white">
+          <tbody>
+            <tr
+              v-for="item in items"
+              class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
+              @click="onItemClick(item.id)"
+            >
+              <td class="flex items-center">
+                <input
+                  v-model="selectedItems"
+                  type="checkbox"
+                  class="w-4 h-4 text-lg rounded"
+                  :value="item.id"
+                  @click.stop
+                />
+              </td>
+              <td class="font-semibold flex-1">
+                {{ `${item.item_brand.name} ${item.item_name}` }}
+              </td>
+              <td>{{ item.item_category.name }}</td>
+              <td>1 шт</td>
+              <td>{{ item.item_purchase_price }} KZT</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <base-data-item v-for="(item, i) in items" :item="item" :key="i" /> -->
+      </div>
     </div>
-  </div>
-  <div
-    class="mt-4 px-4 py-2 text-gray-300 bg-white rounded border border-gray-200 flex items-center gap-2 justify-center hover:text-blue-400 cursor-pointer"
-    @click="isEditMode = !isEditMode"
-  >
-    <span class="text-lg">Режим редактирования</span>
-    <span class="material-icons-outlined">edit_note</span>
   </div>
 </template>
 
@@ -217,8 +163,6 @@ const filters = ref({
 
 const selectedItems = ref([])
 
-const isEditMode = ref(false)
-
 const queryParams = computed(() => {
   const queryString = Object.keys(filters.value)
     .filter((key) => filters.value[key].length > 0)
@@ -241,6 +185,10 @@ const resetFilters = () => {
 
 const onItemClick = (id) => {
   router.push(`/item/${id}`)
+}
+
+const newItemClick = () => {
+  router.push("/item")
 }
 
 watch(queryParams, () => {

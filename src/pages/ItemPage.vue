@@ -1,56 +1,76 @@
 <template>
-  <div class="grid grid-cols-10 bg-white rounded border border-gray-200">
-    <div v-if="item" class="col-span-4 border-r">
-      <div class="px-4 py-2 border-b">
-        <span class="text-lg">Штрихкод</span>
-      </div>
-      <input-field v-model="item.item_code" placeholder="123456789" />
+  <div>
+    <div class="grid grid-cols-10 bg-white rounded border border-gray-200">
+      <div v-if="item" class="col-span-4 border-r">
+        <div class="px-4 py-2 border-b">
+          <span class="text-lg font-semibold">Информация</span>
+        </div>
+        <input-field
+          v-model="item.item_code"
+          placeholder="Штрихкод"
+          :disabled="!isEditMode"
+        />
 
-      <div class="px-4 py-2 border-b">
-        <span class="text-lg">Наименование</span>
-      </div>
-      <input-field v-model="item.item_name" placeholder="ZX 300" />
-      <div class="px-4 py-2 border-b">
-        <span class="text-lg">Категория</span>
-      </div>
-      <select-field
-        v-model="item.item_category_id"
-        :items="categories"
-        placeholder="Защитные стекла"
-        item-value="id"
-        item-title="name"
-      />
+        <input-field
+          v-model="item.item_name"
+          placeholder="Наименование"
+          :disabled="!isEditMode"
+        />
+        <select-field
+          v-model="item.item_category_id"
+          :items="categories"
+          placeholder="Категория"
+          item-value="id"
+          item-title="name"
+          :disabled="!isEditMode"
+        />
 
-      <div class="px-4 py-2 border-b">
-        <span class="text-lg">Подкатегория</span>
+        <select-field
+          v-model="item.item_subcategory_id"
+          :items="subcategories"
+          placeholder="Подкатегория"
+          item-value="id"
+          item-title="name"
+          :disabled="!isEditMode"
+        />
+        <select-field
+          v-model="item.item_brand_id"
+          :items="brands"
+          placeholder="Бренд"
+          item-value="id"
+          item-title="name"
+          :disabled="!isEditMode"
+        />
       </div>
-      <select-field
-        v-model="item.item_subcategory_id"
-        :items="subcategories"
-        placeholder="Противоударные"
-        item-value="id"
-        item-title="name"
-      />
-      <div class="px-4 py-2 border-b">
-        <span class="text-lg">Бренд</span>
-      </div>
-      <select-field
-        v-model="item.item_brand_id"
-        :items="brands"
-        placeholder="Hoco"
-        item-value="id"
-        item-title="name"
-      />
+      <div class="col-span-6 px-4 py-2 flex"></div>
     </div>
-    <div class="col-span-6 px-4 py-2 flex">
-      <button
-        class="px-4 py-2 text-lg font-semibold text-white bg-blue-400 border border-blue-600 rounded self-end flex items-center gap-2 hover:brightness-95"
+    <div
+      class="mt-4 inline-block bg-white border border-gray-200 rounded overflow-auto"
+    >
+      <div
+        v-if="!isEditMode"
+        class="px-4 py-2 text-blue-600 inline-flex gap-2 items-center border-l first:border-none cursor-pointer hover:bg-gray-50"
+        @click="isEditMode = true"
+      >
+        <span class="material-icons-outlined">edit</span>
+        <span class="text-lg">Редактировать</span>
+      </div>
+      <div
+        v-if="isEditMode"
+        class="px-4 py-2 text-blue-600 inline-flex gap-2 items-center border-l first:border-none cursor-pointer hover:bg-gray-50"
+        @click="isEditMode = false"
+      >
+        <span class="material-icons-outlined">save</span>
+        <span class="text-lg">Сохранить</span>
+      </div>
+      <!-- <button
+        class="px-4 py-2 text-lg ont-semibold text-white bg-blue-400 border border-blue-600 rounded self-end flex items-center gap-2 hover:brightness-95"
         type="submit"
         @click="saveItemData"
       >
         <span class="material-icons-outlined">save</span>
         Сохранить
-      </button>
+      </button> -->
     </div>
   </div>
 </template>
