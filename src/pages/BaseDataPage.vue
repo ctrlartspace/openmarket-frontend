@@ -2,64 +2,29 @@
   <div class="grid grid-cols-10 gap-4">
     <div class="col-span-3 bg-white border border-gray-200 rounded">
       <!-- Categories -->
-      <div>
-        <div
-          class="px-4 py-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer"
-        >
-          <p class="text-lg font-semibold">Категория</p>
-        </div>
-        <div
-          v-for="item in categories"
-          class="flex items-center gap-3 px-4 py-2 border-b"
-        >
-          <input
-            v-model="filters.categoryId"
-            type="checkbox"
-            class="w-4 h-4 text-lg rounded"
-            :value="item.id"
-            @click.stop
-          />
-          <span class="text-lg">{{ item.name }}</span>
-        </div>
-      </div>
+      <filter-block
+        v-model="filters.categoryId"
+        :items="categories"
+        title="Категория"
+        item-value="id"
+        item-title="name"
+      />
       <!-- Subcategories -->
-      <div>
-        <div class="px-4 py-2 border-b">
-          <p class="text-lg font-semibold">Подкатегория</p>
-        </div>
-        <div
-          v-for="item in subcategories"
-          class="flex items-center gap-3 px-4 py-2 border-b"
-        >
-          <input
-            v-model="filters.subcategoryId"
-            type="checkbox"
-            class="w-4 h-4 text-lg rounded"
-            :value="item.id"
-            @click.stop
-          />
-          <span class="text-lg">{{ item.name }}</span>
-        </div>
-      </div>
+      <filter-block
+        v-model="filters.subcategoryId"
+        :items="subcategories"
+        title="Подкатегория"
+        item-value="id"
+        item-title="name"
+      />
       <!-- Brands -->
-      <div>
-        <div class="px-4 py-2 border-b">
-          <p class="text-lg font-semibold">Бренд</p>
-        </div>
-        <div
-          v-for="item in brands"
-          class="flex items-center gap-3 px-4 py-2 border-b"
-        >
-          <input
-            v-model="filters.brandId"
-            type="checkbox"
-            class="w-4 h-4 text-lg rounded"
-            :value="item.id"
-            @click.stop
-          />
-          <span class="text-lg">{{ item.name }}</span>
-        </div>
-      </div>
+      <filter-block
+        v-model="filters.brandId"
+        :items="brands"
+        title="Подкатегория"
+        item-value="id"
+        item-title="name"
+      />
       <!-- Filter Reset -->
       <div class="px-4 py-2 bg-gray-50 border-b"></div>
       <div
@@ -138,6 +103,8 @@
 </template>
 
 <script setup>
+import FilterBlock from "@/components/FilterBlock.vue"
+
 import { ref, watch, computed, onMounted } from "vue"
 import { useRouter } from "vue-router"
 

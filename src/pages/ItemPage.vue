@@ -63,14 +63,6 @@
         <span class="material-icons-outlined">save</span>
         <span class="text-lg">Сохранить</span>
       </div>
-      <!-- <button
-        class="px-4 py-2 text-lg ont-semibold text-white bg-blue-400 border border-blue-600 rounded self-end flex items-center gap-2 hover:brightness-95"
-        type="submit"
-        @click="saveItemData"
-      >
-        <span class="material-icons-outlined">save</span>
-        Сохранить
-      </button> -->
     </div>
   </div>
 </template>
