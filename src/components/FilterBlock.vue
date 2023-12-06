@@ -20,6 +20,7 @@
           </li>
           <li
             class="flex items-center gap-4 px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            @click="addItemClick"
           >
             <span class="material-icons-outlined">add</span>
             Добавить
@@ -39,24 +40,43 @@
         @input="onCheckedChange"
         @click.stop
       />
-      <span class="text-lg">{{ item[itemTitle] }}</span>
+      <span class="text-lg">{{ item[itemName] }}</span>
+    </div>
+    <div v-if="isAddMode" class="flex items-center gap-3 px-4 py-2 border-b">
+      <input
+        v-model="newItemName"
+        ref="inputNewItem"
+        class="w-full text-lg placeholder:text-gray-300 focus:outline-none"
+        type="text"
+        placeholder="Название"
+        @keyup.enter="addNewItem"
+      />
+      <span
+        class="material-icons-outlined cursor-pointer hover:text-blue-600"
+        :class="newItemName ? 'text-black ' : 'text-gray-300'"
+        @click="addNewItem"
+        >add</span
+      >
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, nextTick } from "vue"
 
 const props = defineProps([
   "items",
   "title",
   "itemValue",
-  "itemTitle",
+  "itemName",
   "modelValue",
 ])
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["addItemClick", "update:modelValue"])
 
 const isMoreActive = ref(false)
+const isAddMode = ref(false)
+const inputNewItem = ref(null)
+const newItemName = ref(null)
 
 const onCheckedChange = (e) => {
   const value = e.target.value
@@ -68,5 +88,19 @@ const onCheckedChange = (e) => {
     currentValue = currentValue.filter((item) => item !== value)
   }
   emit("update:modelValue", currentValue)
+}
+
+const addItemClick = async () => {
+  newItemName.value = ""
+  isMoreActive.value = false
+  isAddMode.value = true
+  await nextTick()
+  inputNewItem.value.focus()
+}
+
+const addNewItem = async () => {
+  isMoreActive.value = false
+  isAddMode.value = false
+  emit("addItemClick", newItemName.value)
 }
 </script>

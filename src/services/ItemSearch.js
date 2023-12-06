@@ -66,4 +66,68 @@ const getSubcategories = async () => {
   }
 }
 
-export { getItems, getItem, getBrands, getCategories, getSubcategories }
+const addBrand = async (data) => {
+  try {
+    const response = await fetch(`${BASE_URL}/brands`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+const addCategory = async (data) => {
+  try {
+    const response = await fetch(`${BASE_URL}/categories`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+const addSubcategory = async (data) => {
+  try {
+    const response = await fetch(`${BASE_URL}/subcategories`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export {
+  getItems,
+  getItem,
+  getBrands,
+  getCategories,
+  getSubcategories,
+  addBrand,
+  addCategory,
+  addSubcategory,
+}

@@ -7,7 +7,8 @@
         :items="categories"
         title="Категория"
         item-value="id"
-        item-title="name"
+        item-name="name"
+        @add-item-click="addNewCategory"
       />
       <!-- Subcategories -->
       <filter-block
@@ -15,15 +16,17 @@
         :items="subcategories"
         title="Подкатегория"
         item-value="id"
-        item-title="name"
+        item-name="name"
+        @add-item-click="addNewSubcategory"
       />
       <!-- Brands -->
       <filter-block
         v-model="filters.brandId"
         :items="brands"
-        title="Подкатегория"
+        title="Бренд"
         item-value="id"
-        item-title="name"
+        item-name="name"
+        @add-item-click="addNewBrand"
       />
       <!-- Filter Reset -->
       <div class="px-4 py-2 bg-gray-50 border-b"></div>
@@ -36,7 +39,7 @@
       </div>
     </div>
     <div class="col-span-7">
-      <div class="bg-white border rounded overflow-auto">
+      <div class="sticky top-4 bg-white border rounded overflow-auto">
         <div
           v-if="selectedItems && selectedItems.length > 0"
           class="flex gap-2 justify-between px-4 py-2 border-b"
@@ -113,6 +116,9 @@ import {
   getCategories,
   getSubcategories,
   getItems,
+  addBrand,
+  addCategory,
+  addSubcategory,
 } from "@/services/ItemSearch"
 
 const router = useRouter()
@@ -161,6 +167,21 @@ const newItemClick = () => {
 watch(queryParams, () => {
   updateItems()
 })
+
+const addNewBrand = async (name) => {
+  await addBrand({ name })
+  brands.value = await getBrands()
+}
+
+const addNewCategory = async (name) => {
+  await addCategory({ name })
+  categories.value = await getCategories()
+}
+
+const addNewSubcategory = async (name) => {
+  await addSubcategory({ name })
+  subcategories.value = await getSubcategories()
+}
 
 onMounted(async () => {
   items.value = await getItems()
