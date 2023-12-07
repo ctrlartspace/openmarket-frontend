@@ -9,6 +9,8 @@
         item-value="id"
         item-name="name"
         @add-item-click="addNewCategory"
+        @on-update-data="updateCategoryData"
+        @on-delete="deleteCategoryData"
       />
       <!-- Subcategories -->
       <filter-block
@@ -19,6 +21,8 @@
         item-value="id"
         item-name="name"
         @add-item-click="addNewSubcategory"
+        @on-update-data="updateSubcategoryData"
+        @on-delete="deleteSubcategoryData"
       />
       <!-- Brands -->
       <filter-block
@@ -29,6 +33,8 @@
         item-value="id"
         item-name="name"
         @add-item-click="addNewBrand"
+        @on-update-data="updateBrandData"
+        @on-delete="deleteBrandData"
       />
       <!-- Filter Reset -->
       <button
@@ -94,7 +100,7 @@
               <td class="font-semibold flex-1">
                 {{ `${item.item_brand.name} ${item.item_name}` }}
               </td>
-              <td>{{ item.item_category.name }}</td>
+              <td>{{ item.item_category?.name }}</td>
               <td>1 шт</td>
               <td>{{ item.item_purchase_price }} KZT</td>
             </tr>
@@ -120,6 +126,12 @@ import {
   addBrand,
   addCategory,
   addSubcategory,
+  updateCategory,
+  updateSubcategory,
+  updateBrand,
+  deleteCategory,
+  deleteSubcategory,
+  deleteBrand,
 } from "@/services/ItemSearch"
 
 const router = useRouter()
@@ -182,6 +194,33 @@ const addNewCategory = async (name) => {
 const addNewSubcategory = async (name) => {
   await addSubcategory({ name })
   subcategories.value = await getSubcategories()
+}
+
+const updateCategoryData = async (data) => {
+  await updateCategory(data)
+  categories.value = await getCategories()
+}
+const updateSubcategoryData = async (data) => {
+  await updateSubcategory(data)
+  subcategories.value = await getSubcategories()
+}
+
+const updateBrandData = async (data) => {
+  await updateBrand(data)
+  brands.value = await getBrands()
+}
+
+const deleteCategoryData = async (id) => {
+  await deleteCategory(id)
+  categories.value = await getCategories()
+}
+const deleteSubcategoryData = async (id) => {
+  await deleteSubcategory(id)
+  subcategories.value = await getSubcategories()
+}
+const deleteBrandData = async (id) => {
+  await deleteBrand(id)
+  brands.value = await getBrands()
 }
 
 onMounted(async () => {

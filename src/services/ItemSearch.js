@@ -121,6 +121,115 @@ const addSubcategory = async (data) => {
   }
 }
 
+const updateCategory = async (data) => {
+  try {
+    console.log(data)
+    const response = await fetch(`${BASE_URL}/categories/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+const updateSubcategory = async (data) => {
+  try {
+    console.log(data)
+    const response = await fetch(`${BASE_URL}/subcategories/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+const updateBrand = async (data) => {
+  try {
+    console.log(data)
+    const response = await fetch(`${BASE_URL}/brands/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+const deleteCategory = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/categories/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+const deleteSubcategory = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/subcategories/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+const deleteBrand = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/brands/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
 export {
   getItems,
   getItem,
@@ -130,4 +239,10 @@ export {
   addBrand,
   addCategory,
   addSubcategory,
+  updateCategory,
+  updateSubcategory,
+  updateBrand,
+  deleteCategory,
+  deleteSubcategory,
+  deleteBrand,
 }

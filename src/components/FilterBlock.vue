@@ -44,6 +44,7 @@
         <button
           v-if="isEditMode"
           class="flex items-center rounded hover:bg-red-100 hover:text-red-600"
+          @click="onDeleteClick(item.id)"
         >
           <span class="material-icons">remove</span>
         </button>
@@ -66,12 +67,12 @@
           type="text"
           placeholder="Название"
           :disabled="!isEditMode"
-          @keyup.enter="isEditMode = false"
+          @keyup.enter="updateItemClick(item)"
         />
         <button
           v-if="isEditMode && item[itemName]"
           class="flex items-center text-gray-300 rounded hover:bg-blue-100 hover:text-blue-600"
-          @click="isEditMode = false"
+          @click="updateItemClick(item)"
         >
           <span class="material-icons-outlined">check</span>
         </button>
@@ -117,7 +118,7 @@ const props = defineProps([
   "itemName",
   "modelValue",
 ])
-const emit = defineEmits(["addItemClick", "update:modelValue"])
+const emit = defineEmits(["addItemClick", "onUpdateData", "update:modelValue"])
 
 const isShowFull = ref(false)
 const visibleItemsCount = computed(() =>
@@ -156,6 +157,15 @@ const addItemClick = async () => {
   isEditMode.value = false
   await nextTick()
   inputNewItem.value.focus()
+}
+
+const onDeleteClick = (id) => {
+  emit("onDelete", id)
+}
+
+const updateItemClick = (item) => {
+  emit("onUpdateData", item)
+  isEditMode.value = false
 }
 
 const addNewItem = async () => {
