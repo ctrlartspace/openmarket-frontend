@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-10 gap-4">
-    <div class="col-span-3 bg-white border border-gray-200 rounded">
+    <div class="col-span-3">
       <!-- Categories -->
       <filter-block
         v-model="filters.categoryId"
@@ -12,6 +12,7 @@
       />
       <!-- Subcategories -->
       <filter-block
+        class="mt-2"
         v-model="filters.subcategoryId"
         :items="subcategories"
         title="Подкатегория"
@@ -21,6 +22,7 @@
       />
       <!-- Brands -->
       <filter-block
+        class="mt-2"
         v-model="filters.brandId"
         :items="brands"
         title="Бренд"
@@ -29,20 +31,19 @@
         @add-item-click="addNewBrand"
       />
       <!-- Filter Reset -->
-      <div class="px-4 py-2 bg-gray-50 border-b"></div>
-      <div
-        class="px-4 py-2 text-gray-300 cursor-pointer flex items-center gap-2 hover:bg-gray-100 hover:text-black"
+      <button
+        class="mt-2 w-full bg-white border border-gray-200 rounded px-4 py-2 flex items-center gap-2 hover:bg-gray-50"
         @click="resetFilters"
       >
         <span class="material-icons-outlined">filter_list_off</span>
         <span class="text-lg">Сбросить</span>
-      </div>
+      </button>
     </div>
     <div class="col-span-7">
       <div class="sticky top-4 bg-white border rounded overflow-auto">
         <div
           v-if="selectedItems && selectedItems.length > 0"
-          class="flex gap-2 justify-between px-4 py-2 border-b"
+          class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
         >
           <div
             class="flex gap-2 items-center hover:text-red-600 cursor-pointer"
@@ -57,7 +58,7 @@
             <span class="text-lg">Показать в магазине</span>
           </div>
         </div>
-        <div v-else class="px-4 py-2 flex border-b">
+        <div v-else class="px-4 py-2 flex border-b last:border-none">
           <div class="flex-1 flex gap-2 items-center">
             <span class="material-icons text-gray-300">search</span>
             <input
@@ -84,8 +85,8 @@
               <td class="flex items-center">
                 <input
                   v-model="selectedItems"
+                  class="w-4 h-4"
                   type="checkbox"
-                  class="w-4 h-4 text-lg rounded"
                   :value="item.id"
                   @click.stop
                 />

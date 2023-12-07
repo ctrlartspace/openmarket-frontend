@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, onMounted } from "vue"
+import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue"
 
 const props = defineProps({
   searchItems: {
@@ -105,10 +105,16 @@ const onClearClick = () => {
   value.value = ""
 }
 
-onMounted(async () => {
-  window.addEventListener("keypress", async () => {
+const setInputFocus = async () => {
+  if (searchInput) {
     await nextTick()
     searchInput.value.focus()
-  })
+  }
+}
+onMounted(async () => {
+  window.addEventListener("keypress", setInputFocus)
+})
+onBeforeUnmount(() => {
+  window.removeEventListener("keypress", setInputFocus)
 })
 </script>
