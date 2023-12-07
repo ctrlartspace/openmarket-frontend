@@ -66,11 +66,12 @@
           type="text"
           placeholder="Название"
           :disabled="!isEditMode"
+          @keyup.enter="isEditMode = false"
         />
         <button
           v-if="isEditMode && item[itemName]"
           class="flex items-center text-gray-300 rounded hover:bg-blue-100 hover:text-blue-600"
-          @click="console.log(item[itemName])"
+          @click="isEditMode = false"
         >
           <span class="material-icons-outlined">check</span>
         </button>
