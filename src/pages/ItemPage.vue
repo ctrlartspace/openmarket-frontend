@@ -6,18 +6,18 @@
           <span class="text-lg font-semibold">Информация</span>
         </div>
         <input-field
-          v-model="item.item_code"
+          v-model="item.code"
           placeholder="Штрихкод"
           :disabled="!isEditMode"
         />
 
         <input-field
-          v-model="item.item_name"
+          v-model="item.name"
           placeholder="Наименование"
           :disabled="!isEditMode"
         />
         <select-field
-          v-model="item.item_category_id"
+          v-model="item.category_id"
           :items="categories"
           placeholder="Категория"
           item-value="id"
@@ -26,7 +26,7 @@
         />
 
         <select-field
-          v-model="item.item_subcategory_id"
+          v-model="item.subcategory_id"
           :items="subcategories"
           placeholder="Подкатегория"
           item-value="id"
@@ -34,11 +34,21 @@
           :disabled="!isEditMode"
         />
         <select-field
-          v-model="item.item_brand_id"
+          v-model="item.brand_id"
           :items="brands"
           placeholder="Бренд"
           item-value="id"
           item-title="name"
+          :disabled="!isEditMode"
+        />
+        <input-field
+          v-model="item.purchase_price"
+          placeholder="Цена покупки"
+          :disabled="!isEditMode"
+        />
+        <input-field
+          v-model="item.selling_price"
+          placeholder="Цена продажи"
           :disabled="!isEditMode"
         />
       </div>
@@ -58,7 +68,7 @@
       <div
         v-if="isEditMode"
         class="px-4 py-2 text-blue-600 inline-flex gap-2 items-center border-l first:border-none cursor-pointer hover:bg-gray-50"
-        @click="isEditMode = false"
+        @click="saveItemData"
       >
         <span class="material-icons-outlined">save</span>
         <span class="text-lg">Сохранить</span>
@@ -73,7 +83,7 @@ import SelectField from "../components/ui/SelectField.vue"
 
 import { ref, onMounted } from "vue"
 import { useRoute } from "vue-router"
-import { getItem } from "@/services/ItemSearch"
+import { getItem, updateItem, addItem } from "@/services/ItemSearch"
 
 import {
   getBrands,
@@ -90,8 +100,19 @@ const brands = ref([])
 const categories = ref([])
 const subcategories = ref([])
 
-const saveItemData = () => {
-  console.log(item.value)
+const saveItemData = async () => {
+  if (item.value.id) {
+    const response = await updateItem(item.value)
+    const { id } = response
+    item.value = await getItem(id)
+    console.log(response)
+  } else {
+    const response = await addItem(item.value)
+    const { id } = response
+    item.value = await getItem(id)
+    console.log(response)
+  }
+  isEditMode.value = false
 }
 onMounted(async () => {
   brands.value = await getBrands()

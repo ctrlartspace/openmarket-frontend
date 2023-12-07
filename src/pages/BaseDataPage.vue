@@ -12,18 +12,6 @@
         @on-update-data="updateCategoryData"
         @on-delete="deleteCategoryData"
       />
-      <!-- Subcategories -->
-      <filter-block
-        class="mt-2"
-        v-model="filters.subcategoryId"
-        :items="subcategories"
-        title="Подкатегория"
-        item-value="id"
-        item-name="name"
-        @add-item-click="addNewSubcategory"
-        @on-update-data="updateSubcategoryData"
-        @on-delete="deleteSubcategoryData"
-      />
       <!-- Brands -->
       <filter-block
         class="mt-2"
@@ -98,11 +86,11 @@
                 />
               </td>
               <td class="font-semibold flex-1">
-                {{ `${item.item_brand.name} ${item.item_name}` }}
+                {{ `${item.brand.name} ${item.name}` }}
               </td>
-              <td>{{ item.item_category?.name }}</td>
+              <td>{{ item.category?.name }}</td>
               <td>1 шт</td>
-              <td>{{ item.item_purchase_price }} KZT</td>
+              <td>{{ item.purchase_price }} KZT</td>
             </tr>
           </tbody>
         </table>
@@ -121,16 +109,12 @@ import { useRouter } from "vue-router"
 import {
   getBrands,
   getCategories,
-  getSubcategories,
   getItems,
   addBrand,
   addCategory,
-  addSubcategory,
   updateCategory,
-  updateSubcategory,
   updateBrand,
   deleteCategory,
-  deleteSubcategory,
   deleteBrand,
 } from "@/services/ItemSearch"
 
@@ -138,13 +122,11 @@ const router = useRouter()
 
 const brands = ref([])
 const categories = ref([])
-const subcategories = ref([])
 const items = ref([])
 
 const filters = ref({
   brandId: [],
   categoryId: [],
-  subcategoryId: [],
 })
 
 const selectedItems = ref([])
@@ -191,18 +173,9 @@ const addNewCategory = async (name) => {
   categories.value = await getCategories()
 }
 
-const addNewSubcategory = async (name) => {
-  await addSubcategory({ name })
-  subcategories.value = await getSubcategories()
-}
-
 const updateCategoryData = async (data) => {
   await updateCategory(data)
   categories.value = await getCategories()
-}
-const updateSubcategoryData = async (data) => {
-  await updateSubcategory(data)
-  subcategories.value = await getSubcategories()
 }
 
 const updateBrandData = async (data) => {
@@ -214,10 +187,6 @@ const deleteCategoryData = async (id) => {
   await deleteCategory(id)
   categories.value = await getCategories()
 }
-const deleteSubcategoryData = async (id) => {
-  await deleteSubcategory(id)
-  subcategories.value = await getSubcategories()
-}
 const deleteBrandData = async (id) => {
   await deleteBrand(id)
   brands.value = await getBrands()
@@ -227,6 +196,5 @@ onMounted(async () => {
   items.value = await getItems()
   brands.value = await getBrands()
   categories.value = await getCategories()
-  subcategories.value = await getSubcategories()
 })
 </script>

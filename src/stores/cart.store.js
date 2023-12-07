@@ -8,7 +8,7 @@ export const useCartStore = defineStore("cart", () => {
 
   const getTotalAmount = computed(() =>
     cartItems.value.reduce((acc, obj) => {
-      return acc + obj["item_selling_price"]
+      return acc + obj["selling_price"]
     }, 0)
   )
 

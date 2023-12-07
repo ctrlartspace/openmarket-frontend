@@ -1,14 +1,12 @@
 <template>
   <div class="flex text-lg cursor-pointer hover:underline">
     <span class="font-semibold">
-      {{ `${item.item_name}` }}
+      {{ `${item.name}` }}
     </span>
     <span class="flex-auto">
-      {{
-        `${item.item_brand.name} ${item.item_category.name} ${item.item_subcategory.name}`
-      }}
+      {{ `${item.brand.name} ${item.category.name} ${item.subcategory.name}` }}
     </span>
-    <span class=""> {{ item.item_purchase_price }}</span>
+    <span class=""> {{ item.purchase_price }}</span>
   </div>
 </template>
 

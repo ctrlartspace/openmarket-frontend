@@ -230,6 +230,42 @@ const deleteBrand = async (id) => {
     return Promise.reject(error)
   }
 }
+const updateItem = async (data) => {
+  try {
+    const response = await fetch(`${BASE_URL}/items/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+const addItem = async (data) => {
+  try {
+    const response = await fetch(`${BASE_URL}/items`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
 export {
   getItems,
   getItem,
@@ -245,4 +281,6 @@ export {
   deleteCategory,
   deleteSubcategory,
   deleteBrand,
+  updateItem,
+  addItem,
 }

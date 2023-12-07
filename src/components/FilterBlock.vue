@@ -76,6 +76,9 @@
         >
           <span class="material-icons-outlined">check</span>
         </button>
+        <button class="flex items-center">
+          <span class="material-icons-outlined">expand_more</span>
+        </button>
       </li>
 
       <li v-if="isAddMode" class="flex items-center gap-3 px-4 py-2 border-b">

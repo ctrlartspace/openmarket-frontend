@@ -27,10 +27,10 @@
                   </span>
                 </td>
                 <td class="flex-1 font-semibold">
-                  {{ `${item.item_brand.name} ${item.item_name}` }}
+                  {{ `${item.brand.name} ${item.name}` }}
                 </td>
                 <td class="text-gray-300">1 шт.</td>
-                <td>{{ item.item_purchase_price }} KZT</td>
+                <td>{{ item.purchase_price }} KZT</td>
               </tr>
             </tbody>
           </table>
