@@ -1,21 +1,18 @@
 <template>
-  <router-link
-    v-for="(item, i) in menuItems"
-    v-slot="{ isActive }"
-    :to="item.path"
-    :key="i"
-  >
-    <span
-      class="font-semibold text-lg"
-      :class="{
-        'ml-4': i != 0,
-        'text-black': isActive,
-        'text-gray-300': !isActive,
-      }"
-    >
-      {{ item.title }}
-    </span>
-  </router-link>
+  <nav>
+    <ul>
+      <li class="inline ml-4 first:ml-0" v-for="item in menuItems">
+        <router-link v-slot="{ isActive }" :to="item.path">
+          <span
+            class="font-semibold text-lg"
+            :class="isActive ? 'text-black' : 'text-gray-300'"
+          >
+            {{ item.title }}
+          </span>
+        </router-link>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script setup>
