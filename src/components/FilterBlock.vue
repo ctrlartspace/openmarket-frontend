@@ -43,7 +43,7 @@
       >
         <button
           v-if="isEditMode"
-          class="flex items-center rounded hover:bg-red-100 hover:text-red-700"
+          class="flex items-center rounded hover:bg-red-100 hover:text-red-600"
         >
           <span class="material-icons">remove</span>
         </button>
@@ -69,7 +69,7 @@
         />
         <button
           v-if="isEditMode && item[itemName]"
-          class="flex items-center text-lg text-gray-300 hover:text-black cursor-pointer"
+          class="flex items-center text-gray-300 rounded hover:bg-blue-100 hover:text-blue-600"
           @click="console.log(item[itemName])"
         >
           <span class="material-icons-outlined">check</span>
