@@ -1,8 +1,5 @@
 <template>
-  <li
-    v-for="(item, i) in items"
-    class="flex items-center gap-3 px-4 py-2 border-b last:border-none"
-  >
+  <div class="flex items-center gap-3 px-4 py-2">
     <div class="flex items-center">
       <input
         type="checkbox"
@@ -16,18 +13,29 @@
     <input
       v-model="item[itemName]"
       class="w-full bg-inherit text-lg placeholder:text-gray-300 focus:outline-none capitalize"
-      :class="isEditMode ? 'text-blue-600' : 'text-black'"
       type="text"
       placeholder="Название"
-      :disabled="!isEditMode"
       @keyup.enter="updateItemClick(item)"
     />
     <button class="flex items-center">
       <span class="material-icons-outlined">expand_more</span>
     </button>
-  </li>
+  </div>
 </template>
 
 <script setup>
-defineProps(["items"])
+const props = defineProps(["item", "itemValue", "itemName", "modelValue"])
+const emit = defineEmits(["addItemClick", "onUpdateData", "update:modelValue"])
+
+const onCheckedChange = (e) => {
+  const value = e.target.value
+  const isChecked = e.target.checked
+  let currentValue = [...props.modelValue]
+  if (isChecked) {
+    currentValue.push(value)
+  } else {
+    currentValue = currentValue.filter((item) => item !== value)
+  }
+  emit("update:modelValue", currentValue)
+}
 </script>

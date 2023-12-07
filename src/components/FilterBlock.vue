@@ -37,50 +37,24 @@
       </ul>
     </div>
     <ul>
-      <li
-        v-for="(item, i) in firstItems"
-        class="flex items-center gap-3 px-4 py-2 border-b last:border-none"
-      >
-        <button
-          v-if="isEditMode"
-          class="flex items-center rounded hover:bg-red-100 hover:text-red-600"
-          @click="onDeleteClick(item.id)"
-        >
-          <span class="material-icons">remove</span>
-        </button>
-        <div v-else class="flex items-center">
-          <input
-            type="checkbox"
-            class="w-4 h-4"
-            :value="item[itemValue]"
-            :checked="
-              modelValue.find((i) => String(i) === String(item[itemValue]))
-            "
-            @input="onCheckedChange"
-            @click.stop
-          />
-        </div>
-        <input
-          v-model="item[itemName]"
-          class="w-full bg-inherit text-lg placeholder:text-gray-300 focus:outline-none capitalize"
-          :class="isEditMode ? 'text-blue-600' : 'text-black'"
-          type="text"
-          placeholder="Название"
-          :disabled="!isEditMode"
-          @keyup.enter="updateItemClick(item)"
+      <li v-for="item in firstItems">
+        <filter-item
+          v-model="filterItems"
+          :item="item"
+          :item-value="itemValue"
+          :item-name="itemName"
         />
-        <button
-          v-if="isEditMode && item[itemName]"
-          class="flex items-center text-gray-300 rounded hover:bg-blue-100 hover:text-blue-600"
-          @click="updateItemClick(item)"
-        >
-          <span class="material-icons-outlined">check</span>
-        </button>
-        <button class="flex items-center">
-          <span class="material-icons-outlined">expand_more</span>
-        </button>
+        <ul v-if="!item.subcategories">
+          <li v-for="subitem in [{ id: 1, name: 'sdf' }]">
+            <filter-item
+              v-model="filterItemsSub"
+              :item="subitem"
+              :item-value="itemValue"
+              :item-name="itemName"
+            />
+          </li>
+        </ul>
       </li>
-
       <li v-if="isAddMode" class="flex items-center gap-3 px-4 py-2 border-b">
         <input
           v-model="newItemName"
@@ -112,6 +86,7 @@
 </template>
 
 <script setup>
+import FilterItem from "@/components/FilterItem.vue"
 import { ref, computed, nextTick } from "vue"
 
 const props = defineProps([
@@ -129,6 +104,8 @@ const visibleItemsCount = computed(() =>
 )
 const firstItems = computed(() => props.items.slice(0, visibleItemsCount.value))
 
+const filterItems = ref([])
+const filterItemsSub = ref([])
 const isMoreActive = ref(false)
 const isAddMode = ref(false)
 const isEditMode = ref(false)
