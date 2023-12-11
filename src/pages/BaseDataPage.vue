@@ -86,7 +86,7 @@
                 />
               </td>
               <td class="font-semibold flex-1">
-                {{ `${item.brand.name} ${item.name}` }}
+                {{ `${item.brand?.name} ${item.name}` }}
               </td>
               <td>{{ item.category?.name }}</td>
               <td>1 шт</td>
@@ -131,6 +131,9 @@ const filters = ref({
 
 const selectedItems = ref([])
 
+const updateItems = async () => {
+  items.value = await getItems(queryParams.value)
+}
 const queryParams = computed(() => {
   const queryString = Object.keys(filters.value)
     .filter((key) => filters.value[key].length > 0)
@@ -140,9 +143,7 @@ const queryParams = computed(() => {
   return queryString ? `${queryString}` : ""
 })
 
-const updateItems = async () => {
-  items.value = await getItems(queryParams.value)
-}
+watch(queryParams, updateItems)
 
 const resetFilters = () => {
   Object.keys(filters.value).forEach((key) => {
@@ -158,10 +159,6 @@ const onItemClick = (id) => {
 const newItemClick = () => {
   router.push("/item")
 }
-
-watch(queryParams, () => {
-  updateItems()
-})
 
 const addNewBrand = async (name) => {
   await addBrand({ name })

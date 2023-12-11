@@ -4,7 +4,9 @@
       {{ `${item.name}` }}
     </span>
     <span class="flex-auto">
-      {{ `${item.brand.name} ${item.category.name} ${item.subcategory.name}` }}
+      {{
+        `${item.brand?.name} ${item.category?.name} ${item.subcategory?.name}`
+      }}
     </span>
     <span class=""> {{ item.purchase_price }}</span>
   </div>

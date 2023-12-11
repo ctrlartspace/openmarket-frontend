@@ -1,5 +1,8 @@
 <template>
-  <div class="flex items-center gap-3 px-4 py-2">
+  <div
+    class="flex items-center gap-3 px-4 py-2 border-t hover:bg-gray-50 cursor-pointer"
+    @click="expandClick"
+  >
     <div class="flex items-center">
       <input
         type="checkbox"
@@ -10,22 +13,30 @@
         @click.stop
       />
     </div>
-    <input
-      v-model="item[itemName]"
-      class="w-full bg-inherit text-lg placeholder:text-gray-300 focus:outline-none capitalize"
-      type="text"
-      placeholder="Название"
-      @keyup.enter="updateItemClick(item)"
-    />
-    <button class="flex items-center">
-      <span class="material-icons-outlined">expand_more</span>
-    </button>
+    <span
+      class="w-full bg-inherit text-lg placeholder:text-gray-300 focus:outline-none"
+    >
+      {{ item[itemName] }}
+    </span>
+    <span v-if="showExpand" class="material-icons-outlined">
+      {{ isExpand ? "expand_less" : "expand_more" }}
+    </span>
   </div>
 </template>
 
 <script setup>
-const props = defineProps(["item", "itemValue", "itemName", "modelValue"])
-const emit = defineEmits(["addItemClick", "onUpdateData", "update:modelValue"])
+import { ref } from "vue"
+
+const props = defineProps([
+  "item",
+  "itemValue",
+  "itemName",
+  "showExpand",
+  "modelValue",
+])
+const emit = defineEmits(["onExpandToggle", "update:modelValue"])
+
+const isExpand = ref(false)
 
 const onCheckedChange = (e) => {
   const value = e.target.value
@@ -37,5 +48,10 @@ const onCheckedChange = (e) => {
     currentValue = currentValue.filter((item) => item !== value)
   }
   emit("update:modelValue", currentValue)
+}
+
+const expandClick = () => {
+  isExpand.value = !isExpand.value
+  emit("onExpandToggle", isExpand.value)
 }
 </script>
