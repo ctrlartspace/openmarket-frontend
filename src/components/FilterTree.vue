@@ -2,30 +2,35 @@
   <ul>
     <li v-for="item in firstItems">
       <filter-item
+        class="pl-4"
         v-model="selectedItems"
         :item="item"
         :showExpand="item.items && item.items.length > 0"
         @on-expand-toggle="(v) => (item.subVisible = v)"
         :key="item.id"
+        @change="selectChilds(item, $event.target.checked)"
       />
       <ul v-if="item.subVisible">
         <li v-for="subitem in item.items">
           <filter-item
             class="pl-6"
-            v-model="selectedSubitems"
+            v-model="selectedItems"
             :item="subitem"
             :showExpand="subitem.items && subitem.items.length > 0"
             @on-expand-toggle="(v) => (subitem.subVisible = v)"
             :key="subitem.id"
+            @change="selectChilds(subitem, $event.target.checked)"
           />
           <ul v-if="subitem.subVisible">
             <li v-for="subsubitem in subitem.items">
               <filter-item
                 class="pl-8"
-                v-model="selectedSubsubitems"
+                v-model="selectedItems"
                 :item="subsubitem"
                 :showExpand="subsubitem.items && subsubitem.items.length > 0"
+                @on-expand-toggle="(v) => (subsubitem.subVisible = v)"
                 :key="subsubitem.id"
+                @change="selectChilds(subsubitem, $event.target.checked)"
               />
             </li>
           </ul>
@@ -63,18 +68,36 @@ const firstItems = computed(() =>
 )
 
 const selectedItems = ref([])
-const selectedSubitems = ref([])
-const selectedSubsubitems = ref([])
 
 const updateModelValue = () => {
-  const items = selectedItems.value.concat(
-    selectedSubitems.value,
-    selectedSubsubitems.value
-  )
-  emit("update:modelValue", items)
+  emit("update:modelValue", selectedItems.value)
+}
+
+const getNestedIds = (obj, ids = []) => {
+  if (obj.id) {
+    ids.push(obj.id)
+  }
+  if (obj.items) {
+    obj.items.forEach((item) => {
+      getNestedIds(item, ids)
+    })
+  }
+  return ids
+}
+
+const selectChilds = (item) => {
+  const nestedIds = getNestedIds(item)
+  nestedIds
+    .filter((id) => id != item.id)
+    .forEach((id) => {
+      const index = selectedItems.value.indexOf(id)
+      if (index === -1) {
+        selectedItems.value.push(id)
+      } else {
+        selectedItems.value.splice(index, 1)
+      }
+    })
 }
 
 watch(selectedItems, updateModelValue)
-watch(selectedSubitems, updateModelValue)
-watch(selectedSubsubitems, updateModelValue)
 </script>

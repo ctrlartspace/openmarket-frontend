@@ -5,11 +5,10 @@
   >
     <div class="flex items-center">
       <input
+        v-model="model"
         type="checkbox"
         class="w-4 h-4"
         :value="item.id"
-        :checked="modelValue.find((i) => String(i) === String(item.id))"
-        @input="onCheckedChange"
         @click.stop
       />
     </div>
@@ -25,24 +24,21 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, computed } from "vue"
 
 const props = defineProps(["item", "showExpand", "modelValue"])
 const emit = defineEmits(["onExpandToggle", "update:modelValue"])
 
-const isExpand = ref(false)
+const model = computed({
+  get() {
+    return props.modelValue
+  },
+  set(value) {
+    emit("update:modelValue", value)
+  },
+})
 
-const onCheckedChange = (e) => {
-  const value = e.target.value
-  const isChecked = e.target.checked
-  let currentValue = [...props.modelValue]
-  if (isChecked) {
-    currentValue.push(value)
-  } else {
-    currentValue = currentValue.filter((item) => item !== value)
-  }
-  emit("update:modelValue", currentValue)
-}
+const isExpand = ref(false)
 
 const expandClick = () => {
   isExpand.value = !isExpand.value
