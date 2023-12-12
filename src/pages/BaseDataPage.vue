@@ -2,28 +2,15 @@
   <div class="grid grid-cols-10 gap-4">
     <div class="col-span-3">
       <!-- Categories -->
-      <filter-block
-        v-model="filters.categoryId"
-        :items="categories"
-        title="Категория"
-        item-value="id"
-        item-name="name"
-        @add-item-click="addNewCategory"
-        @on-update-data="updateCategoryData"
-        @on-delete="deleteCategoryData"
-      />
+      <div class="bg-white border border-gray-200 rounded">
+        <filter-header title="Категория" />
+        <filter-tree v-model="filters.categoryId" :items="categories" />
+      </div>
       <!-- Brands -->
-      <filter-block
-        class="mt-2"
-        v-model="filters.brandId"
-        :items="brands"
-        title="Бренд"
-        item-value="id"
-        item-name="name"
-        @add-item-click="addNewBrand"
-        @on-update-data="updateBrandData"
-        @on-delete="deleteBrandData"
-      />
+      <div class="mt-2 bg-white border border-gray-200 rounded">
+        <filter-header title="Бренд" />
+        <filter-tree v-model="filters.brandId" :items="brands" />
+      </div>
       <!-- Filter Reset -->
       <button
         class="mt-2 w-full bg-white border border-gray-200 rounded px-4 py-2 flex items-center gap-2 hover:bg-gray-50"
@@ -101,7 +88,8 @@
 </template>
 
 <script setup>
-import FilterBlock from "@/components/FilterBlock.vue"
+import FilterHeader from "@/components/FilterHeader.vue"
+import FilterTree from "@/components/FilterTree.vue"
 
 import { ref, watch, computed, onMounted } from "vue"
 import { useRouter } from "vue-router"

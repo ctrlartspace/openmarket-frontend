@@ -4,8 +4,6 @@
       <filter-item
         v-model="selectedItems"
         :item="item"
-        :item-value="itemValue"
-        :item-name="itemName"
         :showExpand="item.items && item.items.length > 0"
         @on-expand-toggle="(v) => (item.subVisible = v)"
         :key="item.id"
@@ -16,8 +14,6 @@
             class="pl-6"
             v-model="selectedSubitems"
             :item="subitem"
-            :item-value="itemValue"
-            :item-name="itemName"
             :showExpand="subitem.items && subitem.items.length > 0"
             @on-expand-toggle="(v) => (subitem.subVisible = v)"
             :key="subitem.id"
@@ -28,8 +24,6 @@
                 class="pl-8"
                 v-model="selectedSubsubitems"
                 :item="subsubitem"
-                :item-value="itemValue"
-                :item-name="itemName"
                 :showExpand="subsubitem.items && subsubitem.items.length > 0"
                 :key="subsubitem.id"
               />
@@ -55,7 +49,7 @@
 import FilterItem from "@/components/FilterItem.vue"
 import { ref, computed, watch } from "vue"
 
-const props = defineProps(["items", "itemValue", "itemName", "modelValue"])
+const props = defineProps(["items", "modelValue"])
 const emit = defineEmits(["update:modelValue"])
 
 const isShowFull = ref(false)

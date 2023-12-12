@@ -7,8 +7,8 @@
       <input
         type="checkbox"
         class="w-4 h-4"
-        :value="item[itemValue]"
-        :checked="modelValue.find((i) => String(i) === String(item[itemValue]))"
+        :value="item.id"
+        :checked="modelValue.find((i) => String(i) === String(item.id))"
         @input="onCheckedChange"
         @click.stop
       />
@@ -16,7 +16,7 @@
     <span
       class="w-full bg-inherit text-lg placeholder:text-gray-300 focus:outline-none"
     >
-      {{ item[itemName] }}
+      {{ item.name }}
     </span>
     <span v-if="showExpand" class="material-icons-outlined">
       {{ isExpand ? "expand_less" : "expand_more" }}
@@ -27,13 +27,7 @@
 <script setup>
 import { ref } from "vue"
 
-const props = defineProps([
-  "item",
-  "itemValue",
-  "itemName",
-  "showExpand",
-  "modelValue",
-])
+const props = defineProps(["item", "showExpand", "modelValue"])
 const emit = defineEmits(["onExpandToggle", "update:modelValue"])
 
 const isExpand = ref(false)
