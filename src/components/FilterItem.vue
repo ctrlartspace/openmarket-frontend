@@ -7,7 +7,7 @@
       <input
         v-model="model"
         type="checkbox"
-        class="z-10 w-4 h-4"
+        class="w-4 h-4"
         :value="item.id"
         @click.stop
       />
@@ -27,7 +27,7 @@
 <script setup>
 import { ref, computed } from "vue"
 
-const props = defineProps(["item", "showExpand", "modelValue"])
+const props = defineProps(["item", "showExpand", "isExpand", "modelValue"])
 const emit = defineEmits(["onExpandToggle", "update:modelValue"])
 
 const model = computed({
@@ -39,10 +39,7 @@ const model = computed({
   },
 })
 
-const isExpand = ref(false)
-
 const expandClick = () => {
-  isExpand.value = !isExpand.value
-  emit("onExpandToggle", isExpand.value)
+  emit("onExpandToggle", !props.isExpand)
 }
 </script>

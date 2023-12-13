@@ -7,6 +7,7 @@
         :item="item"
         :showExpand="item.items && item.items.length > 0"
         @on-expand-toggle="(v) => (item.subVisible = v)"
+        :isExpand="item.subVisible"
         :key="item.id"
         @change="selectChilds(item, $event.target.checked)"
       />
@@ -18,6 +19,7 @@
             :item="subitem"
             :showExpand="subitem.items && subitem.items.length > 0"
             @on-expand-toggle="(v) => (subitem.subVisible = v)"
+            :isExpand="subitem.subVisible"
             :key="subitem.id"
             @change="selectChilds(subitem, $event.target.checked)"
           />
@@ -29,6 +31,7 @@
                 :item="subsubitem"
                 :showExpand="subsubitem.items && subsubitem.items.length > 0"
                 @on-expand-toggle="(v) => (subsubitem.subVisible = v)"
+                :isExpand="subsubitem.subVisible"
                 :key="subsubitem.id"
                 @change="selectChilds(subsubitem, $event.target.checked)"
               />
@@ -38,13 +41,17 @@
       </ul>
     </li>
 
-    <li v-if="!isShowFull" class="border-t">
+    <li v-if="isItemsMore" class="border-t">
       <button
-        class="w-full px-4 py-2 text-start hover:bg-gray-50 flex items-center justify-between"
-        @click="isShowFull = true"
+        class="w-full px-4 py-2 text-start hover:bg-gray-50 flex items-center justify-center"
+        @click="isShowFull = !isShowFull"
       >
-        <span class="text-lg">Показать все</span>
-        <span class="material-icons-outlined">expand_more</span>
+        <!-- <span class="text-lg">{{
+          isShowFull ? "Скрыть" : "Показать все"
+        }}</span> -->
+        <span class="material-icons-outlined">{{
+          isShowFull ? "expand_less" : "expand_more"
+        }}</span>
       </button>
     </li>
   </ul>
@@ -52,26 +59,30 @@
 
 <script setup>
 import FilterItem from "@/components/FilterItem.vue"
-import { ref, computed, watch } from "vue"
+import { ref, computed } from "vue"
 
 const props = defineProps(["items", "single", "modelValue"])
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["change", "update:modelValue"])
 
+const VISIBLE_ITEMS_COUNT = 3
 const isShowFull = ref(false)
+const mainItems = computed(() => props.items.filter((item) => !item.parent_id))
+const isItemsMore = computed(() => mainItems.value.length > VISIBLE_ITEMS_COUNT)
 const visibleItemsCount = computed(() =>
-  isShowFull.value ? props.items.length : 3
+  isShowFull.value ? mainItems.value.length : VISIBLE_ITEMS_COUNT
 )
 const firstItems = computed(() =>
-  props.items
-    .filter((item) => !item.parent_id)
-    .slice(0, visibleItemsCount.value)
+  mainItems.value.slice(0, visibleItemsCount.value)
 )
 
-const selectedItems = ref([])
-
-const updateModelValue = () => {
-  emit("update:modelValue", selectedItems.value)
-}
+const selectedItems = computed({
+  get() {
+    return props.modelValue
+  },
+  set(value) {
+    emit("update:modelValue", value)
+  },
+})
 
 const getNestedIds = (obj, ids = []) => {
   if (obj.id) {
@@ -102,6 +113,4 @@ const selectChilds = (item) => {
       }
     })
 }
-
-watch(selectedItems, updateModelValue)
 </script>
