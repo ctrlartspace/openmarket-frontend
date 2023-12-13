@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="item in firstItems">
+    <li class="border-t first:border-none" v-for="item in firstItems">
       <filter-item
         class="pl-4"
         v-model="selectedItems"
@@ -11,7 +11,7 @@
         @change="selectChilds(item, $event.target.checked)"
       />
       <ul v-if="item.subVisible">
-        <li v-for="subitem in item.items">
+        <li class="border-t" v-for="subitem in item.items">
           <filter-item
             class="pl-6"
             v-model="selectedItems"
@@ -22,7 +22,7 @@
             @change="selectChilds(subitem, $event.target.checked)"
           />
           <ul v-if="subitem.subVisible">
-            <li v-for="subsubitem in subitem.items">
+            <li class="border-t" v-for="subsubitem in subitem.items">
               <filter-item
                 class="pl-8"
                 v-model="selectedItems"
@@ -54,7 +54,7 @@
 import FilterItem from "@/components/FilterItem.vue"
 import { ref, computed, watch } from "vue"
 
-const props = defineProps(["items", "modelValue"])
+const props = defineProps(["items", "single", "modelValue"])
 const emit = defineEmits(["update:modelValue"])
 
 const isShowFull = ref(false)
@@ -86,6 +86,10 @@ const getNestedIds = (obj, ids = []) => {
 }
 
 const selectChilds = (item) => {
+  if (props.single) {
+    selectedItems.value = [item.id]
+    return
+  }
   const nestedIds = getNestedIds(item)
   nestedIds
     .filter((id) => id != item.id)

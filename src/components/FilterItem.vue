@@ -1,13 +1,13 @@
 <template>
   <div
-    class="flex items-center gap-3 px-4 py-2 border-t hover:bg-gray-50 cursor-pointer"
+    class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer"
     @click="expandClick"
   >
     <div class="flex items-center">
       <input
         v-model="model"
         type="checkbox"
-        class="w-4 h-4"
+        class="z-10 w-4 h-4"
         :value="item.id"
         @click.stop
       />
@@ -17,6 +17,7 @@
     >
       {{ item.name }}
     </span>
+
     <span v-if="showExpand" class="material-icons-outlined">
       {{ isExpand ? "expand_less" : "expand_more" }}
     </span>

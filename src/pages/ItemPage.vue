@@ -23,16 +23,15 @@
           item-value="id"
           item-title="name"
           :disabled="!isEditMode"
-        />
+          @change="(value) => (categories = value.items)"
+        >
+          <filter-tree
+            v-model="item.category_id"
+            :items="categories"
+            single="true"
+          />
+        </select-field>
 
-        <select-field
-          v-model="item.subcategory_id"
-          :items="subcategories"
-          placeholder="Подкатегория"
-          item-value="id"
-          item-title="name"
-          :disabled="!isEditMode"
-        />
         <select-field
           v-model="item.brand_id"
           :items="brands"
@@ -80,16 +79,13 @@
 <script setup>
 import InputField from "@/components/ui/InputField.vue"
 import SelectField from "../components/ui/SelectField.vue"
+import FilterTree from "../components/FilterTree.vue"
 
-import { ref, onMounted } from "vue"
+import { ref, onMounted, computed } from "vue"
 import { useRoute } from "vue-router"
 import { getItem, updateItem, addItem } from "@/services/ItemSearch"
 
-import {
-  getBrands,
-  getCategories,
-  getSubcategories,
-} from "@/services/ItemSearch"
+import { getCategories } from "@/services/ItemSearch"
 
 const route = useRoute()
 
@@ -99,6 +95,8 @@ const isEditMode = ref(true)
 const brands = ref([])
 const categories = ref([])
 const subcategories = ref([])
+
+const subcategoryItems = ref([])
 
 const saveItemData = async () => {
   if (item.value.id) {
@@ -115,9 +113,8 @@ const saveItemData = async () => {
   isEditMode.value = false
 }
 onMounted(async () => {
-  brands.value = await getBrands()
   categories.value = await getCategories()
-  subcategories.value = await getSubcategories()
+  // categories.value = categories.value.filter((item) => !item.parent_id)
 
   const id = route.params.id
   if (id) {
