@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-[800px] mx-auto h-full">
-    <header class="p-2">
+    <header class="p-2 pb-0">
       <app-header></app-header>
     </header>
     <main class="p-2 h-full">
