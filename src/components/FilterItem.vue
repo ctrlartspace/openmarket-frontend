@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { computed } from "vue"
 
 const props = defineProps(["item", "showExpand", "isExpand", "modelValue"])
 const emit = defineEmits(["onExpandToggle", "update:modelValue"])

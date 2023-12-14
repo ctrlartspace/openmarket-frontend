@@ -24,15 +24,6 @@
           Редактировать
         </button>
       </li>
-      <li>
-        <button
-          class="flex w-full items-center gap-4 px-4 py-2 hover:bg-gray-100 cursor-pointer"
-          @click.self="addItemClick"
-        >
-          <span class="material-icons-outlined">add</span>
-          Добавить
-        </button>
-      </li>
     </ul>
   </div>
 </template>

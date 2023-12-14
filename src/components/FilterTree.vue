@@ -77,7 +77,9 @@ const firstItems = computed(() =>
 
 const selectedItems = computed({
   get() {
-    return props.modelValue
+    return Array.isArray(props.modelValue)
+      ? props.modelValue
+      : [props.modelValue]
   },
   set(value) {
     emit("update:modelValue", value)

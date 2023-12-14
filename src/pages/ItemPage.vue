@@ -94,9 +94,6 @@ const isEditMode = ref(true)
 
 const brands = ref([])
 const categories = ref([])
-const subcategories = ref([])
-
-const subcategoryItems = ref([])
 
 const saveItemData = async () => {
   if (item.value.id) {

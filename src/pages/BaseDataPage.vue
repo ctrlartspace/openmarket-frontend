@@ -39,7 +39,7 @@
             <span class="text-lg">Показать в магазине</span>
           </div>
         </div>
-        <div v-else class="px-4 py-2 flex border-b last:border-none">
+        <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
           <div class="flex-1 flex gap-2 items-center">
             <span class="material-icons text-gray-300">search</span>
             <input
@@ -48,19 +48,20 @@
               placeholder="Код товара, наименование"
             />
           </div>
-          <div
-            class="flex items-center gap-2 cursor-pointer hover:text-blue-600"
+          <button
+            class="flex items-center gap-2 px-4 bg-blue-600 text-white rounded hover:brightness-95"
+            type="button"
             @click="newItemClick"
           >
-            <span class="text-lg">Добавить</span>
+            <span class="text-lg">Новый</span>
             <span class="material-icons-outlined">add</span>
-          </div>
+          </button>
         </div>
         <table class="table-auto w-full text-lg text-left bg-white">
           <tbody>
             <tr
               v-for="item in items"
-              class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
+              class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
               @click="onItemClick(item.id)"
             >
               <td class="flex items-center">
