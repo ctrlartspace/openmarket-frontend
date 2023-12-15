@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="selectField"
     class="relative flex items-center border-b border-gray-200 cursor-pointer last:border-none"
   >
     <input
@@ -8,7 +9,7 @@
       type="text"
       :placeholder="placeholder"
       :value="selectedItem && selectedItem[itemTitle]"
-      @click="isActive = !isActive"
+      @click="onClick"
       v-bind="$attrs"
       readonly
     />
@@ -16,7 +17,7 @@
       v-if="!$attrs.disabled"
       class="px-4 py-2 material-icons-outlined"
       :class="selectedItem ? 'text-black' : 'text-gray-300'"
-      @click="isActive = !isActive"
+      @click="onClick"
       >{{ isActive ? "expand_less" : "expand_more" }}</span
     >
     <div
@@ -54,6 +55,19 @@ const isActive = ref(false)
 const selectedItem = computed(() =>
   props.items.find((item) => item[props.itemValue] == props.modelValue)
 )
+const selectField = ref(null)
+
+const hideDropdown = (event) => {
+  if (!selectField.value.contains(event.target)) {
+    isActive.value = false
+    document.removeEventListener("click", hideDropdown)
+  }
+}
+
+const onClick = () => {
+  isActive.value = !isActive.value
+  document.addEventListener("click", hideDropdown)
+}
 
 const onItemClick = (item) => {
   emit("update:modelValue", item[props.itemValue])

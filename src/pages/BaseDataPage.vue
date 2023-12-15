@@ -49,7 +49,7 @@
             />
           </div>
           <button
-            class="flex items-center gap-2 px-4 bg-blue-600 text-white rounded hover:brightness-95"
+            class="flex items-center gap-2 text-blue-600 rounded hover:brightness-95"
             type="button"
             @click="newItemClick"
           >

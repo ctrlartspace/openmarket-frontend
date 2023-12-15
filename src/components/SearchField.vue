@@ -106,7 +106,7 @@ const onClearClick = () => {
 }
 
 const setInputFocus = async () => {
-  if (searchInput) {
+  if (searchInput.value) {
     await nextTick()
     searchInput.value.focus()
   }
