@@ -98,7 +98,7 @@ const getNestedIds = (obj, ids = []) => {
   return ids
 }
 
-const selectChilds = (item) => {
+const selectChilds = (item, isChecked) => {
   if (props.single) {
     selectedItems.value = [item.id]
     return
@@ -108,8 +108,10 @@ const selectChilds = (item) => {
     .filter((id) => id != item.id)
     .forEach((id) => {
       const index = selectedItems.value.indexOf(id)
-      if (index === -1) {
-        selectedItems.value.push(id)
+      if (isChecked) {
+        if (index === -1) {
+          selectedItems.value.push(id)
+        }
       } else {
         selectedItems.value.splice(index, 1)
       }

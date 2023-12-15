@@ -23,7 +23,6 @@
           item-value="id"
           item-title="name"
           :disabled="!isEditMode"
-          @change="(value) => (categories = value.items)"
         >
           <filter-tree
             v-model="item.category_id"
@@ -111,7 +110,6 @@ const saveItemData = async () => {
 }
 onMounted(async () => {
   categories.value = await getCategories()
-  // categories.value = categories.value.filter((item) => !item.parent_id)
 
   const id = route.params.id
   if (id) {
