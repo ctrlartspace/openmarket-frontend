@@ -38,7 +38,9 @@
           item-value="id"
           item-title="name"
           :disabled="!isEditMode"
-        />
+        >
+          <filter-tree v-model="item.brand_id" :items="brands" single="true" />
+        </select-field>
         <input-field
           v-model="item.purchase_price"
           placeholder="Цена покупки"
@@ -84,7 +86,7 @@ import { ref, onMounted, computed } from "vue"
 import { useRoute } from "vue-router"
 import { getItem, updateItem, addItem } from "@/services/ItemSearch"
 
-import { getCategories } from "@/services/ItemSearch"
+import { getBrands, getCategories } from "@/services/ItemSearch"
 
 const route = useRoute()
 
@@ -109,6 +111,7 @@ const saveItemData = async () => {
   isEditMode.value = false
 }
 onMounted(async () => {
+  brands.value = await getBrands()
   categories.value = await getCategories()
 
   const id = route.params.id

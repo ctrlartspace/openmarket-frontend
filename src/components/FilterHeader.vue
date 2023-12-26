@@ -3,7 +3,7 @@
     class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
   >
     <h2 class="text-lg font-semibold">{{ title }}</h2>
-    <button
+    <!-- <button
       class="inline-flex items-center"
       @click="isMenuOpened = !isMenuOpened"
     >
@@ -24,7 +24,7 @@
           Редактировать
         </button>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 

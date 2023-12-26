@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul v-if="firstItems.length > 0">
     <li class="border-t first:border-none" v-for="item in firstItems">
       <filter-item
         class="pl-4"

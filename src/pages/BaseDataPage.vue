@@ -19,6 +19,13 @@
         <span class="material-icons-outlined">filter_list_off</span>
         <span class="text-lg">Сбросить</span>
       </button>
+      <button
+        class="mt-2 w-full bg-white border border-gray-200 rounded px-4 py-2 flex items-center gap-2 hover:bg-gray-50"
+        @click="goToEditFilters"
+      >
+        <span class="material-icons-outlined">edit</span>
+        <span class="text-lg">Редактировать</span>
+      </button>
     </div>
     <div class="col-span-7">
       <div class="sticky top-4 bg-white border rounded overflow-auto">
