@@ -1,6 +1,10 @@
 <template>
   <ul v-if="firstItems.length > 0">
-    <li class="border-t first:border-none" v-for="item in firstItems">
+    <li
+      class="border-t first:border-none"
+      v-for="(item, i) in firstItems"
+      :key="i"
+    >
       <filter-item
         class="pl-4"
         v-model="selectedItems"
@@ -12,7 +16,7 @@
         @change="selectChilds(item, $event.target.checked)"
       />
       <ul v-if="item.subVisible">
-        <li class="border-t" v-for="subitem in item.items">
+        <li class="border-t" v-for="(subitem, i) in item.items" :key="i">
           <filter-item
             class="pl-6"
             v-model="selectedItems"
@@ -24,7 +28,11 @@
             @change="selectChilds(subitem, $event.target.checked)"
           />
           <ul v-if="subitem.subVisible">
-            <li class="border-t" v-for="subsubitem in subitem.items">
+            <li
+              class="border-t"
+              v-for="(subsubitem, i) in subitem.items"
+              :key="i"
+            >
               <filter-item
                 class="pl-8"
                 v-model="selectedItems"

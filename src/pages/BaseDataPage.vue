@@ -67,9 +67,10 @@
         <table class="table-auto w-full text-lg text-left bg-white">
           <tbody>
             <tr
-              v-for="item in items"
+              v-for="(item, i) in items"
               class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
               @click="onItemClick(item.id)"
+              :key="i"
             >
               <td class="flex items-center">
                 <input

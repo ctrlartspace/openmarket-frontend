@@ -42,6 +42,7 @@
           v-for="i in 9"
           class="py-4 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
           @click="onKeyboardClick(i)"
+          :key="i"
         >
           {{ i }}
         </div>

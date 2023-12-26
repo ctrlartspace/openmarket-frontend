@@ -1,7 +1,11 @@
 <template>
   <nav>
     <ul>
-      <li class="inline ml-4 first:ml-0" v-for="item in menuItems">
+      <li
+        class="inline ml-4 first:ml-0"
+        v-for="(item, i) in menuItems"
+        :key="i"
+      >
         <router-link v-slot="{ isActive }" :to="item.path">
           <span
             class="font-semibold text-lg"

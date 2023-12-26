@@ -27,9 +27,10 @@
       <slot :is-active="isActive">
         <ul class="text-lg">
           <li
-            v-for="item in items"
+            v-for="(item, i) in items"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
             @click.stop="onItemClick(item)"
+            :key="i"
           >
             {{ item[itemTitle] }}
           </li>

@@ -40,6 +40,7 @@
           <div
             v-for="i in 2"
             class="inline-block bg-white text-lg text-gray-300 px-4 py-2 cursor-pointer border-t border-b border-r border-gray-200 hover:bg-gray-100 first:rounded-br-none first:border-l first:rounded-bl first:rounded-tl last:rounded-tr last:rounded-br first:text-black"
+            :key="i"
           >
             <div class="flex">
               <span class="self-center material-icons text-lg">
@@ -63,7 +64,7 @@
     >
       <div class="flex flex-col h-full">
         <cart-change class="" />
-        <cart-total class="mt-auto" @click="" />
+        <cart-total class="mt-auto" />
       </div>
     </div>
   </div>

@@ -9,7 +9,6 @@
         type="text"
         @input="onInputChange"
         v-bind="$attrs"
-        @focus=""
       />
       <div v-if="value" class="absolute inset-y-0 right-2 flex items-center">
         <span
@@ -22,9 +21,8 @@
         class="absolute mt-2 w-full bg-white py-2 border border-gray-200 rounded shadow-sm"
         :class="value ? 'block' : 'hidden'"
       >
-        <ul>
+        <ul v-if="searchItems && searchItems.length > 0">
           <li
-            v-if="searchItems && searchItems.length > 0"
             class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
             v-for="(item, index) in searchItems"
             :key="index"
@@ -33,7 +31,9 @@
           >
             {{ item.model }}
           </li>
-          <li v-else class="px-4 py-2 text-gray-300">Ничего не найдено</li>
+        </ul>
+        <ul v-else>
+          <li class="px-4 py-2 text-gray-300">Ничего не найдено</li>
         </ul>
       </div>
     </div>
