@@ -79,8 +79,8 @@
 
 <script setup>
 import InputField from "@/components/ui/InputField.vue"
-import SelectField from "../components/ui/SelectField.vue"
-import FilterTree from "../components/FilterTree.vue"
+import SelectField from "@/components/ui/SelectField.vue"
+import FilterTree from "@/components/FilterTree.vue"
 
 import { ref, onMounted, computed } from "vue"
 import { useRoute } from "vue-router"

@@ -2,12 +2,12 @@
   <div class="grid grid-cols-10 gap-4">
     <div class="col-span-3">
       <!-- Categories -->
-      <div class="bg-white border border-gray-200 rounded">
+      <div class="bg-white border border-gray-200 rounded overflow-hidden">
         <filter-header title="Категория" />
         <filter-tree v-model="filters.categoryId" :items="categories" />
       </div>
       <!-- Brands -->
-      <div class="mt-2 bg-white border border-gray-200 rounded">
+      <div class="mt-2 bg-white border border-gray-200 rounded overflow-hidden">
         <filter-header title="Бренд" />
         <filter-tree v-model="filters.brandId" :items="brands" />
       </div>
@@ -157,33 +157,8 @@ const newItemClick = () => {
   router.push("/item")
 }
 
-const addNewBrand = async (name) => {
-  await addBrand({ name })
-  brands.value = await getBrands()
-}
-
-const addNewCategory = async (name) => {
-  await addCategory({ name })
-  categories.value = await getCategories()
-}
-
-const updateCategoryData = async (data) => {
-  await updateCategory(data)
-  categories.value = await getCategories()
-}
-
-const updateBrandData = async (data) => {
-  await updateBrand(data)
-  brands.value = await getBrands()
-}
-
-const deleteCategoryData = async (id) => {
-  await deleteCategory(id)
-  categories.value = await getCategories()
-}
-const deleteBrandData = async (id) => {
-  await deleteBrand(id)
-  brands.value = await getBrands()
+const goToEditFilters = () => {
+  router.push("/filters")
 }
 
 onMounted(async () => {
