@@ -113,7 +113,7 @@ const getNestedIds = (obj, ids = []) => {
 const selectChilds = (item, isChecked) => {
   if (props.single) {
     selectedItems.value = isChecked ? item.id : null
-    emitUpdates(item.id)
+    emitUpdates(isChecked ? item.id : null)
     return
   }
   if (!props.nested) {
