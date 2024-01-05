@@ -3,7 +3,7 @@
     class="flex items-center gap-3 px-4 py-2 bg-white hover:bg-gray-50 cursor-pointer"
     @click="expandClick"
   >
-    <div v-if="item.parent_id" class="flex items-center">
+    <div v-if="editMain || item.parent_id" class="flex items-center">
       <input
         v-model="model"
         type="checkbox"
@@ -27,7 +27,13 @@
 <script setup>
 import { computed } from "vue"
 
-const props = defineProps(["item", "showExpand", "isExpand", "modelValue"])
+const props = defineProps([
+  "item",
+  "showExpand",
+  "isExpand",
+  "editMain",
+  "modelValue",
+])
 const emit = defineEmits(["onExpandToggle", "update:modelValue"])
 
 const model = computed({

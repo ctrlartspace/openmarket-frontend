@@ -11,7 +11,8 @@
         :item="item"
         :showExpand="item.items && item.items.length > 0"
         @on-expand-toggle="(v) => (item.subVisible = v)"
-        :isExpand="item.subVisible"
+        :is-expand="item.subVisible"
+        :edit-main="editMain"
         :key="item.id"
         @change="selectChilds(item, $event.target.checked)"
       />
@@ -23,7 +24,8 @@
             :item="subitem"
             :showExpand="subitem.items && subitem.items.length > 0"
             @on-expand-toggle="(v) => (subitem.subVisible = v)"
-            :isExpand="subitem.subVisible"
+            :is-expand="subitem.subVisible"
+            :edit-main="editMain"
             :key="subitem.id"
             @change="selectChilds(subitem, $event.target.checked)"
           />
@@ -39,7 +41,8 @@
                 :item="subsubitem"
                 :showExpand="subsubitem.items && subsubitem.items.length > 0"
                 @on-expand-toggle="(v) => (subsubitem.subVisible = v)"
-                :isExpand="subsubitem.subVisible"
+                :is-expand="subsubitem.subVisible"
+                :edit-main="editMain"
                 :key="subsubitem.id"
                 @change="selectChilds(subsubitem, $event.target.checked)"
               />
@@ -66,7 +69,13 @@
 import FilterItem from "@/components/FilterItem.vue"
 import { ref, computed } from "vue"
 
-const props = defineProps(["items", "single", "nested", "modelValue"])
+const props = defineProps([
+  "items",
+  "single",
+  "nested",
+  "editMain",
+  "modelValue",
+])
 const emit = defineEmits(["change", "update:modelValue"])
 
 const VISIBLE_ITEMS_COUNT = 3
