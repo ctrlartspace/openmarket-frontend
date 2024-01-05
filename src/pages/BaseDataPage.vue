@@ -26,7 +26,7 @@
                 v-model="newFilter.parentId"
                 :items="filtersList"
                 single="true"
-                edit-main="true"
+                select-root="true"
               />
             </div>
           </template>

@@ -42,7 +42,7 @@
                 :showExpand="subsubitem.items && subsubitem.items.length > 0"
                 @on-expand-toggle="(v) => (subsubitem.subVisible = v)"
                 :is-expand="subsubitem.subVisible"
-                :edit-main="editMain"
+                :select-root="selectRoot"
                 :key="subsubitem.id"
                 @change="selectChilds(subsubitem, $event.target.checked)"
               />
@@ -73,7 +73,7 @@ const props = defineProps([
   "items",
   "single",
   "nested",
-  "editMain",
+  "selectRoot",
   "modelValue",
 ])
 const emit = defineEmits(["change", "update:modelValue"])
