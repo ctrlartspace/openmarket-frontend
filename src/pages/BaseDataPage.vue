@@ -23,7 +23,7 @@
             <div class="p-4 flex flex-col justify-center">
               <filter-tree
                 class="mt-2 border border-gray-200 rounded overflow-hidden"
-                v-model="newCategory.parentId"
+                v-model="newFilter.parentId"
                 :items="filtersList"
                 single="true"
               />
@@ -32,9 +32,9 @@
           <template #footer>
             <div class="border rounded border-gray-200">
               <input-field
-                v-model="newCategory.name"
+                v-model="newFilter.name"
                 :placeholder="
-                  newCategory.parentId
+                  newFilter.parentId
                     ? 'Название подкатегории'
                     : 'Название категории'
                 "
@@ -43,13 +43,13 @@
             <div class="mt-2 flex gap-2">
               <button
                 class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 rounded"
-                @click="addCategory"
+                @click="addFilter"
               >
                 <span class="text-lg font-semibold">Добавить</span>
               </button>
               <button
                 class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 rounded"
-                @click="deleteCategory"
+                @click="deleteFilter"
               >
                 <span class="text-lg font-semibold">Удалить</span>
               </button>
@@ -167,7 +167,7 @@ const updateItems = async () => {
   items.value = await DataManager.getItems(filterQuery)
 }
 
-const newCategory = ref({})
+const newFilter = ref({})
 
 const resetFilters = () => {
   selectedFilters.value = []
@@ -182,17 +182,19 @@ const newItemClick = () => {
   router.push("/items")
 }
 
-const addCategory = async () => {
+const addFilter = async () => {
   const data = {
-    name: newCategory.value.name,
-    parent_id: newCategory.value.parentId,
+    name: newFilter.value.name,
+    parent_id: newFilter.value.parentId,
   }
 
-  await DataManager.addCategory(data)
+  await DataManager.addFilter(data)
+  filtersList.value = await DataManager.getFilters()
 }
 
-const deleteCategory = async () => {
-  await DataManager.deleteCategory(newCategory.value.parentId)
+const deleteFilter = async () => {
+  await DataManager.deleteFilter(newFilter.value.parentId)
+  filtersList.value = await DataManager.getFilters()
 }
 
 onMounted(async () => {

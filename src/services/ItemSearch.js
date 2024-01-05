@@ -77,10 +77,28 @@ const updateItem = async (data) => {
     return Promise.reject(error)
   }
 }
-
-const deleteBrand = async (id) => {
+const addFilter = async (data) => {
   try {
-    const response = await fetch(`${BASE_URL}/brands/${id}`, {
+    const response = await fetch(`${BASE_URL}/filters`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+const deleteFilter = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/filters/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -95,4 +113,12 @@ const deleteBrand = async (id) => {
     return Promise.reject(error)
   }
 }
-export { getItems, getItem, getFilters, deleteBrand, updateItem, addItem }
+export {
+  getItems,
+  getItem,
+  getFilters,
+  addFilter,
+  deleteFilter,
+  updateItem,
+  addItem,
+}
