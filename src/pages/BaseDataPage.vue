@@ -1,15 +1,67 @@
 <template>
   <div class="grid grid-cols-10 gap-4">
     <div class="col-span-3">
-      <!-- Categories -->
-      <div class="bg-white border border-gray-200 rounded overflow-hidden">
-        <filter-header title="Категория" />
-        <filter-tree v-model="filters.categoryId" :items="categories" />
-      </div>
-      <!-- Brands -->
-      <div class="mt-2 bg-white border border-gray-200 rounded overflow-hidden">
-        <filter-header title="Бренд" />
-        <filter-tree v-model="filters.brandId" :items="brands" />
+      <div
+        class="bg-white border border-gray-200 rounded overflow-hidden mt-2 first:mt-0"
+      >
+        <app-dialog title="Новая категория">
+          <template #activator="{ action }">
+            <div
+              class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
+            >
+              <h2 class="text-lg font-semibold">Фильтры</h2>
+              <button class="inline-flex items-center" v-on="action">
+                <span
+                  class="material-icons-outlined hover:text-gray-600 cursor-pointer"
+                >
+                  more_vert
+                </span>
+              </button>
+            </div>
+          </template>
+          <template #content>
+            <div class="p-4 flex flex-col justify-center">
+              <filter-tree
+                class="mt-2 border border-gray-200 rounded overflow-hidden"
+                v-model="newCategory.parentId"
+                :items="filtersList"
+                single="true"
+              />
+            </div>
+          </template>
+          <template #footer>
+            <div class="border rounded border-gray-200">
+              <input-field
+                v-model="newCategory.name"
+                :placeholder="
+                  newCategory.parentId
+                    ? 'Название подкатегории'
+                    : 'Название категории'
+                "
+              />
+            </div>
+            <div class="mt-2 flex gap-2">
+              <button
+                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 rounded"
+                @click="addCategory"
+              >
+                <span class="text-lg font-semibold">Добавить</span>
+              </button>
+              <button
+                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 rounded"
+                @click="deleteCategory"
+              >
+                <span class="text-lg font-semibold">Удалить</span>
+              </button>
+            </div>
+          </template>
+        </app-dialog>
+        <filter-tree
+          v-model="selectedFilters"
+          :items="filtersList"
+          @change="updateItems"
+          nested="true"
+        />
       </div>
       <!-- Filter Reset -->
       <button
@@ -19,17 +71,6 @@
         <span class="material-icons-outlined">filter_list_off</span>
         <span class="text-lg">Сбросить</span>
       </button>
-      <app-dialog title="Title">
-        <template #activator="{ action }">
-          <button
-            class="mt-2 w-full bg-white border border-gray-200 rounded px-4 py-2 flex items-center gap-2 hover:bg-gray-50"
-            v-on="action"
-          >
-            <span class="material-icons-outlined">edit</span>
-            <span class="text-lg">Редактировать</span>
-          </button>
-        </template>
-      </app-dialog>
     </div>
     <div class="col-span-7">
       <div class="sticky top-4 bg-white border rounded overflow-auto">
@@ -86,89 +127,76 @@
                 />
               </td>
               <td class="font-semibold flex-1">
-                {{ `${item.brand?.name} ${item.name}` }}
+                {{
+                  `${item.filters.map((filter) => filter.name).join(", ")} ${
+                    item.name
+                  }`
+                }}
               </td>
-              <td>{{ item.category?.name }}</td>
               <td>1 шт</td>
               <td>{{ item.purchase_price }} KZT</td>
             </tr>
           </tbody>
         </table>
-        <!-- <base-data-item v-for="(item, i) in items" :item="item" :key="i" /> -->
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import FilterHeader from "@/components/FilterHeader.vue"
 import FilterTree from "@/components/FilterTree.vue"
 import AppDialog from "@/components/AppDialog.vue"
+import InputField from "@/components/ui/InputField.vue"
 
-import { ref, watch, computed, onMounted } from "vue"
+import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
 
-import {
-  getBrands,
-  getCategories,
-  getItems,
-  addBrand,
-  addCategory,
-  updateCategory,
-  updateBrand,
-  deleteCategory,
-  deleteBrand,
-} from "@/services/ItemSearch"
+import * as DataManager from "@/services/ItemSearch"
 
 const router = useRouter()
 
-const brands = ref([])
-const categories = ref([])
+const filtersList = ref([])
 const items = ref([])
 
-const filters = ref({
-  brandId: [],
-  categoryId: [],
-})
+const selectedFilters = ref([])
 
 const selectedItems = ref([])
 
 const updateItems = async () => {
-  items.value = await getItems(queryParams.value)
+  const filterQuery = selectedFilters.value.join(",")
+  items.value = await DataManager.getItems(filterQuery)
 }
-const queryParams = computed(() => {
-  const queryString = Object.keys(filters.value)
-    .filter((key) => filters.value[key].length > 0)
-    .map((key) => `${key}=${filters.value[key].toString()}`)
-    .join("&")
 
-  return queryString ? `${queryString}` : ""
-})
-
-watch(queryParams, updateItems)
+const newCategory = ref({})
 
 const resetFilters = () => {
-  Object.keys(filters.value).forEach((key) => {
-    filters.value[key] = []
-  })
+  selectedFilters.value = []
   updateItems()
 }
 
 const onItemClick = (id) => {
-  router.push(`/item/${id}`)
+  router.push(`/items/${id}`)
 }
 
 const newItemClick = () => {
-  router.push("/item")
+  router.push("/items")
 }
 
-const goToEditFilters = () => {
-  router.push("/filters")
+const addCategory = async () => {
+  const data = {
+    name: newCategory.value.name,
+    parent_id: newCategory.value.parentId,
+  }
+
+  await DataManager.addCategory(data)
+}
+
+const deleteCategory = async () => {
+  await DataManager.deleteCategory(newCategory.value.parentId)
 }
 
 onMounted(async () => {
-  items.value = await getItems()
-  brands.value = await getBrands()
-  categories.value = await getCategories()
+  items.value = await DataManager.getItems()
+  filtersList.value = await DataManager.getFilters()
 })
 </script>

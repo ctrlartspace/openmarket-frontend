@@ -54,9 +54,6 @@
         class="w-full px-4 py-2 text-start hover:bg-gray-50 flex items-center justify-center"
         @click="isShowFull = !isShowFull"
       >
-        <!-- <span class="text-lg">{{
-          isShowFull ? "Скрыть" : "Показать все"
-        }}</span> -->
         <span class="material-icons-outlined">{{
           isShowFull ? "expand_less" : "expand_more"
         }}</span>
@@ -69,7 +66,7 @@
 import FilterItem from "@/components/FilterItem.vue"
 import { ref, computed } from "vue"
 
-const props = defineProps(["items", "single", "modelValue"])
+const props = defineProps(["items", "single", "nested", "modelValue"])
 const emit = defineEmits(["change", "update:modelValue"])
 
 const VISIBLE_ITEMS_COUNT = 3
@@ -83,14 +80,21 @@ const firstItems = computed(() =>
   mainItems.value.slice(0, visibleItemsCount.value)
 )
 
+const emitUpdates = (value) => {
+  emit("update:modelValue", value)
+  emit("change", value)
+}
 const selectedItems = computed({
   get() {
-    return Array.isArray(props.modelValue)
-      ? props.modelValue
-      : [props.modelValue]
+    if (props.modelValue) {
+      return Array.isArray(props.modelValue)
+        ? props.modelValue
+        : [props.modelValue]
+    }
+    return []
   },
   set(value) {
-    emit("update:modelValue", value)
+    emitUpdates(value)
   },
 })
 
@@ -108,9 +112,14 @@ const getNestedIds = (obj, ids = []) => {
 
 const selectChilds = (item, isChecked) => {
   if (props.single) {
-    selectedItems.value = [item.id]
+    selectedItems.value = isChecked ? item.id : null
+    emitUpdates(item.id)
     return
   }
+  if (!props.nested) {
+    return
+  }
+
   const nestedIds = getNestedIds(item)
   nestedIds
     .filter((id) => id != item.id)
@@ -124,5 +133,6 @@ const selectChilds = (item, isChecked) => {
         selectedItems.value.splice(index, 1)
       }
     })
+  emitUpdates(selectedItems.value)
 }
 </script>

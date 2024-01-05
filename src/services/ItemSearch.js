@@ -1,8 +1,8 @@
 const BASE_URL = "http://localhost:3000/api"
 
-const getItems = async (queryParams = {}) => {
+const getItems = async (queryParams = "") => {
   try {
-    const response = await fetch(`${BASE_URL}/items?${queryParams}`)
+    const response = await fetch(`${BASE_URL}/items?filters=${queryParams}`)
     if (response.ok) {
       return Promise.resolve(response.json())
     } else {
@@ -27,48 +27,9 @@ const getItem = async (code) => {
   }
 }
 
-const getBrands = async () => {
+const addItem = async (data) => {
   try {
-    const response = await fetch(`${BASE_URL}/brands`)
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-
-const getCategories = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/categories`)
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-
-const getSubcategories = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/subcategories`)
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-
-const addBrand = async (data) => {
-  try {
-    const response = await fetch(`${BASE_URL}/brands`, {
+    const response = await fetch(`${BASE_URL}/items`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,33 +45,9 @@ const addBrand = async (data) => {
     return Promise.reject(error)
   }
 }
-const addCategory = async (data) => {
+const getFilters = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/categories`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-const addSubcategory = async (data) => {
-  try {
-    const response = await fetch(`${BASE_URL}/subcategories`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    const response = await fetch(`${BASE_URL}/filters`)
     if (response.ok) {
       return Promise.resolve(response.json())
     } else {
@@ -121,87 +58,15 @@ const addSubcategory = async (data) => {
   }
 }
 
-const updateCategory = async (data) => {
+const updateItem = async (data) => {
   try {
     console.log(data)
-    const response = await fetch(`${BASE_URL}/categories/${data.id}`, {
+    const response = await fetch(`${BASE_URL}/items/${data.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    })
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-const updateSubcategory = async (data) => {
-  try {
-    console.log(data)
-    const response = await fetch(`${BASE_URL}/subcategories/${data.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-const updateBrand = async (data) => {
-  try {
-    console.log(data)
-    const response = await fetch(`${BASE_URL}/brands/${data.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-const deleteCategory = async (id) => {
-  try {
-    const response = await fetch(`${BASE_URL}/categories/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-const deleteSubcategory = async (id) => {
-  try {
-    const response = await fetch(`${BASE_URL}/subcategories/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
     })
     if (response.ok) {
       return Promise.resolve(response.json())
@@ -230,57 +95,4 @@ const deleteBrand = async (id) => {
     return Promise.reject(error)
   }
 }
-const updateItem = async (data) => {
-  try {
-    const response = await fetch(`${BASE_URL}/items/${data.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-const addItem = async (data) => {
-  try {
-    const response = await fetch(`${BASE_URL}/items`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
-export {
-  getItems,
-  getItem,
-  getBrands,
-  getCategories,
-  getSubcategories,
-  addBrand,
-  addCategory,
-  addSubcategory,
-  updateCategory,
-  updateSubcategory,
-  updateBrand,
-  deleteCategory,
-  deleteSubcategory,
-  deleteBrand,
-  updateItem,
-  addItem,
-}
+export { getItems, getItem, getFilters, deleteBrand, updateItem, addItem }

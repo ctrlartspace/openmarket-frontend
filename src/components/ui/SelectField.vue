@@ -8,7 +8,7 @@
       :class="$attrs.disabled ? 'text-black' : 'text-blue-600'"
       type="text"
       :placeholder="placeholder"
-      :value="selectedItem && selectedItem[itemTitle]"
+      :value="selectedItems"
       @click="onClick"
       v-bind="$attrs"
       readonly
@@ -16,7 +16,7 @@
     <span
       v-if="!$attrs.disabled"
       class="px-4 py-2 material-icons-outlined"
-      :class="selectedItem ? 'text-black' : 'text-gray-300'"
+      :class="selectedItems ? 'text-black' : 'text-gray-300'"
       @click="onClick"
       >{{ isActive ? "expand_less" : "expand_more" }}</span
     >
@@ -53,9 +53,17 @@ const props = defineProps([
 const emit = defineEmits(["change", "update:modelValue"])
 
 const isActive = ref(false)
-const selectedItem = computed(() =>
-  props.items.find((item) => item[props.itemValue] == props.modelValue)
-)
+
+const selectedItems = computed(() => {
+  if (Array.isArray(props.modelValue)) {
+    return props.items
+      .filter((item) => props.modelValue.includes(item[props.itemValue]))
+      .map((item) => item.name)
+      .join(", ")
+  }
+
+  return []
+})
 const selectField = ref(null)
 
 const hideDropdown = (event) => {

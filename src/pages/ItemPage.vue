@@ -16,31 +16,7 @@
           placeholder="Наименование"
           :disabled="!isEditMode"
         />
-        <select-field
-          v-model="item.category_id"
-          :items="categories"
-          placeholder="Категория"
-          item-value="id"
-          item-title="name"
-          :disabled="!isEditMode"
-        >
-          <filter-tree
-            v-model="item.category_id"
-            :items="categories"
-            single="true"
-          />
-        </select-field>
 
-        <select-field
-          v-model="item.brand_id"
-          :items="brands"
-          placeholder="Бренд"
-          item-value="id"
-          item-title="name"
-          :disabled="!isEditMode"
-        >
-          <filter-tree v-model="item.brand_id" :items="brands" single="true" />
-        </select-field>
         <input-field
           v-model="item.purchase_price"
           placeholder="Цена покупки"
@@ -51,8 +27,20 @@
           placeholder="Цена продажи"
           :disabled="!isEditMode"
         />
+        <select-field
+          v-model="item.filters"
+          :items="filterList"
+          placeholder="Фильтры"
+          item-value="id"
+          item-title="name"
+          :disabled="!isEditMode"
+        >
+          <filter-tree v-model="item.filters" :items="filterList" />
+        </select-field>
       </div>
-      <div class="col-span-6 px-4 py-2 flex"></div>
+      <div class="col-span-6 px-4 py-2 flex">
+        <pre class="text-sm"></pre>
+      </div>
     </div>
     <div
       class="mt-4 inline-block bg-white border border-gray-200 rounded overflow-auto"
@@ -82,37 +70,33 @@ import InputField from "@/components/ui/InputField.vue"
 import SelectField from "@/components/ui/SelectField.vue"
 import FilterTree from "@/components/FilterTree.vue"
 
-import { ref, onMounted, computed } from "vue"
-import { useRoute } from "vue-router"
-import { getItem, updateItem, addItem } from "@/services/ItemSearch"
-
-import { getBrands, getCategories } from "@/services/ItemSearch"
+import { ref, onMounted } from "vue"
+import { useRoute, useRouter } from "vue-router"
+import { getItem, updateItem, addItem, getFilters } from "@/services/ItemSearch"
 
 const route = useRoute()
+const router = useRouter()
 
 const item = ref({})
 const isEditMode = ref(true)
 
-const brands = ref([])
-const categories = ref([])
+const filterList = ref([])
 
 const saveItemData = async () => {
   if (item.value.id) {
     const response = await updateItem(item.value)
     const { id } = response
     item.value = await getItem(id)
-    console.log(response)
   } else {
     const response = await addItem(item.value)
     const { id } = response
-    item.value = await getItem(id)
-    console.log(response)
+    router.push(`/items/${id}`)
   }
   isEditMode.value = false
 }
+
 onMounted(async () => {
-  brands.value = await getBrands()
-  categories.value = await getCategories()
+  filterList.value = await getFilters()
 
   const id = route.params.id
   if (id) {
