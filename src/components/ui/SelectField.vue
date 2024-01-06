@@ -16,7 +16,11 @@
     <span
       v-if="!$attrs.disabled"
       class="px-4 py-2 material-icons-outlined"
-      :class="selectedItems ? 'text-black' : 'text-gray-300'"
+      :class="
+        selectedItems && selectedItems.length > 0
+          ? 'text-black'
+          : 'text-gray-300'
+      "
       @click="onClick"
       >{{ isActive ? "expand_less" : "expand_more" }}</span
     >
