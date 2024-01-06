@@ -12,7 +12,7 @@
         :showExpand="item.items && item.items.length > 0"
         @on-expand-toggle="(v) => (item.subVisible = v)"
         :is-expand="item.subVisible"
-        :edit-main="editMain"
+        :select-root="selectRoot"
         :key="item.id"
         @change="selectChilds(item, $event.target.checked)"
       />
@@ -25,7 +25,7 @@
             :showExpand="subitem.items && subitem.items.length > 0"
             @on-expand-toggle="(v) => (subitem.subVisible = v)"
             :is-expand="subitem.subVisible"
-            :edit-main="editMain"
+            :select-root="selectRoot"
             :key="subitem.id"
             @change="selectChilds(subitem, $event.target.checked)"
           />
