@@ -17,17 +17,18 @@
                 v-for="(item, i) in store.cartItems"
                 class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 p-2"
                 :key="i"
+                @click="onItemClick(item.id)"
               >
                 <td class="flex items-center">
                   <span
                     class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
-                    @click="store.removeItem(i)"
+                    @click.stop="store.removeItem(i)"
                   >
                     remove
                   </span>
                 </td>
                 <td class="flex-1 font-semibold">
-                  {{ `${item.brand.name} ${item.name}` }}
+                  {{ `${item.name} ${item.name}` }}
                 </td>
                 <td class="text-gray-300">1 шт.</td>
                 <td>{{ item.purchase_price }} KZT</td>
@@ -72,15 +73,16 @@
 
 <script setup>
 import SearchField from "@/components/SearchField.vue"
-import CartItem from "@/components/CartItem.vue"
 import CartChange from "@/components/CartChange.vue"
 import CartTotal from "@/components/CartTotal.vue"
 
 import { ref } from "vue"
+import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
 import { getItem } from "@/services/ItemSearch"
 
 const store = useCartStore()
+const router = useRouter()
 
 const inputValue = ref(null)
 
@@ -93,5 +95,9 @@ const addCartItem = async (code) => {
   } catch (error) {
     console.error(error)
   }
+}
+
+const onItemClick = (id) => {
+  router.push(`/items/${id}`)
 }
 </script>
