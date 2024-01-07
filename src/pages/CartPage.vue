@@ -10,12 +10,18 @@
           autoclear
         />
 
-        <div class="mt-4 mb-4 bg-white border rounded overflow-auto h-full">
-          <table class="table-auto w-full text-lg text-left bg-white">
+        <div class="mt-4 mb-4 h-full overflow-auto">
+          <p
+            v-if="store.cartItems.length === 0"
+            class="text-center text-gray-300"
+          >
+            В корзине нет товаров
+          </p>
+          <table v-else class="table-auto w-full text-lg text-left bg-white">
             <tbody>
               <tr
                 v-for="(item, i) in store.cartItems"
-                class="cursor-pointer hover:bg-gray-100 border-b flex items-center justify-between gap-2 p-2"
+                class="cursor-pointer hover:bg-gray-100 border border-gray-200 rounded flex items-center justify-between gap-2 p-2 mt-2 first:mt-0"
                 :key="i"
                 @click="onItemClick(item.id)"
               >
@@ -86,11 +92,11 @@ const router = useRouter()
 
 const inputValue = ref(null)
 
-const searchItems = ref(null)
+const searchItems = ref([{ id: 1, name: "sdf" }])
 
-const addCartItem = async (code) => {
+const addCartItem = async (id) => {
   try {
-    const item = await getItem(code)
+    const item = await getItem(id)
     store.addItem(item)
   } catch (error) {
     console.error(error)

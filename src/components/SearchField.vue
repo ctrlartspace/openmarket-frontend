@@ -29,7 +29,7 @@
             :value="index"
             @click="onSearchItemClick(item.id)"
           >
-            {{ item.model }}
+            {{ item.name }}
           </li>
         </ul>
         <ul v-else>
