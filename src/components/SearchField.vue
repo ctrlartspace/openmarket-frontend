@@ -94,6 +94,10 @@ const onSearchItemClick = (id) => {
   emit("onSearchItemClick", id)
 }
 const submit = () => {
+  if (!value.value) {
+    return
+  }
+
   emit("submit", value.value)
 
   if (props.autoclear) {
