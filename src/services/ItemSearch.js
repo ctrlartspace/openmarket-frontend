@@ -132,6 +132,18 @@ const makeSale = async (data) => {
     return Promise.reject(error)
   }
 }
+const getSales = async (queryParams = "") => {
+  try {
+    const response = await fetch(`${BASE_URL}/sales?filters=${queryParams}`)
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
 export {
   getItems,
   getItem,
@@ -141,4 +153,5 @@ export {
   updateItem,
   addItem,
   makeSale,
+  getSales,
 }
