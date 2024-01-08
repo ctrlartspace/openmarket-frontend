@@ -2,27 +2,53 @@ import { defineStore } from "pinia"
 import { ref, computed } from "vue"
 
 export const useCartStore = defineStore("cart", () => {
-  const cartItems = ref([])
+  const cartItems = ref(new Map())
 
-  const isEmpty = computed(() => cartItems.value.length === 0)
+  const groupedCartItems = computed(() =>
+    [...cartItems.value].map((el) => el[1])
+  )
+
+  const isEmpty = computed(() => cartItems.value.size === 0)
 
   const getTotalAmount = computed(() =>
-    cartItems.value.reduce((acc, obj) => {
-      return acc + obj["selling_price"]
-    }, 0)
+    groupedCartItems.value.reduce((total, item) => total + item.totalPrice, 0)
   )
 
   const addItem = (item) => {
-    cartItems.value.push(item)
+    const existingItem = cartItems.value.get(item.id)
+    if (existingItem) {
+      existingItem.count += 1
+      existingItem.totalPrice = existingItem.count * existingItem.selling_price
+    } else {
+      cartItems.value.set(item.id, {
+        ...item,
+        count: 1,
+        totalPrice: item.selling_price,
+      })
+    }
   }
 
-  const removeItem = (index) => {
-    cartItems.value.splice(index, 1)
+  const removeItem = (id) => {
+    const item = cartItems.value.get(id)
+    if (item && item.count > 1) {
+      item.count -= 1
+      item.totalPrice = item.count * item.selling_price
+    } else {
+      cartItems.value.delete(id)
+    }
   }
 
   const clearCart = () => {
-    cartItems.value = []
+    cartItems.value.clear()
   }
 
-  return { cartItems, isEmpty, getTotalAmount, addItem, removeItem, clearCart }
+  return {
+    cartItems,
+    groupedCartItems,
+    isEmpty,
+    getTotalAmount,
+    addItem,
+    removeItem,
+    clearCart,
+  }
 })

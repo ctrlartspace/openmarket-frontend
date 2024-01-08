@@ -11,16 +11,13 @@
         />
 
         <div class="mt-4 mb-4 h-full overflow-auto">
-          <p
-            v-if="store.cartItems.length === 0"
-            class="text-center text-gray-300"
-          >
+          <p v-if="store.isEmpty" class="text-center text-gray-300">
             В корзине нет товаров
           </p>
           <table v-else class="table-auto w-full text-lg text-left bg-white">
             <tbody>
               <tr
-                v-for="(item, i) in store.cartItems"
+                v-for="(item, i) in store.groupedCartItems"
                 class="cursor-pointer hover:bg-gray-100 border border-gray-200 rounded flex items-center justify-between gap-2 p-2 mt-2 first:mt-0"
                 :key="i"
                 @click="onItemClick(item.id)"
@@ -28,7 +25,7 @@
                 <td class="flex items-center">
                   <span
                     class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
-                    @click.stop="store.removeItem(i)"
+                    @click.stop="store.removeItem(item.id)"
                   >
                     remove
                   </span>
@@ -36,8 +33,8 @@
                 <td class="flex-1 font-semibold">
                   {{ `${item.name} ${item.name}` }}
                 </td>
-                <td class="text-gray-300">1 шт.</td>
-                <td>{{ item.purchase_price }} KZT</td>
+                <td class="text-gray-300">{{ item.count }} шт.</td>
+                <td>{{ item.totalPrice }} KZT</td>
               </tr>
             </tbody>
           </table>
