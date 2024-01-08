@@ -84,7 +84,9 @@ const paymentTypes = ref([
 
 const currentPaymentType = ref(paymentTypes.value[1])
 
-const cartChange = computed(() => inputAmount.value - store.getTotalAmount)
+const cartChange = computed(() =>
+  inputAmount.value ? inputAmount.value - store.getTotalAmount : 0
+)
 
 const onKeyboardClick = (value) => {
   inputAmount.value = inputAmount.value + "" + value
@@ -94,7 +96,6 @@ const onClearClick = () => {
 }
 
 const changePaymentType = () => {
-  inputAmount.value = store.getTotalAmount
   if (currentPaymentType.value.id < paymentTypes.value.length) {
     currentPaymentType.value = paymentTypes.value[currentPaymentType.value.id]
   } else {
