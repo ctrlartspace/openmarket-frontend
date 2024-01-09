@@ -40,8 +40,8 @@
           <div
             class="flex gap-2 items-center hover:text-blue-600 cursor-pointer"
           >
-            <span class="material-icons-outlined">shopping_bag</span>
-            <span class="text-lg">Показать в магазине</span>
+            <span class="material-icons-outlined">keyboard_backspace</span>
+            <span class="text-lg">Сделать возврат</span>
           </div>
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
@@ -79,7 +79,6 @@
                 }}
               </td>
               <td class="text-gray-300">{{ item.count }} шт.</td>
-              <td>{{ item.selling_price }} KZT</td>
               <td class="text-green-600 font-semibold">
                 {{ item.count * item.selling_price }} KZT
               </td>
