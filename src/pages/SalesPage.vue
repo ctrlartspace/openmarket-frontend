@@ -31,18 +31,21 @@
           v-if="selectedItems && selectedItems.length > 0"
           class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
         >
-          <div
+          <button
             class="flex gap-2 items-center hover:text-red-600 cursor-pointer"
+            type="button"
           >
             <span class="material-icons">remove</span>
             <span class="text-lg">Удалить</span>
-          </div>
-          <div
-            class="flex gap-2 items-center hover:text-blue-600 cursor-pointer"
+          </button>
+          <button
+            class="flex items-center gap-2 text-blue-600 rounded hover:brightness-95"
+            type="button"
+            @click="makeReturns"
           >
             <span class="material-icons-outlined">keyboard_backspace</span>
             <span class="text-lg">Сделать возврат</span>
-          </div>
+          </button>
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
           <div class="flex-1 flex gap-2 items-center">
@@ -77,6 +80,14 @@
                     .map((filter) => filter.name)
                     .join(", ")} ${item.item.name}`
                 }}
+              </td>
+              <td
+                v-if="item.is_returned"
+                class="flex items-center bg-red-50 rounded"
+              >
+                <span class="material-icons text-red-600"
+                  >keyboard_backspace</span
+                >
               </td>
               <td class="text-gray-300">{{ item.count }} шт.</td>
               <td class="text-green-600 font-semibold">
@@ -119,6 +130,13 @@ const resetFilters = () => {
 
 const onItemClick = (id) => {
   router.push(`/items/${id}`)
+}
+
+const makeReturns = async () => {
+  const ids = selectedItems.value.join(",")
+  const data = { is_returned: true }
+  await DataManager.updateSales(data, ids)
+  items.value = await DataManager.getSales()
 }
 
 onMounted(async () => {

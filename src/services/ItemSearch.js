@@ -144,6 +144,25 @@ const getSales = async (queryParams = "") => {
     return Promise.reject(error)
   }
 }
+
+const updateSales = async (data, ids = "") => {
+  try {
+    const response = await fetch(`${BASE_URL}/sales?ids=${ids}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
 export {
   getItems,
   getItem,
@@ -154,4 +173,5 @@ export {
   addItem,
   makeSale,
   getSales,
+  updateSales,
 }
