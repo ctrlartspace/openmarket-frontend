@@ -134,7 +134,7 @@
                   }`
                 }}
               </td>
-              <td>1 шт</td>
+              <td>{{ item.count }} шт.</td>
               <td>{{ item.purchase_price }} KZT</td>
             </tr>
           </tbody>
