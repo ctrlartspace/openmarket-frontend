@@ -163,6 +163,19 @@ const updateSales = async (data, ids = "") => {
     return Promise.reject(error)
   }
 }
+
+const getIncomes = async (queryParams = "") => {
+  try {
+    const response = await fetch(`${BASE_URL}/incomes?filters=${queryParams}`)
+    if (response.ok) {
+      return Promise.resolve(response.json())
+    } else {
+      throw new Error("error")
+    }
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
 export {
   getItems,
   getItem,
@@ -174,4 +187,5 @@ export {
   makeSale,
   getSales,
   updateSales,
+  getIncomes,
 }

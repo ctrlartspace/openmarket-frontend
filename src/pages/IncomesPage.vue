@@ -38,14 +38,6 @@
             <span class="material-icons">remove</span>
             <span class="text-lg">Удалить</span>
           </button>
-          <button
-            class="flex items-center gap-2 text-blue-600 rounded hover:brightness-95"
-            type="button"
-            @click="makeReturns"
-          >
-            <span class="material-icons-outlined">keyboard_backspace</span>
-            <span class="text-lg">Сделать возврат</span>
-          </button>
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
           <div class="flex-1 flex gap-2 items-center">
@@ -91,7 +83,7 @@
               </td>
               <td class="text-gray-300">{{ item.count }} шт.</td>
               <td class="text-green-600 font-semibold">
-                {{ item.count * item.selling_price }} KZT
+                {{ item.count * item.purchase_price }} KZT
               </td>
             </tr>
           </tbody>
@@ -120,7 +112,7 @@ const selectedItems = ref([])
 
 const updateItems = async () => {
   const filterQuery = selectedFilters.value.join(",")
-  items.value = await DataManager.getSales(filterQuery)
+  items.value = await DataManager.getIncomes(filterQuery)
 }
 
 const resetFilters = () => {
@@ -132,15 +124,8 @@ const onItemClick = (id) => {
   router.push(`/items/${id}`)
 }
 
-const makeReturns = async () => {
-  const ids = selectedItems.value.join(",")
-  const data = { is_returned: true }
-  await DataManager.updateSales(data, ids)
-  items.value = await DataManager.getSales()
-}
-
 onMounted(async () => {
-  items.value = await DataManager.getSales()
+  items.value = await DataManager.getIncomes()
   filtersList.value = await DataManager.getFilters()
 })
 </script>

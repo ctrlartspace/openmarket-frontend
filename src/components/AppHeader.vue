@@ -36,12 +36,8 @@ const menuItems = ref([
     path: "/sales",
   },
   {
-    title: "Возврат",
-    path: "/returns",
-  },
-  {
     title: "Поступления",
-    path: "/income",
+    path: "/incomes",
   },
   {
     title: "База",
