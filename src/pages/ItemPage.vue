@@ -38,9 +38,7 @@
           <filter-tree v-model="item.filters" :items="filterList" />
         </select-field>
       </div>
-      <div class="col-span-6 px-4 py-2 flex">
-        <pre class="text-sm"></pre>
-      </div>
+      <div class="col-span-6 px-4 py-2 flex"></div>
     </div>
     <div
       class="mt-4 inline-block bg-white border border-gray-200 rounded overflow-auto"

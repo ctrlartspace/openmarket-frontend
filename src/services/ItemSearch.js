@@ -60,7 +60,6 @@ const getFilters = async () => {
 
 const updateItem = async (data) => {
   try {
-    console.log(data)
     const response = await fetch(`${BASE_URL}/items/${data.id}`, {
       method: "PUT",
       headers: {
@@ -68,12 +67,14 @@ const updateItem = async (data) => {
       },
       body: JSON.stringify(data),
     })
+    console.log(response)
     if (response.ok) {
       return Promise.resolve(response.json())
     } else {
       throw new Error("error")
     }
   } catch (error) {
+    console.log(error)
     return Promise.reject(error)
   }
 }
