@@ -40,7 +40,7 @@
           </button>
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
-          <div class="flex-1 flex gap-2 items-center">
+          <div class="flex-1 flex gap-2 items-center h-7">
             <span class="material-icons text-gray-300">search</span>
             <input
               type="text"
@@ -52,6 +52,13 @@
         <table class="table-auto w-full text-lg text-left bg-white">
           <tbody>
             <tr
+              v-if="items.length === 0"
+              class="border-b flex justify-center px-4 py-2 last:border-none"
+            >
+              <span class="text-gray-300 text-lg">Нет данных</span>
+            </tr>
+            <tr
+              v-else
               v-for="(item, i) in items"
               class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
               @click="onItemClick(item.item.id)"
