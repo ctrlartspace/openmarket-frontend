@@ -35,6 +35,7 @@ export const useCartStore = defineStore("cart", () => {
         count: 1,
         totalPrice: item.selling_price,
       })
+      console.log(item)
     }
   }
 

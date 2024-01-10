@@ -148,6 +148,7 @@ const makeReturns = async () => {
 
 onMounted(async () => {
   items.value = await DataManager.getSales()
+  console.log(items.value)
   filtersList.value = await DataManager.getFilters()
 })
 </script>
