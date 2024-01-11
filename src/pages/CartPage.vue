@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-6 gap-4 h-96">
     <div class="col-span-4">
-      <div class="sticky top-4 bg-white border rounded overflow-auto h-96">
+      <div class="bg-white border rounded h-96">
         <div
           v-if="selectedItems && selectedItems.length > 0"
           class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
@@ -15,9 +15,9 @@
           </button>
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
-          <div class="flex-1 flex gap-2 items-center h-7">
+          <div class="relative flex-1 flex gap-2 items-center h-7">
             <span class="material-icons text-gray-300">search</span>
-            <v-form @submit.prevent="addCartItem" class="w-full">
+            <v-form @submit.prevent="addCartItem" class="relative w-full">
               <input
                 ref="searchInput"
                 v-model.trim="inputValue"
@@ -29,6 +29,21 @@
                 @input="isSearchError = false"
                 placeholder="Код товара, наименование"
               />
+              <div
+                v-if="store.groupedCartItems.length > 0"
+                class="absolute w-full mt-2 bg-white border border-t-0 border-gray-200 rounded-b before:w-full before:h-0.5 before:bg-blue-600 before:absolute shadow-xl overflow-hidden"
+              >
+                <ul>
+                  <li
+                    class="px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer"
+                    v-for="(item, index) in store.groupedCartItems"
+                    :key="index"
+                    :value="index"
+                  >
+                    {{ item.name }}
+                  </li>
+                </ul>
+              </div>
             </v-form>
           </div>
         </div>
@@ -67,31 +82,8 @@
         </table>
       </div>
     </div>
-    <div
-      class="col-span-2 bg-white border border-gray-200 p-4 rounded sticky top-16"
-    >
+    <div class="col-span-2 bg-white border border-gray-200 p-4 rounded">
       <div class="flex flex-col h-full">
-        <div class="mt-auto">
-          <div
-            v-for="i in 1"
-            class="inline-block bg-white text-lg text-gray-301 px-4 py-2 cursor-pointer border-t border-b border-r border-gray-200 hover:bg-gray-100 first:rounded-br-none first:border-l first:rounded-bl first:rounded-tl last:rounded-tr last:rounded-br first:text-black"
-            :key="i"
-          >
-            <div class="flex">
-              <span class="self-center material-icons text-lg">
-                shopping_cart</span
-              >
-              <span class="ml-3"> {{ i }} </span>
-            </div>
-          </div>
-          <div
-            class="inline-block bg-white text-lg text-gray-301 px-4 py-2 cursor-pointer border-t border-b border-r border-gray-200 hover:bg-gray-100 first:rounded-br-none first:border-l first:rounded-bl first:rounded-tl last:rounded-tr last:rounded-br first:text-black"
-          >
-            <div class="flex">
-              <span class="self-center material-icons text-lg"> add</span>
-            </div>
-          </div>
-        </div>
         <cart-change class="" />
         <cart-total class="mt-auto" />
       </div>

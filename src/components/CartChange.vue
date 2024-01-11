@@ -40,20 +40,20 @@
       <div class="grid grid-cols-3 gap-2 mt-2 mb-2 font-semibold text-xl">
         <div
           v-for="i in 9"
-          class="py-4 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          class="py-2 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
           @click="onKeyboardClick(i)"
           :key="i"
         >
           {{ i }}
         </div>
         <div
-          class="py-4 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          class="py-2 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
           @click="onKeyboardClick(0)"
         >
           0
         </div>
         <div
-          class="col-start-2 col-end-4 py-4 bg-gray-100 text-red-400 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          class="col-start-2 col-end-4 py-2 bg-gray-100 text-red-400 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
           @click="onClearClick"
         >
           C
