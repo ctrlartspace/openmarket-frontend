@@ -49,7 +49,7 @@
               <td>
                 <input
                   v-model.number="item.count"
-                  class="rounded bg-inherit text-lg focus:outline-none focus:text-blue-600"
+                  class="rounded border border-gray-200 px-2 bg-inherit text-lg focus:outline-none focus:text-blue-600"
                   :size="String(item.count).length"
                   @click.stop
                 />
