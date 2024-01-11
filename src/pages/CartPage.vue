@@ -30,7 +30,7 @@
                 placeholder="Код товара, наименование"
               />
               <div
-                v-if="store.groupedCartItems.length > 0"
+                v-if="false"
                 class="absolute w-full mt-2 bg-white border border-t-0 border-gray-200 rounded-b before:w-full before:h-0.5 before:bg-blue-600 before:absolute shadow-xl overflow-hidden"
               >
                 <ul>
