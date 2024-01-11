@@ -48,6 +48,14 @@
               placeholder="Код товара, наименование"
             />
           </div>
+          <button
+            class="leading-8 flex items-center gap-2 text-blue-600 rounded hover:brightness-95"
+            type="button"
+            @click="addIncomes"
+          >
+            <span class="text-lg">Добавить</span>
+            <span class="material-icons-outlined">add</span>
+          </button>
         </div>
         <table class="table-auto w-full text-lg text-left bg-white">
           <tbody>
@@ -129,6 +137,10 @@ const resetFilters = () => {
 
 const onItemClick = (id) => {
   router.push(`/items/${id}`)
+}
+
+const addIncomes = () => {
+  router.push("/incomes/add")
 }
 
 onMounted(async () => {

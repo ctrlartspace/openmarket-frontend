@@ -5,7 +5,7 @@
         <div class="px-4 py-2 flex gap-2 border-b last:border-none">
           <div class="relative flex-1 flex gap-2 items-center h-7">
             <span class="material-icons text-gray-300">search</span>
-            <v-form @submit.prevent="addCartItem" class="relative w-full">
+            <v-form @submit.prevent="addIncomeItem" class="relative w-full">
               <input
                 ref="searchInput"
                 v-model.trim="inputValue"
@@ -17,35 +17,20 @@
                 @input="isSearchError = false"
                 placeholder="Код товара, наименование"
               />
-              <div
-                v-if="false"
-                class="absolute w-full mt-2 bg-white border border-t-0 border-gray-200 rounded-b before:w-full before:h-0.5 before:bg-blue-600 before:absolute shadow-xl overflow-hidden"
-              >
-                <ul>
-                  <li
-                    class="px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer"
-                    v-for="(item, index) in store.groupedCartItems"
-                    :key="index"
-                    :value="index"
-                  >
-                    {{ item.name }}
-                  </li>
-                </ul>
-              </div>
             </v-form>
           </div>
         </div>
         <table class="table-auto w-full text-lg text-left bg-white">
           <tbody>
             <tr
-              v-if="store.groupedCartItems.length === 0"
+              v-if="incomeItems.length === 0"
               class="border-b flex justify-center px-4 py-2 last:border-none"
             >
               <span class="text-gray-300 text-lg">Нет данных</span>
             </tr>
             <tr
               v-else
-              v-for="(item, i) in store.groupedCartItems"
+              v-for="(item, i) in groupedIncomeItems"
               class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2"
               @click="onItemClick(item.id)"
               :key="i"
@@ -53,7 +38,7 @@
               <td class="flex items-center">
                 <span
                   class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
-                  @click.stop="store.removeItem(item.id)"
+                  @click.stop="removeItem(item.id)"
                 >
                   remove
                 </span>
@@ -61,7 +46,15 @@
               <td class="font-semibold flex-1">
                 {{ item.name }}
               </td>
-              <td>{{ item.count }} шт.</td>
+              <td>
+                <input
+                  v-model.number="item.count"
+                  class="rounded bg-inherit text-lg focus:outline-none focus:text-blue-600"
+                  :size="String(item.count).length"
+                  @click.stop
+                />
+                шт.
+              </td>
               <td class="text-green-600 font-semibold">
                 {{ item.count * item.purchase_price }} KZT
               </td>
@@ -70,32 +63,73 @@
         </table>
       </div>
     </div>
-    <div class="col-span-2 bg-white border border-gray-200 p-4 rounded">
-      <div class="flex flex-col h-full">
-        <cart-change class="" />
-        <cart-total class="mt-auto" />
-      </div>
+    <div
+      class="col-span-2 bg-white border border-gray-2addIncomesItems p-4 rounded"
+    >
+      <input class="max-w-fit red-100" value="1" @click.stop />
+      <!-- <button type="button" @click="addIncomesItems">add</button> -->
     </div>
   </div>
 </template>
 
 <script setup>
-import CartChange from "@/components/CartChange.vue"
-import CartTotal from "@/components/CartTotal.vue"
-
-import { ref, nextTick, onMounted, onBeforeUnmount } from "vue"
+import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue"
 import { useRouter } from "vue-router"
-import { useCartStore } from "@/stores/cart.store"
-import { getItem } from "@/services/ItemSearch"
+import { getItem, makeIncome } from "@/services/ItemSearch"
 
-const store = useCartStore()
 const router = useRouter()
 
 const searchInput = ref(null)
 const inputValue = ref("")
 const isSearchError = ref(false)
 
-const addCartItem = async () => {
+const incomeItems = ref(new Map())
+
+const groupedIncomeItems = computed(() =>
+  [...incomeItems.value].map((el) => el[1])
+)
+
+const isEmpty = computed(() => incomeItems.value.size === 0)
+
+const getItemsForIncome = computed(() =>
+  groupedIncomeItems.value.map((item) => {
+    return {
+      item_id: item.id,
+      purchase_price: item.selling_price,
+      count: item.count,
+    }
+  })
+)
+
+const addItem = (item) => {
+  const existingItem = incomeItems.value.get(item.id)
+  if (existingItem) {
+    existingItem.count += 1
+    existingItem.totalPrice = existingItem.count * existingItem.selling_price
+  } else {
+    incomeItems.value.set(item.id, {
+      ...item,
+      count: 1,
+      totalPrice: item.selling_price,
+    })
+  }
+}
+
+const removeItem = (id) => {
+  const item = incomeItems.value.get(id)
+  if (item && item.count > 1) {
+    item.count -= 1
+    item.totalPrice = item.count * item.selling_price
+  } else {
+    incomeItems.value.delete(id)
+  }
+}
+
+const clearItems = () => {
+  incomeItems.value.clear()
+}
+
+const addIncomeItem = async () => {
   isSearchError.value = false
   if (!inputValue.value) {
     return
@@ -103,13 +137,19 @@ const addCartItem = async () => {
 
   try {
     const item = await getItem(inputValue.value)
-    store.addItem(item)
+    addItem(item)
     inputValue.value = ""
     isSearchError.value = false
   } catch (error) {
     isSearchError.value = true
     console.error(error)
   }
+}
+
+const addIncomesItems = async () => {
+  const response = await makeIncome(getItemsForIncome.value)
+  console.log(response)
+  clearItems()
 }
 
 const onItemClick = (id) => {
