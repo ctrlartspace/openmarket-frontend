@@ -8,7 +8,7 @@
         `${item.brand?.name} ${item.category?.name} ${item.subcategory?.name}`
       }}
     </span>
-    <span class=""> {{ item.purchase_price }}</span>
+    <span class=""> {{ item.purchasePrice }}</span>
   </div>
 </template>
 

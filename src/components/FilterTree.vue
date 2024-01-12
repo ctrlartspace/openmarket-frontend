@@ -80,7 +80,7 @@ const emit = defineEmits(["change", "update:modelValue"])
 
 const VISIBLE_ITEMS_COUNT = 3
 const isShowFull = ref(false)
-const mainItems = computed(() => props.items.filter((item) => !item.parent_id))
+const mainItems = computed(() => props.items.filter((item) => !item.parentId))
 const isItemsMore = computed(() => mainItems.value.length > VISIBLE_ITEMS_COUNT)
 const visibleItemsCount = computed(() =>
   isShowFull.value ? mainItems.value.length : VISIBLE_ITEMS_COUNT

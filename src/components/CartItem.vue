@@ -13,7 +13,7 @@
     >
       {{ `${item.brand.name}  ${item.name}` }}
     </span>
-    <span> 1 шт, {{ item.selling_price }}</span>
+    <span> 1 шт, {{ item.sellingPrice }}</span>
   </div>
 </template>
 

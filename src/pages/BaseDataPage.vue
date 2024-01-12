@@ -142,7 +142,7 @@
                 }}
               </td>
               <td>{{ item.count }} шт.</td>
-              <td>{{ item.purchase_price }} KZT</td>
+              <td>{{ item.purchasePrice }} KZT</td>
             </tr>
           </tbody>
         </table>
@@ -193,7 +193,7 @@ const newItemClick = () => {
 const addFilter = async () => {
   const data = {
     name: newFilter.value.name,
-    parent_id: newFilter.value.parentId,
+    parentId: newFilter.value.parentId,
   }
 
   await DataManager.addFilter(data)

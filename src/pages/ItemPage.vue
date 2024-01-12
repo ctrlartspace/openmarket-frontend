@@ -18,12 +18,12 @@
         />
 
         <input-field
-          v-model="item.purchase_price"
+          v-model="item.purchasePrice"
           placeholder="Цена покупки"
           :disabled="!isEditMode"
         />
         <input-field
-          v-model="item.selling_price"
+          v-model="item.sellingPrice"
           placeholder="Цена продажи"
           :disabled="!isEditMode"
         />

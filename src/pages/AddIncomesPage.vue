@@ -56,7 +56,7 @@
                 шт.
               </td>
               <td class="text-green-600 font-semibold">
-                {{ item.count * item.purchase_price }} KZT
+                {{ item.count * item.purchasePrice }} KZT
               </td>
             </tr>
           </tbody>
@@ -94,8 +94,8 @@ const isEmpty = computed(() => incomeItems.value.size === 0)
 const getItemsForIncome = computed(() =>
   groupedIncomeItems.value.map((item) => {
     return {
-      item_id: item.id,
-      purchase_price: item.selling_price,
+      itemId: item.id,
+      purchasePrice: item.sellingPrice,
       count: item.count,
     }
   })
@@ -105,12 +105,12 @@ const addItem = (item) => {
   const existingItem = incomeItems.value.get(item.id)
   if (existingItem) {
     existingItem.count += 1
-    existingItem.totalPrice = existingItem.count * existingItem.selling_price
+    existingItem.totalPrice = existingItem.count * existingItem.sellingPrice
   } else {
     incomeItems.value.set(item.id, {
       ...item,
       count: 1,
-      totalPrice: item.selling_price,
+      totalPrice: item.sellingPrice,
     })
   }
 }
@@ -119,7 +119,7 @@ const removeItem = (id) => {
   const item = incomeItems.value.get(id)
   if (item && item.count > 1) {
     item.count -= 1
-    item.totalPrice = item.count * item.selling_price
+    item.totalPrice = item.count * item.sellingPrice
   } else {
     incomeItems.value.delete(id)
   }

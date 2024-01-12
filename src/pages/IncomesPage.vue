@@ -89,7 +89,7 @@
                 }}
               </td>
               <td
-                v-if="item.is_returned"
+                v-if="item.isReturned"
                 class="flex items-center bg-red-50 rounded"
               >
                 <span class="material-icons text-red-600"
@@ -98,7 +98,7 @@
               </td>
               <td class="text-gray-300">{{ item.count }} шт.</td>
               <td class="text-green-600 font-semibold">
-                {{ item.count * item.purchase_price }} KZT
+                {{ item.count * item.purchasePrice }} KZT
               </td>
             </tr>
           </tbody>

@@ -5,6 +5,7 @@ import ItemPage from "@/pages/ItemPage.vue"
 import SalesPage from "@/pages/SalesPage.vue"
 import IncomesPage from "@/pages/IncomesPage.vue"
 import AddIncomesPage from "@/pages/AddIncomesPage.vue"
+import AuthPage from "@/pages/AuthPage.vue"
 
 const routes = [
   { path: "/", component: CartPage },
@@ -15,6 +16,8 @@ const routes = [
   { path: "/base", component: BaseDataPage },
   { path: "/items", component: ItemPage },
   { path: "/items/:id", component: ItemPage },
+  { path: "/profile", component: ItemPage },
+  { path: "/auth", component: AuthPage },
 ]
 
 const router = createRouter({

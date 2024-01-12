@@ -1,11 +1,7 @@
 <template>
-  <nav>
-    <ul>
-      <li
-        class="inline ml-4 first:ml-0"
-        v-for="(item, i) in menuItems"
-        :key="i"
-      >
+  <nav v-if="store.isAuthorized">
+    <ul class="flex gap-4">
+      <li class="inline" v-for="(item, i) in menuItems" :key="i">
         <router-link v-slot="{ isActive }" :to="item.path">
           <span
             class="font-semibold text-lg"
@@ -15,12 +11,25 @@
           </span>
         </router-link>
       </li>
+      <li class="inline ml-auto">
+        <router-link v-slot="{ isActive }" to="/profile">
+          <span
+            class="font-semibold text-lg"
+            :class="isActive ? 'text-black' : 'text-gray-300'"
+          >
+            Настройки
+          </span>
+        </router-link>
+      </li>
     </ul>
   </nav>
 </template>
 
 <script setup>
 import { ref } from "vue"
+import { useUserStore } from "@/stores/user.store"
+
+const store = useUserStore()
 
 const menuItems = ref([
   {
