@@ -7,8 +7,8 @@ export const useUserStore = defineStore("user", () => {
   const isAuthorized = computed(() => accessToken.value !== null)
 
   const logIn = async (data) => {
-    await UserService.logIn(data)
-    console.log("login")
+    const response = await UserService.logIn(data)
+    localStorage.setItem("access_token", response.accessToken)
   }
 
   const logOut = () => {
