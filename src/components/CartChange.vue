@@ -3,9 +3,9 @@
     <div
       class="flex px-4 py-2 border rounded text-center font-semibold cursor-pointer select-none justify-center shadow"
       :class="{
-        'bg-blue-400 text-white border-blue-600':
+        'bg-blue-600 text-white border-blue-800':
           currentPaymentType.value === 'cash',
-        'bg-red-400 text-white border-red-600':
+        'bg-red-600 text-white border-red-800':
           currentPaymentType.value === 'kaspi',
       }"
       @click="changePaymentType()"
@@ -33,7 +33,7 @@
       </div>
       <div class="mt-2 px-4 py-2 border border-gray-200 rounded flex">
         <span class="text-lg text-gray-300 flex-auto">Сдача</span>
-        <span class="text-lg font-semibold text-blue-500">{{
+        <span class="text-lg font-semibold text-blue-600">{{
           cartChange
         }}</span>
       </div>
@@ -53,7 +53,7 @@
           0
         </div>
         <div
-          class="col-start-2 col-end-4 py-2 bg-gray-100 text-red-400 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          class="col-start-2 col-end-4 py-2 bg-gray-100 text-red-600 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
           @click="onClearClick"
         >
           C
