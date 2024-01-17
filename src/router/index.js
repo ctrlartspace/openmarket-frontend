@@ -6,6 +6,7 @@ import SalesPage from "@/pages/SalesPage.vue"
 import IncomesPage from "@/pages/IncomesPage.vue"
 import AddIncomesPage from "@/pages/AddIncomesPage.vue"
 import AuthPage from "@/pages/AuthPage.vue"
+import { useUserStore } from "@/stores/user.store"
 
 const routes = [
   { path: "/", component: CartPage },
@@ -26,8 +27,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  //
-  next()
+  const store = useUserStore()
+  if (to.path != "/auth" && !store.isAuthorized) {
+    store.logOut()
+  } else {
+    console.log("next")
+    next()
+  }
 })
 
 router.afterEach(() => {
