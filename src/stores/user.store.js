@@ -3,16 +3,15 @@ import { ref, computed } from "vue"
 import * as UserService from "@/services/UserService"
 
 export const useUserStore = defineStore("user", () => {
-  const accessToken = computed(() => localStorage.getItem("access_token"))
-  const isAuthorized = computed(() => accessToken.value !== null)
+  const isAuthorized = computed(() => localStorage.getItem("isAuthorized"))
 
   const logIn = async (data) => {
     const response = await UserService.logIn(data)
-    localStorage.setItem("access_token", response.accessToken)
+    localStorage.setItem("isAuthorized", true)
   }
 
   const logOut = () => {
-    localStorage.removeItem("access_token")
+    localStorage.removeItem("isAuthorized")
   }
 
   return { isAuthorized, logIn, logOut }

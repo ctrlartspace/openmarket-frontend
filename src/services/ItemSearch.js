@@ -1,13 +1,9 @@
 const BASE_URL = "http://localhost:3000/api"
 
-const authorizationHeader = {
-  Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-}
-
 const getItems = async (queryParams = "") => {
   try {
     const response = await fetch(`${BASE_URL}/items?filters=${queryParams}`, {
-      headers: { ...authorizationHeader },
+      credentials: "include",
     })
     if (response.ok) {
       return Promise.resolve(response.json())
@@ -22,7 +18,7 @@ const getItems = async (queryParams = "") => {
 const getItem = async (code) => {
   try {
     const response = await fetch(`${BASE_URL}/items/${code}`, {
-      headers: { ...authorizationHeader },
+      credentials: "include",
     })
     if (response.ok) {
       return Promise.resolve(response.json())
@@ -41,8 +37,8 @@ const addItem = async (data) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...authorizationHeader,
       },
+      credentials: "include",
       body: JSON.stringify(data),
     })
     if (response.ok) {
@@ -57,7 +53,7 @@ const addItem = async (data) => {
 const getFilters = async () => {
   try {
     const response = await fetch(`${BASE_URL}/filters`, {
-      headers: { ...authorizationHeader },
+      credentials: "include",
     })
     if (response.ok) {
       return Promise.resolve(response.json())
@@ -75,8 +71,8 @@ const updateItem = async (data) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        ...authorizationHeader,
       },
+      credentials: "include",
       body: JSON.stringify(data),
     })
     console.log(response)
@@ -96,8 +92,8 @@ const addFilter = async (data) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...authorizationHeader,
       },
+      credentials: "include",
       body: JSON.stringify(data),
     })
     if (response.ok) {
@@ -116,8 +112,8 @@ const deleteFilter = async (id) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        ...authorizationHeader,
       },
+      credentials: "include",
     })
     if (response.ok) {
       return Promise.resolve(response.json())
@@ -135,8 +131,8 @@ const makeSale = async (data) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...authorizationHeader,
       },
+      credentials: "include",
       body: JSON.stringify(data),
     })
     if (response.ok) {
@@ -151,7 +147,7 @@ const makeSale = async (data) => {
 const getSales = async (queryParams = "") => {
   try {
     const response = await fetch(`${BASE_URL}/sales?filters=${queryParams}`, {
-      headers: { ...authorizationHeader },
+      credentials: "include",
     })
     if (response.ok) {
       return Promise.resolve(response.json())
@@ -169,8 +165,8 @@ const updateSales = async (data, ids = "") => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        ...authorizationHeader,
       },
+      credentials: "include",
       body: JSON.stringify(data),
     })
     if (response.ok) {
@@ -186,7 +182,7 @@ const updateSales = async (data, ids = "") => {
 const getIncomes = async (queryParams = "") => {
   try {
     const response = await fetch(`${BASE_URL}/incomes?filters=${queryParams}`, {
-      headers: { ...authorizationHeader },
+      credentials: "include",
     })
     if (response.ok) {
       return Promise.resolve(response.json())
@@ -203,8 +199,9 @@ const makeIncome = async (data) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...authorizationHeader,
       },
+      credentials: "include",
+
       body: JSON.stringify(data),
     })
     if (response.ok) {
