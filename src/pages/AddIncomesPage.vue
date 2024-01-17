@@ -66,7 +66,12 @@
     <div
       class="col-span-2 bg-white border border-gray-2addIncomesItems p-4 rounded"
     >
-      <input class="max-w-fit red-100" value="1" @click.stop />
+      <button
+        class="w-full px-4 py-2 text-white bg-blue-600 flex gap-2 items-center justify-center hover:brightness-90 rounded"
+        @click="addIncomesItems"
+      >
+        <span class="text-lg">Добавить</span>
+      </button>
       <!-- <button type="button" @click="addIncomesItems">add</button> -->
     </div>
   </div>

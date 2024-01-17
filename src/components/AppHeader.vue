@@ -17,7 +17,7 @@
             class="font-semibold text-lg"
             :class="isActive ? 'text-black' : 'text-gray-300'"
           >
-            Настройки
+            Меню
           </span>
         </router-link>
       </li>
