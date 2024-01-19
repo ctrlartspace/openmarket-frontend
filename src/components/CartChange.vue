@@ -4,15 +4,15 @@
       class="flex px-4 py-2 border rounded text-center font-semibold cursor-pointer select-none justify-center shadow"
       :class="{
         'bg-blue-600 text-white border-blue-800':
-          currentPaymentType.value === 'cash',
+          store.getPaymentType.code === 'cash',
         'bg-red-600 text-white border-red-800':
-          currentPaymentType.value === 'kaspi',
+          store.getPaymentType.code === 'kaspi',
       }"
-      @click="changePaymentType()"
+      @click="store.changePaymentType"
     >
-      <span class="ml-2 text-lg"> {{ currentPaymentType.label }} </span>
+      <span class="ml-2 text-lg"> {{ store.getPaymentType.label }} </span>
     </div>
-    <div v-if="currentPaymentType.value === 'cash'">
+    <div v-if="store.getPaymentType.code === 'cash'">
       <div class="relative">
         <input
           v-model="inputAmount"
@@ -69,20 +69,6 @@ import { useCartStore } from "@/stores/cart.store"
 
 const store = useCartStore()
 const inputAmount = ref("")
-const paymentTypes = ref([
-  {
-    id: 1,
-    value: "cash",
-    label: "Наличные",
-  },
-  {
-    id: 2,
-    value: "kaspi",
-    label: "Перевод",
-  },
-])
-
-const currentPaymentType = ref(paymentTypes.value[1])
 
 const cartChange = computed(() =>
   inputAmount.value ? inputAmount.value - store.getTotalAmount : 0
@@ -93,13 +79,5 @@ const onKeyboardClick = (value) => {
 }
 const onClearClick = () => {
   inputAmount.value = ""
-}
-
-const changePaymentType = () => {
-  if (currentPaymentType.value.id < paymentTypes.value.length) {
-    currentPaymentType.value = paymentTypes.value[currentPaymentType.value.id]
-  } else {
-    currentPaymentType.value = paymentTypes.value[0]
-  }
 }
 </script>

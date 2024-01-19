@@ -96,6 +96,11 @@
                   >keyboard_backspace</span
                 >
               </td>
+              <td class="flex items-center bg-blue-50 rounded">
+                <span class="material-icons-outlined text-blue-600">{{
+                  item.paymentType === "cash" ? "payments" : "credit_card"
+                }}</span>
+              </td>
               <td class="text-gray-300">{{ item.count }} шт.</td>
               <td class="text-green-600 font-semibold">
                 {{ item.count * item.sellingPrice }} KZT
