@@ -56,10 +56,30 @@
         </button>
         <button
           class="text-blue-600 inline-flex gap-2 items-center hover:brightness-90"
-          @click="saveItemData"
+          @click="showDialog = true"
         >
           <span class="text-lg">Добавить</span>
         </button>
+        <app-dialog
+          v-if="showDialog"
+          title="Добавить"
+          @close="showDialog = false"
+        >
+          <v-form @submit.prevent="addIncome">
+            <div class="border rounded border-gray-200">
+              <input-field
+                v-model.number="newIncomeItemCount"
+                placeholder="Количество"
+              />
+            </div>
+            <button
+              type="submit"
+              class="block w-full mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:brightness-90"
+            >
+              <span class="text-lg font-semibold">Добавить</span>
+            </button>
+          </v-form>
+        </app-dialog>
       </div>
     </div>
   </div>
@@ -69,10 +89,17 @@
 import InputField from "@/components/ui/InputField.vue"
 import SelectField from "@/components/ui/SelectField.vue"
 import FilterTree from "@/components/FilterTree.vue"
+import AppDialog from "@/components/AppDialog.vue"
 
 import { ref, onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
-import { getItem, updateItem, addItem, getFilters } from "@/services/ItemSearch"
+import {
+  getItem,
+  updateItem,
+  addItem,
+  getFilters,
+  makeIncome,
+} from "@/services/ItemSearch"
 
 const route = useRoute()
 const router = useRouter()
@@ -81,6 +108,8 @@ const item = ref({})
 const isEditMode = ref(true)
 
 const filterList = ref([])
+const showDialog = ref(false)
+const newIncomeItemCount = ref(null)
 
 const saveItemData = async () => {
   if (item.value.id) {
@@ -93,6 +122,16 @@ const saveItemData = async () => {
     router.push(`/items/${id}`)
   }
   isEditMode.value = false
+}
+
+const addIncome = async () => {
+  const incomeItem = {
+    itemId: item.value.id,
+    purchasePrice: item.value.purchasePrice,
+    count: newIncomeItemCount.value,
+  }
+  const response = await makeIncome([incomeItem])
+  console.log(response)
 }
 
 onMounted(async () => {
