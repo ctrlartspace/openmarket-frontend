@@ -1,9 +1,9 @@
 <template>
   <div class="max-w-[800px] mx-auto">
-    <header class="p-2 pb-0">
+    <header class="md:p-2 md:pb-0">
       <app-header></app-header>
     </header>
-    <main class="p-2 h-full">
+    <main class="md:p-2 h-full">
       <router-view></router-view>
     </main>
   </div>
