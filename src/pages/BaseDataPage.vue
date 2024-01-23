@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="grid grid-cols-10 gap-4">
-      <div class="col-span-3">
+      <div class="col-span-10 md:col-span-3">
         <div
           class="bg-white border border-gray-200 rounded overflow-hidden mt-2 first:mt-0"
         >
@@ -72,7 +72,7 @@
           <span class="text-lg">Сбросить</span>
         </button>
       </div>
-      <div class="col-span-7">
+      <div class="col-span-10 md:col-span-7">
         <div class="sticky top-4 bg-white border rounded overflow-auto">
           <div
             v-if="selectedItems && selectedItems.length > 0"
@@ -82,7 +82,7 @@
               class="flex gap-2 items-center hover:text-red-600 cursor-pointer"
             >
               <span class="material-icons">remove</span>
-              <span class="text-lg">Удалить</span>
+              <span class="hidden md:inline text-lg">Удалить</span>
             </div>
             <div
               class="flex gap-2 items-center hover:text-blue-600 cursor-pointer"
@@ -105,7 +105,7 @@
               type="button"
               @click="newItemClick"
             >
-              <span class="text-lg">Новый</span>
+              <span class="hidden md:inline text-lg">Новый</span>
               <span class="material-icons-outlined">add</span>
             </button>
           </div>

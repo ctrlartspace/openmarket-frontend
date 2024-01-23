@@ -3,7 +3,7 @@
     <header class="md:p-2 md:pb-0">
       <app-header></app-header>
     </header>
-    <main class="md:p-2 h-full">
+    <main class="p-2 h-full">
       <router-view></router-view>
     </main>
   </div>

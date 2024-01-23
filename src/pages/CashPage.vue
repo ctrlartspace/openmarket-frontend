@@ -1,9 +1,9 @@
 <template>
   <div class="grid grid-cols-10 bg-white rounded border border-gray-200">
-    <div class="col-span-4 p-4 flex flex-col gap-2">
+    <div class="col-span-10 md:p-4 flex flex-col gap-2 md:col-span-4">
       <div
         v-for="cash in openedCashList"
-        class="rounded border border-gray-200"
+        class="rounded md:border border-gray-200"
         :class="cash.isClosed ? 'bg-gray-100' : 'bg-white'"
         :key="cash.id"
       >
@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <div class="col-span-6 p-4 flex flex-col gap-2">
+    <div class="col-span-10 p-4 flex flex-col gap-2 md:col-span-6">
       <div
         v-for="cash in closedCashList"
         class="p-4 rounded border border-gray-200"

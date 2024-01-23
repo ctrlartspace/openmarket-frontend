@@ -37,7 +37,9 @@
           cartChange
         }}</span>
       </div>
-      <div class="grid grid-cols-3 gap-2 mt-2 mb-2 font-semibold text-xl">
+      <div
+        class="hidden md:grid grid-cols-3 gap-2 mt-2 mb-2 font-semibold text-xl"
+      >
         <div
           v-for="i in 9"
           class="py-2 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"

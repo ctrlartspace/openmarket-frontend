@@ -23,9 +23,7 @@
         </router-link>
       </li>
     </ul>
-    <div
-      class="md:hidden sticky px-4 py-2 bg-white mb-2 border-b border-gray-200"
-    >
+    <div class="md:hidden sticky px-4 py-2 bg-white border-b border-gray-200">
       <div class="flex justify-between">
         <span class="font-semibold text-lg">
           {{ menuItems.find((item) => item.path === route.path)?.title }}
