@@ -1,6 +1,7 @@
 <template>
   <nav v-if="store.isAuthorized">
-    <ul class="hidden md:flex gap-4">
+    <!-- Desktop -->
+    <ul class="hidden md:flex bg-white border px-4 py-2 rounded gap-4">
       <li class="inline" v-for="(item, i) in menuItems" :key="i">
         <router-link v-slot="{ isActive }" :to="item.path">
           <span
@@ -22,6 +23,8 @@
         </router-link>
       </li>
     </ul>
+
+    <!--  Mobile -->
     <div
       class="md:hidden sticky px-4 py-2 bg-white border-b border-gray-200 shadow-sm"
     >
