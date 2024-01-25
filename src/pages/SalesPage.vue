@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-10 gap-4">
-    <div class="col-span-3">
+  <div class="grid grid-cols-10 gap-4 p-2 md:p-0">
+    <div class="col-span-10 md:col-span-3">
       <div
         class="bg-white border border-gray-200 rounded overflow-hidden mt-2 first:mt-0"
       >
@@ -25,7 +25,7 @@
         <span class="text-lg">Сбросить</span>
       </button>
     </div>
-    <div class="col-span-7">
+    <div class="col-span-10 md:col-span-7">
       <div class="sticky top-4 bg-white border rounded overflow-auto">
         <div
           v-if="selectedItems && selectedItems.length > 0"
@@ -36,7 +36,7 @@
             type="button"
           >
             <span class="material-icons">remove</span>
-            <span class="text-lg">Удалить</span>
+            <span class="hidden md:inline text-lg">Удалить</span>
           </button>
           <button
             class="flex items-center gap-2 text-blue-600 rounded hover:brightness-95"
@@ -44,7 +44,7 @@
             @click="makeReturns"
           >
             <span class="material-icons-outlined">keyboard_backspace</span>
-            <span class="text-lg">Сделать возврат</span>
+            <span class="hidden md:inline text-lg">Сделать возврат</span>
           </button>
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
@@ -99,6 +99,11 @@
               <td class="text-gray-300">{{ item.count }} шт.</td>
               <td class="text-green-600 font-semibold">
                 {{ item.count * item.sellingPrice }} KZT
+              </td>
+              <td class="flex items-center bg-blue-50 rounded">
+                <span class="material-icons-outlined text-blue-600">{{
+                  item.paymentType === "cash" ? "payments" : "credit_card"
+                }}</span>
               </td>
             </tr>
           </tbody>

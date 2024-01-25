@@ -1,36 +1,34 @@
 <template>
-  <div class="grid grid-cols-10 gap-4">
-    <div class="col-span-3">
+  <div class="grid grid-cols-10 gap-4 p-2 md:p-0">
+    <div class="col-span-10 md:col-span-3">
       <div
         class="bg-white border border-gray-200 rounded overflow-hidden mt-2 first:mt-0"
       >
-        <app-dialog title="Новая категория">
-          <template #activator="{ action }">
-            <div
-              class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
+        <div
+          class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
+        >
+          <h2 class="text-lg font-semibold">Фильтры</h2>
+          <button class="inline-flex items-center" @click="showDialog = true">
+            <span
+              class="material-icons-outlined hover:text-gray-600 cursor-pointer"
             >
-              <h2 class="text-lg font-semibold">Фильтры</h2>
-              <button class="inline-flex items-center" v-on="action">
-                <span
-                  class="material-icons-outlined hover:text-gray-600 cursor-pointer"
-                >
-                  more_vert
-                </span>
-              </button>
-            </div>
-          </template>
-          <template #content>
-            <div class="p-4 flex flex-col justify-center">
-              <filter-tree
-                class="mt-2 border border-gray-200 rounded overflow-hidden"
-                v-model="newFilter.parentId"
-                :items="filtersList"
-                single="true"
-                select-root="true"
-              />
-            </div>
-          </template>
-          <template #footer>
+              more_vert
+            </span>
+          </button>
+        </div>
+        <app-dialog
+          v-if="showDialog"
+          title="Новая категория"
+          @close="showDialog = false"
+        >
+          <div class="flex flex-col justify-center gap-2">
+            <filter-tree
+              class="border border-gray-200 rounded overflow-hidden"
+              v-model="newFilter.parentId"
+              :items="filtersList"
+              single="true"
+              select-root="true"
+            />
             <div class="border rounded border-gray-200">
               <input-field
                 v-model="newFilter.name"
@@ -41,7 +39,7 @@
                 "
               />
             </div>
-            <div class="mt-2 flex gap-2">
+            <div class="flex gap-2">
               <button
                 class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 rounded"
                 @click="addFilter"
@@ -55,7 +53,7 @@
                 <span class="text-lg font-semibold">Удалить</span>
               </button>
             </div>
-          </template>
+          </div>
         </app-dialog>
         <filter-tree
           v-model="selectedFilters"
@@ -73,7 +71,7 @@
         <span class="text-lg">Сбросить</span>
       </button>
     </div>
-    <div class="col-span-7">
+    <div class="col-span-10 md:col-span-7">
       <div class="sticky top-4 bg-white border rounded overflow-auto">
         <div
           v-if="selectedItems && selectedItems.length > 0"
@@ -83,7 +81,7 @@
             class="flex gap-2 items-center hover:text-red-600 cursor-pointer"
           >
             <span class="material-icons">remove</span>
-            <span class="text-lg">Удалить</span>
+            <span class="hidden md:inline text-lg">Удалить</span>
           </div>
           <div
             class="flex gap-2 items-center hover:text-blue-600 cursor-pointer"
@@ -106,7 +104,7 @@
             type="button"
             @click="newItemClick"
           >
-            <span class="text-lg">Новый</span>
+            <span class="hidden md:inline text-lg">Новый</span>
             <span class="material-icons-outlined">add</span>
           </button>
         </div>
@@ -169,6 +167,7 @@ const items = ref([])
 const selectedFilters = ref([])
 
 const selectedItems = ref([])
+const showDialog = ref(false)
 
 const updateItems = async () => {
   const filterQuery = selectedFilters.value.join(",")
@@ -197,6 +196,7 @@ const addFilter = async () => {
   }
 
   await DataManager.addFilter(data)
+  newFilter.value.name = ""
   filtersList.value = await DataManager.getFilters()
 }
 

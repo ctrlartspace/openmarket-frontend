@@ -4,15 +4,15 @@
       class="flex px-4 py-2 border rounded text-center font-semibold cursor-pointer select-none justify-center shadow"
       :class="{
         'bg-blue-600 text-white border-blue-800':
-          currentPaymentType.value === 'cash',
+          store.getPaymentType.code === 'cash',
         'bg-red-600 text-white border-red-800':
-          currentPaymentType.value === 'kaspi',
+          store.getPaymentType.code === 'kaspi',
       }"
-      @click="changePaymentType()"
+      @click="store.changePaymentType"
     >
-      <span class="ml-2 text-lg"> {{ currentPaymentType.label }} </span>
+      <span class="ml-2 text-lg"> {{ store.getPaymentType.label }} </span>
     </div>
-    <div v-if="currentPaymentType.value === 'cash'">
+    <div v-if="store.getPaymentType.code === 'cash'">
       <div class="relative">
         <input
           v-model="inputAmount"
@@ -37,7 +37,9 @@
           cartChange
         }}</span>
       </div>
-      <div class="grid grid-cols-3 gap-2 mt-2 mb-2 font-semibold text-xl">
+      <div
+        class="hidden md:grid grid-cols-3 gap-2 mt-2 mb-2 font-semibold text-xl"
+      >
         <div
           v-for="i in 9"
           class="py-2 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
@@ -69,20 +71,6 @@ import { useCartStore } from "@/stores/cart.store"
 
 const store = useCartStore()
 const inputAmount = ref("")
-const paymentTypes = ref([
-  {
-    id: 1,
-    value: "cash",
-    label: "Наличные",
-  },
-  {
-    id: 2,
-    value: "kaspi",
-    label: "Перевод",
-  },
-])
-
-const currentPaymentType = ref(paymentTypes.value[1])
 
 const cartChange = computed(() =>
   inputAmount.value ? inputAmount.value - store.getTotalAmount : 0
@@ -93,13 +81,5 @@ const onKeyboardClick = (value) => {
 }
 const onClearClick = () => {
   inputAmount.value = ""
-}
-
-const changePaymentType = () => {
-  if (currentPaymentType.value.id < paymentTypes.value.length) {
-    currentPaymentType.value = paymentTypes.value[currentPaymentType.value.id]
-  } else {
-    currentPaymentType.value = paymentTypes.value[0]
-  }
 }
 </script>

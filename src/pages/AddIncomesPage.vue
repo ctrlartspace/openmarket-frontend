@@ -100,7 +100,7 @@ const getItemsForIncome = computed(() =>
   groupedIncomeItems.value.map((item) => {
     return {
       itemId: item.id,
-      purchasePrice: item.sellingPrice,
+      purchasePrice: item.purchasePrice,
       count: item.count,
     }
   })

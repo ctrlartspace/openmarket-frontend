@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-10 gap-4">
-    <div class="col-span-3">
+  <div class="grid grid-cols-10 gap-4 p-2 md:p-0">
+    <div class="col-span-10 md:col-span-3">
       <div
         class="bg-white border border-gray-200 rounded overflow-hidden mt-2 first:mt-0"
       >
@@ -25,7 +25,7 @@
         <span class="text-lg">Сбросить</span>
       </button>
     </div>
-    <div class="col-span-7">
+    <div class="col-span-10 md:col-span-7">
       <div class="sticky top-4 bg-white border rounded overflow-auto">
         <div
           v-if="selectedItems && selectedItems.length > 0"
@@ -53,7 +53,7 @@
             type="button"
             @click="addIncomes"
           >
-            <span class="text-lg">Добавить</span>
+            <span class="hidden md:inline text-lg">Добавить</span>
             <span class="material-icons-outlined">add</span>
           </button>
         </div>

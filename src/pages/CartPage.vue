@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-6 gap-4 h-96">
-    <div class="col-span-4">
+    <div class="col-span-6 md:col-span-4 p-2">
       <div class="bg-white border rounded h-96">
         <div class="px-4 py-2 flex gap-2 border-b last:border-none">
           <div class="relative flex-1 flex gap-2 items-center h-7">
@@ -70,11 +70,14 @@
         </table>
       </div>
     </div>
-    <div class="col-span-2 bg-white border border-gray-200 p-4 rounded">
-      <div class="flex flex-col h-full">
+    <div class="col-span-6 md:col-span-2">
+      <div class="absolute bottom-0 left-0 right-0">
+        <cart-total-bar />
+      </div>
+      <!-- <div class="flex flex-col h-full">
         <cart-change class="" />
         <cart-total class="mt-auto" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -82,6 +85,7 @@
 <script setup>
 import CartChange from "@/components/CartChange.vue"
 import CartTotal from "@/components/CartTotal.vue"
+import CartTotalBar from "@/components/CartTotalBar.vue"
 
 import { ref, nextTick, onMounted, onBeforeUnmount } from "vue"
 import { useRouter } from "vue-router"

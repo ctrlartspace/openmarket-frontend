@@ -6,7 +6,8 @@ import SalesPage from "@/pages/SalesPage.vue"
 import IncomesPage from "@/pages/IncomesPage.vue"
 import AddIncomesPage from "@/pages/AddIncomesPage.vue"
 import AuthPage from "@/pages/AuthPage.vue"
-import { useUserStore } from "@/stores/user.store"
+import CashPage from "@/pages/CashPage.vue"
+// import { useUserStore } from "@/stores/user.store"
 
 const routes = [
   { path: "/", component: CartPage },
@@ -19,6 +20,7 @@ const routes = [
   { path: "/items/:id", component: ItemPage },
   { path: "/profile", component: ItemPage },
   { path: "/auth", component: AuthPage },
+  { path: "/cash", component: CashPage },
 ]
 
 const router = createRouter({
@@ -26,15 +28,15 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from, next) => {
-  const store = useUserStore()
-  if (to.path != "/auth" && !store.isAuthorized) {
-    store.logOut()
-  } else {
-    console.log("next")
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+// const store = useUserStore()
+// if (to.path != "/auth" && !store.isAuthorized) {
+//   store.logOut()
+// } else {
+//   console.log("next")
+//   next()
+// }
+// })
 
 router.afterEach(() => {
   window.scrollTo({ top: 0, behavior: "smooth" })

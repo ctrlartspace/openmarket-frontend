@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex text-xl font-semibold p-4 border rounded hover:brightness-95 cursor-pointer font-mono"
+    class="flex justify-between font-semibold text-2xl p-4 border rounded hover:brightness-95 cursor-pointer"
     :class="
       store.getTotalAmount
         ? 'bg-green-400 text-white border-green-600 shadow'
@@ -8,9 +8,9 @@
     "
     @click="makeSaleFromCart"
   >
-    <span class="material-icons self-center">check_circle</span>
-    <span class="ml-4 flex-auto"> {{ store.getTotalAmount }} </span>
-    <span class="">KZT</span>
+    <!-- <span class="material-icons self-center">check_circle</span> -->
+    <span>ИТОГО</span>
+    <span>{{ store.getTotalAmount }} KZT</span>
   </div>
 </template>
 

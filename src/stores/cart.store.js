@@ -3,6 +3,14 @@ import { ref, computed } from "vue"
 
 export const useCartStore = defineStore("cart", () => {
   const cartItems = ref(new Map())
+  const paymentTypes = ref([
+    { code: "cash", label: "Наличные" },
+    { code: "kaspi", label: "Перевод" },
+  ])
+  const currentPaymentType = ref(0)
+  const getPaymentType = computed(
+    () => paymentTypes.value[currentPaymentType.value]
+  )
 
   const groupedCartItems = computed(() =>
     [...cartItems.value].map((el) => el[1])
@@ -20,6 +28,7 @@ export const useCartStore = defineStore("cart", () => {
         itemId: item.id,
         sellingPrice: item.sellingPrice,
         count: item.count,
+        paymentType: getPaymentType.value.code,
       }
     })
   )
@@ -53,6 +62,13 @@ export const useCartStore = defineStore("cart", () => {
     cartItems.value.clear()
   }
 
+  const changePaymentType = () => {
+    currentPaymentType.value =
+      currentPaymentType.value < paymentTypes.value.length - 1
+        ? currentPaymentType.value + 1
+        : 0
+  }
+
   return {
     cartItems,
     groupedCartItems,
@@ -62,5 +78,7 @@ export const useCartStore = defineStore("cart", () => {
     addItem,
     removeItem,
     clearCart,
+    changePaymentType,
+    getPaymentType,
   }
 })
