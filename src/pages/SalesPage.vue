@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-10 gap-4">
+  <div class="grid grid-cols-10 gap-4 p-2 md:p-0">
     <div class="col-span-10 md:col-span-3">
       <div
         class="bg-white border border-gray-200 rounded overflow-hidden mt-2 first:mt-0"
@@ -96,14 +96,14 @@
                   >keyboard_backspace</span
                 >
               </td>
+              <td class="text-gray-300">{{ item.count }} шт.</td>
+              <td class="text-green-600 font-semibold">
+                {{ item.count * item.sellingPrice }} KZT
+              </td>
               <td class="flex items-center bg-blue-50 rounded">
                 <span class="material-icons-outlined text-blue-600">{{
                   item.paymentType === "cash" ? "payments" : "credit_card"
                 }}</span>
-              </td>
-              <td class="text-gray-300">{{ item.count }} шт.</td>
-              <td class="text-green-600 font-semibold">
-                {{ item.count * item.sellingPrice }} KZT
               </td>
             </tr>
           </tbody>

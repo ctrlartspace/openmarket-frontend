@@ -1,6 +1,5 @@
 <template>
-  <!-- <nav v-if="store.isAuthorized"> -->
-  <nav>
+  <nav v-if="store.isAuthorized">
     <ul class="hidden md:flex gap-4">
       <li class="inline" v-for="(item, i) in menuItems" :key="i">
         <router-link v-slot="{ isActive }" :to="item.path">
@@ -23,11 +22,13 @@
         </router-link>
       </li>
     </ul>
-    <div class="md:hidden sticky px-4 py-2 bg-white border-b border-gray-200">
+    <div
+      class="md:hidden sticky px-4 py-2 bg-white border-b border-gray-200 shadow-sm"
+    >
       <div class="flex justify-between">
-        <span class="font-semibold text-lg">
+        <h2 class="font-semibold text-lg">
           {{ menuItems.find((item) => item.path === route.path)?.title }}
-        </span>
+        </h2>
         <label for="navbar-toggle" class="flex items-center">
           <span class="material-icons-outlined">{{
             isCollapsed ? "close" : "menu"

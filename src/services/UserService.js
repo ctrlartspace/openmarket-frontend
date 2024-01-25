@@ -1,20 +1,9 @@
-const BASE_URL = "http://localhost:3000/api"
+import axios from "@/plugins/axios"
 
 const logIn = async (data) => {
   try {
-    const response = await fetch(`${BASE_URL}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(data),
-    })
-    if (response.ok) {
-      return Promise.resolve(response.json())
-    } else {
-      throw new Error("error")
-    }
+    const response = await axios.post("/login", data)
+    return Promise.resolve(response.data)
   } catch (error) {
     return Promise.reject(error)
   }
