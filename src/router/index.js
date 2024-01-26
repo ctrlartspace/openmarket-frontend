@@ -7,6 +7,7 @@ import IncomesPage from "@/pages/IncomesPage.vue"
 import AddIncomesPage from "@/pages/AddIncomesPage.vue"
 import AuthPage from "@/pages/AuthPage.vue"
 import CashPage from "@/pages/CashPage.vue"
+import ScanPage from "@/pages/ScanPage.vue"
 // import { useUserStore } from "@/stores/user.store"
 
 const routes = [
@@ -21,6 +22,7 @@ const routes = [
   { path: "/profile", component: ItemPage },
   { path: "/auth", component: AuthPage },
   { path: "/cash", component: CashPage },
+  { path: "/scan", component: ScanPage },
 ]
 
 const router = createRouter({
