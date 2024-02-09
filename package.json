@@ -10,10 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@zxing/library": "^0.20.0",
     "axios": "^1.6.5",
     "pinia": "^2.1.7",
     "pinia-plugin-persist": "^1.0.0",
+    "quagga": "^0.12.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5",
     "vuetify": "^3.4.0"

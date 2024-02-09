@@ -8,10 +8,6 @@
           >
             <span class="material-icons text-gray-300">search</span>
             <v-form @submit.prevent="addCartItem" class="relative w-full">
-              <video
-                id="video"
-                class="bg-red-100 w-full h-10 object-cover"
-              ></video>
               <input
                 v-show="false"
                 ref="searchInput"
@@ -40,15 +36,13 @@
                 </ul>
               </div>
             </v-form>
-            <button class="flex items-center" @click="showReader">sdsdf</button>
+            <button class="flex items-center" @click="router.push('/scan')">
+              <span class="material-icons text-gray-300">photo_camera</span>
+            </button>
           </div>
         </div>
         <table class="table-auto w-full text-lg text-left bg-white">
           <tbody>
-            result:
-            {{
-              scanResult
-            }}
             <tr
               v-if="store.groupedCartItems.length === 0"
               class="border-b flex justify-center px-4 py-2 last:border-none"
@@ -104,8 +98,6 @@ import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
 import { getItem } from "@/services/ItemSearch"
 
-import { BrowserBarcodeReader, BarcodeFormat } from "@zxing/library"
-
 const store = useCartStore()
 const router = useRouter()
 
@@ -142,77 +134,8 @@ const setInputFocus = async () => {
 }
 onMounted(async () => {
   window.addEventListener("keypress", setInputFocus)
-  codeReader.value = new BrowserBarcodeReader({
-    formats: [BarcodeFormat.QR_CODE],
-    hints: {
-      tryHarder: true,
-      autoFocus: true,
-    },
-  })
-  codeReader.value.listVideoInputDevices().then((videoInputDevices) => {
-    window.alert(videoInputDevices.length[1])
-    selectedDeviceId.value = videoInputDevices[0].deviceId
-  })
 })
 onBeforeUnmount(() => {
   window.removeEventListener("keypress", setInputFocus)
-  codeReader = null
 })
-
-const selectedDeviceId = ref(0)
-const scanResult = ref("")
-const errorMsg = ref("")
-
-const codeReader = ref(null)
-
-const showReader = async () => {
-  // const constraints = (window.constraints = {
-  //   // video: {
-  //   //   facingMode: { exact: "environment" },
-  //   //   focusingMode: "continuous",
-  //   // },
-  //   video: {
-  //     aspectRatio: 1.7777777778,
-  //     facingMode: "environment",
-  //     focusMode: "continuous",
-  //     frameRate: { ideal: 30, max: 60 },
-  //   },
-  //   audio: false,
-  // })
-  // try {
-  //   scanResult.value = await codeReader.value.decodeOnceFromConstraints(
-  //     constraints,
-  //     "video"
-  //   )
-  //   console.log(scanResult.value)
-  //   window.alert(scanResult.value)
-  // } catch (error) {
-  //   window.alert(error)
-  // }
-  try {
-    const result = codeReader.value.decodeFromInputVideoDevice(
-      undefined,
-      "video"
-    )
-    window.alert(result)
-  } catch (error) {
-    window.alert(error)
-  }
-  // codeReader.value.decodeFromInputVideoDevice(
-  //   undefined,
-  //   "video",
-  //   (result, err) => {
-  //     if (result) {
-  //       console.log(result)
-  //       scanResult.value = result
-  //       window.alert(scanResult.value)
-  //     }
-  //     if (err && !(err instanceof NotFoundException)) {
-  //       console.error(err)
-  //       // errorMsg.value = err
-  //       scanResult.value = err
-  //     }
-  //   }
-  // )
-}
 </script>

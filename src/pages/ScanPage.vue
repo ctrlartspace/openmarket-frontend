@@ -1,123 +1,174 @@
 <template>
-  <main class="wrapper" style="padding-top: 2em">
-    <section class="container" id="demo-content">
-      <h1 class="title">Scan 1D/2D Code from Video Camera</h1>
-
-      <p>
-        <a class="button-small button-outline" href="../../index.html"
-          >HOME 🏡</a
-        >
-      </p>
-
-      <p>
-        This example shows how to scan any supported 1D/2D code with ZXing
-        javascript library from the device video camera. If more than one video
-        input devices are available (for example front and back camera) the
-        example shows how to read them and use a select to change the input
-        device.
-      </p>
-
-      <div>
-        <a class="button" id="startButton">Start</a>
-        <a class="button" id="resetButton">Reset</a>
-      </div>
-
-      <div>
-        <video
-          id="video"
-          width="300"
-          height="200"
-          style="border: 1px solid gray"
-        ></video>
-      </div>
-
-      <div id="sourceSelectPanel" style="display: none">
-        <label for="sourceSelect">Change video source:</label>
-        <select id="sourceSelect" style="max-width: 400px"></select>
-      </div>
-
-      <label>Result:</label>
-      <pre><code id="result"></code></pre>
-
-      <p>
-        See the
-        <a
-          href="https://github.com/zxing-js/library/tree/master/docs/examples/multi-camera/"
-          >source code</a
-        >
-        for this example.
-      </p>
-    </section>
-
-    <footer class="footer">
-      <section class="container">
-        <p>
-          ZXing TypeScript Demo. Licensed under the
-          <a
-            target="_blank"
-            href="https://github.com/zxing-js/library#license"
-            title="MIT"
-            >MIT</a
-          >.
-        </p>
-      </section>
-    </footer>
-  </main>
+  <div class="p-4 bg-black text-white">
+    <video class="hidden" id="video" autoplay muted playsinline></video>
+    <canvas ref="canvasEl" class="w-full" id="canvas"></canvas>
+    <button class="select-none" @click="captureCode">SCAN</button>
+  </div>
 </template>
 
 <script setup>
-import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library"
+import { ref, onMounted } from "vue"
+import Quagga from "quagga"
 
-const codeReader = new BrowserMultiFormatReader()
+const canvasEl = ref(null)
 
-codeReader
-  .listVideoInputDevices()
-  .then((videoInputDevices) => {
-    const sourceSelect = document.getElementById("sourceSelect")
-    const selectedDeviceId = videoInputDevices[0].deviceId
-    if (videoInputDevices.length >= 1) {
-      videoInputDevices.forEach((element) => {
-        const sourceOption = document.createElement("option")
-        sourceOption.text = element.label
-        sourceOption.value = element.deviceId
-        sourceSelect.appendChild(sourceOption)
-      })
+const captureCode = () => {
+  console.log("start")
+  const canvas = canvasEl.value
+  const ctx = canvas.getContext("2d", { willReadFrequently: true })
 
-      sourceSelect.onchange = () => {
-        selectedDeviceId = sourceSelect.value
+  let scale = 3
+
+  canvas.width = video.videoWidth
+  canvas.height = video.videoHeight
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+  const scaledWidth = canvas.width * scale
+  const scaledHeight = canvas.height * scale
+  const x = (canvas.width - scaledWidth) / 2
+  const y = (canvas.height - scaledHeight) / 2
+
+  ctx.drawImage(video, x, y, scaledWidth, scaledHeight)
+
+  const urlData = canvas.toDataURL("image/jpeg")
+
+  Quagga.decodeSingle(
+    {
+      src: urlData,
+      decoder: {
+        readers: ["ean_reader"],
+      },
+      inputStream: {
+        size: 100,
+      },
+      numOfWorkers: navigator.hardwareConcurrency
+        ? navigator.hardwareConcurrency
+        : 4,
+      locator: {
+        halfSample: true,
+        patchSize: "medium",
+      },
+    },
+    (result) => {
+      if (result && result.codeResult) {
+        window.alert(result.codeResult.code)
       }
+    }
+  )
+}
 
-      const sourceSelectPanel = document.getElementById("sourceSelectPanel")
-      sourceSelectPanel.style.display = "block"
+onMounted(async () => {
+  try {
+    const constraints = {
+      video: {
+        facingMode: "environment",
+        width: { ideal: 2160 },
+        height: { ideal: 2160 },
+        aspectRatio: { ideal: 1 },
+      },
+      audio: false,
     }
 
-    document.getElementById("startButton").addEventListener("click", () => {
-      codeReader.decodeFromVideoDevice(
-        selectedDeviceId,
-        "video",
-        (result, err) => {
-          if (result) {
-            console.log(result)
-            document.getElementById("result").textContent = result.text
-          }
-          if (err && !(err instanceof NotFoundException)) {
-            console.error(err)
-            document.getElementById("result").textContent = err
-          }
-        }
-      )
-      console.log(
-        `Started continous decode from camera with id ${selectedDeviceId}`
-      )
-    })
+    const stream = await navigator.mediaDevices.getUserMedia(constraints)
 
-    document.getElementById("resetButton").addEventListener("click", () => {
-      codeReader.reset()
-      document.getElementById("result").textContent = ""
-      console.log("Reset.")
-    })
-  })
-  .catch((err) => {
-    console.error(err)
-  })
+    if (stream) {
+      // const video = document.getElementById("video")
+      // video.srcObject = stream
+      // video.play()
+
+      // const canvas = document.getElementById("canvas")
+      // const ctx = canvas.getContext("2d")
+
+      const scale = 3
+
+      // video.addEventListener("loadedmetadata", () => {
+      //   canvas.width = video.videoWidth
+      //   canvas.height = video.videoHeight
+      //   window.alert(canvas.height)
+      // })
+
+      // const fps = 24
+      const canvas = document.getElementById("canvas")
+
+      // Получаем контекст WebGL
+      const gl = canvas.getContext("webgl")
+
+      // Создаем текстуру
+      const texture = gl.createTexture()
+      gl.bindTexture(gl.TEXTURE_2D, texture)
+
+      // Задаем параметры, чтобы можно было отрисовать изображение любого размера
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+
+      const captureAndDraw = () => {
+        // ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        gl.bindTexture(gl.TEXTURE_2D, texture)
+        gl.texImage2D(
+          gl.TEXTURE_2D,
+          0,
+          gl.RGBA,
+          gl.RGBA,
+          gl.UNSIGNED_BYTE,
+          video
+        )
+        const scaledWidth = canvas.width * scale
+        const scaledHeight = canvas.height * scale
+        const x = (canvas.width - scaledWidth) / 2
+        const y = (canvas.height - scaledHeight) / 2
+
+        console.log(scaledWidth, scaledHeight)
+        // ctx.drawImage(video, x, y, scaledWidth, scaledHeight)
+        // ctx.drawImage(video, 0, 0)
+
+        // ctx.drawImage(
+        //   video,
+        //   0,
+        //   0,
+        //   video.videoWidth,
+        //   video.videoHeight,
+        //   x,
+        //   y,
+        //   scaledWidth,
+        //   scaledHeight
+        // )
+
+        const urlData = canvas.toDataURL("image/jpeg")
+
+        // Quagga.decodeSingle(
+        //   {
+        //     src: urlData,
+        //     decoder: {
+        //       readers: ["ean_reader"],
+        //     },
+        //     inputStream: {
+        //       size: 600,
+        //     },
+        //     numOfWorkers: navigator.hardwareConcurrency
+        //       ? navigator.hardwareConcurrency
+        //       : 4,
+        //     locator: {
+        //       halfSample: true,
+        //       patchSize: "medium",
+        //     },
+        //   },
+        //   (result) => {
+        //     if (result && result.codeResult) {
+        //       window.alert(result.codeResult.code)
+        //     }
+        //   }
+        // )
+        requestAnimationFrame(captureAndDraw)
+      }
+
+      captureAndDraw()
+    }
+  } catch (error) {
+    window.alert(error)
+    console.log(error)
+  }
+})
 </script>
