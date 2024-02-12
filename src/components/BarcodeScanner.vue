@@ -45,6 +45,7 @@ const emit = defineEmits(["success"])
 const resultCode = ref("")
 const scaleFactor = ref(2)
 const canvas = ref(null)
+const video = ref(null)
 
 const zoomIn = () => {
   if (scaleFactor.value < 6) {
@@ -64,7 +65,6 @@ onMounted(async () => {
       document.documentElement.clientWidth || 0,
       window.innerWidth || 0
     )
-    let video = null
     let lastScanTime = 0
     const script = (p5) => {
       p5.setup = () => {
@@ -77,15 +77,15 @@ onMounted(async () => {
           },
           audio: false,
         }
-        video = p5.createCapture(constraints)
-        video.hide()
+        video.value = p5.createCapture(constraints)
+        video.value.hide()
         p5.frameRate(30)
       }
       p5.draw = () => {
         const scale = SIZE * scaleFactor.value
         const offsetX = (SIZE - scale) / 2
         const offsetY = (SIZE - scale) / 2
-        p5.image(video, offsetX, offsetY, scale, scale)
+        p5.image(video.value, offsetX, offsetY, scale, scale)
 
         const currentTime = Date.now()
         const timeSinceLastScan = currentTime - lastScanTime
@@ -128,6 +128,6 @@ onMounted(async () => {
 })
 onBeforeUnmount(() => {
   canvas.value.remove()
-  console.log("canvas destroyed")
+  video.value.remove()
 })
 </script>
