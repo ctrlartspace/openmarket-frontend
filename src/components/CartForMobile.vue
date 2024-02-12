@@ -69,27 +69,11 @@
               {{ item.count * item.purchasePrice }} KZT
             </td>
           </tr>
-          <tr
-            class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
-            @click="onItemClick(item.id)"
-          >
-            <td class="flex items-center">
-              <span
-                class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
-                @click.stop="store.removeItem(item.id)"
-              >
-                remove
-              </span>
-            </td>
-            <td class="font-semibold flex-1">Name</td>
-            <td>12 st</td>
-            <td class="text-green-600 font-semibold">122 KZT</td>
-          </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="absolute bottom-0 left-0 right-0 p-4">
+  <div class="absolute bottom-4 left-0 right-0 p-4">
     <cart-total />
   </div>
 </template>
