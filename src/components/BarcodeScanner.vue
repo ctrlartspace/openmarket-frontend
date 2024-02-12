@@ -8,16 +8,16 @@
         <div class="p-4 text-center opacity-20">{{ resultCode }}</div>
         <div class="flex justify-between">
           <button
-            class="w-full px-4 py-2 text-center text-white bg-black opacity-20 flex items-center justify-center"
+            class="w-full p-4 text-center text-white opacity-20 flex items-center justify-center"
             @click="zoomOut"
           >
-            <span class="material-icons-outlined">zoom_out</span>
+            <span class="material-icons-outlined">zoom_out_map</span>
           </button>
           <button
-            class="w-full px-4 py-2 text-center text-white bg-black opacity-20 flex items-center justify-center"
+            class="w-full p-4 text-center text-white opacity-20 flex items-center justify-center"
             @click="zoomIn"
           >
-            <span class="material-icons-outlined">zoom_in</span>
+            <span class="material-icons-outlined">zoom_in_map</span>
           </button>
         </div>
       </div>
@@ -53,7 +53,7 @@ const zoomIn = () => {
 }
 
 const zoomOut = () => {
-  if (scaleFactor.value > 2) {
+  if (scaleFactor.value > 1) {
     scaleFactor.value -= 1
   }
 }
@@ -82,9 +82,10 @@ onMounted(async () => {
         p5.frameRate(30)
       }
       p5.draw = () => {
-        const s1 = SIZE / scaleFactor.value
-        const s2 = SIZE * scaleFactor.value
-        p5.image(video, 0 - s1, 0 - s1, s2, s2)
+        const scale = SIZE * scaleFactor.value
+        const offsetX = (SIZE - scale) / 2
+        const offsetY = (SIZE - scale) / 2
+        p5.image(video, offsetX, offsetY, scale, scale)
 
         const currentTime = Date.now()
         const timeSinceLastScan = currentTime - lastScanTime
