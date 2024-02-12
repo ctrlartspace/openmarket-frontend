@@ -4,19 +4,22 @@
       class="relative bg-green-400 text-white flex items-center justify-center"
     >
       <div id="canvas" class="bg-red-100 w-full"></div>
-      <div class="absolute w-full bottom-0 flex justify-between">
-        <button
-          class="w-full px-4 py-2 text-center text-white bg-black opacity-20 flex items-center justify-center"
-          @click="zoomOut"
-        >
-          <span class="material-icons-outlined">zoom_out</span>
-        </button>
-        <button
-          class="w-full px-4 py-2 text-center text-white bg-black opacity-20 flex items-center justify-center"
-          @click="zoomIn"
-        >
-          <span class="material-icons-outlined">zoom_in</span>
-        </button>
+      <div class="absolute w-full bottom-0">
+        <div class="p-4 text-center opacity-20">{{ resultCode }}</div>
+        <div class="flex justify-between">
+          <button
+            class="w-full px-4 py-2 text-center text-white bg-black opacity-20 flex items-center justify-center"
+            @click="zoomOut"
+          >
+            <span class="material-icons-outlined">zoom_out</span>
+          </button>
+          <button
+            class="w-full px-4 py-2 text-center text-white bg-black opacity-20 flex items-center justify-center"
+            @click="zoomIn"
+          >
+            <span class="material-icons-outlined">zoom_in</span>
+          </button>
+        </div>
       </div>
     </div>
     <audio class="hidden" id="beepSound" controls preload="none">
@@ -69,8 +72,8 @@ onMounted(async () => {
         const constraints = {
           video: {
             facingMode: "environment",
-            width: { ideal: 1920 },
-            height: { ideal: 1920 },
+            width: { ideal: 2160 },
+            height: { ideal: 2160 },
           },
           audio: false,
         }

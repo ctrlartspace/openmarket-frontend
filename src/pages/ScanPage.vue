@@ -6,12 +6,20 @@
       <p>{{ resultItem.name }}</p>
       <p>{{ resultItem.purchasePrice }} KZT</p>
     </div>
-    <div v-if="!resultItem && !isStopped" class="p-4 text-center">
+    <div
+      v-if="!resultItem && !isStopped && !isNotFound"
+      class="p-4 text-center"
+    >
       <p>Отсканируйте товар</p>
     </div>
     <div v-if="isNotFound" class="p-4 text-red-600 text-center">
       <p>Товар не найден</p>
-      <button @click="resetScanner">Повторить</button>
+      <button
+        class="px-4 mt-2 border border-red-600 rounded"
+        @click="resetScanner"
+      >
+        Повторить
+      </button>
     </div>
     <div class="p-4 absolute bottom-0 left-0 right-0">
       <button
@@ -39,7 +47,9 @@ const isNotFound = ref(false)
 const resultItem = ref(null)
 
 const resetScanner = () => {
+  resultItem.value = null
   isStopped.value = false
+  isNotFound.value = false
 }
 
 const backToCart = () => {
