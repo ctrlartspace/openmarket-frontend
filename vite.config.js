@@ -6,10 +6,11 @@ import { VitePWA } from "vite-plugin-pwa"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: { https: true },
+  server: { https: false },
   base: "./",
   plugins: [
-    vue(), mkcert(),
+    vue(),
+    mkcert(),
     VitePWA({
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,jpg,png,svg,gif,webmanifest}"],

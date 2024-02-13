@@ -44,7 +44,7 @@
             v-if="store.groupedCartItems.length === 0"
             class="border-b flex justify-center px-4 py-2 last:border-none"
           >
-            <span class="text-gray-300 text-lg">Нет данных</span>
+            <span class="text-gray-300 text-lg">Пусто</span>
           </tr>
           <tr
             v-else
