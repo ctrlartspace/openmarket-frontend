@@ -1,8 +1,8 @@
 <template>
-  <footer>
+  <footer class="pb-safe">
     <nav v-if="store.isAuthorized">
       <div class="px-4 py-2 border-t border-gray-200 bg-white">
-        <ul class="flex gap-2 justify-around pb-safe">
+        <ul class="flex gap-2 justify-around">
           <li v-for="(item, i) in menuItems" :key="i">
             <router-link
               class="flex items-center"
