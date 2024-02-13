@@ -22,7 +22,7 @@
         Повторить
       </button>
     </div>
-    <div class="absolute bottom-8 left-0 right-0 p-4">
+    <div class="absolute bottom-8 left-0 right-0 p-4 mb-safe">
       <button
         class="w-full px-4 py-2 rounded text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-75 shadow-lg"
         @click="backToCart"
