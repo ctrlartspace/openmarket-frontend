@@ -3,7 +3,7 @@
     <div
       class="absolute bottom-0 left-0 right-0 px-4 py-2 border-t border-gray-200 bg-white"
     >
-      <ul class="flex gap-2 justify-around">
+      <ul class="flex gap-2 justify-around pb-safe">
         <li v-for="(item, i) in menuItems" :key="i">
           <router-link
             class="flex items-center"
