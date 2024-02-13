@@ -21,7 +21,7 @@
         Повторить
       </button>
     </div>
-    <div class="p-4 absolute bottom-4 left-0 right-0">
+    <div class="p-4 absolute bottom-8 left-0 right-0">
       <button
         class="w-full px-4 py-2 rounded text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-75"
         @click="backToCart"

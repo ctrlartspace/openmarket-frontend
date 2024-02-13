@@ -129,5 +129,6 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   canvas.value.remove()
   video.value.remove()
+  console.log("unmount")
 })
 </script>
