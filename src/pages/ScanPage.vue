@@ -1,7 +1,8 @@
 <template>
-  <div class="overflow-scroll">
+  <div>
     <barcode-scanner :is-stopped="isStopped" @success="onScanned" />
-    <div v-if="resultItem" class="p-4 text-2xl">
+
+    <div v-if="resultItem" class="p-4 text-2xl mb-8">
       <p class="text-sm">{{ resultItem.code }}</p>
       <p>{{ resultItem.name }}</p>
       <p>{{ resultItem.purchasePrice }} KZT</p>
@@ -21,9 +22,9 @@
         Повторить
       </button>
     </div>
-    <div class="p-4 absolute bottom-8 left-0 right-0">
+    <div class="absolute bottom-8 left-0 right-0 p-4">
       <button
-        class="w-full px-4 py-2 rounded text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-75"
+        class="w-full px-4 py-2 rounded text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-75 shadow-lg"
         @click="backToCart"
       >
         <span class="material-icons-outlined">arrow_back</span>

@@ -1,13 +1,14 @@
 <template>
-  <div class="max-w-[800px] mx-auto">
-    <header class="">
-      <app-header class="hidden md:flex p-2 pb-0" />
-      <app-header-mobile class="md:hidden sticky" />
-    </header>
-    <main class="md:p-2 h-full">
+  <div class="flex flex-col h-screen">
+    <app-header class="hidden md:flex p-2 pb-0" />
+    <app-header-mobile class="md:hidden" />
+    <main class="flex-1 overflow-y-scroll">
       <router-view></router-view>
     </main>
     <app-bottom-navigation-bar />
+    <!-- <footer class="w-full text-center border-t border-grey p-4">
+      some footer
+    </footer> -->
   </div>
 </template>
 <script setup>

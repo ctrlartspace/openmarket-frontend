@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <cart-for-mobile />
-  </div>
+  <cart-for-mobile />
 </template>
 
 <script setup>

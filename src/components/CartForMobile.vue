@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex flex-col gap-2">
+  <div class="relative p-4 flex flex-col gap-2">
     <div
       class="relative bg-white px-4 py-2 flex justify-between gap-2 items-center border rounded"
     >

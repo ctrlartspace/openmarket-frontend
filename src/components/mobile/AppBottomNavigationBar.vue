@@ -1,25 +1,25 @@
 <template>
-  <nav v-if="store.isAuthorized">
-    <div
-      class="absolute bottom-0 left-0 right-0 px-4 py-2 border-t border-gray-200 bg-white"
-    >
-      <ul class="flex gap-2 justify-around pb-safe">
-        <li v-for="(item, i) in menuItems" :key="i">
-          <router-link
-            class="flex items-center"
-            v-slot="{ isActive }"
-            :to="item.path"
-          >
-            <span
-              class="material-icons-outlined"
-              :class="isActive ? 'text-black' : 'text-gray-300'"
-              >{{ item.icon }}</span
+  <footer>
+    <nav v-if="store.isAuthorized">
+      <div class="px-4 py-2 border-t border-gray-200 bg-white">
+        <ul class="flex gap-2 justify-around pb-safe">
+          <li v-for="(item, i) in menuItems" :key="i">
+            <router-link
+              class="flex items-center"
+              v-slot="{ isActive }"
+              :to="item.path"
             >
-          </router-link>
-        </li>
-      </ul>
-    </div>
-  </nav>
+              <span
+                class="material-icons-outlined"
+                :class="isActive ? 'text-black' : 'text-gray-300'"
+                >{{ item.icon }}</span
+              >
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
 </template>
 
 <script setup>
