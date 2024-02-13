@@ -1,7 +1,14 @@
 <template>
   <nav v-if="store.isAuthorized">
     <!--  Mobile -->
-    <div class="sticky px-4 py-2 bg-white border-b border-gray-200 shadow-sm">
+    <div
+      class="sticky px-4 py-2 bg-white border-b border-gray-200 shadow-sm flex items-center"
+    >
+      <div class="absolute">
+        <button class="flex items-center" @click="goBack">
+          <span class="material-icons-outlined text-xl">arrow_back_ios</span>
+        </button>
+      </div>
       <h2 class="font-semibold text-lg text-center w-full">
         {{ getCurrentItem }}
       </h2>
@@ -11,12 +18,12 @@
 
 <script setup>
 import { ref, computed } from "vue"
-import { useRoute } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { useUserStore } from "@/stores/user.store"
 
 const route = useRoute()
+const router = useRouter()
 const store = useUserStore()
-const isCollapsed = ref(false)
 
 const getCurrentItem = computed(() => {
   const currentItem = menuItems.value.find((item) => item.path === route.path)
@@ -25,6 +32,10 @@ const getCurrentItem = computed(() => {
   }
   return "Меню"
 })
+
+const goBack = () => {
+  router.go(-1)
+}
 
 const menuItems = ref([
   {

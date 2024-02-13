@@ -73,7 +73,7 @@
       </table>
     </div>
   </div>
-  <div class="absolute bottom-4 left-0 right-0 p-4">
+  <div class="absolute bottom-8 left-0 right-0 p-4">
     <cart-total />
   </div>
 </template>
