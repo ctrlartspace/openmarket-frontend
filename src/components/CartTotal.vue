@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-black text-white flex justify-center gap-4 font-semibold text-2xl p-4 rounded hover:brightness-50 cursor-pointer select-none"
+    class="bg-black text-white flex justify-center gap-4 font-semibold text-2xl p-4 rounded hover:brightness-50 cursor-pointer select-none shadow-xl"
     @click="makeSaleFromCart"
   >
     <span>{{ store.getTotalAmount }} KZT</span>
