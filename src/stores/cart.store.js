@@ -33,15 +33,15 @@ export const useCartStore = defineStore("cart", () => {
     })
   )
 
-  const addItem = (item) => {
+  const addItem = (item, count = 1) => {
     const existingItem = cartItems.value.get(item.id)
     if (existingItem) {
-      existingItem.count += 1
+      existingItem.count += count
       existingItem.totalPrice = existingItem.count * existingItem.sellingPrice
     } else {
       cartItems.value.set(item.id, {
         ...item,
-        count: 1,
+        count: count,
         totalPrice: item.sellingPrice,
       })
       console.log(item)

@@ -28,20 +28,23 @@
         <div class="mt-2 flex gap-2 justify-between items-center">
           <button
             class="w-full p-2 bg-gray-100 flex items-center justify-center rounded"
+            @click="minusItem"
           >
             <span class="material-icons-outlined">remove</span>
           </button>
           <div class="w-full text-center">
-            <span class="text-2xl">1</span>
+            <span class="text-2xl">{{ itemCount }}</span>
           </div>
           <button
             class="w-full p-2 bg-gray-100 flex items-center justify-center rounded"
+            @click="plusItem"
           >
             <span class="material-icons-outlined">add</span>
           </button>
         </div>
         <button
           class="mt-4 w-full px-4 py-2 rounded text-center text-white bg-green-400 flex items-center justify-center gap-2 hover:brightness-95"
+          @click="addToCart"
         >
           Добавить
         </button>
@@ -72,6 +75,7 @@ const router = useRouter()
 const isStopped = ref(false)
 const isNotFound = ref(false)
 const resultItem = ref({ code: 12312313, name: "Item 1", purchasePrice: 2000 })
+const itemCount = ref(1)
 
 const resetScanner = () => {
   resultItem.value = null
@@ -83,13 +87,25 @@ const backToCart = () => {
   router.push("/cart")
 }
 
+const minusItem = () => {
+  if (itemCount.value > 1) {
+    itemCount.value -= 1
+  }
+}
+const plusItem = () => {
+  itemCount.value += 1
+}
+
+const addToCart = () => {
+  store.addItem(resultItem.value, itemCount.value)
+  resultItem.value = null
+}
+
 const checkItem = async (id) => {
   try {
     isNotFound.value = false
     const item = await getItem(id)
     resultItem.value = item
-    store.addItem(item)
-    console.log("item", item)
   } catch (error) {
     console.error(error)
     isNotFound.value = true
