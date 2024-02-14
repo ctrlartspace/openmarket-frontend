@@ -74,7 +74,7 @@ const store = useCartStore()
 const router = useRouter()
 const isStopped = ref(false)
 const isNotFound = ref(false)
-const resultItem = ref({ code: 12312313, name: "Item 1", purchasePrice: 2000 })
+const resultItem = ref(null)
 const itemCount = ref(1)
 
 const resetScanner = () => {
