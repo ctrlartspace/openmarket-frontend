@@ -20,14 +20,14 @@
     <div class="absolute bottom-8 left-0 right-0 p-4 mb-safe">
       <div
         v-if="resultItem"
-        class="relative p-4 mb-4 rounded bg-white shadow-lg"
+        class="relative p-4 mb-4 rounded-xl bg-white shadow-lg"
       >
         <p class="text-sm">{{ resultItem.code }}</p>
         <p class="text-2xl">{{ resultItem.name }}</p>
         <p class="text-2xl">{{ resultItem.purchasePrice }} KZT</p>
         <div class="mt-2 flex gap-2 justify-between items-center">
           <button
-            class="w-full p-2 bg-gray-100 flex items-center justify-center rounded"
+            class="w-full p-2 bg-gray-100 flex items-center justify-center rounded-xl"
             @click="minusItem"
           >
             <span class="material-icons-outlined">remove</span>
@@ -36,14 +36,14 @@
             <span class="text-2xl">{{ itemCount }}</span>
           </div>
           <button
-            class="w-full p-2 bg-gray-100 flex items-center justify-center rounded"
+            class="w-full p-2 bg-gray-100 flex items-center justify-center rounded-xl"
             @click="plusItem"
           >
             <span class="material-icons-outlined">add</span>
           </button>
         </div>
         <button
-          class="mt-4 w-full px-4 py-2 rounded text-center text-white bg-green-400 flex items-center justify-center gap-2 hover:brightness-95"
+          class="mt-4 w-full px-4 py-2 rounded-xl text-center text-white bg-green-400 flex items-center justify-center gap-2 hover:brightness-95"
           @click="addToCart"
         >
           Добавить
@@ -53,7 +53,7 @@
         </button>
       </div>
       <button
-        class="w-full px-4 py-2 rounded text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-75 shadow-lg"
+        class="w-full px-4 py-2 rounded-xl text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-75 shadow-lg"
         @click="backToCart"
       >
         <span class="material-icons-outlined">arrow_back</span>
@@ -74,7 +74,7 @@ const store = useCartStore()
 const router = useRouter()
 const isStopped = ref(false)
 const isNotFound = ref(false)
-const resultItem = ref(null)
+const resultItem = ref({})
 const itemCount = ref(1)
 
 const resetScanner = () => {
