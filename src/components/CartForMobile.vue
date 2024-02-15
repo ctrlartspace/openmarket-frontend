@@ -54,12 +54,14 @@
             :key="i"
           >
             <td class="flex items-center">
-              <span
-                class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
-                @click.stop="store.removeItem(item.id)"
-              >
-                remove
-              </span>
+              <button class="flex items-center justify-center">
+                <span
+                  class="material-icons text-red-600 bg-red-100 rounded hover:bg-red-200 hover:text-red-700 select-none"
+                  @click.stop="store.removeItem(item.id)"
+                >
+                  remove
+                </span>
+              </button>
             </td>
             <td class="font-semibold flex-1">
               {{ item.name }}
