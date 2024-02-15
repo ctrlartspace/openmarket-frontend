@@ -37,17 +37,16 @@
         <span class="material-icons text-gray-300">photo_camera</span>
       </button>
     </div>
-    <div class="border rounded overflow-hidden bg-white">
+    <p
+      v-if="store.groupedCartItems.length === 0"
+      class="text-gray-300 text-lg text-center"
+    >
+      Пусто
+    </p>
+    <div v-else class="border rounded overflow-hidden bg-white">
       <table class="table-auto w-full text-lg text-left">
         <tbody>
           <tr
-            v-if="store.groupedCartItems.length === 0"
-            class="border-b flex justify-center px-4 py-2 last:border-none"
-          >
-            <span class="text-gray-300 text-lg">Пусто</span>
-          </tr>
-          <tr
-            v-else
             v-for="(item, i) in store.groupedCartItems"
             class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
             @click="onItemClick(item.id)"
