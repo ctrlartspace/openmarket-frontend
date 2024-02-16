@@ -1,7 +1,7 @@
 <template>
   <div class="relative p-4 flex flex-col gap-2">
     <div
-      class="relative bg-white px-4 py-2 flex justify-between gap-2 items-center border rounded"
+      class="relative bg-white px-4 py-2 flex justify-between gap-2 items-center border md:rounded rounded-xl"
     >
       <span class="material-icons text-gray-300">search</span>
       <v-form @submit.prevent="addCartItem" class="relative w-full">
@@ -43,7 +43,7 @@
     >
       Пусто
     </p>
-    <div v-else class="border rounded overflow-hidden bg-white">
+    <div v-else class="border md:rounded rounded-xl overflow-hidden bg-white">
       <table class="table-auto w-full text-lg text-left">
         <tbody>
           <tr

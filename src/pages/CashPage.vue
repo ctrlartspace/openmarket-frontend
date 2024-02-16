@@ -1,12 +1,12 @@
 <template>
-  <div class="p-2 md:p-0">
+  <div class="p-4 md:p-0">
     <div
-      class="grid grid-cols-10 bg-white rounded border border-gray-200 md:p-4 md:gap-4"
+      class="grid grid-cols-10 bg-white md:rounded rounded-xl border border-gray-200 md:p-4 md:gap-4"
     >
       <div class="col-span-10 flex flex-col gap-2 md:col-span-4">
         <div
           v-for="cash in openedCashList"
-          class="rounded md:border border-gray-200 overflow-hidden"
+          class="md:rounded rounded-xl md:border border-gray-200 overflow-hidden"
           :class="cash.isClosed ? 'bg-gray-100' : 'bg-white'"
           :key="cash.id"
         >
@@ -41,7 +41,7 @@
           </div>
           <div class="px-4 py-4 text-lg">
             <button
-              class="block w-full bg-blue-600 text-white px-4 py-2 rounded hover:brightness-90"
+              class="block w-full bg-blue-600 text-white px-4 py-2 md:rounded rounded-xl hover:brightness-90"
             >
               Закрыть
             </button>
@@ -51,12 +51,12 @@
       <div class="col-span-10 flex flex-col gap-2 md:col-span-6 p-4 md:p-0">
         <div
           v-for="cash in closedCashList"
-          class="p-4 rounded border border-gray-200"
+          class="p-4 md:rounded rounded-xl border border-gray-200 text-center"
           :class="cash.isClosed ? 'bg-gray-100' : 'bg-white'"
           :key="cash.id"
         >
           <span class="text-lg text-gray-600">Закрыт </span>
-          <span class="text-lg font-mono"> {{ cash.total }}</span>
+          <!-- <span class="text-lg font-mono"> {{ cash.total }}</span> -->
         </div>
       </div>
     </div>

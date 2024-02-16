@@ -1,8 +1,8 @@
 <template>
-  <div class="grid grid-cols-10 gap-4 p-2 md:p-0">
+  <div class="grid grid-cols-10 gap-4 p-4 md:p-0">
     <div class="col-span-10 md:col-span-3">
       <div
-        class="bg-white border border-gray-200 rounded overflow-hidden mt-2 first:mt-0"
+        class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
       >
         <div
           class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
@@ -23,13 +23,13 @@
         >
           <div class="flex flex-col justify-center gap-2">
             <filter-tree
-              class="border border-gray-200 rounded overflow-hidden"
+              class="border border-gray-200 md:rounded rounded-xl overflow-hidden"
               v-model="newFilter.parentId"
               :items="filtersList"
               single="true"
               select-root="true"
             />
-            <div class="border rounded border-gray-200">
+            <div class="border md:rounded rounded-xl border-gray-200">
               <input-field
                 v-model="newFilter.name"
                 :placeholder="
@@ -41,13 +41,13 @@
             </div>
             <div class="flex gap-2">
               <button
-                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 rounded"
+                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 md:rounded rounded-xl"
                 @click="addFilter"
               >
                 <span class="text-lg font-semibold">Добавить</span>
               </button>
               <button
-                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 rounded"
+                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 md:rounded rounded-xl"
                 @click="deleteFilter"
               >
                 <span class="text-lg font-semibold">Удалить</span>
@@ -63,16 +63,18 @@
         />
       </div>
       <!-- Filter Reset -->
-      <button
+      <!-- <button
         class="mt-2 w-full bg-white border border-gray-200 rounded px-4 py-2 flex items-center gap-2 hover:bg-gray-50"
         @click="resetFilters"
       >
         <span class="material-icons-outlined">filter_list_off</span>
         <span class="text-lg">Сбросить</span>
-      </button>
+      </button> -->
     </div>
     <div class="col-span-10 md:col-span-7">
-      <div class="sticky top-4 bg-white border rounded overflow-auto">
+      <div
+        class="sticky top-4 bg-white border md:rounded rounded-xl overflow-auto"
+      >
         <div
           v-if="selectedItems && selectedItems.length > 0"
           class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="fixed top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center w-full bg-black bg-opacity-10 shadow-md shadow-black"
+    class="p-2 fixed top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center w-full bg-black bg-opacity-10 shadow-md shadow-black"
     @click="closeDialog"
   >
     <div
-      class="flex flex-col w-80 max-w-lg bg-white border border-gray-300 rounded overflow-hidden"
+      class="flex flex-col w-80 max-w-lg bg-white border border-gray-300 md:rounded rounded-xl overflow-hidden"
       @click.stop
     >
       <div class="p-4 bg-gray-50 border-b border-gray-200">
