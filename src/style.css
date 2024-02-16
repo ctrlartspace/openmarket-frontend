@@ -5,6 +5,7 @@
 html {
   @apply h-full;
   font-size: 20px;
+  -webkit-tap-highlight-color: transparent;
 }
 body {
   @apply h-full;
@@ -17,4 +18,7 @@ div#__next {
 }
 main {
   @apply h-full;
+}
+button {
+  user-select: none;
 }

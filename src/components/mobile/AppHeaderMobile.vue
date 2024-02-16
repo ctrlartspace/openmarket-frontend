@@ -2,7 +2,7 @@
   <header class="sticky top-0 z-10">
     <nav v-if="store.isAuthorized">
       <div
-        class="px-4 py-2 bg-white border-b border-gray-200 shadow-sm flex items-center"
+        class="px-4 py-2 bg-white border-b border-gray-200 flex items-center"
       >
         <div class="absolute">
           <button class="flex items-center" @click="goBack">

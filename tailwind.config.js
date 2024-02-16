@@ -14,8 +14,12 @@ export default {
       },
     },
   },
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   variants: {
     extend: {},
   },
+
   plugins: [require("tailwindcss-safe-area")],
 }
