@@ -18,10 +18,7 @@
       </button>
     </div>
     <div class="absolute bottom-8 left-0 right-0 p-4 mb-safe">
-      <div
-        v-if="resultItem"
-        class="relative p-4 mb-4 rounded-xl bg-white shadow-lg"
-      >
+      <div v-if="resultItem" class="relative p-4 rounded-xl bg-white shadow-lg">
         <p class="text-sm">{{ resultItem.code }}</p>
         <p class="text-2xl">{{ resultItem.name }}</p>
         <p class="text-2xl">{{ resultItem.purchasePrice }} KZT</p>
@@ -43,7 +40,7 @@
           </button>
         </div>
         <button
-          class="mt-4 w-full px-4 py-2 rounded-xl text-center text-white bg-green-400 flex items-center justify-center gap-2 hover:brightness-95"
+          class="mt-4 w-full px-4 py-2 rounded-xl text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-95"
           @click="addToCart"
         >
           Добавить
@@ -52,13 +49,6 @@
           <span class="material-icons-outlined">close</span>
         </button>
       </div>
-      <button
-        class="w-full px-4 py-2 rounded-xl text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-75 shadow-lg"
-        @click="backToCart"
-      >
-        <span class="material-icons-outlined">arrow_back</span>
-        Корзина
-      </button>
     </div>
   </div>
 </template>
@@ -74,7 +64,7 @@ const store = useCartStore()
 const router = useRouter()
 const isStopped = ref(false)
 const isNotFound = ref(false)
-const resultItem = ref({})
+const resultItem = ref(null)
 const itemCount = ref(1)
 
 const resetScanner = () => {
