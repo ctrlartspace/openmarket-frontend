@@ -4,8 +4,8 @@ import { ref, computed } from "vue"
 export const useCartStore = defineStore("cart", () => {
   const cartItems = ref(new Map())
   const paymentTypes = ref([
+    { code: "card", label: "Перевод" },
     { code: "cash", label: "Наличные" },
-    { code: "kaspi", label: "Перевод" },
   ])
   const currentPaymentType = ref(0)
   const getPaymentType = computed(

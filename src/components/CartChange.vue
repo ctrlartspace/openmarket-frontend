@@ -6,7 +6,7 @@
         'bg-blue-600 text-white border-blue-800':
           store.getPaymentType.code === 'cash',
         'bg-red-600 text-white border-red-800':
-          store.getPaymentType.code === 'kaspi',
+          store.getPaymentType.code === 'card',
       }"
       @click="store.changePaymentType"
     >
