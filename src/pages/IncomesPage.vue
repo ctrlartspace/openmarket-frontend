@@ -1,13 +1,13 @@
 <template>
-  <div class="grid grid-cols-10 gap-4 p-2 md:p-0">
+  <div class="grid grid-cols-10 gap-2 p-4 md:p-2">
     <div class="col-span-10 md:col-span-3">
       <div
-        class="bg-white border border-gray-200 rounded overflow-hidden mt-2 first:mt-0"
+        class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
       >
         <div
           class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
         >
-          <h2 class="text-lg font-semibold">Фильтры</h2>
+          <h2 class="text-lg md:text-base font-semibold">Фильтры</h2>
         </div>
         <filter-tree
           v-model="selectedFilters"
@@ -17,16 +17,16 @@
         />
       </div>
       <!-- Filter Reset -->
-      <button
+      <!-- <button
         class="mt-2 w-full bg-white border border-gray-200 rounded px-4 py-2 flex items-center gap-2 hover:bg-gray-50"
         @click="resetFilters"
       >
         <span class="material-icons-outlined">filter_list_off</span>
-        <span class="text-lg">Сбросить</span>
-      </button>
+        <span class="text-lg md:text-base">Сбросить</span>
+      </button> -->
     </div>
     <div class="col-span-10 md:col-span-7">
-      <div class="sticky top-4 bg-white border rounded overflow-auto">
+      <div class="bg-white border md:rounded rounded-xl overflow-auto">
         <div
           v-if="selectedItems && selectedItems.length > 0"
           class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
@@ -35,16 +35,18 @@
             class="flex gap-2 items-center hover:text-red-600 cursor-pointer"
             type="button"
           >
-            <span class="material-icons">remove</span>
-            <span class="text-lg">Удалить</span>
+            <span class="material-icons md:text-[28px]">remove</span>
+            <span class="text-lg md:text-base">Удалить</span>
           </button>
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
-          <div class="flex-1 flex gap-2 items-center h-7">
-            <span class="material-icons text-gray-300">search</span>
+          <div class="flex-1 flex gap-2 items-center">
+            <span class="material-icons md:text-[28px] text-gray-300"
+              >search</span
+            >
             <input
               type="text"
-              class="w-full h-full text-lg placeholder:text-gray-300 focus:outline-none"
+              class="w-full h-full text-lg md:text-base placeholder:text-gray-300 focus:outline-none"
               placeholder="Код товара, наименование"
             />
           </div>
@@ -53,17 +55,19 @@
             type="button"
             @click="addIncomes"
           >
-            <span class="hidden md:inline text-lg">Добавить</span>
+            <span class="hidden md:inline text-lg md:text-base">Добавить</span>
             <span class="material-icons-outlined">add</span>
           </button>
         </div>
-        <table class="table-auto w-full text-lg text-left bg-white">
+        <table
+          class="table-auto w-full text-lg md:text-base text-left bg-white"
+        >
           <tbody>
             <tr
               v-if="items.length === 0"
               class="border-b flex justify-center px-4 py-2 last:border-none"
             >
-              <span class="text-gray-300 text-lg">Нет данных</span>
+              <span class="text-gray-300 text-lg md:text-base">Нет данных</span>
             </tr>
             <tr
               v-else
@@ -81,7 +85,7 @@
                   @click.stop
                 />
               </td>
-              <td class="font-semibold flex-1">
+              <td class="flex-1">
                 {{
                   `${item.item.filters
                     .map((filter) => filter.name)
@@ -97,7 +101,7 @@
                 >
               </td>
               <td class="text-gray-300">{{ item.count }} шт.</td>
-              <td class="text-green-600 font-semibold">
+              <td class="text-green-600">
                 {{ item.count * item.purchasePrice }} KZT
               </td>
             </tr>

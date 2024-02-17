@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <div class="grid grid-cols-10 bg-white rounded border border-gray-200">
-      <div v-if="item" class="col-span-4 border-r border-b border-gray-200">
+  <div class="p-4 md:p-2">
+    <div
+      class="grid grid-cols-10 bg-white rounded-xl md:rounded border border-gray-200"
+    >
+      <div
+        v-if="item"
+        class="col-span-10 md:col-span-4 border-r border-b border-gray-200"
+      >
         <div class="px-4 py-2 border-b">
-          <span class="text-lg font-semibold">Информация</span>
+          <span class="text-lg md:text-base font-semibold">Информация</span>
         </div>
         <input-field
           v-model="item.code"
@@ -38,27 +43,29 @@
           <filter-tree v-model="item.filters" :items="filterList" />
         </select-field>
       </div>
-      <div class="col-span-6 px-4 py-2 flex border-b border-gray-200"></div>
-      <div class="col-span-12 px-4 py-2 flex gap-4">
+      <div
+        class="col-span-10 md:col-span-6 px-4 py-2 flex border-b border-gray-200"
+      ></div>
+      <div class="col-span-10 px-4 py-2 flex flex-col md:flex-row gap-4">
         <button
           v-if="!isEditMode"
           class="text-blue-600 inline-flex gap-2 items-center hover:brightness-90"
           @click="isEditMode = true"
         >
-          <span class="text-lg">Редактировать</span>
+          <span class="text-lg md:text-base">Редактировать</span>
         </button>
         <button
           v-if="isEditMode"
           class="text-blue-600 inline-flex gap-2 items-center hover:brightness-90"
           @click="saveItemData"
         >
-          <span class="text-lg">Сохранить</span>
+          <span class="text-lg md:text-base">Сохранить</span>
         </button>
         <button
           class="text-blue-600 inline-flex gap-2 items-center hover:brightness-90"
           @click="showDialog = true"
         >
-          <span class="text-lg">Добавить</span>
+          <span class="text-lg md:text-base">Добавить</span>
         </button>
         <app-dialog
           v-if="showDialog"
@@ -66,7 +73,7 @@
           @close="showDialog = false"
         >
           <v-form @submit.prevent="addIncome">
-            <div class="border rounded border-gray-200">
+            <div class="border rounded-xl md:rounded border-gray-200">
               <input-field
                 v-model.number="newIncomeItemCount"
                 placeholder="Количество"
@@ -74,9 +81,9 @@
             </div>
             <button
               type="submit"
-              class="block w-full mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:brightness-90"
+              class="block w-full mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl md:rounded hover:brightness-90"
             >
-              <span class="text-lg font-semibold">Добавить</span>
+              <span class="text-lg md:text-base font-semibold">Добавить</span>
             </button>
           </v-form>
         </app-dialog>

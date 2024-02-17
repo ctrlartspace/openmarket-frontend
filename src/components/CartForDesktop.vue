@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-6 gap-4 h-96">
-    <div class="col-span-6 md:col-span-4 p-2 md:p-0">
+  <div class="grid grid-cols-6 gap-2 h-96 p-2">
+    <div class="col-span-6 md:col-span-4">
       <div class="bg-white border border-gray-200 rounded h-96">
         <div class="px-4 py-2 flex gap-2 border-b last:border-none">
           <div
@@ -12,7 +12,7 @@
                 ref="searchInput"
                 v-model.trim="inputValue"
                 type="text"
-                class="flex-1 w-full h-full text-lg placeholder:text-gray-300 focus:outline-none"
+                class="flex-1 w-full h-full placeholder:text-gray-300 focus:outline-none"
                 :class="
                   isSearchError ? 'text-red-600 animate-shake' : 'text-black'
                 "
@@ -25,7 +25,7 @@
               >
                 <ul>
                   <li
-                    class="px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer"
+                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                     v-for="(item, index) in store.groupedCartItems"
                     :key="index"
                     :value="index"
@@ -35,18 +35,15 @@
                 </ul>
               </div>
             </v-form>
-            <button class="flex items-center" @click="router.push('/scan')">
-              <span class="material-icons text-gray-300">photo_camera</span>
-            </button>
           </div>
         </div>
-        <table class="table-auto w-full text-lg text-left bg-white">
+        <table class="table-auto w-full text-left bg-white">
           <tbody>
             <tr
               v-if="store.groupedCartItems.length === 0"
               class="border-b flex justify-center px-4 py-2 last:border-none"
             >
-              <span class="text-gray-300 text-lg">Нет данных</span>
+              <span class="text-gray-300">Нет данных</span>
             </tr>
             <tr
               v-else
@@ -75,13 +72,12 @@
         </table>
       </div>
     </div>
-    <div class="col-span-6 md:col-span-2">
-      <!-- <div class="md:hidden absolute bottom-0 left-0 right-0">
-        <cart-total-bar />
-      </div> -->
-      <div class="flex flex-col h-full">
-        <cart-change class="" />
-        <cart-total class="mt-auto" />
+    <div class="col-span-2">
+      <div
+        class="h-full flex flex-col justify-between bg-white border border-gray-200 p-4 rounded"
+      >
+        <cart-change />
+        <!-- <cart-total /> -->
       </div>
     </div>
   </div>

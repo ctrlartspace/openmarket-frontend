@@ -13,12 +13,12 @@
       />
     </div>
     <span
-      class="w-full bg-inherit text-lg placeholder:text-gray-300 focus:outline-none overflow-hidden"
+      class="w-full bg-inherit text-lg md:text-base placeholder:text-gray-300 focus:outline-none overflow-hidden"
     >
       {{ item.name }}
     </span>
 
-    <span v-if="showExpand" class="material-icons-outlined">
+    <span v-if="showExpand" class="material-icons-outlined md:text-[28px]">
       {{ isExpand ? "expand_less" : "expand_more" }}
     </span>
   </div>

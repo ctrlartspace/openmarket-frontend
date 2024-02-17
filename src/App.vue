@@ -5,10 +5,7 @@
     <main class="flex-1 overflow-y-scroll">
       <router-view></router-view>
     </main>
-    <app-bottom-navigation-bar />
-    <!-- <footer class="w-full text-center border-t border-grey p-4">
-      some footer
-    </footer> -->
+    <app-bottom-navigation-bar class="block md:hidden" />
   </div>
 </template>
 <script setup>
