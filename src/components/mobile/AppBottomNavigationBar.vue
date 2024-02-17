@@ -15,7 +15,7 @@
                 >{{ item.icon }}</span
               >
               <span
-                class="text-xs text-[10px]"
+                class="text-[10px]"
                 :class="isActive ? 'text-black' : 'text-gray-300'"
                 >{{ item.title }}</span
               >
