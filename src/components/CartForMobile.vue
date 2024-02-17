@@ -9,7 +9,7 @@
           ref="searchInput"
           v-model.trim="inputValue"
           type="text"
-          class="flex-1 w-full h-full text-lg placeholder:text-gray-300 focus:outline-none"
+          class="flex-1 w-full h-full text-lg placeholder:text-gray-300 focus:outline-none text-ellipsis"
           :class="isSearchError ? 'text-red-600 animate-shake' : 'text-black'"
           @input="isSearchError = false"
           placeholder="Код товара, наименование"
@@ -33,9 +33,6 @@
           </ul>
         </div>
       </v-form>
-      <button class="flex items-center" @click="router.push('/scan')">
-        <span class="material-icons text-gray-300">photo_camera</span>
-      </button>
     </div>
     <p
       v-if="store.groupedCartItems.length === 0"
@@ -102,10 +99,10 @@
       <p class="text-lg text-center text-gray-300 mb-2">Тип оплаты</p>
       <div v-if="store.getPaymentType.code === 'card'">
         <button
-          class="w-full text-lg px-4 py-2 bg-red-100 text-red-600 font-semibold rounded-xl"
+          class="w-full text-lg px-4 py-2 bg-blue-100 text-blue-600 font-semibold rounded-xl"
           @click="store.changePaymentType"
         >
-          Перевод
+          Карта
         </button>
       </div>
       <div

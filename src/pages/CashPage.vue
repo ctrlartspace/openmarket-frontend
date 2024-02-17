@@ -18,7 +18,7 @@
           <div
             class="px-4 py-2 text-lg border-b border-gray-200 flex justify-between"
           >
-            При открытии
+            Сумма на начало
             <span class="font-mono font-semibold"> {{ cash.startAmount }}</span>
           </div>
           <div

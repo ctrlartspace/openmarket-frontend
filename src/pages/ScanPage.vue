@@ -6,7 +6,7 @@
       v-if="!resultItem && !isStopped && !isNotFound"
       class="p-4 text-center"
     >
-      <p>Отсканируйте товар</p>
+      <p class="text-gray-300">Отсканируйте товар</p>
     </div>
     <div v-if="isNotFound" class="p-4 text-red-600 text-center">
       <p>Товар не найден</p>
