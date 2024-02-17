@@ -71,7 +71,7 @@ const menuItems = ref([
     title: "База",
     path: "/base",
     visible: true,
-    icon: "menu",
+    icon: "list_alt",
   },
 ])
 </script>
