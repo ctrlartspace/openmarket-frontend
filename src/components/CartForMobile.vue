@@ -76,7 +76,7 @@
   </div>
   <div
     v-if="!store.isEmpty"
-    class="absolute bottom-8 left-0 right-0 p-4 mb-safe"
+    class="absolute bottom-12 left-0 right-0 p-4 mb-safe"
   >
     <button
       v-if="cartStep === 1"

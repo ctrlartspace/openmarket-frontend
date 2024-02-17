@@ -17,7 +17,7 @@
         Повторить
       </button>
     </div>
-    <div class="absolute bottom-8 left-0 right-0 p-4 mb-safe">
+    <div class="absolute bottom-12 left-0 right-0 p-4 mb-safe">
       <div v-if="resultItem" class="relative p-4 rounded-xl bg-white shadow-lg">
         <p class="text-sm">{{ resultItem.code }}</p>
         <p class="text-2xl">{{ resultItem.name }}</p>
