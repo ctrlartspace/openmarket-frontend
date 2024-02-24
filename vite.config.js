@@ -12,7 +12,7 @@ export default defineConfig({
     vue(),
     mkcert(),
     VitePWA({
-      injectRegister: "auto",
+      injectRegister: null,
 
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,jpg,png,svg,gif,webmanifest}"],
