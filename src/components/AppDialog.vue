@@ -7,12 +7,15 @@
       class="flex flex-col w-80 max-w-lg bg-white border border-gray-300 md:rounded rounded-xl overflow-hidden"
       @click.stop
     >
-      <div class="p-4 bg-gray-50 border-b border-gray-200">
+      <div class="px-4 py-2 bg-gray-50 border-b border-gray-200">
         <slot name="header">
           <div class="flex items-center justify-between">
-            <span class="text-lg font-semibold">{{ title }}</span>
-            <button class="flex items-center" @click="closeDialog">
-              <span class="material-icons-outlined">close</span>
+            <span class="text-lg">{{ title }}</span>
+            <button
+              class="flex items-center border border-gray-200 rounded text-gray-200 hover:bg-gray-200 hover:text-black"
+              @click="closeDialog"
+            >
+              <span class="material-icons-outlined md:text-[28px]">close</span>
             </button>
           </div>
         </slot>

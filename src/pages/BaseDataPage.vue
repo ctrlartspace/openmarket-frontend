@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-10 gap-2 p-4 md:p-2">
-    <div class="col-span-10 md:col-span-3">
+    <div class="hidden md:block col-span-10 md:col-span-3">
       <div
         class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
       >
@@ -8,7 +8,10 @@
           class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
         >
           <h2 class="text-lg md:text-base font-semibold">Фильтры</h2>
-          <button class="inline-flex items-center" @click="showDialog = true">
+          <button
+            class="inline-flex items-center"
+            @click="showDialog.editFilter = true"
+          >
             <span
               class="material-icons-outlined md:text-[28px] hover:text-gray-600 cursor-pointer"
             >
@@ -17,9 +20,9 @@
           </button>
         </div>
         <app-dialog
-          v-if="showDialog"
+          v-if="showDialog.editFilter"
           title="Новая категория"
-          @close="showDialog = false"
+          @close="showDialog.editFilter = false"
         >
           <div class="flex flex-col justify-center gap-2">
             <filter-tree
@@ -89,7 +92,9 @@
             <span class="material-icons-outlined md:text-[28px]"
               >shopping_bag</span
             >
-            <span class="text-lg md:text-base">Показать в магазине</span>
+            <span class="hidden md:block text-lg md:text-base"
+              >Показать в магазине</span
+            >
           </div>
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
@@ -99,12 +104,32 @@
             >
             <input
               type="text"
-              class="w-full h-full text-lg md:text-base placeholder:text-gray-300 focus:outline-none"
+              class="w-full h-full text-lg md:text-base placeholder:text-gray-300 focus:outline-none text-ellipsis"
               placeholder="Код товара, наименование"
             />
           </div>
           <button
-            class="leading-8 flex items-center gap-2 text-blue-600 rounded hover:brightness-95"
+            class="leading-8 md:hidden flex items-center gap-2 rounded hover:brightness-95"
+            type="button"
+            @click="showDialog.showFilterMobile = true"
+          >
+            <span class="material-icons-outlined md:text-[28px]">tune</span>
+          </button>
+          <app-dialog
+            v-if="showDialog.showFilterMobile"
+            title="Фильтры"
+            @close="showDialog.showFilterMobile = false"
+          >
+            <filter-tree
+              class="border border-gray-200 rounded-xl overflow-hidden"
+              v-model="selectedFilters"
+              :items="filtersList"
+              @change="updateItems"
+              nested="true"
+            />
+          </app-dialog>
+          <button
+            class="hidden leading-8 md:flex items-center gap-2 rounded hover:brightness-95"
             type="button"
             @click="newItemClick"
           >
@@ -150,6 +175,17 @@
             </tr>
           </tbody>
         </table>
+        <div
+          class="md:hidden absolute bottom-12 left-0 right-0 px-4 py-2 mb-safe"
+        >
+          <button
+            class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+            @click="newItemClick"
+          >
+            <span>Новый товар</span>
+            <span class="material-icons-outlined self-center">add</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -173,7 +209,7 @@ const items = ref([])
 const selectedFilters = ref([])
 
 const selectedItems = ref([])
-const showDialog = ref(false)
+const showDialog = ref({ editFilter: false, showFilterMobile: false })
 
 const updateItems = async () => {
   const filterQuery = selectedFilters.value.join(",")
