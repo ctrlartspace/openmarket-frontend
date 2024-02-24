@@ -87,7 +87,7 @@
     </button>
     <div
       v-if="cartStep === 2"
-      class="relative p-4 rounded-xl bg-white shadow-lg"
+      class="relative p-4 rounded-xl bg-white shadow-lg border border-gray-200"
     >
       <div class="absolute">
         <button class="flex items-center" @click="stepBack">
