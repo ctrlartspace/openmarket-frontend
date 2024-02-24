@@ -45,7 +45,7 @@
         <tbody>
           <tr
             v-for="(item, i) in store.groupedCartItems"
-            class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
+            class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none whitespace-nowrap"
             @click="onItemClick(item.id)"
             :key="i"
           >
@@ -59,7 +59,7 @@
                 </span>
               </button>
             </td>
-            <td class="font-semibold flex-1">
+            <td class="font-semibold flex-1 text-ellipsis">
               {{ item.name }}
             </td>
             <td>{{ item.count }} шт.</td>
