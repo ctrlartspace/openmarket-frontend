@@ -8,7 +8,7 @@
         class="col-span-10 md:col-span-4 border-r border-b border-gray-200"
       >
         <div class="px-4 py-2 border-b">
-          <span class="text-lg md:text-base font-semibold">Информация</span>
+          <span class="text-lg md:text-base font-medium">Информация</span>
         </div>
         <input-field
           v-model="item.code"
@@ -83,7 +83,7 @@
               type="submit"
               class="block w-full mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl md:rounded hover:brightness-90"
             >
-              <span class="text-lg md:text-base font-semibold">Добавить</span>
+              <span class="text-lg md:text-base font-medium">Добавить</span>
             </button>
           </v-form>
         </app-dialog>

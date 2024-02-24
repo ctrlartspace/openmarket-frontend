@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex px-4 py-2 border rounded text-center font-semibold cursor-pointer select-none justify-center shadow"
+      class="flex px-4 py-2 border rounded text-center font-medium cursor-pointer select-none justify-center shadow"
       :class="{
         'bg-blue-600 text-white border-blue-800':
           store.getPaymentType.code === 'cash',
@@ -18,7 +18,7 @@
       <div class="relative">
         <input
           v-model="inputAmount"
-          class="mt-2 mb-0 border border-gray-200 px-4 py-2 text-lg md:text-base placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
+          class="mt-2 mb-0 border border-gray-200 px-4 py-2 text-lg md:text-base placeholder:font-normal placeholder:text-gray-300 appearance-none font-medium rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
           placeholder="Внесено"
           type="text"
         />
@@ -35,12 +35,12 @@
       </div>
       <div class="mt-2 px-4 py-2 border border-gray-200 rounded flex">
         <span class="text-lg md:text-base text-gray-300 flex-auto">Сдача</span>
-        <span class="text-lg md:text-base font-semibold text-blue-600">{{
+        <span class="text-lg md:text-base font-medium text-blue-600">{{
           cartChange
         }}</span>
       </div>
       <div
-        class="hidden md:grid grid-cols-3 gap-2 mt-2 mb-2 font-semibold text-base"
+        class="hidden md:grid grid-cols-3 gap-2 mt-2 mb-2 font-medium text-base"
       >
         <div
           v-for="i in 9"

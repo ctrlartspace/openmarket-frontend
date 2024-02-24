@@ -47,7 +47,7 @@
                   remove
                 </span>
               </td>
-              <td class="font-semibold flex-1">
+              <td class="font-medium flex-1">
                 {{ item.name }}
               </td>
               <td>
@@ -59,7 +59,7 @@
                 />
                 шт.
               </td>
-              <td class="text-green-600 font-semibold">
+              <td class="text-green-600 font-medium">
                 {{ item.count * item.purchasePrice }} KZT
               </td>
             </tr>

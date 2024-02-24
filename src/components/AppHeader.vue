@@ -5,7 +5,7 @@
       <li class="inline" v-for="(item, i) in menuItems" :key="i">
         <router-link v-slot="{ isActive }" :to="item.path">
           <span
-            class="font-semibold text-base"
+            class="font-medium text-base"
             :class="isActive ? 'text-black' : 'text-gray-300'"
           >
             {{ item.title }}
@@ -15,7 +15,7 @@
       <li class="inline ml-auto">
         <router-link v-slot="{ isActive }" to="/profile">
           <span
-            class="font-semibold text-base"
+            class="font-medium text-base"
             :class="isActive ? 'text-black' : 'text-gray-300'"
           >
             Меню

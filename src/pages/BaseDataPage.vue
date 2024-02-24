@@ -7,7 +7,7 @@
         <div
           class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
         >
-          <h2 class="text-lg md:text-base font-semibold">Фильтры</h2>
+          <h2 class="text-lg md:text-base font-medium">Фильтры</h2>
           <button
             class="inline-flex items-center"
             @click="showDialog.editFilter = true"
@@ -47,13 +47,13 @@
                 class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 md:rounded rounded-xl"
                 @click="addFilter"
               >
-                <span class="text-lg md:text-base font-semibold">Добавить</span>
+                <span class="text-lg md:text-base font-medium">Добавить</span>
               </button>
               <button
                 class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 md:rounded rounded-xl"
                 @click="deleteFilter"
               >
-                <span class="text-lg md:text-base font-semibold">Удалить</span>
+                <span class="text-lg md:text-base font-medium">Удалить</span>
               </button>
             </div>
           </div>
@@ -66,13 +66,13 @@
         />
       </div>
       <!-- Filter Reset -->
-      <!-- <button
-        class="mt-2 w-full bg-white border border-gray-200 rounded px-4 py-2 flex items-center gap-2 hover:bg-gray-50"
+      <button
+        class="hidden mt-2 w-full bg-white border border-gray-200 rounded px-4 py-2 md:flex items-center gap-2 hover:bg-gray-50"
         @click="resetFilters"
       >
         <span class="material-icons-outlined">filter_list_off</span>
         <span class="text-lg md:text-base">Сбросить</span>
-      </button> -->
+      </button>
     </div>
     <div class="col-span-10 md:col-span-7">
       <div class="bg-white border md:rounded rounded-xl overflow-auto">
@@ -163,7 +163,7 @@
                   @click.stop
                 />
               </td>
-              <td class="font-semibold flex-1">
+              <td class="font-medium flex-1">
                 {{
                   `${item.filters.map((filter) => filter.name).join(", ")} ${
                     item.name

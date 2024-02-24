@@ -45,7 +45,7 @@
         <tbody>
           <tr
             v-for="(item, i) in store.groupedCartItems"
-            class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none whitespace-nowrap"
+            class="cursor-pointer hover:bg-gray-50 border-b flex items-center gap-2 px-4 py-2 last:border-none"
             @click="onItemClick(item.id)"
             :key="i"
           >
@@ -59,13 +59,15 @@
                 </span>
               </button>
             </td>
-            <td class="font-semibold flex-1 text-ellipsis">
-              {{ item.name }}
+            <td class="font-medium line-clamp-1">
+              <span class=""> {{ item.name }}sdf </span>
             </td>
-            <td>{{ item.count }} шт.</td>
-            <td class="text-green-600 font-semibold">
-              {{ item.count * item.purchasePrice }} KZT
-            </td>
+            <div class="ml-auto flex gap-2 whitespace-nowrap">
+              <td class="">{{ item.count }} шт.</td>
+              <td class="text-green-600 font-medium">
+                {{ item.count * item.purchasePrice }} KZT
+              </td>
+            </div>
           </tr>
         </tbody>
       </table>
@@ -77,13 +79,11 @@
   >
     <button
       v-if="cartStep === 1"
-      class="w-full bg-black text-white flex justify-center gap-4 font-semibold text-2xl p-4 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+      class="w-full bg-black text-white flex justify-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
       @click.once="stepForward"
     >
       <span>{{ store.getTotalAmount }} KZT</span>
-      <span class="material-icons self-center font-semibold"
-        >arrow_forward</span
-      >
+      <span class="material-icons self-center font-medium">arrow_forward</span>
     </button>
     <div
       v-if="cartStep === 2"
@@ -99,7 +99,7 @@
       <p class="text-lg text-center text-gray-300 mb-2">Тип оплаты</p>
       <div v-if="store.getPaymentType.code === 'card'">
         <button
-          class="w-full text-lg px-4 py-2 bg-blue-100 text-blue-600 font-semibold rounded-xl"
+          class="w-full text-lg px-4 py-2 bg-blue-100 text-blue-600 font-medium rounded-xl"
           @click="store.changePaymentType"
         >
           Карта
@@ -110,7 +110,7 @@
         class="flex flex-col gap-2"
       >
         <button
-          class="w-full text-lg px-4 py-2 bg-blue-100 text-blue-600 font-semibold rounded-xl"
+          class="w-full text-lg px-4 py-2 bg-blue-100 text-blue-600 font-medium rounded-xl"
           @click="store.changePaymentType"
         >
           Наличные
@@ -123,7 +123,7 @@
         </div>
         <input
           v-model="inputAmount"
-          class="w-full text-center text-lg border border-gray-200 px-4 py-2 placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded-xl focus:outline-2 focus:outline-black focus:bg-white"
+          class="w-full text-center text-lg border border-gray-200 px-4 py-2 placeholder:font-normal placeholder:text-gray-300 appearance-none font-medium rounded-xl focus:outline-2 focus:outline-black focus:bg-white"
           placeholder="Внесено"
           type="number"
         />
@@ -131,11 +131,11 @@
     </div>
     <button
       v-if="cartStep === 2"
-      class="w-full mt-2 bg-black text-white flex justify-center items-center gap-4 font-semibold text-2xl p-4 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+      class="w-full mt-2 bg-black text-white flex justify-center items-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
       @click.once="makeSaleFromCart"
     >
       <span>Готово</span>
-      <!-- <span class="material-icons-outlined self-center font-semibold"
+      <!-- <span class="material-icons-outlined self-center font-medium"
         >done</span
       > -->
     </button>

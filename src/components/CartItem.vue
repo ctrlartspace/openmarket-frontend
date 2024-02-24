@@ -8,7 +8,7 @@
     </span>
 
     <span
-      class="ml-2 font-semibold flex-auto hover:underline"
+      class="ml-2 font-medium flex-auto hover:underline"
       @click="onItemClick"
     >
       {{ `${item.brand.name}  ${item.name}` }}

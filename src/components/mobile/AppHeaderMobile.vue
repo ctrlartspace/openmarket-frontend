@@ -9,7 +9,7 @@
             <span class="material-icons-outlined text-xl">arrow_back_ios</span>
           </button>
         </div>
-        <h2 class="font-semibold text-lg text-center w-full">
+        <h2 class="font-medium text-lg text-center w-full">
           {{ getCurrentItem }}
         </h2>
       </div>

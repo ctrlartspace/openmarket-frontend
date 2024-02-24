@@ -1,6 +1,6 @@
 <template>
   <div class="flex text-lg cursor-pointer hover:underline">
-    <span class="font-semibold">
+    <span class="font-medium">
       {{ `${item.name}` }}
     </span>
     <span class="flex-auto">

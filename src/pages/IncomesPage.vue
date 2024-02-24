@@ -7,7 +7,7 @@
         <div
           class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
         >
-          <h2 class="text-lg md:text-base font-semibold">Фильтры</h2>
+          <h2 class="text-lg md:text-base font-medium">Фильтры</h2>
         </div>
         <filter-tree
           v-model="selectedFilters"

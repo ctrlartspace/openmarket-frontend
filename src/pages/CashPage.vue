@@ -11,7 +11,7 @@
           :key="cash.id"
         >
           <div class="px-4 py-2 border-b border-gray-200 bg-blue-50">
-            <h1 class="text-lg md:text-base font-semibold text-blue-600">
+            <h1 class="text-lg md:text-base font-medium text-blue-600">
               Открытая касса #{{ cash.id }}
             </h1>
           </div>
@@ -19,7 +19,7 @@
             class="px-4 py-2 text-lg md:text-base border-b border-gray-200 flex justify-between"
           >
             Сумма на начало
-            <span class="font-mono font-semibold"> {{ cash.startAmount }}</span>
+            <span class="font-mono font-medium"> {{ cash.startAmount }}</span>
           </div>
           <div
             v-for="(totalPaymentType, i) in cash.totalsPaymentType"

@@ -1,13 +1,13 @@
 <template>
-  <div class="grid grid-cols-10 gap-2 p-4 md:p-2">
-    <div class="col-span-10 md:col-span-3">
+  <div class="grid grid-cols-10 gap-2 p-4 pb-16 md:p-2">
+    <div class="hidden md:block col-span-10 md:col-span-3">
       <div
         class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
       >
         <div
           class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
         >
-          <h2 class="text-lg md:text-base font-semibold">Фильтры</h2>
+          <h2 class="text-lg md:text-base font-medium">Фильтры</h2>
         </div>
         <filter-tree
           v-model="selectedFilters"
@@ -17,13 +17,13 @@
         />
       </div>
       <!-- Filter Reset -->
-      <!-- <button
-        class="mt-2 w-full bg-white border border-gray-200 md:rounded rounded-xl px-4 py-2 flex items-center gap-2 hover:bg-gray-50"
+      <button
+        class="hidden mt-2 w-full bg-white border border-gray-200 md:rounded rounded-xl px-4 py-2 md:flex items-center gap-2 hover:bg-gray-50"
         @click="resetFilters"
       >
         <span class="material-icons-outlined">filter_list_off</span>
         <span class="text-lg md:text-base">Сбросить</span>
-      </button> -->
+      </button>
     </div>
     <div class="col-span-10 md:col-span-7">
       <div class="bg-white border md:rounded rounded-xl overflow-auto">
@@ -63,6 +63,26 @@
               placeholder="Код товара, наименование"
             />
           </div>
+          <button
+            class="leading-8 md:hidden flex items-center gap-2 rounded hover:brightness-95"
+            type="button"
+            @click="showDialog.showFilterMobile = true"
+          >
+            <span class="material-icons-outlined md:text-[28px]">tune</span>
+          </button>
+          <app-dialog
+            v-if="showDialog.showFilterMobile"
+            title="Фильтры"
+            @close="showDialog.showFilterMobile = false"
+          >
+            <filter-tree
+              class="border border-gray-200 rounded-xl overflow-hidden"
+              v-model="selectedFilters"
+              :items="filtersList"
+              @change="updateItems"
+              nested="true"
+            />
+          </app-dialog>
         </div>
         <table
           class="table-auto w-full text-lg md:text-base text-left bg-white"
@@ -77,45 +97,57 @@
             <tr
               v-else
               v-for="(item, i) in items"
-              class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
+              class="cursor-pointer hover:bg-gray-50 border-b flex gap-2 flex-wrap md:flex-nowrap md:flex-row md:items-center md:justify-between md:gap-2 px-4 py-2 last:border-none"
               @click="onItemClick(item.item.id)"
               :key="i"
             >
-              <td class="flex items-center">
+              <td
+                class="flex md:flex-row md:justify-normal items-center gap-2 w-full md:w-max md:flex-1 font-medium"
+              >
                 <input
+                  id="item-checkbox"
                   v-model="selectedItems"
                   class="w-4 h-4"
                   type="checkbox"
                   :value="item.id"
                   @click.stop
                 />
-              </td>
-              <td class="flex-1">
                 {{
                   `${item.item.filters
                     .map((filter) => filter.name)
                     .join(", ")} ${item.item.name}`
                 }}
               </td>
-              <td
+              <!-- <td
                 v-if="item.isReturned"
-                class="flex items-center bg-red-50 rounded"
+                class="flex items-center bg-red-50 rounded w-max order-4 md:order-none"
               >
                 <span class="material-icons text-red-600 md:text-[28px]"
                   >keyboard_backspace</span
                 >
-              </td>
-              <td class="text-gray-300">{{ item.count }} шт.</td>
-              <td class="text-green-600">
-                {{ item.count * item.sellingPrice }} KZT
-              </td>
-              <td class="flex items-center bg-blue-50 rounded">
+              </td> -->
+              <td
+                class="flex items-center gap-2 rounded w-max md:flex-initial order-last md:order-none"
+              >
+                <span
+                  v-if="item.isReturned"
+                  class="material-icons text-red-600 md:text-[28px]"
+                  >keyboard_backspace</span
+                >
                 <span
                   class="material-icons-outlined text-blue-600 md:text-[28px]"
                   >{{
                     item.paymentType === "cash" ? "payments" : "credit_card"
                   }}</span
                 >
+              </td>
+              <td
+                class="flex items-center text-gray-300 w-max order-4 md:order-none flex-1 md:flex-initial"
+              >
+                {{ item.count }} шт.
+              </td>
+              <td class="text-green-600 font-medium">
+                {{ item.count * item.sellingPrice }} KZT
               </td>
             </tr>
           </tbody>
@@ -126,6 +158,7 @@
 </template>
 
 <script setup>
+import AppDialog from "@/components/AppDialog.vue"
 import FilterTree from "@/components/FilterTree.vue"
 
 import { ref, onMounted } from "vue"
@@ -134,6 +167,7 @@ import { useRouter } from "vue-router"
 import * as DataManager from "@/services/ItemSearch"
 
 const router = useRouter()
+const showDialog = ref({ editFilter: false, showFilterMobile: false })
 
 const filtersList = ref([])
 const items = ref([])
