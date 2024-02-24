@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 md:p-2">
+  <div class="p-4 pb-16 md:p-2">
     <div
       class="grid grid-cols-10 bg-white rounded-xl md:rounded border border-gray-200"
     >
@@ -49,14 +49,14 @@
       <div class="col-span-10 px-4 py-2 flex flex-col md:flex-row gap-4">
         <button
           v-if="!isEditMode"
-          class="text-blue-600 inline-flex gap-2 items-center hover:brightness-90"
+          class="hidden md:inline-flex text-blue-600 gap-2 items-center hover:brightness-90"
           @click="isEditMode = true"
         >
           <span class="text-lg md:text-base">Редактировать</span>
         </button>
         <button
           v-if="isEditMode"
-          class="text-blue-600 inline-flex gap-2 items-center hover:brightness-90"
+          class="hidden md:inline-flex text-blue-600 gap-2 items-center hover:brightness-90"
           @click="saveItemData"
         >
           <span class="text-lg md:text-base">Сохранить</span>
@@ -88,6 +88,23 @@
           </v-form>
         </app-dialog>
       </div>
+    </div>
+
+    <div class="md:hidden absolute bottom-12 left-0 right-0 px-4 py-2 mb-safe">
+      <button
+        v-if="!isEditMode"
+        class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+        @click="isEditMode = true"
+      >
+        <span>Редактировать</span>
+      </button>
+      <button
+        v-else
+        class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+        @click="saveItemData"
+      >
+        <span>Сохранить</span>
+      </button>
     </div>
   </div>
 </template>

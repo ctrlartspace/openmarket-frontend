@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-10 gap-2 p-4 md:p-2">
+  <div class="grid grid-cols-10 gap-2 p-4 pb-16 md:p-2">
     <div class="hidden md:block col-span-10 md:col-span-3">
       <div
         class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
@@ -150,11 +150,11 @@
             <tr
               v-else
               v-for="(item, i) in items"
-              class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
+              class="cursor-pointer hover:bg-gray-50 border-b flex flex-col md:flex-row md:items-center md:justify-between md:gap-2 px-4 py-2 last:border-none"
               @click="onItemClick(item.id)"
               :key="i"
             >
-              <td class="flex items-center">
+              <td class="hidden md:flex items-center">
                 <input
                   v-model="selectedItems"
                   class="w-4 h-4"
