@@ -1,16 +1,18 @@
 <template>
-  <div class="grid grid-cols-6 gap-4 h-96">
-    <div class="col-span-4">
+  <div class="grid grid-cols-6 gap-4 p-4 md:p-2">
+    <div class="col-span-10 md:col-span-4">
       <div class="bg-white border rounded h-96">
         <div class="px-4 py-2 flex gap-2 border-b last:border-none">
           <div class="relative flex-1 flex gap-2 items-center h-7">
-            <span class="material-icons text-gray-300">search</span>
+            <span class="material-icons text-gray-300 md:text-[28px]"
+              >search</span
+            >
             <v-form @submit.prevent="addIncomeItem" class="relative w-full">
               <input
                 ref="searchInput"
                 v-model.trim="inputValue"
                 type="text"
-                class="w-full h-full text-lg placeholder:text-gray-300 focus:outline-none"
+                class="w-full h-full text-lg md:text-base placeholder:text-gray-300 focus:outline-none text-ellipsis"
                 :class="
                   isSearchError ? 'text-red-600 animate-shake' : 'text-black'
                 "
@@ -20,13 +22,15 @@
             </v-form>
           </div>
         </div>
-        <table class="table-auto w-full text-lg text-left bg-white">
+        <table
+          class="table-auto w-full text-lg md:text-base text-left bg-white"
+        >
           <tbody>
             <tr
               v-if="incomeItems.length === 0"
               class="border-b flex justify-center px-4 py-2 last:border-none"
             >
-              <span class="text-gray-300 text-lg">Нет данных</span>
+              <span class="text-gray-300 text-lg md:text-base">Нет данных</span>
             </tr>
             <tr
               v-else
@@ -49,7 +53,7 @@
               <td>
                 <input
                   v-model.number="item.count"
-                  class="rounded border border-gray-200 px-2 bg-inherit text-lg focus:outline-none focus:text-blue-600"
+                  class="rounded border border-gray-200 px-2 bg-inherit text-lg md:text-base focus:outline-none focus:text-blue-600"
                   :size="String(item.count).length"
                   @click.stop
                 />
@@ -64,13 +68,13 @@
       </div>
     </div>
     <div
-      class="col-span-2 bg-white border border-gray-2addIncomesItems p-4 rounded"
+      class="col-span-10 md:col-span-2 bg-white border border-gray-2 p-4 rounded"
     >
       <button
         class="w-full px-4 py-2 text-white bg-blue-600 flex gap-2 items-center justify-center hover:brightness-90 rounded"
         @click="addIncomesItems"
       >
-        <span class="text-lg">Добавить</span>
+        <span class="text-lg md:text-base">Добавить</span>
       </button>
       <!-- <button type="button" @click="addIncomesItems">add</button> -->
     </div>

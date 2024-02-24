@@ -10,13 +10,15 @@
       }"
       @click="store.changePaymentType"
     >
-      <span class="ml-2 text-lg"> {{ store.getPaymentType.label }} </span>
+      <span class="ml-2 text-lg md:text-base">
+        {{ store.getPaymentType.label }}
+      </span>
     </div>
     <div v-if="store.getPaymentType.code === 'cash'">
       <div class="relative">
         <input
           v-model="inputAmount"
-          class="mt-2 mb-0 border border-gray-200 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
+          class="mt-2 mb-0 border border-gray-200 px-4 py-2 text-lg md:text-base placeholder:font-normal placeholder:text-gray-300 appearance-none font-semibold rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
           placeholder="Внесено"
           type="text"
         />
@@ -32,13 +34,13 @@
         </div>
       </div>
       <div class="mt-2 px-4 py-2 border border-gray-200 rounded flex">
-        <span class="text-lg text-gray-300 flex-auto">Сдача</span>
-        <span class="text-lg font-semibold text-blue-600">{{
+        <span class="text-lg md:text-base text-gray-300 flex-auto">Сдача</span>
+        <span class="text-lg md:text-base font-semibold text-blue-600">{{
           cartChange
         }}</span>
       </div>
       <div
-        class="hidden md:grid grid-cols-3 gap-2 mt-2 mb-2 font-semibold text-xl"
+        class="hidden md:grid grid-cols-3 gap-2 mt-2 mb-2 font-semibold text-base"
       >
         <div
           v-for="i in 9"

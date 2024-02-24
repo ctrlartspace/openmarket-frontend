@@ -1,10 +1,9 @@
 <template>
-  <div class="flex justify-center">
+  <div class="flex justify-center p-4 md:p-2">
     <form
       class="p-4 bg-white rounded border border-gray-200 w-96"
       @submit.prevent="logIn"
     >
-      <h1 class="text-lg mb-4 font-semibold uppercase">Авторизация</h1>
       <input
         v-model.trim="authData.name"
         type="text"

@@ -12,6 +12,9 @@ export default defineConfig({
     vue(),
     mkcert(),
     VitePWA({
+      // devOptions: {
+      //   enabled: true,
+      // },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,jpg,png,svg,gif,webmanifest}"],
       },

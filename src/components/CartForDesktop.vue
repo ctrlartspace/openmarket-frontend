@@ -3,10 +3,10 @@
     <div class="col-span-6 md:col-span-4">
       <div class="bg-white border border-gray-200 rounded h-96">
         <div class="px-4 py-2 flex gap-2 border-b last:border-none">
-          <div
-            class="relative flex-1 flex justify-between gap-2 items-center h-7"
-          >
-            <span class="material-icons text-gray-300">search</span>
+          <div class="relative flex-1 flex justify-between gap-2 items-center">
+            <span class="material-icons text-gray-300 md:text-[28px]"
+              >search</span
+            >
             <v-form @submit.prevent="addCartItem" class="relative w-full">
               <input
                 ref="searchInput"
