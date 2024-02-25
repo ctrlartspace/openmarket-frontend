@@ -99,6 +99,7 @@ const checkItem = async (id) => {
     isNotFound.value = false
     const item = await getItem(id)
     resultItem.value = item
+    isStopped.value = true
   } catch (error) {
     console.error(error)
     isNotFound.value = true
@@ -106,7 +107,6 @@ const checkItem = async (id) => {
 }
 
 const onScanned = async (resultCode) => {
-  isStopped.value = true
   await checkItem(resultCode)
 }
 </script>

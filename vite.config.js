@@ -4,7 +4,6 @@ import vue from "@vitejs/plugin-vue"
 import mkcert from "vite-plugin-mkcert"
 import { VitePWA } from "vite-plugin-pwa"
 
-// https://vitejs.dev/config/
 export default defineConfig({
   server: { https: false },
   base: "./",
@@ -12,8 +11,7 @@ export default defineConfig({
     vue(),
     mkcert(),
     VitePWA({
-      injectRegister: null,
-
+      injectRegister: "auto",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,jpg,png,svg,gif,webmanifest}"],
       },

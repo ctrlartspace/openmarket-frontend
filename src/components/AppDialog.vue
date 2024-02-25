@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-2 fixed top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center w-full bg-black bg-opacity-10 shadow-md shadow-black"
+    class="p-6 fixed top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center w-full bg-black bg-opacity-10 shadow-xl shadow-black"
     @click="closeDialog"
   >
     <div
@@ -12,15 +12,17 @@
           <div class="flex items-center justify-between">
             <span class="text-lg">{{ title }}</span>
             <button
-              class="flex items-center border border-gray-200 rounded text-gray-200 hover:bg-gray-200 hover:text-black"
+              class="flex items-center border border-gray-200 rounded text-black hover:bg-gray-200 hover:text-black"
               @click="closeDialog"
             >
-              <span class="material-icons-outlined md:text-[28px]">close</span>
+              <span class="material-icons-outlined md:text-[28px]"
+                >minimize</span
+              >
             </button>
           </div>
         </slot>
       </div>
-      <div class="p-4"><slot></slot></div>
+      <div class=""><slot></slot></div>
     </div>
   </div>
 </template>

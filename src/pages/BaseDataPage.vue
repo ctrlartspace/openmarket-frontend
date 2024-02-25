@@ -24,25 +24,34 @@
           title="Новая категория"
           @close="showDialog.editFilter = false"
         >
-          <div class="flex flex-col justify-center gap-2">
+          <div class="flex flex-col justify-center">
             <filter-tree
-              class="border border-gray-200 md:rounded rounded-xl overflow-hidden"
+              class="border-b border-gray-200"
               v-model="newFilter.parentId"
               :items="filtersList"
               single="true"
               select-root="true"
             />
-            <div class="border md:rounded rounded-xl border-gray-200">
-              <input-field
+            <div class="flex flex-wrap gap-2 p-4">
+              <input
+                class="px-4 py-2 border rounded-xl md:rounded border-gray-200 block w-full text-lg md:text-base bg-inherit appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
                 v-model="newFilter.name"
+                type="text"
                 :placeholder="
                   newFilter.parentId
                     ? 'Название подкатегории'
                     : 'Название категории'
                 "
               />
-            </div>
-            <div class="flex gap-2">
+              <!-- <input-field
+              class=""
+              v-model="newFilter.name"
+              :placeholder="
+                newFilter.parentId
+                  ? 'Название подкатегории'
+                  : 'Название категории'
+              "
+            /> -->
               <button
                 class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 md:rounded rounded-xl"
                 @click="addFilter"
@@ -121,7 +130,7 @@
             @close="showDialog.showFilterMobile = false"
           >
             <filter-tree
-              class="border border-gray-200 rounded-xl overflow-hidden"
+              class="border-gray-200 rounded-xl overflow-hidden"
               v-model="selectedFilters"
               :items="filtersList"
               @change="updateItems"

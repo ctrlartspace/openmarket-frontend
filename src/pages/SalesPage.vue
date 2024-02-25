@@ -49,6 +49,7 @@
             <span class="hidden md:inline text-lg md:text-base"
               >Сделать возврат</span
             >
+            <span class="inline md:hidden text-lg md:text-base">Возврат</span>
           </button>
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
@@ -76,7 +77,7 @@
             @close="showDialog.showFilterMobile = false"
           >
             <filter-tree
-              class="border border-gray-200 rounded-xl overflow-hidden"
+              class="border-gray-200"
               v-model="selectedFilters"
               :items="filtersList"
               @change="updateItems"

@@ -61,7 +61,7 @@ const menuItems = ref([
     title: "Сканер",
     path: "/scan",
     visible: true,
-    icon: "qr_code_scanner",
+    icon: "center_focus_strong",
   },
   {
     title: "Продажи",

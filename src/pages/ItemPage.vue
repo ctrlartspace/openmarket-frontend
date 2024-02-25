@@ -73,18 +73,20 @@
           @close="showDialog = false"
         >
           <v-form @submit.prevent="addIncome">
-            <div class="border rounded-xl md:rounded border-gray-200">
+            <div class="border-b border-gray-200">
               <input-field
                 v-model.number="newIncomeItemCount"
                 placeholder="Количество"
               />
             </div>
-            <button
-              type="submit"
-              class="block w-full mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl md:rounded hover:brightness-90"
-            >
-              <span class="text-lg md:text-base font-medium">Добавить</span>
-            </button>
+            <div class="p-4">
+              <button
+                type="submit"
+                class="block w-full px-4 py-2 bg-blue-600 text-white rounded-xl md:rounded hover:brightness-90"
+              >
+                <span class="text-lg md:text-base font-medium">Добавить</span>
+              </button>
+            </div>
           </v-form>
         </app-dialog>
       </div>
