@@ -92,6 +92,7 @@ const plusItem = () => {
 const addToCart = () => {
   store.addItem(resultItem.value, itemCount.value)
   resultItem.value = null
+  isStopped.value = false
 }
 
 const checkItem = async (id) => {

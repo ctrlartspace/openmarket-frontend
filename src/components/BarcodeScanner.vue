@@ -3,18 +3,25 @@
     <div
       class="relative bg-green-400 text-white flex items-center justify-center"
     >
-      <div id="canvas" class="bg-red-100 w-full"></div>
-      <div class="absolute w-full bottom-0">
+      <div id="canvas" class="bg-gray-400 w-full"></div>
+      <div class="absolute top-0 left-0 right-0 bottom-0 flex flex-col">
+        <div class="mt-auto"></div>
         <div class="p-4 text-center opacity-20">{{ resultCode }}</div>
         <div class="flex justify-between">
           <button
-            class="w-full p-4 text-center text-white opacity-20 flex items-center justify-center"
+            class="w-full p-4 text-center text-white opacity-40 flex items-center justify-center"
             @click="zoomOut"
           >
             <span class="material-icons-outlined">zoom_out_map</span>
           </button>
           <button
-            class="w-full p-4 text-center text-white opacity-20 flex items-center justify-center"
+            class="w-full p-4 text-center text-white opacity-40 flex items-center justify-center"
+            @click="changeQuality"
+          >
+            <span class="material-icons-outlined">{{ videoQuality.name }}</span>
+          </button>
+          <button
+            class="w-full p-4 text-center text-white opacity-40 flex items-center justify-center"
             @click="zoomIn"
           >
             <span class="material-icons-outlined">zoom_in_map</span>
@@ -43,6 +50,10 @@ const props = defineProps({
 const emit = defineEmits(["success"])
 
 const resultCode = ref("")
+const videoQuality = ref({
+  name: "4k",
+  size: 2160,
+})
 const scaleFactor = ref(2)
 const canvas = ref(null)
 const video = ref(null)
@@ -59,6 +70,23 @@ const zoomOut = () => {
   }
 }
 
+const changeQuality = () => {
+  if (videoQuality.value.name === "hd") {
+    videoQuality.value = {
+      name: "4k",
+      size: 2160,
+    }
+    return
+  }
+  if (videoQuality.value.name === "4k") {
+    videoQuality.value = {
+      name: "hd",
+      size: 1080,
+    }
+    return
+  }
+}
+
 onMounted(async () => {
   try {
     const SIZE = Math.max(
@@ -72,8 +100,8 @@ onMounted(async () => {
         const constraints = {
           video: {
             facingMode: "environment",
-            width: { ideal: 2160 },
-            height: { ideal: 2160 },
+            width: { ideal: videoQuality.value.size },
+            height: { ideal: videoQuality.value.size },
           },
           audio: false,
         }
@@ -129,6 +157,7 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   canvas.value.remove()
   video.value.remove()
+
   console.log("unmount")
 })
 </script>
