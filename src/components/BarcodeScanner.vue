@@ -71,23 +71,27 @@ const zoomOut = () => {
 }
 
 const changeQuality = () => {
-  if (videoQuality.value.name === "hd") {
-    videoQuality.value = {
-      name: "4k",
-      size: 2160,
-    }
-    return
-  }
-  if (videoQuality.value.name === "4k") {
-    videoQuality.value = {
-      name: "hd",
-      size: 1080,
-    }
-    return
+  switch (videoQuality.value.name) {
+    case "hd":
+      videoQuality.value = {
+        name: "4k",
+        size: 2160,
+      }
+      resetCamera()
+      setupCamera()
+      return
+    case "4k":
+      videoQuality.value = {
+        name: "hd",
+        size: 1080,
+      }
+      resetCamera()
+      setupCamera()
+      return
   }
 }
 
-onMounted(async () => {
+const setupCamera = async () => {
   try {
     const SIZE = Math.max(
       document.documentElement.clientWidth || 0,
@@ -149,15 +153,29 @@ onMounted(async () => {
       }
     }
     canvas.value = new P5(script, "canvas")
+    console.log("camera initizlized")
   } catch (error) {
     window.alert(error)
     console.log(error)
   }
-})
-onBeforeUnmount(() => {
-  canvas.value.remove()
-  video.value.remove()
+}
 
+const resetCamera = () => {
+  if (canvas.value) {
+    canvas.value.remove()
+    console.log("canvas removed")
+  }
+  if (video.value) {
+    video.value.remove()
+    console.log("video removed")
+  }
+}
+onMounted(async () => {
+  await setupCamera()
+})
+
+onBeforeUnmount(() => {
+  resetCamera()
   console.log("unmount")
 })
 </script>
