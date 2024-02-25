@@ -19,9 +19,6 @@
           class="absolute w-full mt-2 bg-white border border-t-0 border-gray-200 rounded-b before:w-full before:h-0.5 before:bg-blue-600 before:absolute shadow-xl overflow-hidden"
         >
           <ul>
-            <li class="px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
-              sdf
-            </li>
             <li
               class="px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer"
               v-for="(item, index) in store.groupedCartItems"
@@ -60,7 +57,7 @@
               </button>
             </td>
             <td class="font-medium line-clamp-1">
-              <span class=""> {{ item.name }}sdf </span>
+              <span class=""> {{ item.name }}</span>
             </td>
             <div class="ml-auto flex gap-2 whitespace-nowrap">
               <td class="">{{ item.count }} шт.</td>
@@ -199,16 +196,16 @@ const onItemClick = (id) => {
   router.push(`/items/${id}`)
 }
 
-const setInputFocus = async () => {
-  if (searchInput.value) {
-    await nextTick()
-    searchInput.value.focus()
-  }
-}
-onMounted(async () => {
-  window.addEventListener("keypress", setInputFocus)
-})
-onBeforeUnmount(() => {
-  window.removeEventListener("keypress", setInputFocus)
-})
+// const setInputFocus = async () => {
+//   if (searchInput.value) {
+//     await nextTick()
+//     searchInput.value.focus()
+//   }
+// }
+// onMounted(async () => {
+//   window.addEventListener("keypress", setInputFocus)
+// })
+// onBeforeUnmount(() => {
+//   window.removeEventListener("keypress", setInputFocus)
+// })
 </script>
