@@ -51,8 +51,8 @@ const emit = defineEmits(["success"])
 
 const resultCode = ref("")
 const videoQuality = ref({
-  name: "4k",
-  size: 2160,
+  name: "hd",
+  size: 1080,
 })
 const scaleFactor = ref(2)
 const canvas = ref(null)
@@ -143,6 +143,8 @@ const setupCamera = async () => {
             },
             (result) => {
               if (result && result.codeResult && !props.isStopped) {
+                const sound = document.getElementById("beepSound")
+                sound.play()
                 resultCode.value = result.codeResult.code
                 emit("success", resultCode.value)
               }
