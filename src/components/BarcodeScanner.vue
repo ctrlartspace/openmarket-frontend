@@ -29,9 +29,6 @@
         </div>
       </div>
     </div>
-    <audio class="hidden" id="beepSound" controls preload="none">
-      <source src="../assets/beep.wav" type="audio/wav" />
-    </audio>
   </div>
 </template>
 
@@ -143,8 +140,6 @@ const setupCamera = async () => {
             },
             (result) => {
               if (result && result.codeResult && !props.isStopped) {
-                const sound = document.getElementById("beepSound")
-                sound.play()
                 resultCode.value = result.codeResult.code
                 emit("success", resultCode.value)
               }

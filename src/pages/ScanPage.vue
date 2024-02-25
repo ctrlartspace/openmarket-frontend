@@ -2,6 +2,9 @@
   <div>
     <barcode-scanner :is-stopped="isStopped" @success="onScanned" />
 
+    <audio class="hidden" id="beepSound" controls preload="none">
+      <source src="../assets/beep.wav" type="audio/wav" />
+    </audio>
     <div
       v-if="!resultItem && !isStopped && !isNotFound"
       class="p-4 text-center"
@@ -102,6 +105,8 @@ const checkItem = async (id) => {
     const item = await getItem(id)
     resultItem.value = item
     isStopped.value = true
+    const sound = document.getElementById("beepSound")
+    sound.play()
   } catch (error) {
     console.error(error)
     isNotFound.value = true
