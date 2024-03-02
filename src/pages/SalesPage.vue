@@ -18,7 +18,7 @@
       </div>
       <!-- Filter Reset -->
       <button
-        class="hidden mt-2 w-full bg-white border border-gray-200 md:rounded rounded-xl px-4 py-2 md:flex items-center gap-2 hover:bg-gray-50"
+        class="hidden mt-2 w-full bg-white border border-gray-200 md:rounded rounded-xl px-4 py-2 md:flex items-center gap-2 hover:bg-gray-50 active:bg-gray-50"
         @click="resetFilters"
       >
         <span class="material-icons-outlined">filter_list_off</span>
@@ -32,14 +32,14 @@
           class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
         >
           <button
-            class="flex gap-2 items-center hover:text-red-600 cursor-pointer"
+            class="flex gap-2 items-center hover:text-red-600 active:text-red-600 cursor-pointer"
             type="button"
           >
             <span class="material-icons md:text-[28px]">remove</span>
             <span class="hidden md:inline text-lg md:text-base">Удалить</span>
           </button>
           <button
-            class="flex items-center gap-2 text-blue-600 rounded hover:brightness-95"
+            class="flex items-center gap-2 text-blue-600 rounded hover:brightness-95 active:brightness-95"
             type="button"
             @click="makeReturns"
           >
@@ -65,7 +65,7 @@
             />
           </div>
           <button
-            class="leading-8 md:hidden flex items-center gap-2 rounded hover:brightness-95"
+            class="leading-8 md:hidden flex items-center gap-2 rounded hover:brightness-95 active:brightness-95"
             type="button"
             @click="showDialog.showFilterMobile = true"
           >
@@ -98,7 +98,7 @@
             <tr
               v-else
               v-for="(item, i) in items"
-              class="cursor-pointer hover:bg-gray-50 border-b flex gap-2 flex-wrap md:flex-nowrap md:flex-row md:items-center md:justify-between md:gap-2 px-4 py-2 last:border-none"
+              class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex gap-2 flex-wrap md:flex-nowrap md:flex-row md:items-center md:justify-between md:gap-2 px-4 py-2 last:border-none"
               @click="onItemClick(item.item.id)"
               :key="i"
             >

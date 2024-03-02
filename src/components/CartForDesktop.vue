@@ -25,7 +25,7 @@
               >
                 <ul>
                   <li
-                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    class="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
                     v-for="(item, index) in store.groupedCartItems"
                     :key="index"
                     :value="index"
@@ -48,13 +48,13 @@
             <tr
               v-else
               v-for="(item, i) in store.groupedCartItems"
-              class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2"
+              class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2"
               @click="onItemClick(item.id)"
               :key="i"
             >
               <td class="flex items-center">
                 <span
-                  class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
+                  class="material-icons rounded hover:bg-red-100 active:bg-red-100 hover:text-red-700 active:text-red-700 select-none"
                   @click.stop="store.removeItem(item.id)"
                 >
                   remove

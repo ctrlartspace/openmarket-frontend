@@ -32,7 +32,7 @@
           class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
         >
           <button
-            class="flex gap-2 items-center hover:text-red-600 cursor-pointer"
+            class="flex gap-2 items-center hover:text-red-600 active:text-red-600 cursor-pointer"
             type="button"
           >
             <span class="material-icons md:text-[28px]">remove</span>
@@ -51,7 +51,7 @@
             />
           </div>
           <button
-            class="leading-8 flex items-center gap-2 text-blue-600 rounded hover:brightness-95"
+            class="leading-8 flex items-center gap-2 text-blue-600 rounded hover:brightness-95 active:brightness-95"
             type="button"
             @click="addIncomes"
           >
@@ -72,7 +72,7 @@
             <tr
               v-else
               v-for="(item, i) in items"
-              class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
+              class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2 last:border-none"
               @click="onItemClick(item.item.id)"
               :key="i"
             >

@@ -10,7 +10,7 @@
     </div>
     <div class="p-4 text-center">
       <button
-        class="px-4 mt-2 border border-gray-600 rounded"
+        class="px-4 py-2 mt-2 border border-gray-600 rounded active:bg-gray-50"
         @click="isNumberInput = true"
       >
         Ввод цифр
@@ -32,7 +32,7 @@
         <div class="grid grid-cols-3 gap-2">
           <button
             v-for="i in 10"
-            class="px-2 py-2 border border-gray-200 rounded-xl text-xl text-center"
+            class="px-2 py-2 border border-gray-200 rounded-xl text-xl text-center active:bg-gray-50"
             :class="i - 1 === 0 ? 'order-last col-span-2 ' : ''"
             @click="setNumberInput(i - 1)"
             :disabled="isLoading"
@@ -72,7 +72,7 @@
           </button>
         </div>
         <button
-          class="mt-4 w-full px-4 py-2 rounded-xl text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-95"
+          class="mt-4 w-full px-4 py-2 rounded-xl text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-95 active:brightness-95"
           @click="addToCart"
         >
           Добавить
@@ -99,11 +99,11 @@ const isNotFound = ref(false)
 const resultItem = ref(null)
 const itemCount = ref(1)
 const isNumberInput = ref(false)
-const inputNumber = ref("000000")
+const inputNumber = ref("00000")
 const isLoading = ref(false)
 
 const setNumberInput = async (value) => {
-  if (inputNumber.value === "000000") {
+  if (inputNumber.value === "00000") {
     inputNumber.value = ""
   }
 
@@ -153,7 +153,7 @@ const checkItem = async (id) => {
     console.error(error)
     isNotFound.value = true
   } finally {
-    inputNumber.value = "000000"
+    inputNumber.value = "00000"
     isLoading.value = false
   }
 }

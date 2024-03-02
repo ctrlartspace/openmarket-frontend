@@ -27,7 +27,7 @@
           class="absolute inset-y-0 top-2 right-2 flex items-center"
         >
           <span
-            class="material-icons text-gray-400 hover:text-gray-800 cursor-pointer"
+            class="material-icons text-gray-400 hover:text-gray-800 active:text-gray-800 cursor-pointer"
             @click="inputAmount = ''"
             >close</span
           >
@@ -44,20 +44,20 @@
       >
         <div
           v-for="i in 9"
-          class="py-2 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          class="py-2 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 active:bg-gray-200 select-none"
           @click="onKeyboardClick(i)"
           :key="i"
         >
           {{ i }}
         </div>
         <div
-          class="py-2 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          class="py-2 bg-gray-100 text-gray-500 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 active:bg-gray-200 select-none"
           @click="onKeyboardClick(0)"
         >
           0
         </div>
         <div
-          class="col-start-2 col-end-4 py-2 bg-gray-100 text-red-600 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 select-none"
+          class="col-start-2 col-end-4 py-2 bg-gray-100 text-red-600 flex items-center justify-center rounded cursor-pointer hover:bg-gray-200 active:bg-gray-200 select-none"
           @click="onClearClick"
         >
           C

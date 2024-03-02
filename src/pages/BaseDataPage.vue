@@ -13,7 +13,7 @@
             @click="showDialog.editFilter = true"
           >
             <span
-              class="material-icons-outlined md:text-[28px] hover:text-gray-600 cursor-pointer"
+              class="material-icons-outlined md:text-[28px] hover:text-gray-600 active:text-gray-600 cursor-pointer"
             >
               more_vert
             </span>
@@ -53,13 +53,13 @@
               "
             /> -->
               <button
-                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 md:rounded rounded-xl"
+                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 active:bg-gray-50 md:rounded rounded-xl"
                 @click="addFilter"
               >
                 <span class="text-lg md:text-base font-medium">Добавить</span>
               </button>
               <button
-                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 md:rounded rounded-xl"
+                class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 active:bg-gray-50 md:rounded rounded-xl"
                 @click="deleteFilter"
               >
                 <span class="text-lg md:text-base font-medium">Удалить</span>
@@ -90,13 +90,13 @@
           class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
         >
           <div
-            class="flex gap-2 items-center hover:text-red-600 cursor-pointer"
+            class="flex gap-2 items-center hover:text-red-600 active:text-red-600 cursor-pointer"
           >
             <span class="material-icons md:text-[28px]">remove</span>
             <span class="hidden md:inline text-lg md:text-base">Удалить</span>
           </div>
           <div
-            class="flex gap-2 items-center hover:text-blue-600 cursor-pointer"
+            class="flex gap-2 items-center hover:text-blue-600 text-blue-600 cursor-pointer"
           >
             <span class="material-icons-outlined md:text-[28px]"
               >shopping_bag</span
@@ -118,7 +118,7 @@
             />
           </div>
           <button
-            class="leading-8 md:hidden flex items-center gap-2 rounded hover:brightness-95"
+            class="leading-8 md:hidden flex items-center gap-2 rounded hover:brightness-95 active:brightness-95"
             type="button"
             @click="showDialog.showFilterMobile = true"
           >
@@ -138,7 +138,7 @@
             />
           </app-dialog>
           <button
-            class="hidden leading-8 md:flex items-center gap-2 rounded hover:brightness-95"
+            class="hidden leading-8 md:flex items-center gap-2 rounded hover:brightness-95 active:brightness-95"
             type="button"
             @click="newItemClick"
           >
@@ -159,7 +159,7 @@
             <tr
               v-else
               v-for="(item, i) in items"
-              class="cursor-pointer hover:bg-gray-50 border-b flex flex-col md:flex-row md:items-center md:justify-between md:gap-2 px-4 py-2 last:border-none"
+              class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex flex-col md:flex-row md:items-center md:justify-between md:gap-2 px-4 py-2 last:border-none"
               @click="onItemClick(item.id)"
               :key="i"
             >
@@ -188,7 +188,7 @@
           class="md:hidden absolute bottom-12 left-0 right-0 px-4 py-2 mb-safe"
         >
           <button
-            class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+            class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-90 active:brightness-50 cursor-pointer select-none shadow-xl"
             @click="newItemClick"
           >
             <span>Новый товар</span>

@@ -20,7 +20,7 @@
         >
           <ul>
             <li
-              class="px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer"
+              class="px-4 py-2 text-lg hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
               v-for="(item, index) in store.groupedCartItems"
               :key="index"
               :value="index"
@@ -42,14 +42,14 @@
         <tbody>
           <tr
             v-for="(item, i) in store.groupedCartItems"
-            class="cursor-pointer hover:bg-gray-50 border-b flex items-center gap-2 px-4 py-2 last:border-none"
+            class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex items-center gap-2 px-4 py-2 last:border-none"
             @click="onItemClick(item.id)"
             :key="i"
           >
             <td class="flex items-center">
               <button class="flex items-center justify-center">
                 <span
-                  class="material-icons text-red-600 bg-red-100 rounded hover:bg-red-200 hover:text-red-700 select-none"
+                  class="material-icons text-red-600 bg-red-100 rounded hover:bg-red-200 active:bg-red-200 hover:text-red-700 active:text-red-700 select-none"
                   @click.stop="store.removeItem(item.id)"
                 >
                   remove
@@ -76,7 +76,7 @@
   >
     <button
       v-if="cartStep === 1"
-      class="w-full bg-black text-white flex justify-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+      class="w-full bg-black text-white flex justify-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 active:brightness-50 cursor-pointer select-none shadow-xl"
       @click.once="stepForward"
     >
       <span>{{ store.getTotalAmount }} KZT</span>
@@ -128,7 +128,7 @@
     </div>
     <button
       v-if="cartStep === 2"
-      class="w-full mt-2 bg-black text-white flex justify-center items-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+      class="w-full mt-2 bg-black text-white flex justify-center items-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 active:brightness-50 cursor-pointer select-none shadow-xl"
       @click.once="makeSaleFromCart"
     >
       <span>Готово</span>

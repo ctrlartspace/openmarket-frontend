@@ -5,7 +5,7 @@
         <ul class="flex gap-2 justify-around">
           <li v-for="(item, i) in menuItems" :key="i">
             <router-link
-              class="flex flex-col items-center justify-center w-12"
+              class="flex flex-col items-center justify-center w-12 active:brightness-90"
               v-slot="{ isActive }"
               :to="item.path"
             >

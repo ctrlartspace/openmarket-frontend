@@ -5,7 +5,7 @@
     >
       <div
         v-if="item"
-        class="col-span-10 md:col-span-4 border-r border-b border-gray-200"
+        class="col-span-10 md:col-span-4 md:border-r md:border-b border-gray-200"
       >
         <div class="px-4 py-2 border-b">
           <span class="text-lg md:text-base font-medium">Информация</span>
@@ -49,20 +49,20 @@
       <div class="col-span-10 px-4 py-2 flex flex-col md:flex-row gap-4">
         <button
           v-if="!isEditMode"
-          class="hidden md:inline-flex text-blue-600 gap-2 items-center hover:brightness-90"
+          class="hidden md:inline-flex text-blue-600 gap-2 items-center hover:brightness-90 active:brightness-90"
           @click="isEditMode = true"
         >
           <span class="text-lg md:text-base">Редактировать</span>
         </button>
         <button
           v-if="isEditMode"
-          class="hidden md:inline-flex text-blue-600 gap-2 items-center hover:brightness-90"
+          class="hidden md:inline-flex text-blue-600 gap-2 items-center hover:brightness-90 active:brightness-90"
           @click="saveItemData"
         >
           <span class="text-lg md:text-base">Сохранить</span>
         </button>
         <button
-          class="text-blue-600 inline-flex gap-2 items-center hover:brightness-90"
+          class="text-blue-600 inline-flex gap-2 items-center hover:brightness-90 active:brightness-90"
           @click="showDialog = true"
         >
           <span class="text-lg md:text-base">Добавить</span>
@@ -82,7 +82,7 @@
             <div class="p-4">
               <button
                 type="submit"
-                class="block w-full px-4 py-2 bg-blue-600 text-white rounded-xl md:rounded hover:brightness-90"
+                class="block w-full px-4 py-2 bg-blue-600 text-white rounded-xl md:rounded hover:brightness-90 active:brightness-90"
               >
                 <span class="text-lg md:text-base font-medium">Добавить</span>
               </button>
@@ -95,14 +95,14 @@
     <div class="md:hidden absolute bottom-12 left-0 right-0 px-4 py-2 mb-safe">
       <button
         v-if="!isEditMode"
-        class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+        class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 active:brightness-90 cursor-pointer select-none shadow-xl"
         @click="isEditMode = true"
       >
         <span>Редактировать</span>
       </button>
       <button
         v-else
-        class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 cursor-pointer select-none shadow-xl"
+        class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 active:brightness-90 cursor-pointer select-none shadow-xl"
         @click="saveItemData"
       >
         <span>Сохранить</span>

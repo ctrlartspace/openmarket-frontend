@@ -41,7 +41,7 @@
           </div>
           <div class="px-4 py-4 text-lg md:text-base">
             <button
-              class="block w-full bg-blue-600 text-white px-4 py-2 md:rounded rounded-xl hover:brightness-90"
+              class="block w-full bg-blue-600 text-white px-4 py-2 md:rounded rounded-xl hover:brightness-90 active:brightness-90"
             >
               Закрыть
             </button>

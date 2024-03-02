@@ -12,7 +12,7 @@
       />
       <div v-if="value" class="absolute inset-y-0 right-2 flex items-center">
         <span
-          class="material-icons text-gray-400 hover:text-gray-800 cursor-pointer"
+          class="material-icons text-gray-400 hover:text-gray-800 active:text-gray-800 cursor-pointer"
           @click="onClearClick"
           >close</span
         >
@@ -23,7 +23,7 @@
       >
         <ul v-if="searchItems && searchItems.length > 0">
           <li
-            class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            class="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
             v-for="(item, index) in searchItems"
             :key="index"
             :value="index"

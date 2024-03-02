@@ -12,7 +12,7 @@
           <div class="flex items-center justify-between">
             <span class="text-lg">{{ title }}</span>
             <button
-              class="flex items-center border border-gray-200 rounded text-black hover:bg-gray-200 hover:text-black"
+              class="flex items-center border border-gray-200 rounded text-black hover:bg-gray-200 active:bg-gray-200 hover:text-black active:text-black"
               @click="closeDialog"
             >
               <span class="material-icons-outlined md:text-[28px]"

@@ -54,7 +54,7 @@
 
     <li v-if="isItemsMore" class="border-t">
       <button
-        class="w-full px-4 py-2 text-start hover:bg-gray-50 flex items-center justify-center"
+        class="w-full px-4 py-2 text-start hover:bg-gray-50 active:bg-gray-50 flex items-center justify-center"
         @click="isShowFull = !isShowFull"
       >
         <span class="material-icons-outlined">{{

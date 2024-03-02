@@ -35,7 +35,7 @@
             <tr
               v-else
               v-for="(item, i) in groupedIncomeItems"
-              class="cursor-pointer hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2"
+              class="cursor-pointer active:bg-gray-50 hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2"
               @click="onItemClick(item.id)"
               :key="i"
             >
