@@ -1,60 +1,62 @@
 <template>
-  <div class="grid grid-cols-6 gap-2 h-96 p-2">
-    <div class="col-span-6 md:col-span-4">
-      <div class="bg-white border border-gray-200 rounded h-96">
-        <div class="px-4 py-2 flex gap-2 border-b last:border-none">
-          <div class="relative flex-1 flex justify-between gap-2 items-center">
-            <span class="material-icons text-gray-300 md:text-[28px]"
-              >search</span
+  <div class="grid grid-cols-8 gap-2 p-2">
+    <div class="col-span-5 flex flex-col gap-2">
+      <div class="bg-white border border-gray-200 rounded px-4 py-2">
+        <div class="relative flex-1 flex justify-between gap-2 items-center">
+          <span class="material-icons text-gray-300 md:text-[28px]"
+            >search</span
+          >
+          <v-form @submit.prevent="addCartItem" class="relative w-full">
+            <input
+              ref="searchInput"
+              v-model.trim="inputValue"
+              type="text"
+              class="flex-1 w-full h-full placeholder:text-gray-300 focus:outline-none"
+              :class="
+                isSearchError ? 'text-red-600 animate-shake' : 'text-black'
+              "
+              @input="isSearchError = false"
+              placeholder="Код товара, наименование"
+            />
+            <div
+              v-if="false"
+              class="absolute w-full mt-2 bg-white border border-t-0 border-gray-200 rounded-b before:w-full before:h-0.5 before:bg-blue-600 before:absolute shadow-xl overflow-hidden"
             >
-            <v-form @submit.prevent="addCartItem" class="relative w-full">
-              <input
-                ref="searchInput"
-                v-model.trim="inputValue"
-                type="text"
-                class="flex-1 w-full h-full placeholder:text-gray-300 focus:outline-none"
-                :class="
-                  isSearchError ? 'text-red-600 animate-shake' : 'text-black'
-                "
-                @input="isSearchError = false"
-                placeholder="Код товара, наименование"
-              />
-              <div
-                v-if="false"
-                class="absolute w-full mt-2 bg-white border border-t-0 border-gray-200 rounded-b before:w-full before:h-0.5 before:bg-blue-600 before:absolute shadow-xl overflow-hidden"
-              >
-                <ul>
-                  <li
-                    class="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
-                    v-for="(item, index) in store.groupedCartItems"
-                    :key="index"
-                    :value="index"
-                  >
-                    {{ item.name }}
-                  </li>
-                </ul>
-              </div>
-            </v-form>
-          </div>
+              <ul>
+                <li
+                  class="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
+                  v-for="(item, index) in store.groupedCartItems"
+                  :key="index"
+                  :value="index"
+                >
+                  {{ item.name }}
+                </li>
+              </ul>
+            </div>
+          </v-form>
         </div>
+      </div>
+      <div
+        v-if="store.groupedCartItems.length === 0"
+        class="border-b flex justify-center px-4 py-2 last:border-none"
+      >
+        <span class="text-gray-300">Нет данных</span>
+      </div>
+      <div
+        v-else
+        class="bg-white border border-gray-200 rounded overflow-hidden"
+      >
         <table class="table-auto w-full text-left bg-white">
           <tbody>
             <tr
-              v-if="store.groupedCartItems.length === 0"
-              class="border-b flex justify-center px-4 py-2 last:border-none"
-            >
-              <span class="text-gray-300">Нет данных</span>
-            </tr>
-            <tr
-              v-else
               v-for="(item, i) in store.groupedCartItems"
-              class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2"
+              class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b last:border-none flex items-center justify-between gap-2 px-4 py-2"
               @click="onItemClick(item.id)"
               :key="i"
             >
               <td class="flex items-center">
                 <span
-                  class="material-icons rounded hover:bg-red-100 active:bg-red-100 hover:text-red-700 active:text-red-700 select-none"
+                  class="material-icons rounded hover:bg-red-100 active:bg-red-100 hover:text-red-700 active:text-red-700 select-none md:text-[28px]"
                   @click.stop="store.removeItem(item.id)"
                 >
                   remove
@@ -72,7 +74,7 @@
         </table>
       </div>
     </div>
-    <div class="col-span-2">
+    <div class="col-span-3">
       <div
         class="h-full flex flex-col justify-between bg-white border border-gray-200 p-4 rounded"
       >

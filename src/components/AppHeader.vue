@@ -1,7 +1,7 @@
 <template>
   <nav v-if="store.isAuthorized">
     <!-- Desktop -->
-    <ul class="w-full flex bg-white border px-4 py-2 rounded gap-4">
+    <ul class="w-full flex rounded gap-4">
       <li class="inline" v-for="(item, i) in menuItems" :key="i">
         <router-link v-slot="{ isActive }" :to="item.path">
           <span
