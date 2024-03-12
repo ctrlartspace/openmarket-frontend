@@ -43,15 +43,6 @@
                     : 'Название категории'
                 "
               />
-              <!-- <input-field
-              class=""
-              v-model="newFilter.name"
-              :placeholder="
-                newFilter.parentId
-                  ? 'Название подкатегории'
-                  : 'Название категории'
-              "
-            /> -->
               <button
                 class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 active:bg-gray-50 md:rounded rounded-xl"
                 @click="addFilter"
@@ -84,39 +75,12 @@
       </button>
     </div>
     <div class="col-span-10 md:col-span-7">
-      <div class="bg-white border md:rounded rounded-xl overflow-auto">
-        <div
-          v-if="selectedItems && selectedItems.length > 0"
-          class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
-        >
-          <div
-            class="flex gap-2 items-center hover:text-red-600 active:text-red-600 cursor-pointer"
-          >
-            <span class="material-icons md:text-[28px]">remove</span>
-            <span class="hidden md:inline text-lg md:text-base">Удалить</span>
-          </div>
-          <div
-            class="flex gap-2 items-center hover:text-blue-600 text-blue-600 cursor-pointer"
-          >
-            <span class="material-icons-outlined md:text-[28px]"
-              >shopping_bag</span
-            >
-            <span class="hidden md:block text-lg md:text-base"
-              >Показать в магазине</span
-            >
-          </div>
-        </div>
-        <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
-          <div class="flex-1 flex gap-2 items-center">
-            <span class="material-icons md:text-[28px] text-gray-300"
-              >search</span
-            >
-            <input
-              type="text"
-              class="w-full h-full text-lg md:text-base placeholder:text-gray-300 focus:outline-none text-ellipsis"
-              placeholder="Код товара, наименование"
-            />
-          </div>
+      <data-table
+        :table-data="items"
+        :table-fields="tableFields"
+        @on-item-click="onItemClick"
+      >
+        <template #action>
           <button
             class="leading-8 md:hidden flex items-center gap-2 rounded hover:brightness-95 active:brightness-95"
             type="button"
@@ -145,57 +109,23 @@
             <span class="hidden md:inline text-lg md:text-base">Новый</span>
             <span class="material-icons-outlined md:text-[28px]">add</span>
           </button>
-        </div>
-        <table
-          class="table-auto w-full text-lg md:text-base text-left bg-white"
-        >
-          <tbody>
-            <tr
-              v-if="items.length === 0"
-              class="border-b flex justify-center px-4 py-2 last:border-none"
-            >
-              <span class="text-gray-300 text-lg md:text-base">Нет данных</span>
-            </tr>
-            <tr
-              v-else
-              v-for="(item, i) in items"
-              class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex flex-col md:flex-row md:items-center md:justify-between md:gap-2 px-4 py-2 last:border-none"
-              @click="onItemClick(item.id)"
-              :key="i"
-            >
-              <td class="hidden md:flex items-center">
-                <input
-                  v-model="selectedItems"
-                  class="w-4 h-4"
-                  type="checkbox"
-                  :value="item.id"
-                  @click.stop
-                />
-              </td>
-              <td class="font-medium flex-1">
-                {{
-                  `${item.filters.map((filter) => filter.name).join(", ")} ${
-                    item.name
-                  }`
-                }}
-              </td>
-              <td>{{ item.count }} шт.</td>
-              <td>{{ item.purchasePrice }} KZT</td>
-            </tr>
-          </tbody>
-        </table>
-        <div
-          class="md:hidden absolute bottom-12 left-0 right-0 px-4 py-2 mb-safe"
-        >
+        </template>
+
+        <template #afterSelect>
           <button
-            class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-90 active:brightness-50 cursor-pointer select-none shadow-xl"
+            class="hidden leading-8 md:flex items-center gap-2 rounded hover:brightness-95 active:brightness-95"
+            type="button"
             @click="newItemClick"
           >
-            <span>Новый товар</span>
-            <span class="material-icons-outlined self-center">add</span>
+            <span class="material-icons-outlined md:text-[28px]"
+              >shopping_bag</span
+            >
+            <span class="hidden md:block text-lg md:text-base"
+              >Показать в магазине</span
+            >
           </button>
-        </div>
-      </div>
+        </template>
+      </data-table>
     </div>
   </div>
 </template>
@@ -203,7 +133,7 @@
 <script setup>
 import FilterTree from "@/components/FilterTree.vue"
 import AppDialog from "@/components/AppDialog.vue"
-import InputField from "@/components/ui/InputField.vue"
+import DataTable from "@/components/ui/DataTable.vue"
 
 import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
@@ -260,4 +190,17 @@ onMounted(async () => {
   items.value = await DataManager.getItems()
   filtersList.value = await DataManager.getFilters()
 })
+
+const tableFields = ref([
+  {
+    name: "name",
+    className: "w-full",
+  },
+  { name: "count", className: "whitespace-nowrap", postfix: " шт" },
+  {
+    name: "purchasePrice",
+    className: "whitespace-nowrap ",
+    postfix: " KZT",
+  },
+])
 </script>
