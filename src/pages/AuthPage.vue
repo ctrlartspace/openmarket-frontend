@@ -7,17 +7,17 @@
       <input
         v-model.trim="authData.name"
         type="text"
-        class="mb-2 block w-full px-4 py-2 text-lg bg-inherit border border-gray-200 rounded-xl md:rounded appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
+        class="mb-2 block w-full px-4 py-2 text-lg md:text-base bg-inherit border border-gray-200 rounded-xl md:rounded appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
         placeholder="Номер кабинета"
       />
       <input
         v-model.trim="authData.password"
         type="text"
-        class="mb-4 block w-full px-4 py-2 text-lg bg-inherit border border-gray-200 rounded-xl md:rounded appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
+        class="mb-4 block w-full px-4 py-2 text-lg md:text-base bg-inherit border border-gray-200 rounded-xl md:rounded appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
         placeholder="Пароль"
       />
       <button
-        class="block w-full px-4 py-2 bg-blue-600 text-lg text-white rounded-xl md:rounded"
+        class="block w-full px-4 py-2 bg-blue-600 text-lg md:text-base text-white rounded-xl md:rounded"
         type="submit"
         @click="logIn"
       >

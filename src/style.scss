@@ -2,6 +2,11 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons+Outlined");
 
+html,
+body,
+label {
+  font-family: "Roboto", sans-serif;
+}
 .material-icons-outlined,
 .material-icons {
   font-size: 1.5rem;
