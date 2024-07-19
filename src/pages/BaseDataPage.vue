@@ -75,11 +75,7 @@
       </button>
     </div>
     <div class="col-span-10 md:col-span-7">
-      <data-table
-        :table-data="items"
-        :table-fields="tableFields"
-        @on-item-click="onItemClick"
-      >
+      <search-field class="mb-2">
         <template #action>
           <button
             class="leading-8 md:hidden flex items-center gap-2 rounded hover:brightness-95 active:brightness-95"
@@ -97,7 +93,6 @@
               class="border-gray-200 rounded-xl overflow-hidden"
               v-model="selectedFilters"
               :items="filtersList"
-              @change="updateItems"
               nested="true"
             />
           </app-dialog>
@@ -125,6 +120,13 @@
             >
           </button>
         </template>
+      </search-field>
+      <data-table
+        v-model="selectedItems"
+        :table-data="items"
+        :table-fields="tableFields"
+        @on-item-click="onItemClick"
+      >
       </data-table>
     </div>
   </div>
@@ -133,6 +135,7 @@
 <script setup>
 import FilterTree from "@/components/FilterTree.vue"
 import AppDialog from "@/components/AppDialog.vue"
+import SearchField from "@/components/ui/SearchField.vue"
 import DataTable from "@/components/ui/DataTable.vue"
 
 import { ref, onMounted } from "vue"

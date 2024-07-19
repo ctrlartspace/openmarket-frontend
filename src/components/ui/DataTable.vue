@@ -1,33 +1,6 @@
 <template>
   <div class="flex flex-col gap-2">
     <div class="border rounded-xl md:rounded overflow-hidden">
-      <div
-        v-if="selectedItems.length === 0"
-        class="px-4 py-2 flex gap-2 items-center bg-white"
-      >
-        <span class="material-icons md:text-[28px] text-gray-300">search</span>
-
-        <input
-          type="text"
-          class="w-full h-full text-lg md:text-base placeholder:text-gray-300 focus:outline-none text-ellipsis"
-          placeholder="Код товара, наименование"
-        />
-        <slot name="action"></slot>
-      </div>
-      <div
-        v-else
-        class="px-4 py-2 flex gap-2 justify-between items-center bg-white"
-      >
-        <div
-          class="flex gap-2 items-center hover:text-red-600 active:text-red-600 cursor-pointer"
-        >
-          <span class="material-icons md:text-[28px]">remove</span>
-          <span class="hidden md:inline text-lg md:text-base">Удалить</span>
-        </div>
-        <slot name="afterSelect"> </slot>
-      </div>
-    </div>
-    <div class="border rounded-xl md:rounded overflow-hidden">
       <table class="w-full text-lg md:text-base text-left bg-white">
         <tbody>
           <tr
@@ -44,6 +17,7 @@
                   type="checkbox"
                   :value="item.id"
                   @click.stop
+                  @change="$emit('update:modelValue', selectedItems)"
                 />
               </div>
             </td>
@@ -78,6 +52,7 @@
 <script setup>
 import { ref } from "vue"
 const props = defineProps({
+  modelValue: {},
   tableData: {
     type: Object,
     required: true,
@@ -88,6 +63,6 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(["onItemClick"])
+const emit = defineEmits(["onItemClick", "update:modelValue"])
 const selectedItems = ref([])
 </script>

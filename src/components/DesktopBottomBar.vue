@@ -38,7 +38,7 @@
 <script setup>
 import { ref, onMounted } from "vue"
 
-const startTime = ref(new Date("03.12.2024"))
+const startTime = ref(new Date("07.19.2024"))
 const calculatedTime = ref("00:00:00")
 
 const elapsedTime = (startTime) => {
