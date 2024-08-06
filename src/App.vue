@@ -1,8 +1,10 @@
 <template>
-  <div class="relative max-w-[800px] mx-auto flex flex-col h-[calc(100dvh)]">
-    <app-header class="hidden md:flex p-2 pb-0" />
+  <div
+    class="relative max-w-[800px] mx-auto flex flex-col h-[calc(100dvh)] bg-white border-l border-r border-neutral-300"
+  >
+    <app-header class="hidden md:flex" />
     <app-header-mobile class="md:hidden" />
-    <main class="flex-1 overflow-y-scroll">
+    <main class="flex-1 overflow-y-scroll p-4 pb-16 bg-neutral-50">
       <router-view></router-view>
     </main>
     <app-bottom-navigation-bar class="block md:hidden" />

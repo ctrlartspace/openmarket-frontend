@@ -7,7 +7,7 @@
             v-for="item in tableData"
             :key="item.id"
             class="p-4 flex flex-col md:block md:p-0 cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b last:border-none"
-            @click="emit('onItemClick', item.id)"
+            @click="emit('onItemClick', item)"
           >
             <td class="hidden md:table-cell md:pl-4 md:py-2 w-2">
               <div class="w-4 h-4 flex items-center justify-center">
@@ -23,13 +23,14 @@
             </td>
             <td
               v-for="field in tableFields"
-              :key="field.field"
+              :key="field.name"
               class="md:px-4 md:py-2"
               :class="field.className"
             >
               <slot :name="field.name" :item="item">
                 <span>
-                  {{ item[field.name] }}
+                  {{ getNestedProperty(item, field.name) }}
+                  <!-- {{ item[field.name] }} -->
                 </span>
                 <span v-if="field.postfix">{{ field.postfix }}</span>
               </slot>
@@ -65,4 +66,7 @@ const props = defineProps({
 
 const emit = defineEmits(["onItemClick", "update:modelValue"])
 const selectedItems = ref([])
+
+const getNestedProperty = (obj, path) =>
+  path.split(".").reduce((acc, key) => acc && acc[key], obj)
 </script>

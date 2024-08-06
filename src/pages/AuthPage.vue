@@ -1,8 +1,8 @@
 <template>
-  <div class="flex justify-center items-center p-4 md:p-2 h-full">
+  <div class="flex justify-center items-center h-full">
     <form
       class="p-4 bg-white rounded-xl md:rounded border border-gray-200 w-96"
-      @submit.prevent="logIn"
+      @submit.prevent="loginToStore"
     >
       <input
         v-model.trim="authData.name"
@@ -19,11 +19,29 @@
       <button
         class="block w-full px-4 py-2 bg-blue-600 text-lg md:text-base text-white rounded-xl md:rounded"
         type="submit"
-        @click="logIn"
       >
         Продолжить
       </button>
     </form>
+    <!-- <div
+      v-else
+      class="p-4 bg-white rounded-xl md:rounded border border-gray-200 w-96"
+    >
+      <h1 class="text-2xl font-semibold mb-4 text-center">
+        {{ storeData.name }}
+      </h1>
+      <div class="flex flex-col gap-4">
+        <button
+          v-for="storePoint in storePoints"
+          class="font-semibold block w-full px-4 py-2 bg-black text-lg md:text-base text-white rounded-xl md:rounded"
+          type="submit"
+          :key="storePoint.id"
+          @click="loginToStorePoint(storePoint.id)"
+        >
+          {{ storePoint.name }}
+        </button>
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -36,10 +54,14 @@ const store = useUserStore()
 const router = useRouter()
 const authData = ref({})
 
-const logIn = async () => {
-  console.log(authData.value)
-  await store.logIn(authData.value)
-  router.push("/")
+const loginToStore = async () => {
+  try {
+    const response = await store.loginToStore(authData.value)
+    router.push("/store")
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  }
 }
 </script>
 

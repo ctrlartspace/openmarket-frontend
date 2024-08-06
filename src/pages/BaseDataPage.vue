@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-10 gap-2 p-4 pb-16 md:p-2">
+  <div class="grid grid-cols-10 gap-2">
     <div class="hidden md:block col-span-10 md:col-span-3">
       <div
         class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
@@ -141,7 +141,7 @@ import DataTable from "@/components/ui/DataTable.vue"
 import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
 
-import * as DataManager from "@/services/ItemSearch"
+import PointService from "@/services/PointService"
 
 const router = useRouter()
 
@@ -155,7 +155,7 @@ const showDialog = ref({ editFilter: false, showFilterMobile: false })
 
 const updateItems = async () => {
   const filterQuery = selectedFilters.value.join(",")
-  items.value = await DataManager.getItems(filterQuery)
+  items.value = await PointService.getItems(filterQuery)
 }
 
 const newFilter = ref({})
@@ -165,8 +165,8 @@ const resetFilters = () => {
   updateItems()
 }
 
-const onItemClick = (id) => {
-  router.push(`/items/${id}`)
+const onItemClick = (item) => {
+  router.push(`/items/${item.id}`)
 }
 
 const newItemClick = () => {
@@ -179,24 +179,24 @@ const addFilter = async () => {
     parentId: newFilter.value.parentId,
   }
 
-  await DataManager.addFilter(data)
+  await PointService.addFilter(data)
   newFilter.value.name = ""
-  filtersList.value = await DataManager.getFilters()
+  filtersList.value = await PointService.getFilters()
 }
 
 const deleteFilter = async () => {
-  await DataManager.deleteFilter(newFilter.value.parentId)
-  filtersList.value = await DataManager.getFilters()
+  await PointService.deleteFilter(newFilter.value.parentId)
+  filtersList.value = await PointService.getFilters()
 }
 
 onMounted(async () => {
-  items.value = await DataManager.getItems()
-  filtersList.value = await DataManager.getFilters()
+  items.value = await PointService.getItems()
+  filtersList.value = await PointService.getFilters()
 })
 
 const tableFields = ref([
   {
-    name: "name",
+    name: "storeItem.name",
     className: "w-full",
   },
   { name: "count", className: "whitespace-nowrap", postfix: " шт" },

@@ -1,6 +1,6 @@
 <template>
   <footer class="pb-safe">
-    <nav v-if="store.isAuthorized">
+    <nav v-if="store.isAuthorizedPoint">
       <div class="px-4 py-1 border-t border-gray-200 bg-white">
         <ul class="flex gap-2 justify-around">
           <li v-for="(item, i) in menuItems" :key="i">

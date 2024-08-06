@@ -36,7 +36,7 @@
               v-else
               v-for="(item, i) in groupedIncomeItems"
               class="cursor-pointer active:bg-gray-50 hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2"
-              @click="onItemClick(item.id)"
+              @click="onItemClick(item)"
               :key="i"
             >
               <td class="flex items-center">
@@ -161,8 +161,8 @@ const addIncomesItems = async () => {
   clearItems()
 }
 
-const onItemClick = (id) => {
-  router.push(`/items/${id}`)
+const onItemClick = (item) => {
+  router.push(`/items/${item.id}`)
 }
 
 const setInputFocus = async () => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 md:p-2">
+  <div class="">
     <div
       class="grid grid-cols-10 bg-white md:rounded rounded-xl border border-gray-200 md:p-4 md:gap-2"
     >
@@ -55,7 +55,8 @@
           :class="cash.isClosed ? 'bg-gray-100' : 'bg-white'"
           :key="cash.id"
         >
-          <span class="text-lg md:text-base text-gray-600">Закрыт </span>
+          <p>#{{ cash.id }}</p>
+          <p class="text-lg md:text-base text-gray-600">Закрыт</p>
           <!-- <span class="text-lg md:text-base font-mono"> {{ cash.total }}</span> -->
         </div>
       </div>

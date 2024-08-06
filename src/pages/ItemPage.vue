@@ -1,47 +1,59 @@
 <template>
-  <div class="p-4 pb-16 md:p-2">
+  <div class="">
     <div
       class="grid grid-cols-10 bg-white rounded-xl md:rounded border border-gray-200"
     >
       <div
         v-if="item"
-        class="col-span-10 md:col-span-4 md:border-r md:border-b border-gray-200"
+        class="p-4 flex flex-col gap-2 col-span-10 md:col-span-4 md:border-r md:border-b border-gray-200"
       >
-        <div class="px-4 py-2 border-b">
-          <span class="text-lg md:text-base font-medium">Информация</span>
-        </div>
-        <input-field
+        <a-select
+          v-model="item.storeItemId"
+          id="input-store-item"
+          :items="storeItems"
+          :disabled="!isEditMode"
+          @change="onStoreItemChange"
+        />
+        <a-base-input
           v-model="item.code"
-          placeholder="Штрихкод"
-          :disabled="!isEditMode"
+          id="article"
+          type="text"
+          label="Код товара"
+          placeholder="Код товара"
+          :disabled="item.storeItemId"
         />
-
-        <input-field
+        <a-base-input
           v-model="item.name"
+          id="name"
+          type="text"
+          label="Наименование"
           placeholder="Наименование"
-          :disabled="!isEditMode"
+          :disabled="item.storeItemId"
         />
-
-        <input-field
+        <a-base-input
           v-model="item.purchasePrice"
+          id="purchase-price"
+          type="text"
+          label="Цена покупки"
           placeholder="Цена покупки"
           :disabled="!isEditMode"
         />
-        <input-field
+        <a-base-input
           v-model="item.sellingPrice"
+          id="selling-price"
+          type="text"
+          label="Цена продажи"
           placeholder="Цена продажи"
           :disabled="!isEditMode"
         />
-        <select-field
+        <a-select
           v-model="item.filters"
+          id="input-filters"
           :items="filterList"
-          placeholder="Фильтры"
-          item-value="id"
-          item-title="name"
           :disabled="!isEditMode"
         >
           <filter-tree v-model="item.filters" :items="filterList" />
-        </select-field>
+        </a-select>
       </div>
       <div
         class="col-span-10 md:col-span-6 px-4 py-2 flex border-b border-gray-200"
@@ -92,7 +104,9 @@
       </div>
     </div>
 
-    <div class="md:hidden absolute bottom-12 left-0 right-0 px-4 py-2 mb-safe">
+    <div
+      class="z-50 md:hidden absolute bottom-12 left-0 right-0 px-4 py-2 mb-safe"
+    >
       <button
         v-if="!isEditMode"
         class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 active:brightness-90 cursor-pointer select-none shadow-xl"
@@ -102,7 +116,7 @@
       </button>
       <button
         v-else
-        class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 active:brightness-90 cursor-pointer select-none shadow-xl"
+        class="z-50 w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 active:brightness-90 cursor-pointer select-none shadow-xl"
         @click="saveItemData"
       >
         <span>Сохранить</span>
@@ -114,6 +128,8 @@
 <script setup>
 import InputField from "@/components/ui/InputField.vue"
 import SelectField from "@/components/ui/SelectField.vue"
+import ASelect from "@/components/ui/ASelect.vue"
+import ABaseInput from "@/components/ui/ABaseInput.vue"
 import FilterTree from "@/components/FilterTree.vue"
 import AppDialog from "@/components/AppDialog.vue"
 
@@ -125,11 +141,13 @@ import {
   addItem,
   getFilters,
   makeIncome,
-} from "@/services/ItemSearch"
+} from "@/services/PointService"
+import StoreService from "@/services/StoreService"
 
 const route = useRoute()
 const router = useRouter()
 
+const storeItems = ref([])
 const item = ref({})
 const isEditMode = ref(true)
 
@@ -139,8 +157,8 @@ const newIncomeItemCount = ref(null)
 
 const saveItemData = async () => {
   if (item.value.id) {
-    const response = await updateItem(item.value)
-    const { id } = response
+    const updatedItem = await updateItem(item.value.id, item.value)
+    const { id } = updatedItem
     item.value = await getItem(id)
   } else {
     const response = await addItem(item.value)
@@ -160,15 +178,39 @@ const addIncome = async () => {
   console.log(response)
 }
 
+const onStoreItemChange = (selectedItem) => {
+  try {
+    if (selectedItem) {
+      item.value.code = selectedItem.code
+      item.value.name = selectedItem.name
+      item.value.storeItemId = selectedItem.id
+      item.value.purchasePrice = selectedItem.purchasePrice
+      item.value.sellingPrice = selectedItem.sellingPrice
+    } else {
+      item.value = {}
+    }
+  } catch (error) {}
+}
+
+const fetchItem = async (id) => {
+  try {
+    const fetchedItem = await getItem(id)
+    if (fetchedItem) {
+      item.value = fetchedItem
+      isEditMode.value = false
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 onMounted(async () => {
   filterList.value = await getFilters()
+  storeItems.value = await StoreService.getItems()
 
   const id = route.params.id
   if (id) {
-    item.value = await getItem(id)
-    if (item.value) {
-      isEditMode.value = false
-    }
+    await fetchItem(id)
   }
 })
 </script>

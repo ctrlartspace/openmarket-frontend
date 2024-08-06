@@ -1,5 +1,5 @@
 <template>
-  <div class="relative p-4 flex flex-col gap-2">
+  <div class="relative flex flex-col gap-2">
     <div
       class="relative bg-white px-4 py-2 flex justify-between gap-2 items-center border md:rounded rounded-xl"
     >
@@ -43,7 +43,7 @@
           <tr
             v-for="(item, i) in store.groupedCartItems"
             class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex items-center gap-2 px-4 py-2 last:border-none"
-            @click="onItemClick(item.id)"
+            @click="onItemClick(item)"
             :key="i"
           >
             <td class="flex items-center">
@@ -143,7 +143,7 @@
 import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
-import { getItem } from "@/services/ItemSearch"
+import { getItem } from "@/services/PointService"
 import { makeSale } from "@/services/ItemSearch"
 
 const store = useCartStore()
@@ -192,8 +192,8 @@ const makeSaleFromCart = async () => {
   }
 }
 
-const onItemClick = (id) => {
-  router.push(`/items/${id}`)
+const onItemClick = (item) => {
+  router.push(`/items/${item.id}`)
 }
 
 // const setInputFocus = async () => {

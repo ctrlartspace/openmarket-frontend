@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-10 gap-2 p-4 pb-16 md:p-2">
+  <div class="grid grid-cols-10 gap-2">
     <div class="hidden md:block col-span-10 md:col-span-3">
       <div
         class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
@@ -26,7 +26,7 @@
       </button>
     </div>
     <div class="col-span-10 md:col-span-7">
-      <div class="bg-white border md:rounded rounded-xl overflow-auto">
+      <!-- <div class="bg-white border md:rounded rounded-xl overflow-auto">
         <div
           v-if="selectedItems && selectedItems.length > 0"
           class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
@@ -119,14 +119,14 @@
                     .join(", ")} ${item.item.name}`
                 }}
               </td>
-              <!-- <td
+               <td
                 v-if="item.isReturned"
                 class="flex items-center bg-red-50 rounded w-max order-4 md:order-none"
               >
                 <span class="material-icons text-red-600 md:text-[28px]"
                   >keyboard_backspace</span
                 >
-              </td> -->
+              </td> 
               <td
                 class="flex items-center gap-2 rounded w-max md:flex-initial order-last md:order-none"
               >
@@ -153,7 +153,45 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div>-->
+      <search-field class="mb-2">
+        <template #action>
+          <button
+            class="leading-8 flex items-center gap-2 text-blue-600 rounded hover:brightness-95 active:brightness-95"
+            type="button"
+            @click="addIncomes"
+          >
+            <span class="hidden md:inline text-lg md:text-base">Добавить</span>
+            <span class="material-icons-outlined">add</span>
+          </button>
+        </template>
+
+        <template #afterSelect> <div>s</div></template>
+      </search-field>
+      <data-table
+        v-model="selectedItems"
+        :table-data="items"
+        :table-fields="tableFields"
+        @on-item-click="onItemClick"
+      >
+        <template #isReturned="{ item }">
+          <div
+            class="flex items-center gap-2 rounded w-max md:flex-initial order-last md:order-none"
+          >
+            <span
+              v-if="item.isReturned"
+              class="material-icons text-red-600 md:text-[28px]"
+              >keyboard_backspace</span
+            >
+            <span
+              class="material-icons-outlined text-blue-600 md:text-[28px]"
+              >{{
+                item.paymentType === "cash" ? "payments" : "credit_card"
+              }}</span
+            >
+          </div>
+        </template>
+      </data-table>
     </div>
   </div>
 </template>
@@ -161,6 +199,8 @@
 <script setup>
 import AppDialog from "@/components/AppDialog.vue"
 import FilterTree from "@/components/FilterTree.vue"
+import SearchField from "@/components/ui/SearchField.vue"
+import DataTable from "@/components/ui/DataTable.vue"
 
 import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
@@ -187,8 +227,8 @@ const resetFilters = () => {
   updateItems()
 }
 
-const onItemClick = (id) => {
-  router.push(`/items/${id}`)
+const onItemClick = (item) => {
+  router.push(`/items/${item.id}`)
 }
 
 const makeReturns = async () => {
@@ -203,4 +243,17 @@ onMounted(async () => {
   console.log(items.value)
   filtersList.value = await DataManager.getFilters()
 })
+const tableFields = ref([
+  {
+    name: "item.name",
+    className: "w-full",
+  },
+  { name: "isReturned" },
+  { name: "count", className: "whitespace-nowrap", postfix: " шт" },
+  {
+    name: "sellingPrice",
+    className: "whitespace-nowrap ",
+    postfix: " KZT",
+  },
+])
 </script>
