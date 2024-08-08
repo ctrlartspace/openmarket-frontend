@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="$attrs.id" class="font-medium">{{ label }}</label>
+    <label :for="$attrs.id" class="mb-2 font-medium">{{ label }}</label>
     <router-link
       v-if="routeLink && inputValue"
       :to="routeLink.path"
@@ -11,7 +11,7 @@
       <input
         v-model="inputValue"
         v-bind="$attrs"
-        class="block mt-2 px-4 py-2 w-full rounded-xl md:rounded border border-solid focus:outline-black peer"
+        class="block px-4 py-2 w-full rounded-xl md:rounded border border-solid focus:outline-black peer"
         :class="{
           'bg-red-50 placeholder:text-red-400': isError,
         }"

@@ -9,9 +9,9 @@ export const getItems = async (queryParams = "") => {
   }
 }
 
-export const getItem = async (id) => {
+export const getItem = async (id, params = {}) => {
   try {
-    const response = await axios.get(`/point/items/${id}`)
+    const response = await axios.get(`/point/items/${id}`, { params })
     return Promise.resolve(response.data)
   } catch (error) {
     console.log(error)

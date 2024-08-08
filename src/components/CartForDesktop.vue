@@ -109,7 +109,7 @@ const addCartItem = async () => {
   }
 
   try {
-    const item = await getItem(inputValue.value)
+    const item = await getItem(inputValue.value, { searchBy: "code" })
     store.addItem(item)
     inputValue.value = ""
     isSearchError.value = false

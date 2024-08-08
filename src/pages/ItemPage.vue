@@ -206,7 +206,7 @@ const fetchItem = async (id) => {
 
 onMounted(async () => {
   filterList.value = await getFilters()
-  storeItems.value = await StoreService.getItems()
+  storeItems.value = await StoreService.getStoreItems()
 
   const id = route.params.id
   if (id) {
