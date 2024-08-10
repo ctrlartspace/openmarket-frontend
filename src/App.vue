@@ -4,7 +4,7 @@
   >
     <app-header class="hidden md:flex" />
     <app-header-mobile class="md:hidden" />
-    <main class="flex-1 overflow-y-scroll p-4 pb-16 bg-neutral-50">
+    <main class="flex-1 overflow-y-scroll bg-neutral-50">
       <router-view></router-view>
     </main>
     <app-bottom-navigation-bar class="block md:hidden" />

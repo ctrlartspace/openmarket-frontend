@@ -10,11 +10,13 @@ import CashPage from "@/pages/CashPage.vue"
 import ScanPage from "@/pages/ScanPage.vue"
 import ProfilePage from "@/pages/ProfilePage.vue"
 import StorePage from "@/pages/StorePage.vue"
+import StorePointPage from "@/pages/StorePointPage.vue"
 import { useUserStore } from "@/stores/user.store"
 
 const routes = [
   { path: "/", component: CartPage },
   { path: "/store", component: StorePage },
+  { path: "/store/point", component: StorePointPage },
   { path: "/cart", component: CartPage },
   { path: "/sales", component: SalesPage },
   { path: "/incomes", component: IncomesPage },

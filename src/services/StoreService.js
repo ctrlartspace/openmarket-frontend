@@ -1,5 +1,30 @@
 import axios from "@/plugins/axios"
 
+export const getStore = async (id) => {
+  try {
+    const response = await axios.get("/store")
+    return Promise.resolve(response.data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+export const getStoreUsers = async (id) => {
+  try {
+    const response = await axios.get("/store/users")
+    return Promise.resolve(response.data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+export const getStorePoint = async () => {
+  try {
+    const response = await axios.get("/store/point")
+    return Promise.resolve(response.data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
 export const getStorePoints = async (queryParams = "") => {
   try {
     const response = await axios.get("/store/points")
@@ -47,6 +72,9 @@ export const addItem = async (data) => {
 }
 
 export default {
+  getStore,
+  getStorePoint,
+  getStoreUsers,
   getStorePoints,
   addStorePoint,
   getStoreItems,
