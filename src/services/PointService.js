@@ -1,15 +1,15 @@
 import axios from "@/plugins/axios"
 
-export const getItems = async (queryParams = "") => {
+export const getPointItems = async (params) => {
   try {
-    const response = await axios.get(`/point/items?filters=${queryParams}`)
+    const response = await axios.get("/point/items", { params })
     return Promise.resolve(response.data)
   } catch (error) {
     return Promise.reject(error)
   }
 }
 
-export const getItem = async (id, params = {}) => {
+export const getPointItem = async (id, params = {}) => {
   try {
     const response = await axios.get(`/point/items/${id}`, { params })
     return Promise.resolve(response.data)
@@ -37,7 +37,7 @@ export const getFilters = async () => {
   }
 }
 
-export const updateItem = async (id, data) => {
+export const updatePointItem = async (id, data) => {
   try {
     const response = await axios.put(`/point/items/${id}`, data)
     return Promise.resolve(response.data)
@@ -111,10 +111,11 @@ export const makeIncome = async (data) => {
 }
 
 export default {
-  getItems,
-  getItem,
+  getPointItems,
+  getPointItem,
   addItem,
   addFilter,
   deleteFilter,
   getFilters,
+  updatePointItem,
 }

@@ -7,26 +7,26 @@
         class="mb-0 border border-gray-200 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-medium rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
         placeholder="Код товара, название, модель"
         type="text"
-        @input="onInputChange"
         v-bind="$attrs"
+        @input="onInputChange"
       />
       <div v-if="value" class="absolute inset-y-0 right-2 flex items-center">
         <span
           class="material-icons text-gray-400 hover:text-gray-800 active:text-gray-800 cursor-pointer"
           @click="onClearClick"
-          >close</span
+        >close</span
         >
       </div>
       <div
-        class="absolute mt-2 w-full bg-white py-2 border border-gray-200 rounded shadow-sm"
         :class="value ? 'block' : 'hidden'"
+        class="absolute mt-2 w-full bg-white py-2 border border-gray-200 rounded shadow-sm"
       >
         <ul v-if="searchItems && searchItems.length > 0">
           <li
-            class="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
             v-for="(item, index) in searchItems"
             :key="index"
             :value="index"
+            class="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
             @click="onSearchItemClick(item.id)"
           >
             {{ item.name }}
@@ -41,28 +41,28 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue"
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 
 const props = defineProps({
   searchItems: {
-    type: Object,
+    type: Object
   },
   loading: {
     type: Boolean,
-    default: false,
+    default: false
   },
   autoclear: {
     type: Boolean,
-    default: false,
+    default: false
   },
-  modelValue: {},
+  modelValue: {}
 })
 
 const emit = defineEmits([
   "submit",
   "update:modelValue",
   "change",
-  "onSearchItemClick",
+  "onSearchItemClick"
 ])
 const searchInput = ref(null)
 const isPrinting = ref(false)
@@ -73,7 +73,7 @@ const value = computed({
   },
   set(value) {
     emit("update:modelValue", value)
-  },
+  }
 })
 
 const onInputChange = (event) => {

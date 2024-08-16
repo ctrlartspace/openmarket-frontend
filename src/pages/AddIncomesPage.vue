@@ -84,7 +84,7 @@
 <script setup>
 import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue"
 import { useRouter } from "vue-router"
-import { getItem, makeIncome } from "@/services/ItemSearch"
+import { getPointItem, makeIncome } from "@/services/ItemSearch"
 
 const router = useRouter()
 
@@ -145,7 +145,7 @@ const addIncomeItem = async () => {
   }
 
   try {
-    const item = await getItem(inputValue.value)
+    const item = await getPointItem(inputValue.value)
     addItem(item)
     inputValue.value = ""
     isSearchError.value = false

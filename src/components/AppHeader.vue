@@ -12,17 +12,32 @@
           </span>
         </router-link>
       </li>
-      <li class="ml-auto"></li>
-      <li v-if="store.storePoint" class="w-auto truncate inline text-pink-300">
-        <router-link v-slot="{ isActive }" to="/store/point">
+      <li v-if="store.point" class="w-auto truncate inline text-pink-300">
+        <router-link v-slot="{ isActive }" to="/point">
           <span
             class="font-medium text-base"
             :class="isActive ? 'text-pink-500' : 'text-pink-300'"
           >
-            {{ store.storePoint.name }}
+            {{ store.point.name }}
           </span>
         </router-link>
       </li>
+      <li class="ml-auto"></li>
+      <li class="inline">
+        <router-link v-slot="{ isActive }" to="/store">
+          <span
+            class="font-medium text-base"
+            :class="isActive ? 'text-black' : 'text-gray-300'"
+          >
+            Магазин
+          </span>
+        </router-link>
+      </li>
+    </ul>
+  </nav>
+  <nav v-else>
+    <ul class="w-full flex gap-4 border-b border-neutral-300 px-4 py-1">
+      <li class="ml-auto"></li>
       <li class="inline">
         <router-link v-slot="{ isActive }" to="/store">
           <span
@@ -62,10 +77,6 @@ const menuItems = ref([
   {
     title: "Поступления",
     path: "/incomes",
-  },
-  {
-    title: "База",
-    path: "/base",
   },
 ])
 </script>

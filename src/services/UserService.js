@@ -11,7 +11,7 @@ const loginToStore = async (data) => {
 
 const loginToStorePoint = async (id) => {
   try {
-    const response = await axios.post("/login/point/", { storePointId: id })
+    const response = await axios.post("/login/point/", { pointId: id })
     return Promise.resolve(response.data)
   } catch (error) {
     return Promise.reject(error)

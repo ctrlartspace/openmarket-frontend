@@ -136,8 +136,8 @@ import AppDialog from "@/components/AppDialog.vue"
 import { ref, onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import {
-  getItem,
-  updateItem,
+  getPointItem,
+  updatePointItem,
   addItem,
   getFilters,
   makeIncome,
@@ -157,9 +157,9 @@ const newIncomeItemCount = ref(null)
 
 const saveItemData = async () => {
   if (item.value.id) {
-    const updatedItem = await updateItem(item.value.id, item.value)
+    const updatedItem = await updatePointItem(item.value.id, item.value)
     const { id } = updatedItem
-    item.value = await getItem(id)
+    item.value = await getPointItem(id)
   } else {
     const response = await addItem(item.value)
     const { id } = response
@@ -194,7 +194,7 @@ const onStoreItemChange = (selectedItem) => {
 
 const fetchItem = async (id) => {
   try {
-    const fetchedItem = await getItem(id)
+    const fetchedItem = await getPointItem(id)
     if (fetchedItem) {
       item.value = fetchedItem
       isEditMode.value = false

@@ -32,13 +32,13 @@
       </h1>
       <div class="flex flex-col gap-4">
         <button
-          v-for="storePoint in storePoints"
+          v-for="point in storePoints"
           class="font-semibold block w-full px-4 py-2 bg-black text-lg md:text-base text-white rounded-xl md:rounded"
           type="submit"
-          :key="storePoint.id"
-          @click="loginToStorePoint(storePoint.id)"
+          :key="point.id"
+          @click="loginToStorePoint(point.id)"
         >
-          {{ storePoint.name }}
+          {{ point.name }}
         </button>
       </div>
     </div> -->

@@ -12,8 +12,8 @@
         <filter-tree
           v-model="selectedFilters"
           :items="filtersList"
-          @change="updateItems"
           nested="true"
+          @change="updateItems"
         />
       </div>
       <!-- Filter Reset -->
@@ -166,7 +166,9 @@
           </button>
         </template>
 
-        <template #afterSelect> <div>s</div></template>
+        <template #afterSelect>
+          <div>s</div>
+        </template>
       </search-field>
       <data-table
         v-model="selectedItems"
@@ -181,11 +183,11 @@
             <span
               v-if="item.isReturned"
               class="material-icons text-red-600 md:text-[28px]"
-              >keyboard_backspace</span
+            >keyboard_backspace</span
             >
             <span
               class="material-icons-outlined text-blue-600 md:text-[28px]"
-              >{{
+            >{{
                 item.paymentType === "cash" ? "payments" : "credit_card"
               }}</span
             >
@@ -197,12 +199,11 @@
 </template>
 
 <script setup>
-import AppDialog from "@/components/AppDialog.vue"
 import FilterTree from "@/components/FilterTree.vue"
 import SearchField from "@/components/ui/SearchField.vue"
 import DataTable from "@/components/ui/DataTable.vue"
 
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 
 import * as DataManager from "@/services/ItemSearch"
@@ -246,14 +247,14 @@ onMounted(async () => {
 const tableFields = ref([
   {
     name: "item.name",
-    className: "w-full",
+    className: "w-full"
   },
   { name: "isReturned" },
   { name: "count", className: "whitespace-nowrap", postfix: " шт" },
   {
     name: "sellingPrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT",
-  },
+    postfix: " KZT"
+  }
 ])
 </script>

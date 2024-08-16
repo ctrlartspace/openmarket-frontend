@@ -43,6 +43,24 @@ export const addStorePoint = async (data) => {
   }
 }
 
+export const addStoreUser = async (data) => {
+  try {
+    const response = await axios.post(`/store/users`, data)
+    return Promise.resolve(response.data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export const addStoreItem = async (data) => {
+  try {
+    const response = await axios.post(`/store/items`, data)
+    return Promise.resolve(response.data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
 export const getStoreItems = async (queryParams = "") => {
   try {
     const response = await axios.get(`/store/items?filters=${queryParams}`)
@@ -52,9 +70,9 @@ export const getStoreItems = async (queryParams = "") => {
   }
 }
 
-export const getItem = async (code) => {
+export const getStoreItem = async (id) => {
   try {
-    const response = await axios.get(`/store/items/${code}`)
+    const response = await axios.get(`/store/items/${id}`)
     return Promise.resolve(response.data)
   } catch (error) {
     console.log(error)
@@ -77,7 +95,9 @@ export default {
   getStoreUsers,
   getStorePoints,
   addStorePoint,
+  addStoreUser,
+  addStoreItem,
   getStoreItems,
-  getItem,
+  getStoreItem,
   addItem,
 }

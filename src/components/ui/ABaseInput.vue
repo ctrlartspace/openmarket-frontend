@@ -1,20 +1,21 @@
 <template>
-  <div>
-    <label :for="$attrs.id" class="mb-2 font-medium">{{ label }}</label>
+  <div class="flex flex-col gap-1">
+    <label v-if="label" :for="$attrs.id">{{ label }}</label>
     <router-link
       v-if="routeLink && inputValue"
       :to="routeLink.path"
       class="ml-2 text-blue-500"
-      >{{ routeLink.title }}</router-link
+    >{{ routeLink.title }}
+    </router-link
     >
     <div class="relative">
       <input
         v-model="inputValue"
-        v-bind="$attrs"
-        class="block px-4 py-2 w-full rounded-xl md:rounded border border-solid focus:outline-black peer"
         :class="{
           'bg-red-50 placeholder:text-red-400': isError,
         }"
+        class="block px-4 py-2 w-full rounded-xl md:rounded border border-neutral-300 border-solid focus:outline-black peer"
+        v-bind="$attrs"
       />
       <div
         v-if="unit"
@@ -27,33 +28,32 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue"
-import { computed } from "vue"
+import { computed, defineEmits, defineProps } from "vue"
 
 const props = defineProps({
   modelValue: {},
   label: {
     type: String,
-    required: true,
+    required: false
   },
   isError: {
     type: Boolean,
-    required: false,
+    required: false
   },
   routeLink: {
     type: Object,
-    required: false,
+    required: false
   },
   unit: {
     type: String,
-    required: false,
-  },
+    required: false
+  }
 })
 
 const emit = defineEmits(["update:modelValue"])
 const inputValue = computed({
   get: () => props.modelValue,
-  set: (newValue) => emit("update:modelValue", newValue),
+  set: (newValue) => emit("update:modelValue", newValue)
 })
 </script>
 

@@ -10,7 +10,7 @@ const getItems = async (queryParams = "") => {
   }
 }
 
-const getItem = async (code) => {
+const getPointItem = async (code) => {
   try {
     const response = await axios.get(`/items/${code}`)
     return Promise.resolve(response.data)
@@ -113,7 +113,7 @@ const makeIncome = async (data) => {
 
 export {
   getItems,
-  getItem,
+  getPointItem,
   getFilters,
   addFilter,
   deleteFilter,

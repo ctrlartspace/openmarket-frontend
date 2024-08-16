@@ -1,50 +1,50 @@
 <template>
   <ul v-if="firstItems.length > 0">
     <li
-      class="border-t first:border-none"
       v-for="(item, i) in firstItems"
       :key="i"
+      class="border-t border-neutral-300 first:border-none"
     >
       <filter-item
-        class="pl-4"
-        v-model="selectedItems"
-        :item="item"
-        :showExpand="item.items && item.items.length > 0"
-        @on-expand-toggle="(v) => (item.subVisible = v)"
-        :is-expand="item.subVisible"
-        :select-root="selectRoot"
         :key="item.id"
+        v-model="selectedItems"
+        :is-expand="item.subVisible"
+        :item="item"
+        :select-root="selectRoot"
+        :showExpand="item.items && item.items.length > 0"
+        class="pl-4"
         @change="selectChilds(item, $event.target.checked)"
+        @on-expand-toggle="(v) => (item.subVisible = v)"
       />
       <ul v-if="item.subVisible">
-        <li class="border-t" v-for="(subitem, i) in item.items" :key="i">
+        <li v-for="(subitem, i) in item.items" :key="i" class="border-t">
           <filter-item
-            class="pl-6"
-            v-model="selectedItems"
-            :item="subitem"
-            :showExpand="subitem.items && subitem.items.length > 0"
-            @on-expand-toggle="(v) => (subitem.subVisible = v)"
-            :is-expand="subitem.subVisible"
-            :select-root="selectRoot"
             :key="subitem.id"
+            v-model="selectedItems"
+            :is-expand="subitem.subVisible"
+            :item="subitem"
+            :select-root="selectRoot"
+            :showExpand="subitem.items && subitem.items.length > 0"
+            class="pl-6"
             @change="selectChilds(subitem, $event.target.checked)"
+            @on-expand-toggle="(v) => (subitem.subVisible = v)"
           />
           <ul v-if="subitem.subVisible">
             <li
-              class="border-t"
               v-for="(subsubitem, i) in subitem.items"
               :key="i"
+              class="border-t"
             >
               <filter-item
-                class="pl-8"
-                v-model="selectedItems"
-                :item="subsubitem"
-                :showExpand="subsubitem.items && subsubitem.items.length > 0"
-                @on-expand-toggle="(v) => (subsubitem.subVisible = v)"
-                :is-expand="subsubitem.subVisible"
-                :select-root="selectRoot"
                 :key="subsubitem.id"
+                v-model="selectedItems"
+                :is-expand="subsubitem.subVisible"
+                :item="subsubitem"
+                :select-root="selectRoot"
+                :showExpand="subsubitem.items && subsubitem.items.length > 0"
+                class="pl-8"
                 @change="selectChilds(subsubitem, $event.target.checked)"
+                @on-expand-toggle="(v) => (subsubitem.subVisible = v)"
               />
             </li>
           </ul>
@@ -58,8 +58,8 @@
         @click="isShowFull = !isShowFull"
       >
         <span class="material-icons-outlined">{{
-          isShowFull ? "expand_less" : "expand_more"
-        }}</span>
+            isShowFull ? "expand_less" : "expand_more"
+          }}</span>
       </button>
     </li>
   </ul>
@@ -67,19 +67,19 @@
 
 <script setup>
 import FilterItem from "@/components/FilterItem.vue"
-import { ref, computed } from "vue"
+import { computed, ref } from "vue"
 
 const props = defineProps([
   "items",
   "single",
   "nested",
   "selectRoot",
-  "modelValue",
+  "modelValue"
 ])
 const emit = defineEmits(["change", "update:modelValue"])
 
 const VISIBLE_ITEMS_COUNT = 3
-const isShowFull = ref(false)
+const isShowFull = ref(true)
 const mainItems = computed(() => props.items.filter((item) => !item.parentId))
 const isItemsMore = computed(() => mainItems.value.length > VISIBLE_ITEMS_COUNT)
 const visibleItemsCount = computed(() =>
@@ -104,7 +104,7 @@ const selectedItems = computed({
   },
   set(value) {
     emitUpdates(value)
-  },
+  }
 })
 
 const getNestedIds = (obj, ids = []) => {

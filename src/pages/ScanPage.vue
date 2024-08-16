@@ -89,7 +89,7 @@
 import BarcodeScanner from "@/components/BarcodeScanner.vue"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
-import { getItem } from "@/services/ItemSearch"
+import { getPointItem } from "@/services/ItemSearch"
 import { useCartStore } from "@/stores/cart.store"
 
 const store = useCartStore()
@@ -143,7 +143,7 @@ const checkItem = async (id) => {
   try {
     isLoading.value = true
     isNotFound.value = false
-    const item = await getItem(id)
+    const item = await getPointItem(id)
     resultItem.value = item
     isStopped.value = true
     const sound = document.getElementById("beepSound")

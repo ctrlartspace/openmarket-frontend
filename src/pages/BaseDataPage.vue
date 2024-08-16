@@ -157,7 +157,7 @@ const showDialog = ref({ editFilter: false, showFilterMobile: false })
 
 const updateItems = async () => {
   const filterQuery = selectedFilters.value.join(",")
-  items.value = await PointService.getItems(filterQuery)
+  items.value = await PointService.getPointItems(filterQuery)
 }
 
 const newFilter = ref({})
@@ -192,7 +192,7 @@ const deleteFilter = async () => {
 }
 
 onMounted(async () => {
-  items.value = await PointService.getItems()
+  items.value = await PointService.getPointItems()
   filtersList.value = await PointService.getFilters()
 })
 

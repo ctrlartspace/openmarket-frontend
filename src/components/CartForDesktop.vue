@@ -93,7 +93,7 @@ import DesktopBottomBar from "@/components/DesktopBottomBar.vue"
 import { ref, nextTick, onMounted, onBeforeUnmount } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
-import { getItem } from "@/services/PointService"
+import { getPointItem } from "@/services/PointService"
 
 const store = useCartStore()
 const router = useRouter()
@@ -109,7 +109,7 @@ const addCartItem = async () => {
   }
 
   try {
-    const item = await getItem(inputValue.value, { searchBy: "code" })
+    const item = await getPointItem(inputValue.value, { searchBy: "code" })
     store.addItem(item)
     inputValue.value = ""
     isSearchError.value = false

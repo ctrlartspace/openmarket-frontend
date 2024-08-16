@@ -143,7 +143,7 @@
 import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
-import { getItem } from "@/services/PointService"
+import { getPointItem } from "@/services/PointService"
 import { makeSale } from "@/services/ItemSearch"
 
 const store = useCartStore()
@@ -174,7 +174,7 @@ const addCartItem = async () => {
   }
 
   try {
-    const item = await getItem(inputValue.value)
+    const item = await getPointItem(inputValue.value)
     store.addItem(item)
     inputValue.value = ""
     isSearchError.value = false

@@ -9,7 +9,7 @@ export const useUserStore = defineStore(
     const isAuthorizedStore = ref(false)
     const isAuthorizedPoint = ref(false)
     const router = useRouter()
-    const storePoint = ref(null)
+    const point = ref(null)
 
     const loginToStore = async (data) => {
       try {
@@ -23,7 +23,7 @@ export const useUserStore = defineStore(
     const loginToStorePoint = async (id) => {
       try {
         const response = await UserService.loginToStorePoint(id)
-        storePoint.value = response.storePoint
+        point.value = response.point
         isAuthorizedPoint.value = true
         return Promise.resolve(response)
       } catch (error) {
@@ -31,9 +31,16 @@ export const useUserStore = defineStore(
       }
     }
 
+    const logOutFromPoint = () => {
+      isAuthorizedPoint.value = false
+      point.value = null
+      router.push("/store")
+    }
+
     const logOut = () => {
       isAuthorizedStore.value = false
       isAuthorizedPoint.value = false
+      point.value = null
       router.push("/auth")
     }
 
@@ -43,7 +50,8 @@ export const useUserStore = defineStore(
       loginToStore,
       loginToStorePoint,
       logOut,
-      storePoint,
+      logOutFromPoint,
+      point,
     }
   },
   {

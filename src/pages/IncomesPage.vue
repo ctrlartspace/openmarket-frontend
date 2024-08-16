@@ -12,8 +12,8 @@
         <filter-tree
           v-model="selectedFilters"
           :items="filtersList"
-          @change="updateItems"
           nested="true"
+          @change="updateItems"
         />
       </div>
     </div>
@@ -30,7 +30,9 @@
           </button>
         </template>
 
-        <template #afterSelect> <div>s</div></template>
+        <template #afterSelect>
+          <div>s</div>
+        </template>
       </search-field>
       <data-table
         v-model="selectedItems"
@@ -48,7 +50,7 @@ import FilterTree from "@/components/FilterTree.vue"
 import SearchField from "@/components/ui/SearchField.vue"
 import DataTable from "@/components/ui/DataTable.vue"
 
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 
 import * as DataManager from "@/services/ItemSearch"
@@ -84,16 +86,17 @@ onMounted(async () => {
   items.value = await DataManager.getIncomes()
   filtersList.value = await DataManager.getFilters()
 })
+
 const tableFields = ref([
   {
     name: "item.name",
-    className: "w-full",
+    className: "w-full"
   },
   { name: "count", className: "whitespace-nowrap", postfix: " шт" },
   {
     name: "purchasePrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT",
-  },
+    postfix: " KZT"
+  }
 ])
 </script>
