@@ -1,0 +1,58 @@
+<template>
+  <a-page>
+    <template #header>
+      <router-link
+        to="/store/items/add"
+        class="text-base font-medium text-blue-600"
+        >Добавить</router-link
+      >
+    </template>
+    <data-table
+      :table-data="storeItems"
+      :table-fields="tableFields"
+      @on-item-click="onItemClick"
+    >
+    </data-table>
+  </a-page>
+</template>
+
+<script setup>
+import { ref, onMounted } from "vue"
+import { useRouter } from "vue-router"
+import StoreService from "@/services/StoreService"
+import DataTable from "@/components/ui/DataTable.vue"
+
+const router = useRouter()
+const storeItems = ref([])
+
+const getStoreItems = async () => {
+  try {
+    storeItems.value = await StoreService.getStoreItems()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const onItemClick = (item) => {
+  router.push(`/store/items/${item.id}`)
+}
+
+onMounted(() => {
+  getStoreItems()
+})
+
+const tableFields = ref([
+  {
+    name: "name",
+    className: "w-full",
+  },
+  { name: "count", className: "whitespace-nowrap", postfix: " шт" },
+  {
+    name: "purchasePrice",
+    className: "whitespace-nowrap ",
+    postfix: " KZT",
+  },
+])
+</script>
+
+<style lang="scss" scoped></style>
