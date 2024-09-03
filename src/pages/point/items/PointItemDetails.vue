@@ -52,7 +52,7 @@
       />
       <a-base-input
         id="filters"
-        v-model="filters"
+        v-model="item.filters"
         label="Фильтры"
         placeholder="Фильтры"
         type="text"
@@ -76,8 +76,12 @@ const { filters, filterPathMulti } = useFilters()
 const getPointItem = async (id) => {
   try {
     item.value = await PointService.getPointItem(id)
+    if (filters.value) {
+      item.value.filters = filters
+    } else {
+      filters.value = item.value.filters
+    }
 
-    // filters.value = item.value.filters
   } catch (error) {
     console.error(error)
   }
@@ -100,6 +104,7 @@ const updatePointItem = async () => {
     console.error(error)
   }
 }
+
 
 onMounted(async () => {
   const id = route.params.id

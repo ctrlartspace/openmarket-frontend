@@ -6,7 +6,7 @@
         <tr
           v-for="item in tableData"
           :key="item.id"
-          class="p-4 flex flex-col md:block md:p-0 cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b last:border-none"
+          class="p-4 flex flex-col md:block md:p-0 cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b border-neutral-300 last:border-none"
           @click="emit('onItemClick', item)"
         >
           <td class="hidden md:table-cell md:pl-4 md:py-2 w-2">
@@ -38,7 +38,7 @@
         </tr>
         <tr
           v-if="tableData.length === 0"
-          class="p-4 flex flex-col md:block md:p-0 cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b last:border-none"
+          class="p-4 flex flex-col md:block md:p-0 cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b border-neutral-300 last:border-none"
         >
           <td class="text-center md:px-4 md:py-2">
             <span class="text-gray-300"> Нет данных </span>

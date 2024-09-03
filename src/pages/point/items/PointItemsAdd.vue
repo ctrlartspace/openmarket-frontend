@@ -77,6 +77,7 @@ const { storeItem } = useStoreItem()
 
 const addPointItem = async () => {
   try {
+    item.value.filters = filters.value
     const pointItem = PointItemService.addPointItem(item.value)
     router.push({ name: "pointItems" })
   } catch (error) {

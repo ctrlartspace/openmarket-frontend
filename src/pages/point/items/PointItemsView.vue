@@ -4,8 +4,9 @@
       <router-link
         :to="filterPathMulti"
         class="text-base font-medium text-blue-600"
-      >Фильтры
-        {{ filters ? `(${selectedFiltersLength})` : "" }}
+      >
+        Фильтры
+        {{ filters ? `[${selectedFiltersLength}]` : "" }}
       </router-link
       >
       <router-link

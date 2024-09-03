@@ -1,6 +1,6 @@
 <template>
   <a-page title="Выберите товар...">
-    <template #header> </template>
+    <template #header></template>
     <data-table
       :table-data="storeItems"
       :table-fields="tableFields"
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useStoreItem } from "@/composables/storeItem.js"
 import DataTable from "@/components/ui/DataTable.vue"
@@ -31,7 +31,7 @@ const onApplyClick = (item) => {
       name: previousRoute.name,
       params: previousRoute.params,
       query: { ...previousRoute.query, storeItem: storeItem.value },
-      replace: true,
+      replace: true
     })
   } catch (error) {
     console.log(error)
@@ -46,20 +46,20 @@ const getStoreItems = async () => {
 }
 
 onMounted(async () => {
-  getStoreItems()
+  await getStoreItems()
 })
 
 const tableFields = ref([
   {
     name: "name",
-    className: "w-full",
+    className: "w-full"
   },
   { name: "count", className: "whitespace-nowrap", postfix: " шт" },
   {
     name: "purchasePrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT",
-  },
+    postfix: " KZT"
+  }
 ])
 </script>
 

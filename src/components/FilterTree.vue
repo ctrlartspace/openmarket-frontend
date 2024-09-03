@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="firstItems.length > 0">
+  <ul v-if="firstItems.length > 0" class="border border-neutral-300 rounded overflow-auto">
     <li
       v-for="(item, i) in firstItems"
       :key="i"
@@ -63,6 +63,9 @@
       </button>
     </li>
   </ul>
+  <div v-else class="px-4 py-2 border border-neutral-300 rounded">
+    <span class="text-base text-neutral-300">Элементы не найдены</span>
+  </div>
 </template>
 
 <script setup>

@@ -2,9 +2,10 @@
   <a-page>
     <template #header>
       <router-link
-        to="/store/items/add"
         class="text-base font-medium text-blue-600"
-        >Добавить</router-link
+        to="/store/items/add"
+      >Добавить
+      </router-link
       >
     </template>
     <data-table
@@ -17,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
@@ -44,14 +45,13 @@ onMounted(() => {
 const tableFields = ref([
   {
     name: "name",
-    className: "w-full",
+    className: "w-full"
   },
-  { name: "count", className: "whitespace-nowrap", postfix: " шт" },
   {
     name: "purchasePrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT",
-  },
+    postfix: " KZT"
+  }
 ])
 </script>
 
