@@ -1,22 +1,20 @@
 <template>
   <a-page title="Новый сотрудник">
     <template #header>
-      <button class="text-base font-medium text-blue-600" @click="addStoreUser">
-        Сохранить
-      </button>
+      <a-button primary @click="addStoreUser"> Сохранить </a-button>
     </template>
     <div class="flex flex-col gap-2">
       <a-base-input
-        v-model="storeUser.name"
         id="store-user-name"
-        type="text"
+        v-model="storeUser.name"
         placeholder="Имя сотрудника"
+        type="text"
       />
       <a-base-input
-        v-model="storeUser.password"
         id="store-user-password"
-        type="text"
+        v-model="storeUser.password"
         placeholder="Пароль"
+        type="text"
       />
     </div>
   </a-page>
@@ -27,6 +25,7 @@ import { ref } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
+import AButton from "@/components/ui/AButton.vue"
 
 const router = useRouter()
 const storeUser = ref({})

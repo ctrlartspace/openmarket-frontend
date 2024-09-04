@@ -1,20 +1,19 @@
 <template>
   <a-page title="Добавить сотрудника">
     <template #header>
-      <button class="text-base font-medium text-blue-600" @click="addPointUser">
-        Сохранить
-      </button>
+      <a-button primary @click="addPointUser"> Сохранить </a-button>
     </template>
     <a-select v-model="selectedUserId" :items="storeUsers" />
   </a-page>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import PointUserService from "@/services/point/users.js"
 import StoreService from "@/services/StoreService"
 import ASelect from "@/components/ui/ASelect.vue"
+import AButton from "@/components/ui/AButton.vue"
 
 const router = useRouter()
 const selectedUserId = ref(null)

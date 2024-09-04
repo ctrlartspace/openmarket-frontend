@@ -1,23 +1,16 @@
 <template>
   <a-page>
     <template #header>
-      <router-link
-        :to="filterPathMulti"
-        class="bg-blue-50 rounded  flex items-center text-blue-600"
-      >
+      <a-link :to="filterPathMulti" neutral>
         <span class="material-icons-outlined text-[28px]">tune</span>
-      </router-link
-      >
-      <router-link
-        class="text-base font-medium text-blue-600"
-        to="/arrivals/items/add"
-      >Добавить
-      </router-link>
+      </a-link>
+      <a-link primary to="/arrivals/items/add"> Добавить</a-link>
     </template>
 
     <data-table
       :table-data="pointItems"
       :table-fields="tableFields"
+      @on-item-click="onItemClick"
     >
     </data-table>
   </a-page>
@@ -29,21 +22,26 @@ import { useRouter } from "vue-router"
 import ArrivalService from "@/services/arrivals/items.js"
 import DataTable from "@/components/ui/DataTable.vue"
 import { useFilters } from "@/composables/filters.js"
+import ALink from "@/components/ui/ALink.vue"
 
 const router = useRouter()
 const pointItems = ref([])
-const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } = useFilters()
+const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =
+  useFilters()
 
 const getPointItems = async () => {
   try {
     pointItems.value = await ArrivalService.getArrivalItems({
-      filters: joinedFilters.value
+      filters: joinedFilters.value,
     })
   } catch (error) {
     console.log(error)
   }
 }
 
+const onItemClick = (item) => {
+  router.push(`/point/items/${item.pointItem.id}`)
+}
 
 onMounted(() => {
   getPointItems()
@@ -52,9 +50,9 @@ onMounted(() => {
 const tableFields = ref([
   {
     name: "pointItem.storeItem.name",
-    className: "w-full"
+    className: "w-full",
   },
-  { name: "count", className: "whitespace-nowrap", postfix: " шт" }
+  { name: "count", className: "whitespace-nowrap", postfix: " шт" },
 ])
 </script>
 

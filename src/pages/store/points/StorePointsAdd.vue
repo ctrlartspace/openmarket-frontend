@@ -1,18 +1,13 @@
 <template>
   <a-page title="Новая точка">
     <template #header>
-      <button
-        class="text-base font-medium text-blue-600"
-        @click="addStorePoint"
-      >
-        Сохранить
-      </button>
+      <a-button primary @click="addStorePoint"> Сохранить </a-button>
     </template>
     <a-base-input
-      v-model="storePointName"
       id="store-point-name"
-      type="text"
+      v-model="storePointName"
       placeholder="Название точки"
+      type="text"
     />
   </a-page>
 </template>
@@ -22,6 +17,7 @@ import { ref } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
+import AButton from "@/components/ui/AButton.vue"
 
 const router = useRouter()
 const storePointName = ref("")

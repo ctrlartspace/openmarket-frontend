@@ -1,11 +1,7 @@
 <template>
   <a-page>
     <template #header>
-      <router-link
-        to="/store/users/add"
-        class="text-base font-medium text-blue-600"
-        >Добавить</router-link
-      >
+      <a-link primary to="/store/users/add">Добавить </a-link>
     </template>
     <data-table :table-data="storeUsers" :table-fields="tableFields">
     </data-table>
@@ -13,9 +9,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
+import ALink from "@/components/ui/ALink.vue"
 
 const storeUsers = ref([])
 

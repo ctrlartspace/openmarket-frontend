@@ -1,15 +1,13 @@
 <template>
   <a-page title="Новый товар">
     <template #header>
-      <button class="text-base font-medium text-blue-600" @click="addPointItem">
-        Сохранить
-      </button>
+      <a-button primary @click="addPointItem"> Сохранить </a-button>
     </template>
     <div class="flex flex-col gap-2">
       <router-link
         :to="{
           path: '/store/items',
-          query: { selectableMode: true},
+          query: { selectableMode: true },
         }"
         class="px-4 py-2 border border-neutral-300 rounded bg-neutral-100 hover:border-neutral-500"
       >
@@ -21,12 +19,8 @@
             Покупка: {{ storeItem.purchasePrice }} KZT Продажа:
             {{ storeItem.sellingPrice }} KZT
           </p>
-
         </div>
-        <p v-else>
-
-          Выбрать товар
-        </p>
+        <p v-else>Выбрать товар</p>
       </router-link>
       <a-base-input
         id="purchase-price"
@@ -67,6 +61,7 @@ import PointItemService from "@/services/point/items.js"
 import { useFilters } from "@/composables/filters.js"
 import { useSelect } from "@/composables/useSelect.js"
 import { getStoreItem } from "@/services/StoreService.js"
+import AButton from "@/components/ui/AButton.vue"
 
 const router = useRouter()
 const item = ref({})

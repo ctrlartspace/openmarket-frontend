@@ -1,11 +1,7 @@
 <template>
   <a-page>
     <template #header>
-      <router-link
-        to="/point/users/add"
-        class="text-base font-medium text-blue-600"
-        >Добавить</router-link
-      >
+      <a-link primary to="/point/users/add">Добавить </a-link>
     </template>
     <data-table :table-data="pointUsers" :table-fields="tableFields">
     </data-table>
@@ -13,9 +9,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import PointUserService from "@/services/point/users.js"
 import DataTable from "@/components/ui/DataTable.vue"
+import ALink from "@/components/ui/ALink.vue"
 
 const pointUsers = ref([])
 

@@ -1,9 +1,7 @@
 <template>
   <a-page title="Новое поступление">
     <template #header>
-      <button class="text-base font-medium text-blue-600" @click="addArrival">
-        Сохранить
-      </button>
+      <a-button primary @click="addArrival">Сохранить</a-button>
     </template>
     <div class="flex flex-col gap-2">
       <router-link
@@ -21,12 +19,8 @@
             Покупка: {{ pointItem.purchasePrice }} KZT Продажа:
             {{ pointItem.sellingPrice }} KZT
           </p>
-
         </div>
-        <p v-else>
-
-          Выбрать товар
-        </p>
+        <p v-else>Выбрать товар</p>
       </router-link>
       <a-base-input
         id="purchase-price"
@@ -48,6 +42,7 @@ import ABaseInput from "@/components/ui/ABaseInput.vue"
 import ArrivalService from "@/services/arrivals/items.js"
 import { useSelect } from "@/composables/useSelect.js"
 import { getPointItem } from "@/services/PointService.js"
+import AButton from "@/components/ui/AButton.vue"
 
 const router = useRouter()
 const item = ref({})

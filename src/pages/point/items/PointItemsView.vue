@@ -1,20 +1,13 @@
 <template>
   <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
     <template #header>
-      <router-link
-        :to="filterPathMulti"
-        class="text-base font-medium text-blue-600"
-      >
+      <a-link :to="filterPathMulti" primary>
         Фильтры
         {{ filters ? `[${selectedFiltersLength}]` : "" }}
-      </router-link
-      >
-      <router-link
-        v-if="!isSelectableMode"
-        class="text-base font-medium text-blue-600"
-        to="/point/items/add"
-      >Добавить
-      </router-link>
+      </a-link>
+      <a-link v-if="!isSelectableMode" primary to="/point/items/add"
+        >Добавить
+      </a-link>
     </template>
 
     <data-table
@@ -33,16 +26,18 @@ import PointService from "@/services/PointService.js"
 import DataTable from "@/components/ui/DataTable.vue"
 import { useFilters } from "@/composables/filters.js"
 import { useSelect } from "@/composables/useSelect.js"
+import ALink from "@/components/ui/ALink.vue"
 
 const router = useRouter()
 const pointItems = ref([])
-const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } = useFilters()
+const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =
+  useFilters()
 const { isSelectableMode, applySelect } = useSelect()
 
 const getPointItems = async () => {
   try {
     pointItems.value = await PointService.getPointItems({
-      filters: joinedFilters.value
+      filters: joinedFilters.value,
     })
   } catch (error) {
     console.log(error)
@@ -64,14 +59,14 @@ onMounted(() => {
 const tableFields = ref([
   {
     name: "storeItem.name",
-    className: "w-full"
+    className: "w-full",
   },
   { name: "count", className: "whitespace-nowrap", postfix: " шт" },
   {
     name: "purchasePrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT"
-  }
+    postfix: " KZT",
+  },
 ])
 </script>
 

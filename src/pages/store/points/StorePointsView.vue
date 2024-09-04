@@ -1,11 +1,7 @@
 <template>
   <a-page>
     <template #header>
-      <router-link
-        to="/store/points/add"
-        class="text-base font-medium text-blue-600"
-        >Добавить</router-link
-      >
+      <a-link primary to="/store/points/add">Добавить </a-link>
     </template>
     <data-table
       :table-data="storePoints"
@@ -17,11 +13,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouter } from "vue-router"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
+import ALink from "@/components/ui/ALink.vue"
 
 const store = useUserStore()
 const router = useRouter()

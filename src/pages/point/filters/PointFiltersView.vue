@@ -1,28 +1,15 @@
 <template>
   <a-page title="Фильтры">
     <template #header>
-
-      <router-link
-        v-if="!isFilterMode"
-        :to="filterPathAdd"
-        class="text-base font-medium text-blue-600"
-      >
+      <a-link v-if="!isFilterMode" :to="filterPathAdd" primary>
         {{ filters ? `Добавить в "${filters}"` : "Добавить" }}
-      </router-link>
-      <button
-        v-if="isFilterMode"
-        class="text-base font-medium text-neutral-300 hover:text-black"
-        @click="resetFilters"
-      >
+      </a-link>
+      <a-button v-if="isFilterMode" neutral @click="resetFilters">
         Сброс
-      </button>
-      <button
-        v-if="isFilterMode"
-        class="text-base font-medium text-blue-600"
-        @click="applyFilters"
-      >
+      </a-button>
+      <a-button v-if="isFilterMode" primary @click="applyFilters">
         Готово
-      </button>
+      </a-button>
     </template>
     <div class="flex flex-col gap-2">
       <filter-tree
@@ -39,9 +26,18 @@
 <script setup>
 import FilterTree from "@/components/FilterTree.vue"
 import { useFilters } from "@/composables/filters.js"
+import ALink from "@/components/ui/ALink.vue"
+import AButton from "@/components/ui/AButton.vue"
 
-const { filters, filterPathAdd, isSingle, isFilterMode, applyFilters, resetFilters, filterItems } = useFilters()
-
+const {
+  filters,
+  filterPathAdd,
+  isSingle,
+  isFilterMode,
+  applyFilters,
+  resetFilters,
+  filterItems,
+} = useFilters()
 </script>
 
 <style lang="scss" scoped></style>

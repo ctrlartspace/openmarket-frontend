@@ -1,13 +1,9 @@
 <template>
   <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
     <template #header>
-      <router-link
-        v-if="!isSelectableMode"
-        class="text-base font-medium text-blue-600"
-        to="/store/items/add"
-      >Добавить
-      </router-link
-      >
+      <a-link v-if="!isSelectableMode" primary to="/store/items/add"
+        >Добавить
+      </a-link>
     </template>
     <data-table
       :table-data="storeItems"
@@ -24,6 +20,7 @@ import { useRouter } from "vue-router"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
 import { useSelect } from "@/composables/useSelect.js"
+import ALink from "@/components/ui/ALink.vue"
 
 const router = useRouter()
 const storeItems = ref([])
@@ -52,13 +49,13 @@ onMounted(() => {
 const tableFields = ref([
   {
     name: "name",
-    className: "w-full"
+    className: "w-full",
   },
   {
     name: "purchasePrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT"
-  }
+    postfix: " KZT",
+  },
 ])
 </script>
 
