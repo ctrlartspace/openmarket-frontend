@@ -35,9 +35,11 @@ import PointFilters from "@/pages/point/filters/PointFilters.vue"
 import PointFiltersView from "@/pages/point/filters/PointFiltersView.vue"
 import PointFiltersAdd from "@/pages/point/filters/PointFiltersAdd.vue"
 
+import ArrivalsPage from "@/pages/arrivals/ArrivalsPage.vue"
+import ArrivalItems from "@/pages/arrivals/items/ArrivalItems.vue"
+import ArrivalItemsView from "@/pages/arrivals/items/ArrivalItemsView.vue"
+import ArrivalItemsAdd from "@/pages/arrivals/items/ArrivalItemsAdd.vue"
 // import SelectFiltersPage from "@/pages/selectable/SelectFiltersPage.vue"
-import SelectStoreItemsPage from "@/pages/selectable/SelectStoreItemsPage.vue"
-
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
 
@@ -108,7 +110,7 @@ const routes = [
     path: "/point",
     component: PointPage,
     name: "point",
-    redirect: "/point/users",
+    redirect: "/point/items",
     children: [
       {
         path: "users",
@@ -144,10 +146,6 @@ const routes = [
             path: ":id",
             name: "pointItem",
             component: PointItemDetails
-          },
-          {
-            path: "store-items",
-            component: SelectStoreItemsPage
           }
         ]
       },
@@ -164,6 +162,30 @@ const routes = [
             path: "add",
             name: "pointFiltersAdd",
             component: PointFiltersAdd
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: "/arrivals",
+    component: ArrivalsPage,
+    name: "arrivals",
+    redirect: "/arrivals/items",
+    children: [
+      {
+        path: "items",
+        component: ArrivalItems,
+        children: [
+          {
+            path: "",
+            name: "arrivalItems",
+            component: ArrivalItemsView
+          },
+          {
+            path: "add",
+            name: "arrivalItemsAdd",
+            component: ArrivalItemsAdd
           }
         ]
       }

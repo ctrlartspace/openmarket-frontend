@@ -2,32 +2,32 @@
   <nav v-if="store.isAuthorizedPoint">
     <!-- Desktop -->
     <ul class="w-full flex gap-4 border-b border-neutral-300 px-4 py-1">
-      <li class="inline" v-for="(item, i) in menuItems" :key="i">
+      <li v-for="(item, i) in menuItems" :key="i" class="inline">
         <router-link v-slot="{ isActive }" :to="item.path">
           <span
-            class="font-medium text-base"
             :class="isActive ? 'text-black' : 'text-gray-300'"
+            class="font-medium text-base"
           >
             {{ item.title }}
           </span>
         </router-link>
       </li>
+      <li class="ml-auto"></li>
       <li v-if="store.point" class="w-auto truncate inline text-pink-300">
         <router-link v-slot="{ isActive }" to="/point">
           <span
-            class="font-medium text-base"
             :class="isActive ? 'text-pink-500' : 'text-pink-300'"
+            class="font-medium text-base"
           >
             {{ store.point.name }}
           </span>
         </router-link>
       </li>
-      <li class="ml-auto"></li>
       <li class="inline">
         <router-link v-slot="{ isActive }" to="/store">
           <span
-            class="font-medium text-base"
             :class="isActive ? 'text-black' : 'text-gray-300'"
+            class="font-medium text-base"
           >
             Магазин
           </span>
@@ -41,8 +41,8 @@
       <li class="inline">
         <router-link v-slot="{ isActive }" to="/store">
           <span
-            class="font-medium text-base"
             :class="isActive ? 'text-black' : 'text-gray-300'"
+            class="font-medium text-base"
           >
             Магазин
           </span>
@@ -64,20 +64,20 @@ const isCollapsed = ref(false)
 const menuItems = ref([
   {
     title: "Корзина",
-    path: "/cart",
+    path: "/cart"
   },
   {
     title: "Касса",
-    path: "/cash",
+    path: "/cash"
   },
   {
     title: "Продажи",
-    path: "/sales",
+    path: "/sales"
   },
   {
-    title: "Поступления",
-    path: "/incomes",
-  },
+    title: "Приход",
+    path: "/arrivals"
+  }
 ])
 </script>
 

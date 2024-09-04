@@ -7,29 +7,26 @@
     </template>
     <div class="flex flex-col gap-2">
       <router-link
-        v-if="storeItem"
         :to="{
-          path: '/point/items/store-items',
+          path: '/store/items',
+          query: { selectableMode: true},
         }"
         class="px-4 py-2 border border-neutral-300 rounded bg-neutral-100 hover:border-neutral-500"
       >
-        <h1 class="text-base font-medium">
-          {{ storeItem.code + ", " + storeItem.name }}
-        </h1>
-        <p class="text-sm text-neutral-400">
-          Покупка: {{ storeItem.purchasePrice }} KZT Продажа:
-          {{ storeItem.sellingPrice }} KZT
+        <div v-if="storeItem">
+          <h1 class="text-base font-medium">
+            {{ storeItem.code + ", " + storeItem.name }}
+          </h1>
+          <p class="text-sm text-neutral-400">
+            Покупка: {{ storeItem.purchasePrice }} KZT Продажа:
+            {{ storeItem.sellingPrice }} KZT
+          </p>
+
+        </div>
+        <p v-else>
+
+          Выбрать товар
         </p>
-      </router-link>
-      <router-link
-        v-else
-        :to="{
-          path: '/point/items/store-items',
-          query: { from: 'pointItemsAdd' },
-        }"
-        class="px-4 py-2 border border-neutral-300 rounded bg-neutral-100 hover:border-neutral-500"
-      >
-        Выбрать товар
       </router-link>
       <a-base-input
         id="purchase-price"
@@ -68,18 +65,19 @@ import { useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import PointItemService from "@/services/point/items.js"
 import { useFilters } from "@/composables/filters.js"
-import { useStoreItem } from "@/composables/storeItem.js"
+import { useSelect } from "@/composables/useSelect.js"
+import { getStoreItem } from "@/services/StoreService.js"
 
 const router = useRouter()
 const item = ref({})
 const { filters, filterPathMulti } = useFilters()
-const { storeItem } = useStoreItem()
+const { selectedItem: storeItem } = useSelect(getStoreItem)
 
 const addPointItem = async () => {
   try {
     item.value.filters = filters.value
-    const pointItem = PointItemService.addPointItem(item.value)
-    router.push({ name: "pointItems" })
+    await PointItemService.addPointItem(item.value)
+    await router.push({ name: "pointItems" })
   } catch (error) {
     console.log(error)
   }

@@ -1,6 +1,11 @@
 <template>
   <a-page title="Товар">
     <template #header>
+      <router-link
+        :to="{ path:'/arrivals/items/add', query: { selectedItem: item.id}}"
+        class="text-base font-medium text-blue-600"
+      >Приход
+      </router-link>
       <button
         class="text-base font-medium text-blue-600"
         @click="updatePointItem"
@@ -49,6 +54,15 @@
         placeholder="Цена продажи"
         type="text"
         unit="KZT"
+      />
+      <a-base-input
+        id="count"
+        v-model="item.count"
+        label="Количество"
+        placeholder="Количество"
+        readonly
+        type="text"
+        unit="Шт."
       />
       <a-base-input
         id="filters"

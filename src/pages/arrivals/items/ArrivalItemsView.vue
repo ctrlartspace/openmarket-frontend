@@ -1,18 +1,16 @@
 <template>
-  <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
+  <a-page>
     <template #header>
       <router-link
         :to="filterPathMulti"
-        class="text-base font-medium text-blue-600"
+        class="bg-blue-50 rounded  flex items-center text-blue-600"
       >
-        Фильтры
-        {{ filters ? `[${selectedFiltersLength}]` : "" }}
+        <span class="material-icons-outlined text-[28px]">tune</span>
       </router-link
       >
       <router-link
-        v-if="!isSelectableMode"
         class="text-base font-medium text-blue-600"
-        to="/point/items/add"
+        to="/arrivals/items/add"
       >Добавить
       </router-link>
     </template>
@@ -20,7 +18,6 @@
     <data-table
       :table-data="pointItems"
       :table-fields="tableFields"
-      @on-item-click="onItemClick"
     >
     </data-table>
   </a-page>
@@ -29,19 +26,17 @@
 <script setup>
 import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
-import PointService from "@/services/PointService.js"
+import ArrivalService from "@/services/arrivals/items.js"
 import DataTable from "@/components/ui/DataTable.vue"
 import { useFilters } from "@/composables/filters.js"
-import { useSelect } from "@/composables/useSelect.js"
 
 const router = useRouter()
 const pointItems = ref([])
 const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } = useFilters()
-const { isSelectableMode, applySelect } = useSelect()
 
 const getPointItems = async () => {
   try {
-    pointItems.value = await PointService.getPointItems({
+    pointItems.value = await ArrivalService.getArrivalItems({
       filters: joinedFilters.value
     })
   } catch (error) {
@@ -49,13 +44,6 @@ const getPointItems = async () => {
   }
 }
 
-const onItemClick = (item) => {
-  if (isSelectableMode.value) {
-    applySelect(item.id)
-  } else {
-    router.push(`/point/items/${item.id}`)
-  }
-}
 
 onMounted(() => {
   getPointItems()
@@ -63,15 +51,10 @@ onMounted(() => {
 
 const tableFields = ref([
   {
-    name: "storeItem.name",
+    name: "pointItem.storeItem.name",
     className: "w-full"
   },
-  { name: "count", className: "whitespace-nowrap", postfix: " шт" },
-  {
-    name: "purchasePrice",
-    className: "whitespace-nowrap ",
-    postfix: " KZT"
-  }
+  { name: "count", className: "whitespace-nowrap", postfix: " шт" }
 ])
 </script>
 

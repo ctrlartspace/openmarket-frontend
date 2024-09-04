@@ -1,7 +1,8 @@
 <template>
-  <a-page>
+  <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
     <template #header>
       <router-link
+        v-if="!isSelectableMode"
         class="text-base font-medium text-blue-600"
         to="/store/items/add"
       >Добавить
@@ -22,9 +23,11 @@ import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
+import { useSelect } from "@/composables/useSelect.js"
 
 const router = useRouter()
 const storeItems = ref([])
+const { isSelectableMode, applySelect } = useSelect()
 
 const getStoreItems = async () => {
   try {
@@ -35,7 +38,11 @@ const getStoreItems = async () => {
 }
 
 const onItemClick = (item) => {
-  router.push(`/store/items/${item.id}`)
+  if (isSelectableMode.value) {
+    applySelect(item.id)
+  } else {
+    router.push(`/store/items/${item.id}`)
+  }
 }
 
 onMounted(() => {
