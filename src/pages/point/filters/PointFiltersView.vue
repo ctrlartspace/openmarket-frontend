@@ -4,7 +4,7 @@
       <a-link v-if="!isFilterMode" :to="filterPathAdd" primary>
         {{ filters ? `Добавить в "${filters}"` : "Добавить" }}
       </a-link>
-      <a-button v-if="isFilterMode" neutral @click="resetFilters">
+      <a-button v-if="isFilterMode" danger @click="resetFilters">
         Сброс
       </a-button>
       <a-button v-if="isFilterMode" primary @click="applyFilters">

@@ -8,7 +8,7 @@
     </template>
 
     <data-table
-      :table-data="pointItems"
+      :table-data="sales"
       :table-fields="tableFields"
       @on-item-click="onItemClick"
     >
@@ -17,21 +17,21 @@
 </template>
 
 <script setup>
+import DataTable from "@/components/ui/DataTable.vue"
+import ALink from "@/components/ui/ALink.vue"
 import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
-import ArrivalService from "@/services/arrivals/items.js"
-import DataTable from "@/components/ui/DataTable.vue"
 import { useFilters } from "@/composables/filters.js"
-import ALink from "@/components/ui/ALink.vue"
+import { getSales } from "@/services/sales/items.js"
 
 const router = useRouter()
-const pointItems = ref([])
+const sales = ref([])
 const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =
   useFilters()
 
 const getPointItems = async () => {
   try {
-    pointItems.value = await ArrivalService.getArrivalItems({
+    sales.value = await getSales({
       filters: joinedFilters.value,
     })
   } catch (error) {

@@ -32,7 +32,7 @@ import { ref } from "vue"
 const menuItems = ref([
   {
     title: "Все",
-    path: "/arrivals/items",
+    path: "/sales/items",
   },
 ])
 </script>

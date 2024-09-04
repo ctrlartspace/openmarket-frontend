@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import { ref, computed } from "vue"
+import { computed, ref } from "vue"
 
 export const useCartStore = defineStore("cart", () => {
   const cartItems = ref(new Map())
@@ -9,28 +9,28 @@ export const useCartStore = defineStore("cart", () => {
   ])
   const currentPaymentType = ref(0)
   const getPaymentType = computed(
-    () => paymentTypes.value[currentPaymentType.value]
+    () => paymentTypes.value[currentPaymentType.value],
   )
 
   const groupedCartItems = computed(() =>
-    [...cartItems.value].map((el) => el[1])
+    [...cartItems.value].map((el) => el[1]),
   )
 
   const isEmpty = computed(() => cartItems.value.size === 0)
 
   const getTotalAmount = computed(() =>
-    groupedCartItems.value.reduce((total, item) => total + item.totalPrice, 0)
+    groupedCartItems.value.reduce((total, item) => total + item.totalPrice, 0),
   )
 
   const getItemsForSale = computed(() =>
     groupedCartItems.value.map((item) => {
       return {
-        itemId: item.id,
+        pointItemId: item.id,
         sellingPrice: item.sellingPrice,
         count: item.count,
         paymentType: getPaymentType.value.code,
       }
-    })
+    }),
   )
 
   const addItem = (item, count = 1) => {

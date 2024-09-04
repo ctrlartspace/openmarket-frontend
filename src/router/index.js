@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router"
 import CartPage from "@/pages/CartPage.vue"
 import BaseDataPage from "@/pages/BaseDataPage.vue"
 import ItemPage from "@/pages/ItemPage.vue"
-import SalesPage from "@/pages/SalesPage.vue"
+// import SalesPage from "@/pages/SalesPage.vue"
 import IncomesPage from "@/pages/IncomesPage.vue"
 import AddIncomesPage from "@/pages/AddIncomesPage.vue"
 import AuthPage from "@/pages/AuthPage.vue"
@@ -39,9 +39,13 @@ import ArrivalsPage from "@/pages/arrivals/ArrivalsPage.vue"
 import ArrivalItems from "@/pages/arrivals/items/ArrivalItems.vue"
 import ArrivalItemsView from "@/pages/arrivals/items/ArrivalItemsView.vue"
 import ArrivalItemsAdd from "@/pages/arrivals/items/ArrivalItemsAdd.vue"
+
+import SalesPage from "@/pages/sales/SalesPage.vue"
+import SaleItems from "@/pages/sales/items/SaleItems.vue"
 // import SelectFiltersPage from "@/pages/selectable/SelectFiltersPage.vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
+import SaleItemsView from "@/pages/sales/items/SaleItemsView.vue"
 
 const routes = [
   { path: "/", component: CartPage },
@@ -58,14 +62,14 @@ const routes = [
           {
             path: "",
             name: "storeUsers",
-            component: StoreUsersView
+            component: StoreUsersView,
           },
           {
             path: "add",
             name: "storeUsersAdd",
-            component: StoreUsersAdd
-          }
-        ]
+            component: StoreUsersAdd,
+          },
+        ],
       },
       {
         path: "points",
@@ -74,14 +78,14 @@ const routes = [
           {
             path: "",
             name: "storePoints",
-            component: StorePointsView
+            component: StorePointsView,
           },
           {
             path: "add",
             name: "storePointsAdd",
-            component: StorePointsAdd
-          }
-        ]
+            component: StorePointsAdd,
+          },
+        ],
       },
       {
         path: "items",
@@ -90,21 +94,21 @@ const routes = [
           {
             path: "",
             name: "storeItems",
-            component: StoreItemsView
+            component: StoreItemsView,
           },
           {
             path: "add",
             name: "storeItemsAdd",
-            component: StoreItemsAdd
+            component: StoreItemsAdd,
           },
           {
             path: ":id",
             name: "storeItem",
-            component: StoreItemDetails
-          }
-        ]
-      }
-    ]
+            component: StoreItemDetails,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "/point",
@@ -119,14 +123,14 @@ const routes = [
           {
             path: "",
             name: "pointUsers",
-            component: PointUsersView
+            component: PointUsersView,
           },
           {
             path: "add",
             name: "pointUsersAdd",
-            component: PointUsersAdd
-          }
-        ]
+            component: PointUsersAdd,
+          },
+        ],
       },
       {
         path: "items",
@@ -135,19 +139,19 @@ const routes = [
           {
             path: "",
             name: "pointItems",
-            component: PointItemsView
+            component: PointItemsView,
           },
           {
             path: "add",
             name: "pointItemsAdd",
-            component: PointItemsAdd
+            component: PointItemsAdd,
           },
           {
             path: ":id",
             name: "pointItem",
-            component: PointItemDetails
-          }
-        ]
+            component: PointItemDetails,
+          },
+        ],
       },
       {
         path: "filters",
@@ -156,16 +160,16 @@ const routes = [
           {
             path: "",
             name: "pointFilters",
-            component: PointFiltersView
+            component: PointFiltersView,
           },
           {
             path: "add",
             name: "pointFiltersAdd",
-            component: PointFiltersAdd
-          }
-        ]
-      }
-    ]
+            component: PointFiltersAdd,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "/arrivals",
@@ -180,19 +184,43 @@ const routes = [
           {
             path: "",
             name: "arrivalItems",
-            component: ArrivalItemsView
+            component: ArrivalItemsView,
           },
           {
             path: "add",
             name: "arrivalItemsAdd",
-            component: ArrivalItemsAdd
-          }
-        ]
-      }
-    ]
+            component: ArrivalItemsAdd,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: "/sales",
+    component: SalesPage,
+    name: "sales",
+    redirect: "/sales/items",
+    children: [
+      {
+        path: "items",
+        component: SaleItems,
+        children: [
+          {
+            path: "",
+            name: "saleItems",
+            component: SaleItemsView,
+          },
+          // {
+          //   path: "add",
+          //   name: "arrivalItemsAdd",
+          //   component: ArrivalItemsAdd
+          // }
+        ],
+      },
+    ],
   },
   { path: "/cart", name: "cart", component: CartPage },
-  { path: "/sales", name: "sales", component: SalesPage },
+  // { path: "/sales", name: "sales", component: SalesPage },
   { path: "/incomes", name: "incomes", component: IncomesPage },
   { path: "/incomes/add", name: "incomesAdd", component: AddIncomesPage },
   { path: "/base", name: "base", component: BaseDataPage },
@@ -201,12 +229,12 @@ const routes = [
   { path: "/profile", name: "profile", component: ProfilePage },
   { path: "/auth", name: "auth", component: AuthPage },
   { path: "/cash", name: "cash", component: CashPage },
-  { path: "/scan", name: "scan", component: ScanPage }
+  { path: "/scan", name: "scan", component: ScanPage },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
 })
 
 router.beforeEach((to, from, next) => {
