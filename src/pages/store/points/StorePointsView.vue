@@ -1,13 +1,17 @@
 <template>
   <a-page>
     <template #header>
-      <a-link primary to="/store/points/add">Добавить </a-link>
+      <a-link primary to="/store/points/add">Добавить</a-link>
     </template>
     <data-table
+      :selectable="false"
       :table-data="storePoints"
       :table-fields="tableFields"
       @on-item-click="loginToStorePoint"
     >
+      <template #option>
+        <a-button accent>Открыть</a-button>
+      </template>
     </data-table>
   </a-page>
 </template>
@@ -19,6 +23,7 @@ import { useRouter } from "vue-router"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
 import ALink from "@/components/ui/ALink.vue"
+import AButton from "@/components/ui/AButton.vue"
 
 const store = useUserStore()
 const router = useRouter()
@@ -50,6 +55,9 @@ const tableFields = ref([
   {
     name: "name",
     className: "w-full",
+  },
+  {
+    name: "option",
   },
 ])
 </script>

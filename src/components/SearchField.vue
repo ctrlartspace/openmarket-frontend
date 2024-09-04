@@ -4,7 +4,7 @@
       <input
         ref="searchInput"
         v-model="value"
-        class="mb-0 border border-gray-200 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-medium rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
+        class="mb-0 border border-neutral-300 px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 appearance-none font-medium rounded w-full focus:outline-2 focus:outline-black focus:bg-white"
         placeholder="Код товара, название, модель"
         type="text"
         v-bind="$attrs"
@@ -14,12 +14,12 @@
         <span
           class="material-icons text-gray-400 hover:text-gray-800 active:text-gray-800 cursor-pointer"
           @click="onClearClick"
-        >close</span
+          >close</span
         >
       </div>
       <div
         :class="value ? 'block' : 'hidden'"
-        class="absolute mt-2 w-full bg-white py-2 border border-gray-200 rounded shadow-sm"
+        class="absolute mt-2 w-full bg-white py-2 border border-neutral-300 rounded shadow-sm"
       >
         <ul v-if="searchItems && searchItems.length > 0">
           <li
@@ -45,24 +45,24 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 
 const props = defineProps({
   searchItems: {
-    type: Object
+    type: Object,
   },
   loading: {
     type: Boolean,
-    default: false
+    default: false,
   },
   autoclear: {
     type: Boolean,
-    default: false
+    default: false,
   },
-  modelValue: {}
+  modelValue: {},
 })
 
 const emit = defineEmits([
   "submit",
   "update:modelValue",
   "change",
-  "onSearchItemClick"
+  "onSearchItemClick",
 ])
 const searchInput = ref(null)
 const isPrinting = ref(false)
@@ -73,7 +73,7 @@ const value = computed({
   },
   set(value) {
     emit("update:modelValue", value)
-  }
+  },
 })
 
 const onInputChange = (event) => {

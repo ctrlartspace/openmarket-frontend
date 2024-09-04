@@ -16,7 +16,7 @@
       <li v-if="store.point" class="w-auto truncate inline text-pink-300">
         <router-link v-slot="{ isActive }" to="/point">
           <span
-            :class="isActive ? 'text-pink-500' : 'text-pink-300'"
+            :class="isActive ? 'text-pink-500 ' : 'text-pink-300'"
             class="font-medium text-base"
           >
             {{ store.point.name }}
@@ -64,20 +64,20 @@ const isCollapsed = ref(false)
 const menuItems = ref([
   {
     title: "Корзина",
-    path: "/cart"
+    path: "/cart",
   },
   {
     title: "Касса",
-    path: "/cash"
+    path: "/cash",
   },
   {
     title: "Продажи",
-    path: "/sales"
+    path: "/sales",
   },
   {
     title: "Приход",
-    path: "/arrivals"
-  }
+    path: "/arrivals",
+  },
 ])
 </script>
 

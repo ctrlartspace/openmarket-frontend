@@ -2,7 +2,7 @@
   <a-page>
     <template #header>
       <a-link :to="filterPathMulti" primary>
-        <span class="material-icons-outlined text-[28px]">tune</span>
+        <span class="material-icons-outlined text-[28px]">segment</span>
       </a-link>
       <a-link primary to="/arrivals/items/add"> Добавить</a-link>
     </template>
