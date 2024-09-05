@@ -21,19 +21,6 @@
           {{ item.storeItem.sellingPrice }} KZT
         </p>
       </div>
-      <!--      <router-link-->
-      <!--        v-if="item.storeItem"-->
-      <!--        :to="{ name: 'storeItem', params: { id: item.storeItem.id } }"-->
-      <!--        class="px-4 py-2 border border-neutral-300 rounded bg-neutral-100 hover:border-neutral-500"-->
-      <!--      >-->
-      <!--        <h1 class="text-base font-medium">-->
-      <!--          {{ item.storeItem.code + ", " + item.storeItem.name }}-->
-      <!--        </h1>-->
-      <!--        <p class="text-sm text-neutral-400">-->
-      <!--          Покупка: {{ item.storeItem.purchasePrice }} KZT Продажа:-->
-      <!--          {{ item.storeItem.sellingPrice }} KZT-->
-      <!--        </p>-->
-      <!--      </router-link>-->
       <a-base-input
         id="purchase-price"
         v-model="item.purchasePrice"

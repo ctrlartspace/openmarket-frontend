@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { computed, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useUserStore } from "@/stores/user.store"
 
@@ -46,7 +46,7 @@ const menuItems = ref([
   },
   {
     title: "Касса",
-    path: "/cash",
+    path: "/cash-register",
     visible: true,
   },
   {

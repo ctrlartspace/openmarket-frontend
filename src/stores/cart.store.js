@@ -5,7 +5,7 @@ export const useCartStore = defineStore("cart", () => {
   const cartItems = ref(new Map())
   const paymentTypes = ref([
     { code: "card", label: "Перевод" },
-    { code: "cash", label: "Наличные" },
+    { code: "cash-register", label: "Наличные" },
   ])
   const currentPaymentType = ref(0)
   const getPaymentType = computed(

@@ -6,9 +6,9 @@
       <div class="col-span-10 flex flex-col gap-2 md:col-span-4">
         <div
           v-for="cash in openedCashList"
-          class="md:rounded rounded-xl md:border border-gray-200 overflow-hidden"
-          :class="cash.isClosed ? 'bg-gray-100' : 'bg-white'"
           :key="cash.id"
+          :class="cash.isClosed ? 'bg-gray-100' : 'bg-white'"
+          class="md:rounded rounded-xl md:border border-gray-200 overflow-hidden"
         >
           <div class="px-4 py-2 border-b border-gray-200 bg-blue-50">
             <h1 class="text-lg md:text-base font-medium text-blue-600">
@@ -23,8 +23,8 @@
           </div>
           <div
             v-for="(totalPaymentType, i) in cash.totalsPaymentType"
-            class="px-4 py-2 text-lg md:text-base flex justify-between border-b border-gray-200"
             :key="i"
+            class="px-4 py-2 text-lg md:text-base flex justify-between border-b border-gray-200"
           >
             <span>
               {{ totalPaymentType.paymentType }}
@@ -51,13 +51,13 @@
       <div class="col-span-10 flex flex-col gap-2 md:col-span-6 p-4 md:p-0">
         <div
           v-for="cash in closedCashList"
-          class="p-4 md:rounded rounded-xl border border-gray-200 text-center"
-          :class="cash.isClosed ? 'bg-gray-100' : 'bg-white'"
           :key="cash.id"
+          :class="cash.isClosed ? 'bg-gray-100' : 'bg-white'"
+          class="p-4 md:rounded rounded-xl border border-gray-200 text-center"
         >
           <p>#{{ cash.id }}</p>
           <p class="text-lg md:text-base text-gray-600">Закрыт</p>
-          <!-- <span class="text-lg md:text-base font-mono"> {{ cash.total }}</span> -->
+          <!-- <span class="text-lg md:text-base font-mono"> {{ cash-register.total }}</span> -->
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import * as CashService from "@/services/CashService"
 
 const closedCashList = ref([])

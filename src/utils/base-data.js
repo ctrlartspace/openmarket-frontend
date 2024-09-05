@@ -1,6 +1,6 @@
 export const paymentTypes = [
   {
-    value: "cash",
+    value: "cash-register",
     title: "Наличные",
   },
   {

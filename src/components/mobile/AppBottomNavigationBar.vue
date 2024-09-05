@@ -5,18 +5,18 @@
         <ul class="flex gap-2 justify-around">
           <li v-for="(item, i) in menuItems" :key="i">
             <router-link
-              class="flex flex-col items-center justify-center w-12 active:brightness-90"
               v-slot="{ isActive }"
               :to="item.path"
+              class="flex flex-col items-center justify-center w-12 active:brightness-90"
             >
               <span
-                class="material-icons-outlined"
                 :class="isActive ? 'text-black' : 'text-gray-300'"
+                class="material-icons-outlined"
                 >{{ item.icon }}</span
               >
               <span
-                class="text-[10px]"
                 :class="isActive ? 'text-black' : 'text-gray-300'"
+                class="text-[10px]"
                 >{{ item.title }}</span
               >
             </router-link>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { computed, ref } from "vue"
 import { useRoute } from "vue-router"
 import { useUserStore } from "@/stores/user.store"
 
@@ -53,7 +53,7 @@ const menuItems = ref([
   },
   {
     title: "Касса",
-    path: "/cash",
+    path: "/cash-register",
     visible: true,
     icon: "receipt",
   },

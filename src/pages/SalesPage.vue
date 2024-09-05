@@ -138,7 +138,7 @@
                 <span
                   class="material-icons-outlined text-blue-600 md:text-[28px]"
                   >{{
-                    item.paymentType === "cash" ? "payments" : "credit_card"
+                    item.paymentType === "cash-register" ? "payments" : "credit_card"
                   }}</span
                 >
               </td>
@@ -183,11 +183,11 @@
             <span
               v-if="item.isReturned"
               class="material-icons text-red-600 md:text-[28px]"
-            >keyboard_backspace</span
+              >keyboard_backspace</span
             >
             <span
               class="material-icons-outlined text-blue-600 md:text-[28px]"
-            >{{
+              >{{
                 item.paymentType === "cash" ? "payments" : "credit_card"
               }}</span
             >
@@ -247,14 +247,14 @@ onMounted(async () => {
 const tableFields = ref([
   {
     name: "item.name",
-    className: "w-full"
+    className: "w-full",
   },
   { name: "isReturned" },
   { name: "count", className: "whitespace-nowrap", postfix: " шт" },
   {
     name: "sellingPrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT"
-  }
+    postfix: " KZT",
+  },
 ])
 </script>

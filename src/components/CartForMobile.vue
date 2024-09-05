@@ -4,15 +4,15 @@
       class="relative bg-white px-4 py-2 flex justify-between gap-2 items-center border md:rounded rounded-xl"
     >
       <span class="material-icons text-gray-300">search</span>
-      <v-form @submit.prevent="addCartItem" class="relative w-full">
+      <v-form class="relative w-full" @submit.prevent="addCartItem">
         <input
           ref="searchInput"
           v-model.trim="inputValue"
-          type="text"
-          class="flex-1 w-full h-full text-lg placeholder:text-gray-300 focus:outline-none text-ellipsis"
           :class="isSearchError ? 'text-red-600 animate-shake' : 'text-black'"
-          @input="isSearchError = false"
+          class="flex-1 w-full h-full text-lg placeholder:text-gray-300 focus:outline-none text-ellipsis"
           placeholder="Код товара, наименование"
+          type="text"
+          @input="isSearchError = false"
         />
         <div
           v-if="false"
@@ -20,10 +20,10 @@
         >
           <ul>
             <li
-              class="px-4 py-2 text-lg hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
               v-for="(item, index) in store.groupedCartItems"
               :key="index"
               :value="index"
+              class="px-4 py-2 text-lg hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
             >
               {{ item.name }}
             </li>
@@ -42,9 +42,9 @@
         <tbody>
           <tr
             v-for="(item, i) in store.groupedCartItems"
+            :key="i"
             class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex items-center gap-2 px-4 py-2 last:border-none"
             @click="onItemClick(item)"
-            :key="i"
           >
             <td class="flex items-center">
               <button class="flex items-center justify-center">
@@ -103,7 +103,7 @@
         </button>
       </div>
       <div
-        v-if="store.getPaymentType.code === 'cash'"
+        v-if="store.getPaymentType.code === 'cash-register'"
         class="flex flex-col gap-2"
       >
         <button
@@ -140,7 +140,7 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue"
+import { computed, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
 import { getPointItem } from "@/services/PointService"
@@ -157,7 +157,7 @@ const cartStep = ref(1)
 const inputAmount = ref("")
 
 const cartChange = computed(() =>
-  inputAmount.value ? inputAmount.value - store.getTotalAmount : 0
+  inputAmount.value ? inputAmount.value - store.getTotalAmount : 0,
 )
 
 const stepBack = () => {

@@ -6,7 +6,7 @@ import ItemPage from "@/pages/ItemPage.vue"
 import IncomesPage from "@/pages/IncomesPage.vue"
 import AddIncomesPage from "@/pages/AddIncomesPage.vue"
 import AuthPage from "@/pages/AuthPage.vue"
-import CashPage from "@/pages/CashPage.vue"
+// import CashPage from "@/pages/CashRegisterPage.vue"
 import ScanPage from "@/pages/ScanPage.vue"
 import ProfilePage from "@/pages/ProfilePage.vue"
 import StorePage from "@/pages/store/StorePage.vue"
@@ -46,6 +46,11 @@ import SaleItems from "@/pages/sales/items/SaleItems.vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
 import SaleItemsView from "@/pages/sales/items/SaleItemsView.vue"
+
+import CashRegisterPage from "@/pages/cash-register/CashRegisterPage.vue"
+import CashRegisterActive from "@/pages/cash-register/items/CashRegisterActive.vue"
+import CashRegisterActiveView from "@/pages/cash-register/items/CashRegisterActiveView.vue"
+import CashRegisterAdd from "@/pages/cash-register/items/CashRegisterAdd.vue"
 
 const routes = [
   { path: "/", component: CartPage },
@@ -219,6 +224,30 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/cash-register",
+    component: CashRegisterPage,
+    name: "cash-register",
+    redirect: "/cash-register/active",
+    children: [
+      {
+        path: "active",
+        component: CashRegisterActive,
+        children: [
+          {
+            path: "",
+            name: "cashRegisterActive",
+            component: CashRegisterActiveView,
+          },
+          {
+            path: "add",
+            name: "cashRegisterAdd",
+            component: CashRegisterAdd,
+          },
+        ],
+      },
+    ],
+  },
   { path: "/cart", name: "cart", component: CartPage },
   // { path: "/sales", name: "sales", component: SalesPage },
   { path: "/incomes", name: "incomes", component: IncomesPage },
@@ -228,7 +257,7 @@ const routes = [
   { path: "/items/:id", name: "item", component: ItemPage },
   { path: "/profile", name: "profile", component: ProfilePage },
   { path: "/auth", name: "auth", component: AuthPage },
-  { path: "/cash", name: "cash", component: CashPage },
+  // { path: "/cash-register", name: "cash-register", component: CashPage },
   { path: "/scan", name: "scan", component: ScanPage },
 ]
 

@@ -68,7 +68,7 @@ const menuItems = ref([
   },
   {
     title: "Касса",
-    path: "/cash",
+    path: "/cash-register",
   },
   {
     title: "Продажи",
