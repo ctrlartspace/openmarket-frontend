@@ -8,49 +8,49 @@
         class="p-4 flex flex-col gap-2 col-span-10 md:col-span-4 md:border-r md:border-b border-gray-200"
       >
         <a-select
-          v-model="item.storeItemId"
           id="input-store-item"
-          :items="storeItems"
+          v-model="item.storeItemId"
           :disabled="!isEditMode"
+          :items="storeItems"
           @change="onStoreItemChange"
         />
         <a-base-input
-          v-model="item.code"
           id="article"
-          type="text"
+          v-model="item.code"
+          :disabled="item.storeItemId"
           label="Код товара"
           placeholder="Код товара"
-          :disabled="item.storeItemId"
+          type="text"
         />
         <a-base-input
-          v-model="item.name"
           id="name"
-          type="text"
+          v-model="item.name"
+          :disabled="item.storeItemId"
           label="Наименование"
           placeholder="Наименование"
-          :disabled="item.storeItemId"
+          type="text"
         />
         <a-base-input
-          v-model="item.purchasePrice"
           id="purchase-price"
-          type="text"
+          v-model="item.purchasePrice"
+          :disabled="!isEditMode"
           label="Цена покупки"
           placeholder="Цена покупки"
-          :disabled="!isEditMode"
+          type="text"
         />
         <a-base-input
-          v-model="item.sellingPrice"
           id="selling-price"
-          type="text"
+          v-model="item.sellingPrice"
+          :disabled="!isEditMode"
           label="Цена продажи"
           placeholder="Цена продажи"
-          :disabled="!isEditMode"
+          type="text"
         />
         <a-select
-          v-model="item.filters"
           id="input-filters"
-          :items="filterList"
+          v-model="item.filters"
           :disabled="!isEditMode"
+          :items="filterList"
         >
           <filter-tree v-model="item.filters" :items="filterList" />
         </a-select>
@@ -93,8 +93,8 @@
             </div>
             <div class="p-4">
               <button
-                type="submit"
                 class="block w-full px-4 py-2 bg-blue-600 text-white rounded-xl md:rounded hover:brightness-90 active:brightness-90"
+                type="submit"
               >
                 <span class="text-lg md:text-base font-medium">Добавить</span>
               </button>
@@ -127,20 +127,19 @@
 
 <script setup>
 import InputField from "@/components/ui/InputField.vue"
-import SelectField from "@/components/ui/SelectField.vue"
 import ASelect from "@/components/ui/ASelect.vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import FilterTree from "@/components/FilterTree.vue"
 import AppDialog from "@/components/AppDialog.vue"
 
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import {
-  getPointItem,
-  updatePointItem,
   addItem,
   getFilters,
+  getPointItem,
   makeIncome,
+  updatePointItem,
 } from "@/services/PointService"
 import StoreService from "@/services/StoreService"
 

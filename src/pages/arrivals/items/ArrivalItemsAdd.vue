@@ -51,7 +51,10 @@ const { selectedItem: pointItem } = useSelect(getPointItem)
 const addArrival = async () => {
   try {
     await ArrivalService.addArrivalItem(item.value)
-    await router.push({ name: "arrivalItems" })
+    await router.push({
+      name: "pointItem",
+      params: { id: item.value.pointItemId },
+    })
   } catch (error) {
     console.log(error)
   }

@@ -5,10 +5,10 @@
         {{ filters ? `Добавить в "${filters}"` : "Добавить" }}
       </a-link>
       <a-button v-if="isFilterMode" neutral @click="resetFilters">
-        Сброс</a-button
-      >
+        Сброс
+      </a-button>
       <a-button v-if="isFilterMode" primary @click="applyFilters">
-        Готово
+        Сохранить
       </a-button>
     </template>
     <div class="flex flex-col gap-2">

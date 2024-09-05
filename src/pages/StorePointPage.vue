@@ -25,8 +25,7 @@
           @on-item-click="onItemClick"
         >
         </data-table>
-      </div
-      >
+      </div>
     </page-content>
   </a-page>
 </template>
@@ -49,12 +48,12 @@ onMounted(async () => {
 const tableFields = ref([
   {
     name: "name",
-    className: "w-full"
+    className: "w-full",
   },
   {
     name: "role",
-    className: ""
-  }
+    className: "",
+  },
 ])
 </script>
 

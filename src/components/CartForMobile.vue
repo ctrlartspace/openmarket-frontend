@@ -131,7 +131,7 @@
       class="w-full mt-2 bg-black text-white flex justify-center items-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 active:brightness-50 cursor-pointer select-none shadow-xl"
       @click.once="makeSaleFromCart"
     >
-      <span>Готово</span>
+      <span>Сохранить</span>
       <!-- <span class="material-icons-outlined self-center font-medium"
         >done</span
       > -->
