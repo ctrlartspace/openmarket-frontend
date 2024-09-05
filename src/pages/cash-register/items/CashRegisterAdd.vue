@@ -7,6 +7,7 @@
       v-model="startAmount"
       placeholder="Сумма на начало"
       type="text"
+      unit="KZT"
     />
   </a-page>
 </template>

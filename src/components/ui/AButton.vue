@@ -20,10 +20,7 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router"
-
 defineProps({
-  ...RouterLink.props,
   loading: { type: Boolean },
   neutral: { type: Boolean },
   primary: { type: Boolean },

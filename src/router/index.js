@@ -51,6 +51,8 @@ import CashRegisterPage from "@/pages/cash-register/CashRegisterPage.vue"
 import CashRegisterActive from "@/pages/cash-register/items/CashRegisterActive.vue"
 import CashRegisterActiveView from "@/pages/cash-register/items/CashRegisterActiveView.vue"
 import CashRegisterAdd from "@/pages/cash-register/items/CashRegisterAdd.vue"
+import CashRegisterArchive from "@/pages/cash-register/archive/CashRegisterArchive.vue"
+import CashRegisterArchiveView from "@/pages/cash-register/archive/CashRegisterArchiveView.vue"
 
 const routes = [
   { path: "/", component: CartPage },
@@ -243,6 +245,17 @@ const routes = [
             path: "add",
             name: "cashRegisterAdd",
             component: CashRegisterAdd,
+          },
+        ],
+      },
+      {
+        path: "archive",
+        component: CashRegisterArchive,
+        children: [
+          {
+            path: "",
+            name: "cashRegisterArchive",
+            component: CashRegisterArchiveView,
           },
         ],
       },

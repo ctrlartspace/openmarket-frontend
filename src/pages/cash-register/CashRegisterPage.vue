@@ -34,6 +34,10 @@ const menuItems = ref([
     title: "Активная",
     path: "/cash-register/active",
   },
+  {
+    title: "История",
+    path: "/cash-register/archive",
+  },
 ])
 </script>
 

@@ -1,9 +1,8 @@
 import axios from "@/plugins/axios"
 
-export const getCashes = async (queryParams = "") => {
+export const getCashRegisters = async (params) => {
   try {
-    const response = await axios.get(`/cashes?filters=${queryParams}`)
-    console.log(response)
+    const response = await axios.get("cash-registers", { params })
     return Promise.resolve(response.data)
   } catch (error) {
     return Promise.reject(error)
@@ -41,4 +40,9 @@ export const openCashRegister = async (startAmount) => {
   }
 }
 
-export default { getCashes, getActiveCash, closeCashRegister, openCashRegister }
+export default {
+  getCashRegisters,
+  getActiveCash,
+  closeCashRegister,
+  openCashRegister,
+}
