@@ -7,7 +7,7 @@
         <div
           class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
         >
-          <h2 class="text-lg md:text-base font-medium">Фильтры</h2>
+          <h2 class="text-lg md:text-base font-medium">Категории</h2>
         </div>
         <filter-tree
           v-model="selectedFilters"
@@ -90,13 +90,13 @@ onMounted(async () => {
 const tableFields = ref([
   {
     name: "item.name",
-    className: "w-full"
+    className: "w-full",
   },
   { name: "count", className: "whitespace-nowrap", postfix: " шт" },
   {
     name: "purchasePrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT"
-  }
+    postfix: " KZT",
+  },
 ])
 </script>

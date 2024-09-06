@@ -31,9 +31,9 @@ import PointItemsView from "@/pages/point/items/PointItemsView.vue"
 import PointItemsAdd from "@/pages/point/items/PointItemsAdd.vue"
 import PointItemDetails from "@/pages/point/items/PointItemDetails.vue"
 
-import PointFilters from "@/pages/point/filters/PointFilters.vue"
-import PointFiltersView from "@/pages/point/filters/PointFiltersView.vue"
-import PointFiltersAdd from "@/pages/point/filters/PointFiltersAdd.vue"
+import StoreFilters from "@/pages/store/filters/StoreFilters.vue"
+import StoreFiltersView from "@/pages/store/filters/StoreFiltersView.vue"
+import StoreFiltersAdd from "@/pages/store/filters/StoreFiltersAdd.vue"
 
 import ArrivalsPage from "@/pages/arrivals/ArrivalsPage.vue"
 import ArrivalItems from "@/pages/arrivals/items/ArrivalItems.vue"
@@ -115,6 +115,22 @@ const routes = [
           },
         ],
       },
+      {
+        path: "filters",
+        component: StoreFilters,
+        children: [
+          {
+            path: "",
+            name: "storeFilters",
+            component: StoreFiltersView,
+          },
+          {
+            path: "add",
+            name: "storeFiltersAdd",
+            component: StoreFiltersAdd,
+          },
+        ],
+      },
     ],
   },
   {
@@ -157,22 +173,6 @@ const routes = [
             path: ":id",
             name: "pointItem",
             component: PointItemDetails,
-          },
-        ],
-      },
-      {
-        path: "filters",
-        component: PointFilters,
-        children: [
-          {
-            path: "",
-            name: "pointFilters",
-            component: PointFiltersView,
-          },
-          {
-            path: "add",
-            name: "pointFiltersAdd",
-            component: PointFiltersAdd,
           },
         ],
       },

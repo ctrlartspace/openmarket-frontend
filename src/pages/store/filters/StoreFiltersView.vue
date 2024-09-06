@@ -1,5 +1,5 @@
 <template>
-  <a-page title="Фильтры">
+  <a-page title="Категории">
     <template #header>
       <a-link v-if="!isFilterMode" :to="filterPathAdd" primary>
         {{ filters ? `Добавить в "${filters}"` : "Добавить" }}
@@ -8,7 +8,7 @@
         Сброс
       </a-button>
       <a-button v-if="isFilterMode" primary @click="applyFilters">
-        Сохранить
+        Применить
       </a-button>
     </template>
     <div class="flex flex-col gap-2">

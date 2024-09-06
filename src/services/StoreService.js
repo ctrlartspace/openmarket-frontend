@@ -61,6 +61,16 @@ export const addStoreItem = async (data) => {
   }
 }
 
+export const updateStoreItem = async (id, data) => {
+  try {
+    const response = await axios.put(`/store/items/${id}`, data)
+    return Promise.resolve(response.data)
+  } catch (error) {
+    console.log(error)
+    return Promise.reject(error)
+  }
+}
+
 export const getStoreItems = async (queryParams = "") => {
   try {
     const response = await axios.get(`/store/items?filters=${queryParams}`)
@@ -100,4 +110,5 @@ export default {
   getStoreItems,
   getStoreItem,
   addItem,
+  updateStoreItem,
 }

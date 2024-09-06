@@ -8,7 +8,7 @@
           <div
             class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
           >
-            <h2 class="text-lg md:text-base font-medium">Фильтры</h2>
+            <h2 class="text-lg md:text-base font-medium">Категории</h2>
             <button
               class="inline-flex items-center"
               @click="showDialog.editFilter = true"
@@ -27,22 +27,22 @@
           >
             <div class="flex flex-col justify-center">
               <filter-tree
-                class="border-b border-gray-200"
                 v-model="newFilter.parentId"
                 :items="filtersList"
-                single="true"
+                class="border-b border-gray-200"
                 select-root="true"
+                single="true"
               />
               <div class="flex flex-wrap gap-2 p-4">
                 <input
-                  class="px-4 py-2 border rounded-xl md:rounded border-gray-200 block w-full text-lg md:text-base bg-inherit appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
                   v-model="newFilter.name"
-                  type="text"
                   :placeholder="
                     newFilter.parentId
                       ? 'Название подкатегории'
                       : 'Название категории'
                   "
+                  class="px-4 py-2 border rounded-xl md:rounded border-gray-200 block w-full text-lg md:text-base bg-inherit appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
+                  type="text"
                 />
                 <button
                   class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 active:bg-gray-50 md:rounded rounded-xl"
@@ -62,8 +62,8 @@
           <filter-tree
             v-model="selectedFilters"
             :items="filtersList"
-            @change="updateItems"
             nested="true"
+            @change="updateItems"
           />
         </div>
         <!-- Filter Reset -->
@@ -87,13 +87,13 @@
             </button>
             <app-dialog
               v-if="showDialog.showFilterMobile"
-              title="Фильтры"
+              title="Категории"
               @close="showDialog.showFilterMobile = false"
             >
               <filter-tree
-                class="border-gray-200 rounded-xl overflow-hidden"
                 v-model="selectedFilters"
                 :items="filtersList"
+                class="border-gray-200 rounded-xl overflow-hidden"
                 nested="true"
               />
             </app-dialog>
@@ -140,7 +140,7 @@ import AppDialog from "@/components/AppDialog.vue"
 import SearchField from "@/components/ui/SearchField.vue"
 import DataTable from "@/components/ui/DataTable.vue"
 
-import { ref, onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 
 import PointService from "@/services/PointService"

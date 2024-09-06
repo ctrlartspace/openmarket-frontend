@@ -10,8 +10,8 @@
           >
             <router-link v-slot="{ isActive }" :to="item.path">
               <span
-                class="font-medium text-base"
                 :class="isActive ? 'text-black' : 'text-gray-300'"
+                class="font-medium text-base"
               >
                 {{ item.title }}
               </span>
@@ -52,6 +52,10 @@ const menuItems = ref([
   {
     title: "Товары",
     path: "/store/items",
+  },
+  {
+    title: "Категории",
+    path: "/store/filters",
   },
 ])
 

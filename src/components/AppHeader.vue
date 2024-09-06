@@ -14,7 +14,16 @@
       </li>
       <li class="ml-auto"></li>
       <li v-if="store.point" class="w-auto truncate inline text-pink-300">
-        <router-link v-slot="{ isActive }" to="/point">
+        <router-link
+          v-slot="{ isActive }"
+          class="flex items-center gap-1"
+          to="/point"
+        >
+          <span
+            :class="isActive ? 'text-pink-500 ' : 'text-pink-300'"
+            class="font-medium material-symbols-outlined"
+            >pin_drop</span
+          >
           <span
             :class="isActive ? 'text-pink-500 ' : 'text-pink-300'"
             class="font-medium text-base"
@@ -54,12 +63,9 @@
 
 <script setup>
 import { ref } from "vue"
-import { useRoute } from "vue-router"
 import { useUserStore } from "@/stores/user.store"
 
-const route = useRoute()
 const store = useUserStore()
-const isCollapsed = ref(false)
 
 const menuItems = ref([
   {

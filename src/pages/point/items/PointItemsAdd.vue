@@ -4,24 +4,15 @@
       <a-button primary @click="addPointItem"> Сохранить</a-button>
     </template>
     <div class="flex flex-col gap-2">
-      <div class="flex flex-col">
-        <button
-          v-if="!isNewItem && !storeItem"
-          class="text-left text-blue-600 px-4 py-2 border border-blue-300 rounded bg-blue-50 hover:border-blue-500"
-          @click="onNewItemClick"
-        >
-          Создать новый
-        </button>
-        <div
-          v-if="isNewItem && !storeItem"
-          class="flex items-center justify-between text-left text-green-600 px-4 py-2 border border-green-300 rounded bg-green-50"
-        >
-          Будет создан новый товар
-          <a-button success @click="onCancelNewItemClick">Отмена</a-button>
-        </div>
-      </div>
       <router-link
-        v-if="!isNewItem"
+        :to="{
+          path: '/store/items/add',
+        }"
+        class="px-4 py-2 text-blue-600 border border-blue-300 rounded bg-blue-50 hover:border-blue-500"
+      >
+        <p>Создать новый</p>
+      </router-link>
+      <router-link
         :to="{
           path: '/store/items',
           query: { selectableMode: true },
@@ -39,76 +30,44 @@
         </div>
         <p v-else>Выбрать товар</p>
       </router-link>
-      <div v-if="storeItem || isNewItem" class="flex flex-col gap-2">
-        <a-base-input
-          v-if="isNewItem"
-          id="article"
-          v-model="itemState.code"
-          label="Код товара"
-          placeholder="Код товара"
-          type="text"
-        />
-        <a-base-input
-          v-if="isNewItem"
-          id="name"
-          v-model="itemState.name"
-          label="Наименование"
-          placeholder="Наименование"
-          type="text"
-        />
-        <a-base-input
-          id="purchase-price"
-          v-model="itemState.purchasePrice"
-          :disabled="!storeItem && !isNewItem"
-          label="Цена покупки"
-          placeholder="Цена покупки"
-          type="text"
-          unit="KZT"
-        />
-        <a-base-input
-          id="selling-price"
-          v-model="itemState.sellingPrice"
-          :disabled="!storeItem && !isNewItem"
-          label="Цена продажи"
-          placeholder="Цена продажи"
-          type="text"
-          unit="KZT"
-        />
-        <a-base-input
-          id="filters"
-          v-model="filters"
-          :disabled="!storeItem && !isNewItem"
-          label="Фильтры"
-          placeholder="Фильтры"
-          type="text"
-          @click="$router.push(filterPathMulti)"
-        />
-      </div>
+      <a-base-input
+        id="purchase-price"
+        v-model="item.purchasePrice"
+        :disabled="!storeItem"
+        label="Цена покупки"
+        placeholder="Цена покупки"
+        type="text"
+        unit="KZT"
+      />
+      <a-base-input
+        id="selling-price"
+        v-model="item.sellingPrice"
+        :disabled="!storeItem"
+        label="Цена продажи"
+        placeholder="Цена продажи"
+        type="text"
+        unit="KZT"
+      />
     </div>
   </a-page>
 </template>
 
 <script setup>
-import { watch } from "vue"
+import { ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import PointItemService from "@/services/point/items.js"
-import { useFilters } from "@/composables/filters.js"
 import { useSelect } from "@/composables/useSelect.js"
 import { getStoreItem } from "@/services/StoreService.js"
 import AButton from "@/components/ui/AButton.vue"
-import { useItemState } from "@/stores/item-state.store.js"
-import { storeToRefs } from "pinia"
 
 const router = useRouter()
-const { itemState, isNewItem } = storeToRefs(useItemState())
-const { filters, filterPathMulti } = useFilters()
+const item = ref({})
 const { selectedItem: storeItem } = useSelect(getStoreItem)
 
 const addPointItem = async () => {
   try {
-    itemState.value.filters = filters.value
-    const newPointItem = await PointItemService.addPointItem(itemState.value)
+    const newPointItem = await PointItemService.addPointItem(item.value)
     onCancelNewItemClick()
     await router.push({ name: "pointItem", params: { id: newPointItem.id } })
   } catch (error) {
@@ -116,23 +75,16 @@ const addPointItem = async () => {
   }
 }
 
-const onNewItemClick = () => {
-  isNewItem.value = true
-  storeItem.value = null
-}
-
 const onCancelNewItemClick = () => {
-  itemState.value = {}
-  isNewItem.value = false
+  item.value = {}
   storeItem.value = null
-  filters.value = null
 }
 
 watch(storeItem, (newStoreItem) => {
   if (newStoreItem) {
-    itemState.value.storeItemId = newStoreItem.id
-    itemState.value.purchasePrice = newStoreItem.purchasePrice
-    itemState.value.sellingPrice = newStoreItem.sellingPrice
+    item.value.storeItemId = newStoreItem.id
+    item.value.purchasePrice = newStoreItem.purchasePrice
+    item.value.sellingPrice = newStoreItem.sellingPrice
   }
 })
 </script>

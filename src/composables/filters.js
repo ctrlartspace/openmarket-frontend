@@ -1,7 +1,7 @@
 import { computed, onMounted, onUpdated, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useRouteStore } from "@/stores/route.store.js"
-import { getPointFilters } from "@/services/point/filters.js"
+import { getStoreFilters } from "@/services/store/filters.js"
 
 export function useFilters() {
   const routeStore = useRouteStore()
@@ -21,7 +21,7 @@ export function useFilters() {
         name: previousRoute.name,
         params: previousRoute.params,
         query: previousRoute.query,
-        replace: true
+        replace: true,
       }
       if (rawFilters) {
         routeOptions.query = { ...routeOptions.query, filters: rawFilters }
@@ -48,7 +48,7 @@ export function useFilters() {
     }
 
     isFilterMode.value = !!route.query.filterMode
-    filterItems.value = await getPointFilters()
+    filterItems.value = await getStoreFilters()
   })
 
   onUpdated(() => {
@@ -56,24 +56,36 @@ export function useFilters() {
     isFilterMode.value = !!route.query.filterMode
   })
 
-  const selectedFiltersLength = computed(() => filters.value instanceof Array ? filters.value.length : 1)
-  const joinedFilters = computed(() => filters.value instanceof Array ? filters.value.join(",") : filters.value)
+  const selectedFiltersLength = computed(() =>
+    filters.value instanceof Array ? filters.value.length : 1,
+  )
+  const joinedFilters = computed(() =>
+    filters.value instanceof Array ? filters.value.join(",") : filters.value,
+  )
 
   const filterPath = computed(() => ({
-    path: "/point/filters",
-    query: { filters: JSON.stringify(filters.value), filterMode: true }
+    path: "/store/filters",
+    query: { filters: JSON.stringify(filters.value), filterMode: true },
   }))
   const filterPathMulti = computed(() => ({
-    path: "/point/filters",
-    query: { filters: JSON.stringify(filters.value), single: false, filterMode: true }
+    path: "/store/filters",
+    query: {
+      filters: JSON.stringify(filters.value),
+      single: false,
+      filterMode: true,
+    },
   }))
   const filterPathSingle = computed(() => ({
-    path: "/point/filters",
-    query: { filters: JSON.stringify(filters.value), single: true, filterMode: true }
+    path: "/store/filters",
+    query: {
+      filters: JSON.stringify(filters.value),
+      single: true,
+      filterMode: true,
+    },
   }))
   const filterPathAdd = computed(() => ({
-    path: "/point/filters/add",
-    query: { filters: JSON.stringify(filters.value) }
+    path: "/store/filters/add",
+    query: { filters: JSON.stringify(filters.value) },
   }))
 
   return {
@@ -88,6 +100,6 @@ export function useFilters() {
     applyFilters,
     resetFilters,
     filterItems,
-    isFilterMode
+    isFilterMode,
   }
 }

@@ -39,8 +39,7 @@ const addFilter = async () => {
       parentId: filters.value,
     }
     await PointService.addFilter(data)
-
-    router.push("/point/filters")
+    await router.push("/store/filters")
   } catch (error) {
     console.error(error)
   }

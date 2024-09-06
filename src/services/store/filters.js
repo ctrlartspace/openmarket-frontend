@@ -1,6 +1,6 @@
-import axios from "@/plugins/axios"
+import axios from "@/plugins/axios.js"
 
-export const getPointFilters = async () => {
+export const getStoreFilters = async () => {
   try {
     const response = await axios.get(`/filters`)
     return Promise.resolve(response.data)
@@ -9,4 +9,4 @@ export const getPointFilters = async () => {
   }
 }
 
-export default { getPointFilters }
+export default { getStoreFilters }
