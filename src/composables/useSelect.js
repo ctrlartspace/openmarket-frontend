@@ -1,4 +1,4 @@
-import { computed, onMounted, onUpdated, ref } from "vue"
+import { onMounted, onUpdated, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useRouteStore } from "@/stores/route.store.js"
 
@@ -10,19 +10,15 @@ export function useSelect(fetchFunction) {
 
   const routeStore = useRouteStore()
 
-  const selectPath = computed(() => ({
-    path: "/point/filters"
-  }))
-
   const applySelect = async (item) => {
     try {
       const previousRoute = routeStore.previousRoute
-      console.log(previousRoute)
       const routeOptions = {
+        path: previousRoute.path,
         name: previousRoute.name,
         params: previousRoute.params,
         query: previousRoute.query,
-        replace: true
+        replace: true,
       }
       if (item) {
         routeOptions.query = { ...routeOptions.query, selectedItem: item }
@@ -42,12 +38,10 @@ export function useSelect(fetchFunction) {
     }
   })
 
-
   onUpdated(() => {
     selectedItem.value = undefined
     isSelectableMode.value = !!route.query.selectableMode
   })
 
-
-  return { isSelectableMode, selectedItem, applySelect, selectPath }
+  return { isSelectableMode, selectedItem, applySelect }
 }
