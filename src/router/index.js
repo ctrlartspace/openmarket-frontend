@@ -10,123 +10,97 @@ import AuthPage from "@/pages/AuthPage.vue"
 import ScanPage from "@/pages/ScanPage.vue"
 import ProfilePage from "@/pages/ProfilePage.vue"
 import StorePage from "@/pages/store/StorePage.vue"
-import StoreUsers from "@/pages/store/users/StoreUsers.vue"
 import StoreUsersAdd from "@/pages/store/users/StoreUsersAdd.vue"
 import StoreUsersView from "@/pages/store/users/StoreUsersView.vue"
-import StoreItems from "@/pages/store/items/StoreItems.vue"
 import StoreItemsAdd from "@/pages/store/items/StoreItemsAdd.vue"
 import StoreItemsView from "@/pages/store/items/StoreItemsView.vue"
 import StoreItemDetails from "@/pages/store/items/StoreItemDetails.vue"
-import StorePoints from "@/pages/store/points/StorePoints.vue"
 import StorePointsView from "@/pages/store/points/StorePointsView.vue"
 import StorePointsAdd from "@/pages/store/points/StorePointsAdd.vue"
 
 import PointPage from "@/pages/point/PointPage.vue"
-import PointUsers from "@/pages/point/users/PointUsers.vue"
 import PointUsersAdd from "@/pages/point/users/PointUsersAdd.vue"
 import PointUsersView from "@/pages/point/users/PointUsersView.vue"
-
-import PointItems from "@/pages/point/items/PointItems.vue"
 import PointItemsView from "@/pages/point/items/PointItemsView.vue"
 import PointItemsAdd from "@/pages/point/items/PointItemsAdd.vue"
 import PointItemDetails from "@/pages/point/items/PointItemDetails.vue"
-
-import StoreFilters from "@/pages/store/filters/StoreFilters.vue"
 import StoreFiltersView from "@/pages/store/filters/StoreFiltersView.vue"
 import StoreFiltersAdd from "@/pages/store/filters/StoreFiltersAdd.vue"
-
-import ArrivalsPage from "@/pages/arrivals/ArrivalsPage.vue"
-import ArrivalItems from "@/pages/arrivals/items/ArrivalItems.vue"
-import ArrivalItemsView from "@/pages/arrivals/items/ArrivalItemsView.vue"
-import ArrivalItemsAdd from "@/pages/arrivals/items/ArrivalItemsAdd.vue"
-
-import SalesPage from "@/pages/sales/SalesPage.vue"
-import SaleItems from "@/pages/sales/items/SaleItems.vue"
+import ArrivalItemsView from "@/pages/point/arrivals/ArrivalItemsView.vue"
+import ArrivalItemsAdd from "@/pages/point/arrivals/ArrivalItemsAdd.vue"
 // import SelectFiltersPage from "@/pages/selectable/SelectFiltersPage.vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
-import SaleItemsView from "@/pages/sales/items/SaleItemsView.vue"
 
 import CashRegisterPage from "@/pages/cash-register/CashRegisterPage.vue"
-import CashRegisterActive from "@/pages/cash-register/items/CashRegisterActive.vue"
 import CashRegisterActiveView from "@/pages/cash-register/items/CashRegisterActiveView.vue"
 import CashRegisterAdd from "@/pages/cash-register/items/CashRegisterAdd.vue"
-import CashRegisterArchive from "@/pages/cash-register/archive/CashRegisterArchive.vue"
 import CashRegisterArchiveView from "@/pages/cash-register/archive/CashRegisterArchiveView.vue"
+import PageContent from "@/pages/PageContent.vue"
 
 const routes = [
   { path: "/", component: CartPage },
   {
     path: "/store",
-    name: "store",
     component: StorePage,
     redirect: "/store/points",
     children: [
       {
         path: "users",
-        component: StoreUsers,
+        component: PageContent,
         children: [
           {
             path: "",
-            name: "storeUsers",
             component: StoreUsersView,
           },
           {
             path: "add",
-            name: "storeUsersAdd",
             component: StoreUsersAdd,
           },
         ],
       },
       {
         path: "points",
-        component: StorePoints,
+        component: PageContent,
         children: [
           {
             path: "",
-            name: "storePoints",
             component: StorePointsView,
           },
           {
             path: "add",
-            name: "storePointsAdd",
             component: StorePointsAdd,
           },
         ],
       },
       {
         path: "items",
-        component: StoreItems,
+        component: PageContent,
         children: [
           {
             path: "",
-            name: "storeItems",
             component: StoreItemsView,
           },
           {
             path: "add",
-            name: "storeItemsAdd",
             component: StoreItemsAdd,
           },
           {
             path: ":id",
-            name: "storeItem",
             component: StoreItemDetails,
           },
         ],
       },
       {
         path: "filters",
-        component: StoreFilters,
+        component: PageContent,
         children: [
           {
             path: "",
-            name: "storeFilters",
             component: StoreFiltersView,
           },
           {
             path: "add",
-            name: "storeFiltersAdd",
             component: StoreFiltersAdd,
           },
         ],
@@ -136,142 +110,154 @@ const routes = [
   {
     path: "/point",
     component: PointPage,
-    name: "point",
     redirect: "/point/items",
     children: [
       {
         path: "users",
-        component: PointUsers,
+        component: PageContent,
         children: [
           {
             path: "",
-            name: "pointUsers",
             component: PointUsersView,
           },
           {
             path: "add",
-            name: "pointUsersAdd",
             component: PointUsersAdd,
           },
         ],
       },
       {
         path: "items",
-        component: PointItems,
+        component: PageContent,
         children: [
           {
             path: "",
-            name: "pointItems",
             component: PointItemsView,
           },
           {
             path: "add",
-            name: "pointItemsAdd",
             component: PointItemsAdd,
           },
           {
             path: ":id",
-            name: "pointItem",
             component: PointItemDetails,
           },
         ],
       },
-    ],
-  },
-  {
-    path: "/arrivals",
-    component: ArrivalsPage,
-    name: "arrivals",
-    redirect: "/arrivals/items",
-    children: [
       {
-        path: "items",
-        component: ArrivalItems,
+        path: "arrivals",
+        component: PageContent,
         children: [
           {
             path: "",
-            name: "arrivalItems",
             component: ArrivalItemsView,
           },
           {
             path: "add",
-            name: "arrivalItemsAdd",
+            component: ArrivalItemsAdd,
+          },
+        ],
+      },
+      {
+        path: "sales",
+        component: PageContent,
+        children: [
+          {
+            path: "",
+            component: ArrivalItemsView,
+          },
+          {
+            path: "add",
             component: ArrivalItemsAdd,
           },
         ],
       },
     ],
   },
-  {
-    path: "/sales",
-    component: SalesPage,
-    name: "sales",
-    redirect: "/sales/items",
-    children: [
-      {
-        path: "items",
-        component: SaleItems,
-        children: [
-          {
-            path: "",
-            name: "saleItems",
-            component: SaleItemsView,
-          },
-          // {
-          //   path: "add",
-          //   name: "arrivalItemsAdd",
-          //   component: ArrivalItemsAdd
-          // }
-        ],
-      },
-    ],
-  },
+  // {
+  //   path: "/arrivals",
+  //   component: ArrivalsPage,
+  //   redirect: "/arrivals/items",
+  //   children: [
+  //     {
+  //       path: "items",
+  //       component: ArrivalItems,
+  //       children: [
+  //         {
+  //           path: "",
+  //           component: ArrivalItemsView,
+  //         },
+  //         {
+  //           path: "add",
+  //           component: ArrivalItemsAdd,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: "/sales",
+  //   component: SalesPage,
+  //   redirect: "/sales/items",
+  //   children: [
+  //     {
+  //       path: "items",
+  //       component: SaleItems,
+  //       children: [
+  //         {
+  //           path: "",
+  //           component: SaleItemsView,
+  //         },
+  //         // {
+  //         //   path: "add",
+  //         //   component: ArrivalItemsAdd
+  //         // }
+  //       ],
+  //     },
+  //   ],
+  // },
   {
     path: "/cash-register",
     component: CashRegisterPage,
-    name: "cash-register",
     redirect: "/cash-register/active",
     children: [
       {
         path: "active",
-        component: CashRegisterActive,
+        component: PageContent,
         children: [
           {
             path: "",
-            name: "cashRegisterActive",
             component: CashRegisterActiveView,
           },
           {
             path: "add",
-            name: "cashRegisterAdd",
             component: CashRegisterAdd,
           },
         ],
       },
       {
         path: "archive",
-        component: CashRegisterArchive,
+        component: PageContent,
         children: [
           {
             path: "",
-            name: "cashRegisterArchive",
             component: CashRegisterArchiveView,
           },
         ],
       },
     ],
   },
-  { path: "/cart", name: "cart", component: CartPage },
-  // { path: "/sales", name: "sales", component: SalesPage },
-  { path: "/incomes", name: "incomes", component: IncomesPage },
-  { path: "/incomes/add", name: "incomesAdd", component: AddIncomesPage },
-  { path: "/base", name: "base", component: BaseDataPage },
-  { path: "/items", name: "items", component: ItemPage },
-  { path: "/items/:id", name: "item", component: ItemPage },
-  { path: "/profile", name: "profile", component: ProfilePage },
-  { path: "/auth", name: "auth", component: AuthPage },
-  // { path: "/cash-register", name: "cash-register", component: CashPage },
-  { path: "/scan", name: "scan", component: ScanPage },
+  { path: "/cart", component: CartPage },
+  // { path: "/sales",  component: SalesPage },
+  { path: "/incomes", component: IncomesPage },
+  { path: "/incomes/add", component: AddIncomesPage },
+  { path: "/base", component: BaseDataPage },
+  { path: "/items", component: ItemPage },
+  { path: "/items/:id", component: ItemPage },
+  { path: "/profile", component: ProfilePage },
+  { path: "/auth", component: AuthPage },
+  // { path: "/cash-register", component: CashPage },
+  { path: "/scan", component: ScanPage },
 ]
 
 const router = createRouter({

@@ -1,23 +1,17 @@
 <template>
   <div class="flex justify-center items-center h-full">
     <form
-      class="p-4 bg-white rounded-xl md:rounded border border-gray-200 w-96"
+      class="flex flex-col gap-2 p-4 bg-white rounded-xl md:rounded border border-neutral-300 w-64"
       @submit.prevent="loginToStore"
     >
-      <input
-        v-model.trim="authData.name"
-        type="text"
-        class="mb-2 block w-full px-4 py-2 text-lg md:text-base bg-inherit border border-gray-200 rounded-xl md:rounded appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
-        placeholder="Номер кабинета"
-      />
-      <input
+      <a-base-input v-model.trim="authData.name" placeholder="Номер магазина" />
+      <a-base-input
         v-model.trim="authData.password"
-        type="text"
-        class="mb-4 block w-full px-4 py-2 text-lg md:text-base bg-inherit border border-gray-200 rounded-xl md:rounded appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
         placeholder="Пароль"
+        type="password"
       />
       <button
-        class="block w-full px-4 py-2 bg-blue-600 text-lg md:text-base text-white rounded-xl md:rounded"
+        class="font-medium mt-2 block w-full px-4 py-2 bg-blue-600 text-lg md:text-base text-white rounded-xl md:rounded"
         type="submit"
       >
         Продолжить
@@ -49,6 +43,7 @@
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useUserStore } from "@/stores/user.store"
+import ABaseInput from "@/components/ui/ABaseInput.vue"
 
 const store = useUserStore()
 const router = useRouter()

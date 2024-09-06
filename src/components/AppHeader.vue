@@ -78,11 +78,11 @@ const menuItems = ref([
   },
   {
     title: "Продажи",
-    path: "/sales",
+    path: "/point/sales",
   },
   {
     title: "Приход",
-    path: "/arrivals",
+    path: "/point/arrivals",
   },
 ])
 </script>

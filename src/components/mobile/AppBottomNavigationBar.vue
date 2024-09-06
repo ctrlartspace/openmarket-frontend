@@ -65,13 +65,13 @@ const menuItems = ref([
   },
   {
     title: "Продажи",
-    path: "/sales",
+    path: "/point/sales",
     visible: true,
     icon: "arrow_upward",
   },
   {
     title: "База",
-    path: "/base",
+    path: "/point",
     visible: true,
     icon: "list_alt",
   },

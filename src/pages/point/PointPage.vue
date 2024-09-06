@@ -51,6 +51,14 @@ const menuItems = ref([
     title: "Товары",
     path: "/point/items",
   },
+  {
+    title: "Продажи",
+    path: "/point/sales",
+  },
+  {
+    title: "Приход",
+    path: "/point/arrivals",
+  },
 ])
 </script>
 

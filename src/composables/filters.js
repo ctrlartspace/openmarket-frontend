@@ -13,11 +13,12 @@ export function useFilters() {
   const isFilterMode = ref(false)
   const filterItems = ref([])
 
-  const applyFilters = () => {
+  const applyFilters = async () => {
     try {
       const previousRoute = routeStore.previousRoute
       const rawFilters = JSON.stringify(filters.value)
       const routeOptions = {
+        path: previousRoute.path,
         name: previousRoute.name,
         params: previousRoute.params,
         query: previousRoute.query,
@@ -26,14 +27,14 @@ export function useFilters() {
       if (rawFilters) {
         routeOptions.query = { ...routeOptions.query, filters: rawFilters }
       }
-      router.push(routeOptions)
+      await router.push(routeOptions)
     } catch (error) {
       console.log(error)
     }
   }
 
   const resetFilters = () => {
-    filters.value = undefined
+    filters.value = []
   }
 
   onMounted(async () => {
