@@ -45,16 +45,13 @@ import { getPointItem } from "@/services/PointService.js"
 import AButton from "@/components/ui/AButton.vue"
 
 const router = useRouter()
-const item = ref({})
+const item = ref({ count: 1 })
 const { selectedItem: pointItem } = useSelect(getPointItem)
 
 const addArrival = async () => {
   try {
     await ArrivalService.addArrivalItem(item.value)
-    await router.push({
-      name: "pointItem",
-      params: { id: item.value.pointItemId },
-    })
+    await router.push(`/point/items/${pointItem.value.id}`)
   } catch (error) {
     console.log(error)
   }

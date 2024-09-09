@@ -2,8 +2,7 @@
   <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
     <template #header>
       <a-link :to="filterPathMulti" primary>
-        Категории
-        {{ filters ? `[${selectedFiltersLength}]` : "" }}
+        <span class="material-icons-outlined text-[28px]">menu</span>
       </a-link>
       <a-link v-if="!isSelectableMode" primary to="/point/items/add"
         >Добавить

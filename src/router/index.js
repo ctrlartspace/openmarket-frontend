@@ -37,6 +37,7 @@ import CashRegisterActiveView from "@/pages/cash-register/items/CashRegisterActi
 import CashRegisterAdd from "@/pages/cash-register/items/CashRegisterAdd.vue"
 import CashRegisterArchiveView from "@/pages/cash-register/archive/CashRegisterArchiveView.vue"
 import PageContent from "@/pages/PageContent.vue"
+import SaleItemsView from "@/pages/point/sales/SaleItemsView.vue"
 
 const routes = [
   { path: "/", component: CartPage },
@@ -164,58 +165,12 @@ const routes = [
         children: [
           {
             path: "",
-            component: ArrivalItemsView,
-          },
-          {
-            path: "add",
-            component: ArrivalItemsAdd,
+            component: SaleItemsView,
           },
         ],
       },
     ],
   },
-  // {
-  //   path: "/arrivals",
-  //   component: ArrivalsPage,
-  //   redirect: "/arrivals/items",
-  //   children: [
-  //     {
-  //       path: "items",
-  //       component: ArrivalItems,
-  //       children: [
-  //         {
-  //           path: "",
-  //           component: ArrivalItemsView,
-  //         },
-  //         {
-  //           path: "add",
-  //           component: ArrivalItemsAdd,
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: "/sales",
-  //   component: SalesPage,
-  //   redirect: "/sales/items",
-  //   children: [
-  //     {
-  //       path: "items",
-  //       component: SaleItems,
-  //       children: [
-  //         {
-  //           path: "",
-  //           component: SaleItemsView,
-  //         },
-  //         // {
-  //         //   path: "add",
-  //         //   component: ArrivalItemsAdd
-  //         // }
-  //       ],
-  //     },
-  //   ],
-  // },
   {
     path: "/cash-register",
     component: CashRegisterPage,

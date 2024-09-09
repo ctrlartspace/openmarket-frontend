@@ -1,5 +1,5 @@
 <template>
-  <a-page title="Категории">
+  <a-page :title="isFilterMode ? 'Выбрать...' : 'Категории'">
     <template #header>
       <a-link v-if="!isFilterMode" :to="filterPathAdd" primary>
         {{ filters ? `Добавить в "${filters}"` : "Добавить" }}

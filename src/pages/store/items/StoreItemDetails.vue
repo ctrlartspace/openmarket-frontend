@@ -107,7 +107,7 @@ const addPointItem = async () => {
     }
 
     const newPointItem = await PointItemService.addPointItem(data)
-    await router.push({ name: "pointItem", params: { id: newPointItem.id } })
+    await router.push({ path: "/point/items/" + newPointItem.id })
   } catch (error) {
     console.log(error)
   }

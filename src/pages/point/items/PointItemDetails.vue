@@ -2,7 +2,7 @@
   <a-page title="Товар">
     <template #header>
       <a-link
-        :to="{ path: '/arrivals/items/add', query: { selectedItem: item.id } }"
+        :to="{ path: '/point/arrivals/add', query: { selectedItem: item.id } }"
         success
       >
         <span class="material-icons-outlined">add</span>
@@ -13,7 +13,7 @@
     <div v-if="item" class="flex flex-col gap-2">
       <router-link
         v-if="item.storeItem"
-        :to="{ name: 'storeItem', params: { id: item.storeItem.id } }"
+        :to="{ path: '/store/items/' + item.storeItem.id }"
         class="px-4 py-2 border border-neutral-300 rounded bg-neutral-100 hover:border-neutral-600"
       >
         <h1 class="text-base font-medium">

@@ -58,8 +58,9 @@ export function useFilters() {
   })
 
   const selectedFiltersLength = computed(() =>
-    filters.value instanceof Array ? filters.value.length : 1,
+    filters.value && filters.value instanceof Array ? filters.value.length : 0,
   )
+
   const joinedFilters = computed(() =>
     filters.value instanceof Array ? filters.value.join(",") : filters.value,
   )

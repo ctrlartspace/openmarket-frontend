@@ -14,16 +14,7 @@
       </li>
       <li class="ml-auto"></li>
       <li v-if="store.point" class="w-auto truncate inline text-pink-300">
-        <router-link
-          v-slot="{ isActive }"
-          class="flex items-center gap-1"
-          to="/point"
-        >
-          <span
-            :class="isActive ? 'text-pink-500 ' : 'text-pink-300'"
-            class="font-medium material-symbols-outlined"
-            >pin_drop</span
-          >
+        <router-link v-slot="{ isActive }" to="/point">
           <span
             :class="isActive ? 'text-pink-500 ' : 'text-pink-300'"
             class="font-medium text-base"
@@ -79,10 +70,6 @@ const menuItems = ref([
   {
     title: "Продажи",
     path: "/point/sales",
-  },
-  {
-    title: "Приход",
-    path: "/point/arrivals",
   },
 ])
 </script>

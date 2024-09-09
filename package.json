@@ -16,6 +16,7 @@
     "pinia-plugin-persist": "^1.0.0",
     "pinia-plugin-persistedstate": "^3.2.1",
     "quagga": "^0.12.1",
+    "receiptline": "^1.16.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5",
     "vuetify": "^3.4.0"
