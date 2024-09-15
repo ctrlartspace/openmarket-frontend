@@ -6,7 +6,7 @@ import { VitePWA } from "vite-plugin-pwa"
 
 export default defineConfig({
   server: { https: false },
-  base: "./",
+  base: "/",
   plugins: [
     vue(),
     mkcert(),

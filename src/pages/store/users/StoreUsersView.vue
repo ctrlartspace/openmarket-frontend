@@ -1,9 +1,13 @@
 <template>
   <a-page>
     <template #header>
-      <a-link primary to="/store/users/add">Добавить </a-link>
+      <a-link primary to="/store/users/add">Добавить</a-link>
     </template>
-    <data-table :table-data="storeUsers" :table-fields="tableFields">
+    <data-table
+      :table-data="storeUsers"
+      :table-fields="tableFields"
+      @on-item-click="onItemClick"
+    >
     </data-table>
   </a-page>
 </template>
@@ -13,14 +17,24 @@ import { onMounted, ref } from "vue"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
 import ALink from "@/components/ui/ALink.vue"
+import { useSelect } from "@/composables/useSelect.js"
 
 const storeUsers = ref([])
+const { isSelectableMode, applySelect } = useSelect()
 
 const getStoreUsers = async () => {
   try {
     storeUsers.value = await StoreService.getStoreUsers()
   } catch (error) {
     console.log(error)
+  }
+}
+
+const onItemClick = (item) => {
+  if (isSelectableMode.value) {
+    applySelect(item.id)
+  } else {
+    // router.push(`/store/items/${item.id}`)
   }
 }
 

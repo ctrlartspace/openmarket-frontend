@@ -1,7 +1,6 @@
 import axiosInstance from "axios"
 import { useUserStore } from "@/stores/user.store"
 
-console.log(import.meta.env)
 const axiosClient = axiosInstance.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
   headers: {
@@ -31,7 +30,7 @@ axiosClient.interceptors.response.use(
     }
 
     return Promise.reject(error)
-  }
+  },
 )
 
 export default axiosClient

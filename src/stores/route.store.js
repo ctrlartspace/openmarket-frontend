@@ -4,7 +4,7 @@ import { ref } from "vue"
 export const useRouteStore = defineStore(
   "route",
   () => {
-    const previousRoute = ref(null)
+    const previousRoute = ref({ path: "/" })
 
     const setPreviousRoute = (route) => {
       previousRoute.value.path = route.path
@@ -20,5 +20,5 @@ export const useRouteStore = defineStore(
   },
   {
     persist: true,
-  }
+  },
 )
