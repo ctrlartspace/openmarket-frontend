@@ -8,7 +8,7 @@
           <tr
             v-for="item in tableData"
             :key="item.id"
-            class="p-4 flex flex-col md:block md:p-0 cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b border-neutral-300 last:border-none"
+            class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b border-neutral-300 last:border-none"
             @click="emit('onItemClick', item)"
           >
             <td

@@ -5,9 +5,8 @@
       v-if="routeLink && inputValue"
       :to="routeLink.path"
       class="ml-2 text-blue-500"
-    >{{ routeLink.title }}
-    </router-link
-    >
+      >{{ routeLink.title }}
+    </router-link>
     <div class="relative">
       <input
         v-model="inputValue"
@@ -34,26 +33,26 @@ const props = defineProps({
   modelValue: {},
   label: {
     type: String,
-    required: false
+    required: false,
   },
   isError: {
     type: Boolean,
-    required: false
+    required: false,
   },
   routeLink: {
     type: Object,
-    required: false
+    required: false,
   },
   unit: {
     type: String,
-    required: false
-  }
+    required: false,
+  },
 })
 
 const emit = defineEmits(["update:modelValue"])
 const inputValue = computed({
   get: () => props.modelValue,
-  set: (newValue) => emit("update:modelValue", newValue)
+  set: (newValue) => emit("update:modelValue", newValue),
 })
 </script>
 

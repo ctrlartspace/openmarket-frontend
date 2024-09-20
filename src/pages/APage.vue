@@ -1,13 +1,10 @@
 <template>
-  <div>
+  <div class="flex flex-col overflow-y-scroll h-full">
     <div
       v-if="hasHeader()"
-      class="flex items-center gap-4  px-4 py-1 bg-white border-b border-neutral-300"
+      class="hidden md:flex items-center gap-4 px-4 py-1 bg-white border-b border-neutral-300"
     >
-      <!--      <button class="flex items-center font-medium text-gray-300 hover:text-black" @click="$router.back()">-->
-      <!--        <span class="material-symbols-outlined">arrow_back_ios</span>-->
-      <!--      </button>-->
-      <h1 v-if="title" class="flex items-center  text-base font-medium">
+      <h1 v-if="title" class="flex items-center text-base font-medium">
         {{ title }}
       </h1>
       <div class="ml-auto flex items-center gap-2">
@@ -15,8 +12,26 @@
       </div>
     </div>
 
-    <div :class="{ 'p-0': noPadding, 'p-4': !noPadding }" class="md:pb-4 pb-16">
+    <div
+      :class="{ 'p-0 no-padding': noPadding, 'p-4': !noPadding }"
+      class="flex-1 overflow-auto"
+    >
       <slot></slot>
+    </div>
+
+    <div
+      v-if="hasHeader()"
+      class="md:hidden z-30 flex items-center gap-4 px-4 py-2 bg-white border-t border-neutral-200 overflow-x-auto overflow-y-hidden"
+    >
+      <h1
+        v-if="title"
+        class="flex items-center text-base font-medium whitespace-nowrap"
+      >
+        {{ title }}
+      </h1>
+      <div class="ml-auto flex items-center gap-2 whitespace-nowrap">
+        <slot name="header"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -26,12 +41,12 @@ import { useSlots } from "vue"
 
 defineProps({
   title: {
-    type: String
+    type: String,
   },
   noPadding: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const slots = useSlots()

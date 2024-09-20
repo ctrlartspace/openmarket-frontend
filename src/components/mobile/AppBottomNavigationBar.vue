@@ -1,5 +1,5 @@
 <template>
-  <footer class="pb-safe">
+  <footer class="@bottom-navigation pb-safe">
     <nav v-if="store.isAuthorizedPoint">
       <div class="px-4 py-1 border-t border-gray-200 bg-white">
         <ul class="flex gap-2 justify-around">
@@ -64,16 +64,16 @@ const menuItems = ref([
     icon: "center_focus_strong",
   },
   {
-    title: "Продажи",
-    path: "/point/sales",
-    visible: true,
-    icon: "arrow_upward",
-  },
-  {
-    title: "База",
+    title: "Точка",
     path: "/point",
     visible: true,
-    icon: "list_alt",
+    icon: "adjust",
+  },
+  {
+    title: "Магазин",
+    path: "/store",
+    visible: true,
+    icon: "store",
   },
 ])
 </script>

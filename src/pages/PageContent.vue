@@ -1,7 +1,5 @@
 <template>
-  <a-page no-padding>
-    <router-view></router-view>
-  </a-page>
+  <router-view></router-view>
 </template>
 
 <script setup></script>

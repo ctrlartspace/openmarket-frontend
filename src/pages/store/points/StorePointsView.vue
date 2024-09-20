@@ -13,6 +13,46 @@
         <a-button accent>Открыть</a-button>
       </template>
     </data-table>
+    <data-table
+      :selectable="false"
+      :table-data="storePoints"
+      :table-fields="tableFields"
+      @on-item-click="loginToStorePoint"
+    >
+      <template #option>
+        <a-button accent>Открыть</a-button>
+      </template>
+    </data-table>
+    <data-table
+      :selectable="false"
+      :table-data="storePoints"
+      :table-fields="tableFields"
+      @on-item-click="loginToStorePoint"
+    >
+      <template #option>
+        <a-button accent>Открыть</a-button>
+      </template>
+    </data-table>
+    <data-table
+      :selectable="false"
+      :table-data="storePoints"
+      :table-fields="tableFields"
+      @on-item-click="loginToStorePoint"
+    >
+      <template #option>
+        <a-button accent>Открыть</a-button>
+      </template>
+    </data-table>
+    <data-table
+      :selectable="false"
+      :table-data="storePoints"
+      :table-fields="tableFields"
+      @on-item-click="loginToStorePoint"
+    >
+      <template #option>
+        <a-button accent>Открыть</a-button>
+      </template>
+    </data-table>
   </a-page>
 </template>
 

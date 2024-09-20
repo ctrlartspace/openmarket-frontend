@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col gap-2">
+  <div class="relative flex flex-col gap-2 p-4">
     <div
       class="relative bg-white px-4 py-2 flex justify-between gap-2 items-center border md:rounded rounded-xl"
     >
@@ -131,7 +131,7 @@
       class="w-full mt-2 bg-black text-white flex justify-center items-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 active:brightness-50 cursor-pointer select-none shadow-xl"
       @click.once="makeSaleFromCart"
     >
-      <span>Сохранить</span>
+      <span>Готово</span>
       <!-- <span class="material-icons-outlined self-center font-medium"
         >done</span
       > -->
