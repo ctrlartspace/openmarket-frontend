@@ -1,5 +1,8 @@
 <template>
-  <ul v-if="firstItems.length > 0" class="border border-neutral-300 rounded overflow-auto">
+  <ul
+    v-if="firstItems.length > 0"
+    class="border border-neutral-300 rounded-xl md:rounded overflow-auto"
+  >
     <li
       v-for="(item, i) in firstItems"
       :key="i"
@@ -58,12 +61,15 @@
         @click="isShowFull = !isShowFull"
       >
         <span class="material-icons-outlined">{{
-            isShowFull ? "expand_less" : "expand_more"
-          }}</span>
+          isShowFull ? "expand_less" : "expand_more"
+        }}</span>
       </button>
     </li>
   </ul>
-  <div v-else class="px-4 py-2 border border-neutral-300 rounded">
+  <div
+    v-else
+    class="bg-white text-center px-4 py-2 border border-neutral-300 rounded-xl md:rounded"
+  >
     <span class="text-base text-neutral-300">Элементы не найдены</span>
   </div>
 </template>
@@ -77,7 +83,7 @@ const props = defineProps([
   "single",
   "nested",
   "selectRoot",
-  "modelValue"
+  "modelValue",
 ])
 const emit = defineEmits(["change", "update:modelValue"])
 
@@ -86,10 +92,10 @@ const isShowFull = ref(true)
 const mainItems = computed(() => props.items.filter((item) => !item.parentId))
 const isItemsMore = computed(() => mainItems.value.length > VISIBLE_ITEMS_COUNT)
 const visibleItemsCount = computed(() =>
-  isShowFull.value ? mainItems.value.length : VISIBLE_ITEMS_COUNT
+  isShowFull.value ? mainItems.value.length : VISIBLE_ITEMS_COUNT,
 )
 const firstItems = computed(() =>
-  mainItems.value.slice(0, visibleItemsCount.value)
+  mainItems.value.slice(0, visibleItemsCount.value),
 )
 
 const emitUpdates = (value) => {
@@ -107,7 +113,7 @@ const selectedItems = computed({
   },
   set(value) {
     emitUpdates(value)
-  }
+  },
 })
 
 const getNestedIds = (obj, ids = []) => {

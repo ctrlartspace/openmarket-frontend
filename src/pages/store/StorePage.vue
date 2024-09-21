@@ -1,5 +1,9 @@
 <template>
-  <base-page :menu-items="menuItems" />
+  <base-page :menu-items="menuItems">
+    <template #action>
+      <button class="text-gray-300 hover:text-black">Завершить работу</button>
+    </template>
+  </base-page>
 </template>
 
 <script setup>

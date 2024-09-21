@@ -9,14 +9,14 @@
           path: '/store/users',
           query: { selectableMode: true },
         }"
-        class="px-4 py-2 border border-neutral-300 rounded bg-neutral-100 hover:border-neutral-500"
+        class="px-4 py-2 border border-neutral-300 rounded-xl md:rounded bg-white hover:border-neutral-500"
       >
         <div v-if="selectedUser">
           <h1 class="text-base font-medium">
             {{ selectedUser.name }}
           </h1>
         </div>
-        <p v-else>Выбрать сотрудника</p>
+        <p v-else>Выбрать сотрудника...</p>
       </router-link>
     </div>
   </a-page>

@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col gap-2">
-    <div
-      class="border border-neutral-300 rounded-xl md:rounded overflow-hidden"
-    >
-      <table class="w-full text-lg md:text-base text-left bg-white">
+    <div class="border border-neutral-300 rounded-xl md:rounded overflow-auto">
+      <table
+        class="w-full text-lg md:text-base text-left bg-white whitespace-nowrap"
+      >
         <tbody>
           <tr
             v-for="item in tableData"
@@ -11,10 +11,7 @@
             class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b border-neutral-300 last:border-none"
             @click="emit('onItemClick', item)"
           >
-            <td
-              v-if="selectable"
-              class="hidden md:table-cell md:pl-4 md:py-2 w-2"
-            >
+            <td v-if="selectable" class="hidden md:table-cell pl-4 py-2 w-2">
               <div class="w-4 h-4 flex items-center justify-center">
                 <input
                   v-model="selectedItems"
@@ -30,7 +27,7 @@
               v-for="field in tableFields"
               :key="field.name"
               :class="field.className"
-              class="md:px-4 md:py-2"
+              class="px-4 py-2"
             >
               <slot :item="item" :name="field.name">
                 <span>
@@ -43,9 +40,9 @@
           </tr>
           <tr
             v-if="tableData.length === 0"
-            class="p-4 flex flex-col md:block md:p-0 cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b border-neutral-300 last:border-none"
+            class="p-4 cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b border-neutral-300 last:border-none"
           >
-            <td class="text-center md:px-4 md:py-2">
+            <td class="text-center px-4 py-2">
               <span class="text-gray-300"> Нет данных </span>
             </td>
           </tr>

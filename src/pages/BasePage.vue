@@ -20,7 +20,7 @@
     <section class="flex flex-col flex-1 relative overflow-auto">
       <div
         :class="isSideMenuExpanded ? 'translate-x-0' : '-translate-x-full'"
-        class="z-50 absolute top-0 left-0 right-0 bottom-0 transition-transform will-change-transform"
+        class="z-50 flex flex-col absolute top-0 left-0 right-0 bottom-0 transition-transform ease-in-out will-change-transform"
         @click="toggleSideMenu"
       >
         <ul class="w-2/3 bg-white h-full border-r border-neutral-300 shadow-xl">
@@ -41,6 +41,16 @@
                 {{ item.title }}
               </span>
             </router-link>
+          </li>
+        </ul>
+        <ul
+          v-if="hasAction()"
+          class="w-2/3 bg-white border-r border-neutral-300 shadow-xl"
+        >
+          <li
+            class="px-4 py-1 bg-white border-t border-neutral-300 font-medium text-base text-gray-300"
+          >
+            <slot name="action"></slot>
           </li>
         </ul>
       </div>
@@ -72,6 +82,13 @@
             </router-link>
           </li>
         </ul>
+        <ul v-if="hasAction()">
+          <li
+            class="px-4 py-1 bg-white border-t border-neutral-300 font-medium text-base text-gray-300"
+          >
+            <slot name="action"></slot>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col-span-6 overflow-hidden overflow-y-scroll flex flex-col">
@@ -81,7 +98,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, useSlots } from "vue"
 import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.vue"
 
 const props = defineProps({
@@ -90,6 +107,9 @@ const props = defineProps({
     required: true,
   },
 })
+
+const slots = useSlots()
+const hasAction = () => !!slots.action
 
 const headerTitle = ref("Меню")
 const isSideMenuExpanded = ref(false)

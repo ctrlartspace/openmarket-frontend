@@ -6,9 +6,12 @@
     <div class="flex flex-col gap-2">
       <div
         v-if="filters"
-        class="px-4 py-2 border border-neutral-300 rounded bg-neutral-100"
+        class="px-4 py-2 border border-neutral-300 rounded-xl md:rounded bg-white"
       >
-        Добавить в {{ filters }}
+        Добавить в
+        <span class="bg-blue-50 px-2 py-1 rounded text-blue-600">
+          {{ filters }}
+        </span>
       </div>
       <a-base-input
         id="filter-name"

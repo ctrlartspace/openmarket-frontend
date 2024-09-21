@@ -10,6 +10,7 @@
       'bg-green-50 text-green-600 hover:bg-green-100 hover:text-green-700':
         success,
       'bg-pink-50 text-pink-500 hover:bg-pink-100 hover:text-pink-700': accent,
+      'w-full justify-center': block,
     }"
     :disabled="loading"
     class="px-2 flex items-center gap-2 text-base font-medium rounded"
@@ -28,6 +29,7 @@ defineProps({
   info: { type: Boolean },
   success: { type: Boolean },
   accent: { type: Boolean },
+  block: { type: Boolean },
 })
 </script>
 
