@@ -8,7 +8,7 @@
         :to="{
           path: '/store/items/add',
         }"
-        class="px-4 py-2 text-blue-600 border border-blue-300 rounded bg-blue-50 hover:border-blue-500"
+        class="px-4 py-2 text-blue-600 border border-blue-300 rounded-xl md:rounded bg-blue-50 hover:border-blue-500"
       >
         <p>Создать новый</p>
       </router-link>
@@ -17,7 +17,7 @@
           path: '/store/items',
           query: { selectableMode: true },
         }"
-        class="px-4 py-2 border border-neutral-300 rounded bg-neutral-100 hover:border-neutral-500"
+        class="px-4 py-2 border border-neutral-300 rounded-xl md:rounded bg-white hover:border-neutral-500"
       >
         <div v-if="storeItem">
           <h1 class="text-base font-medium">
@@ -28,7 +28,7 @@
             {{ storeItem.sellingPrice }} KZT
           </p>
         </div>
-        <p v-else>Выбрать товар</p>
+        <p v-else>Выбрать товар...</p>
       </router-link>
       <a-base-input
         id="purchase-price"

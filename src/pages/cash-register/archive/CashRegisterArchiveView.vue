@@ -45,7 +45,7 @@ const tableFields = ref([
     name: "id",
     className: "w-full",
   },
-  { name: "total", className: "whitespace-nowrap", postfix: " KZT" },
+  // { name: "total", className: "whitespace-nowrap", postfix: " KZT" },
   { name: "isClosed", className: "whitespace-nowrap" },
 ])
 </script>

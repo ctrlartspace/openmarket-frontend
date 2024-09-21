@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-1">
-    <label v-if="label" :for="$attrs.id">{{ label }}</label>
+    <label v-if="label" :for="$attrs.id" class="font-medium">{{ label }}</label>
     <router-link
       v-if="routeLink && inputValue"
       :to="routeLink.path"

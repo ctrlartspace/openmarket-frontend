@@ -1,87 +1,90 @@
 <template>
-  <div>
-    <barcode-scanner :is-stopped="isStopped" @success="onScanned" />
+  <div class="flex flex-col h-full">
+    <div class="flex-1">
+      <barcode-scanner :is-stopped="isStopped" @success="onScanned" />
 
-    <audio class="hidden" id="beepSound" controls preload="none">
-      <source src="../assets/beep.wav" type="audio/wav" />
-    </audio>
-    <div v-if="isNotFound" class="p-4 text-red-600 text-center">
-      <p>Товар не найден</p>
-    </div>
-    <div class="p-4 text-center">
-      <button
-        class="px-4 py-2 mt-2 border border-gray-600 rounded active:bg-gray-50"
-        @click="isNumberInput = true"
-      >
-        Ввод цифр
-      </button>
-    </div>
-    <div class="absolute bottom-12 left-0 right-0 p-4 mb-safe">
-      <div
-        v-if="isNumberInput"
-        class="relative p-4 flex flex-col gap-2 rounded-xl bg-white shadow-lg border border-gray-200"
-      >
-        <div class="p-4 text-2xl text-center border rounded-xl">
-          <p
-            class="tracking-widest"
-            :class="isLoading ? 'text-gray-300 animate-pulse' : ''"
-          >
-            {{ inputNumber }}
-          </p>
+      <audio id="beepSound" class="hidden" controls preload="none">
+        <source src="../assets/beep.wav" type="audio/wav" />
+      </audio>
+      <div v-if="isNotFound" class="p-4 text-red-600 text-center">
+        <p>Товар не найден</p>
+      </div>
+      <div class="p-4 text-center">
+        <button
+          class="px-4 py-2 mt-2 border border-gray-600 rounded active:bg-gray-50"
+          @click="isNumberInput = true"
+        >
+          Ввод цифр
+        </button>
+      </div>
+      <div class="absolute bottom-12 left-0 right-0 p-4 mb-safe">
+        <div
+          v-if="isNumberInput"
+          class="relative p-4 flex flex-col gap-2 rounded-xl bg-white shadow-lg border border-gray-200"
+        >
+          <div class="p-4 text-2xl text-center border rounded-xl">
+            <p
+              :class="isLoading ? 'text-gray-300 animate-pulse' : ''"
+              class="tracking-widest"
+            >
+              {{ inputNumber }}
+            </p>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <button
+              v-for="i in 10"
+              :class="i - 1 === 0 ? 'order-last col-span-2 ' : ''"
+              :disabled="isLoading"
+              class="px-2 py-2 border border-gray-200 rounded-xl text-xl text-center active:bg-gray-50"
+              @click="setNumberInput(i - 1)"
+            >
+              {{ i - 1 }}
+            </button>
+            <button
+              class="flex items-center justify-center px-2 py-2 bg-black text-white rounded-xl text-xl text-center order-last"
+              @click="isNumberInput = false"
+            >
+              <span class="material-icons-outlined">close</span>
+            </button>
+          </div>
         </div>
-        <div class="grid grid-cols-3 gap-2">
+        <div
+          v-if="resultItem"
+          class="relative p-4 rounded-xl bg-white shadow-lg border border-gray-200"
+        >
+          <p class="text-sm">{{ resultItem.code }}</p>
+          <p class="text-2xl">{{ resultItem.name }}</p>
+          <p class="text-2xl">{{ resultItem.purchasePrice }} KZT</p>
+          <div class="mt-2 flex gap-2 justify-between items-center">
+            <button
+              class="w-full p-2 bg-gray-100 flex items-center justify-center rounded-xl"
+              @click="minusItem"
+            >
+              <span class="material-icons-outlined">remove</span>
+            </button>
+            <div class="w-full text-center">
+              <span class="text-2xl">{{ itemCount }}</span>
+            </div>
+            <button
+              class="w-full p-2 bg-gray-100 flex items-center justify-center rounded-xl"
+              @click="plusItem"
+            >
+              <span class="material-icons-outlined">add</span>
+            </button>
+          </div>
           <button
-            v-for="i in 10"
-            class="px-2 py-2 border border-gray-200 rounded-xl text-xl text-center active:bg-gray-50"
-            :class="i - 1 === 0 ? 'order-last col-span-2 ' : ''"
-            @click="setNumberInput(i - 1)"
-            :disabled="isLoading"
+            class="mt-4 w-full px-4 py-2 rounded-xl text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-95 active:brightness-95"
+            @click="addToCart"
           >
-            {{ i - 1 }}
+            Добавить
           </button>
-          <button
-            class="flex items-center justify-center px-2 py-2 bg-black text-white rounded-xl text-xl text-center order-last"
-            @click="isNumberInput = false"
-          >
+          <button class="absolute top-0 right-0 p-4" @click="resetScanner">
             <span class="material-icons-outlined">close</span>
           </button>
         </div>
       </div>
-      <div
-        v-if="resultItem"
-        class="relative p-4 rounded-xl bg-white shadow-lg border border-gray-200"
-      >
-        <p class="text-sm">{{ resultItem.code }}</p>
-        <p class="text-2xl">{{ resultItem.name }}</p>
-        <p class="text-2xl">{{ resultItem.purchasePrice }} KZT</p>
-        <div class="mt-2 flex gap-2 justify-between items-center">
-          <button
-            class="w-full p-2 bg-gray-100 flex items-center justify-center rounded-xl"
-            @click="minusItem"
-          >
-            <span class="material-icons-outlined">remove</span>
-          </button>
-          <div class="w-full text-center">
-            <span class="text-2xl">{{ itemCount }}</span>
-          </div>
-          <button
-            class="w-full p-2 bg-gray-100 flex items-center justify-center rounded-xl"
-            @click="plusItem"
-          >
-            <span class="material-icons-outlined">add</span>
-          </button>
-        </div>
-        <button
-          class="mt-4 w-full px-4 py-2 rounded-xl text-center text-white bg-black flex items-center justify-center gap-2 hover:brightness-95 active:brightness-95"
-          @click="addToCart"
-        >
-          Добавить
-        </button>
-        <button class="absolute top-0 right-0 p-4" @click="resetScanner">
-          <span class="material-icons-outlined">close</span>
-        </button>
-      </div>
     </div>
+    <app-bottom-navigation-bar />
   </div>
 </template>
 
@@ -91,6 +94,7 @@ import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { getPointItem } from "@/services/ItemSearch"
 import { useCartStore } from "@/stores/cart.store"
+import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.vue"
 
 const store = useCartStore()
 const router = useRouter()

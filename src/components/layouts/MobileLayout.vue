@@ -1,7 +1,7 @@
 <template>
-  <main class="@mobile-layout bg-neutral-100 h-full">
+  <div class="@mobile-layout bg-neutral-100 h-full">
     <router-view></router-view>
-  </main>
+  </div>
 </template>
 
 <script setup></script>

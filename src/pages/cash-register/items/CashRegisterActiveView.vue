@@ -16,7 +16,7 @@
 
     <div
       v-if="isActiveCashExists"
-      class="flex flex-col gap-2 p-4 bg-white border border-neutral-300 rounded"
+      class="flex flex-col gap-2 p-4 bg-white border border-neutral-300 rounded-xl md:rounded"
     >
       <a-base-input
         v-model="activeCash.startAmount"

@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue"
+import { onBeforeUnmount, onMounted, ref } from "vue"
 
 import Quagga from "quagga"
 import P5 from "p5"
@@ -92,7 +92,7 @@ const setupCamera = async () => {
   try {
     const SIZE = Math.max(
       document.documentElement.clientWidth || 0,
-      window.innerWidth || 0
+      window.innerWidth || 0,
     )
     let lastScanTime = 0
     const script = (p5) => {
@@ -143,7 +143,7 @@ const setupCamera = async () => {
                 resultCode.value = result.codeResult.code
                 emit("success", resultCode.value)
               }
-            }
+            },
           )
           lastScanTime = currentTime
         }

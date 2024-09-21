@@ -9,7 +9,7 @@
           path: '/point/items',
           query: { selectableMode: true },
         }"
-        class="px-4 py-2 border border-neutral-300 rounded bg-neutral-100 hover:border-neutral-500"
+        class="px-4 py-2 border border-neutral-300 rounded-xl md:rounded bg-white hover:border-neutral-500"
       >
         <div v-if="pointItem">
           <h1 class="text-base font-medium">
@@ -20,7 +20,7 @@
             {{ pointItem.sellingPrice }} KZT
           </p>
         </div>
-        <p v-else>Выбрать товар</p>
+        <p v-else>Выбрать товар...</p>
       </router-link>
       <a-base-input
         id="purchase-price"
