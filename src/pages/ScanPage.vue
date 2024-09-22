@@ -37,6 +37,7 @@
               :disabled="isLoading"
               class="rounded-xl border border-gray-200 px-2 py-2 text-center text-xl active:bg-gray-50"
               @click="setNumberInput(i - 1)"
+              :key="i"
             >
               {{ i - 1 }}
             </button>
