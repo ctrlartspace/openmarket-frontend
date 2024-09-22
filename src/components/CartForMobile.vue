@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col h-full">
+  <div class="flex h-full flex-col">
     <header>
       <nav>
         <div
-          class="px-4 py-2 bg-white border-b border-gray-200 flex items-center"
+          class="flex items-center border-b border-gray-200 bg-white px-4 py-2"
         >
           <div class="absolute left-0 right-0">
-            <div class="px-4 flex justify-between">
+            <div class="flex justify-between px-4">
               <button class="flex items-center">
                 <span class="material-icons-outlined">delete</span>
               </button>
@@ -15,14 +15,14 @@
               </button>
             </div>
           </div>
-          <h2 class="font-medium text-lg text-center w-full">Корзина</h2>
+          <h2 class="w-full text-center text-lg font-medium">Корзина</h2>
         </div>
       </nav>
     </header>
     <div class="flex-1">
       <div class="relative flex flex-col gap-2 p-4">
         <div
-          class="relative bg-white px-4 py-2 flex justify-between gap-2 items-center border md:rounded rounded-xl"
+          class="relative flex items-center justify-between gap-2 rounded-xl border bg-white px-4 py-2 md:rounded"
         >
           <span class="material-icons text-gray-300">search</span>
           <v-form class="relative w-full" @submit.prevent="addCartItem">
@@ -30,23 +30,23 @@
               ref="searchInput"
               v-model.trim="inputValue"
               :class="
-                isSearchError ? 'text-red-600 animate-shake' : 'text-black'
+                isSearchError ? 'animate-shake text-red-600' : 'text-black'
               "
-              class="flex-1 w-full h-full text-lg placeholder:text-gray-300 focus:outline-none text-ellipsis"
+              class="h-full w-full flex-1 text-ellipsis text-lg placeholder:text-gray-300 focus:outline-none"
               placeholder="Код товара, наименование"
               type="text"
               @input="isSearchError = false"
             />
             <div
               v-if="false"
-              class="absolute w-full mt-2 bg-white border border-t-0 border-gray-200 rounded-b before:w-full before:h-0.5 before:bg-blue-600 before:absolute shadow-xl overflow-hidden"
+              class="absolute mt-2 w-full overflow-hidden rounded-b border border-t-0 border-gray-200 bg-white shadow-xl before:absolute before:h-0.5 before:w-full before:bg-blue-600"
             >
               <ul>
                 <li
                   v-for="(item, index) in store.groupedCartItems"
                   :key="index"
                   :value="index"
-                  class="px-4 py-2 text-lg hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
+                  class="cursor-pointer px-4 py-2 text-lg hover:bg-gray-100 active:bg-gray-100"
                 >
                   {{ item.name }}
                 </li>
@@ -56,38 +56,38 @@
         </div>
         <p
           v-if="store.groupedCartItems.length === 0"
-          class="text-gray-300 text-lg text-center"
+          class="text-center text-lg text-gray-300"
         >
           Пусто
         </p>
         <div
           v-else
-          class="border md:rounded rounded-xl overflow-hidden bg-white"
+          class="overflow-hidden rounded-xl border bg-white md:rounded"
         >
-          <table class="table-auto w-full text-lg text-left">
+          <table class="w-full table-auto text-left text-lg">
             <tbody>
               <tr
                 v-for="(item, i) in store.groupedCartItems"
                 :key="i"
-                class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b flex items-center gap-2 px-4 py-2 last:border-none"
+                class="flex cursor-pointer items-center gap-2 border-b px-4 py-2 last:border-none hover:bg-gray-50 active:bg-gray-50"
                 @click="onItemClick(item)"
               >
                 <td class="flex items-center">
                   <button class="flex items-center justify-center">
                     <span
-                      class="material-icons text-red-600 bg-red-100 rounded hover:bg-red-200 active:bg-red-200 hover:text-red-700 active:text-red-700 select-none"
+                      class="material-icons select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
                       @click.stop="store.removeItem(item.id)"
                     >
                       remove
                     </span>
                   </button>
                 </td>
-                <td class="font-medium line-clamp-1">
+                <td class="line-clamp-1 font-medium">
                   <span class=""> {{ item.name }}</span>
                 </td>
                 <div class="ml-auto flex gap-2 whitespace-nowrap">
                   <td class="">{{ item.count }} шт.</td>
-                  <td class="text-green-600 font-medium">
+                  <td class="font-medium text-green-600">
                     {{ item.count * item.sellingPrice }} KZT
                   </td>
                 </div>
@@ -102,7 +102,7 @@
       >
         <button
           v-if="cartStep === 1"
-          class="w-full bg-black text-white flex justify-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 active:brightness-50 cursor-pointer select-none shadow-xl"
+          class="flex w-full cursor-pointer select-none justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl hover:brightness-50 active:brightness-50"
           @click.once="stepForward"
         >
           <span>{{ store.getTotalAmount }} KZT</span>
@@ -112,7 +112,7 @@
         </button>
         <div
           v-if="cartStep === 2"
-          class="relative p-4 rounded-xl bg-white shadow-lg border border-gray-200"
+          class="relative rounded-xl border border-gray-200 bg-white p-4 shadow-lg"
         >
           <div class="absolute">
             <button class="flex items-center" @click="stepBack">
@@ -121,10 +121,10 @@
               >
             </button>
           </div>
-          <p class="text-lg text-center text-gray-300 mb-2">Тип оплаты</p>
+          <p class="mb-2 text-center text-lg text-gray-300">Тип оплаты</p>
           <div v-if="store.getPaymentType.code === 'card'">
             <button
-              class="w-full text-lg px-4 py-2 bg-blue-100 text-blue-600 font-medium rounded-xl"
+              class="w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
               @click="store.changePaymentType"
             >
               Карта
@@ -135,20 +135,20 @@
             class="flex flex-col gap-2"
           >
             <button
-              class="w-full text-lg px-4 py-2 bg-blue-100 text-blue-600 font-medium rounded-xl"
+              class="w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
               @click="store.changePaymentType"
             >
               Наличные
             </button>
             <div
-              class="px-4 py-2 bg-gray-100 border border-gray-200 rounded-xl flex justify-between items-center"
+              class="flex items-center justify-between rounded-xl border border-gray-200 bg-gray-100 px-4 py-2"
             >
               <span class="text-lg text-gray-300">Сдача</span>
               <span class="text-lg text-gray-300">{{ cartChange }} KZT</span>
             </div>
             <input
               v-model="inputAmount"
-              class="w-full text-center text-lg border border-gray-200 px-4 py-2 placeholder:font-normal placeholder:text-gray-300 appearance-none font-medium rounded-xl focus:outline-2 focus:outline-black focus:bg-white"
+              class="w-full appearance-none rounded-xl border border-gray-200 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
               placeholder="Внесено"
               type="number"
             />
@@ -156,7 +156,7 @@
         </div>
         <button
           v-if="cartStep === 2"
-          class="w-full mt-2 bg-black text-white flex justify-center items-center gap-4 font-medium text-2xl p-4 rounded-xl hover:brightness-50 active:brightness-50 cursor-pointer select-none shadow-xl"
+          class="mt-2 flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl hover:brightness-50 active:brightness-50"
           @click.once="makeSaleFromCart"
         >
           <span>Готово</span>
@@ -206,7 +206,7 @@ const addCartItem = async () => {
   }
 
   try {
-    const item = await getPointItem(inputValue.value)
+    const item = await getPointItem(inputValue.value, { searchBy: "code" })
     store.addItem(item)
     inputValue.value = ""
     isSearchError.value = false

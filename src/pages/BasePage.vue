@@ -1,60 +1,68 @@
 <template>
-  <div class="@base-page md:hidden z-50 flex flex-col h-full">
+  <div v-if="!isDesktop" class="@base-page z-50 flex h-full flex-col">
     <header>
       <nav>
         <div
-          class="px-4 py-2 bg-white border-b border-gray-200 flex items-center"
+          class="flex items-center border-b border-gray-200 bg-white px-4 py-2"
         >
-          <div class="absolute">
-            <button class="flex items-center" @click="toggleSideMenu">
-              <span class="material-icons-outlined">menu</span>
-            </button>
+          <div class="absolute left-0 right-0">
+            <div class="flex justify-end px-4">
+              <button class="flex items-center" @click="toggleSideMenu">
+                <span v-if="!isSideMenuExpanded" class="material-icons-outlined"
+                  >menu</span
+                >
+                <span v-else class="material-icons-outlined">close</span>
+              </button>
+            </div>
           </div>
-          <h2 class="font-medium text-lg text-center w-full">
+          <div class="absolute"></div>
+          <h2 class="w-full text-center text-lg font-medium">
             {{ headerTitle }}
           </h2>
         </div>
       </nav>
     </header>
 
-    <section class="flex flex-col flex-1 relative overflow-auto">
+    <section class="relative flex flex-1 flex-col overflow-auto">
       <div
-        :class="isSideMenuExpanded ? 'translate-x-0' : '-translate-x-full'"
-        class="z-50 flex flex-col absolute top-0 left-0 right-0 bottom-0 transition-transform ease-in-out will-change-transform"
+        :class="
+          isSideMenuExpanded
+            ? 'pointer-events-auto opacity-100'
+            : 'pointer-events-none opacity-0'
+        "
+        class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-50 flex flex-col bg-neutral-100 p-4 opacity-0 transition-opacity duration-100 ease-in-out will-change-transform"
         @click="toggleSideMenu"
       >
-        <ul class="w-2/3 bg-white h-full border-r border-neutral-300 shadow-xl">
+        <ul class="flex h-full flex-col gap-2">
           <li
             v-for="item in menuItems"
             :key="item"
-            class="px-4 py-1 bg-white border-b border-neutral-300 whitespace-nowrap"
+            class="whitespace-nowrap rounded-xl border border-neutral-300 bg-white px-4 py-2"
           >
             <router-link
+              class="block w-full"
               v-slot="{ isActive }"
               :to="item.path"
               @click.stop="onMenuItemClick(item)"
             >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="font-medium text-base"
+                class="text-base font-medium"
               >
                 {{ item.title }}
               </span>
             </router-link>
           </li>
         </ul>
-        <ul
-          v-if="hasAction()"
-          class="w-2/3 bg-white border-r border-neutral-300 shadow-xl"
-        >
+        <ul v-if="hasAction()" class="flex flex-col gap-2">
           <li
-            class="px-4 py-1 bg-white border-t border-neutral-300 font-medium text-base text-gray-300"
+            class="whitespace-nowrap rounded-xl border border-neutral-300 bg-white px-4 py-2 font-medium"
           >
             <slot name="action"></slot>
           </li>
         </ul>
       </div>
-      <div class="h-full flex flex-col">
+      <div class="flex h-full flex-col">
         <router-view></router-view>
       </div>
     </section>
@@ -63,19 +71,19 @@
     </footer>
   </div>
 
-  <div class="hidden md:grid grid-cols-10 w-full">
+  <div v-if="isDesktop" class="grid w-full grid-cols-10">
     <div class="col-span-4 border-r border-neutral-300">
-      <div class="h-full flex flex-col justify-between">
+      <div class="flex h-full flex-col justify-between">
         <ul class="">
           <li
             v-for="item in menuItems"
             :key="item"
-            class="px-4 py-1 bg-white border-b border-neutral-300"
+            class="border-b border-neutral-300 bg-white px-4 py-1"
           >
             <router-link v-slot="{ isActive }" :to="item.path">
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="font-medium text-base"
+                class="text-base font-medium"
               >
                 {{ item.title }}
               </span>
@@ -84,14 +92,14 @@
         </ul>
         <ul v-if="hasAction()">
           <li
-            class="px-4 py-1 bg-white border-t border-neutral-300 font-medium text-base text-gray-300"
+            class="border-t border-neutral-300 bg-white px-4 py-1 text-base font-medium text-gray-300"
           >
             <slot name="action"></slot>
           </li>
         </ul>
       </div>
     </div>
-    <div class="col-span-6 overflow-hidden overflow-y-scroll flex flex-col">
+    <div class="col-span-6 flex flex-col overflow-hidden overflow-y-scroll">
       <router-view></router-view>
     </div>
   </div>
@@ -100,6 +108,12 @@
 <script setup>
 import { ref, useSlots } from "vue"
 import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.vue"
+import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
+import MobileLayout from "@/components/layouts/MobileLayout.vue"
+import DesktopLayout from "@/components/layouts/DesktopLayout.vue"
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const isDesktop = breakpoints.greater("sm") // only smaller than lg
 
 const props = defineProps({
   menuItems: {

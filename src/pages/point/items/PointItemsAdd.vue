@@ -8,7 +8,7 @@
         :to="{
           path: '/store/items/add',
         }"
-        class="px-4 py-2 text-blue-600 border border-blue-300 rounded-xl md:rounded bg-blue-50 hover:border-blue-500"
+        class="rounded-xl border border-blue-300 bg-blue-50 px-4 py-2 text-blue-600 hover:border-blue-500 md:rounded"
       >
         <p>Создать новый</p>
       </router-link>
@@ -17,7 +17,7 @@
           path: '/store/items',
           query: { selectableMode: true },
         }"
-        class="px-4 py-2 border border-neutral-300 rounded-xl md:rounded bg-white hover:border-neutral-500"
+        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded"
       >
         <div v-if="storeItem">
           <h1 class="text-base font-medium">
@@ -69,7 +69,7 @@ const addPointItem = async () => {
   try {
     const newPointItem = await PointItemService.addPointItem(item.value)
     onCancelNewItemClick()
-    await router.push({ name: "pointItem", params: { id: newPointItem.id } })
+    await router.push({ path: "/point/items/" + newPointItem.id })
   } catch (error) {
     console.log(error)
   }
