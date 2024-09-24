@@ -1,15 +1,15 @@
 <template>
-  <a-page title="Новый фильтр">
+  <a-page title="Новая категория">
     <template #header>
       <a-button primary @click="addFilter">Сохранить</a-button>
     </template>
     <div class="flex flex-col gap-2">
       <div
         v-if="filters"
-        class="px-4 py-2 border border-neutral-300 rounded-xl md:rounded bg-white"
+        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded"
       >
         Добавить в
-        <span class="bg-blue-50 px-2 py-1 rounded text-blue-600">
+        <span class="rounded bg-blue-50 px-2 py-1 text-blue-600">
           {{ filters }}
         </span>
       </div>

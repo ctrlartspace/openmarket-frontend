@@ -1,7 +1,7 @@
 <template>
-  <div class="flex justify-center items-center h-full">
+  <div class="flex h-full w-full items-center justify-center">
     <form
-      class="flex flex-col gap-2 p-4 bg-white rounded-xl md:rounded border border-neutral-300 w-64"
+      class="flex w-64 flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded"
       @submit.prevent="loginToStore"
     >
       <a-base-input v-model.trim="authData.name" placeholder="Номер магазина" />
@@ -11,7 +11,7 @@
         type="password"
       />
       <button
-        class="font-medium mt-2 block w-full px-4 py-2 bg-blue-600 text-lg md:text-base text-white rounded-xl md:rounded"
+        class="mt-2 block w-full rounded-xl bg-blue-600 px-4 py-2 text-lg font-medium text-white md:rounded md:text-base"
         type="submit"
       >
         Продолжить

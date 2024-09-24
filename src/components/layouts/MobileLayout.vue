@@ -1,5 +1,5 @@
 <template>
-  <div class="@mobile-layout bg-neutral-100 h-full">
+  <div class="@mobile-layout h-full">
     <router-view></router-view>
   </div>
 </template>

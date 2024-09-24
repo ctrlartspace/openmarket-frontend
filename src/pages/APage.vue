@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col overflow-y-scroll h-full">
+  <div class="flex h-full flex-col overflow-y-scroll bg-neutral-100">
     <div
       v-if="hasHeader()"
-      class="hidden md:flex items-center gap-4 px-4 py-1 bg-white border-b border-neutral-300"
+      class="flex items-center gap-4 border-b border-neutral-300 bg-white px-4 py-2 md:py-1"
     >
       <h1 v-if="title" class="flex items-center text-base font-medium">
         {{ title }}
@@ -13,26 +13,26 @@
     </div>
 
     <div
-      :class="{ 'p-0 no-padding': noPadding, 'p-4': !noPadding }"
+      :class="{ 'no-padding p-0': noPadding, 'p-4': !noPadding }"
       class="flex-1 overflow-auto"
     >
       <slot></slot>
     </div>
 
-    <div
+    <!-- <div
       v-if="hasHeader()"
-      class="md:hidden z-30 flex items-center gap-4 px-4 py-2 bg-white border-t border-neutral-200 overflow-x-auto overflow-y-hidden"
+      class="z-30 flex items-center gap-4 overflow-x-auto overflow-y-hidden border-t border-neutral-200 bg-white px-4 py-2 md:hidden"
     >
       <h1
         v-if="title"
-        class="flex items-center text-base font-medium whitespace-nowrap"
+        class="flex items-center whitespace-nowrap text-base font-medium"
       >
         {{ title }}
       </h1>
       <div class="ml-auto flex items-center gap-2 whitespace-nowrap">
         <slot name="header"></slot>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

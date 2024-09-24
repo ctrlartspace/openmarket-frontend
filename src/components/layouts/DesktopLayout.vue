@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex flex-col max-w-[800px] mx-auto h-screen max-h-screen bg-white border-l border-r border-neutral-300"
+    class="mx-auto flex h-screen max-h-screen max-w-[800px] flex-col border-l border-r border-neutral-300 bg-white"
   >
     <app-header />
-    <main class="flex-1 flex overflow-hidden bg-neutral-100">
+    <main class="flex w-full flex-1 overflow-hidden">
       <router-view></router-view>
     </main>
   </div>
