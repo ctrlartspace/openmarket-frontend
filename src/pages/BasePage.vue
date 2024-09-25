@@ -104,9 +104,11 @@
     </div>
     <div class="col-span-6 flex flex-col overflow-hidden overflow-y-scroll">
       <router-view></router-view>
-      <section>
-        <slot name="bottom"></slot>
-      </section>
+      <div>
+        <section>
+          <slot name="bottom"></slot>
+        </section>
+      </div>
     </div>
   </div>
 </template>

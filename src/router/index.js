@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
-import CartPage from "@/pages/CartPage.vue"
+// import CartPage from "@/pages/CartPage.vue"
 import BaseDataPage from "@/pages/BaseDataPage.vue"
 import ItemPage from "@/pages/ItemPage.vue"
 import IncomesPage from "@/pages/IncomesPage.vue"
@@ -36,9 +36,28 @@ import CashRegisterAdd from "@/pages/cash-register/items/CashRegisterAdd.vue"
 import CashRegisterArchiveView from "@/pages/cash-register/archive/CashRegisterArchiveView.vue"
 import PageContent from "@/pages/PageContent.vue"
 import SaleItemsView from "@/pages/point/sales/SaleItemsView.vue"
+import CartPage from "@/pages/cart/CartPage.vue"
+import CartActiveView from "@/pages/cart/items/CartActiveView.vue"
 
 const routes = [
-  { path: "/", component: CartPage },
+  // { path: "/", component: CartPage },
+  {
+    path: "/cart",
+    component: CartPage,
+    redirect: "/cart/active",
+    children: [
+      {
+        path: "active",
+        component: PageContent,
+        children: [
+          {
+            path: "",
+            component: CartActiveView,
+          },
+        ],
+      },
+    ],
+  },
   {
     path: "/store",
     component: StorePage,
