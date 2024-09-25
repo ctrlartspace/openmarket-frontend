@@ -8,7 +8,7 @@
           <div class="absolute left-0 right-0">
             <div class="px- flex justify-between px-4">
               <button class="flex items-center" @click="$router.back">
-                <span class="material-icons-outlined">arrow_back_ios_new</span>
+                <span class="material-icons-outlined">arrow_back</span>
               </button>
               <button class="flex items-center" @click="toggleSideMenu">
                 <span v-if="!isSideMenuExpanded" class="material-icons-outlined"
@@ -74,42 +74,42 @@
     </footer>
   </div>
 
-  <div v-if="isDesktop" class="grid w-full grid-cols-10">
-    <div class="col-span-4 border-r border-neutral-300">
-      <div class="flex h-full flex-col justify-between">
-        <ul class="">
-          <li
-            v-for="item in menuItems"
-            :key="item"
-            class="border-b border-neutral-300 bg-white px-4 py-1"
-          >
-            <router-link v-slot="{ isActive }" :to="item.path">
-              <span
-                :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="text-base font-medium"
-              >
-                {{ item.title }}
-              </span>
-            </router-link>
-          </li>
-        </ul>
-        <ul v-if="hasAction()">
-          <li
-            class="border-t border-neutral-300 bg-white px-4 py-1 text-base font-medium text-gray-300"
-          >
-            <slot name="action"></slot>
-          </li>
-        </ul>
+  <div v-if="isDesktop" class="flex w-full flex-col">
+    <div class="grid w-full flex-grow grid-cols-10 overflow-hidden">
+      <div class="col-span-4 border-r border-neutral-300">
+        <div class="flex h-full flex-col justify-between">
+          <ul class="">
+            <li
+              v-for="item in menuItems"
+              :key="item"
+              class="border-b border-neutral-300 bg-white px-4 py-1"
+            >
+              <router-link v-slot="{ isActive }" :to="item.path">
+                <span
+                  :class="isActive ? 'text-black' : 'text-gray-300'"
+                  class="text-base font-medium"
+                >
+                  {{ item.title }}
+                </span>
+              </router-link>
+            </li>
+          </ul>
+          <ul v-if="hasAction()">
+            <li
+              class="border-t border-neutral-300 bg-white px-4 py-1 text-base font-medium text-gray-300"
+            >
+              <slot name="action"></slot>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-span-6 flex flex-col overflow-hidden">
+        <router-view></router-view>
       </div>
     </div>
-    <div class="col-span-6 flex flex-col overflow-hidden overflow-y-scroll">
-      <router-view></router-view>
-      <div>
-        <section>
-          <slot name="bottom"></slot>
-        </section>
-      </div>
-    </div>
+    <section class="w-full">
+      <slot name="bottom"></slot>
+    </section>
   </div>
 </template>
 

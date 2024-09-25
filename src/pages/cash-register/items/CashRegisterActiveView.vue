@@ -19,9 +19,13 @@
         class="flex flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded"
       >
         <h1>Сумма на начало</h1>
-        <p class="text-2xl font-medium">{{ activeCash.startAmount }} ₸</p>
+        <p class="text-2xl font-medium">
+          {{ activeCash.startAmount }}
+          <span class="font-semibold">₸</span>
+        </p>
       </div>
       <div
+        v-if="activeCash.totalsPaymentType.length > 0"
         class="flex flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded"
       >
         <div
@@ -29,7 +33,10 @@
           :key="total.paymentType"
         >
           <h1>{{ total.paymentType }}</h1>
-          <p class="text-2xl font-medium">{{ total.total }} ТНГ</p>
+          <p class="text-2xl font-medium">
+            {{ total.total }}
+            <span class="font-semibold">₸</span>
+          </p>
         </div>
       </div>
     </div>

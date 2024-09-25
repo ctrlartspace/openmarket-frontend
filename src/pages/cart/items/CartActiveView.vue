@@ -6,7 +6,7 @@
           ref="searchInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-300 px-4 py-2 pl-12 text-lg outline-black placeholder:text-gray-300 md:rounded"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-300 px-4 py-2 pl-12 text-lg outline-black placeholder:text-gray-300 md:rounded md:text-base"
           :class="isSearchError ? 'animate-shake text-red-600' : 'text-black'"
           placeholder="Код товара, наименование"
           @input="isSearchError = false"
@@ -18,9 +18,10 @@
         </div>
       </v-form>
       <div
+        v-if="!store.isEmpty"
         class="overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded"
       >
-        <table class="w-full table-auto text-left text-lg">
+        <table class="w-full table-auto text-left text-lg md:text-base">
           <tbody>
             <tr
               v-for="(item, i) in store.groupedCartItems"
@@ -44,42 +45,16 @@
               <div class="ml-auto flex gap-2 whitespace-nowrap">
                 <td class="">{{ item.count }} шт.</td>
                 <td class="font-medium text-green-600">
-                  {{ item.count * item.sellingPrice }} KZT
+                  {{ item.count * item.sellingPrice }}
+                  <span class="font-semibold">₸</span>
                 </td>
               </div>
             </tr>
           </tbody>
         </table>
-        <table class="w-full table-auto text-left text-lg">
-          <tbody>
-            <tr
-              v-for="(item, i) in store.groupedCartItems"
-              :key="i"
-              class="flex cursor-pointer items-center gap-2 border-b border-neutral-300 px-4 py-2 last:border-none hover:bg-gray-50 active:bg-gray-50"
-              @click="onItemClick(item)"
-            >
-              <td class="flex items-center">
-                <button class="flex items-center justify-center">
-                  <span
-                    class="material-icons select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
-                    @click.stop="store.removeItem(item.id)"
-                  >
-                    remove
-                  </span>
-                </button>
-              </td>
-              <td class="line-clamp-1 font-medium">
-                <span class=""> {{ item.name }}</span>
-              </td>
-              <div class="ml-auto flex gap-2 whitespace-nowrap">
-                <td class="">{{ item.count }} шт.</td>
-                <td class="font-medium text-green-600">
-                  {{ item.count * item.sellingPrice }} KZT
-                </td>
-              </div>
-            </tr>
-          </tbody>
-        </table>
+      </div>
+      <div v-else class="flex justify-center p-4 text-lg text-neutral-300">
+        Пусто
       </div>
     </div>
     <cart-total-for-mobile v-if="!isDesktop" />

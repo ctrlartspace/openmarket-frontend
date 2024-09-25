@@ -8,7 +8,9 @@
       class="flex w-full cursor-pointer select-none justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl hover:brightness-50 active:brightness-50"
       @click.once="stepForward"
     >
-      <span>{{ store.getTotalAmount }} KZT</span>
+      <span
+        >{{ store.getTotalAmount }} <span class="font-semibold">₸</span></span
+      >
       <span class="material-icons self-center font-bold">arrow_forward</span>
     </button>
     <div
@@ -22,7 +24,7 @@
           >
         </button>
       </div>
-      <p class="mb-2 text-center text-lg text-gray-300">Тип оплаты</p>
+      <p class="mb-2 text-center text-lg text-gray-300">Способ оплаты</p>
       <div
         v-if="store.getPaymentType.code === 'cash'"
         class="flex flex-col gap-2"
@@ -37,7 +39,7 @@
           class="flex items-center justify-between rounded-xl border border-neutral-300 bg-gray-100 px-4 py-2"
         >
           <span class="text-lg text-gray-300">Сдача</span>
-          <span class="text-lg text-gray-300">{{ cartChange }} KZT</span>
+          <span class="text-lg text-gray-300">{{ cartChange }} </span>
         </div>
         <input
           v-model="inputAmount"

@@ -21,21 +21,6 @@
     >
       <slot></slot>
     </div>
-
-    <!-- <div
-      v-if="hasHeader()"
-      class="z-30 flex items-center gap-4 overflow-x-auto overflow-y-hidden border-t border-neutral-200 bg-white px-4 py-2 md:hidden"
-    >
-      <h1
-        v-if="title"
-        class="flex items-center whitespace-nowrap text-base font-medium"
-      >
-        {{ title }}
-      </h1>
-      <div class="ml-auto flex items-center gap-2 whitespace-nowrap">
-        <slot name="header"></slot>
-      </div>
-    </div> -->
   </div>
 </template>
 

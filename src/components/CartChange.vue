@@ -9,13 +9,12 @@
         class="bg-text-white rounded border border-neutral-300 bg-neutral-50 hover:bg-neutral-100"
         :class="{ 'order-last col-span-3': i - 1 === 0 }"
       >
-        <button class="h-full w-full text-xl font-medium">
+        <button class="h-full w-full text-2xl font-medium">
           {{ i - 1 }}
         </button>
       </div>
     </div>
     <div class="col-span-6 flex flex-col gap-2 bg-white p-4">
-      <h1 class="text-2xl font-medium">К ОПЛАТЕ: {{ store.getTotalAmount }}</h1>
       <div
         class="flex cursor-pointer select-none items-center justify-center gap-2 rounded bg-blue-600 px-4 py-2 text-center font-medium text-white"
         @click="store.changePaymentType"
@@ -37,17 +36,29 @@
         />
         <div class="flex rounded border border-neutral-300 bg-white px-4 py-2">
           <span class="flex-auto text-base text-gray-300">Сдача</span>
-          <span class="text-base font-medium">{{ cartChange }}</span>
+          <span
+            class="text-base font-medium"
+            :class="cartChange > 0 ? 'text-black' : 'text-gray-300'"
+            >{{ cartChange }}</span
+          >
         </div>
       </div>
+      <textarea
+        class="rounded border border-neutral-300 p-4 placeholder:text-gray-300"
+        rows="2"
+        placeholder="Комментарий"
+      ></textarea>
       <button
-        class="flex w-full cursor-pointer select-none justify-center gap-4 rounded bg-black p-4 text-2xl font-medium text-white hover:brightness-90 active:brightness-50"
+        class="flex w-full cursor-pointer select-none justify-between gap-4 rounded bg-black p-4 text-2xl font-medium uppercase text-white hover:brightness-90 active:brightness-50"
         @click="makeSaleFromCart"
       >
-        <span>{{ store.getTotalAmount }} KZT</span>
-        <span class="material-icons self-center font-semibold"
-          >arrow_forward</span
+        <span
+          >{{ store.getTotalAmount }} <span class="font-semibold">₸</span></span
         >
+        <p class="flex items-center gap-2">
+          Оплата
+          <span class="material-icons font-semibold">arrow_forward</span>
+        </p>
       </button>
     </div>
   </div>
