@@ -13,14 +13,14 @@
         :class="{
           'bg-red-50 placeholder:text-red-400': isError,
         }"
-        class="block px-4 py-2 w-full rounded-xl md:rounded border border-neutral-300 border-solid focus:outline-black peer"
+        class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 focus:outline-black md:rounded"
         v-bind="$attrs"
       />
       <div
-        v-if="unit"
-        class="absolute top-0 bottom-0 right-0 pr-4 flex items-center justify-center"
+        class="absolute bottom-0 right-0 top-0 flex items-center justify-center pr-4"
       >
-        <span class="text-gray-400"> {{ unit }} </span>
+        <span v-if="unit" class="text-gray-400"> {{ unit }} </span>
+        <slot name="action"></slot>
       </div>
     </div>
   </div>

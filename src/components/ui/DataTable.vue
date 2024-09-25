@@ -1,22 +1,22 @@
 <template>
   <div class="flex flex-col gap-2">
-    <div class="border border-neutral-300 rounded-xl md:rounded overflow-auto">
+    <div class="overflow-auto rounded-xl border border-neutral-300 md:rounded">
       <table
-        class="w-full text-lg md:text-base text-left bg-white whitespace-nowrap"
+        class="w-full whitespace-nowrap bg-white text-left text-lg md:text-base"
       >
         <tbody>
           <tr
             v-for="item in tableData"
             :key="item.id"
-            class="cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b border-neutral-300 last:border-none"
+            class="cursor-pointer border-b border-neutral-300 last:border-none hover:bg-gray-50 active:bg-gray-50"
             @click="emit('onItemClick', item)"
           >
-            <td v-if="selectable" class="hidden md:table-cell pl-4 py-2 w-2">
-              <div class="w-4 h-4 flex items-center justify-center">
+            <td v-if="selectable" class="hidden w-2 py-2 pl-4 md:table-cell">
+              <div class="flex h-4 w-4 items-center justify-center">
                 <input
                   v-model="selectedItems"
                   :value="item.id"
-                  class="w-4 h-4"
+                  class="h-4 w-4"
                   type="checkbox"
                   @change="$emit('update:modelValue', selectedItems)"
                   @click.stop
@@ -40,9 +40,9 @@
           </tr>
           <tr
             v-if="tableData.length === 0"
-            class="p-4 cursor-pointer hover:bg-gray-50 active:bg-gray-50 border-b border-neutral-300 last:border-none"
+            class="cursor-pointer border-b border-neutral-300 p-4 last:border-none hover:bg-gray-50 active:bg-gray-50"
           >
-            <td class="text-center px-4 py-2">
+            <td class="px-4 py-2 text-center">
               <span class="text-gray-300"> Нет данных </span>
             </td>
           </tr>

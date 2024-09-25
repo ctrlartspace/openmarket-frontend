@@ -3,7 +3,7 @@
     <header>
       <nav>
         <div
-          class="flex items-center border-b border-gray-200 bg-white px-4 py-2"
+          class="flex items-center border-b border-neutral-300 bg-white px-4 py-2"
         >
           <div class="absolute left-0 right-0">
             <div class="flex justify-between px-4">
@@ -49,14 +49,14 @@
         </p>
         <div
           v-else
-          class="overflow-hidden rounded-xl border bg-white md:rounded"
+          class="overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded"
         >
           <table class="w-full table-auto text-left text-lg">
             <tbody>
               <tr
                 v-for="(item, i) in store.groupedCartItems"
                 :key="i"
-                class="flex cursor-pointer items-center gap-2 border-b px-4 py-2 last:border-none hover:bg-gray-50 active:bg-gray-50"
+                class="flex cursor-pointer items-center gap-2 border-b border-neutral-300 px-4 py-2 last:border-none hover:bg-gray-50 active:bg-gray-50"
                 @click="onItemClick(item)"
               >
                 <td class="flex items-center">
@@ -99,7 +99,7 @@
         </button>
         <div
           v-if="cartStep === 2"
-          class="relative rounded-xl border border-gray-200 bg-white p-4 shadow-lg"
+          class="relative rounded-xl border border-neutral-300 bg-white p-4 shadow-lg"
         >
           <div class="absolute">
             <button class="flex items-center" @click="stepBack">
@@ -109,36 +109,36 @@
             </button>
           </div>
           <p class="mb-2 text-center text-lg text-gray-300">Тип оплаты</p>
-          <div v-if="store.getPaymentType.code === 'card'">
-            <button
-              class="w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
-              @click="store.changePaymentType"
-            >
-              Карта
-            </button>
-          </div>
           <div
-            v-if="store.getPaymentType.code === 'cash-register'"
+            v-if="store.getPaymentType.code === 'cash'"
             class="flex flex-col gap-2"
           >
             <button
               class="w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
               @click="store.changePaymentType"
             >
-              Наличные
+              {{ store.getPaymentType.label }}
             </button>
             <div
-              class="flex items-center justify-between rounded-xl border border-gray-200 bg-gray-100 px-4 py-2"
+              class="flex items-center justify-between rounded-xl border border-neutral-300 bg-gray-100 px-4 py-2"
             >
               <span class="text-lg text-gray-300">Сдача</span>
               <span class="text-lg text-gray-300">{{ cartChange }} KZT</span>
             </div>
             <input
               v-model="inputAmount"
-              class="w-full appearance-none rounded-xl border border-gray-200 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
+              class="w-full appearance-none rounded-xl border border-neutral-300 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
               placeholder="Внесено"
               type="number"
             />
+          </div>
+          <div v-else>
+            <button
+              class="w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
+              @click="store.changePaymentType"
+            >
+              {{ store.getPaymentType.label }}
+            </button>
           </div>
         </div>
         <button

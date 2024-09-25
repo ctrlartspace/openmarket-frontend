@@ -14,27 +14,23 @@
       </a-link>
     </template>
 
-    <div
-      v-if="isActiveCashExists"
-      class="flex flex-col gap-2 p-4 bg-white border border-neutral-300 rounded-xl md:rounded"
-    >
-      <a-base-input
-        v-model="activeCash.startAmount"
-        label="Сумма на начало"
-        placeholder="Сумма на начало"
-        type="text"
-        unit="KZT"
-      />
-      <div class="flex flex-col gap-2">
-        <a-base-input
-          v-for="(total, i) in activeCash.totalsPaymentType"
-          :key="i"
-          v-model="total.total"
-          :label="total.paymentType + ': ' + total.count"
-          placeholder="Итого"
-          type="text"
-          unit="KZT"
-        />
+    <div class="flex flex-col gap-2" v-if="isActiveCashExists">
+      <div
+        class="flex flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded"
+      >
+        <h1>Сумма на начало</h1>
+        <p class="text-2xl font-medium">{{ activeCash.startAmount }} ₸</p>
+      </div>
+      <div
+        class="flex flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded"
+      >
+        <div
+          v-for="total in activeCash.totalsPaymentType"
+          :key="total.paymentType"
+        >
+          <h1>{{ total.paymentType }}</h1>
+          <p class="text-2xl font-medium">{{ total.total }} ТНГ</p>
+        </div>
       </div>
     </div>
   </a-page>

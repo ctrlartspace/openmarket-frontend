@@ -61,11 +61,6 @@ const tableFields = ref([
     className: "w-full",
   },
   { name: "count", className: "whitespace-nowrap", postfix: " шт" },
-  {
-    name: "purchasePrice",
-    className: "whitespace-nowrap ",
-    postfix: " KZT",
-  },
 ])
 </script>
 

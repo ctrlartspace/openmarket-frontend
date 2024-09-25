@@ -3,10 +3,13 @@
     <header>
       <nav>
         <div
-          class="flex items-center border-b border-gray-200 bg-white px-4 py-2"
+          class="flex items-center border-b border-neutral-300 bg-white px-4 py-2"
         >
           <div class="absolute left-0 right-0">
-            <div class="flex justify-end px-4">
+            <div class="px- flex justify-between px-4">
+              <button class="flex items-center" @click="$router.back">
+                <span class="material-icons-outlined">arrow_back_ios_new</span>
+              </button>
               <button class="flex items-center" @click="toggleSideMenu">
                 <span v-if="!isSideMenuExpanded" class="material-icons-outlined"
                   >menu</span
@@ -101,17 +104,20 @@
     </div>
     <div class="col-span-6 flex flex-col overflow-hidden overflow-y-scroll">
       <router-view></router-view>
+      <section>
+        <slot name="bottom"></slot>
+      </section>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, useSlots } from "vue"
+import { computed, ref, useSlots } from "vue"
 import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.vue"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
-import MobileLayout from "@/components/layouts/MobileLayout.vue"
-import DesktopLayout from "@/components/layouts/DesktopLayout.vue"
+import { useRoute } from "vue-router"
 
+const route = useRoute()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm") // only smaller than lg
 
@@ -125,7 +131,9 @@ const props = defineProps({
 const slots = useSlots()
 const hasAction = () => !!slots.action
 
-const headerTitle = ref("Меню")
+const headerTitle = computed(() => {
+  return props.menuItems.find((item) => route.path.includes(item.path))?.title
+})
 const isSideMenuExpanded = ref(false)
 
 const toggleSideMenu = () => {
@@ -134,7 +142,6 @@ const toggleSideMenu = () => {
 }
 
 const onMenuItemClick = (item) => {
-  headerTitle.value = item.title
   toggleSideMenu()
 }
 </script>

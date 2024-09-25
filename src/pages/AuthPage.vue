@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full w-full items-center justify-center">
+  <div class="flex h-full w-full items-center justify-center bg-neutral-100">
     <form
       class="flex w-64 flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded"
       @submit.prevent="loginToStore"

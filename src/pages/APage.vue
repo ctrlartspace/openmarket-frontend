@@ -2,12 +2,15 @@
   <div class="flex h-full flex-col overflow-y-scroll bg-neutral-100">
     <div
       v-if="hasHeader()"
-      class="flex items-center gap-4 border-b border-neutral-300 bg-white px-4 py-2 md:py-1"
+      class="flex items-center gap-4 overflow-x-auto overflow-y-hidden border-b border-neutral-300 bg-white px-4 py-2 md:py-1"
     >
-      <h1 v-if="title" class="flex items-center text-base font-medium">
+      <h1
+        v-if="title"
+        class="flex items-center whitespace-nowrap text-base font-medium"
+      >
         {{ title }}
       </h1>
-      <div class="ml-auto flex items-center gap-2">
+      <div class="ml-auto flex items-center gap-2 whitespace-nowrap">
         <slot name="header"></slot>
       </div>
     </div>

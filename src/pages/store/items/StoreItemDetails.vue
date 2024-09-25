@@ -13,7 +13,16 @@
         label="Код товара"
         placeholder="Код товара"
         type="text"
-      />
+        ><template #action>
+          <button
+            type="button"
+            class="flex items-center"
+            @click="onGenerateBarcodeClick"
+          >
+            <span class="material-icons-outlined">print</span>
+          </button>
+        </template></a-base-input
+      >
       <a-base-input
         id="name"
         v-model="itemState.name"
@@ -60,6 +69,7 @@ import { storeToRefs } from "pinia"
 import { useItemState } from "@/stores/item-state.store.js"
 import { useUserStore } from "@/stores/user.store.js"
 import PointItemService from "@/services/point/items.js"
+import { generateBarcodePDF } from "@/utils/barcodeGenerator"
 
 const route = useRoute()
 const router = useRouter()
@@ -111,6 +121,10 @@ const addPointItem = async () => {
   } catch (error) {
     console.log(error)
   }
+}
+
+const onGenerateBarcodeClick = () => {
+  generateBarcodePDF(itemState.value.code)
 }
 
 onMounted(() => {
