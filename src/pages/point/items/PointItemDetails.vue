@@ -14,7 +14,7 @@
       <router-link
         v-if="item.storeItem"
         :to="{ path: '/store/items/' + item.storeItem.id }"
-        class="px-4 py-2 border border-neutral-300 rounded-xl md:rounded bg-white hover:border-neutral-600"
+        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-600 md:rounded"
       >
         <h1 class="text-base font-medium">
           {{ item.storeItem.code + ", " + item.storeItem.name }}

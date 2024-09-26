@@ -4,9 +4,9 @@ import { computed, ref } from "vue"
 export const useCartStore = defineStore("cart", () => {
   const cartItems = ref(new Map())
   const paymentTypes = ref([
-    { code: "online", label: "Перевод" },
-    { code: "kaspi-qr", label: "Kaspi QR" },
-    { code: "cash", label: "Наличные" },
+    { code: "online", label: "Перевод", icon: "smartphone", color: "blue" },
+    { code: "kaspi-qr", label: "Kaspi QR", icon: "qr_code", color: "red" },
+    { code: "cash", label: "Наличные", icon: "payments", color: "green" },
   ])
   const currentPaymentType = ref(0)
   const getPaymentType = computed(

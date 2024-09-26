@@ -8,7 +8,7 @@ import BasePage from "@/pages/BasePage.vue"
 
 const menuItems = ref([
   {
-    title: "Открытая касса",
+    title: "Сегодня",
     path: "/cash-register/active",
   },
   {

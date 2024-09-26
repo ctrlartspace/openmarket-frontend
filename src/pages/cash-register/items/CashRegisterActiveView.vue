@@ -15,9 +15,7 @@
     </template>
 
     <div class="flex flex-col gap-2" v-if="isActiveCashExists">
-      <div
-        class="flex flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded"
-      >
+      <div class="rounded-xl border border-neutral-300 bg-white p-4 md:rounded">
         <h1>Сумма на начало</h1>
         <p class="text-2xl font-medium">
           {{ activeCash.startAmount }}
@@ -26,13 +24,23 @@
       </div>
       <div
         v-if="activeCash.totalsPaymentType.length > 0"
-        class="flex flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded"
+        class="flex flex-col rounded-xl border border-neutral-300 bg-white md:flex-row md:rounded"
       >
         <div
+          class="border-b border-neutral-300 px-4 py-2 last:border-none md:flex-1 md:border-b-0 md:border-r"
           v-for="total in activeCash.totalsPaymentType"
           :key="total.paymentType"
         >
-          <h1>{{ total.paymentType }}</h1>
+          <h1
+            class="inline rounded px-1 font-medium"
+            :class="{
+              'bg-blue-50 text-blue-500': total.paymentType === 'online',
+              'bg-red-50 text-red-500': total.paymentType === 'kaspi-qr',
+              'bg-green-50 text-green-500': total.paymentType === 'cash',
+            }"
+          >
+            {{ total.paymentType }}
+          </h1>
           <p class="text-2xl font-medium">
             {{ total.total }}
             <span class="font-semibold">₸</span>

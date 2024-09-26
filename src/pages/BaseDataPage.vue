@@ -1,20 +1,20 @@
 <template>
   <a-page>
     <div class="grid grid-cols-10 gap-2">
-      <div class="hidden md:block col-span-10 md:col-span-3">
+      <div class="col-span-10 hidden md:col-span-3 md:block">
         <div
-          class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
+          class="mt-2 overflow-hidden rounded-xl border border-gray-200 bg-white first:mt-0 md:rounded"
         >
           <div
-            class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
+            class="relative flex items-center justify-between border-b border-gray-200 px-4 py-2 last:border-none"
           >
-            <h2 class="text-lg md:text-base font-medium">Категории</h2>
+            <h2 class="text-lg font-medium md:text-base">Категории</h2>
             <button
               class="inline-flex items-center"
               @click="showDialog.editFilter = true"
             >
               <span
-                class="material-icons-outlined md:text-[28px] hover:text-gray-600 active:text-gray-600 cursor-pointer"
+                class="material-icons-outlined cursor-pointer hover:text-gray-600 active:text-gray-600 md:text-[28px]"
               >
                 more_vert
               </span>
@@ -41,20 +41,20 @@
                       ? 'Название подкатегории'
                       : 'Название категории'
                   "
-                  class="px-4 py-2 border rounded-xl md:rounded border-gray-200 block w-full text-lg md:text-base bg-inherit appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none"
+                  class="block w-full appearance-none rounded-xl border border-gray-200 bg-inherit px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 focus:outline-none md:rounded md:text-base"
                   type="text"
                 />
                 <button
-                  class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 active:bg-gray-50 md:rounded rounded-xl"
+                  class="w-full flex-1 rounded-xl border border-gray-200 px-4 py-2 hover:bg-gray-50 active:bg-gray-50 md:rounded"
                   @click="addFilter"
                 >
-                  <span class="text-lg md:text-base font-medium">Добавить</span>
+                  <span class="text-lg font-medium md:text-base">Добавить</span>
                 </button>
                 <button
-                  class="flex-1 w-full px-4 py-2 border border-gray-200 hover:bg-gray-50 active:bg-gray-50 md:rounded rounded-xl"
+                  class="w-full flex-1 rounded-xl border border-gray-200 px-4 py-2 hover:bg-gray-50 active:bg-gray-50 md:rounded"
                   @click="deleteFilter"
                 >
-                  <span class="text-lg md:text-base font-medium">Удалить</span>
+                  <span class="text-lg font-medium md:text-base">Удалить</span>
                 </button>
               </div>
             </div>
@@ -68,7 +68,7 @@
         </div>
         <!-- Filter Reset -->
         <button
-          class="hidden mt-2 w-full bg-white border border-gray-200 rounded px-4 py-2 md:flex items-center gap-2 hover:bg-gray-50"
+          class="mt-2 hidden w-full items-center gap-2 rounded border border-gray-200 bg-white px-4 py-2 hover:bg-gray-50 md:flex"
           @click="resetFilters"
         >
           <span class="material-icons-outlined">filter_list_off</span>
@@ -79,7 +79,7 @@
         <search-field class="mb-2">
           <template #action>
             <button
-              class="leading-8 md:hidden flex items-center gap-2 rounded hover:brightness-95 active:brightness-95"
+              class="flex items-center gap-2 rounded leading-8 hover:brightness-95 active:brightness-95 md:hidden"
               type="button"
               @click="showDialog.showFilterMobile = true"
             >
@@ -93,30 +93,30 @@
               <filter-tree
                 v-model="selectedFilters"
                 :items="filtersList"
-                class="border-gray-200 rounded-xl overflow-hidden"
+                class="overflow-hidden rounded-xl border-gray-200"
                 nested="true"
               />
             </app-dialog>
             <button
-              class="hidden leading-8 md:flex items-center gap-2 rounded hover:brightness-95 active:brightness-95"
+              class="hidden items-center gap-2 rounded leading-8 hover:brightness-95 active:brightness-95 md:flex"
               type="button"
               @click="newItemClick"
             >
-              <span class="hidden md:inline text-lg md:text-base">Новый</span>
+              <span class="hidden text-lg md:inline md:text-base">Новый</span>
               <span class="material-icons-outlined md:text-[28px]">add</span>
             </button>
           </template>
 
           <template #afterSelect>
             <button
-              class="hidden leading-8 md:flex items-center gap-2 rounded hover:brightness-95 active:brightness-95"
+              class="hidden items-center gap-2 rounded leading-8 hover:brightness-95 active:brightness-95 md:flex"
               type="button"
               @click="newItemClick"
             >
               <span class="material-icons-outlined md:text-[28px]"
                 >shopping_bag</span
               >
-              <span class="hidden md:block text-lg md:text-base"
+              <span class="hidden text-lg md:block md:text-base"
                 >Показать в магазине</span
               >
             </button>
@@ -205,7 +205,7 @@ const tableFields = ref([
   {
     name: "purchasePrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT",
+    postfix: " ₸",
   },
 ])
 </script>

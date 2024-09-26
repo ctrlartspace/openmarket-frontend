@@ -40,7 +40,7 @@ import CartPage from "@/pages/cart/CartPage.vue"
 import CartActiveView from "@/pages/cart/items/CartActiveView.vue"
 
 const routes = [
-  // { path: "/", component: CartPage },
+  { path: "/", redirect: "/store" },
   {
     path: "/cart",
     component: CartPage,

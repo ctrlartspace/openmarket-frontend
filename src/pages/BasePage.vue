@@ -76,7 +76,7 @@
 
   <div v-if="isDesktop" class="flex w-full flex-col">
     <div class="grid w-full flex-grow grid-cols-10 overflow-hidden">
-      <div class="col-span-4 border-r border-neutral-300">
+      <div class="col-span-3 border-r border-neutral-300">
         <div class="flex h-full flex-col justify-between">
           <ul class="">
             <li
@@ -103,7 +103,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-span-6 flex flex-col overflow-hidden">
+      <div class="col-span-7 flex-col overflow-hidden">
         <router-view></router-view>
       </div>
     </div>
