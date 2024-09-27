@@ -2,7 +2,7 @@
   <div class="relative rounded-lg">
     <input
       ref="dropdownInput"
-      class="w-full block px-4 py-2 border rounded-xl md:rounded peer focus:outline-black cursor-pointer"
+      class="peer block w-full cursor-pointer rounded-xl border px-4 py-2 focus:outline-black md:rounded-lg"
       :class="{
         'placeholder:text-gray-300': disabled || loading,
         'animate-pulse': loading,
@@ -17,12 +17,12 @@
       autocomplete="off"
     />
     <div
-      class="pointer-events-none absolute top-0 bottom-0 right-0 px-4 items-center justify-end hidden peer-focus:flex"
+      class="pointer-events-none absolute bottom-0 right-0 top-0 hidden items-center justify-end px-4 peer-focus:flex"
     >
       <span class="material-symbols-outlined md:text-[28px]">expand_less</span>
     </div>
     <div
-      class="pointer-events-none absolute top-0 bottom-0 right-0 px-4 flex items-center justify-end peer-focus:hidden"
+      class="pointer-events-none absolute bottom-0 right-0 top-0 flex items-center justify-end px-4 peer-focus:hidden"
     >
       <span
         class="material-symbols-outlined md:text-[28px]"
@@ -30,17 +30,17 @@
         >expand_more</span
       >
     </div>
-    <div class="z-20 relative peer-focus:block hidden">
+    <div class="relative z-20 hidden peer-focus:block">
       <div class="absolute left-0 right-0" :class="dropdownDirection">
         <div
           ref="dropdownList"
-          class="mt-2 mb-2 bg-white border rounded-lg shadow-xl max-h-64 overflow-auto"
+          class="mb-2 mt-2 max-h-64 overflow-auto rounded-lg border bg-white shadow-xl"
         >
           <slot>
             <ul>
               <li v-if="selectedItemTitle">
                 <button
-                  class="px-4 py-2 w-full text-left text-gray-400 hover:bg-gray-50"
+                  class="w-full px-4 py-2 text-left text-gray-400 hover:bg-gray-50"
                   @mousedown="clearInput"
                 >
                   Сбросить
@@ -48,7 +48,7 @@
               </li>
               <li v-for="item in items" :key="item.id">
                 <button
-                  class="px-4 py-2 w-full text-left hover:bg-gray-50"
+                  class="w-full px-4 py-2 text-left hover:bg-gray-50"
                   @mousedown="selectItem(item)"
                 >
                   {{ item.name }}
@@ -56,7 +56,7 @@
               </li>
               <li v-if="inputValue && items.length === 0">
                 <button
-                  class="px-4 py-2 w-full text-left text-blue-500 hover:bg-gray-50"
+                  class="w-full px-4 py-2 text-left text-blue-500 hover:bg-gray-50"
                   @mousedown="selectItem(inputValue)"
                 >
                   {{ inputValue }}
@@ -96,7 +96,7 @@ const inputValue = ref("")
 const selectedItemTitle = computed(
   () =>
     props.items.find((item) => item.id === props.modelValue)?.name ||
-    inputValue.value
+    inputValue.value,
 )
 const selectedItemTitles = computed(() => {
   if (Array.isArray(props.modelValue)) {

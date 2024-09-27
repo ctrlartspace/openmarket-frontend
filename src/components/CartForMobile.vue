@@ -49,7 +49,7 @@
         </p>
         <div
           v-else
-          class="overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded"
+          class="overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded-lg"
         >
           <table class="w-full table-auto text-left text-lg">
             <tbody>

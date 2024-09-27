@@ -1,18 +1,18 @@
 <template>
   <div
-    class="p-6 fixed top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center w-full bg-black bg-opacity-10 shadow-xl shadow-black"
+    class="fixed bottom-0 left-0 right-0 top-0 z-50 flex w-full items-center justify-center bg-black bg-opacity-10 p-6 shadow-xl shadow-black"
     @click="closeDialog"
   >
     <div
-      class="flex flex-col w-80 max-w-lg bg-white border border-gray-300 md:rounded rounded-xl overflow-hidden"
+      class="flex w-80 max-w-lg flex-col overflow-hidden rounded-xl border border-gray-300 bg-white md:rounded-lg"
       @click.stop
     >
-      <div class="px-4 py-2 bg-gray-50 border-b border-gray-200">
+      <div class="border-b border-gray-200 bg-gray-50 px-4 py-2">
         <slot name="header">
           <div class="flex items-center justify-between">
             <span class="text-lg">{{ title }}</span>
             <button
-              class="flex items-center border border-gray-200 rounded text-black hover:bg-gray-200 active:bg-gray-200 hover:text-black active:text-black"
+              class="flex items-center rounded border border-gray-200 text-black hover:bg-gray-200 hover:text-black active:bg-gray-200 active:text-black"
               @click="closeDialog"
             >
               <span class="material-icons-outlined md:text-[28px]"

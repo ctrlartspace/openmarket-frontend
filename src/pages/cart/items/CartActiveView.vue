@@ -6,7 +6,7 @@
           ref="searchInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-gray-300 md:rounded md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-gray-300 md:rounded-lg md:text-base"
           :class="isSearchError ? 'animate-shake text-red-600' : 'text-black'"
           placeholder="Код товара, наименование"
           @input="isSearchError = false"
@@ -19,7 +19,7 @@
       </v-form>
       <div
         v-if="!store.isEmpty"
-        class="overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded"
+        class="overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded-lg"
       >
         <table class="w-full table-auto text-left text-lg md:text-base">
           <tbody>

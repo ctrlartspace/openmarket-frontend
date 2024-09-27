@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full w-full items-center justify-center bg-neutral-100">
     <form
-      class="flex w-64 flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded"
+      class="flex w-64 flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg"
       @submit.prevent="loginToStore"
     >
       <a-base-input v-model.trim="authData.name" placeholder="Номер магазина" />
@@ -11,7 +11,7 @@
         type="password"
       />
       <button
-        class="mt-2 block w-full rounded-xl bg-blue-600 px-4 py-2 text-lg font-medium text-white md:rounded md:text-base"
+        class="mt-2 block w-full rounded-xl bg-blue-600 px-4 py-2 text-lg font-medium text-white md:rounded-lg md:text-base"
         type="submit"
       >
         Продолжить
@@ -19,7 +19,7 @@
     </form>
     <!-- <div
       v-else
-      class="p-4 bg-white rounded-xl md:rounded border border-gray-200 w-96"
+      class="p-4 bg-white rounded-xl md:rounded-lg border border-gray-200 w-96"
     >
       <h1 class="text-2xl font-semibold mb-4 text-center">
         {{ storeData.name }}
@@ -27,7 +27,7 @@
       <div class="flex flex-col gap-4">
         <button
           v-for="point in storePoints"
-          class="font-semibold block w-full px-4 py-2 bg-black text-lg md:text-base text-white rounded-xl md:rounded"
+          class="font-semibold block w-full px-4 py-2 bg-black text-lg md:text-base text-white rounded-xl md:rounded-lg"
           type="submit"
           :key="point.id"
           @click="loginToStorePoint(point.id)"

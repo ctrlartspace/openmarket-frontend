@@ -1,23 +1,23 @@
 <template>
-  <div class="border rounded-xl md:rounded overflow-hidden">
+  <div class="overflow-hidden rounded-xl border md:rounded-lg">
     <div
       v-if="showAction"
-      class="px-4 py-2 flex gap-2 justify-between items-center bg-white"
+      class="flex items-center justify-between gap-2 bg-white px-4 py-2"
     >
       <div
-        class="flex gap-2 items-center hover:text-red-600 active:text-red-600 cursor-pointer"
+        class="flex cursor-pointer items-center gap-2 hover:text-red-600 active:text-red-600"
       >
         <span class="material-icons md:text-[28px]">remove</span>
-        <span class="hidden md:inline text-lg md:text-base">Удалить</span>
+        <span class="hidden text-lg md:inline md:text-base">Удалить</span>
       </div>
       <slot name="afterSelect"> </slot>
     </div>
-    <div v-else class="px-4 py-2 flex gap-2 items-center bg-white">
-      <span class="material-icons md:text-[28px] text-gray-300">search</span>
+    <div v-else class="flex items-center gap-2 bg-white px-4 py-2">
+      <span class="material-icons text-gray-300 md:text-[28px]">search</span>
 
       <input
         type="text"
-        class="w-full h-full text-lg md:text-base placeholder:text-gray-300 focus:outline-none text-ellipsis"
+        class="h-full w-full text-ellipsis text-lg placeholder:text-gray-300 focus:outline-none md:text-base"
         placeholder="Код товара, наименование"
       />
       <slot name="action"></slot>

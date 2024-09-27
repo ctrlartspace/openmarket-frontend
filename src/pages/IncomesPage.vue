@@ -2,12 +2,12 @@
   <div class="grid grid-cols-10 gap-2">
     <div class="col-span-10 md:col-span-3">
       <div
-        class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
+        class="mt-2 overflow-hidden rounded-xl border border-gray-200 bg-white first:mt-0 md:rounded-lg"
       >
         <div
-          class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
+          class="relative flex items-center justify-between border-b border-gray-200 px-4 py-2 last:border-none"
         >
-          <h2 class="text-lg md:text-base font-medium">Категории</h2>
+          <h2 class="text-lg font-medium md:text-base">Категории</h2>
         </div>
         <filter-tree
           v-model="selectedFilters"
@@ -21,11 +21,11 @@
       <search-field class="mb-2">
         <template #action>
           <button
-            class="leading-8 flex items-center gap-2 text-blue-600 rounded hover:brightness-95 active:brightness-95"
+            class="flex items-center gap-2 rounded leading-8 text-blue-600 hover:brightness-95 active:brightness-95"
             type="button"
             @click="addIncomes"
           >
-            <span class="hidden md:inline text-lg md:text-base">Добавить</span>
+            <span class="hidden text-lg md:inline md:text-base">Добавить</span>
             <span class="material-icons-outlined">add</span>
           </button>
         </template>

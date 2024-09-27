@@ -3,7 +3,7 @@
     <div class="grid grid-cols-10 gap-2">
       <div class="col-span-10 hidden md:col-span-3 md:block">
         <div
-          class="mt-2 overflow-hidden rounded-xl border border-gray-200 bg-white first:mt-0 md:rounded"
+          class="mt-2 overflow-hidden rounded-xl border border-gray-200 bg-white first:mt-0 md:rounded-lg"
         >
           <div
             class="relative flex items-center justify-between border-b border-gray-200 px-4 py-2 last:border-none"
@@ -41,17 +41,17 @@
                       ? 'Название подкатегории'
                       : 'Название категории'
                   "
-                  class="block w-full appearance-none rounded-xl border border-gray-200 bg-inherit px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 focus:outline-none md:rounded md:text-base"
+                  class="block w-full appearance-none rounded-xl border border-gray-200 bg-inherit px-4 py-2 text-lg placeholder:font-normal placeholder:text-gray-300 focus:outline-none md:rounded-lg md:text-base"
                   type="text"
                 />
                 <button
-                  class="w-full flex-1 rounded-xl border border-gray-200 px-4 py-2 hover:bg-gray-50 active:bg-gray-50 md:rounded"
+                  class="w-full flex-1 rounded-xl border border-gray-200 px-4 py-2 hover:bg-gray-50 active:bg-gray-50 md:rounded-lg"
                   @click="addFilter"
                 >
                   <span class="text-lg font-medium md:text-base">Добавить</span>
                 </button>
                 <button
-                  class="w-full flex-1 rounded-xl border border-gray-200 px-4 py-2 hover:bg-gray-50 active:bg-gray-50 md:rounded"
+                  class="w-full flex-1 rounded-xl border border-gray-200 px-4 py-2 hover:bg-gray-50 active:bg-gray-50 md:rounded-lg"
                   @click="deleteFilter"
                 >
                   <span class="text-lg font-medium md:text-base">Удалить</span>

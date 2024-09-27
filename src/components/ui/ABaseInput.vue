@@ -13,7 +13,7 @@
         :class="{
           'bg-red-50 placeholder:text-red-400': isError,
         }"
-        class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 focus:outline-black md:rounded"
+        class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 focus:outline-black md:rounded-lg"
         v-bind="$attrs"
       />
       <div

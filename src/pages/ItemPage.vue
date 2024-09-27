@@ -1,11 +1,11 @@
 <template>
   <div class="">
     <div
-      class="grid grid-cols-10 bg-white rounded-xl md:rounded border border-gray-200"
+      class="grid grid-cols-10 rounded-xl border border-gray-200 bg-white md:rounded-lg"
     >
       <div
         v-if="item"
-        class="p-4 flex flex-col gap-2 col-span-10 md:col-span-4 md:border-r md:border-b border-gray-200"
+        class="col-span-10 flex flex-col gap-2 border-gray-200 p-4 md:col-span-4 md:border-b md:border-r"
       >
         <a-select
           id="input-store-item"
@@ -56,25 +56,25 @@
         </a-select>
       </div>
       <div
-        class="col-span-10 md:col-span-6 px-4 py-2 flex border-b border-gray-200"
+        class="col-span-10 flex border-b border-gray-200 px-4 py-2 md:col-span-6"
       ></div>
-      <div class="col-span-10 px-4 py-2 flex flex-col md:flex-row gap-4">
+      <div class="col-span-10 flex flex-col gap-4 px-4 py-2 md:flex-row">
         <button
           v-if="!isEditMode"
-          class="hidden md:inline-flex text-blue-600 gap-2 items-center hover:brightness-90 active:brightness-90"
+          class="hidden items-center gap-2 text-blue-600 hover:brightness-90 active:brightness-90 md:inline-flex"
           @click="isEditMode = true"
         >
           <span class="text-lg md:text-base">Редактировать</span>
         </button>
         <button
           v-if="isEditMode"
-          class="hidden md:inline-flex text-blue-600 gap-2 items-center hover:brightness-90 active:brightness-90"
+          class="hidden items-center gap-2 text-blue-600 hover:brightness-90 active:brightness-90 md:inline-flex"
           @click="saveItemData"
         >
           <span class="text-lg md:text-base">Сохранить</span>
         </button>
         <button
-          class="text-blue-600 inline-flex gap-2 items-center hover:brightness-90 active:brightness-90"
+          class="inline-flex items-center gap-2 text-blue-600 hover:brightness-90 active:brightness-90"
           @click="showDialog = true"
         >
           <span class="text-lg md:text-base">Добавить</span>
@@ -93,10 +93,10 @@
             </div>
             <div class="p-4">
               <button
-                class="block w-full px-4 py-2 bg-blue-600 text-white rounded-xl md:rounded hover:brightness-90 active:brightness-90"
+                class="block w-full rounded-xl bg-blue-600 px-4 py-2 text-white hover:brightness-90 active:brightness-90 md:rounded-lg"
                 type="submit"
               >
-                <span class="text-lg md:text-base font-medium">Добавить</span>
+                <span class="text-lg font-medium md:text-base">Добавить</span>
               </button>
             </div>
           </v-form>
@@ -105,18 +105,18 @@
     </div>
 
     <div
-      class="z-50 md:hidden absolute bottom-12 left-0 right-0 px-4 py-2 mb-safe"
+      class="absolute bottom-12 left-0 right-0 z-50 px-4 py-2 mb-safe md:hidden"
     >
       <button
         v-if="!isEditMode"
-        class="w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 active:brightness-90 cursor-pointer select-none shadow-xl"
+        class="flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl bg-blue-600 px-4 py-2 text-lg text-white shadow-xl hover:brightness-50 active:brightness-90"
         @click="isEditMode = true"
       >
         <span>Редактировать</span>
       </button>
       <button
         v-else
-        class="z-50 w-full bg-blue-600 text-white flex justify-center items-center gap-4 text-lg px-4 py-2 rounded-xl hover:brightness-50 active:brightness-90 cursor-pointer select-none shadow-xl"
+        class="z-50 flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl bg-blue-600 px-4 py-2 text-lg text-white shadow-xl hover:brightness-50 active:brightness-90"
         @click="saveItemData"
       >
         <span>Сохранить</span>

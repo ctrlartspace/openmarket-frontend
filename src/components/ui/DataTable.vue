@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col gap-2">
-    <div class="overflow-auto rounded-xl border border-neutral-300 md:rounded">
+    <div
+      class="overflow-auto rounded-xl border border-neutral-300 md:rounded-lg"
+    >
       <table
         class="w-full whitespace-nowrap bg-white text-left text-lg md:text-base"
       >

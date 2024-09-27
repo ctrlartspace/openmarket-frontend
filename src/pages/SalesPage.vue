@@ -1,13 +1,13 @@
 <template>
   <div class="grid grid-cols-10 gap-2">
-    <div class="hidden md:block col-span-10 md:col-span-3">
+    <div class="col-span-10 hidden md:col-span-3 md:block">
       <div
-        class="bg-white border border-gray-200 md:rounded rounded-xl overflow-hidden mt-2 first:mt-0"
+        class="mt-2 overflow-hidden rounded-xl border border-gray-200 bg-white first:mt-0 md:rounded-lg"
       >
         <div
-          class="relative px-4 py-2 flex items-center justify-between border-b border-gray-200 last:border-none"
+          class="relative flex items-center justify-between border-b border-gray-200 px-4 py-2 last:border-none"
         >
-          <h2 class="text-lg md:text-base font-medium">Категории</h2>
+          <h2 class="text-lg font-medium md:text-base">Категории</h2>
         </div>
         <filter-tree
           v-model="selectedFilters"
@@ -18,7 +18,7 @@
       </div>
       <!-- Filter Reset -->
       <button
-        class="hidden mt-2 w-full bg-white border border-gray-200 md:rounded rounded-xl px-4 py-2 md:flex items-center gap-2 hover:bg-gray-50 active:bg-gray-50"
+        class="mt-2 hidden w-full items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 hover:bg-gray-50 active:bg-gray-50 md:flex md:rounded-lg"
         @click="resetFilters"
       >
         <span class="material-icons-outlined">filter_list_off</span>
@@ -26,7 +26,7 @@
       </button>
     </div>
     <div class="col-span-10 md:col-span-7">
-      <!-- <div class="bg-white border md:rounded rounded-xl overflow-auto">
+      <!-- <div class="bg-white border md:rounded-lg rounded-xl overflow-auto">
         <div
           v-if="selectedItems && selectedItems.length > 0"
           class="flex gap-2 justify-between px-4 py-2 border-b last:border-none"
@@ -157,11 +157,11 @@
       <search-field class="mb-2">
         <template #action>
           <button
-            class="leading-8 flex items-center gap-2 text-blue-600 rounded hover:brightness-95 active:brightness-95"
+            class="flex items-center gap-2 rounded leading-8 text-blue-600 hover:brightness-95 active:brightness-95"
             type="button"
             @click="addIncomes"
           >
-            <span class="hidden md:inline text-lg md:text-base">Добавить</span>
+            <span class="hidden text-lg md:inline md:text-base">Добавить</span>
             <span class="material-icons-outlined">add</span>
           </button>
         </template>
@@ -178,7 +178,7 @@
       >
         <template #isReturned="{ item }">
           <div
-            class="flex items-center gap-2 rounded w-max md:flex-initial order-last md:order-none"
+            class="order-last flex w-max items-center gap-2 rounded md:order-none md:flex-initial"
           >
             <span
               v-if="item.isReturned"

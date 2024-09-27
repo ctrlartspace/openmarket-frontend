@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="!store.isEmpty"
-    class="absolute bottom-0 left-0 right-0 p-4 mb-safe"
-  >
+  <div v-if="!store.isEmpty" class="absolute bottom-0 left-0 right-0 p-4">
     <button
       v-if="cartStep === 1"
       class="flex w-full cursor-pointer select-none justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl hover:brightness-50 active:brightness-50"

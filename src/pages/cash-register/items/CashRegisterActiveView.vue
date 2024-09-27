@@ -15,7 +15,9 @@
     </template>
 
     <div class="flex flex-col gap-2" v-if="isActiveCashExists">
-      <div class="rounded-xl border border-neutral-300 bg-white p-4 md:rounded">
+      <div
+        class="rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg"
+      >
         <h1>Сумма на начало</h1>
         <p class="text-2xl font-medium">
           {{ activeCash.startAmount }}
@@ -24,7 +26,7 @@
       </div>
       <div
         v-if="activeCash.totalsPaymentType.length > 0"
-        class="flex flex-col rounded-xl border border-neutral-300 bg-white md:flex-row md:rounded"
+        class="flex flex-col rounded-xl border border-neutral-300 bg-white md:flex-row md:rounded-lg"
       >
         <div
           class="border-b border-neutral-300 px-4 py-2 last:border-none md:flex-1 md:border-b-0 md:border-r"

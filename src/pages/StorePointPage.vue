@@ -7,12 +7,12 @@
       <button class="font-medium text-blue-600">Сохранить</button>
     </template> -->
       <div v-if="point">
-        <div class="flex gap-2 mb-2">
+        <div class="mb-2 flex gap-2">
           <a-select v-model="selectedUserId" :items="storeUsers" />
 
           <button
             :disabled="!selectedUserId"
-            class="flex items-center gap-2 bg-blue-500 text-white w-min px-4 text-lg rounded-xl md:rounded md:text-base hover:brightness-95 active:brightness-95"
+            class="flex w-min items-center gap-2 rounded-xl bg-blue-500 px-4 text-lg text-white hover:brightness-95 active:brightness-95 md:rounded-lg md:text-base"
           >
             <span class="material-icons-outlined">add</span>
             Добавить

@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div
-      class="grid grid-cols-10 bg-white md:rounded rounded-xl border border-gray-200 md:p-4 md:gap-2"
+      class="grid grid-cols-10 rounded-xl border border-gray-200 bg-white md:gap-2 md:rounded-lg md:p-4"
     >
       <div class="col-span-10 flex flex-col gap-2 md:col-span-4">
         {{ profileData }}

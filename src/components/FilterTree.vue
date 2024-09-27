@@ -1,7 +1,7 @@
 <template>
   <ul
     v-if="firstItems.length > 0"
-    class="border border-neutral-300 rounded-xl md:rounded overflow-auto"
+    class="overflow-auto rounded-xl border border-neutral-300 md:rounded-lg"
   >
     <li
       v-for="(item, i) in firstItems"
@@ -57,7 +57,7 @@
 
     <li v-if="isItemsMore" class="border-t">
       <button
-        class="w-full px-4 py-2 text-start hover:bg-gray-50 active:bg-gray-50 flex items-center justify-center"
+        class="flex w-full items-center justify-center px-4 py-2 text-start hover:bg-gray-50 active:bg-gray-50"
         @click="isShowFull = !isShowFull"
       >
         <span class="material-icons-outlined">{{
@@ -68,7 +68,7 @@
   </ul>
   <div
     v-else
-    class="bg-white text-center px-4 py-2 border border-neutral-300 rounded-xl md:rounded"
+    class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-center md:rounded-lg"
   >
     <span class="text-base text-neutral-300">Элементы не найдены</span>
   </div>
