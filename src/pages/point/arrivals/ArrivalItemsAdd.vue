@@ -13,7 +13,7 @@
       >
         <div v-if="pointItem">
           <h1 class="text-base font-medium">
-            {{ pointItem.code + ", " + pointItem.name }}
+            {{ pointItem.storeItem.code + ", " + pointItem.storeItem.name }}
           </h1>
           <p class="text-sm text-neutral-400">
             Покупка: {{ pointItem.purchasePrice }} KZT Продажа:
@@ -23,9 +23,9 @@
         <p v-else>Выбрать товар...</p>
       </router-link>
       <a-base-input
+        v-if="pointItem"
         id="purchase-price"
         v-model="item.count"
-        :disabled="!pointItem"
         label="Количество"
         placeholder="Количество"
         type="text"
@@ -40,13 +40,12 @@ import { ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import ArrivalService from "@/services/arrivals/items.js"
-import { useSelect } from "@/composables/useSelect.js"
-import { getPointItem } from "@/services/PointService.js"
+import { useSelect } from "@/composables/useSelect2.js"
 import AButton from "@/components/ui/AButton.vue"
 
 const router = useRouter()
 const item = ref({ count: 1 })
-const { selectedItem: pointItem } = useSelect(getPointItem)
+const { selectedItem: pointItem } = useSelect()
 
 const addArrival = async () => {
   try {

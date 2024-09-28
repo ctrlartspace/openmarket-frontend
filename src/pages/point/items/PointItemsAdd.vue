@@ -57,13 +57,12 @@ import { ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import PointItemService from "@/services/point/items.js"
-import { useSelect } from "@/composables/useSelect.js"
-import { getStoreItem } from "@/services/StoreService.js"
+import { useSelect } from "@/composables/useSelect2.js"
 import AButton from "@/components/ui/AButton.vue"
 
 const router = useRouter()
 const item = ref({})
-const { selectedItem: storeItem } = useSelect(getStoreItem)
+const { selectedItem: storeItem } = useSelect()
 
 const addPointItem = async () => {
   try {

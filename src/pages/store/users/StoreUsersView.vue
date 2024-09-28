@@ -17,7 +17,7 @@ import { onMounted, ref } from "vue"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
 import ALink from "@/components/ui/ALink.vue"
-import { useSelect } from "@/composables/useSelect.js"
+import { useSelect } from "@/composables/useSelect2.js"
 
 const storeUsers = ref([])
 const { isSelectableMode, applySelect } = useSelect()
@@ -32,7 +32,7 @@ const getStoreUsers = async () => {
 
 const onItemClick = (item) => {
   if (isSelectableMode.value) {
-    applySelect(item.id)
+    applySelect(item)
   } else {
     // router.push(`/store/items/${item.id}`)
   }

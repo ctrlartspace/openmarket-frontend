@@ -19,7 +19,7 @@ import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
-import { useSelect } from "@/composables/useSelect.js"
+import { useSelect } from "@/composables/useSelect2.js"
 import ALink from "@/components/ui/ALink.vue"
 
 const router = useRouter()
@@ -36,7 +36,7 @@ const getStoreItems = async () => {
 
 const onItemClick = (item) => {
   if (isSelectableMode.value) {
-    applySelect(item.id)
+    applySelect(item)
   } else {
     router.push(`/store/items/${item.id}`)
   }

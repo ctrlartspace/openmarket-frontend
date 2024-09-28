@@ -26,10 +26,9 @@
 import { useRouter } from "vue-router"
 import PointUserService from "@/services/point/users.js"
 import AButton from "@/components/ui/AButton.vue"
-import { useSelect } from "@/composables/useSelect.js"
-import { getStoreUser } from "@/services/store/users.js"
+import { useSelect } from "@/composables/useSelect2.js"
 
-const { selectedItem: selectedUser } = useSelect(getStoreUser)
+const { selectedItem: selectedUser } = useSelect()
 
 const router = useRouter()
 

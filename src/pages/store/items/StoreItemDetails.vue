@@ -59,21 +59,22 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue"
+import { ref, onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import StoreService from "@/services/StoreService"
 import AButton from "@/components/ui/AButton.vue"
 import { useFilters } from "@/composables/filters.js"
 import { storeToRefs } from "pinia"
-import { useItemState } from "@/stores/item-state.store.js"
+// import { useItemState } from "@/stores/item-state.store.js"
 import { useUserStore } from "@/stores/user.store.js"
 import PointItemService from "@/services/point/items.js"
 import { generateBarcodePDF } from "@/utils/barcodeGenerator"
 
 const route = useRoute()
 const router = useRouter()
-const { itemState } = storeToRefs(useItemState())
+// const { itemState } = storeToRefs(useItemState())
+const itemState = ref({})
 const { filters, filterPathMulti } = useFilters()
 const { point } = useUserStore()
 

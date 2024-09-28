@@ -59,18 +59,19 @@
 </template>
 
 <script setup>
-import { watch } from "vue"
+import { ref, watch } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
 import { storeToRefs } from "pinia"
-import { useItemState } from "@/stores/item-state.store.js"
+// import { useItemState } from "@/stores/item-state.store.js"
 import { useFilters } from "@/composables/filters.js"
 import { useScan } from "@/composables/useScan"
 
 const router = useRouter()
-const { itemState } = storeToRefs(useItemState())
+// const { itemState } = storeToRefs(useItemState())
+const itemState = ref({})
 const { filters, filterPathMulti } = useFilters()
 const { scannedCode } = useScan()
 
