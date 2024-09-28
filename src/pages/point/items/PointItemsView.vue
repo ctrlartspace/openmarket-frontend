@@ -9,6 +9,34 @@
       </a-link>
     </template>
 
+    <v-form class="relative mb-2 w-full" @submit.prevent>
+      <input
+        ref="focusableInput"
+        v-model.trim="searchInput"
+        type="text"
+        class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 pr-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-gray-300 md:rounded-lg md:text-base"
+        placeholder="Код товара, наименование"
+      />
+      <div
+        class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
+      >
+        <span class="material-icons text-gray-300">search</span>
+      </div>
+      <div
+        class="absolute bottom-0 right-0 top-0 flex items-center justify-between px-4"
+      >
+        <router-link
+          :to="{
+            path: '/scan2',
+            query: { scannableMode: true },
+          }"
+          class="flex items-center"
+        >
+          <span class="material-icons-outlined">center_focus_strong</span>
+        </router-link>
+      </div>
+    </v-form>
+
     <data-table
       :table-data="pointItems"
       :table-fields="tableFields"
@@ -19,24 +47,31 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
+import { onMounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import PointService from "@/services/PointService.js"
 import DataTable from "@/components/ui/DataTable.vue"
 import { useFilters } from "@/composables/filters.js"
 import { useSelect } from "@/composables/useSelect2.js"
+import { useScan } from "@/composables/useScan"
+import { useFocusable } from "@/composables/useFocusable"
 import ALink from "@/components/ui/ALink.vue"
+import { watchDebounced } from "@vueuse/core"
 
+const { focusableInput } = useFocusable()
 const router = useRouter()
 const pointItems = ref([])
 const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =
   useFilters()
 const { isSelectableMode, applySelect } = useSelect()
+const { scannedCode } = useScan()
+const searchInput = ref("")
 
 const getPointItems = async () => {
   try {
     pointItems.value = await PointService.getPointItems({
       filters: joinedFilters.value,
+      q: searchInput.value,
     })
   } catch (error) {
     console.log(error)
@@ -51,6 +86,20 @@ const onItemClick = (item) => {
   }
 }
 
+watchDebounced(
+  searchInput,
+  async () => {
+    await getPointItems()
+  },
+  { debounce: 500, maxWait: 1000 },
+)
+
+watch(scannedCode, (newScannedCode) => {
+  if (newScannedCode) {
+    searchInput.value = newScannedCode
+  }
+})
+
 onMounted(() => {
   getPointItems()
 })
@@ -60,7 +109,7 @@ const tableFields = ref([
     name: "storeItem.name",
     className: "w-full",
   },
-  { name: "count", className: "whitespace-nowrap", postfix: " шт" },
+  { name: "count", className: "whitespace-nowrap text-right", postfix: " шт" },
 ])
 </script>
 

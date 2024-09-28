@@ -71,9 +71,9 @@ export const updateStoreItem = async (id, data) => {
   }
 }
 
-export const getStoreItems = async (queryParams = "") => {
+export const getStoreItems = async (params = {}) => {
   try {
-    const response = await axios.get(`/store/items?filters=${queryParams}`)
+    const response = await axios.get("/store/items", { params })
     return Promise.resolve(response.data)
   } catch (error) {
     return Promise.reject(error)

@@ -89,7 +89,7 @@ const addStoreItem = async () => {
 
 watch(scannedCode, (newScannedCode) => {
   if (newScannedCode) {
-    itemState.value.code = scannedCode
+    itemState.value.code = newScannedCode
   }
 })
 </script>

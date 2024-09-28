@@ -57,7 +57,9 @@ const addArrival = async () => {
 }
 
 watch(pointItem, (newStoreItem) => {
-  item.value.pointItemId = newStoreItem.id
+  if (newStoreItem) {
+    item.value.pointItemId = newStoreItem.id
+  }
 })
 </script>
 

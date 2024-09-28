@@ -3,7 +3,7 @@
     <div class="flex flex-col gap-2">
       <v-form class="relative w-full" @submit.prevent="addCartItem">
         <input
-          ref="searchInput"
+          ref="focusableInput"
           v-model.trim="inputValue"
           type="text"
           class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-gray-300 md:rounded-lg md:text-base"
@@ -68,14 +68,15 @@ import { useCartStore } from "@/stores/cart.store"
 import { getPointItem } from "@/services/PointService"
 import CartTotalForMobile from "@/components/CartTotalForMobile.vue"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
+import { useFocusable } from "@/composables/useFocusable"
 
+const { focusableInput } = useFocusable()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm") // only smaller than lg
 
 const store = useCartStore()
 const router = useRouter()
 
-const searchInput = ref(null)
 const inputValue = ref("")
 const isSearchError = ref(false)
 
@@ -99,17 +100,4 @@ const addCartItem = async () => {
 const onItemClick = (item) => {
   router.push(`/point/items/${item.id}`)
 }
-
-const setInputFocus = async () => {
-  if (searchInput.value) {
-    await nextTick()
-    searchInput.value.focus()
-  }
-}
-onMounted(async () => {
-  window.addEventListener("keypress", setInputFocus)
-})
-onBeforeUnmount(() => {
-  window.removeEventListener("keypress", setInputFocus)
-})
 </script>
