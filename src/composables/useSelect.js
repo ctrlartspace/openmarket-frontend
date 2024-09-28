@@ -23,6 +23,7 @@ export function useSelect(fetchFunction) {
       if (item) {
         routeOptions.query = { ...routeOptions.query, selectedItem: item }
       }
+      console.log(routeOptions)
       await router.push(routeOptions)
     } catch (error) {
       console.log(error)

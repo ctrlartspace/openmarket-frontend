@@ -1,13 +1,13 @@
 <template>
   <footer class="@bottom-navigation pb-safe">
     <nav v-if="store.isAuthorizedPoint">
-      <div class="px-4 py-1 border-t border-gray-200 bg-white">
-        <ul class="flex gap-2 justify-around">
+      <div class="border-t border-gray-200 bg-white px-4 py-1">
+        <ul class="flex justify-around gap-2">
           <li v-for="(item, i) in menuItems" :key="i">
             <router-link
               v-slot="{ isActive }"
               :to="item.path"
-              class="flex flex-col items-center justify-center w-12 active:brightness-90"
+              class="flex w-12 flex-col items-center justify-center active:brightness-90"
             >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
@@ -34,15 +34,6 @@ import { useUserStore } from "@/stores/user.store"
 
 const route = useRoute()
 const store = useUserStore()
-const isCollapsed = ref(false)
-
-const getCurrentItem = computed(() => {
-  const currentItem = menuItems.value.find((item) => item.path === route.path)
-  if (currentItem) {
-    return currentItem.title
-  }
-  return "Меню"
-})
 
 const menuItems = ref([
   {
@@ -59,7 +50,7 @@ const menuItems = ref([
   },
   {
     title: "Сканер",
-    path: "/scan",
+    path: "/scan2",
     visible: true,
     icon: "center_focus_strong",
   },

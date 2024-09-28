@@ -6,6 +6,7 @@ import IncomesPage from "@/pages/IncomesPage.vue"
 import AddIncomesPage from "@/pages/AddIncomesPage.vue"
 import AuthPage from "@/pages/AuthPage.vue"
 import ScanPage from "@/pages/ScanPage.vue"
+import ScanPage2 from "@/pages/ScanPage2.vue"
 import ProfilePage from "@/pages/ProfilePage.vue"
 import StorePage from "@/pages/store/StorePage.vue"
 import StoreUsersAdd from "@/pages/store/users/StoreUsersAdd.vue"
@@ -230,6 +231,7 @@ const routes = [
   { path: "/auth", component: AuthPage },
   // { path: "/cash-register", component: CashPage },
   { path: "/scan", component: ScanPage },
+  { path: "/scan2", component: ScanPage2 },
 ]
 
 const router = createRouter({
@@ -245,7 +247,6 @@ router.beforeEach((to, from, next) => {
   if (to.path !== "/auth" && !userStore.isAuthorizedStore) {
     userStore.logOut()
   } else {
-    console.log("next")
     next()
   }
 })

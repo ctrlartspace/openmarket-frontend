@@ -1,27 +1,27 @@
 <template>
   <div class="bg-gray-200">
     <div
-      class="relative bg-green-400 text-white flex items-center justify-center"
+      class="relative flex items-center justify-center bg-green-400 text-white"
     >
-      <div id="canvas" class="bg-gray-400 w-full"></div>
-      <div class="absolute top-0 left-0 right-0 bottom-0 flex flex-col">
+      <div id="canvas" class="w-full bg-gray-400"></div>
+      <div class="absolute bottom-0 left-0 right-0 top-0 flex flex-col">
         <div class="mt-auto"></div>
         <div class="p-4 text-center opacity-20">{{ resultCode }}</div>
         <div class="flex justify-between">
           <button
-            class="w-full p-4 text-center text-white opacity-40 flex items-center justify-center"
+            class="flex w-full items-center justify-center p-4 text-center text-white opacity-40"
             @click="zoomOut"
           >
             <span class="material-icons-outlined">zoom_out_map</span>
           </button>
           <button
-            class="w-full p-4 text-center text-white opacity-40 flex items-center justify-center"
+            class="flex w-full items-center justify-center p-4 text-center text-white opacity-40"
             @click="changeQuality"
           >
             <span class="material-icons-outlined">{{ videoQuality.name }}</span>
           </button>
           <button
-            class="w-full p-4 text-center text-white opacity-40 flex items-center justify-center"
+            class="flex w-full items-center justify-center p-4 text-center text-white opacity-40"
             @click="zoomIn"
           >
             <span class="material-icons-outlined">zoom_in_map</span>

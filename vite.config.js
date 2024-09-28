@@ -17,9 +17,9 @@ export default defineConfig({
       },
       includeAssets: ["**/*.{png}"],
       manifest: {
-        name: "My Awesome App",
-        short_name: "MyApp",
-        description: "My Awesome App description",
+        name: "Openmarket",
+        short_name: "Openmarket",
+        description: "Openmarket",
         theme_color: "#ffffff",
         icons: [
           {

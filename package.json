@@ -21,6 +21,7 @@
     "quagga": "^0.12.1",
     "receiptline": "^1.16.1",
     "vue": "^3.3.4",
+    "vue-qrcode-reader": "^5.5.10",
     "vue-router": "^4.2.5",
     "vuetify": "^3.4.0"
   },
