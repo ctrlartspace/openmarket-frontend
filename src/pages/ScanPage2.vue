@@ -9,16 +9,18 @@
         @detect="onDetect"
         :paused="isPaused"
       >
-        <div class="flex h-full items-end justify-center p-4 text-white">
+        <div
+          class="flex h-full items-end justify-center p-4 text-white opacity-40"
+        >
           {{ result }}
         </div>
       </qrcode-stream>
-      <audio id="beepSound" class="hidden" controls preload="none">
-        <source src="../assets/beep.wav" type="audio/wav" />
-      </audio>
     </div>
     <div class="relative flex-1 p-4">
-      <div v-if="isNotFound" class="flex justify-center font-medium">
+      <div
+        v-if="isNotFound && !isScannableMode"
+        class="flex justify-center font-medium"
+      >
         <span class="rounded-lg bg-red-50 px-4 py-2 text-red-500">
           Товар не найден ({{ resultCount }})
         </span>
@@ -50,7 +52,7 @@
           </div>
           <button
             class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-2 text-center text-2xl text-white hover:brightness-95 active:brightness-95"
-            @click="addToCart"
+            @click="onApplyClick"
           >
             Добавить
           </button>
@@ -70,8 +72,9 @@ import { QrcodeStream } from "vue-qrcode-reader"
 import { useCartStore } from "@/stores/cart.store"
 import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.vue"
 import { getPointItem } from "@/services/PointService"
+import { useScan } from "@/composables/useScan"
 
-/*** detection handling ***/
+const { isScannableMode, applyScan } = useScan()
 
 const resultCount = ref(0)
 const result = ref("")
@@ -92,6 +95,15 @@ const plusItem = () => {
   itemCount.value += 1
 }
 
+const onApplyClick = () => {
+  if (isScannableMode.value) {
+    console.log("scannable")
+    applyScan(result.value)
+    return
+  }
+  addToCart()
+}
+
 const addToCart = () => {
   store.addItem(resultItem.value, itemCount.value)
   resultItem.value = null
@@ -108,7 +120,12 @@ const resetScanner = () => {
 async function onDetect(detectedCodes) {
   result.value = detectedCodes[0].rawValue
   resultCount.value = resultCount.value + 1
-  await checkItem(result.value)
+  if (isScannableMode.value) {
+    playSound()
+    applyScan(result.value)
+  } else {
+    await checkItem(result.value)
+  }
 }
 
 const checkItem = async (id) => {
@@ -117,15 +134,19 @@ const checkItem = async (id) => {
     isNotFound.value = false
     const item = await getPointItem(id, { searchBy: "code" })
     resultItem.value = item
-    const sound = document.getElementById("beepSound")
-    sound.play()
     isPaused.value = true
+    playSound()
   } catch (error) {
     console.error(error)
     isNotFound.value = true
   } finally {
     isLoading.value = false
   }
+}
+
+const playSound = () => {
+  const sound = new Audio("/beep.wav")
+  sound.play()
 }
 
 /*** select camera ***/

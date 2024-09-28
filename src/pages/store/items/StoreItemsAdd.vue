@@ -10,7 +10,19 @@
         label="Код товара"
         placeholder="Код товара"
         type="text"
-      />
+      >
+        <template #action>
+          <router-link
+            :to="{
+              path: '/scan2',
+              query: { scannableMode: true },
+            }"
+            class="flex items-center"
+          >
+            <span class="material-icons-outlined">center_focus_strong</span>
+          </router-link>
+        </template></a-base-input
+      >
       <a-base-input
         id="name"
         v-model="itemState.name"
@@ -47,6 +59,7 @@
 </template>
 
 <script setup>
+import { watch } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
@@ -54,10 +67,12 @@ import AButton from "@/components/ui/AButton.vue"
 import { storeToRefs } from "pinia"
 import { useItemState } from "@/stores/item-state.store.js"
 import { useFilters } from "@/composables/filters.js"
+import { useScan } from "@/composables/useScan"
 
 const router = useRouter()
 const { itemState } = storeToRefs(useItemState())
 const { filters, filterPathMulti } = useFilters()
+const { scannedCode } = useScan()
 
 const addStoreItem = async () => {
   try {
@@ -70,6 +85,12 @@ const addStoreItem = async () => {
     console.error(error)
   }
 }
+
+watch(scannedCode, (newScannedCode) => {
+  if (newScannedCode) {
+    itemState.value.code = scannedCode
+  }
+})
 </script>
 
 <style lang="scss" scoped></style>
