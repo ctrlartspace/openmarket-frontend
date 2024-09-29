@@ -21,7 +21,7 @@
         class="mt-2 hidden w-full items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 hover:bg-gray-50 active:bg-gray-50 md:flex md:rounded-lg"
         @click="resetFilters"
       >
-        <span class="material-icons-outlined">filter_list_off</span>
+        <span class="material-symbols-outlined">filter_list_off</span>
         <span class="text-lg md:text-base">Сбросить</span>
       </button>
     </div>
@@ -35,7 +35,7 @@
             class="flex gap-2 items-center hover:text-red-600 active:text-red-600 cursor-pointer"
             type="button"
           >
-            <span class="material-icons md:text-[28px]">remove</span>
+            <span class="material-symbols-outlined md:text-[28px]">remove</span>
             <span class="hidden md:inline text-lg md:text-base">Удалить</span>
           </button>
           <button
@@ -43,7 +43,7 @@
             type="button"
             @click="makeReturns"
           >
-            <span class="material-icons-outlined md:text-[28px]"
+            <span class="material-symbols-outlined md:text-[28px]"
               >keyboard_backspace</span
             >
             <span class="hidden md:inline text-lg md:text-base"
@@ -54,7 +54,7 @@
         </div>
         <div v-else class="px-4 py-2 flex gap-2 border-b last:border-none">
           <div class="flex h-full w-full gap-2 items-center">
-            <span class="material-icons text-gray-300 md:text-[28px]"
+            <span class="material-symbols-outlined text-gray-300 md:text-[28px]"
               >search</span
             >
 
@@ -69,7 +69,7 @@
             type="button"
             @click="showDialog.showFilterMobile = true"
           >
-            <span class="material-icons-outlined md:text-[28px]">tune</span>
+            <span class="material-symbols-outlined md:text-[28px]">tune</span>
           </button>
           <app-dialog
             v-if="showDialog.showFilterMobile"
@@ -123,7 +123,7 @@
                 v-if="item.isReturned"
                 class="flex items-center bg-red-50 rounded w-max order-4 md:order-none"
               >
-                <span class="material-icons text-red-600 md:text-[28px]"
+                <span class="material-symbols-outlined text-red-600 md:text-[28px]"
                   >keyboard_backspace</span
                 >
               </td> 
@@ -132,11 +132,11 @@
               >
                 <span
                   v-if="item.isReturned"
-                  class="material-icons text-red-600 md:text-[28px]"
+                  class="material-symbols-outlined text-red-600 md:text-[28px]"
                   >keyboard_backspace</span
                 >
                 <span
-                  class="material-icons-outlined text-blue-600 md:text-[28px]"
+                  class="material-symbols-outlined text-blue-600 md:text-[28px]"
                   >{{
                     item.paymentType === "cash-register" ? "payments" : "credit_card"
                   }}</span
@@ -162,7 +162,7 @@
             @click="addIncomes"
           >
             <span class="hidden text-lg md:inline md:text-base">Добавить</span>
-            <span class="material-icons-outlined">add</span>
+            <span class="material-symbols-outlined">add</span>
           </button>
         </template>
 
@@ -182,11 +182,11 @@
           >
             <span
               v-if="item.isReturned"
-              class="material-icons text-red-600 md:text-[28px]"
+              class="material-symbols-outlined text-red-600 md:text-[28px]"
               >keyboard_backspace</span
             >
             <span
-              class="material-icons-outlined text-blue-600 md:text-[28px]"
+              class="material-symbols-outlined text-blue-600 md:text-[28px]"
               >{{
                 item.paymentType === "cash" ? "payments" : "credit_card"
               }}</span

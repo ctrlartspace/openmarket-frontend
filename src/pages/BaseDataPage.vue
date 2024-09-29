@@ -14,7 +14,7 @@
               @click="showDialog.editFilter = true"
             >
               <span
-                class="material-icons-outlined cursor-pointer hover:text-gray-600 active:text-gray-600 md:text-[28px]"
+                class="material-symbols-outlined cursor-pointer hover:text-gray-600 active:text-gray-600 md:text-[28px]"
               >
                 more_vert
               </span>
@@ -71,7 +71,7 @@
           class="mt-2 hidden w-full items-center gap-2 rounded border border-gray-200 bg-white px-4 py-2 hover:bg-gray-50 md:flex"
           @click="resetFilters"
         >
-          <span class="material-icons-outlined">filter_list_off</span>
+          <span class="material-symbols-outlined">filter_list_off</span>
           <span class="text-lg md:text-base">Сбросить</span>
         </button>
       </div>
@@ -83,7 +83,7 @@
               type="button"
               @click="showDialog.showFilterMobile = true"
             >
-              <span class="material-icons-outlined md:text-[28px]">tune</span>
+              <span class="material-symbols-outlined md:text-[28px]">tune</span>
             </button>
             <app-dialog
               v-if="showDialog.showFilterMobile"
@@ -103,7 +103,7 @@
               @click="newItemClick"
             >
               <span class="hidden text-lg md:inline md:text-base">Новый</span>
-              <span class="material-icons-outlined md:text-[28px]">add</span>
+              <span class="material-symbols-outlined md:text-[28px]">add</span>
             </button>
           </template>
 
@@ -113,7 +113,7 @@
               type="button"
               @click="newItemClick"
             >
-              <span class="material-icons-outlined md:text-[28px]"
+              <span class="material-symbols-outlined md:text-[28px]"
                 >shopping_bag</span
               >
               <span class="hidden text-lg md:block md:text-base"

@@ -2,9 +2,15 @@
   <a-page>
     <template #header>
       <a-link :to="filterPathMulti" primary>
-        <span class="material-icons-outlined text-[28px]">menu</span>
+        <span class="material-symbols-outlined text-[28px]">menu</span>
       </a-link>
       <a-link primary to="/arrivals/items/add"> Добавить</a-link>
+    </template>
+    <template #floating>
+      <a-link-floating :to="filterPathMulti" primary>
+        page_info
+      </a-link-floating>
+      <a-link-floating primary to="/arrivals/items/add"> add</a-link-floating>
     </template>
 
     <data-table
@@ -19,6 +25,7 @@
 <script setup>
 import DataTable from "@/components/ui/DataTable.vue"
 import ALink from "@/components/ui/ALink.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"

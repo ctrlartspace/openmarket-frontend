@@ -18,7 +18,9 @@
             <div
               class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center px-4"
             >
-              <span class="material-icons text-gray-300">search</span>
+              <span class="material-symbols-outlined text-gray-300"
+                >search</span
+              >
             </div>
           </v-form>
         </div>
@@ -42,7 +44,7 @@
               >
                 <td class="flex items-center">
                   <span
-                    class="material-icons select-none rounded hover:bg-red-100 hover:text-red-700 active:bg-red-100 active:text-red-700 md:text-[28px]"
+                    class="material-symbols-outlined select-none rounded hover:bg-red-100 hover:text-red-700 active:bg-red-100 active:text-red-700 md:text-[28px]"
                     @click.stop="store.removeItem(item.id)"
                   >
                     remove

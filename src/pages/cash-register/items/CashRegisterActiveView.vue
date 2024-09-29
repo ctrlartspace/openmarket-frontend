@@ -9,9 +9,26 @@
       >
         Закрыть
       </a-button>
-      <a-link v-if="!isActiveCashExists" success to="/cash-register/active/add">
+      <a-link v-if="!isActiveCashExists" primary to="/cash-register/active/add">
         Открыть
       </a-link>
+    </template>
+    <template #floating>
+      <a-button-floating
+        v-if="isActiveCashExists"
+        danger
+        to="/arrivals/items/add"
+        @click="closeActiveCashRegister"
+      >
+        close
+      </a-button-floating>
+      <a-link-floating
+        v-if="!isActiveCashExists"
+        primary
+        to="/cash-register/active/add"
+      >
+        add
+      </a-link-floating>
     </template>
 
     <div class="flex flex-col gap-2" v-if="isActiveCashExists">
@@ -57,8 +74,9 @@
 import ALink from "@/components/ui/ALink.vue"
 import { computed, onMounted, ref } from "vue"
 import { closeCashRegister, getActiveCash } from "@/services/CashService.js"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AButton from "@/components/ui/AButton.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 
 const activeCash = ref(null)
 

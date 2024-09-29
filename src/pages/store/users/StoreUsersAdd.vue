@@ -3,6 +3,11 @@
     <template #header>
       <a-button primary @click="addStoreUser"> Сохранить </a-button>
     </template>
+    <template #floating>
+      <a-button-floating primary @click="addStoreUser">
+        save
+      </a-button-floating>
+    </template>
     <div class="flex flex-col gap-2">
       <a-base-input
         id="store-user-name"
@@ -26,6 +31,7 @@ import ABaseInput from "@/components/ui/ABaseInput.vue"
 import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 
 const router = useRouter()
 const storeUser = ref({})

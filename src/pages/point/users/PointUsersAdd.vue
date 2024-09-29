@@ -3,6 +3,9 @@
     <template #header>
       <a-button primary @click="addPointUser"> Сохранить</a-button>
     </template>
+    <template #floating>
+      <a-button-floating primary @click="addPointUser"> save</a-button-floating>
+    </template>
     <div class="flex flex-col gap-2">
       <router-link
         :to="{
@@ -26,6 +29,7 @@
 import { useRouter } from "vue-router"
 import PointUserService from "@/services/point/users.js"
 import AButton from "@/components/ui/AButton.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import { useSelect } from "@/composables/useSelect2.js"
 
 const { selectedItem: selectedUser } = useSelect()

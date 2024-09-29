@@ -1,34 +1,34 @@
 <template>
   <aside>
     <div class="flex flex-col">
-      <div class="w-full flex items-center justify-between">
-        <!-- <span class="material-icons-outlined md:text-[24px]">schedule</span> -->
+      <div class="flex w-full items-center justify-between">
+        <!-- <span class="material-symbols-outlined md:text-[24px]">schedule</span> -->
         <span class="text-gray-300"> Касса: </span>
         <span> #1</span>
       </div>
-      <div class="w-full flex items-center justify-between">
-        <!-- <span class="material-icons-outlined md:text-[24px]">schedule</span> -->
+      <div class="flex w-full items-center justify-between">
+        <!-- <span class="material-symbols-outlined md:text-[24px]">schedule</span> -->
         <span class="text-gray-300"> Время работы:</span>
         <span>
           {{ calculatedTime }}
         </span>
       </div>
-      <div class="w-full flex items-center justify-between">
-        <!-- <span class="material-icons-outlined md:text-[24px]">schedule</span> -->
+      <div class="flex w-full items-center justify-between">
+        <!-- <span class="material-symbols-outlined md:text-[24px]">schedule</span> -->
         <span class="text-gray-300"> Продавец:</span>
         <span> Аман </span>
       </div>
-      <div class="w-full flex items-center justify-between">
-        <!-- <span class="material-icons-outlined md:text-[24px]">schedule</span> -->
+      <div class="flex w-full items-center justify-between">
+        <!-- <span class="material-symbols-outlined md:text-[24px]">schedule</span> -->
         <span class="text-gray-300"> Сумма:</span>
         <span> 8000 </span>
       </div>
       <div>
         <button
-          class="mt-2 w-full px-4 py-2 text-gray-300 font-medium flex items-center justify-center gap-2 rounded border border-gray-200 hover:text-black hover:border-black"
+          class="mt-2 flex w-full items-center justify-center gap-2 rounded border border-gray-200 px-4 py-2 font-medium text-gray-300 hover:border-black hover:text-black"
         >
           Заблокировать
-          <span class="material-icons-outlined md:text-[24px]">lock</span>
+          <span class="material-symbols-outlined md:text-[24px]">lock</span>
         </button>
       </div>
     </div>

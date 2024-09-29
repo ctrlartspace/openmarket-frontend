@@ -1,10 +1,10 @@
 <template>
   <div class="grid grid-cols-6 gap-4 p-4 md:p-2">
     <div class="col-span-10 md:col-span-4">
-      <div class="bg-white border rounded h-96">
-        <div class="px-4 py-2 flex gap-2 border-b last:border-none">
-          <div class="relative flex-1 flex gap-2 items-center h-7">
-            <span class="material-icons text-gray-300 md:text-[28px]"
+      <div class="h-96 rounded border bg-white">
+        <div class="flex gap-2 border-b px-4 py-2 last:border-none">
+          <div class="relative flex h-7 flex-1 items-center gap-2">
+            <span class="material-symbols-outlined text-gray-300 md:text-[28px]"
               >search</span
             >
             <v-form @submit.prevent="addIncomeItem" class="relative w-full">
@@ -12,9 +12,9 @@
                 ref="searchInput"
                 v-model.trim="inputValue"
                 type="text"
-                class="w-full h-full text-lg md:text-base placeholder:text-gray-300 focus:outline-none text-ellipsis"
+                class="h-full w-full text-ellipsis text-lg placeholder:text-gray-300 focus:outline-none md:text-base"
                 :class="
-                  isSearchError ? 'text-red-600 animate-shake' : 'text-black'
+                  isSearchError ? 'animate-shake text-red-600' : 'text-black'
                 "
                 @input="isSearchError = false"
                 placeholder="Код товара, наименование"
@@ -23,43 +23,43 @@
           </div>
         </div>
         <table
-          class="table-auto w-full text-lg md:text-base text-left bg-white"
+          class="w-full table-auto bg-white text-left text-lg md:text-base"
         >
           <tbody>
             <tr
               v-if="incomeItems.length === 0"
-              class="border-b flex justify-center px-4 py-2 last:border-none"
+              class="flex justify-center border-b px-4 py-2 last:border-none"
             >
-              <span class="text-gray-300 text-lg md:text-base">Нет данных</span>
+              <span class="text-lg text-gray-300 md:text-base">Нет данных</span>
             </tr>
             <tr
               v-else
               v-for="(item, i) in groupedIncomeItems"
-              class="cursor-pointer active:bg-gray-50 hover:bg-gray-50 border-b flex items-center justify-between gap-2 px-4 py-2"
+              class="flex cursor-pointer items-center justify-between gap-2 border-b px-4 py-2 hover:bg-gray-50 active:bg-gray-50"
               @click="onItemClick(item)"
               :key="i"
             >
               <td class="flex items-center">
                 <span
-                  class="material-icons rounded hover:bg-red-100 hover:text-red-700 select-none"
+                  class="material-symbols-outlined select-none rounded hover:bg-red-100 hover:text-red-700"
                   @click.stop="removeItem(item.id)"
                 >
                   remove
                 </span>
               </td>
-              <td class="font-medium flex-1">
+              <td class="flex-1 font-medium">
                 {{ item.name }}
               </td>
               <td>
                 <input
                   v-model.number="item.count"
-                  class="rounded border border-gray-200 px-2 bg-inherit text-lg md:text-base focus:outline-none focus:text-blue-600"
+                  class="rounded border border-gray-200 bg-inherit px-2 text-lg focus:text-blue-600 focus:outline-none md:text-base"
                   :size="String(item.count).length"
                   @click.stop
                 />
                 шт.
               </td>
-              <td class="text-green-600 font-medium">
+              <td class="font-medium text-green-600">
                 {{ item.count * item.purchasePrice }} KZT
               </td>
             </tr>
@@ -68,10 +68,10 @@
       </div>
     </div>
     <div
-      class="col-span-10 md:col-span-2 bg-white border border-gray-2 p-4 rounded"
+      class="border-gray-2 col-span-10 rounded border bg-white p-4 md:col-span-2"
     >
       <button
-        class="w-full px-4 py-2 text-white bg-blue-600 flex gap-2 items-center justify-center hover:brightness-90 rounded"
+        class="flex w-full items-center justify-center gap-2 rounded bg-blue-600 px-4 py-2 text-white hover:brightness-90"
         @click="addIncomesItems"
       >
         <span class="text-lg md:text-base">Добавить</span>
@@ -95,7 +95,7 @@ const isSearchError = ref(false)
 const incomeItems = ref(new Map())
 
 const groupedIncomeItems = computed(() =>
-  [...incomeItems.value].map((el) => el[1])
+  [...incomeItems.value].map((el) => el[1]),
 )
 
 const isEmpty = computed(() => incomeItems.value.size === 0)
@@ -107,7 +107,7 @@ const getItemsForIncome = computed(() =>
       purchasePrice: item.purchasePrice,
       count: item.count,
     }
-  })
+  }),
 )
 
 const addItem = (item) => {

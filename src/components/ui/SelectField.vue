@@ -1,16 +1,16 @@
 <template>
   <div
     ref="selectField"
-    class="relative px-4 py-2 border-b border-gray-200 cursor-pointer last:border-none"
+    class="relative cursor-pointer border-b border-gray-200 px-4 py-2 last:border-none"
   >
     <span
       v-if="selectedItems.length > 0"
-      class="flex-1 text-lg md:text-base text-gray-300"
+      class="flex-1 text-lg text-gray-300 md:text-base"
       >{{ placeholder }}</span
     >
     <div class="flex items-center">
       <input
-        class="block w-full text-lg md:text-base bg-inherit appearance-none placeholder:text-gray-300 placeholder:font-normal focus:outline-none cursor-pointer"
+        class="block w-full cursor-pointer appearance-none bg-inherit text-lg placeholder:font-normal placeholder:text-gray-300 focus:outline-none md:text-base"
         :class="$attrs.disabled ? 'text-black' : 'text-blue-600'"
         type="text"
         :value="selectedItems"
@@ -21,7 +21,7 @@
       />
       <span
         v-if="!$attrs.disabled"
-        class="material-icons-outlined md:text-[28px]"
+        class="material-symbols-outlined md:text-[28px]"
         :class="
           selectedItems && selectedItems.length > 0
             ? 'text-black'
@@ -32,13 +32,13 @@
       >
       <div
         v-if="isActive"
-        class="absolute z-10 w-full left-0 top-full bg-white border-t rounded-b border-gray-200 shadow-xl overflow-auto"
+        class="absolute left-0 top-full z-10 w-full overflow-auto rounded-b border-t border-gray-200 bg-white shadow-xl"
       >
         <slot :is-active="isActive">
           <ul class="text-lg md:text-base">
             <li
               v-for="(item, i) in items"
-              class="px-4 py-2 hover:bg-gray-100 active:bg-gray-100 cursor-pointer"
+              class="cursor-pointer px-4 py-2 hover:bg-gray-100 active:bg-gray-100"
               @click.stop="onItemClick(item)"
               :key="i"
             >

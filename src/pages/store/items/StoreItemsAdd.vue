@@ -3,6 +3,9 @@
     <template #header>
       <a-button primary @click="addStoreItem"> Сохранить</a-button>
     </template>
+    <template #floating>
+      <a-button-floating primary @click="addStoreItem"> save</a-button-floating>
+    </template>
     <div class="flex flex-col gap-2">
       <a-base-input
         id="article"
@@ -19,7 +22,7 @@
             }"
             class="flex items-center"
           >
-            <span class="material-icons-outlined">center_focus_strong</span>
+            <span class="material-symbols-outlined">center_focus_strong</span>
           </router-link>
         </template></a-base-input
       >
@@ -64,6 +67,7 @@ import ABaseInput from "@/components/ui/ABaseInput.vue"
 import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import { storeToRefs } from "pinia"
 // import { useItemState } from "@/stores/item-state.store.js"
 import { useFilters } from "@/composables/filters.js"

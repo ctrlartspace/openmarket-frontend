@@ -26,7 +26,7 @@
             @click="addIncomes"
           >
             <span class="hidden text-lg md:inline md:text-base">Добавить</span>
-            <span class="material-icons-outlined">add</span>
+            <span class="material-symbols-outlined">add</span>
           </button>
         </template>
 

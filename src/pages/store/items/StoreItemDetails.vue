@@ -6,6 +6,14 @@
       </a-button>
       <a-button primary @click="updateStoreItem">Сохранить</a-button>
     </template>
+    <template #floating>
+      <a-button-floating v-if="point" accent @click="addPointItem"
+        >add_circle
+      </a-button-floating>
+      <a-button-floating primary @click="updateStoreItem"
+        >save</a-button-floating
+      >
+    </template>
     <div class="flex flex-col gap-2">
       <a-base-input
         id="article"
@@ -19,7 +27,7 @@
             class="flex items-center"
             @click="onGenerateBarcodeClick"
           >
-            <span class="material-icons-outlined">print</span>
+            <span class="material-symbols-outlined">print</span>
           </button>
         </template></a-base-input
       >
@@ -64,6 +72,7 @@ import { useRoute, useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import StoreService from "@/services/StoreService"
 import AButton from "@/components/ui/AButton.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import { useFilters } from "@/composables/filters.js"
 import { storeToRefs } from "pinia"
 // import { useItemState } from "@/stores/item-state.store.js"

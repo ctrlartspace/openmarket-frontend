@@ -42,7 +42,7 @@
               class="order-last flex items-center justify-center rounded-xl bg-black px-2 py-2 text-center text-xl text-white"
               @click="isNumberInput = false"
             >
-              <span class="material-icons-outlined">close</span>
+              <span class="material-symbols-outlined">close</span>
             </button>
           </div>
         </div>
@@ -58,7 +58,7 @@
               class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"
               @click="minusItem"
             >
-              <span class="material-icons-outlined">remove</span>
+              <span class="material-symbols-outlined">remove</span>
             </button>
             <div class="w-full text-center">
               <span class="text-2xl">{{ itemCount }}</span>
@@ -67,7 +67,7 @@
               class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"
               @click="plusItem"
             >
-              <span class="material-icons-outlined">add</span>
+              <span class="material-symbols-outlined">add</span>
             </button>
           </div>
           <button
@@ -77,7 +77,7 @@
             Добавить
           </button>
           <button class="absolute right-0 top-0 p-4" @click="resetScanner">
-            <span class="material-icons-outlined">close</span>
+            <span class="material-symbols-outlined">close</span>
           </button>
         </div>
       </div>

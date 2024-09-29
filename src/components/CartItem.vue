@@ -1,14 +1,14 @@
 <template>
   <div class="flex cursor-pointer text-lg">
     <span
-      class="material-icons self-center rounded hover:bg-red-100 hover:text-red-700 active:text-red-700 select-none"
+      class="material-symbols-outlined select-none self-center rounded hover:bg-red-100 hover:text-red-700 active:text-red-700"
       @click="onRemoveClick"
     >
       remove
     </span>
 
     <span
-      class="ml-2 font-medium flex-auto hover:underline active:underline"
+      class="ml-2 flex-auto font-medium hover:underline active:underline"
       @click="onItemClick"
     >
       {{ `${item.brand.name}  ${item.name}` }}

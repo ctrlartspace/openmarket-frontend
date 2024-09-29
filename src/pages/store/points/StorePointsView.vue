@@ -3,6 +3,10 @@
     <template #header>
       <a-link primary to="/store/points/add">Добавить</a-link>
     </template>
+    <template #floating>
+      <a-link-floating primary to="/store/points/add">save</a-link-floating>
+      <a-link-floating primary to="/store/points/add">add</a-link-floating>
+    </template>
     <data-table
       :selectable="false"
       :table-data="storePoints"
@@ -23,6 +27,7 @@ import { useRouter } from "vue-router"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
 import ALink from "@/components/ui/ALink.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
 
 const store = useUserStore()

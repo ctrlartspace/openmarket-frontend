@@ -15,7 +15,7 @@
               class="flex items-center rounded border border-gray-200 text-black hover:bg-gray-200 hover:text-black active:bg-gray-200 active:text-black"
               @click="closeDialog"
             >
-              <span class="material-icons-outlined md:text-[28px]"
+              <span class="material-symbols-outlined md:text-[28px]"
                 >minimize</span
               >
             </button>

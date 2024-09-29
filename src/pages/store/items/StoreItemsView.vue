@@ -5,6 +5,11 @@
         >Добавить
       </a-link>
     </template>
+    <template #floating>
+      <a-link-floating v-if="!isSelectableMode" primary to="/store/items/add"
+        >add
+      </a-link-floating>
+    </template>
     <v-form class="relative mb-2 w-full" @submit.prevent>
       <input
         ref="focusableInput"
@@ -16,7 +21,7 @@
       <div
         class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
       >
-        <span class="material-icons text-gray-300">search</span>
+        <span class="material-symbols-outlined text-gray-300">search</span>
       </div>
       <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-between px-4"
@@ -28,7 +33,7 @@
           }"
           class="flex items-center"
         >
-          <span class="material-icons-outlined">center_focus_strong</span>
+          <span class="material-symbols-outlined">center_focus_strong</span>
         </router-link>
       </div>
     </v-form>
@@ -51,6 +56,7 @@ import { useScan } from "@/composables/useScan"
 import { useFocusable } from "@/composables/useFocusable"
 import { watchDebounced } from "@vueuse/core"
 import ALink from "@/components/ui/ALink.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 
 const { focusableInput } = useFocusable()
 const router = useRouter()

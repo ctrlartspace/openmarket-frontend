@@ -2,14 +2,16 @@
   <header class="sticky top-0 z-10">
     <nav>
       <div
-        class="px-4 py-2 bg-white border-b border-gray-200 flex items-center"
+        class="flex items-center border-b border-gray-200 bg-white px-4 py-2"
       >
         <div class="absolute">
           <button class="flex items-center" @click="goBack">
-            <span class="material-icons-outlined text-xl">arrow_back_ios</span>
+            <span class="material-symbols-outlined text-xl"
+              >arrow_back_ios</span
+            >
           </button>
         </div>
-        <h2 class="font-medium text-lg text-center w-full">
+        <h2 class="w-full text-center text-lg font-medium">
           {{ getCurrentItem }}
         </h2>
       </div>

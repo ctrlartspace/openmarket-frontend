@@ -36,6 +36,8 @@ export function useSelect() {
 
   onMounted(async () => {
     isSelectableMode.value = !!route.query.selectableMode
+
+    console.log(isSelectableMode.value)
     nextPath.value = route.query.nextPath
     selectedItem.value = selectStore.selectedItem
   })

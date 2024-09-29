@@ -57,7 +57,7 @@
           }"
           @click="store.changePaymentType"
         >
-          <span class="material-icons-outlined text-3xl">
+          <span class="material-symbols-outlined text-3xl">
             {{ store.getPaymentType.icon }}
           </span>
         </button>

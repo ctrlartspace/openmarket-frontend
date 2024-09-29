@@ -3,6 +3,9 @@
     <template #header>
       <a-button primary @click="addFilter">Сохранить</a-button>
     </template>
+    <template #floating>
+      <a-button-floating primary @click="addFilter">save</a-button-floating>
+    </template>
     <div class="flex flex-col gap-2">
       <div
         v-if="filters"
@@ -30,6 +33,7 @@ import PointService from "@/services/PointService.js"
 import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"
 import AButton from "@/components/ui/AButton.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 
 const router = useRouter()
 const filterName = ref("")

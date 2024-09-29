@@ -60,7 +60,7 @@
         class="flex w-full items-center justify-center px-4 py-2 text-start hover:bg-gray-50 active:bg-gray-50"
         @click="isShowFull = !isShowFull"
       >
-        <span class="material-icons-outlined">{{
+        <span class="material-symbols-outlined">{{
           isShowFull ? "expand_less" : "expand_more"
         }}</span>
       </button>

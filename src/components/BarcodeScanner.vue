@@ -12,19 +12,21 @@
             class="flex w-full items-center justify-center p-4 text-center text-white opacity-40"
             @click="zoomOut"
           >
-            <span class="material-icons-outlined">zoom_out_map</span>
+            <span class="material-symbols-outlined">zoom_out_map</span>
           </button>
           <button
             class="flex w-full items-center justify-center p-4 text-center text-white opacity-40"
             @click="changeQuality"
           >
-            <span class="material-icons-outlined">{{ videoQuality.name }}</span>
+            <span class="material-symbols-outlined">{{
+              videoQuality.name
+            }}</span>
           </button>
           <button
             class="flex w-full items-center justify-center p-4 text-center text-white opacity-40"
             @click="zoomIn"
           >
-            <span class="material-icons-outlined">zoom_in_map</span>
+            <span class="material-symbols-outlined">zoom_in_map</span>
           </button>
         </div>
       </div>

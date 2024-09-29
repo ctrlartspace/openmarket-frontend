@@ -3,6 +3,9 @@
     <template #header>
       <a-link primary to="/point/users/add">Добавить </a-link>
     </template>
+    <template #floating>
+      <a-link-floating primary to="/point/users/add">add </a-link-floating>
+    </template>
     <data-table :table-data="pointUsers" :table-fields="tableFields">
     </data-table>
   </a-page>
@@ -13,6 +16,7 @@ import { onMounted, ref } from "vue"
 import PointUserService from "@/services/point/users.js"
 import DataTable from "@/components/ui/DataTable.vue"
 import ALink from "@/components/ui/ALink.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 
 const pointUsers = ref([])
 

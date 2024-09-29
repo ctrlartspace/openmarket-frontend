@@ -2,7 +2,7 @@
   <a-page>
     <template #header>
       <a-link :to="filterPathMulti" primary>
-        <span class="material-icons-outlined text-[28px]">menu</span>
+        <span class="material-symbols-outlined text-[28px]">menu</span>
       </a-link>
       <a-link
         primary
@@ -12,6 +12,20 @@
         }"
       >
         Добавить</a-link
+      >
+    </template>
+    <template #floating>
+      <a-link-floating :to="filterPathMulti" primary>
+        page_info
+      </a-link-floating>
+      <a-link-floating
+        primary
+        :to="{
+          path: '/point/items',
+          query: { selectableMode: true, nextPath: '/point/arrivals/add' },
+        }"
+      >
+        add</a-link-floating
       >
     </template>
 
@@ -31,6 +45,7 @@ import ArrivalService from "@/services/arrivals/items.js"
 import DataTable from "@/components/ui/DataTable.vue"
 import { useFilters } from "@/composables/filters.js"
 import ALink from "@/components/ui/ALink.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 
 const router = useRouter()
 const pointItems = ref([])

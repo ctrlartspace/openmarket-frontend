@@ -8,7 +8,9 @@
       <span
         >{{ store.getTotalAmount }} <span class="font-semibold">₸</span></span
       >
-      <span class="material-icons self-center font-bold">arrow_forward</span>
+      <span class="material-symbols-outlined self-center font-bold"
+        >arrow_forward</span
+      >
     </button>
     <div
       v-if="cartStep === 2"
@@ -16,7 +18,7 @@
     >
       <div class="absolute">
         <button class="flex items-center" @click="stepBack">
-          <span class="material-icons-outlined text-xl text-gray-300"
+          <span class="material-symbols-outlined text-xl text-gray-300"
             >arrow_back_ios</span
           >
         </button>

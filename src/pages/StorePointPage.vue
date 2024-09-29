@@ -14,7 +14,7 @@
             :disabled="!selectedUserId"
             class="flex w-min items-center gap-2 rounded-xl bg-blue-500 px-4 text-lg text-white hover:brightness-95 active:brightness-95 md:rounded-lg md:text-base"
           >
-            <span class="material-icons-outlined">add</span>
+            <span class="material-symbols-outlined">add</span>
             Добавить
           </button>
         </div>

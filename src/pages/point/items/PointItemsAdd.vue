@@ -3,6 +3,9 @@
     <template #header>
       <a-button primary @click="addPointItem"> Сохранить</a-button>
     </template>
+    <template #floating>
+      <a-button-floating primary @click="addPointItem"> save</a-button-floating>
+    </template>
     <div class="flex flex-col gap-2">
       <router-link
         :to="{
@@ -59,6 +62,7 @@ import ABaseInput from "@/components/ui/ABaseInput.vue"
 import PointItemService from "@/services/point/items.js"
 import { useSelect } from "@/composables/useSelect2.js"
 import AButton from "@/components/ui/AButton.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 
 const router = useRouter()
 const item = ref({})

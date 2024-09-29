@@ -11,7 +11,7 @@
             >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="material-icons-outlined"
+                class="material-symbols-outlined"
                 >{{ item.icon }}</span
               >
               <span

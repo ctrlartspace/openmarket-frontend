@@ -11,6 +11,15 @@
         Применить
       </a-button>
     </template>
+
+    <template #floating>
+      <a-link-floating v-if="!isFilterMode" :to="filterPathAdd" primary>
+        add
+      </a-link-floating>
+      <a-button-floating v-if="isFilterMode" primary @click="applyFilters">
+        done
+      </a-button-floating>
+    </template>
     <div class="flex flex-col gap-2">
       <filter-tree
         v-model="filters"
@@ -27,7 +36,9 @@
 import FilterTree from "@/components/FilterTree.vue"
 import { useFilters } from "@/composables/filters.js"
 import ALink from "@/components/ui/ALink.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 
 const {
   filters,

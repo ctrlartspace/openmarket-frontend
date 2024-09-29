@@ -3,6 +3,9 @@
     <template #header>
       <a-link primary to="/store/users/add">Добавить</a-link>
     </template>
+    <template #floating>
+      <a-link-floating primary to="/store/users/add">add</a-link-floating>
+    </template>
     <data-table
       :table-data="storeUsers"
       :table-fields="tableFields"
@@ -17,6 +20,7 @@ import { onMounted, ref } from "vue"
 import StoreService from "@/services/StoreService"
 import DataTable from "@/components/ui/DataTable.vue"
 import ALink from "@/components/ui/ALink.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { useSelect } from "@/composables/useSelect2.js"
 
 const storeUsers = ref([])

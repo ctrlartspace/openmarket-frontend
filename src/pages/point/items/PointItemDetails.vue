@@ -5,10 +5,21 @@
         :to="{ path: '/point/arrivals/add', query: { selectedItem: item.id } }"
         success
       >
-        <span class="material-icons-outlined">add</span>
+        <span class="material-symbols-outlined">add</span>
         Приход
       </a-link>
       <a-button primary @click="updatePointItem"> Сохранить</a-button>
+    </template>
+    <template #floating>
+      <a-link-floating
+        :to="{ path: '/point/arrivals/add', query: { selectedItem: item.id } }"
+        success
+      >
+        add
+      </a-link-floating>
+      <a-button-floating primary @click="updatePointItem">
+        save</a-button-floating
+      >
     </template>
     <div v-if="item" class="flex flex-col gap-2">
       <router-link
@@ -59,7 +70,9 @@ import { useRoute } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import PointService from "@/services/PointService.js"
 import ALink from "@/components/ui/ALink.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 
 const route = useRoute()
 const item = ref({})

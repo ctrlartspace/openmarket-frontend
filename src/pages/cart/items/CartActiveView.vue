@@ -14,7 +14,7 @@
         <div
           class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center px-4"
         >
-          <span class="material-icons text-gray-300">search</span>
+          <span class="material-symbols-outlined text-gray-300">search</span>
         </div>
       </v-form>
       <div
@@ -32,7 +32,7 @@
               <td class="flex items-center">
                 <button class="flex items-center justify-center">
                   <span
-                    class="material-icons select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
+                    class="material-symbols-outlined select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
                     @click.stop="store.removeItem(item.id)"
                   >
                     remove

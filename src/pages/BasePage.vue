@@ -8,13 +8,15 @@
           <div class="absolute left-0 right-0">
             <div class="px- flex justify-between px-4">
               <button class="flex items-center" @click="$router.back">
-                <span class="material-icons-outlined">arrow_back</span>
+                <span class="material-symbols-outlined">arrow_back</span>
               </button>
               <button class="flex items-center" @click="toggleSideMenu">
-                <span v-if="!isSideMenuExpanded" class="material-icons-outlined"
+                <span
+                  v-if="!isSideMenuExpanded"
+                  class="material-symbols-outlined"
                   >menu</span
                 >
-                <span v-else class="material-icons-outlined">close</span>
+                <span v-else class="material-symbols-outlined">close</span>
               </button>
             </div>
           </div>
@@ -118,10 +120,12 @@ import { computed, ref, useSlots } from "vue"
 import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.vue"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import { useRoute } from "vue-router"
+import { useSelect } from "@/composables/useSelect2"
 
 const route = useRoute()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm") // only smaller than lg
+const { isSelectableMode } = useSelect()
 
 const props = defineProps({
   menuItems: {
@@ -134,6 +138,9 @@ const slots = useSlots()
 const hasAction = () => !!slots.action
 
 const headerTitle = computed(() => {
+  if (isSelectableMode.value) {
+    return "Выберите..."
+  }
   return props.menuItems.find((item) => route.path.includes(item.path))?.title
 })
 const isSideMenuExpanded = ref(false)
