@@ -4,7 +4,15 @@
       <a-link :to="filterPathMulti" primary>
         <span class="material-icons-outlined text-[28px]">menu</span>
       </a-link>
-      <a-link primary to="/point/arrivals/add"> Добавить</a-link>
+      <a-link
+        primary
+        :to="{
+          path: '/point/items',
+          query: { selectableMode: true, nextPath: '/point/arrivals/add' },
+        }"
+      >
+        Добавить</a-link
+      >
     </template>
 
     <data-table

@@ -8,6 +8,7 @@ export function useSelect() {
   const router = useRouter()
   const isSelectableMode = ref(false)
   const selectedItem = ref(null)
+  const nextPath = ref(null)
 
   const routeStore = useRouteStore()
   const selectStore = useSelectStore()
@@ -15,6 +16,10 @@ export function useSelect() {
   const applySelect = async (item) => {
     try {
       selectStore.setItem(item)
+      if (nextPath.value) {
+        router.replace({ path: String(nextPath.value), push: true })
+        return
+      }
       const previousRoute = routeStore.previousRoute
       const routeOptions = {
         path: previousRoute.path,
@@ -23,7 +28,7 @@ export function useSelect() {
         query: previousRoute.query,
         replace: true,
       }
-      await router.replace(routeOptions)
+      await router.push(routeOptions)
     } catch (error) {
       console.log(error)
     }
@@ -31,6 +36,7 @@ export function useSelect() {
 
   onMounted(async () => {
     isSelectableMode.value = !!route.query.selectableMode
+    nextPath.value = route.query.nextPath
     selectedItem.value = selectStore.selectedItem
   })
 

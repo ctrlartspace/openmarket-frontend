@@ -3,9 +3,6 @@
     <div class="flex-1">
       <barcode-scanner :is-stopped="isStopped" @success="onScanned" />
 
-      <audio id="beepSound" class="hidden" controls preload="none">
-        <source src="../assets/beep.wav" type="audio/wav" />
-      </audio>
       <div v-if="isNotFound" class="p-4 text-center text-red-600">
         <p>Товар не найден</p>
       </div>
@@ -151,8 +148,6 @@ const checkItem = async (id) => {
     const item = await getPointItem(id, { searchBy: "code" })
     resultItem.value = item
     isStopped.value = true
-    const sound = document.getElementById("beepSound")
-    sound.play()
     isNumberInput.value = false
   } catch (error) {
     console.error(error)

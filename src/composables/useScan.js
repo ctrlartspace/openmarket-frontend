@@ -23,7 +23,7 @@ export function useScan() {
       if (item) {
         routeOptions.query = { ...routeOptions.query, scannedCode: item }
       }
-      await router.push(routeOptions)
+      await router.replace(routeOptions)
     } catch (error) {
       console.log(error)
     }
