@@ -11,7 +11,7 @@
         :to="{
           path: '/store/items/add',
         }"
-        class="rounded-xl border border-blue-300 bg-blue-50 px-4 py-2 text-blue-600 hover:border-blue-500 md:rounded-lg"
+        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-blue-600 hover:border-blue-500 md:rounded-lg"
       >
         <p>Создать новый</p>
       </router-link>

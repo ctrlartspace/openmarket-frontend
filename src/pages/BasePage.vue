@@ -52,7 +52,7 @@
             >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="text-base font-medium"
+                class="text-lg font-medium md:text-base"
               >
                 {{ item.title }}
               </span>

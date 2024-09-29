@@ -148,7 +148,7 @@
                 {{ item.count }} шт.
               </td>
               <td class="text-green-600 font-medium">
-                {{ item.count * item.sellingPrice }} KZT
+                {{ item.count * item.sellingPrice }} ₸
               </td>
             </tr>
           </tbody>
@@ -254,7 +254,7 @@ const tableFields = ref([
   {
     name: "sellingPrice",
     className: "whitespace-nowrap ",
-    postfix: " KZT",
+    postfix: " ₸",
   },
 ])
 </script>

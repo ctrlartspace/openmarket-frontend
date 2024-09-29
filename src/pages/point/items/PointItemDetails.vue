@@ -27,12 +27,12 @@
         :to="{ path: '/store/items/' + item.storeItem.id }"
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-600 md:rounded-lg"
       >
-        <h1 class="text-base font-medium">
+        <h1 class="text-lg font-medium md:text-base">
           {{ item.storeItem.code + ", " + item.storeItem.name }}
         </h1>
-        <p class="text-sm text-neutral-400">
-          Покупка: {{ item.storeItem.purchasePrice }} KZT Продажа:
-          {{ item.storeItem.sellingPrice }} KZT
+        <p class="text-md text-neutral-400 md:text-sm">
+          Покупка: {{ item.storeItem.purchasePrice }} ₸ Продажа:
+          {{ item.storeItem.sellingPrice }} ₸
         </p>
       </router-link>
       <a-base-input
@@ -41,7 +41,7 @@
         label="Цена покупки"
         placeholder="Цена покупки"
         type="text"
-        unit="KZT"
+        unit="₸"
       />
       <a-base-input
         id="selling-price"
@@ -49,7 +49,7 @@
         label="Цена продажи"
         placeholder="Цена продажи"
         type="text"
-        unit="KZT"
+        unit="₸"
       />
       <a-base-input
         id="count"

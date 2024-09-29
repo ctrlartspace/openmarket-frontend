@@ -53,7 +53,9 @@ export function useFilters() {
   })
 
   onUpdated(() => {
-    filters.value = undefined
+    if (!isFilterMode.value) {
+      filters.value = undefined
+    }
     isFilterMode.value = !!route.query.filterMode
   })
 

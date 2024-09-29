@@ -77,7 +77,7 @@
                 <div class="ml-auto flex gap-2 whitespace-nowrap">
                   <td class="">{{ item.count }} шт.</td>
                   <td class="font-medium text-green-600">
-                    {{ item.count * item.sellingPrice }} KZT
+                    {{ item.count * item.sellingPrice }} ₸
                   </td>
                 </div>
               </tr>
@@ -94,7 +94,7 @@
           class="flex w-full cursor-pointer select-none justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl hover:brightness-50 active:brightness-50"
           @click.once="stepForward"
         >
-          <span>{{ store.getTotalAmount }} KZT</span>
+          <span>{{ store.getTotalAmount }} ₸</span>
           <span class="material-symbols-outlined self-center font-bold"
             >arrow_forward</span
           >
@@ -125,7 +125,7 @@
               class="flex items-center justify-between rounded-xl border border-neutral-300 bg-gray-100 px-4 py-2"
             >
               <span class="text-lg text-gray-300">Сдача</span>
-              <span class="text-lg text-gray-300">{{ cartChange }} KZT</span>
+              <span class="text-lg text-gray-300">{{ cartChange }} ₸</span>
             </div>
             <input
               v-model="inputAmount"

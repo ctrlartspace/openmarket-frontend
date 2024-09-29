@@ -12,7 +12,7 @@
       v-model="startAmount"
       placeholder="Сумма на начало"
       type="text"
-      unit="KZT"
+      unit="₸"
     />
   </a-page>
 </template>

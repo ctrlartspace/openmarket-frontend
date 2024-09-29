@@ -19,8 +19,8 @@
             {{ pointItem.storeItem.code + ", " + pointItem.storeItem.name }}
           </h1>
           <p class="text-sm text-neutral-400">
-            Покупка: {{ pointItem.purchasePrice }} KZT Продажа:
-            {{ pointItem.sellingPrice }} KZT
+            Покупка: {{ pointItem.purchasePrice }} ₸ Продажа:
+            {{ pointItem.sellingPrice }} ₸
           </p>
         </div>
         <p v-else>Выбрать товар...</p>

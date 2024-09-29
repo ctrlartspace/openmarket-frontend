@@ -10,3 +10,8 @@ label {
 .material-symbols-outlined {
   font-size: 1.5rem;
 }
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}

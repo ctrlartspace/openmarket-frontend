@@ -2,7 +2,7 @@
   <base-page :menu-items="menuItems">
     <template #action>
       <button
-        class="w-full text-center text-red-600 hover:text-black md:text-start md:text-gray-300"
+        class="w-full text-center text-lg text-red-600 hover:text-black md:text-start md:text-base md:text-gray-300"
         @click="store.logOut()"
       >
         Завершить работу

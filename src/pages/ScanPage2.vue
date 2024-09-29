@@ -32,7 +32,7 @@
         >
           <p class="text-sm">{{ resultItem.code }}</p>
           <p class="text-2xl">{{ resultItem.name }}</p>
-          <p class="text-2xl">{{ resultItem.purchasePrice }} KZT</p>
+          <p class="text-2xl">{{ resultItem.purchasePrice }} ₸</p>
           <div class="mt-2 flex items-center justify-between gap-2">
             <button
               class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"

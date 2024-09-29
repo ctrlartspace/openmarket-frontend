@@ -7,17 +7,19 @@
       :table-fields="tableFields"
     >
       <template #id="{ item }">
-        <span class="text-base font-medium">Касса #{{ item.id }}</span>
+        <span class="text-lg font-medium md:text-base"
+          >Касса #{{ item.id }}</span
+        >
       </template>
       <template #isClosed="{ item }">
         <span
           v-if="item.isClosed"
-          class="font-medium px-4 py-1 bg-neutral-50 text-neutral-500 rounded"
+          class="rounded bg-neutral-50 px-4 py-1 text-lg font-medium text-neutral-500 md:text-base"
           >Закрыта</span
         >
         <span
           v-else
-          class="font-medium px-4 py-1 bg-green-50 text-green-600 rounded"
+          class="rounded bg-green-50 px-4 py-1 text-lg font-medium text-green-600 md:text-base"
           >Открыта</span
         >
       </template>
@@ -45,7 +47,7 @@ const tableFields = ref([
     name: "id",
     className: "w-full",
   },
-  // { name: "total", className: "whitespace-nowrap", postfix: " KZT" },
+  // { name: "total", className: "whitespace-nowrap", postfix: " ₸" },
   { name: "isClosed", className: "whitespace-nowrap" },
 ])
 </script>

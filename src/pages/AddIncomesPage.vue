@@ -60,7 +60,7 @@
                 шт.
               </td>
               <td class="font-medium text-green-600">
-                {{ item.count * item.purchasePrice }} KZT
+                {{ item.count * item.purchasePrice }} ₸
               </td>
             </tr>
           </tbody>

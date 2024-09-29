@@ -1,6 +1,11 @@
 <template>
   <div class="flex flex-col gap-1">
-    <label v-if="label" :for="$attrs.id" class="font-medium">{{ label }}</label>
+    <label
+      v-if="label"
+      :for="$attrs.id"
+      class="text-lg font-medium md:text-base"
+      >{{ label }}</label
+    >
     <router-link
       v-if="routeLink && inputValue"
       :to="routeLink.path"
@@ -13,13 +18,18 @@
         :class="{
           'bg-red-50 placeholder:text-red-400': isError,
         }"
-        class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 focus:outline-black md:rounded-lg"
+        class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 text-lg focus:outline-black md:rounded-lg md:text-base"
         v-bind="$attrs"
       />
       <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-center pr-4"
       >
-        <span v-if="unit" class="text-gray-400"> {{ unit }} </span>
+        <span
+          v-if="unit"
+          class="text-lg font-medium text-gray-400 md:text-base"
+        >
+          {{ unit }}
+        </span>
         <slot name="action"></slot>
       </div>
     </div>

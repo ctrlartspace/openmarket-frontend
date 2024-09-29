@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
+import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
 import { getPointItem } from "@/services/PointService"

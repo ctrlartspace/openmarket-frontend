@@ -17,7 +17,7 @@ export function useSelect() {
     try {
       selectStore.setItem(item)
       if (nextPath.value) {
-        router.replace({ path: String(nextPath.value), push: true })
+        await router.replace({ path: String(nextPath.value), push: true })
         return
       }
       const previousRoute = routeStore.previousRoute

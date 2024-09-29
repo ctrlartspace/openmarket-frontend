@@ -4,7 +4,6 @@
       <a-link primary to="/store/points/add">Добавить</a-link>
     </template>
     <template #floating>
-      <a-link-floating primary to="/store/points/add">save</a-link-floating>
       <a-link-floating primary to="/store/points/add">add</a-link-floating>
     </template>
     <data-table

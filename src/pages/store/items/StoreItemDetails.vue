@@ -44,7 +44,7 @@
         label="Цена покупки"
         placeholder="Цена покупки"
         type="text"
-        unit="KZT"
+        unit="₸"
       />
       <a-base-input
         id="selling-price"
@@ -52,7 +52,7 @@
         label="Цена продажи"
         placeholder="Цена продажи"
         type="text"
-        unit="KZT"
+        unit="₸"
       />
       <a-base-input
         id="filters"

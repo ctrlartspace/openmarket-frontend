@@ -108,7 +108,7 @@ const tableFields = ref([
   {
     name: "purchasePrice",
     className: "whitespace-nowrap text-right",
-    postfix: " KZT",
+    postfix: " ₸",
   },
 ])
 </script>
