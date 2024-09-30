@@ -181,7 +181,7 @@ function paintOutline(detectedCodes, ctx) {
 
 const barcodeFormats = ref({
   aztec: false,
-  code_128: false,
+  code_128: true,
   code_39: false,
   code_93: false,
   codabar: false,
@@ -190,15 +190,15 @@ const barcodeFormats = ref({
   data_matrix: false,
   dx_film_edge: false,
   ean_13: true,
-  ean_8: false,
+  ean_8: true,
   itf: false,
   maxi_code: false,
   micro_qr_code: false,
   pdf417: false,
   qr_code: true,
   rm_qr_code: false,
-  upc_a: false,
-  upc_e: false,
+  upc_a: true,
+  upc_e: true,
   linear_codes: false,
   matrix_codes: false,
 })

@@ -62,7 +62,7 @@ const routes = [
   {
     path: "/store",
     component: StorePage,
-    redirect: "/store/points",
+    redirect: "/store/items",
     children: [
       {
         path: "users",

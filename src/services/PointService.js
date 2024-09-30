@@ -28,6 +28,15 @@ export const addItem = async (data) => {
   }
 }
 
+export const addItemsMany = async (data) => {
+  try {
+    const response = await axios.post(`/point/items/many`, data)
+    return Promise.resolve(response.data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
 export const getFilters = async () => {
   try {
     const response = await axios.get(`/filters`)
@@ -114,6 +123,7 @@ export default {
   getPointItems,
   getPointItem,
   addItem,
+  addItemsMany,
   addFilter,
   deleteFilter,
   getFilters,

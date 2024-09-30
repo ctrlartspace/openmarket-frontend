@@ -1,11 +1,20 @@
 <template>
   <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
     <template #header>
+      <a-button v-if="selectedItems.length > 0" accent @click="addPointItems"
+        >Добавить в точку
+      </a-button>
       <a-link v-if="!isSelectableMode" primary to="/store/items/add"
         >Добавить
       </a-link>
     </template>
     <template #floating>
+      <a-button-floating
+        v-if="selectedItems.length > 0"
+        accent
+        @click="addPointItems"
+        >add_circle
+      </a-button-floating>
       <a-link-floating v-if="!isSelectableMode" primary to="/store/items/add"
         >add
       </a-link-floating>
@@ -38,6 +47,7 @@
       </div>
     </v-form>
     <data-table
+      v-model="selectedItems"
       :table-data="storeItems"
       :table-fields="tableFields"
       @on-item-click="onItemClick"
@@ -57,6 +67,9 @@ import { useFocusable } from "@/composables/useFocusable"
 import { watchDebounced } from "@vueuse/core"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
+import AButton from "@/components/ui/AButton.vue"
+import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import PointService from "@/services/PointService"
 
 const { focusableInput } = useFocusable()
 const router = useRouter()
@@ -64,12 +77,23 @@ const storeItems = ref([])
 const { isSelectableMode, applySelect } = useSelect()
 const { scannedCode } = useScan()
 const searchInput = ref("")
+const selectedItems = ref([])
 
 const getStoreItems = async () => {
   try {
     storeItems.value = await StoreService.getStoreItems({
       q: searchInput.value,
     })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const addPointItems = async () => {
+  try {
+    const data = selectedItems.value.map((item) => ({ storeItemId: item }))
+    await PointService.addItemsMany(data)
+    selectedItems.value = []
   } catch (error) {
     console.log(error)
   }
@@ -103,7 +127,7 @@ onMounted(() => {
 const tableFields = ref([
   {
     name: "name",
-    className: "w-full",
+    className: "w-full max-w-10 truncate",
   },
   {
     name: "purchasePrice",

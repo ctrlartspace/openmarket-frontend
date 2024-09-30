@@ -1,13 +1,10 @@
 <template>
   <a-page title="Товар">
     <template #header>
-      <a-link
-        :to="{ path: '/point/arrivals/add', query: { selectedItem: item.id } }"
-        success
-      >
+      <a-button success @click="applySelect(item, '/point/arrivals/add')">
         <span class="material-symbols-outlined">add</span>
         Приход
-      </a-link>
+      </a-button>
       <a-button primary @click="updatePointItem"> Сохранить</a-button>
     </template>
     <template #floating>
@@ -73,9 +70,11 @@ import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import { useSelect } from "@/composables/useSelect2"
 
 const route = useRoute()
 const item = ref({})
+const { applySelect } = useSelect()
 
 const getPointItem = async (id) => {
   try {

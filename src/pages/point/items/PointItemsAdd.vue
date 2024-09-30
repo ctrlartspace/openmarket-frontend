@@ -11,7 +11,7 @@
         :to="{
           path: '/store/items/add',
         }"
-        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-blue-600 hover:border-blue-500 md:rounded-lg"
+        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg text-blue-600 hover:border-blue-500 md:rounded-lg md:text-base"
       >
         <p>Создать новый</p>
       </router-link>
@@ -23,15 +23,15 @@
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded-lg"
       >
         <div v-if="storeItem">
-          <h1 class="text-base font-medium">
+          <h1 class="text-lg font-medium md:text-base">
             {{ storeItem.code + ", " + storeItem.name }}
           </h1>
-          <p class="text-sm text-neutral-400">
+          <p class="text-md text-neutral-400 md:text-sm">
             Покупка: {{ storeItem.purchasePrice }} KZT Продажа:
             {{ storeItem.sellingPrice }} KZT
           </p>
         </div>
-        <p v-else>Выбрать товар...</p>
+        <p class="text-lg md:text-base" v-else>Выбрать товар...</p>
       </router-link>
       <a-base-input
         id="purchase-price"

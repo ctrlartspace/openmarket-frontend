@@ -13,11 +13,12 @@ export function useSelect() {
   const routeStore = useRouteStore()
   const selectStore = useSelectStore()
 
-  const applySelect = async (item) => {
+  const applySelect = async (item, nextPathDirect = nextPath.value) => {
     try {
+      isSelectableMode.value = true
       selectStore.setItem(item)
-      if (nextPath.value) {
-        await router.replace({ path: String(nextPath.value), push: true })
+      if (nextPathDirect) {
+        await router.replace({ path: String(nextPathDirect), push: true })
         return
       }
       const previousRoute = routeStore.previousRoute
@@ -37,7 +38,6 @@ export function useSelect() {
   onMounted(async () => {
     isSelectableMode.value = !!route.query.selectableMode
 
-    console.log(isSelectableMode.value)
     nextPath.value = route.query.nextPath
     selectedItem.value = selectStore.selectedItem
   })
@@ -50,6 +50,7 @@ export function useSelect() {
   onUnmounted(() => {
     if (!isSelectableMode.value) {
       selectStore.resetItem()
+      console.log("reset")
     }
   })
 
