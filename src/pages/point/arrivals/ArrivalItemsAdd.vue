@@ -15,15 +15,15 @@
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded-lg"
       >
         <div v-if="pointItem">
-          <h1 class="text-base font-medium">
+          <h1 class="text-lg font-medium md:text-base">
             {{ pointItem.storeItem.code + ", " + pointItem.storeItem.name }}
           </h1>
-          <p class="text-sm text-neutral-400">
+          <p class="text-md text-neutral-400 md:text-sm">
             Покупка: {{ pointItem.purchasePrice }} ₸ Продажа:
             {{ pointItem.sellingPrice }} ₸
           </p>
         </div>
-        <p v-else>Выбрать товар...</p>
+        <p class="text-lg md:text-base" v-else>Выбрать товар...</p>
       </router-link>
       <a-base-input
         v-if="pointItem"

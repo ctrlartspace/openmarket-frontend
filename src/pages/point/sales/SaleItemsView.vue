@@ -13,17 +13,18 @@
       <a-link-floating primary to="/arrivals/items/add"> add</a-link-floating>
     </template>
 
-    <data-table
-      :table-data="sales"
-      :table-fields="tableFields"
-      @on-item-click="onItemClick"
-    >
-    </data-table>
+    <a-list
+      @click="onItemClick"
+      :items="sales"
+      title-field="pointItem.storeItem.name"
+      description-field="count"
+      description-hint="шт."
+    ></a-list>
   </a-page>
 </template>
 
 <script setup>
-import DataTable from "@/components/ui/DataTable.vue"
+import AList from "@/components/ui/AList.vue"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { onMounted, ref } from "vue"
@@ -53,14 +54,6 @@ const onItemClick = (item) => {
 onMounted(() => {
   getPointItems()
 })
-
-const tableFields = ref([
-  {
-    name: "pointItem.storeItem.name",
-    className: "w-full",
-  },
-  { name: "count", className: "whitespace-nowrap", postfix: " шт" },
-])
 </script>
 
 <style lang="scss" scoped></style>

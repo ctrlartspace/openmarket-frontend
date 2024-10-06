@@ -6,16 +6,14 @@
     <template #floating>
       <a-link-floating primary to="/store/points/add">add</a-link-floating>
     </template>
-    <data-table
-      :selectable="false"
-      :table-data="storePoints"
-      :table-fields="tableFields"
+    <a-list
+      :items="storePoints"
+      title-field="name"
       @on-item-click="loginToStorePoint"
+      ><template #action>
+        <a-button primary>Открыть</a-button>
+      </template></a-list
     >
-      <template #option>
-        <a-button accent>Открыть</a-button>
-      </template>
-    </data-table>
   </a-page>
 </template>
 
@@ -24,10 +22,10 @@ import { onMounted, ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouter } from "vue-router"
 import StoreService from "@/services/StoreService"
-import DataTable from "@/components/ui/DataTable.vue"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
+import AList from "@/components/ui/AList.vue"
 
 const store = useUserStore()
 const router = useRouter()
@@ -54,16 +52,6 @@ const loginToStorePoint = async (item) => {
 onMounted(() => {
   getStorePoints()
 })
-
-const tableFields = ref([
-  {
-    name: "name",
-    className: "w-full",
-  },
-  {
-    name: "option",
-  },
-])
 </script>
 
 <style lang="scss" scoped></style>

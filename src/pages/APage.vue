@@ -23,10 +23,10 @@
     </div>
     <div
       v-if="!isDesktop && hasFloating()"
-      class="absolute bottom-0 right-0 p-4"
+      class="absolute bottom-0 left-1/2 -translate-x-1/2 p-4"
     >
       <div
-        class="flex overflow-hidden whitespace-nowrap rounded-lg border border-neutral-300 bg-white shadow-sm"
+        class="flex overflow-hidden whitespace-nowrap rounded-xl border border-neutral-300 bg-white shadow-sm"
       >
         <slot name="floating" :floating="true"></slot>
       </div>

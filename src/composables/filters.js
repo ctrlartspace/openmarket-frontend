@@ -63,6 +63,8 @@ export function useFilters() {
     filters.value && filters.value instanceof Array ? filters.value.length : 0,
   )
 
+  const isFiltersApplied = computed(() => selectedFiltersLength.value > 0)
+
   const joinedFilters = computed(() =>
     filters.value instanceof Array ? filters.value.join(",") : filters.value,
   )
@@ -100,6 +102,7 @@ export function useFilters() {
     filterPathMulti,
     filterPathAdd,
     selectedFiltersLength,
+    isFiltersApplied,
     joinedFilters,
     applyFilters,
     resetFilters,

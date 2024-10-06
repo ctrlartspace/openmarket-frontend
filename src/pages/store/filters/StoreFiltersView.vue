@@ -17,7 +17,7 @@
         add
       </a-link-floating>
       <a-button-floating v-if="isFilterMode" primary @click="applyFilters">
-        done
+        arrow_forward
       </a-button-floating>
     </template>
     <div class="flex flex-col gap-2">

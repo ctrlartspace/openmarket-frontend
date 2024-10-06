@@ -6,19 +6,18 @@
     <template #floating>
       <a-link-floating primary to="/store/users/add">add</a-link-floating>
     </template>
-    <data-table
-      :table-data="storeUsers"
-      :table-fields="tableFields"
+    <a-list
+      :items="storeUsers"
+      title-field="name"
       @on-item-click="onItemClick"
-    >
-    </data-table>
+    ></a-list>
   </a-page>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue"
 import StoreService from "@/services/StoreService"
-import DataTable from "@/components/ui/DataTable.vue"
+import AList from "@/components/ui/AList.vue"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { useSelect } from "@/composables/useSelect2.js"
@@ -45,13 +44,6 @@ const onItemClick = (item) => {
 onMounted(() => {
   getStoreUsers()
 })
-
-const tableFields = ref([
-  {
-    name: "name",
-    className: "w-full",
-  },
-])
 </script>
 
 <style lang="scss" scoped></style>

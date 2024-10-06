@@ -1,9 +1,6 @@
 <template>
   <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
     <template #header>
-      <a-link :to="filterPathMulti" primary>
-        <span class="material-symbols-outlined text-[28px]">menu</span>
-      </a-link>
       <a-link v-if="!isSelectableMode" primary to="/point/items/add"
         >Добавить
       </a-link>
@@ -30,7 +27,15 @@
       <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-between gap-2 px-4"
       >
-        <router-link :to="filterPathMulti" class="flex items-center">
+        <router-link
+          :to="filterPathMulti"
+          class="flex items-center rounded"
+          :class="
+            isFiltersApplied
+              ? 'bg-blue-50 text-blue-600'
+              : 'bg-white text-black'
+          "
+        >
           <span class="material-symbols-outlined">page_info</span>
         </router-link>
         <router-link
@@ -45,12 +50,14 @@
       </div>
     </v-form>
 
-    <data-table
-      :table-data="pointItems"
-      :table-fields="tableFields"
+    <a-list
+      :items="pointItems"
+      title-field="storeItem.name"
+      description-field="count"
+      description-hint="шт."
       @on-item-click="onItemClick"
     >
-    </data-table>
+    </a-list>
   </a-page>
 </template>
 
@@ -58,19 +65,19 @@
 import { onMounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import PointService from "@/services/PointService.js"
-import DataTable from "@/components/ui/DataTable.vue"
 import { useFilters } from "@/composables/filters.js"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useScan } from "@/composables/useScan"
 import { useFocusable } from "@/composables/useFocusable"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
+import AList from "@/components/ui/AList.vue"
 import { watchDebounced } from "@vueuse/core"
 
 const { focusableInput } = useFocusable()
 const router = useRouter()
 const pointItems = ref([])
-const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =
+const { filters, filterPathMulti, isFiltersApplied, joinedFilters } =
   useFilters()
 const { isSelectableMode, applySelect } = useSelect()
 const { scannedCode } = useScan()
@@ -112,14 +119,6 @@ watch(scannedCode, (newScannedCode) => {
 onMounted(() => {
   getPointItems()
 })
-
-const tableFields = ref([
-  {
-    name: "storeItem.name",
-    className: "w-full",
-  },
-  { name: "count", className: "whitespace-nowrap text-right", postfix: " шт" },
-])
 </script>
 
 <style lang="scss" scoped></style>

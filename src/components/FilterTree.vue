@@ -70,7 +70,9 @@
     v-else
     class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-center md:rounded-lg"
   >
-    <span class="text-base text-neutral-300">Элементы не найдены</span>
+    <span class="text-lg text-neutral-300 md:text-base"
+      >Категории не найдены</span
+    >
   </div>
 </template>
 

@@ -46,13 +46,16 @@
         </router-link>
       </div>
     </v-form>
-    <data-table
+    <a-list
       v-model="selectedItems"
-      :table-data="storeItems"
-      :table-fields="tableFields"
+      :items="storeItems"
+      title-field="name"
+      description-field="purchasePrice"
+      description-hint="₸"
       @on-item-click="onItemClick"
+      selectable
     >
-    </data-table>
+    </a-list>
   </a-page>
 </template>
 
@@ -60,7 +63,6 @@
 import { onMounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import StoreService from "@/services/StoreService"
-import DataTable from "@/components/ui/DataTable.vue"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useScan } from "@/composables/useScan"
 import { useFocusable } from "@/composables/useFocusable"
@@ -70,6 +72,7 @@ import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import PointService from "@/services/PointService"
+import AList from "@/components/ui/AList.vue"
 
 const { focusableInput } = useFocusable()
 const router = useRouter()
@@ -124,17 +127,6 @@ watch(scannedCode, (newScannedCode) => {
 onMounted(() => {
   getStoreItems()
 })
-const tableFields = ref([
-  {
-    name: "name",
-    className: "w-full max-w-10 truncate",
-  },
-  {
-    name: "purchasePrice",
-    className: "whitespace-nowrap text-right",
-    postfix: " ₸",
-  },
-])
 </script>
 
 <style lang="scss" scoped></style>

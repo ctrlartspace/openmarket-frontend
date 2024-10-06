@@ -1,6 +1,10 @@
 <template>
   <a-page title="Товар">
     <template #header>
+      <a-button neutral @click="addItemToCart">
+        <span class="material-symbols-outlined text-[26px]">shopping_cart</span>
+        В корзину
+      </a-button>
       <a-button success @click="applySelect(item, '/point/arrivals/add')">
         <span class="material-symbols-outlined">add</span>
         Приход
@@ -8,12 +12,14 @@
       <a-button primary @click="updatePointItem"> Сохранить</a-button>
     </template>
     <template #floating>
-      <a-link-floating
-        :to="{ path: '/point/arrivals/add', query: { selectedItem: item.id } }"
+      <a-button-floating @click="addItemToCart"
+        >shopping_cart
+      </a-button-floating>
+      <a-button-floating
         success
-      >
-        add
-      </a-link-floating>
+        @click="applySelect(item, '/point/arrivals/add')"
+        >add
+      </a-button-floating>
       <a-button-floating primary @click="updatePointItem">
         save</a-button-floating
       >
@@ -63,7 +69,7 @@
 
 <script setup>
 import { onMounted, ref } from "vue"
-import { useRoute } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import PointService from "@/services/PointService.js"
 import ALink from "@/components/ui/ALink.vue"
@@ -71,11 +77,18 @@ import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import { useSelect } from "@/composables/useSelect2"
+import { useCartStore } from "@/stores/cart.store"
 
+const cartStore = useCartStore()
 const route = useRoute()
+const router = useRouter()
 const item = ref({})
 const { applySelect } = useSelect()
 
+const addItemToCart = () => {
+  cartStore.addItem(item.value)
+  router.push("/cart")
+}
 const getPointItem = async (id) => {
   try {
     item.value = await PointService.getPointItem(id)

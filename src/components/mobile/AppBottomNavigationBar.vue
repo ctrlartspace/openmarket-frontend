@@ -16,7 +16,7 @@
               >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="text-[10px]"
+                class="text-[12px]"
                 >{{ item.title }}</span
               >
             </router-link>

@@ -9,7 +9,7 @@
           v-for="i in 10"
           :key="i"
           class="bg-text-white aspect-square rounded-lg border border-neutral-300 bg-neutral-50 hover:bg-neutral-100"
-          :class="{ 'order-last col-span-3 aspect-video py-2': i - 1 === 0 }"
+          :class="{ 'order-last col-span-3 aspect-[3/1] py-2': i - 1 === 0 }"
         >
           <button class="h-full w-full text-2xl font-medium">
             {{ i - 1 }}
@@ -69,7 +69,7 @@
             >ИТОГО: {{ store.getTotalAmount }}
             <span class="font-semibold">₸</span></span
           >
-          <span class="material-symbols-outlined text-4xl">priority</span>
+          <span class="material-symbols-outlined text-4xl">arrow_forward</span>
         </button>
       </div>
     </div>

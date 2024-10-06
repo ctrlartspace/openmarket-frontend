@@ -2,7 +2,7 @@
   <button
     :class="{
       'animate-pulse': loading,
-      'text-gray-600 hover:bg-gray-50 hover:text-gray-700 active:bg-gray-100':
+      'text-neutral-800 hover:bg-neutral-100 hover:text-neutral-700 active:bg-neutral-200':
         neutral,
       'text-blue-600 hover:bg-gray-50 hover:text-blue-700 active:bg-gray-100':
         primary,

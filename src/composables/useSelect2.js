@@ -50,7 +50,6 @@ export function useSelect() {
   onUnmounted(() => {
     if (!isSelectableMode.value) {
       selectStore.resetItem()
-      console.log("reset")
     }
   })
 

@@ -29,12 +29,14 @@
       >
     </template>
 
-    <data-table
-      :table-data="pointItems"
-      :table-fields="tableFields"
+    <a-list
+      :items="pointItems"
+      title-field="pointItem.storeItem.name"
+      description-field="count"
+      description-hint="шт."
       @on-item-click="onItemClick"
     >
-    </data-table>
+    </a-list>
   </a-page>
 </template>
 
@@ -42,7 +44,7 @@
 import { onMounted, ref } from "vue"
 import { useRouter } from "vue-router"
 import ArrivalService from "@/services/arrivals/items.js"
-import DataTable from "@/components/ui/DataTable.vue"
+import AList from "@/components/ui/AList.vue"
 import { useFilters } from "@/composables/filters.js"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
@@ -69,14 +71,6 @@ const onItemClick = (item) => {
 onMounted(() => {
   getPointItems()
 })
-
-const tableFields = ref([
-  {
-    name: "pointItem.storeItem.name",
-    className: "w-full",
-  },
-  { name: "count", className: "whitespace-nowrap", postfix: " шт" },
-])
 </script>
 
 <style lang="scss" scoped></style>

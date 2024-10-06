@@ -15,11 +15,11 @@
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded-lg"
       >
         <div v-if="selectedUser">
-          <h1 class="text-base font-medium">
+          <h1 class="text-lg font-medium md:text-base">
             {{ selectedUser.name }}
           </h1>
         </div>
-        <p v-else>Выбрать сотрудника...</p>
+        <p class="text-lg md:text-base" v-else>Выбрать сотрудника...</p>
       </router-link>
     </div>
   </a-page>
