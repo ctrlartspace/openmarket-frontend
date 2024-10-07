@@ -1,12 +1,22 @@
 <template>
   <a-page title="Новый сотрудник">
     <template #header>
-      <a-button primary @click="addStoreUser"> Сохранить </a-button>
+      <a-modal
+        #="{ props }"
+        title="Добавить сотрудника?"
+        :async-operation="addStoreUser"
+      >
+        <a-button primary v-bind="props"> Сохранить </a-button>
+      </a-modal>
     </template>
     <template #floating>
-      <a-button-floating primary @click="addStoreUser">
-        save
-      </a-button-floating>
+      <a-modal
+        #="{ props }"
+        title="Добавить сотрудника?"
+        :async-operation="addStoreUser"
+      >
+        <a-button-floating primary v-bind="props"> save </a-button-floating>
+      </a-modal>
     </template>
     <div class="flex flex-col gap-2">
       <a-base-input
@@ -32,6 +42,7 @@ import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AModal from "@/components/ui/AModal.vue"
 
 const router = useRouter()
 const storeUser = ref({})

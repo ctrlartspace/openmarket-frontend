@@ -1,10 +1,22 @@
 <template>
   <a-page title="Новый товар">
     <template #header>
-      <a-button primary @click="addPointItem"> Сохранить</a-button>
+      <a-modal
+        #="{ props }"
+        title="Добавить товар?"
+        :async-operation="addPointItem"
+      >
+        <a-button primary v-bind="props"> Сохранить</a-button>
+      </a-modal>
     </template>
     <template #floating>
-      <a-button-floating primary @click="addPointItem"> save</a-button-floating>
+      <a-modal
+        #="{ props }"
+        title="Добавить товар?"
+        :async-operation="addPointItem"
+      >
+        <a-button-floating primary v-bind="props"> save</a-button-floating>
+      </a-modal>
     </template>
     <div class="flex flex-col gap-2">
       <router-link
@@ -63,6 +75,7 @@ import PointItemService from "@/services/point/items.js"
 import { useSelect } from "@/composables/useSelect2.js"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AModal from "@/components/ui/AModal.vue"
 
 const router = useRouter()
 const item = ref({})

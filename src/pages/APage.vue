@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex h-full flex-col bg-neutral-100">
+  <div class="flex h-full flex-col bg-neutral-100">
     <div
       v-if="isDesktop && hasHeader()"
       class="flex items-center gap-4 overflow-x-auto overflow-y-hidden border-b border-neutral-300 bg-white px-4 py-2 md:py-1"
@@ -23,10 +23,10 @@
     </div>
     <div
       v-if="!isDesktop && hasFloating()"
-      class="absolute bottom-0 left-1/2 -translate-x-1/2 p-4"
+      class="pointer-events-none absolute bottom-0 left-0 right-0 flex items-center justify-center p-4"
     >
       <div
-        class="flex overflow-hidden whitespace-nowrap rounded-xl border border-neutral-300 bg-white shadow-sm"
+        class="pointer-events-auto flex overflow-hidden whitespace-nowrap rounded-xl border border-neutral-300 bg-white shadow-sm"
       >
         <slot name="floating" :floating="true"></slot>
       </div>

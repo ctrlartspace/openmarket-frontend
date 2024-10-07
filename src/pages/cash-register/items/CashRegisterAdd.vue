@@ -1,12 +1,22 @@
 <template>
   <a-page title="Новая касса">
     <template #header>
-      <a-button primary @click="openCashRegister"> Сохранить</a-button>
+      <a-modal
+        #="{ props }"
+        title="Открыть кассу?"
+        :async-operation="openCashRegister"
+      >
+        <a-button v-bind="props" primary> Сохранить</a-button>
+      </a-modal>
     </template>
     <template #floating>
-      <a-button-floating primary @click="openCashRegister">
-        save</a-button-floating
+      <a-modal
+        #="{ props }"
+        title="Открыть кассу?"
+        :async-operation="openCashRegister"
       >
+        <a-button-floating v-bind="props" primary> save</a-button-floating>
+      </a-modal>
     </template>
     <a-base-input
       v-model="startAmount"
@@ -20,6 +30,7 @@
 <script setup>
 import { ref } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
+import AModal from "@/components/ui/AModal.vue"
 import CashService from "@/services/CashService.js"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"

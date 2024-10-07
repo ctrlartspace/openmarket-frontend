@@ -1,10 +1,22 @@
 <template>
   <a-page title="Новый товар">
     <template #header>
-      <a-button primary @click="addStoreItem"> Сохранить</a-button>
+      <a-modal
+        #="{ props }"
+        title="Создать товар?"
+        :async-operation="addStoreItem"
+      >
+        <a-button primary v-bind="props"> Сохранить</a-button>
+      </a-modal>
     </template>
     <template #floating>
-      <a-button-floating primary @click="addStoreItem"> save</a-button-floating>
+      <a-modal
+        #="{ props }"
+        title="Создать товар?"
+        :async-operation="addStoreItem"
+      >
+        <a-button-floating primary v-bind="props"> save</a-button-floating>
+      </a-modal>
     </template>
     <div class="flex flex-col gap-2">
       <a-base-input
@@ -68,13 +80,11 @@ import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
-import { storeToRefs } from "pinia"
-// import { useItemState } from "@/stores/item-state.store.js"
 import { useFilters } from "@/composables/filters.js"
 import { useScan } from "@/composables/useScan"
+import AModal from "@/components/ui/AModal.vue"
 
 const router = useRouter()
-// const { itemState } = storeToRefs(useItemState())
 const itemState = ref({})
 const { filters, filterPathMulti } = useFilters()
 const { scannedCode } = useScan()

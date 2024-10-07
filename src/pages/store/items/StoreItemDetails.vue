@@ -1,18 +1,40 @@
 <template>
   <a-page title="Товар">
     <template #header>
-      <a-button v-if="point" accent @click="addPointItem"
-        >Добавить в точку
-      </a-button>
-      <a-button primary @click="updateStoreItem">Сохранить</a-button>
+      <a-modal
+        #="{ props }"
+        title="Добавить в точку?"
+        :async-operation="addPointItem"
+      >
+        <a-button v-if="point" accent v-bind="props"
+          >Добавить в точку
+        </a-button>
+      </a-modal>
+      <a-modal
+        #="{ props }"
+        title="Сохранить изменения?"
+        :async-operation="updateStoreItem"
+      >
+        <a-button primary v-bind="props">Сохранить</a-button>
+      </a-modal>
     </template>
     <template #floating>
-      <a-button-floating v-if="point" accent @click="addPointItem"
-        >add_circle
-      </a-button-floating>
-      <a-button-floating primary @click="updateStoreItem"
-        >save</a-button-floating
+      <a-modal
+        #="{ props }"
+        title="Добавить в точку?"
+        :async-operation="addPointItem"
       >
+        <a-button-floating v-if="point" accent v-bind="props"
+          >add_circle
+        </a-button-floating>
+      </a-modal>
+      <a-modal
+        #="{ props }"
+        title="Сохранить изменения?"
+        :async-operation="updateStoreItem"
+      >
+        <a-button-floating primary v-bind="props">save</a-button-floating>
+      </a-modal>
     </template>
     <div class="flex flex-col gap-2">
       <a-base-input
@@ -74,15 +96,13 @@ import StoreService from "@/services/StoreService"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import { useFilters } from "@/composables/filters.js"
-import { storeToRefs } from "pinia"
-// import { useItemState } from "@/stores/item-state.store.js"
+import AModal from "@/components/ui/AModal.vue"
 import { useUserStore } from "@/stores/user.store.js"
 import PointItemService from "@/services/point/items.js"
 import { generateBarcodePDF } from "@/utils/barcodeGenerator"
 
 const route = useRoute()
 const router = useRouter()
-// const { itemState } = storeToRefs(useItemState())
 const itemState = ref({})
 const { filters, filterPathMulti } = useFilters()
 const { point } = useUserStore()

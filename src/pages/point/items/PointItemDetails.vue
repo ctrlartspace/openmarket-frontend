@@ -9,7 +9,13 @@
         <span class="material-symbols-outlined">add</span>
         Приход
       </a-button>
-      <a-button primary @click="updatePointItem"> Сохранить</a-button>
+      <a-modal
+        #="{ props }"
+        title="Сохранить изменения?"
+        :async-operation="updatePointItem"
+      >
+        <a-button primary v-bind="props"> Сохранить</a-button>
+      </a-modal>
     </template>
     <template #floating>
       <a-button-floating @click="addItemToCart"
@@ -20,9 +26,13 @@
         @click="applySelect(item, '/point/arrivals/add')"
         >add
       </a-button-floating>
-      <a-button-floating primary @click="updatePointItem">
-        save</a-button-floating
+      <a-modal
+        #="{ props }"
+        title="Сохранить изменения?"
+        :async-operation="updatePointItem"
       >
+        <a-button-floating primary v-bind="props"> save</a-button-floating>
+      </a-modal>
     </template>
     <div v-if="item" class="flex flex-col gap-2">
       <router-link
@@ -72,10 +82,9 @@ import { onMounted, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import PointService from "@/services/PointService.js"
-import ALink from "@/components/ui/ALink.vue"
-import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AModal from "@/components/ui/AModal.vue"
 import { useSelect } from "@/composables/useSelect2"
 import { useCartStore } from "@/stores/cart.store"
 

@@ -1,10 +1,22 @@
 <template>
   <a-page title="Новая категория">
     <template #header>
-      <a-button primary @click="addFilter">Сохранить</a-button>
+      <a-modal
+        #="{ props }"
+        title="Добавить категорию?"
+        :async-operation="addFilter"
+      >
+        <a-button primary v-bind="props">Сохранить</a-button>
+      </a-modal>
     </template>
     <template #floating>
-      <a-button-floating primary @click="addFilter">save</a-button-floating>
+      <a-modal
+        #="{ props }"
+        title="Добавить категорию?"
+        :async-operation="addFilter"
+      >
+        <a-button-floating primary v-bind="props">save</a-button-floating>
+      </a-modal>
     </template>
     <div class="flex flex-col gap-2">
       <div
@@ -36,6 +48,7 @@ import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AModal from "@/components/ui/AModal.vue"
 
 const router = useRouter()
 const filterName = ref("")

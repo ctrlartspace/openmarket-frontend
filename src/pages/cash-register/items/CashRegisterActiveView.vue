@@ -1,27 +1,34 @@
 <template>
   <a-page :title="getCashTitle">
     <template #header>
-      <a-button
-        v-if="isActiveCashExists"
-        danger
-        to="/arrivals/items/add"
-        @click="closeActiveCashRegister"
+      <a-modal
+        #="{ props }"
+        title="Закрыть кассу?"
+        :async-operation="closeActiveCashRegister"
       >
-        Закрыть
-      </a-button>
+        <a-button v-if="isActiveCashExists" danger v-bind="props">
+          Закрыть
+        </a-button>
+      </a-modal>
       <a-link v-if="!isActiveCashExists" primary to="/cash-register/active/add">
         Открыть
       </a-link>
     </template>
     <template #floating>
-      <a-button-floating
-        v-if="isActiveCashExists"
-        danger
-        to="/arrivals/items/add"
-        @click="closeActiveCashRegister"
+      <a-modal
+        #="{ props }"
+        title="Закрыть кассу?"
+        :async-operation="closeActiveCashRegister"
       >
-        close
-      </a-button-floating>
+        <a-button-floating
+          v-if="isActiveCashExists"
+          danger
+          to="/arrivals/items/add"
+          v-bind="props"
+        >
+          close
+        </a-button-floating>
+      </a-modal>
       <a-link-floating
         v-if="!isActiveCashExists"
         primary
@@ -35,7 +42,7 @@
       <div
         class="rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg"
       >
-        <h1>Сумма на начало</h1>
+        <h1 class="text-lg md:text-base">Сумма на начало</h1>
         <p class="text-2xl font-medium">
           {{ activeCash.startAmount }}
           <span class="font-semibold">₸</span>
@@ -50,20 +57,31 @@
           v-for="total in activeCash.totalsPaymentType"
           :key="total.paymentType"
         >
-          <h1
-            class="inline rounded px-1 font-medium"
-            :class="{
-              'bg-blue-50 text-blue-500': total.paymentType === 'online',
-              'bg-red-50 text-red-500': total.paymentType === 'kaspi-qr',
-              'bg-green-50 text-green-500': total.paymentType === 'cash',
-            }"
-          >
-            {{ total.paymentType }}
-          </h1>
-          <p class="text-2xl font-medium">
-            {{ total.total }}
-            <span class="font-semibold">₸</span>
-          </p>
+          <div v-if="total.paymentType === 'online'">
+            <h1 class="inline rounded text-lg text-blue-500 md:text-base">
+              Перевод
+            </h1>
+            <p class="text-2xl font-medium">
+              {{ total.total }}
+              <span class="font-semibold">₸</span>
+            </p>
+          </div>
+          <div v-if="total.paymentType === 'kaspi-qr'">
+            <h1 class="inline rounded text-lg text-red-500 md:text-base">
+              Kaspi QR
+            </h1>
+            <p class="text-2xl font-medium">
+              {{ total.total }}
+              <span class="font-semibold">₸</span>
+            </p>
+          </div>
+          <div v-if="total.paymentType === 'cash'">
+            <h1 class="inline text-lg text-green-500 md:text-base">Наличные</h1>
+            <p class="text-2xl font-medium">
+              {{ total.total }}
+              <span class="font-semibold">₸</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +95,7 @@ import { closeCashRegister, getActiveCash } from "@/services/CashService.js"
 import AButton from "@/components/ui/AButton.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AModal from "@/components/ui/AModal.vue"
 
 const activeCash = ref(null)
 

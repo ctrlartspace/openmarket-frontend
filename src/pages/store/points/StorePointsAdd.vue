@@ -1,12 +1,22 @@
 <template>
   <a-page title="Новая точка">
     <template #header>
-      <a-button primary @click="addStorePoint"> Сохранить </a-button>
+      <a-modal
+        #="{ props }"
+        title="Создать новую точку?"
+        :async-operation="addStorePoint"
+      >
+        <a-button primary v-bind="props"> Сохранить </a-button>
+      </a-modal>
     </template>
     <template #floating>
-      <a-button-floating primary @click="addStorePoint">
-        save
-      </a-button-floating>
+      <a-modal
+        #="{ props }"
+        title="Создать новую точку?"
+        :async-operation="addStorePoint"
+      >
+        <a-button-floating primary v-bind="props"> save </a-button-floating>
+      </a-modal>
     </template>
     <a-base-input
       id="store-point-name"
@@ -20,6 +30,7 @@
 <script setup>
 import { ref } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
+import AModal from "@/components/ui/AModal.vue"
 import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"

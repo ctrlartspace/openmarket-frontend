@@ -1,10 +1,22 @@
 <template>
   <a-page title="Добавить сотрудника">
     <template #header>
-      <a-button primary @click="addPointUser"> Сохранить</a-button>
+      <a-modal
+        #="{ props }"
+        title="Добавить сотрудника?"
+        :async-operation="addPointUser"
+      >
+        <a-button primary v-bind="props"> Сохранить</a-button>
+      </a-modal>
     </template>
     <template #floating>
-      <a-button-floating primary @click="addPointUser"> save</a-button-floating>
+      <a-modal
+        #="{ props }"
+        title="Добавить сотрудника?"
+        :async-operation="addPointUser"
+      >
+        <a-button-floating primary v-bind="props"> save</a-button-floating>
+      </a-modal>
     </template>
     <div class="flex flex-col gap-2">
       <router-link
@@ -31,6 +43,7 @@ import PointUserService from "@/services/point/users.js"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import { useSelect } from "@/composables/useSelect2.js"
+import AModal from "@/components/ui/AModal.vue"
 
 const { selectedItem: selectedUser } = useSelect()
 
