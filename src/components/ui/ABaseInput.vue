@@ -18,7 +18,7 @@
         :class="{
           'bg-red-50 placeholder:text-red-400': isError,
         }"
-        class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 text-lg focus:outline-black md:rounded-lg md:text-base"
+        class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 text-lg placeholder:text-neutral-300 focus:outline-black md:rounded-lg md:text-base"
         v-bind="$attrs"
       />
       <div
@@ -26,7 +26,7 @@
       >
         <span
           v-if="unit"
-          class="text-lg font-medium text-gray-400 md:text-base"
+          class="text-lg font-medium text-neutral-300 md:text-base"
         >
           {{ unit }}
         </span>

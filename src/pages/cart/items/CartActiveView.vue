@@ -1,6 +1,6 @@
 <template>
   <a-page>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 pb-8">
       <v-form class="relative w-full" @submit.prevent="addCartItem">
         <input
           ref="focusableInput"
@@ -42,13 +42,11 @@
               <td class="line-clamp-1 font-medium">
                 <span class=""> {{ item.name }}</span>
               </td>
-              <div class="ml-auto flex gap-2 whitespace-nowrap">
-                <td class="">{{ item.count }} шт.</td>
-                <td class="font-medium text-green-600">
-                  {{ item.count * item.sellingPrice }}
-                  <span class="font-semibold">₸</span>
-                </td>
-              </div>
+              <td class="whitespace-nowrap">{{ item.count }} шт.</td>
+              <td class="whitespace-nowrap font-medium text-green-600">
+                {{ item.count * item.sellingPrice }}
+                <span class="font-semibold">₸</span>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -57,7 +55,9 @@
         Пусто
       </div>
     </div>
-    <cart-total-for-mobile v-if="!isDesktop" />
+    <template #floating>
+      <cart-total-for-mobile v-if="!isDesktop" />
+    </template>
   </a-page>
 </template>
 

@@ -17,7 +17,8 @@ export const useCartStore = defineStore("cart", () => {
     [...cartItems.value].map((el) => el[1]),
   )
 
-  const isEmpty = computed(() => cartItems.value.size === 0)
+  const itemsCount = computed(() => cartItems.value.size)
+  const isEmpty = computed(() => itemsCount.value === 0)
 
   const getTotalAmount = computed(() =>
     groupedCartItems.value.reduce((total, item) => total + item.totalPrice, 0),
@@ -73,6 +74,7 @@ export const useCartStore = defineStore("cart", () => {
   return {
     cartItems,
     groupedCartItems,
+    itemsCount,
     isEmpty,
     getTotalAmount,
     getItemsForSale,
