@@ -52,8 +52,7 @@ const authData = ref({})
 const loginToStore = async () => {
   try {
     const response = await store.loginToStore(authData.value)
-    router.push("/store")
-    console.log(response)
+    router.push("/store/points")
   } catch (error) {
     console.log(error)
   }

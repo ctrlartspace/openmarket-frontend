@@ -3,7 +3,7 @@ import axios from "@/plugins/axios"
 const loginToStore = async (data) => {
   try {
     const response = await axios.post("/login/store", data)
-    return Promise.resolve(response.data)
+    return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)
   }
@@ -12,7 +12,7 @@ const loginToStore = async (data) => {
 const loginToStorePoint = async (id) => {
   try {
     const response = await axios.post("/login/point/", { pointId: id })
-    return Promise.resolve(response.data)
+    return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)
   }
@@ -21,7 +21,7 @@ const loginToStorePoint = async (id) => {
 const getProfile = async () => {
   try {
     const response = await axios.get("/profile")
-    return Promise.resolve(response.data)
+    return Promise.resolve(response.data.data)
   } catch (error) {}
 }
 

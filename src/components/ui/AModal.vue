@@ -1,35 +1,33 @@
 <template>
-  <div>
-    <slot :props="activatorProps"></slot>
-    <div v-if="isOpen" class="relative z-10">
-      <div
-        class="fixed inset-0 bg-black bg-opacity-30 transition-opacity"
-        aria-hidden="true"
-      >
-        <div class="fixed inset-0 z-10 flex w-screen">
-          <div class="flex h-full w-full items-center justify-center">
-            <div
-              class="w-4/5 rounded-xl border border-neutral-400 bg-white p-4 md:max-w-xs md:rounded-lg"
+  <slot :props="activatorProps"></slot>
+  <div v-if="isOpen" class="relative z-10">
+    <div
+      class="fixed inset-0 bg-black bg-opacity-30 transition-opacity"
+      aria-hidden="true"
+    >
+      <div class="fixed inset-0 z-10 flex w-screen">
+        <div class="flex h-full w-full items-center justify-center">
+          <div
+            class="w-4/5 rounded-xl border border-neutral-400 bg-white p-4 md:max-w-xs md:rounded-lg"
+          >
+            <h1
+              class="mb-4 whitespace-break-spaces text-center text-xl font-medium md:text-lg"
             >
-              <h1
-                class="mb-4 whitespace-break-spaces text-center text-xl font-medium md:text-lg"
+              {{ title }}
+            </h1>
+            <div class="flex flex-col gap-2">
+              <button
+                class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-500 hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
+                @click="onYesClick"
               >
-                {{ title }}
-              </h1>
-              <div class="flex flex-col gap-2">
-                <button
-                  class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-500 hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
-                  @click="onYesClick"
-                >
-                  {{ yesCaption }}
-                </button>
-                <button
-                  class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-red-500 hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
-                  @click="onNoClick"
-                >
-                  {{ noCaption }}
-                </button>
-              </div>
+                {{ yesCaption }}
+              </button>
+              <button
+                class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-red-500 hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
+                @click="onNoClick"
+              >
+                {{ noCaption }}
+              </button>
             </div>
           </div>
         </div>
