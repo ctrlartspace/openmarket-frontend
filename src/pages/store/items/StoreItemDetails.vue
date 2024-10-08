@@ -33,10 +33,10 @@
         title="Сохранить изменения?"
         :async-operation="updateStoreItem"
       >
-        <a-button-floating primary v-bind="props">save</a-button-floating>
+        <a-button-floating v-bind="props">save</a-button-floating>
       </a-modal>
     </template>
-    <div class="flex flex-col gap-2">
+    <div v-if="itemState" class="flex flex-col gap-2">
       <a-base-input
         id="article"
         v-model="itemState.code"
@@ -100,6 +100,7 @@ import AModal from "@/components/ui/AModal.vue"
 import { useUserStore } from "@/stores/user.store.js"
 import PointItemService from "@/services/point/items.js"
 import { generateBarcodePDF } from "@/utils/barcodeGenerator"
+import items from "@/services/point/items.js"
 
 const route = useRoute()
 const router = useRouter()

@@ -7,6 +7,7 @@
       <a-link-floating primary to="/store/points/add">add</a-link-floating>
     </template>
     <a-list
+      v-if="storePoints"
       :items="storePoints"
       title-field="name"
       @on-item-click="loginToStorePoint"

@@ -16,7 +16,7 @@
       <input
         v-model="inputValue"
         :class="{
-          'bg-red-50 placeholder:text-red-400': isError,
+          'placeholder:text-red-300': isError,
         }"
         class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 text-lg placeholder:text-neutral-300 focus:outline-black md:rounded-lg md:text-base"
         v-bind="$attrs"

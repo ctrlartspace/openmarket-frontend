@@ -21,9 +21,7 @@
       <a-button-floating @click="addItemToCart"
         >shopping_cart
       </a-button-floating>
-      <a-button-floating
-        success
-        @click="applySelect(item, '/point/arrivals/add')"
+      <a-button-floating @click="applySelect(item, '/point/arrivals/add')"
         >add
       </a-button-floating>
       <a-modal
@@ -31,7 +29,7 @@
         title="Сохранить изменения?"
         :async-operation="updatePointItem"
       >
-        <a-button-floating primary v-bind="props"> save</a-button-floating>
+        <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
     </template>
     <div v-if="item" class="flex flex-col gap-2">

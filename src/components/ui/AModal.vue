@@ -23,7 +23,7 @@
                 {{ yesCaption }}
               </button>
               <button
-                class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-red-500 hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
+                class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-black hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
                 @click="onNoClick"
               >
                 {{ noCaption }}

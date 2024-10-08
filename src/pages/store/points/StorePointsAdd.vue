@@ -15,7 +15,7 @@
         title="Создать новую точку?"
         :async-operation="addStorePoint"
       >
-        <a-button-floating primary v-bind="props"> save </a-button-floating>
+        <a-button-floating v-bind="props"> save </a-button-floating>
       </a-modal>
     </template>
     <a-base-input

@@ -15,9 +15,7 @@
       >
     </template>
     <template #floating>
-      <a-link-floating :to="filterPathMulti" primary>
-        page_info
-      </a-link-floating>
+      <a-link-floating :to="filterPathMulti"> page_info </a-link-floating>
       <a-link-floating
         primary
         :to="{
@@ -30,6 +28,7 @@
     </template>
 
     <a-list
+      v-if="pointItems"
       :items="pointItems"
       title-field="pointItem.storeItem.name"
       description-field="count"

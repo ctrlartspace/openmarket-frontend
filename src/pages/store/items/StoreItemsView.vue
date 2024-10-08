@@ -15,6 +15,14 @@
         @click="addPointItems"
         >add_circle
       </a-button-floating>
+      <a-link-floating
+        :to="{
+          path: '/scan2',
+          query: { scannableMode: true },
+        }"
+      >
+        center_focus_strong
+      </a-link-floating>
       <a-link-floating v-if="!isSelectableMode" primary to="/store/items/add"
         >add
       </a-link-floating>
@@ -24,7 +32,7 @@
         ref="focusableInput"
         v-model.trim="searchInput"
         type="text"
-        class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 pr-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-neutral-300 md:rounded-lg md:text-base"
+        class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-neutral-300 md:rounded-lg md:text-base"
         placeholder="Код товара, наименование"
       />
       <div
@@ -32,21 +40,13 @@
       >
         <span class="material-symbols-outlined text-gray-300">search</span>
       </div>
-      <div
+      <!-- <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-between px-4"
       >
-        <router-link
-          :to="{
-            path: '/scan2',
-            query: { scannableMode: true },
-          }"
-          class="flex items-center"
-        >
-          <span class="material-symbols-outlined">center_focus_strong</span>
-        </router-link>
-      </div>
+      </div> -->
     </v-form>
     <a-list
+      v-if="storeItems"
       v-model="selectedItems"
       :items="storeItems"
       title-field="name"

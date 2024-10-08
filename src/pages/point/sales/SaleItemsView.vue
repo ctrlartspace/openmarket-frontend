@@ -1,19 +1,16 @@
 <template>
   <a-page>
     <template #header>
-      <a-link :to="filterPathMulti" primary>
-        <span class="material-symbols-outlined text-[28px]">menu</span>
-      </a-link>
+      <a-link :to="filterPathMulti" primary> Категории </a-link>
       <a-link primary to="/arrivals/items/add"> Добавить</a-link>
     </template>
     <template #floating>
-      <a-link-floating :to="filterPathMulti" primary>
-        page_info
-      </a-link-floating>
+      <a-link-floating :to="filterPathMulti"> page_info </a-link-floating>
       <a-link-floating primary to="/arrivals/items/add"> add</a-link-floating>
     </template>
 
     <a-list
+      v-if="sales"
       @click="onItemClick"
       :items="sales"
       title-field="pointItem.storeItem.name"

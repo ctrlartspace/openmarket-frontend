@@ -7,6 +7,7 @@
       <a-link-floating primary to="/store/users/add">add</a-link-floating>
     </template>
     <a-list
+      v-if="storeUsers"
       :items="storeUsers"
       title-field="name"
       @on-item-click="onItemClick"
@@ -16,22 +17,20 @@
 
 <script setup>
 import { onMounted, ref } from "vue"
-import StoreService from "@/services/StoreService"
 import AList from "@/components/ui/AList.vue"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { useSelect } from "@/composables/useSelect2.js"
+import { useApiRequest } from "@/composables/useApiRequest"
 
-const storeUsers = ref([])
+const {
+  serverData: storeUsers,
+  errorMessage,
+  validationErrors,
+  sendRequest,
+} = useApiRequest()
+
 const { isSelectableMode, applySelect } = useSelect()
-
-const getStoreUsers = async () => {
-  try {
-    storeUsers.value = await StoreService.getStoreUsers()
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const onItemClick = (item) => {
   if (isSelectableMode.value) {
@@ -41,8 +40,10 @@ const onItemClick = (item) => {
   }
 }
 
-onMounted(() => {
-  getStoreUsers()
+onMounted(async () => {
+  await sendRequest("get", "/store/users")
+
+  // getStoreUsers()
 })
 </script>
 

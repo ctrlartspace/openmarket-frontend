@@ -15,7 +15,7 @@
         title="Открыть кассу?"
         :async-operation="openCashRegister"
       >
-        <a-button-floating v-bind="props" primary> save</a-button-floating>
+        <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
     </template>
     <a-base-input

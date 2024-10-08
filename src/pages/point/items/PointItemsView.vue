@@ -1,11 +1,21 @@
 <template>
   <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
     <template #header>
+      <a-link :to="filterPathMulti" primary> Категории </a-link>
       <a-link v-if="!isSelectableMode" primary to="/point/items/add"
         >Добавить
       </a-link>
     </template>
     <template #floating>
+      <a-link-floating :to="filterPathMulti"> page_info </a-link-floating>
+      <a-link-floating
+        :to="{
+          path: '/scan2',
+          query: { scannableMode: true },
+        }"
+      >
+        center_focus_strong
+      </a-link-floating>
       <a-link-floating v-if="!isSelectableMode" primary to="/point/items/add"
         >add
       </a-link-floating>
@@ -16,7 +26,7 @@
         ref="focusableInput"
         v-model.trim="searchInput"
         type="text"
-        class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 pr-20 text-lg font-medium outline-black placeholder:font-normal placeholder:text-neutral-300 md:rounded-lg md:text-base"
+        class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-neutral-300 md:rounded-lg md:text-base"
         placeholder="Код товара, наименование"
       />
       <div
@@ -24,33 +34,14 @@
       >
         <span class="material-symbols-outlined text-gray-300">search</span>
       </div>
-      <div
+      <!-- <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-between gap-2 px-4"
       >
-        <router-link
-          :to="filterPathMulti"
-          class="flex items-center rounded"
-          :class="
-            isFiltersApplied
-              ? 'bg-blue-50 text-blue-600'
-              : 'bg-white text-black'
-          "
-        >
-          <span class="material-symbols-outlined">page_info</span>
-        </router-link>
-        <router-link
-          :to="{
-            path: '/scan2',
-            query: { scannableMode: true },
-          }"
-          class="flex items-center"
-        >
-          <span class="material-symbols-outlined">center_focus_strong</span>
-        </router-link>
-      </div>
+      </div> -->
     </v-form>
 
     <a-list
+      v-if="pointItems"
       :items="pointItems"
       title-field="storeItem.name"
       description-field="count"

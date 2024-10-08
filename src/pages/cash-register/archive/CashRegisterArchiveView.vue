@@ -2,6 +2,7 @@
   <a-page title="История">
     <template #header></template>
     <a-list
+      v-if="cashRegisters"
       :items="cashRegisters"
       title-field="id"
       description-field="isClosed"

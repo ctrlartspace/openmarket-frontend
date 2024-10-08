@@ -15,7 +15,7 @@
         title="Добавить сотрудника?"
         :async-operation="addPointUser"
       >
-        <a-button-floating primary v-bind="props"> save</a-button-floating>
+        <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
     </template>
     <div class="flex flex-col gap-2">
