@@ -1,17 +1,5 @@
 <template>
   <div v-if="!store.isEmpty" class="absolute bottom-0 left-0 right-0 p-4">
-    <button
-      v-if="cartStep === 1"
-      class="flex w-full cursor-pointer select-none justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl hover:brightness-50 active:brightness-50"
-      @click.once="stepForward"
-    >
-      <span
-        >{{ store.getTotalAmount }} <span class="font-semibold">₸</span></span
-      >
-      <span class="material-symbols-outlined self-center font-bold"
-        >arrow_forward</span
-      >
-    </button>
     <div
       v-if="cartStep === 2"
       class="relative rounded-xl border border-neutral-300 bg-white p-4 shadow-lg"
@@ -25,20 +13,13 @@
       </div>
       <p class="mb-2 text-center text-lg text-gray-300">Способ оплаты</p>
       <div
-        v-if="store.getPaymentType.code === 'cash'"
-        class="flex flex-col gap-2"
+        class="flex flex-col gap-2 overflow-hidden transition-[max-height,opacity] ease-in-out will-change-transform"
+        :class="
+          store.getPaymentType.code === 'cash'
+            ? 'max-h-96 opacity-100 delay-75'
+            : 'max-h-0 opacity-0'
+        "
       >
-        <button
-          class="w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
-          :class="{
-            'bg-blue-100 text-blue-600': store.getPaymentType.code === 'online',
-            'bg-red-100 text-red-600': store.getPaymentType.code === 'kaspi-qr',
-            'bg-green-100 text-green-600': store.getPaymentType.code === 'cash',
-          }"
-          @click="store.changePaymentType"
-        >
-          {{ store.getPaymentType.label }}
-        </button>
         <div
           class="flex items-center justify-between rounded-xl border border-neutral-300 bg-gray-100 px-4 py-2"
         >
@@ -52,26 +33,31 @@
           type="number"
         />
       </div>
-      <div v-else>
-        <button
-          class="w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
-          :class="{
-            'bg-blue-100 text-blue-600': store.getPaymentType.code === 'online',
-            'bg-red-100 text-red-600': store.getPaymentType.code === 'kaspi-qr',
-            'bg-green-100 text-green-600': store.getPaymentType.code === 'cash',
-          }"
-          @click="store.changePaymentType"
-        >
-          {{ store.getPaymentType.label }}
-        </button>
-      </div>
+      <button
+        class="mt-2 w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600 transition-[transform,colors] ease-in-out will-change-transform active:scale-95"
+        :class="{
+          'bg-blue-100 text-blue-600': store.getPaymentType.code === 'online',
+          'bg-red-100 text-red-600': store.getPaymentType.code === 'kaspi-qr',
+          'bg-green-100 text-green-600': store.getPaymentType.code === 'cash',
+        }"
+        @click="store.changePaymentType"
+      >
+        {{ store.getPaymentType.label }}
+      </button>
     </div>
     <button
-      v-if="cartStep === 2"
-      class="mt-2 flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl hover:brightness-50 active:brightness-50"
-      @click.once="makeSaleFromCart"
+      class="mt-2 w-full transform cursor-pointer select-none justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl transition-transform will-change-transform hover:brightness-50 active:scale-95 active:brightness-50"
+      @click="onNextClick"
     >
-      <span>Готово</span>
+      <p v-if="cartStep === 1" class="flex justify-center gap-4">
+        <span
+          >{{ store.getTotalAmount }} <span class="font-semibold">₸</span></span
+        >
+        <span class="material-symbols-outlined self-center font-bold"
+          >arrow_forward</span
+        >
+      </p>
+      <p v-if="cartStep === 2">Готово</p>
     </button>
   </div>
 </template>
@@ -93,15 +79,22 @@ const cartChange = computed(() =>
 const stepBack = () => {
   cartStep.value -= 1
 }
-const stepForward = () => {
-  cartStep.value += 1
-}
 
 const makeSaleFromCart = async () => {
   if (!store.isEmpty) {
     const response = await makeSale(store.getItemsForSale)
     store.clearCart()
     cartStep.value = 1
+  }
+}
+const onNextClick = async () => {
+  if (cartStep.value === 1) {
+    cartStep.value = 2
+    return
+  }
+  if (cartStep.value === 2) {
+    await makeSaleFromCart()
+    return
   }
 }
 </script>

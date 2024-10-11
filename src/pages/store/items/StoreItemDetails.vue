@@ -89,53 +89,37 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
+import { onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
-import StoreService from "@/services/StoreService"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import { useFilters } from "@/composables/filters.js"
 import AModal from "@/components/ui/AModal.vue"
 import { useUserStore } from "@/stores/user.store.js"
-import PointItemService from "@/services/point/items.js"
 import { generateBarcodePDF } from "@/utils/barcodeGenerator"
-import items from "@/services/point/items.js"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const route = useRoute()
 const router = useRouter()
-const itemState = ref({})
 const { filters, filterPathMulti } = useFilters()
 const { point } = useUserStore()
+const { serverData: itemState, sendRequest } = useApiRequest()
 
-const getStoreItem = async (id) => {
-  try {
-    itemState.value = await StoreService.getStoreItem(id)
-    if (filters.value) {
-      itemState.value.filters = filters
-    } else {
-      filters.value = itemState.value.filters
-    }
-  } catch (error) {
-    console.error(error)
+const fetchStoreItemCall = async (id) => {
+  await sendRequest("get", "/store/items/" + id)
+  if (filters.value) {
+    itemState.value.filters = filters
+  } else {
+    filters.value = itemState.value.filters
   }
 }
 
 const updateStoreItem = async () => {
-  try {
-    if (itemState.value.id) {
-      itemState.value.filters = filters.value
-      const updatedItem = await StoreService.updateStoreItem(
-        itemState.value.id,
-        itemState.value,
-      )
-      const { id } = updatedItem
-      await getStoreItem(id)
-    } else {
-      console.log("id not found")
-    }
-  } catch (error) {
-    console.error(error)
+  const id = itemState.value.id
+  if (id) {
+    itemState.value.filters = filters.value
+    await sendRequest("put", "/store/items/" + id, itemState.value)
   }
 }
 
@@ -147,8 +131,10 @@ const addPointItem = async () => {
       purchasePrice: itemState.value.purchasePrice,
     }
 
-    const newPointItem = await PointItemService.addPointItem(data)
-    await router.push({ path: "/point/items/" + newPointItem.id })
+    const response = await sendRequest("post", "/point/items", data)
+    if (response) {
+      await router.push({ path: "/point/items/" + response.data.data.id })
+    }
   } catch (error) {
     console.log(error)
   }
@@ -161,7 +147,7 @@ const onGenerateBarcodeClick = () => {
 onMounted(() => {
   const id = route.params.id
   if (id) {
-    getStoreItem(id)
+    fetchStoreItemCall(id)
   }
 })
 </script>

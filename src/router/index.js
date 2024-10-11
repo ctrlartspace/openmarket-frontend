@@ -1,13 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
-// import CartPage from "@/pages/CartPage.vue"
-import BaseDataPage from "@/pages/BaseDataPage.vue"
-import ItemPage from "@/pages/ItemPage.vue"
-import IncomesPage from "@/pages/IncomesPage.vue"
-import AddIncomesPage from "@/pages/AddIncomesPage.vue"
 import AuthPage from "@/pages/AuthPage.vue"
-import ScanPage from "@/pages/ScanPage.vue"
 import ScanPage2 from "@/pages/ScanPage2.vue"
-import ProfilePage from "@/pages/ProfilePage.vue"
 import StorePage from "@/pages/store/StorePage.vue"
 import StoreUsersAdd from "@/pages/store/users/StoreUsersAdd.vue"
 import StoreUsersView from "@/pages/store/users/StoreUsersView.vue"
@@ -27,7 +20,6 @@ import StoreFiltersView from "@/pages/store/filters/StoreFiltersView.vue"
 import StoreFiltersAdd from "@/pages/store/filters/StoreFiltersAdd.vue"
 import ArrivalItemsView from "@/pages/point/arrivals/ArrivalItemsView.vue"
 import ArrivalItemsAdd from "@/pages/point/arrivals/ArrivalItemsAdd.vue"
-// import SelectFiltersPage from "@/pages/selectable/SelectFiltersPage.vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
 
@@ -220,17 +212,7 @@ const routes = [
       },
     ],
   },
-  { path: "/cart", component: CartPage },
-  // { path: "/sales",  component: SalesPage },
-  { path: "/incomes", component: IncomesPage },
-  { path: "/incomes/add", component: AddIncomesPage },
-  { path: "/base", component: BaseDataPage },
-  { path: "/items", component: ItemPage },
-  { path: "/items/:id", component: ItemPage },
-  { path: "/profile", component: ProfilePage },
   { path: "/auth", component: AuthPage },
-  // { path: "/cash-register", component: CashPage },
-  { path: "/scan", component: ScanPage },
   { path: "/scan2", component: ScanPage2 },
 ]
 

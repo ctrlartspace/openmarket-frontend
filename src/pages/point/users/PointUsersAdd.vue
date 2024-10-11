@@ -2,6 +2,7 @@
   <a-page title="Добавить сотрудника">
     <template #header>
       <a-modal
+        v-if="selectedUser"
         #="{ props }"
         title="Добавить сотрудника?"
         :async-operation="addPointUser"
@@ -11,6 +12,7 @@
     </template>
     <template #floating>
       <a-modal
+        v-if="selectedUser"
         #="{ props }"
         title="Добавить сотрудника?"
         :async-operation="addPointUser"
@@ -39,24 +41,26 @@
 
 <script setup>
 import { useRouter } from "vue-router"
-import PointUserService from "@/services/point/users.js"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import { useSelect } from "@/composables/useSelect2.js"
 import AModal from "@/components/ui/AModal.vue"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const { selectedItem: selectedUser } = useSelect()
+const { sendRequest } = useApiRequest()
 
 const router = useRouter()
 
 const addPointUser = async () => {
-  try {
-    if (selectedUser.value) {
-      await PointUserService.addPointUser(selectedUser.value.id)
-      await router.push("/point/users")
-    }
-  } catch (error) {
-    console.error(error)
+  if (!selectedUser.value) {
+    return
+  }
+  const response = await sendRequest("post", "/point/users", {
+    id: selectedUser.value.id,
+  })
+  if (response) {
+    await router.push("/point/users")
   }
 }
 </script>

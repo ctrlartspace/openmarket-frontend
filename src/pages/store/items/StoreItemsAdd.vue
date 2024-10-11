@@ -4,7 +4,7 @@
       <a-modal
         #="{ props }"
         title="Создать товар?"
-        :async-operation="addStoreItem"
+        :async-operation="onAddStoreItemClick"
       >
         <a-button primary v-bind="props"> Сохранить</a-button>
       </a-modal>
@@ -13,7 +13,7 @@
       <a-modal
         #="{ props }"
         title="Создать товар?"
-        :async-operation="addStoreItem"
+        :async-operation="onAddStoreItemClick"
       >
         <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
@@ -25,6 +25,7 @@
         label="Код товара"
         placeholder="Код товара"
         type="text"
+        :is-error="validationErrors.code"
       >
         <template #action>
           <router-link
@@ -44,6 +45,7 @@
         label="Наименование"
         placeholder="Наименование"
         type="text"
+        :is-error="validationErrors.name"
       />
       <a-base-input
         id="purchase-price"
@@ -52,6 +54,7 @@
         placeholder="Цена покупки"
         type="text"
         unit="₸"
+        :is-error="validationErrors.purchasePrice"
       />
       <a-base-input
         id="selling-price"
@@ -60,6 +63,7 @@
         placeholder="Цена продажи"
         type="text"
         unit="₸"
+        :is-error="validationErrors.sellingPrice"
       />
       <a-base-input
         id="filters"
@@ -74,30 +78,27 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
-import StoreService from "@/services/StoreService"
-import { useRouter } from "vue-router"
+import AModal from "@/components/ui/AModal.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import { ref, watch } from "vue"
+import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"
 import { useScan } from "@/composables/useScan"
-import AModal from "@/components/ui/AModal.vue"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const router = useRouter()
 const itemState = ref({})
 const { filters, filterPathMulti } = useFilters()
 const { scannedCode } = useScan()
+const { validationErrors, sendRequest: addStoreItem } = useApiRequest()
 
-const addStoreItem = async () => {
-  try {
-    itemState.value.filters = filters.value
-    const storeItem = await StoreService.addStoreItem(itemState.value)
-    if (storeItem) {
-      await router.push("/store/items/" + storeItem.id)
-    }
-  } catch (error) {
-    console.error(error)
+const onAddStoreItemClick = async () => {
+  itemState.value.filters = filters.value
+  const response = await addStoreItem("post", "/store/items", itemState.value)
+  if (response) {
+    await router.push("/store/items/" + response.data.data.id)
   }
 }
 

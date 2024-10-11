@@ -38,10 +38,11 @@
         :to="{ path: '/store/items/' + item.storeItem.id }"
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-600 md:rounded-lg"
       >
-        <h1 class="text-lg font-medium md:text-base">
-          {{ item.storeItem.code + ", " + item.storeItem.name }}
+        <h1 class="text-lg font-medium text-blue-600 md:text-base">
+          {{ item.storeItem.name }}
         </h1>
-        <p class="text-md text-neutral-400 md:text-sm">
+        <p class="text-sm text-neutral-400">
+          Код: {{ item.storeItem.code }}<br />
           Покупка: {{ item.storeItem.purchasePrice }} ₸ Продажа:
           {{ item.storeItem.sellingPrice }} ₸
         </p>
@@ -76,55 +77,47 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
-import { useRoute, useRouter } from "vue-router"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
-import PointService from "@/services/PointService.js"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
+import { onMounted } from "vue"
+import { useRoute, useRouter } from "vue-router"
 import { useSelect } from "@/composables/useSelect2"
 import { useCartStore } from "@/stores/cart.store"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const cartStore = useCartStore()
 const route = useRoute()
 const router = useRouter()
-const item = ref({})
 const { applySelect } = useSelect()
+const { serverData: item, sendRequest } = useApiRequest()
 
 const addItemToCart = () => {
   cartStore.addItem(item.value)
   router.push("/cart")
 }
-const getPointItem = async (id) => {
-  try {
-    item.value = await PointService.getPointItem(id)
-  } catch (error) {
-    console.error(error)
-  }
-}
 
 const updatePointItem = async () => {
-  try {
-    if (item.value.id) {
-      const updatedItem = await PointService.updatePointItem(
-        item.value.id,
-        item.value,
-      )
-      const { id } = updatedItem
-      await getPointItem(id)
-    } else {
-      console.log("id not found")
-    }
-  } catch (error) {
-    console.error(error)
+  const id = item.value.id
+  if (!id) {
+    return
+  }
+  const response = await sendRequest(
+    "put",
+    "/point/items/" + item.value.id,
+    item.value,
+  )
+
+  if (response) {
+    await sendRequest("get", "/point/items/" + response.data.data.id)
   }
 }
 
 onMounted(async () => {
   const id = route.params.id
   if (id) {
-    await getPointItem(id)
+    await sendRequest("get", "/point/items/" + id)
   }
 })
 </script>

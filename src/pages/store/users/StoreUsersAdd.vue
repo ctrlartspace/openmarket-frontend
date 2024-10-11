@@ -19,9 +19,6 @@
       </a-modal>
     </template>
     <div class="flex flex-col gap-2">
-      <p v-if="hasValidationErrors" class="text-center text-lg md:text-base">
-        Заполните поля
-      </p>
       <a-base-input
         id="store-user-name"
         v-model="storeUser.name"
@@ -52,7 +49,7 @@ import { useApiRequest } from "@/composables/useApiRequest"
 
 const router = useRouter()
 const storeUser = ref({})
-const { validationErrors, hasValidationErrors, sendRequest } = useApiRequest()
+const { validationErrors, sendRequest } = useApiRequest()
 
 const addStoreUser = async () => {
   const payload = {

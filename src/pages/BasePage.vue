@@ -147,7 +147,6 @@ const isSideMenuExpanded = ref(false)
 
 const toggleSideMenu = () => {
   isSideMenuExpanded.value = !isSideMenuExpanded.value
-  console.log("togle")
 }
 
 const onMenuItemClick = (item) => {

@@ -35,12 +35,13 @@
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded-lg"
       >
         <div v-if="storeItem">
-          <h1 class="text-lg font-medium md:text-base">
-            {{ storeItem.code + ", " + storeItem.name }}
+          <h1 class="text-lg font-medium text-blue-600 md:text-base">
+            {{ storeItem.name }}
           </h1>
-          <p class="text-md text-neutral-400 md:text-sm">
-            Покупка: {{ storeItem.purchasePrice }} KZT Продажа:
-            {{ storeItem.sellingPrice }} KZT
+          <p class="text-sm text-neutral-400">
+            Код: {{ storeItem.code }}<br />
+            Покупка: {{ storeItem.purchasePrice }} ₸ Продажа:
+            {{ storeItem.sellingPrice }} ₸
           </p>
         </div>
         <p class="text-lg md:text-base" v-else>Выбрать товар...</p>
@@ -68,26 +69,25 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue"
-import { useRouter } from "vue-router"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
-import PointItemService from "@/services/point/items.js"
-import { useSelect } from "@/composables/useSelect2.js"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
+import ABaseInput from "@/components/ui/ABaseInput.vue"
+import { ref, watch } from "vue"
+import { useRouter } from "vue-router"
+import { useSelect } from "@/composables/useSelect2.js"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const router = useRouter()
 const item = ref({})
 const { selectedItem: storeItem } = useSelect()
+const { sendRequest } = useApiRequest()
 
 const addPointItem = async () => {
-  try {
-    const newPointItem = await PointItemService.addPointItem(item.value)
+  const response = await sendRequest("post", "/point/items", item.value)
+  if (response) {
     onCancelNewItemClick()
-    await router.push({ path: "/point/items/" + newPointItem.id })
-  } catch (error) {
-    console.log(error)
+    await router.push({ path: "/point/items/" + response.data.data.id })
   }
 }
 

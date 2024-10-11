@@ -23,29 +23,30 @@
       placeholder="Сумма на начало"
       type="text"
       unit="₸"
+      :is-error="validationErrors.startAmount"
     />
   </a-page>
 </template>
 
 <script setup>
-import { ref } from "vue"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
-import AModal from "@/components/ui/AModal.vue"
-import CashService from "@/services/CashService.js"
-import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import ABaseInput from "@/components/ui/ABaseInput.vue"
+import AModal from "@/components/ui/AModal.vue"
+import { ref } from "vue"
+import { useRouter } from "vue-router"
+import { useApiRequest } from "@/composables/useApiRequest"
 
+const { sendRequest, validationErrors } = useApiRequest()
 const router = useRouter()
 const startAmount = ref("")
 
 const openCashRegister = async () => {
-  try {
-    await CashService.openCashRegister(startAmount.value)
-
+  const response = await sendRequest("post", "/cash-registers", {
+    startAmount: startAmount.value,
+  })
+  if (response) {
     await router.push("/cash-register/active")
-  } catch (error) {
-    console.error(error)
   }
 }
 </script>

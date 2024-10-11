@@ -2,6 +2,7 @@
   <a-page title="Новое поступление">
     <template #header>
       <a-modal
+        v-if="pointItem"
         #="{ props }"
         title="Сделать приход?"
         :async-operation="addArrival"
@@ -11,6 +12,7 @@
     </template>
     <template #floating>
       <a-modal
+        v-if="pointItem"
         #="{ props }"
         title="Сделать приход?"
         :async-operation="addArrival"
@@ -27,10 +29,11 @@
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded-lg"
       >
         <div v-if="pointItem">
-          <h1 class="text-lg font-medium md:text-base">
-            {{ pointItem.storeItem.code + ", " + pointItem.storeItem.name }}
+          <h1 class="text-lg font-medium text-blue-600 md:text-base">
+            {{ pointItem.storeItem.name }}
           </h1>
-          <p class="text-md text-neutral-400 md:text-sm">
+          <p class="text-sm text-neutral-400">
+            Код: {{ pointItem.storeItem.code }} <br />
             Покупка: {{ pointItem.purchasePrice }} ₸ Продажа:
             {{ pointItem.sellingPrice }} ₸
           </p>
@@ -51,25 +54,24 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue"
-import { useRouter } from "vue-router"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
-import ArrivalService from "@/services/arrivals/items.js"
-import { useSelect } from "@/composables/useSelect2.js"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
+import ABaseInput from "@/components/ui/ABaseInput.vue"
+import { ref, watch } from "vue"
+import { useRouter } from "vue-router"
+import { useSelect } from "@/composables/useSelect2.js"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const router = useRouter()
 const item = ref({ count: 1 })
 const { selectedItem: pointItem } = useSelect()
+const { sendRequest } = useApiRequest()
 
 const addArrival = async () => {
-  try {
-    await ArrivalService.addArrivalItem(item.value)
+  const response = await sendRequest("post", "/arrivals", item.value)
+  if (response) {
     await router.push(`/point/items/${pointItem.value.id}`)
-  } catch (error) {
-    console.log(error)
   }
 }
 

@@ -10,7 +10,7 @@ export default {
         },
       },
       animation: {
-        shake: "shake 0.1s linear ",
+        shake: "shake 0.1s linear",
       },
     },
   },

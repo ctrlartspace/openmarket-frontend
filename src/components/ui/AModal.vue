@@ -17,10 +17,18 @@
             </h1>
             <div class="flex flex-col gap-2">
               <button
-                class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-500 hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
+                class="flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-500 hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
+                :disabled="isLoading"
                 @click="onYesClick"
               >
-                {{ yesCaption }}
+                <span
+                  v-if="isLoading"
+                  class="material-symbols-outlined animate-spin"
+                  >progress_activity</span
+                >
+                <span v-else>
+                  {{ yesCaption }}
+                </span>
               </button>
               <button
                 class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-black hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"

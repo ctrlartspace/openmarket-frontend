@@ -22,24 +22,17 @@
 import { onMounted, ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouter } from "vue-router"
-import StoreService from "@/services/StoreService"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AList from "@/components/ui/AList.vue"
+import { useApiRequest } from "@/composables/useApiRequest"
+
+const { serverData: storePoints, sendRequest: fetchStorePoints } =
+  useApiRequest()
 
 const store = useUserStore()
 const router = useRouter()
-
-const storePoints = ref([])
-
-const getStorePoints = async () => {
-  try {
-    storePoints.value = await StoreService.getStorePoints()
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const loginToStorePoint = async (item) => {
   try {
@@ -50,8 +43,8 @@ const loginToStorePoint = async (item) => {
   }
 }
 
-onMounted(() => {
-  getStorePoints()
+onMounted(async () => {
+  await fetchStorePoints("get", "/store/points")
 })
 </script>
 

@@ -35,6 +35,7 @@
         v-model="filterName"
         placeholder="Название"
         type="text"
+        :is-error="validationErrors.name"
       />
     </div>
   </a-page>
@@ -43,27 +44,26 @@
 <script setup>
 import { ref } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
-import PointService from "@/services/PointService.js"
 import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const router = useRouter()
 const filterName = ref("")
 const { filters } = useFilters()
+const { sendRequest, validationErrors } = useApiRequest()
 
 const addFilter = async () => {
-  try {
-    const data = {
-      name: filterName.value,
-      parentId: filters.value,
-    }
-    await PointService.addFilter(data)
+  const data = {
+    name: filterName.value,
+    parentId: filters.value,
+  }
+  const response = await sendRequest("post", "/filters", data)
+  if (response) {
     await router.push("/store/filters")
-  } catch (error) {
-    console.error(error)
   }
 }
 </script>

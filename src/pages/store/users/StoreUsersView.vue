@@ -23,12 +23,7 @@ import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useApiRequest } from "@/composables/useApiRequest"
 
-const {
-  serverData: storeUsers,
-  errorMessage,
-  validationErrors,
-  sendRequest,
-} = useApiRequest()
+const { serverData: storeUsers, sendRequest } = useApiRequest()
 
 const { isSelectableMode, applySelect } = useSelect()
 

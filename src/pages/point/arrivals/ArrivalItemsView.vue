@@ -40,35 +40,26 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
-import { useRouter } from "vue-router"
-import ArrivalService from "@/services/arrivals/items.js"
 import AList from "@/components/ui/AList.vue"
-import { useFilters } from "@/composables/filters.js"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
+import { onMounted } from "vue"
+import { useRouter } from "vue-router"
+import { useFilters } from "@/composables/filters.js"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const router = useRouter()
-const pointItems = ref([])
-const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =
-  useFilters()
-
-const getPointItems = async () => {
-  try {
-    pointItems.value = await ArrivalService.getArrivalItems({
-      filters: joinedFilters.value,
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
+const { filterPathMulti, joinedFilters } = useFilters()
+const { serverData: pointItems, sendRequest } = useApiRequest()
 
 const onItemClick = (item) => {
   router.push(`/point/items/${item.pointItem.id}`)
 }
 
-onMounted(() => {
-  getPointItems()
+onMounted(async () => {
+  await sendRequest("get", "/incomes", {
+    filters: joinedFilters.value,
+  })
 })
 </script>
 

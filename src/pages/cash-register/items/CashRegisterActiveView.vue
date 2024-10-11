@@ -85,19 +85,24 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      <p class="p-4 text-center text-lg text-neutral-300 md:text-base">
+        Касса не найдена
+      </p>
+    </div>
   </a-page>
 </template>
 
 <script setup>
 import ALink from "@/components/ui/ALink.vue"
-import { computed, onMounted, ref } from "vue"
-import { closeCashRegister, getActiveCash } from "@/services/CashService.js"
 import AButton from "@/components/ui/AButton.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
+import { computed, onMounted } from "vue"
+import { useApiRequest } from "@/composables/useApiRequest"
 
-const activeCash = ref(null)
+const { serverData: activeCash, sendRequest } = useApiRequest()
 
 const getCashTitle = computed(() => {
   if (isActiveCashExists.value) {
@@ -108,8 +113,10 @@ const getCashTitle = computed(() => {
 
 const closeActiveCashRegister = async () => {
   if (isActiveCashExists.value) {
-    await closeCashRegister(activeCash.value.id)
-    await fetchActiveCash()
+    await sendRequest("put", "/cash-registers/" + activeCash.value.id, {
+      isClosed: true,
+    })
+    await sendRequest("get", "/cash-registers/active")
   }
 }
 
@@ -117,12 +124,8 @@ const isActiveCashExists = computed(
   () => !!activeCash.value && activeCash.value.id,
 )
 
-const fetchActiveCash = async () => {
-  activeCash.value = await getActiveCash()
-}
-
 onMounted(async () => {
-  await fetchActiveCash()
+  await sendRequest("get", "/cash-registers/active")
 })
 </script>
 

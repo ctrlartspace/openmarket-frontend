@@ -51,10 +51,10 @@
             </button>
           </div>
           <button
-            class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-2 text-center text-2xl text-white hover:brightness-95 active:brightness-95"
+            class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-2 text-center text-2xl font-medium text-white hover:brightness-95 active:brightness-95"
             @click="onApplyClick"
           >
-            Добавить
+            Готово
           </button>
           <button class="absolute right-0 top-0 p-4" @click="resetScanner">
             <span class="material-symbols-outlined">close</span>

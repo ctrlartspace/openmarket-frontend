@@ -53,36 +53,31 @@
 </template>
 
 <script setup>
+import ALink from "@/components/ui/ALink.vue"
+import ALinkFloating from "@/components/ui/ALinkFloating.vue"
+import AList from "@/components/ui/AList.vue"
 import { onMounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
-import PointService from "@/services/PointService.js"
 import { useFilters } from "@/composables/filters.js"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useScan } from "@/composables/useScan"
 import { useFocusable } from "@/composables/useFocusable"
-import ALink from "@/components/ui/ALink.vue"
-import ALinkFloating from "@/components/ui/ALinkFloating.vue"
-import AList from "@/components/ui/AList.vue"
 import { watchDebounced } from "@vueuse/core"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const { focusableInput } = useFocusable()
 const router = useRouter()
-const pointItems = ref([])
-const { filters, filterPathMulti, isFiltersApplied, joinedFilters } =
-  useFilters()
+const { filterPathMulti, joinedFilters } = useFilters()
 const { isSelectableMode, applySelect } = useSelect()
 const { scannedCode } = useScan()
 const searchInput = ref("")
+const { serverData: pointItems, sendRequest: fetchPointItems } = useApiRequest()
 
 const getPointItems = async () => {
-  try {
-    pointItems.value = await PointService.getPointItems({
-      filters: joinedFilters.value,
-      q: searchInput.value,
-    })
-  } catch (error) {
-    console.log(error)
-  }
+  await fetchPointItems("get", "/point/items", {
+    filters: joinedFilters.value,
+    q: searchInput.value,
+  })
 }
 
 const onItemClick = (item) => {

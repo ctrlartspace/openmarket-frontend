@@ -16,7 +16,8 @@
       <input
         v-model="inputValue"
         :class="{
-          'placeholder:text-red-300': isError,
+          'animate-shake will-change-transform placeholder:text-red-500':
+            isError,
         }"
         class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 text-lg placeholder:text-neutral-300 focus:outline-black md:rounded-lg md:text-base"
         v-bind="$attrs"

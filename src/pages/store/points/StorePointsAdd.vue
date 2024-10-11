@@ -4,7 +4,7 @@
       <a-modal
         #="{ props }"
         title="Создать новую точку?"
-        :async-operation="addStorePoint"
+        :async-operation="onSaveClick"
       >
         <a-button primary v-bind="props"> Сохранить </a-button>
       </a-modal>
@@ -13,7 +13,7 @@
       <a-modal
         #="{ props }"
         title="Создать новую точку?"
-        :async-operation="addStorePoint"
+        :async-operation="onSaveClick"
       >
         <a-button-floating v-bind="props"> save </a-button-floating>
       </a-modal>
@@ -23,6 +23,7 @@
       v-model="storePointName"
       placeholder="Название точки"
       type="text"
+      :is-error="validationErrors.name"
     />
   </a-page>
 </template>
@@ -31,23 +32,22 @@
 import { ref } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AModal from "@/components/ui/AModal.vue"
-import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import { useApiRequest } from "@/composables/useApiRequest"
+
+const { validationErrors, sendRequest: addStorePoint } = useApiRequest()
 
 const router = useRouter()
 const storePointName = ref("")
 
-const addStorePoint = async () => {
-  try {
-    await StoreService.addStorePoint({
-      name: storePointName.value,
-    })
-
+const onSaveClick = async () => {
+  const response = await addStorePoint("post", "/store/points", {
+    name: storePointName.value,
+  })
+  if (response) {
     router.push("/store/points")
-  } catch (error) {
-    console.error(error)
   }
 }
 </script>

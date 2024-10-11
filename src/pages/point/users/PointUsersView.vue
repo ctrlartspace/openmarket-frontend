@@ -11,24 +11,16 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
-import PointUserService from "@/services/point/users.js"
+import { onMounted } from "vue"
 import AList from "@/components/ui/AList.vue"
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
+import { useApiRequest } from "@/composables/useApiRequest"
 
-const pointUsers = ref([])
+const { serverData: pointUsers, sendRequest: fetchPointUsers } = useApiRequest()
 
-const getPointUsers = async () => {
-  try {
-    pointUsers.value = await PointUserService.getPointUsers()
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-onMounted(() => {
-  getPointUsers()
+onMounted(async () => {
+  await fetchPointUsers("get", "/point/users")
 })
 </script>
 

@@ -1,7 +1,10 @@
 <template>
   <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
     <template #header>
-      <a-button v-if="selectedItems.length > 0" accent @click="addPointItems"
+      <a-button
+        v-if="selectedItems.length > 0 && point"
+        accent
+        @click="onAddItemsToPointClick"
         >Добавить в точку
       </a-button>
       <a-link v-if="!isSelectableMode" primary to="/store/items/add"
@@ -9,12 +12,18 @@
       </a-link>
     </template>
     <template #floating>
-      <a-button-floating
-        v-if="selectedItems.length > 0"
-        accent
-        @click="addPointItems"
-        >add_circle
-      </a-button-floating>
+      <a-modal
+        #="{ props }"
+        title="Добавить товары в точку?"
+        :async-operation="onAddItemsToPointClick"
+      >
+        <a-button-floating
+          v-if="selectedItems.length > 0 && point"
+          accent
+          v-bind="props"
+          >add_circle
+        </a-button-floating>
+      </a-modal>
       <a-link-floating
         :to="{
           path: '/scan2',
@@ -53,7 +62,7 @@
       description-field="purchasePrice"
       description-hint="₸"
       @on-item-click="onItemClick"
-      selectable
+      :selectable="point"
     >
     </a-list>
   </a-page>
@@ -62,7 +71,6 @@
 <script setup>
 import { onMounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
-import StoreService from "@/services/StoreService"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useScan } from "@/composables/useScan"
 import { useFocusable } from "@/composables/useFocusable"
@@ -71,34 +79,31 @@ import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
-import PointService from "@/services/PointService"
 import AList from "@/components/ui/AList.vue"
+import AModal from "@/components/ui/AModal.vue"
+import { useApiRequest } from "@/composables/useApiRequest"
+import { useUserStore } from "@/stores/user.store"
 
+const { serverData: storeItems, sendRequest: fetchStoreItems } = useApiRequest()
+const { sendRequest: addItemsToPoint } = useApiRequest()
+
+const { point } = useUserStore()
 const { focusableInput } = useFocusable()
 const router = useRouter()
-const storeItems = ref([])
 const { isSelectableMode, applySelect } = useSelect()
 const { scannedCode } = useScan()
 const searchInput = ref("")
 const selectedItems = ref([])
 
-const getStoreItems = async () => {
-  try {
-    storeItems.value = await StoreService.getStoreItems({
-      q: searchInput.value,
-    })
-  } catch (error) {
-    console.log(error)
-  }
+const onFetchStoreItems = async () => {
+  await fetchStoreItems("get", "/store/items", { q: searchInput.value })
 }
 
-const addPointItems = async () => {
-  try {
-    const data = selectedItems.value.map((item) => ({ storeItemId: item }))
-    await PointService.addItemsMany(data)
+const onAddItemsToPointClick = async () => {
+  const data = selectedItems.value.map((item) => ({ storeItemId: item }))
+  const response = await addItemsToPoint("post", "/point/items/many", data)
+  if (response) {
     selectedItems.value = []
-  } catch (error) {
-    console.log(error)
   }
 }
 
@@ -113,7 +118,7 @@ const onItemClick = (item) => {
 watchDebounced(
   searchInput,
   async () => {
-    await getStoreItems()
+    await onFetchStoreItems()
   },
   { debounce: 500, maxWait: 1000 },
 )
@@ -124,8 +129,8 @@ watch(scannedCode, (newScannedCode) => {
   }
 })
 
-onMounted(() => {
-  getStoreItems()
+onMounted(async () => {
+  await onFetchStoreItems()
 })
 </script>
 
