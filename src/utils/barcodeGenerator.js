@@ -12,6 +12,8 @@ export const generateBarcodePDF = (barcodeData) => {
   const pdfHeight = 20
 
   const pdf = new jsPDF({
+    text: "sdf",
+    textPosition: "top",
     orientation: "landscape",
     unit: "mm",
     format: [pdfWidth, pdfHeight],
@@ -22,7 +24,20 @@ export const generateBarcodePDF = (barcodeData) => {
 
   pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight)
 
-  pdf.output("dataurlnewwindow")
+  // Включаем автопечать
+  pdf.autoPrint()
+
+  const pdfBlob = pdf.output("blob")
+
+  // Создаём URL для Blob и открываем его в новом окне
+  const url = URL.createObjectURL(pdfBlob)
+  const printWindow = window.open(url)
+
+  // Ждём загрузки и запускаем печать
+  printWindow.onload = () => {
+    printWindow.focus()
+    printWindow.print()
+  }
 }
 
 export const generateEAN13 = (productName, price, categoryId) => {
@@ -35,7 +50,7 @@ export const generateEAN13 = (productName, price, categoryId) => {
       hash = hash | 0 // Приводим к 32-битному целому
     }
     const id = Math.abs(hash).toString().slice(-12)
-    return id.padStart(12, "0")
+    return id.padStart(12, "9")
   }
 
   // Функция для расчета контрольной цифры EAN-13

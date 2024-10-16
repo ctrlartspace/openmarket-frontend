@@ -8,7 +8,7 @@
     "net": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "dock": "docker build --platform linux/amd64 -t ctrlartspace/openmarket-frontend . && docker push ctrlartspace/openmarket-frontend"
+    "deploy": "docker build --platform linux/amd64 -t ctrlartspace/openmarket-frontend . && docker push ctrlartspace/openmarket-frontend"
   },
   "dependencies": {
     "@vueuse/core": "^11.1.0",

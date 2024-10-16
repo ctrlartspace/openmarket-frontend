@@ -10,7 +10,7 @@
           :key="i"
           class="bg-text-white aspect-square rounded-lg border border-neutral-300 bg-neutral-50 hover:bg-neutral-100"
           :class="{
-            'order-last col-span-3 aspect-auto max-h-60 py-2': i - 1 === 0,
+            'order-last col-span-3 aspect-[unset] py-2': i - 1 === 0,
           }"
         >
           <button class="h-full w-full text-2xl font-medium">

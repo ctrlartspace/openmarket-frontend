@@ -17,9 +17,9 @@ export default defineConfig({
       },
       includeAssets: ["**/*.{png}"],
       manifest: {
-        name: "Openmarket",
-        short_name: "Openmarket",
-        description: "Openmarket",
+        name: "Open Kassa",
+        short_name: "Open Kassa",
+        description: "Open Kassa",
         theme_color: "#ffffff",
         icons: [
           {
