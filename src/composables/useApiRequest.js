@@ -2,6 +2,7 @@ import { ref, computed } from "vue"
 import apiService from "@/services/ApiService"
 
 export function useApiRequest() {
+  const isLoading = ref(false)
   const serverData = ref(null)
   const errorMessage = ref("")
   const validationErrors = ref({})
@@ -11,6 +12,7 @@ export function useApiRequest() {
 
   const sendRequest = async (method, url, payload = null) => {
     try {
+      isLoading.value = true
       errorMessage.value = ""
       validationErrors.value = {}
 
@@ -30,6 +32,8 @@ export function useApiRequest() {
         errorMessage.value = error.message || "An error occurred"
       }
       console.error(error) // Логирование ошибки для отладки
+    } finally {
+      isLoading.value = false
     }
   }
 
@@ -38,6 +42,7 @@ export function useApiRequest() {
     errorMessage,
     validationErrors,
     hasValidationErrors,
+    isLoading,
     sendRequest,
   }
 }

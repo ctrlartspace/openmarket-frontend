@@ -26,8 +26,23 @@
         placeholder="Код товара"
         type="text"
         :is-error="validationErrors.code"
+        :disabled="codeIsGenerated"
+        @click="generateCode"
       >
         <template #action>
+          <label class="flex items-center" for="generateCodeCheckbox">
+            <span
+              class="material-symbols-outlined cursor-pointer"
+              :class="codeIsGenerated ? 'text-blue-600' : 'text-black'"
+              >bolt</span
+            >
+          </label>
+          <input
+            class="hidden"
+            v-model="codeIsGenerated"
+            id="generateCodeCheckbox"
+            type="checkbox"
+          />
           <router-link
             :to="{
               path: '/scan2',
@@ -39,6 +54,7 @@
           </router-link>
         </template></a-base-input
       >
+
       <a-base-input
         id="name"
         v-model="itemState.name"
@@ -82,17 +98,19 @@ import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AModal from "@/components/ui/AModal.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
-import { ref, watch } from "vue"
+import { computed, ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"
 import { useScan } from "@/composables/useScan"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { generateEAN13 } from "@/utils/barcodeGenerator"
 
 const router = useRouter()
 const itemState = ref({})
 const { filters, filterPathMulti } = useFilters()
 const { scannedCode } = useScan()
 const { validationErrors, sendRequest: addStoreItem } = useApiRequest()
+const codeIsGenerated = ref(false)
 
 const onAddStoreItemClick = async () => {
   itemState.value.filters = filters.value
@@ -101,6 +119,23 @@ const onAddStoreItemClick = async () => {
     await router.push("/store/items/" + response.data.data.id)
   }
 }
+
+const generateCode = () => {
+  itemState.value.code = generateEAN13(
+    itemState.value.name,
+    itemState.value.sellingPrice,
+    itemState.value.filters,
+  )
+}
+watch(
+  itemState,
+  () => {
+    if (codeIsGenerated.value) {
+      generateCode()
+    }
+  },
+  { deep: true },
+)
 
 watch(scannedCode, (newScannedCode) => {
   if (newScannedCode) {

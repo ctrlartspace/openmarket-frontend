@@ -46,10 +46,10 @@
       </button>
     </div>
     <button
-      class="mt-2 w-full transform cursor-pointer select-none justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl transition-transform will-change-transform hover:brightness-50 active:scale-95 active:brightness-50"
+      class="mt-2 flex w-full transform cursor-pointer select-none items-center justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl transition-transform will-change-transform hover:brightness-50 active:scale-95 active:brightness-50"
       @click="onNextClick"
     >
-      <p v-if="cartStep === 1" class="flex justify-center gap-4">
+      <p v-if="cartStep === 1 && !isLoading" class="flex justify-center gap-4">
         <span
           >{{ store.getTotalAmount }} <span class="font-semibold">₸</span></span
         >
@@ -57,7 +57,12 @@
           >arrow_forward</span
         >
       </p>
-      <p v-if="cartStep === 2">Готово</p>
+      <p v-if="cartStep === 2 && !isLoading">Готово</p>
+      <span
+        v-if="isLoading"
+        class="material-symbols-outlined animate-spin text-2xl"
+        >progress_activity</span
+      >
     </button>
   </div>
 </template>
@@ -65,9 +70,10 @@
 <script setup>
 import { computed, ref } from "vue"
 import { useCartStore } from "@/stores/cart.store"
-import { makeSale } from "@/services/ItemSearch"
+import { useApiRequest } from "@/composables/useApiRequest"
 
 const store = useCartStore()
+const { sendRequest, isLoading } = useApiRequest()
 
 const cartStep = ref(1)
 const inputAmount = ref("")
@@ -81,8 +87,8 @@ const stepBack = () => {
 }
 
 const makeSaleFromCart = async () => {
-  if (!store.isEmpty) {
-    const response = await makeSale(store.getItemsForSale)
+  const response = await sendRequest("post", "/sales", store.getItemsForSale)
+  if (response) {
     store.clearCart()
     cartStep.value = 1
   }

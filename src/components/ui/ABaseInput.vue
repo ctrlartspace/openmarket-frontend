@@ -23,7 +23,7 @@
         v-bind="$attrs"
       />
       <div
-        class="absolute bottom-0 right-0 top-0 flex items-center justify-center pr-4"
+        class="absolute bottom-0 right-0 top-0 flex items-center justify-center gap-1 pr-4"
       >
         <span
           v-if="unit"
@@ -31,6 +31,7 @@
         >
           {{ unit }}
         </span>
+
         <slot name="action"></slot>
       </div>
     </div>
