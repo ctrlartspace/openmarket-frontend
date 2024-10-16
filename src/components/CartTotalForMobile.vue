@@ -13,7 +13,7 @@
       </div>
       <p class="mb-2 text-center text-lg text-gray-300">Способ оплаты</p>
       <div
-        class="flex flex-col gap-2 overflow-hidden transition-[max-height,opacity] ease-in-out will-change-transform"
+        class="flex flex-col gap-2 transition-[max-height,opacity] ease-in-out will-change-transform"
         :class="
           store.getPaymentType.code === 'cash'
             ? 'max-h-96 opacity-100 delay-75'
@@ -28,7 +28,7 @@
         </div>
         <input
           v-model="inputAmount"
-          class="w-full appearance-none rounded-xl border border-neutral-300 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
+          class="w-full appearance-none rounded-xl border border-neutral-300 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
           placeholder="Внесено"
           type="number"
         />
@@ -60,7 +60,7 @@
       <p v-if="cartStep === 2 && !isLoading">Готово</p>
       <span
         v-if="isLoading"
-        class="material-symbols-outlined animate-spin text-2xl"
+        class="material-symbols-outlined animate-spin text-2xl font-medium"
         >progress_activity</span
       >
     </button>

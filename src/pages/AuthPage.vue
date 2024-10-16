@@ -11,7 +11,7 @@
         type="password"
       />
       <button
-        class="mt-2 block w-full rounded-xl bg-blue-600 px-4 py-2 text-lg font-medium text-white md:rounded-lg md:text-base"
+        class="mt-2 block w-full rounded-xl bg-black px-4 py-2 text-lg font-medium text-white md:rounded-lg md:text-base"
         type="submit"
       >
         Продолжить

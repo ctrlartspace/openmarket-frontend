@@ -8,7 +8,8 @@
     "net": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "docker build --platform linux/amd64 -t ctrlartspace/openmarket-frontend . && docker push ctrlartspace/openmarket-frontend"
+    "deploy": "docker build --platform linux/amd64 -t ctrlartspace/openmarket-frontend . && docker push ctrlartspace/openmarket-frontend",
+    "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
     "@vueuse/core": "^11.1.0",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@mdi/font": "^7.3.67",
+    "@vite-pwa/assets-generator": "^0.2.6",
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.57.1",

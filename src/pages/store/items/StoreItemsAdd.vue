@@ -27,10 +27,13 @@
         type="text"
         :is-error="validationErrors.code"
         :disabled="codeIsGenerated"
-        @click="generateCode"
       >
         <template #action>
-          <label class="flex items-center" for="generateCodeCheckbox">
+          <label
+            class="flex items-center"
+            for="generateCodeCheckbox"
+            @click="generateCode"
+          >
             <span
               class="material-symbols-outlined cursor-pointer"
               :class="codeIsGenerated ? 'text-blue-600' : 'text-black'"
