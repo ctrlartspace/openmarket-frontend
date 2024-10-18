@@ -3,6 +3,7 @@ import apiService from "@/services/ApiService"
 
 export function useApiRequest() {
   const isLoading = ref(false)
+  const isError = ref(false)
   const serverData = ref(null)
   const errorMessage = ref("")
   const validationErrors = ref({})
@@ -13,6 +14,7 @@ export function useApiRequest() {
   const sendRequest = async (method, url, payload = null) => {
     try {
       isLoading.value = true
+      isError.value = false
       errorMessage.value = ""
       validationErrors.value = {}
 
@@ -25,6 +27,8 @@ export function useApiRequest() {
       }
       return response // Возвращаем данные, если нужно дополнительная обработка
     } catch (error) {
+      serverData.value = null
+      isError.value = true
       if (error && error.response && error.response.data) {
         errorMessage.value = error.response.data.message
         validationErrors.value = error.response.data.errors // Ошибки валидации
@@ -43,6 +47,7 @@ export function useApiRequest() {
     validationErrors,
     hasValidationErrors,
     isLoading,
+    isError,
     sendRequest,
   }
 }

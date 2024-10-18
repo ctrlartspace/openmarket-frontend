@@ -23,7 +23,7 @@
               >
                 <span
                   v-if="isLoading"
-                  class="material-symbols-outlined animate-spin"
+                  class="material-symbols-outlined animate-spin text-lg font-medium"
                   >progress_activity</span
                 >
                 <span v-else>

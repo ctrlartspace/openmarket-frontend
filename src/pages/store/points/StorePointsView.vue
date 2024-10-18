@@ -12,7 +12,9 @@
       title-field="name"
       @on-item-click="loginToStorePoint"
       ><template #action>
-        <a-button primary>Открыть</a-button>
+        <span class="material-symbols-outlined flex items-center font-medium"
+          >chevron_right</span
+        >
       </template></a-list
     >
   </a-page>

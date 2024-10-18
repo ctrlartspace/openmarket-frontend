@@ -14,6 +14,12 @@
         <slot name="header"></slot>
       </div>
     </div>
+    <div
+      v-if="hasError()"
+      class="border-b border-neutral-300 bg-red-50 px-4 py-2"
+    >
+      <p class="text-red-600"><slot name="error"></slot></p>
+    </div>
 
     <div
       :class="{ 'no-padding p-0': noPadding, 'p-4': !noPadding }"
@@ -54,6 +60,7 @@ defineProps({
 const slots = useSlots()
 const hasHeader = () => !!slots.header
 const hasFloating = () => !!slots.floating
+const hasError = () => !!slots.error
 </script>
 
 <style lang="scss" scoped></style>

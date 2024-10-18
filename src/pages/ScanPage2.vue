@@ -17,6 +17,11 @@
       </qrcode-stream>
     </div>
     <div class="relative flex-1 p-4">
+      <div v-if="!resultItem && !isNotFound">
+        <p class="text-center text-lg text-neutral-300 md:text-base">
+          Сканируйте штрихкод
+        </p>
+      </div>
       <div
         v-if="isNotFound && !isScannableMode"
         class="flex justify-center font-medium"
@@ -32,7 +37,7 @@
         >
           <p class="text-sm">{{ resultItem.code }}</p>
           <p class="text-2xl">{{ resultItem.name }}</p>
-          <p class="text-2xl">{{ resultItem.purchasePrice }} ₸</p>
+          <p class="text-2xl">{{ resultItem.sellingPrice }} ₸</p>
           <div class="mt-2 flex items-center justify-between gap-2">
             <button
               class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"
@@ -74,6 +79,7 @@ import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.v
 import { getPointItem } from "@/services/PointService"
 import { useScan } from "@/composables/useScan"
 
+const sound = new Audio("/beep.wav")
 const { isScannableMode, applyScan } = useScan()
 
 const resultCount = ref(0)
@@ -97,7 +103,6 @@ const plusItem = () => {
 
 const onApplyClick = () => {
   if (isScannableMode.value) {
-    console.log("scannable")
     applyScan(result.value)
     return
   }
@@ -145,7 +150,6 @@ const checkItem = async (id) => {
 }
 
 const playSound = () => {
-  const sound = new Audio("/beep.wav")
   sound.play()
 }
 

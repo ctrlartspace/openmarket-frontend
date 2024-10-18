@@ -18,6 +18,7 @@
         <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
     </template>
+    <template v-if="isError" #error>{{ errorMessage }}</template>
     <div class="flex flex-col gap-2">
       <router-link
         :to="{
@@ -30,7 +31,7 @@
       <router-link
         :to="{
           path: '/store/items',
-          query: { selectableMode: true },
+          query: { selectableMode: true, nextPath: '/point/items/add' },
         }"
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded-lg"
       >
@@ -81,7 +82,7 @@ import { useApiRequest } from "@/composables/useApiRequest"
 const router = useRouter()
 const item = ref({})
 const { selectedItem: storeItem } = useSelect()
-const { sendRequest } = useApiRequest()
+const { sendRequest, errorMessage, isError } = useApiRequest()
 
 const addPointItem = async () => {
   const response = await sendRequest("post", "/point/items", item.value)

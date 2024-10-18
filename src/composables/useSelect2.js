@@ -21,9 +21,10 @@ export function useSelect() {
         await router.replace({ path: String(nextPathDirect), push: true })
         return
       }
+
       const previousRoute = routeStore.previousRoute
       const routeOptions = {
-        path: previousRoute.path,
+        path: nextPath || previousRoute.path,
         name: previousRoute.name,
         params: previousRoute.params,
         query: previousRoute.query,
