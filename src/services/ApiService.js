@@ -13,8 +13,8 @@ const apiService = {
     return axiosClient.put(url, data)
   },
 
-  delete(url, data = {}) {
-    return axiosClient.delete(url, { data })
+  delete(url) {
+    return axiosClient.delete(url)
   },
 }
 

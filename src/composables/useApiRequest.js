@@ -20,6 +20,7 @@ export function useApiRequest() {
 
       // Вызов API с динамическим методом
       const response = await apiService[method](url, payload)
+      console.log(response)
 
       // Успешный ответ
       if (response.data.success) {

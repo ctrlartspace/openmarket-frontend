@@ -31,6 +31,8 @@ import PageContent from "@/pages/PageContent.vue"
 import SaleItemsView from "@/pages/point/sales/SaleItemsView.vue"
 import CartPage from "@/pages/cart/CartPage.vue"
 import CartActiveView from "@/pages/cart/items/CartActiveView.vue"
+import FiltersAddPage from "@/pages/FiltersAddPage.vue"
+import PointInfoView from "@/pages/point/info/PointInfoView.vue"
 
 const routes = [
   { path: "/", redirect: "/store" },
@@ -123,6 +125,16 @@ const routes = [
     component: PointPage,
     redirect: "/point/items",
     children: [
+      {
+        path: "info",
+        component: PageContent,
+        children: [
+          {
+            path: "",
+            component: PointInfoView,
+          },
+        ],
+      },
       {
         path: "users",
         component: PageContent,

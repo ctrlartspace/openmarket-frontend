@@ -34,7 +34,7 @@
         />
       </div>
       <button
-        class="mt-2 w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600 transition-[transform,colors] ease-in-out will-change-transform active:scale-95"
+        class="mt-2 w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600 transition-[transform,colors] ease-in-out will-change-transform active:scale-90"
         :class="{
           'bg-blue-100 text-blue-600': store.getPaymentType.code === 'online',
           'bg-red-100 text-red-600': store.getPaymentType.code === 'kaspi-qr',
@@ -46,7 +46,7 @@
       </button>
     </div>
     <button
-      class="mt-2 flex w-full transform cursor-pointer select-none items-center justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl transition-transform will-change-transform hover:brightness-50 active:scale-95 active:brightness-50"
+      class="mt-2 flex w-full transform cursor-pointer select-none items-center justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl transition-transform will-change-transform active:scale-95"
       @click="onNextClick"
     >
       <p v-if="cartStep === 1 && !isLoading" class="flex justify-center gap-4">

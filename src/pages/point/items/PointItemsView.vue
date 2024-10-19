@@ -2,7 +2,13 @@
   <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
     <template #header>
       <a-link :to="filterPathMulti" primary> Категории </a-link>
-      <a-link v-if="!isSelectableMode" primary to="/point/items/add"
+      <a-link
+        v-if="!isSelectableMode"
+        primary
+        :to="{
+          path: '/store/items',
+          query: { selectableMode: true, nextPath: '/point/items/add' },
+        }"
         >Добавить
       </a-link>
     </template>
