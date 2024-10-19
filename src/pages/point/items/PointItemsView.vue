@@ -16,7 +16,13 @@
       >
         center_focus_strong
       </a-link-floating>
-      <a-link-floating v-if="!isSelectableMode" primary to="/point/items/add"
+      <a-link-floating
+        v-if="!isSelectableMode"
+        primary
+        :to="{
+          path: '/store/items',
+          query: { selectableMode: true, nextPath: '/point/items/add' },
+        }"
         >add
       </a-link-floating>
     </template>

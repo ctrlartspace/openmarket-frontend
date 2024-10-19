@@ -65,6 +65,19 @@
       :selectable="point"
     >
     </a-list>
+    <div v-if="storeItems && storeItems.length === 0">
+      <h1 class="p-4 text-center text-neutral-300">
+        Не найдено.<br />
+        <router-link
+          :to="{
+            path: '/store/items/add',
+            query: { scannedCode: searchInput },
+          }"
+          class="text-blue-600"
+          >Создать {{ searchInput }}
+        </router-link>
+      </h1>
+    </div>
   </a-page>
 </template>
 
