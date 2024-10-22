@@ -25,7 +25,25 @@
       :class="{ 'no-padding p-0': noPadding, 'p-4': !noPadding }"
       class="relative flex-1 overflow-auto pb-20"
     >
-      <slot></slot>
+      <div
+        :class="loading ? 'pointer-events-none opacity-0' : 'opacity-100'"
+        class="transition-opacity duration-200"
+      >
+        <slot></slot>
+      </div>
+      <div
+        class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center transition-opacity duration-200"
+        :class="loading ? 'opacity-100' : 'pointer-events-none opacity-0'"
+      >
+        <div
+          class="flex aspect-square items-center justify-center rounded-full border border-neutral-300 bg-white p-4"
+        >
+          <span
+            class="material-symbols-outlined animate-spin text-4xl font-medium"
+            >progress_activity</span
+          >
+        </div>
+      </div>
     </div>
     <div
       v-if="!isDesktop && hasFloating()"
@@ -52,6 +70,10 @@ defineProps({
     type: String,
   },
   noPadding: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
     type: Boolean,
     default: false,
   },

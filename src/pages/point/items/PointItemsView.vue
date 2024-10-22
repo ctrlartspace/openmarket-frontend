@@ -1,5 +1,8 @@
 <template>
-  <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
+  <a-page
+    :title="isSelectableMode ? 'Выбрать...' : ''"
+    :loading="isPointItemsFetching"
+  >
     <template #header>
       <a-link :to="filterPathMulti" primary> Категории </a-link>
       <a-link
@@ -83,7 +86,11 @@ const { filterPathMulti, joinedFilters } = useFilters()
 const { isSelectableMode, applySelect } = useSelect()
 const { scannedCode } = useScan()
 const searchInput = ref("")
-const { serverData: pointItems, sendRequest: fetchPointItems } = useApiRequest()
+const {
+  serverData: pointItems,
+  sendRequest: fetchPointItems,
+  isLoading: isPointItemsFetching,
+} = useApiRequest()
 
 const getPointItems = async () => {
   await fetchPointItems("get", "/point/items", {

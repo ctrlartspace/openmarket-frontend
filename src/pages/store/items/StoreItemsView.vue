@@ -1,5 +1,8 @@
 <template>
-  <a-page :title="isSelectableMode ? 'Выбрать...' : ''">
+  <a-page
+    :title="isSelectableMode ? 'Выбрать...' : ''"
+    :loading="isStoreItemsFetching"
+  >
     <template #header>
       <a-button
         v-if="selectedItems.length > 0 && point"
@@ -11,6 +14,7 @@
         >Добавить
       </a-link>
     </template>
+
     <template #floating>
       <a-modal
         #="{ props }"
@@ -97,7 +101,11 @@ import AModal from "@/components/ui/AModal.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { useUserStore } from "@/stores/user.store"
 
-const { serverData: storeItems, sendRequest: fetchStoreItems } = useApiRequest()
+const {
+  serverData: storeItems,
+  sendRequest: fetchStoreItems,
+  isLoading: isStoreItemsFetching,
+} = useApiRequest()
 const { sendRequest: addItemsToPoint } = useApiRequest()
 
 const { point } = useUserStore()

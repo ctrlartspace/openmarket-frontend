@@ -24,12 +24,13 @@ export function useSelect() {
 
       const previousRoute = routeStore.previousRoute
       const routeOptions = {
-        path: nextPath || previousRoute.path,
+        path: nextPath.value || previousRoute.path,
         name: previousRoute.name,
         params: previousRoute.params,
         query: previousRoute.query,
         replace: true,
       }
+      console.log(routeOptions)
       await router.push(routeOptions)
     } catch (error) {
       console.log(error)

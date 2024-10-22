@@ -2,24 +2,19 @@
   <button
     :class="{
       'animate-pulse': loading,
-      'text-neutral-800 hover:bg-neutral-100 hover:text-neutral-700 active:bg-neutral-200':
-        neutral,
-      'text-blue-600 hover:bg-gray-50 hover:text-blue-700 active:bg-gray-100':
-        primary,
-      'text-red-600 hover:bg-gray-50 hover:text-red-700 active:bg-gray-100':
-        danger,
-      'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700 active:bg-gray-100':
-        info,
-      'text-green-600 hover:bg-gray-50 hover:text-green-700 active:bg-gray-100':
-        success,
-      'text-pink-500 hover:bg-gray-50 hover:text-pink-700 active:bg-gray-100':
-        accent,
-      'bg-black text-white hover:bg-neutral-900 active:bg-neutral-800': black,
+      'text-neutral-800 hover:bg-neutral-100 hover:text-neutral-700': neutral,
+      'text-blue-600 hover:bg-gray-50 hover:text-blue-700': primary,
+      'text-red-600 hover:bg-gray-50 hover:text-red-700': danger,
+      'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700': info,
+      'text-green-600 hover:bg-gray-50 hover:text-green-700': success,
+      'text-pink-500 hover:bg-gray-50 hover:text-pink-700': accent,
+      'bg-black text-white hover:bg-neutral-900': black,
       'w-full justify-center': block,
     }"
     :disabled="loading"
-    class="flex aspect-square w-full transform items-center gap-2 border-r border-neutral-300 px-3 text-base font-medium last:border-none"
+    class="flex aspect-square w-full items-center gap-2 border-r border-neutral-300 px-3 text-base font-medium last:border-none"
     v-bind="$attrs"
+    v-press
   >
     <span class="material-symbols-outlined text-3xl">
       <slot></slot>

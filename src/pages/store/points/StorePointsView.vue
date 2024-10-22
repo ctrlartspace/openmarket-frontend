@@ -1,5 +1,5 @@
 <template>
-  <a-page>
+  <a-page :loading="isLoading">
     <template #header>
       <a-link primary to="/store/points/add">Добавить</a-link>
     </template>
@@ -30,8 +30,11 @@ import AButton from "@/components/ui/AButton.vue"
 import AList from "@/components/ui/AList.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 
-const { serverData: storePoints, sendRequest: fetchStorePoints } =
-  useApiRequest()
+const {
+  serverData: storePoints,
+  sendRequest: fetchStorePoints,
+  isLoading,
+} = useApiRequest()
 
 const store = useUserStore()
 const router = useRouter()

@@ -1,5 +1,5 @@
 <template>
-  <a-page>
+  <a-page :loading="isPointUsersFetching">
     <template #header>
       <a-link primary to="/point/users/add">Добавить </a-link>
     </template>
@@ -17,7 +17,11 @@ import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 
-const { serverData: pointUsers, sendRequest: fetchPointUsers } = useApiRequest()
+const {
+  serverData: pointUsers,
+  sendRequest: fetchPointUsers,
+  isLoading: isPointUsersFetching,
+} = useApiRequest()
 
 onMounted(async () => {
   await fetchPointUsers("get", "/point/users")

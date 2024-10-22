@@ -18,7 +18,9 @@
     </div>
     <div class="relative flex-1 p-4">
       <div v-if="!resultItem && !isNotFound">
-        <p class="text-center text-lg text-neutral-300 md:text-base">
+        <p
+          class="rounded-xl bg-blue-50 px-4 py-2 text-center text-lg text-blue-600 md:text-base"
+        >
           Сканируйте штрихкод
         </p>
       </div>
@@ -42,6 +44,7 @@
             <button
               class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"
               @click="minusItem"
+              v-press
             >
               <span class="material-symbols-outlined">remove</span>
             </button>
@@ -51,6 +54,7 @@
             <button
               class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"
               @click="plusItem"
+              v-press
             >
               <span class="material-symbols-outlined">add</span>
             </button>
@@ -58,6 +62,7 @@
           <button
             class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-2 text-center text-2xl font-medium text-white hover:brightness-95 active:brightness-95"
             @click="onApplyClick"
+            v-press
           >
             Готово
           </button>

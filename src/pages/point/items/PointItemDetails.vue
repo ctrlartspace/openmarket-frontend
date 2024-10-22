@@ -1,5 +1,5 @@
 <template>
-  <a-page title="Товар">
+  <a-page title="Товар" :loading="isLoading">
     <template #header>
       <a-button neutral @click="addItemToCart">
         <span class="material-symbols-outlined text-[26px]">shopping_cart</span>
@@ -37,6 +37,7 @@
         v-if="item.storeItem"
         :to="{ path: '/store/items/' + item.storeItem.id }"
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-600 md:rounded-lg"
+        v-press
       >
         <h1 class="text-lg font-medium text-blue-600 md:text-base">
           {{ item.storeItem.name }}
@@ -91,7 +92,7 @@ const cartStore = useCartStore()
 const route = useRoute()
 const router = useRouter()
 const { applySelect } = useSelect()
-const { serverData: item, sendRequest } = useApiRequest()
+const { serverData: item, sendRequest, isLoading } = useApiRequest()
 
 const addItemToCart = () => {
   cartStore.addItem(item.value)

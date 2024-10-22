@@ -7,20 +7,16 @@
     <button
       :class="{
         'animate-pulse': loading,
-        'text-black hover:bg-gray-50 hover:text-gray-700 active:bg-gray-100':
-          neutral,
-        'text-blue-600 hover:bg-gray-50 hover:text-blue-700 active:bg-gray-100':
-          primary,
-        'text-red-600 hover:bg-gray-50 hover:text-red-700 active:bg-gray-100':
-          danger,
-        'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700 active:bg-gray-100':
-          info,
-        'text-green-600 hover:bg-gray-50 hover:text-green-700 active:bg-gray-100':
-          success,
+        'text-black hover:bg-gray-50 hover:text-gray-700': neutral,
+        'text-blue-600 hover:bg-gray-50 hover:text-blue-700': primary,
+        'text-red-600 hover:bg-gray-50 hover:text-red-700': danger,
+        'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700': info,
+        'text-green-600 hover:bg-gray-50 hover:text-green-700': success,
       }"
       :disabled="loading"
       class="flex aspect-square w-full items-center gap-2 rounded px-3 text-base font-medium"
       v-bind="$attrs"
+      v-press
     >
       <span class="material-symbols-outlined text-3xl">
         <slot></slot>

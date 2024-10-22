@@ -26,6 +26,7 @@
           query: { selectableMode: true, nextPath: '/point/items/add' },
         }"
         class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded-lg"
+        v-press
       >
         <div v-if="storeItem">
           <h1 class="text-lg font-medium text-blue-600 md:text-base">
@@ -47,7 +48,7 @@
           label="Цена покупки"
           placeholder="Цена покупки"
           type="text"
-          unit="KZT"
+          unit="₸"
         />
         <a-base-input
           id="selling-price"
@@ -56,7 +57,7 @@
           label="Цена продажи"
           placeholder="Цена продажи"
           type="text"
-          unit="KZT"
+          unit="₸"
         />
       </div>
     </div>

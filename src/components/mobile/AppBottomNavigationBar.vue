@@ -8,6 +8,7 @@
               v-slot="{ isActive }"
               :to="item.path"
               class="flex w-12 flex-col items-center justify-center active:brightness-90"
+              v-press
             >
               <span
                 :class="isActive ? 'text-black' : 'text-neutral-300'"

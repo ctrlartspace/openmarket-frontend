@@ -1,5 +1,5 @@
 <template>
-  <a-page title="Товар">
+  <a-page title="Товар" :loading="isLoading">
     <template #header>
       <a-modal
         #="{ props }"
@@ -104,7 +104,7 @@ const route = useRoute()
 const router = useRouter()
 const { filters, filterPathMulti } = useFilters()
 const { point } = useUserStore()
-const { serverData: itemState, sendRequest } = useApiRequest()
+const { serverData: itemState, sendRequest, isLoading } = useApiRequest()
 
 const fetchStoreItemCall = async (id) => {
   await sendRequest("get", "/store/items/" + id)

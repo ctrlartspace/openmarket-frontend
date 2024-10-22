@@ -1,5 +1,5 @@
 <template>
-  <a-page>
+  <a-page :loading="isLoading">
     <template #header>
       <a-link :to="filterPathMulti" primary>
         <span class="material-symbols-outlined text-[28px]">menu</span>
@@ -50,7 +50,7 @@ import { useApiRequest } from "@/composables/useApiRequest"
 
 const router = useRouter()
 const { filterPathMulti, joinedFilters } = useFilters()
-const { serverData: pointItems, sendRequest } = useApiRequest()
+const { serverData: pointItems, sendRequest, isLoading } = useApiRequest()
 
 const onItemClick = (item) => {
   router.push(`/point/items/${item.pointItem.id}`)

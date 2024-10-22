@@ -1,5 +1,5 @@
 <template>
-  <a-page :title="getCashTitle">
+  <a-page :title="getCashTitle" :loading="isLoading">
     <template #header>
       <a-modal
         #="{ props }"
@@ -102,7 +102,7 @@ import AModal from "@/components/ui/AModal.vue"
 import { computed, onMounted } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 
-const { serverData: activeCash, sendRequest } = useApiRequest()
+const { serverData: activeCash, sendRequest, isLoading } = useApiRequest()
 
 const getCashTitle = computed(() => {
   if (isActiveCashExists.value) {

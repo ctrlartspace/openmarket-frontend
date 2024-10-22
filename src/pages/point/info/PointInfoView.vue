@@ -1,5 +1,5 @@
 <template>
-  <a-page title="Информация о точке">
+  <a-page title="Информация о точке" :loading="isLoading">
     <template #header>
       <a-modal
         #="{ props }"
@@ -54,7 +54,7 @@ import { useUserStore } from "@/stores/user.store"
 
 const store = useUserStore()
 
-const { serverData: point, sendRequest } = useApiRequest()
+const { serverData: point, sendRequest, isLoading } = useApiRequest()
 const { sendRequest: deletePoint } = useApiRequest()
 
 const onDeletePointClick = async () => {
