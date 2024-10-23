@@ -12,7 +12,7 @@
       'w-full justify-center': block,
     }"
     :disabled="loading"
-    class="flex aspect-square w-full items-center gap-2 border-r border-neutral-300 px-3 text-base font-medium last:border-none"
+    class="flex aspect-square w-full items-center gap-2 px-3 text-base font-medium"
     v-bind="$attrs"
     v-press
   >

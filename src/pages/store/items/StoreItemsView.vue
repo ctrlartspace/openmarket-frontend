@@ -17,16 +17,12 @@
 
     <template #floating>
       <a-modal
+        v-if="selectedItems.length > 0 && point"
         #="{ props }"
         title="Добавить товары в точку?"
         :async-operation="onAddItemsToPointClick"
       >
-        <a-button-floating
-          v-if="selectedItems.length > 0 && point"
-          accent
-          v-bind="props"
-          >add_circle
-        </a-button-floating>
+        <a-button-floating accent v-bind="props">add_circle </a-button-floating>
       </a-modal>
       <a-link-floating
         :to="{
@@ -69,7 +65,7 @@
       :selectable="point"
     >
     </a-list>
-    <div v-if="storeItems && storeItems.length === 0">
+    <div v-if="storeItems && storeItems.length === 0 && isSelectableMode">
       <h1 class="p-4 text-center text-neutral-300">
         Не найдено.<br />
         <router-link

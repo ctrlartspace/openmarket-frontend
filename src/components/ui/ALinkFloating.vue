@@ -1,9 +1,5 @@
 <template>
-  <router-link
-    class="flex items-center border-r border-neutral-300 last:border-none"
-    custom
-    v-bind="$props"
-  >
+  <router-link class="flex items-center" custom v-bind="$props">
     <button
       :class="{
         'animate-pulse': loading,

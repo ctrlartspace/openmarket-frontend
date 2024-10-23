@@ -4,7 +4,7 @@ export default {
     const handleTouchStart = () => {
       el.classList.add(
         "scale-95",
-        "transition-transform",
+        "transition-all",
         "duration-200",
         "ease-in-out",
       )

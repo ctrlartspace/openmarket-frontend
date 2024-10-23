@@ -36,6 +36,7 @@
         <a-button-floating v-bind="props">save</a-button-floating>
       </a-modal>
     </template>
+    <template v-if="isError" #error>{{ errorMessage }}</template>
     <div v-if="itemState" class="flex flex-col gap-2">
       <a-base-input
         id="article"
@@ -84,6 +85,15 @@
         type="text"
         @click="$router.push(filterPathMulti)"
       />
+      <div class="flex flex-col gap-1" v-if="itemState.availability.length > 0">
+        <label class="text-lg font-medium md:text-base">Наличие в точках</label>
+        <a-list
+          :items="itemState.availability"
+          title-field="pointName"
+          description-field="count"
+          description-hint="шт."
+        />
+      </div>
     </div>
   </a-page>
 </template>
@@ -99,12 +109,19 @@ import AModal from "@/components/ui/AModal.vue"
 import { useUserStore } from "@/stores/user.store.js"
 import { generateBarcodePDF } from "@/utils/barcodeGenerator"
 import { useApiRequest } from "@/composables/useApiRequest"
+import AList from "@/components/ui/AList.vue"
 
 const route = useRoute()
 const router = useRouter()
 const { filters, filterPathMulti } = useFilters()
 const { point } = useUserStore()
-const { serverData: itemState, sendRequest, isLoading } = useApiRequest()
+const {
+  serverData: itemState,
+  sendRequest,
+  isLoading,
+  isError,
+  errorMessage,
+} = useApiRequest()
 
 const fetchStoreItemCall = async (id) => {
   await sendRequest("get", "/store/items/" + id)
@@ -124,20 +141,17 @@ const updateStoreItem = async () => {
 }
 
 const addPointItem = async () => {
-  try {
-    const data = {
-      storeItemId: itemState.value.id,
-      sellingPrice: itemState.value.sellingPrice,
-      purchasePrice: itemState.value.purchasePrice,
-    }
-
-    const response = await sendRequest("post", "/point/items", data)
-    if (response) {
-      await router.push({ path: "/point/items/" + response.data.data.id })
-    }
-  } catch (error) {
-    console.log(error)
+  const data = {
+    storeItemId: itemState.value.id,
+    sellingPrice: itemState.value.sellingPrice,
+    purchasePrice: itemState.value.purchasePrice,
   }
+
+  const response = await sendRequest("post", "/point/items", data)
+  if (response) {
+    await router.push({ path: "/point/items/" + response.data.data.id })
+  }
+  console.log("sfsdf")
 }
 
 const onGenerateBarcodeClick = () => {

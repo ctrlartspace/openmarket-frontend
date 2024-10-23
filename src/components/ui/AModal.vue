@@ -1,6 +1,13 @@
 <template>
   <slot :props="activatorProps"></slot>
-  <div v-if="isOpen" class="relative z-10">
+  <div
+    class="modal-window relative z-10 transition-opacity"
+    :class="
+      isOpen
+        ? 'pointer-events-auto opacity-100'
+        : 'pointer-events-none opacity-0'
+    "
+  >
     <div
       class="fixed inset-0 bg-black bg-opacity-30 transition-opacity"
       aria-hidden="true"
@@ -17,7 +24,7 @@
             </h1>
             <div class="flex flex-col gap-2">
               <button
-                class="flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-500 hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
+                class="flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-500 hover:bg-neutral-50 md:rounded-lg md:text-base md:active:bg-neutral-100"
                 :disabled="isLoading"
                 @click="onYesClick"
                 v-press
@@ -32,7 +39,7 @@
                 </span>
               </button>
               <button
-                class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-black hover:bg-neutral-50 active:bg-neutral-100 md:rounded-lg md:text-base"
+                class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-black hover:bg-neutral-50 md:rounded-lg md:text-base md:active:bg-neutral-100"
                 @click="onNoClick"
                 v-press
               >
@@ -80,11 +87,11 @@ const activatorProps = ref({
 })
 
 const onYesClick = async () => {
+  emits("yes")
   isLoading.value = true
   await props.asyncOperation()
   isLoading.value = false
   isOpen.value = false
-  emits("yes")
   emits("finish")
 }
 

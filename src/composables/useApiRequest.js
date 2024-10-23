@@ -28,7 +28,7 @@ export function useApiRequest() {
       }
       return response // Возвращаем данные, если нужно дополнительная обработка
     } catch (error) {
-      serverData.value = null
+      // serverData.value = null
       isError.value = true
       if (error && error.response && error.response.data) {
         errorMessage.value = error.response.data.message
