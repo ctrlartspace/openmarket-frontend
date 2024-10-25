@@ -1,7 +1,7 @@
 <template>
   <base-page :menu-items="menuItems">
     <template #bottom>
-      <div class="border-t border-neutral-300">
+      <div>
         <cart-change></cart-change>
       </div>
     </template>

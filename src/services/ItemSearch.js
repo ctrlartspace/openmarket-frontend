@@ -95,7 +95,7 @@ const updateSales = async (data, ids = "") => {
 
 const getIncomes = async (queryParams = "") => {
   try {
-    const response = await axios.get(`/incomes?fitlers=${queryParams}`)
+    const response = await axios.get(`/arrivals?fitlers=${queryParams}`)
     return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)
@@ -104,7 +104,7 @@ const getIncomes = async (queryParams = "") => {
 
 const makeIncome = async (data) => {
   try {
-    const response = await axios.post(`/incomes`, data)
+    const response = await axios.post(`/arrivals`, data)
     return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)

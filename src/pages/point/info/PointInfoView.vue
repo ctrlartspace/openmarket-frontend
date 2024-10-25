@@ -1,13 +1,13 @@
 <template>
   <a-page title="Информация о точке" :loading="isLoading">
     <template #header>
-      <a-modal
+      <!-- <a-modal
         #="{ props }"
         title="Сохранить изменения?"
         :async-operation="updatePointItem"
       >
         <a-button primary v-bind="props"> Сохранить</a-button>
-      </a-modal>
+      </a-modal> -->
       <a-modal
         #="{ props }"
         title="Удалить точку?"
@@ -17,13 +17,13 @@
       </a-modal>
     </template>
     <template #floating>
-      <a-modal
+      <!-- <a-modal
         #="{ props }"
         title="Сохранить изменения?"
         :async-operation="updatePointItem"
       >
         <a-button-floating v-bind="props"> save</a-button-floating>
-      </a-modal>
+      </a-modal> -->
       <a-modal
         #="{ props }"
         title="Удалить точку?"

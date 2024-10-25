@@ -13,7 +13,7 @@
           success,
       }"
       :disabled="loading"
-      class="px-2 flex items-center gap-2 text-base font-medium rounded"
+      class="flex items-center gap-2 rounded px-4 text-base font-medium"
       v-bind="$attrs"
     >
       <slot></slot>

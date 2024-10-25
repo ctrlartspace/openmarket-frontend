@@ -2,7 +2,7 @@ import axios from "@/plugins/axios.js"
 
 export const getArrivalItems = async (params) => {
   try {
-    const response = await axios.get("/incomes", { params })
+    const response = await axios.get("/arrivals", { params })
     return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)

@@ -1,17 +1,7 @@
 <template>
   <slot :props="activatorProps"></slot>
-  <div
-    class="modal-window relative z-10 transition-opacity"
-    :class="
-      isOpen
-        ? 'pointer-events-auto opacity-100'
-        : 'pointer-events-none opacity-0'
-    "
-  >
-    <div
-      class="fixed inset-0 bg-black bg-opacity-30 transition-opacity"
-      aria-hidden="true"
-    >
+  <div v-if="isOpen" class="modal-window relative z-10">
+    <div class="fixed inset-0 bg-black bg-opacity-30" aria-hidden="true">
       <div class="fixed inset-0 z-10 flex w-screen">
         <div class="flex h-full w-full items-center justify-center">
           <div

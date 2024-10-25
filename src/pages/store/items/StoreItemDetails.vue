@@ -61,22 +61,26 @@
         placeholder="Наименование"
         type="text"
       />
-      <a-base-input
-        id="purchase-price"
-        v-model="itemState.purchasePrice"
-        label="Цена покупки"
-        placeholder="Цена покупки"
-        type="text"
-        unit="₸"
-      />
-      <a-base-input
-        id="selling-price"
-        v-model="itemState.sellingPrice"
-        label="Цена продажи"
-        placeholder="Цена продажи"
-        type="text"
-        unit="₸"
-      />
+      <div class="flex gap-2">
+        <a-base-input
+          class="w-full"
+          id="purchase-price"
+          v-model="itemState.purchasePrice"
+          label="Покупка"
+          placeholder="Цена покупки"
+          type="text"
+          unit="₸"
+        />
+        <a-base-input
+          class="w-full"
+          id="selling-price"
+          v-model="itemState.sellingPrice"
+          label="Продажа"
+          placeholder="Цена продажи"
+          type="text"
+          unit="₸"
+        />
+      </div>
       <a-base-input
         id="filters"
         v-model="filters"
@@ -85,7 +89,10 @@
         type="text"
         @click="$router.push(filterPathMulti)"
       />
-      <div class="flex flex-col gap-1" v-if="itemState.availability.length > 0">
+      <div
+        class="flex flex-col gap-1"
+        v-if="itemState.availability?.length > 0"
+      >
         <label class="text-lg font-medium md:text-base">Наличие в точках</label>
         <a-list
           :items="itemState.availability"
@@ -136,7 +143,7 @@ const updateStoreItem = async () => {
   const id = itemState.value.id
   if (id) {
     itemState.value.filters = filters.value
-    await sendRequest("put", "/store/items/" + id, itemState.value)
+    // await sendRequest("put", "/store/items/" + id, itemState.value)
   }
 }
 

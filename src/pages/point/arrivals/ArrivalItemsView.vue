@@ -57,7 +57,7 @@ const onItemClick = (item) => {
 }
 
 onMounted(async () => {
-  await sendRequest("get", "/incomes", {
+  await sendRequest("get", "/arrivals", {
     filters: joinedFilters.value,
   })
 })

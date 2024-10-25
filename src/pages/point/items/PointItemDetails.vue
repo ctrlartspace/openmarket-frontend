@@ -48,22 +48,26 @@
           {{ item.storeItem.sellingPrice }} ₸
         </p>
       </router-link>
-      <a-base-input
-        id="purchase-price"
-        v-model="item.purchasePrice"
-        label="Цена покупки"
-        placeholder="Цена покупки"
-        type="text"
-        unit="₸"
-      />
-      <a-base-input
-        id="selling-price"
-        v-model="item.sellingPrice"
-        label="Цена продажи"
-        placeholder="Цена продажи"
-        type="text"
-        unit="₸"
-      />
+      <div class="flex gap-2">
+        <a-base-input
+          class="w-full"
+          id="purchase-price"
+          v-model="item.purchasePrice"
+          label="Покупка"
+          placeholder="Цена покупки"
+          type="text"
+          unit="₸"
+        />
+        <a-base-input
+          class="w-full"
+          id="selling-price"
+          v-model="item.sellingPrice"
+          label="Продажа"
+          placeholder="Цена продажи"
+          type="text"
+          unit="₸"
+        />
+      </div>
       <a-base-input
         id="count"
         v-model="item.count"
