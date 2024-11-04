@@ -1,4 +1,4 @@
-import { ref, computed } from "vue"
+import { ref, computed, nextTick } from "vue"
 import apiService from "@/services/ApiService"
 
 export function useApiRequest() {
@@ -10,15 +10,20 @@ export function useApiRequest() {
   const hasValidationErrors = computed(
     () => Object.keys(validationErrors.value).length > 0,
   )
+  function timeout(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+  }
 
   const sendRequest = async (method, url, payload = null) => {
     try {
+      await timeout(1)
       isLoading.value = true
       isError.value = false
       errorMessage.value = ""
       validationErrors.value = {}
 
       // Вызов API с динамическим методом
+
       const response = await apiService[method](url, payload)
       console.log(response)
 

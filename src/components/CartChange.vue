@@ -79,14 +79,17 @@
                 : 'bg-blue-100 text-blue-600 transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90'
             "
             @click="makeSaleFromCart"
-            :disabled="store.isEmpty"
+            :disabled="store.isEmpty || isLoading"
           >
             <span
               >{{ store.getTotalAmount }}
               <span class="font-semibold">₸</span></span
             >
-            <span class="material-symbols-outlined text-4xl"
+            <span v-if="!isLoading" class="material-symbols-outlined text-4xl"
               >arrow_forward</span
+            >
+            <span v-else class="material-symbols-outlined animate-spin text-4xl"
+              >progress_activity</span
             >
           </button>
         </div>

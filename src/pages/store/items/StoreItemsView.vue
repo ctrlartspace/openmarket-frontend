@@ -36,47 +36,48 @@
         >add
       </a-link-floating>
     </template>
-    <v-form class="relative mb-2 w-full" @submit.prevent>
-      <input
-        ref="focusableInput"
-        v-model.trim="searchInput"
-        type="text"
-        class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-neutral-300 md:rounded-lg md:text-base"
-        placeholder="Код товара, наименование"
-      />
-      <div
-        class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
-      >
-        <span class="material-symbols-outlined text-gray-300">search</span>
-      </div>
-      <!-- <div
+    <div v-if="storeItems">
+      <v-form class="relative mb-2 w-full" @submit.prevent>
+        <input
+          ref="focusableInput"
+          v-model.trim="searchInput"
+          type="text"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-neutral-300 md:rounded-lg md:text-base"
+          placeholder="Код товара, наименование"
+        />
+        <div
+          class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
+        >
+          <span class="material-symbols-outlined text-gray-300">search</span>
+        </div>
+        <!-- <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-between px-4"
       >
       </div> -->
-    </v-form>
-    <a-list
-      v-if="storeItems"
-      v-model="selectedItems"
-      :items="storeItems"
-      title-field="name"
-      description-field="purchasePrice"
-      description-hint="₸"
-      @on-item-click="onItemClick"
-      :selectable="point"
-    >
-    </a-list>
-    <div v-if="storeItems && storeItems.length === 0 && isSelectableMode">
-      <h1 class="p-4 text-center text-neutral-300">
-        Не найдено.<br />
-        <router-link
-          :to="{
-            path: '/store/items/add',
-            query: { scannedCode: searchInput },
-          }"
-          class="text-blue-600"
-          >Создать {{ searchInput }}
-        </router-link>
-      </h1>
+      </v-form>
+      <a-list
+        v-model="selectedItems"
+        :items="storeItems"
+        title-field="name"
+        description-field="purchasePrice"
+        description-hint="₸"
+        @on-item-click="onItemClick"
+        :selectable="point"
+      >
+      </a-list>
+      <div v-if="storeItems && storeItems.length === 0 && isSelectableMode">
+        <h1 class="p-4 text-center text-neutral-300">
+          Не найдено.<br />
+          <router-link
+            :to="{
+              path: '/store/items/add',
+              query: { scannedCode: searchInput },
+            }"
+            class="text-blue-600"
+            >Создать {{ searchInput }}
+          </router-link>
+        </h1>
+      </div>
     </div>
   </a-page>
 </template>

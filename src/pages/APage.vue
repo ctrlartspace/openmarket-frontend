@@ -32,17 +32,29 @@
         <slot></slot>
       </div>
       <div
-        class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center transition-opacity duration-200"
-        :class="loading ? 'opacity-100' : 'pointer-events-none opacity-0'"
+        class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-neutral-100 transition-opacity"
+        :class="
+          loading
+            ? 'opacity-100 duration-[1000ms]'
+            : 'pointer-events-none opacity-0 duration-200'
+        "
       >
-        <div
+        <div class="flex h-full w-full flex-col gap-2 p-4">
+          <div
+            class="animate-pulse rounded-xl bg-neutral-200 px-4 py-6 md:rounded-lg"
+          ></div>
+          <div
+            class="h-full animate-pulse rounded-xl bg-gradient-to-b from-neutral-200 to-neutral-100 px-4 py-12 md:rounded-lg"
+          ></div>
+        </div>
+        <!-- <div
           class="flex aspect-square items-center justify-center rounded-full border border-neutral-300 bg-white p-4"
         >
           <span
             class="material-symbols-outlined animate-spin text-4xl font-medium"
             >progress_activity</span
           >
-        </div>
+        </div> -->
       </div>
     </div>
     <div

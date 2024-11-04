@@ -23,37 +23,35 @@
       </v-form>
       <div
         v-if="!store.isEmpty"
-        class="overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded-lg"
+        class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded-lg"
       >
-        <table class="w-full table-auto text-left text-lg md:text-base">
-          <tbody>
-            <tr
-              v-for="(item, i) in store.groupedCartItems"
-              :key="i"
-              class="flex cursor-pointer items-center gap-2 border-b border-neutral-300 px-4 py-2 last:border-none hover:bg-gray-50 active:bg-gray-50"
-              @click="onItemClick(item)"
-            >
-              <td class="flex items-center">
-                <button class="flex items-center justify-center">
-                  <span
-                    class="material-symbols-outlined select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
-                    @click.stop="store.removeItem(item.id)"
-                  >
-                    remove
-                  </span>
-                </button>
-              </td>
-              <td class="line-clamp-1 font-medium">
-                <span class=""> {{ item.name }}</span>
-              </td>
-              <td class="whitespace-nowrap">{{ item.count }} шт.</td>
-              <td class="whitespace-nowrap font-medium text-green-600">
-                {{ item.count * item.sellingPrice }}
-                <span class="font-semibold">₸</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div
+          v-for="(item, i) in store.groupedCartItems"
+          :key="i"
+          class="flex w-full cursor-pointer items-center border-b border-neutral-300 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:text-base"
+          @click="onItemClick(item)"
+        >
+          <div class="flex items-center py-2 pl-4">
+            <button class="flex items-center justify-center" v-press>
+              <span
+                class="material-symbols-outlined select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
+                @click.stop="store.removeItem(item.id)"
+              >
+                remove
+              </span>
+            </button>
+          </div>
+          <div class="w-full truncate px-4 py-2 font-medium">
+            {{ item.name }}
+          </div>
+          <div class="w-max whitespace-nowrap px-4 py-2">
+            <span class="text-neutral-400">{{ item.count }} шт. </span>
+            <span class="font-medium text-green-600">
+              {{ item.count * item.sellingPrice }}
+            </span>
+            <span class="font-semibold text-green-600"> ₸ </span>
+          </div>
+        </div>
       </div>
       <div v-else class="flex justify-center p-4 text-lg text-neutral-300">
         Пусто

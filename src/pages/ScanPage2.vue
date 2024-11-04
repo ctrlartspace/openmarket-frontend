@@ -1,7 +1,8 @@
 <template>
-  <div class="flex h-full flex-col gap-2">
-    <div class="aspect-square w-full">
+  <div class="flex h-full flex-col">
+    <div class="aspect-square w-full p-2">
       <qrcode-stream
+        class="overflow-hidden rounded-xl border-4 border-neutral-100"
         :constraints="selectedConstraints"
         :track="paintOutline"
         :formats="selectedBarcodeFormats"
@@ -17,12 +18,13 @@
       </qrcode-stream>
     </div>
     <div class="relative flex-1 p-4">
-      <div v-if="!resultItem && !isNotFound">
-        <p
-          class="rounded-xl bg-blue-50 px-4 py-2 text-center text-lg text-blue-600 md:text-base"
-        >
+      <div
+        class="flex justify-center font-medium"
+        v-if="!resultItem && !isNotFound"
+      >
+        <span class="rounded-lg bg-blue-50 px-4 py-2 text-blue-600">
           Сканируйте штрихкод
-        </p>
+        </span>
       </div>
       <div
         v-if="isNotFound && !isScannableMode"
@@ -162,8 +164,8 @@ const playSound = () => {
 
 const selectedConstraints = ref({
   facingMode: "environment",
-  width: { ideal: 1080 },
-  height: { ideal: 1080 },
+  width: { ideal: 1500 },
+  height: { ideal: 1500 },
   advanced: [
     { focusMode: "continuous" }, // Включение автофокуса
   ],

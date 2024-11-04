@@ -35,13 +35,22 @@
 
     <div class="flex flex-col gap-2" v-if="isActiveCashExists">
       <div
-        class="rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg"
+        class="grid grid-cols-2 rounded-xl border border-neutral-300 bg-white md:rounded-lg"
       >
-        <h1 class="text-lg md:text-base">На кассе:</h1>
-        <p class="text-2xl font-medium">
-          {{ cashAmount }}
-          <span class="font-semibold">₸</span>
-        </p>
+        <div class="border-r border-neutral-300 px-4 py-2">
+          <h1 class="text-lg md:text-base">На кассе</h1>
+          <p class="text-2xl font-medium">
+            {{ cashAmount }}
+            <span class="font-semibold">₸</span>
+          </p>
+        </div>
+        <div class="px-4 py-2">
+          <h1 class="inline text-lg md:text-base">Итого</h1>
+          <p class="text-2xl font-medium">
+            {{ activeCash.total }}
+            <span class="font-semibold">₸</span>
+          </p>
+        </div>
       </div>
       <div
         v-if="activeCash.totalsPaymentType.length > 0"
@@ -78,15 +87,6 @@
             </p>
           </div>
         </div>
-      </div>
-      <div
-        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg"
-      >
-        <h1 class="inline text-lg md:text-base">Итого</h1>
-        <p class="text-2xl font-medium">
-          {{ activeCash.total }}
-          <span class="font-semibold">₸</span>
-        </p>
       </div>
     </div>
 

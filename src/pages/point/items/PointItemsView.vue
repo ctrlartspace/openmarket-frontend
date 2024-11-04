@@ -36,34 +36,35 @@
       </a-link-floating>
     </template>
 
-    <v-form class="relative mb-2 w-full" @submit.prevent>
-      <input
-        ref="focusableInput"
-        v-model.trim="searchInput"
-        type="text"
-        class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-neutral-300 md:rounded-lg md:text-base"
-        placeholder="Код товара, наименование"
-      />
-      <div
-        class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
-      >
-        <span class="material-symbols-outlined text-gray-300">search</span>
-      </div>
-      <!-- <div
+    <div v-if="pointItems">
+      <v-form class="relative mb-2 w-full" @submit.prevent>
+        <input
+          ref="focusableInput"
+          v-model.trim="searchInput"
+          type="text"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-neutral-300 md:rounded-lg md:text-base"
+          placeholder="Код товара, наименование"
+        />
+        <div
+          class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
+        >
+          <span class="material-symbols-outlined text-gray-300">search</span>
+        </div>
+        <!-- <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-between gap-2 px-4"
       >
       </div> -->
-    </v-form>
+      </v-form>
 
-    <a-list
-      v-if="pointItems"
-      :items="pointItems"
-      title-field="storeItem.name"
-      description-field="count"
-      description-hint="шт."
-      @on-item-click="onItemClick"
-    >
-    </a-list>
+      <a-list
+        :items="pointItems"
+        title-field="storeItem.name"
+        description-field="count"
+        description-hint="шт."
+        @on-item-click="onItemClick"
+      >
+      </a-list>
+    </div>
   </a-page>
 </template>
 
