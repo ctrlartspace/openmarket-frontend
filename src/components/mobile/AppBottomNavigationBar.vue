@@ -1,7 +1,9 @@
 <template>
   <footer class="@bottom-navigation pb-safe">
     <nav v-if="store.isAuthorizedPoint">
-      <div class="border-t border-neutral-300 bg-white px-4 py-1">
+      <div
+        class="border-t border-neutral-300 bg-white px-4 py-1 md:border-neutral-200"
+      >
         <ul class="flex justify-around gap-2">
           <li class="relative" v-for="(item, i) in menuItems" :key="i">
             <router-link

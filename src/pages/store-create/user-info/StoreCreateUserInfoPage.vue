@@ -64,11 +64,11 @@ import AppDialogVue from '@/components/AppDialog.vue';
     </div>
     <div v-if="step === 3" class="flex flex-col gap-4">
       <div
-        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg"
+        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg md:border-neutral-200"
       >
         <div class="flex items-start gap-4 rounded-xl">
           <div
-            class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-blue-400 p-2 text-white md:rounded-lg"
+            class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-blue-600 p-2 text-white md:rounded-lg"
           >
             <span class="material-symbols-outlined text-3xl">person</span>
           </div>
@@ -80,14 +80,12 @@ import AppDialogVue from '@/components/AppDialog.vue';
       </div>
       <!-- <div class="flex items-center justify-center">
         <div
-          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300 bg-white"
+          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300 bg-white md:border-neutral-200"
         >
-          <span class="material-symbols-outlined text-4xl text-neutral-400"
-            >arrow_downward_alt</span
-          >
+          <span class="material-symbols-outlined text-4xl">unfold_more</span>
         </div>
         <div
-          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300 bg-white"
+          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300 bg-white md:border-neutral-200"
         >
           <span class="material-symbols-outlined animate-spin text-4xl"
             >autorenew</span
@@ -95,14 +93,14 @@ import AppDialogVue from '@/components/AppDialog.vue';
         </div>
       </div> -->
       <div
-        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg"
+        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg md:border-neutral-200"
       >
         <h1 class="text-lg font-medium md:text-base">Магазин</h1>
         <div class="flex gap-4 rounded-xl">
           <div
-            class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-green-400 p-2 text-white md:rounded-lg"
+            class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-gray-600 p-2 text-white md:rounded-lg"
           >
-            <span class="material-symbols-outlined text-3xl">person</span>
+            <span class="material-symbols-outlined text-3xl">store</span>
           </div>
           <div class="h-full w-full">
             <p class="font-medium">{{ data.store.full_name }}</p>

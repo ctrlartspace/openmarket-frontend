@@ -26,7 +26,7 @@
           path: '/store/users',
           query: { selectableMode: true },
         }"
-        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded-lg"
+        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-500 md:rounded-lg md:border-neutral-200"
       >
         <div v-if="selectedUser">
           <h1 class="text-lg font-medium md:text-base">

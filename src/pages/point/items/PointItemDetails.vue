@@ -1,12 +1,8 @@
 <template>
   <a-page title="Товар" :loading="isLoading">
     <template #header>
-      <a-button neutral @click="addItemToCart">
-        <span class="material-symbols-outlined text-[26px]">shopping_cart</span>
-        В корзину
-      </a-button>
+      <a-button neutral @click="addItemToCart"> В корзину </a-button>
       <a-button success @click="applySelect(item, '/point/arrivals/add')">
-        <span class="material-symbols-outlined">add</span>
         Приход
       </a-button>
       <a-modal
@@ -36,7 +32,7 @@
       <router-link
         v-if="item.storeItem"
         :to="{ path: '/store/items/' + item.storeItem.id }"
-        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 hover:border-neutral-600 md:rounded-lg"
+        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg md:border-neutral-200 md:hover:bg-gray-50"
         v-press
       >
         <h1 class="text-lg font-medium text-blue-600 md:text-base">

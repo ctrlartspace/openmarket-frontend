@@ -36,7 +36,7 @@
     <div class="flex flex-col gap-2" v-if="isActiveCashExists">
       <div class="grid grid-cols-1 gap-2">
         <div
-          class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg"
+          class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg md:border-neutral-200"
         >
           <h1 class="inline text-lg md:text-base">Итого</h1>
           <p class="text-2xl font-medium">
@@ -46,7 +46,7 @@
         </div>
 
         <div
-          class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg"
+          class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg md:border-neutral-200"
         >
           <h1 class="text-lg md:text-base">На кассе</h1>
           <p class="text-2xl font-medium">

@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="border-b border-neutral-300 bg-white"
+    class="border-b border-neutral-300 bg-white md:border-neutral-200"
     v-if="store.isAuthorizedPoint"
   >
     <!-- Desktop -->
@@ -38,8 +38,11 @@
       </li>
     </ul>
   </nav>
-  <nav v-else>
-    <ul class="flex w-full gap-4 border-b border-neutral-300 px-4 py-1">
+  <nav
+    class="border-b border-neutral-300 bg-white md:border-neutral-200"
+    v-else
+  >
+    <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
       <li class="ml-auto"></li>
       <li class="inline">
         <router-link v-slot="{ isActive }" to="/store">
@@ -47,7 +50,7 @@
             :class="isActive ? 'text-black' : 'text-gray-300'"
             class="text-base font-medium"
           >
-            Магазин
+            {{ getStoreTitle }}
           </span>
         </router-link>
       </li>
@@ -56,10 +59,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { useUserStore } from "@/stores/user.store"
 
 const store = useUserStore()
+
+const getStoreTitle = computed(() =>
+  store.isAuthorizedStore ? "Магазин" : "Open Kassa",
+)
 
 const menuItems = ref([
   {

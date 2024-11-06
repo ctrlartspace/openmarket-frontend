@@ -1,11 +1,11 @@
 <template>
   <div
     v-if="!hasNoItems"
-    class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded-lg"
+    class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded-lg md:border-neutral-200"
   >
     <div
       v-if="selectedItems.length > 0"
-      class="flex w-full cursor-pointer items-center border-b border-neutral-300 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:text-base"
+      class="flex w-full cursor-pointer items-center border-b border-neutral-300 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:border-neutral-200 md:text-base"
     >
       <div v-if="selectable" class="flex items-center py-2 pl-4">
         <input
@@ -21,7 +21,7 @@
     <div
       v-for="(item, i) in items"
       :key="i"
-      class="flex w-full cursor-pointer items-center border-b border-neutral-300 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:text-base"
+      class="flex w-full cursor-pointer items-center border-b border-neutral-300 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:border-neutral-200 md:text-base"
       @click="emits('onItemClick', item)"
     >
       <div v-if="selectable" class="flex items-center py-2 pl-4">

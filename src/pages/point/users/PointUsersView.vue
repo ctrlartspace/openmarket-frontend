@@ -6,7 +6,11 @@
     <template #floating>
       <a-link-floating primary to="/point/users/add">add </a-link-floating>
     </template>
-    <a-list v-if="pointUsers" :items="pointUsers" title-field="name"></a-list>
+    <a-list
+      v-if="pointUsers"
+      :items="pointUsers"
+      title-field="full_name"
+    ></a-list>
   </a-page>
 </template>
 

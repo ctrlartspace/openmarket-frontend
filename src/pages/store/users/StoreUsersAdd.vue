@@ -20,8 +20,15 @@
     </template>
     <div class="flex flex-col gap-2">
       <a-base-input
+        id="store-user-phone-number"
+        v-model="storeUser.phone_number"
+        placeholder="Номер телефона"
+        type="text"
+        :is-error="validationErrors.phone_number"
+      />
+      <a-base-input
         id="store-user-name"
-        v-model="storeUser.name"
+        v-model="storeUser.full_name"
         placeholder="Имя сотрудника"
         type="text"
         :is-error="validationErrors.name"
@@ -53,7 +60,8 @@ const { validationErrors, sendRequest } = useApiRequest()
 
 const addStoreUser = async () => {
   const payload = {
-    name: storeUser.value.name,
+    phone_number: storeUser.value.phone_number,
+    full_name: storeUser.value.full_name,
     password: storeUser.value.password,
   }
 

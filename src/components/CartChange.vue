@@ -1,6 +1,8 @@
 <template>
   <div class="grid h-full grid-cols-10 bg-neutral-100">
-    <div class="col-span-3 border-r border-t border-neutral-300 bg-white p-4">
+    <div
+      class="col-span-3 border-r border-t border-neutral-300 bg-white p-4 md:border-neutral-200"
+    >
       <div
         v-if="store.getPaymentType.code === 'cash'"
         class="grid h-full grid-cols-3 gap-2"
@@ -23,7 +25,7 @@
     </div>
     <div class="col-span-7 h-full p-4">
       <div
-        class="flex h-full flex-col justify-between gap-2 rounded-lg border border-neutral-300 bg-white p-4"
+        class="flex h-full flex-col justify-between gap-2 rounded-lg border border-neutral-300 bg-white p-4 md:border-neutral-200"
       >
         <div
           v-if="store.getPaymentType.code === 'cash'"
@@ -32,13 +34,13 @@
           <div class="grid grid-cols-2 gap-2">
             <input
               v-model="inputAmount"
-              class="appearance-none rounded-lg border border-neutral-300 px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black md:text-base"
+              class="appearance-none rounded-lg border border-neutral-300 px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black md:border-neutral-200 md:text-base"
               :class="inputAmount ? 'text-end' : 'text-start'"
               placeholder="Внесено"
               type="text"
             />
             <div
-              class="flex rounded-lg border border-neutral-300 bg-white px-4 py-2"
+              class="flex rounded-lg border border-neutral-300 bg-white px-4 py-2 md:border-neutral-200"
             >
               <span class="flex-auto text-base text-gray-300">Сдача</span>
               <span
@@ -49,7 +51,7 @@
             </div>
           </div>
           <textarea
-            class="rounded-lg border border-neutral-300 px-4 py-2 placeholder:text-gray-300"
+            class="rounded-lg border border-neutral-300 px-4 py-2 placeholder:text-gray-300 md:border-neutral-200"
             rows="2"
             placeholder="Комментарий"
           ></textarea>
@@ -85,10 +87,14 @@
               >{{ store.getTotalAmount }}
               <span class="font-semibold">₸</span></span
             >
-            <span v-if="!isLoading" class="material-symbols-outlined text-4xl"
+            <span
+              v-if="!isLoading"
+              class="material-symbols-outlined text-4xl font-medium"
               >arrow_forward</span
             >
-            <span v-else class="material-symbols-outlined animate-spin text-4xl"
+            <span
+              v-else
+              class="material-symbols-outlined animate-spin text-4xl font-medium"
               >progress_activity</span
             >
           </button>

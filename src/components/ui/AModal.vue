@@ -14,7 +14,7 @@
             </h1>
             <div class="flex flex-col gap-2">
               <button
-                class="flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-500 hover:bg-neutral-50 md:rounded-lg md:text-base md:active:bg-neutral-100"
+                class="flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-500 hover:bg-neutral-50 md:rounded-lg md:border-neutral-200 md:text-base md:active:bg-neutral-100"
                 :disabled="isLoading"
                 @click="onYesClick"
                 v-press
@@ -29,7 +29,7 @@
                 </span>
               </button>
               <button
-                class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-black hover:bg-neutral-50 md:rounded-lg md:text-base md:active:bg-neutral-100"
+                class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-black hover:bg-neutral-50 md:rounded-lg md:border-neutral-200 md:text-base md:active:bg-neutral-100"
                 @click="onNoClick"
                 v-press
               >

@@ -2,7 +2,7 @@
   <div v-if="!store.isEmpty" class="absolute bottom-0 left-0 right-0 p-4">
     <div
       v-if="cartStep === 2"
-      class="relative rounded-xl border border-neutral-300 bg-white p-4 shadow-lg"
+      class="relative rounded-xl border border-neutral-300 bg-white p-4 shadow-lg md:border-neutral-200"
     >
       <div class="absolute">
         <button class="flex items-center" @click="stepBack">
@@ -21,14 +21,14 @@
         "
       >
         <div
-          class="flex items-center justify-between rounded-xl border border-neutral-300 bg-gray-100 px-4 py-2"
+          class="flex items-center justify-between rounded-xl border border-neutral-300 bg-gray-100 px-4 py-2 md:border-neutral-200"
         >
           <span class="text-lg text-gray-300">Сдача</span>
           <span class="text-lg text-gray-300">{{ cartChange }} </span>
         </div>
         <input
           v-model="inputAmount"
-          class="w-full appearance-none rounded-xl border border-neutral-300 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
+          class="w-full appearance-none rounded-xl border border-neutral-300 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0 md:border-neutral-200"
           placeholder="Внесено"
           type="number"
         />
