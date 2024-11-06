@@ -55,6 +55,16 @@
       >
       </div> -->
       </v-form>
+      <router-link
+        v-if="isSelectableMode"
+        :to="{
+          path: '/store/items/add',
+          query: { scannedCode: searchInput },
+        }"
+        class="mb-2 block w-full rounded-xl border border-neutral-300 bg-white px-4 py-2 text-center text-blue-600 md:rounded-lg"
+        >Создать новый товар
+      </router-link>
+
       <a-list
         v-model="selectedItems"
         :items="storeItems"
@@ -66,17 +76,7 @@
       >
       </a-list>
       <div v-if="storeItems && storeItems.length === 0 && isSelectableMode">
-        <h1 class="p-4 text-center text-neutral-300">
-          Не найдено.<br />
-          <router-link
-            :to="{
-              path: '/store/items/add',
-              query: { scannedCode: searchInput },
-            }"
-            class="text-blue-600"
-            >Создать {{ searchInput }}
-          </router-link>
-        </h1>
+        <h1 class="p-4 text-center text-neutral-300">Не найдено</h1>
       </div>
     </div>
   </a-page>

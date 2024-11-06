@@ -76,7 +76,7 @@
     </footer>
   </div>
 
-  <div v-if="isDesktop" class="flex w-full flex-col">
+  <div v-if="isDesktop" class="flex w-full flex-col bg-neutral-50">
     <div class="grid w-full flex-grow grid-cols-10 overflow-hidden">
       <div class="col-span-3 border-r border-neutral-300">
         <div class="flex h-full flex-col justify-between">

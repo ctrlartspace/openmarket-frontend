@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full flex-col bg-neutral-100">
+  <div class="flex h-full w-full flex-col bg-neutral-100">
     <div
       v-if="isDesktop && hasHeader()"
       class="flex items-center gap-4 overflow-x-auto overflow-y-hidden border-b border-neutral-300 bg-white px-4 py-2 md:py-1"

@@ -20,9 +20,9 @@
         title="Закрыть кассу?"
         :async-operation="closeActiveCashRegister"
       >
-        <a-button-floating danger to="/arrivals/items/add" v-bind="props">
-          close
-        </a-button-floating>
+        <a-button-floating-text danger to="/arrivals/items/add" v-bind="props">
+          Закрыть
+        </a-button-floating-text>
       </a-modal>
       <a-link-floating
         v-if="!isActiveCashExists"
@@ -34,66 +34,37 @@
     </template>
 
     <div class="flex flex-col gap-2" v-if="isActiveCashExists">
-      <div
-        class="grid grid-cols-2 rounded-xl border border-neutral-300 bg-white md:rounded-lg"
-      >
-        <div class="border-r border-neutral-300 px-4 py-2">
-          <h1 class="text-lg md:text-base">На кассе</h1>
-          <p class="text-2xl font-medium">
-            {{ cashAmount }}
-            <span class="font-semibold">₸</span>
-          </p>
-        </div>
-        <div class="px-4 py-2">
+      <div class="grid grid-cols-1 gap-2">
+        <div
+          class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg"
+        >
           <h1 class="inline text-lg md:text-base">Итого</h1>
           <p class="text-2xl font-medium">
             {{ activeCash.total }}
             <span class="font-semibold">₸</span>
           </p>
         </div>
-      </div>
-      <div
-        v-if="activeCash.totalsPaymentType.length > 0"
-        class="flex flex-col rounded-xl border border-neutral-300 bg-white md:flex-row md:rounded-lg"
-      >
+
         <div
-          class="border-b border-neutral-300 px-4 py-2 last:border-none md:flex-1 md:border-b-0 md:border-r"
-          v-for="total in activeCash.totalsPaymentType"
-          :key="total.paymentType"
+          class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg"
         >
-          <div v-if="total.paymentType === 'online'">
-            <h1 class="inline rounded text-lg text-blue-500 md:text-base">
-              Перевод
-            </h1>
-            <p class="text-2xl font-medium">
-              {{ total.total }}
-              <span class="font-semibold">₸</span>
-            </p>
-          </div>
-          <div v-if="total.paymentType === 'kaspi-qr'">
-            <h1 class="inline rounded text-lg text-red-500 md:text-base">
-              Kaspi QR
-            </h1>
-            <p class="text-2xl font-medium">
-              {{ total.total }}
-              <span class="font-semibold">₸</span>
-            </p>
-          </div>
-          <div v-if="total.paymentType === 'cash'">
-            <h1 class="inline text-lg text-green-500 md:text-base">Наличные</h1>
-            <p class="text-2xl font-medium">
-              {{ total.total }}
-              <span class="font-semibold">₸</span>
-            </p>
-          </div>
+          <h1 class="text-lg md:text-base">На кассе</h1>
+          <p class="text-2xl font-medium">
+            {{ cashAmount }}
+            <span class="font-semibold">₸</span>
+          </p>
         </div>
       </div>
-    </div>
-
-    <div v-else>
-      <p class="p-4 text-center text-lg text-neutral-300 md:text-base">
-        Касса не найдена
-      </p>
+      <a-list
+        :items="activeCash.totalsPaymentType"
+        title-field="paymentType"
+        description-field="total"
+        description-hint="₸"
+      >
+        <template #title="{ item }">{{
+          formatPaymentType(item.paymentType)
+        }}</template>
+      </a-list>
     </div>
   </a-page>
 </template>
@@ -102,8 +73,9 @@
 import ALink from "@/components/ui/ALink.vue"
 import AButton from "@/components/ui/AButton.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
-import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import AModal from "@/components/ui/AModal.vue"
+import AList from "@/components/ui/AList.vue"
 import { computed, onMounted } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 
@@ -144,6 +116,16 @@ const totalCashAmount = computed(
 const cashAmount = computed(
   () => activeCash.value.startAmount + totalCashAmount.value,
 )
+
+const formatPaymentType = (paymentType) => {
+  const types = {
+    cash: "Наличные",
+    kaspi_qr: "Kaspi QR",
+    online: "Перевод",
+  }
+
+  return types[paymentType] || "Другое"
+}
 
 onMounted(async () => {
   await sendRequest("get", "/cash-registers/today")

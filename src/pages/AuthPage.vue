@@ -1,5 +1,7 @@
 <template>
-  <div class="flex h-full w-full items-center justify-center bg-neutral-100">
+  <div
+    class="flex h-full w-full flex-col items-center justify-center gap-4 bg-neutral-100"
+  >
     <form
       class="flex w-64 flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg"
       @submit.prevent="loginToStore"
@@ -18,25 +20,18 @@
         Продолжить
       </button>
     </form>
-    <!-- <div
-      v-else
-      class="p-4 bg-white rounded-xl md:rounded-lg border border-gray-200 w-96"
+    <div
+      class="w-64 rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg"
     >
-      <h1 class="text-2xl font-semibold mb-4 text-center">
-        {{ storeData.name }}
-      </h1>
-      <div class="flex flex-col gap-4">
-        <button
-          v-for="point in storePoints"
-          class="font-semibold block w-full px-4 py-2 bg-black text-lg md:text-base text-white rounded-xl md:rounded-lg"
-          type="submit"
-          :key="point.id"
-          @click="loginToStorePoint(point.id)"
-        >
-          {{ point.name }}
-        </button>
-      </div>
-    </div> -->
+      <p class="text-center text-neutral-400">
+        У вас еще нет магазина?
+        <router-link
+          class="font-medium text-blue-500"
+          :to="{ path: '/store-create' }"
+          >Создать
+        </router-link>
+      </p>
+    </div>
   </div>
 </template>
 

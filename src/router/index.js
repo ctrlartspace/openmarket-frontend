@@ -33,6 +33,8 @@ import CartPage from "@/pages/cart/CartPage.vue"
 import CartActiveView from "@/pages/cart/items/CartActiveView.vue"
 import FiltersAddPage from "@/pages/FiltersAddPage.vue"
 import PointInfoView from "@/pages/point/info/PointInfoView.vue"
+import StoreCreatePage from "@/pages/store-create/StoreCreatePage.vue"
+import StoreCreateUserInfoPage from "@/pages/store-create/user-info/StoreCreateUserInfoPage.vue"
 
 const routes = [
   { path: "/", redirect: "/store" },
@@ -224,7 +226,25 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/store-create",
+    component: StoreCreatePage,
+    redirect: "/store-create/user-info",
+    children: [
+      {
+        path: "user-info",
+        component: PageContent,
+        children: [
+          {
+            path: "",
+            component: StoreCreateUserInfoPage,
+          },
+        ],
+      },
+    ],
+  },
   { path: "/auth", component: AuthPage },
+  { path: "/store/create", component: StoreCreatePage },
   { path: "/scan2", component: ScanPage2 },
 ]
 
@@ -238,7 +258,13 @@ router.beforeEach((to, from, next) => {
   const routeStore = useRouteStore()
 
   routeStore.setPreviousRoute(from)
-  if (to.path !== "/auth" && !userStore.isAuthorizedStore) {
+  console.log(to.path)
+  if (
+    to.path !== "/auth" &&
+    to.path !== "/store-create" &&
+    to.path !== "/store-create/user-info" &&
+    !userStore.isAuthorizedStore
+  ) {
     userStore.logOut()
   } else {
     next()

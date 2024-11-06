@@ -5,7 +5,7 @@ export const useCartStore = defineStore("cart", () => {
   const cartItems = ref(new Map())
   const paymentTypes = ref([
     { code: "online", label: "Перевод", icon: "smartphone", color: "blue" },
-    { code: "kaspi-qr", label: "Kaspi QR", icon: "qr_code", color: "red" },
+    { code: "kaspi_qr", label: "Kaspi QR", icon: "qr_code", color: "red" },
     { code: "cash", label: "Наличные", icon: "payments", color: "green" },
   ])
   const currentPaymentType = ref(0)
