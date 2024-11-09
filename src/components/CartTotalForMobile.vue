@@ -13,25 +13,29 @@
       </div>
       <p class="mb-2 text-center text-lg text-gray-300">Способ оплаты</p>
       <div
-        class="flex flex-col gap-2 transition-[max-height,opacity] ease-in-out will-change-transform"
+        class="grid transition-all"
         :class="
           store.getPaymentType.code === 'cash'
-            ? 'max-h-96 opacity-100 delay-75'
-            : 'pointer-events-none max-h-0 opacity-0'
+            ? 'grid-rows-[1fr] opacity-100'
+            : 'grid-rows-[0fr] opacity-0'
         "
       >
-        <div
-          class="flex items-center justify-between rounded-xl border border-neutral-300 bg-gray-100 px-4 py-2 md:border-neutral-200"
-        >
-          <span class="text-lg text-gray-300">Сдача</span>
-          <span class="text-lg text-gray-300">{{ cartChange }} </span>
+        <div class="flex flex-col gap-2 overflow-hidden">
+          <div
+            class="flex items-center justify-between rounded-xl bg-neutral-50 px-4 py-2"
+          >
+            <span class="text-lg font-medium">Сдача</span>
+            <span class="text-lg font-medium"
+              >{{ cartChange }} <span class="font-semibold">₸</span></span
+            >
+          </div>
+          <input
+            v-model="inputAmount"
+            class="w-full appearance-none rounded-xl border border-neutral-300 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0 md:border-neutral-200"
+            placeholder="Внесено"
+            type="number"
+          />
         </div>
-        <input
-          v-model="inputAmount"
-          class="w-full appearance-none rounded-xl border border-neutral-300 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0 md:border-neutral-200"
-          placeholder="Внесено"
-          type="number"
-        />
       </div>
       <button
         class="mt-2 w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
@@ -47,7 +51,7 @@
       </button>
     </div>
     <button
-      class="mt-2 flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl"
+      class="mt-2 flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl border border-black bg-gradient-to-b from-black/80 to-black p-4 text-2xl font-medium text-white shadow-xl"
       @click="onNextClick"
       v-press
     >

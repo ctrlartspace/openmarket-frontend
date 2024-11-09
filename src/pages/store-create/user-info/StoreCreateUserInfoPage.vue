@@ -5,7 +5,17 @@ import AppDialogVue from '@/components/AppDialog.vue';
       <a-button neutral v-if="step > 1" @click="step = step - 1">
         Назад
       </a-button>
-      <a-button primary @click="step = step + 1"> Далее </a-button>
+      <a-button primary v-if="step < 3" @click="step = step + 1">
+        Далее
+      </a-button>
+      <a-modal
+        v-if="step > 2"
+        #="{ props }"
+        title="Создать магазин?"
+        :async-operation="createData"
+      >
+        <a-button primary v-bind="props"> Готово </a-button>
+      </a-modal>
     </template>
     <template #floating>
       <a-button-floating-text neutral v-if="step > 1" @click="step = step - 1">
@@ -18,27 +28,32 @@ import AppDialogVue from '@/components/AppDialog.vue';
         v-if="step > 2"
         #="{ props }"
         title="Создать магазин?"
-        :async-operation="onAddItemsToPointClick"
+        :async-operation="createData"
       >
         <a-button-floating-text v-bind="props" primary>
           Готово
         </a-button-floating-text>
       </a-modal>
     </template>
+    <template v-if="isError" #error>
+      {{ errorMessage }}
+    </template>
 
     <div v-if="step === 1" class="flex flex-col gap-2">
       <a-base-input
-        v-model="data.user.phone_number"
+        v-model="data.user.phoneNumber"
         label="Номер телефона"
         placeholder="Номер телефона"
         type="text"
+        :is-error="validationErrors?.userInfo?.phoneNumber"
       />
       <a-base-input
-        v-model="data.user.full_name"
+        v-model="data.user.fullName"
         label="Имя"
         placeholder="Имя"
         type="text"
         autocomplete="new-text"
+        :is-error="validationErrors?.userInfo?.fullName"
       />
       <a-base-input
         v-model="data.user.password"
@@ -46,20 +61,23 @@ import AppDialogVue from '@/components/AppDialog.vue';
         placeholder="Пароль"
         type="password"
         autocomplete="new-password"
+        :is-error="validationErrors?.userInfo?.password"
       />
     </div>
     <div v-if="step === 2" class="flex flex-col gap-2">
       <a-base-input
-        v-model="data.store.full_name"
+        v-model="data.store.fullName"
         label="Название магазина"
         placeholder="Название магазина"
         type="text"
+        :is-error="validationErrors?.storeInfo?.fullName"
       />
       <a-base-input
         v-model="data.store.address"
         label="Адрес"
         placeholder="Адрес"
         type="text"
+        :is-error="validationErrors?.storeInfo?.address"
       />
     </div>
     <div v-if="step === 3" class="flex flex-col gap-4">
@@ -73,8 +91,8 @@ import AppDialogVue from '@/components/AppDialog.vue';
             <span class="material-symbols-outlined text-3xl">person</span>
           </div>
           <div class="h-full w-full">
-            <p class="font-medium">{{ data.user.full_name }}</p>
-            <p>{{ data.user.phone_number }}</p>
+            <p class="font-medium">{{ data.user.fullName }}</p>
+            <p>{{ data.user.phoneNumber }}</p>
           </div>
         </div>
       </div>
@@ -103,7 +121,7 @@ import AppDialogVue from '@/components/AppDialog.vue';
             <span class="material-symbols-outlined text-3xl">store</span>
           </div>
           <div class="h-full w-full">
-            <p class="font-medium">{{ data.store.full_name }}</p>
+            <p class="font-medium">{{ data.store.fullName }}</p>
             <p>{{ data.store.address }}</p>
           </div>
         </div>
@@ -119,14 +137,28 @@ import AModal from "@/components/ui/AModal.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { useUserStore } from "@/stores/user.store"
 
-const { validationErrors, sendRequest: addStorePoint } = useApiRequest()
+const store = useUserStore()
+
+const { validationErrors, sendRequest, isLoading, errorMessage, isError } =
+  useApiRequest()
 
 const step = ref(1)
 const data = ref({
-  user: { phone_number: "7747906904", full_name: "Аман Киргизбаев" },
-  store: { full_name: "Rozetka", address: "Калдаякова 14" },
+  user: { phoneNumber: "", fullName: "" },
+  store: { fullName: "", address: "" },
 })
+
+const createData = async () => {
+  const response = await sendRequest("post", "/store", {
+    userInfo: data.value.user,
+    storeInfo: data.value.store,
+  })
+  if (response) {
+    store.logOut()
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

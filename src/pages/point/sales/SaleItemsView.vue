@@ -11,7 +11,7 @@
 
     <a-list
       v-if="sales"
-      @click="onItemClick"
+      @on-item-click="onItemClick"
       :items="sales"
       title-field="pointItem.storeItem.name"
       description-field="count"
@@ -37,6 +37,7 @@ const { serverData: sales, sendRequest, isLoading } = useApiRequest()
 
 const onItemClick = (item) => {
   router.push(`/point/items/${item.pointItem.id}`)
+  console.log("dsf")
 }
 
 onMounted(async () => {

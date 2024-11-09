@@ -21,14 +21,14 @@
     <div class="flex flex-col gap-2">
       <a-base-input
         id="store-user-phone-number"
-        v-model="storeUser.phone_number"
+        v-model="storeUser.phoneNumber"
         placeholder="Номер телефона"
         type="text"
-        :is-error="validationErrors.phone_number"
+        :is-error="validationErrors.phoneNumber"
       />
       <a-base-input
         id="store-user-name"
-        v-model="storeUser.full_name"
+        v-model="storeUser.fullName"
         placeholder="Имя сотрудника"
         type="text"
         :is-error="validationErrors.name"
@@ -47,7 +47,6 @@
 <script setup>
 import { ref } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
-import StoreService from "@/services/StoreService"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
@@ -60,8 +59,8 @@ const { validationErrors, sendRequest } = useApiRequest()
 
 const addStoreUser = async () => {
   const payload = {
-    phone_number: storeUser.value.phone_number,
-    full_name: storeUser.value.full_name,
+    phoneNumber: storeUser.value.phoneNumber,
+    fullName: storeUser.value.fullName,
     password: storeUser.value.password,
   }
 

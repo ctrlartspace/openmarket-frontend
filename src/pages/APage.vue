@@ -16,9 +16,9 @@
     </div>
     <div
       v-if="hasError()"
-      class="border-b border-neutral-300 bg-red-50 px-4 py-2 md:border-neutral-200"
+      class="border-b border-red-100 bg-red-50 px-4 py-2 md:border-neutral-200"
     >
-      <p class="text-red-600"><slot name="error"></slot></p>
+      <p class="text-center text-red-600"><slot name="error"></slot></p>
     </div>
 
     <div

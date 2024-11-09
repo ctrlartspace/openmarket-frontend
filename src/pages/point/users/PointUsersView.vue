@@ -9,7 +9,7 @@
     <a-list
       v-if="pointUsers"
       :items="pointUsers"
-      title-field="full_name"
+      title-field="fullName"
     ></a-list>
   </a-page>
 </template>

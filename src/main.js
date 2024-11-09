@@ -8,12 +8,14 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate"
 import APage from "@/pages/APage.vue"
 import * as VueQrcodeReader from "vue-qrcode-reader"
 import vPress from "./directives/v-press"
+import vMask from "./directives/v-mask"
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
 createApp(App)
   .directive("press", vPress)
+  .directive("mask", vMask)
   .component("a-page", APage)
   .use(VueQrcodeReader)
   .use(router)

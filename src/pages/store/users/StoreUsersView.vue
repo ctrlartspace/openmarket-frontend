@@ -9,7 +9,7 @@
     <a-list
       v-if="storeUsers"
       :items="storeUsers"
-      title-field="full_name"
+      title-field="fullName"
       @on-item-click="onItemClick"
     ></a-list>
   </a-page>

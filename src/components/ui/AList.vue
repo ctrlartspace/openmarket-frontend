@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="!hasNoItems"
     class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded-lg md:border-neutral-200"
   >
     <div
@@ -45,10 +44,19 @@
           }}
         </slot>
       </div>
-      <div v-if="hasAction" class="px-4 py-2">
-        <slot name="action"></slot>
+      <div v-if="hasAction" class="flex items-center gap-2 px-4 py-2">
+        <slot name="action" :item="item"></slot>
       </div>
     </div>
+    <div
+      v-if="hasNoItems"
+      class="border-b border-neutral-300 px-4 py-2 last:border-none"
+    >
+      <p class="text-center text-lg text-neutral-300 md:text-base">
+        Нет данных
+      </p>
+    </div>
+    <div v-if="hasLast" class="px-4 py-2"><slot name="last"></slot></div>
   </div>
 </template>
 
@@ -71,6 +79,7 @@ const selectedItems = defineModel({ default: [] })
 const slots = useSlots()
 const hasAction = computed(() => !!slots.action)
 const hasNoItems = computed(() => props.items.length === 0)
+const hasLast = computed(() => !!slots.last)
 const getNestedProperty = (obj, path) =>
   path.split(".").reduce((acc, key) => acc && acc[key], obj)
 

@@ -7,8 +7,8 @@
       @submit.prevent="loginToStore"
     >
       <a-base-input
-        v-model.trim="authData.phone_number"
-        placeholder="Номер магазина"
+        v-model.trim="authData.phoneNumber"
+        placeholder="Номер телефона"
       />
       <a-base-input
         v-model.trim="authData.password"
@@ -16,11 +16,16 @@
         type="password"
       />
       <button
-        class="mt-2 block w-full rounded-xl bg-black px-4 py-2 text-lg font-medium text-white md:rounded-lg md:text-base"
+        class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-black bg-gradient-to-b from-black/80 to-black px-4 py-2 text-lg font-medium text-white shadow-sm md:rounded-lg md:text-base"
         type="submit"
         v-press
       >
-        Продолжить
+        <span
+          v-if="isLoading"
+          class="material-symbols-outlined animate-spin font-semibold"
+          >progress_activity</span
+        >
+        <span v-else> Продолжить </span>
       </button>
       <p class="mt-2 text-center text-neutral-400">
         Нет магазина?
@@ -43,13 +48,19 @@ import ABaseInput from "@/components/ui/ABaseInput.vue"
 const store = useUserStore()
 const router = useRouter()
 const authData = ref({})
+const isLoading = ref(false)
 
 const loginToStore = async () => {
   try {
+    isLoading.value = true
     const response = await store.loginToStore(authData.value)
-    router.push("/store/points")
+    if (response) {
+      router.push("/store")
+    }
   } catch (error) {
     console.log(error)
+  } finally {
+    isLoading.value = false
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <a-page :title="getCashTitle" :loading="isLoading">
+  <a-page :title="getCashTitle" :loading="isLoading" no-padding>
     <template #header>
       <a-modal
         v-if="isActiveCashExists"
@@ -24,28 +24,36 @@
           Закрыть
         </a-button-floating-text>
       </a-modal>
-      <a-link-floating
+      <a-link-floating-text
         v-if="!isActiveCashExists"
         primary
         to="/cash-register/active/add"
       >
-        add
-      </a-link-floating>
+        Открыть
+      </a-link-floating-text>
     </template>
 
-    <div class="flex flex-col gap-2" v-if="isActiveCashExists">
-      <div class="grid grid-cols-1 gap-2">
-        <div
-          class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg md:border-neutral-200"
-        >
-          <h1 class="inline text-lg md:text-base">Итого</h1>
-          <p class="text-2xl font-medium">
+    <div
+      class="min-h-32 flex flex-col bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:border-b md:border-neutral-200 md:from-white/50 md:to-white/50"
+      v-if="isActiveCashExists"
+    >
+      <div class="grid grid-cols-2 gap-2">
+        <p class="flex flex-col">
+          <span class="text-green-200/50 md:text-green-500/50">Итого</span>
+          <span class="text-3xl font-medium text-green-400 md:text-green-400">
             {{ activeCash.total }}
             <span class="font-semibold">₸</span>
-          </p>
-        </div>
+          </span>
+        </p>
+        <p class="flex flex-col">
+          <span class="text-white/50 md:text-black/50">Касса</span>
+          <span class="text-3xl font-medium text-white/90 md:text-black">
+            {{ cashAmount }}
+            <span class="font-semibold">₸</span>
+          </span>
+        </p>
 
-        <div
+        <!-- <div
           class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg md:border-neutral-200"
         >
           <h1 class="text-lg md:text-base">На кассе</h1>
@@ -53,8 +61,11 @@
             {{ cashAmount }}
             <span class="font-semibold">₸</span>
           </p>
-        </div>
+        </div> -->
       </div>
+    </div>
+
+    <div v-if="activeCash" class="-mt-10 p-4">
       <a-list
         :items="activeCash.totalsPaymentType"
         title-field="paymentType"
@@ -64,6 +75,12 @@
         <template #title="{ item }">{{
           formatPaymentType(item.paymentType)
         }}</template>
+        <!-- <template #description="{ item }">
+          <span class="font-medium"
+            >{{ item.total }}
+            <span class="font-semibold">₸</span>
+          </span>
+        </template> -->
       </a-list>
     </div>
   </a-page>
@@ -72,7 +89,7 @@
 <script setup>
 import ALink from "@/components/ui/ALink.vue"
 import AButton from "@/components/ui/AButton.vue"
-import ALinkFloating from "@/components/ui/ALinkFloating.vue"
+import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import AModal from "@/components/ui/AModal.vue"
 import AList from "@/components/ui/AList.vue"

@@ -20,8 +20,8 @@ const store = useUserStore()
 
 const menuItems = ref([
   {
-    title: "Точки продаж",
-    path: "/store/points",
+    title: "Обзор",
+    path: "/store/info",
   },
   {
     title: "Сотрудники",

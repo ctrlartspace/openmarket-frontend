@@ -15,7 +15,9 @@
         title="Создать новую точку?"
         :async-operation="onSaveClick"
       >
-        <a-button-floating v-bind="props"> save </a-button-floating>
+        <a-button-floating-text primary v-bind="props">
+          Готово
+        </a-button-floating-text>
       </a-modal>
     </template>
     <a-base-input
@@ -34,7 +36,7 @@ import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AModal from "@/components/ui/AModal.vue"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
-import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 
 const { validationErrors, sendRequest: addStorePoint } = useApiRequest()

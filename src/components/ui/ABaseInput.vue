@@ -14,7 +14,8 @@
     </router-link>
     <div class="relative">
       <input
-        v-model="inputValue"
+        ref="input"
+        v-model="modelValue"
         :class="{
           'animate-shake will-change-transform placeholder:text-red-500':
             isError,
@@ -39,10 +40,11 @@
 </template>
 
 <script setup>
-import { computed, defineEmits, defineProps } from "vue"
+import { defineModel, defineProps } from "vue"
+
+const modelValue = defineModel()
 
 const props = defineProps({
-  modelValue: {},
   label: {
     type: String,
     required: false,
@@ -59,12 +61,6 @@ const props = defineProps({
     type: String,
     required: false,
   },
-})
-
-const emit = defineEmits(["update:modelValue"])
-const inputValue = computed({
-  get: () => props.modelValue,
-  set: (newValue) => emit("update:modelValue", newValue),
 })
 </script>
 

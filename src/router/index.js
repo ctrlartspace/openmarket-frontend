@@ -2,12 +2,12 @@ import { createRouter, createWebHistory } from "vue-router"
 import AuthPage from "@/pages/AuthPage.vue"
 import ScanPage2 from "@/pages/ScanPage2.vue"
 import StorePage from "@/pages/store/StorePage.vue"
+import StoreInfoView from "@/pages/store/info/StoreInfoView.vue"
 import StoreUsersAdd from "@/pages/store/users/StoreUsersAdd.vue"
 import StoreUsersView from "@/pages/store/users/StoreUsersView.vue"
 import StoreItemsAdd from "@/pages/store/items/StoreItemsAdd.vue"
 import StoreItemsView from "@/pages/store/items/StoreItemsView.vue"
 import StoreItemDetails from "@/pages/store/items/StoreItemDetails.vue"
-import StorePointsView from "@/pages/store/points/StorePointsView.vue"
 import StorePointsAdd from "@/pages/store/points/StorePointsAdd.vue"
 
 import PointPage from "@/pages/point/PointPage.vue"
@@ -58,8 +58,18 @@ const routes = [
   {
     path: "/store",
     component: StorePage,
-    redirect: "/store/items",
+    redirect: "/store/info",
     children: [
+      {
+        path: "info",
+        component: PageContent,
+        children: [
+          {
+            path: "",
+            component: StoreInfoView,
+          },
+        ],
+      },
       {
         path: "users",
         component: PageContent,
@@ -78,10 +88,6 @@ const routes = [
         path: "points",
         component: PageContent,
         children: [
-          {
-            path: "",
-            component: StorePointsView,
-          },
           {
             path: "add",
             component: StorePointsAdd,

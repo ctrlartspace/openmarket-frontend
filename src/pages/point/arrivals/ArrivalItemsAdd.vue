@@ -17,7 +17,9 @@
         title="Сделать приход?"
         :async-operation="addArrival"
       >
-        <a-button-floating v-bind="props">save</a-button-floating>
+        <a-button-floating-text primary v-bind="props"
+          >Готово</a-button-floating-text
+        >
       </a-modal>
     </template>
     <div class="flex flex-col gap-2">
@@ -55,7 +57,7 @@
 
 <script setup>
 import AButton from "@/components/ui/AButton.vue"
-import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import AModal from "@/components/ui/AModal.vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import { ref, watch } from "vue"

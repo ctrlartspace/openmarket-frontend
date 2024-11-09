@@ -30,7 +30,7 @@
       >
         <div v-if="selectedUser">
           <h1 class="text-lg font-medium md:text-base">
-            {{ selectedUser.name }}
+            {{ selectedUser.fullName }}
           </h1>
         </div>
         <p class="text-lg md:text-base" v-else>Выбрать сотрудника...</p>

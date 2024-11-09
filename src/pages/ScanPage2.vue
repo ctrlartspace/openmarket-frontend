@@ -9,11 +9,17 @@
         @error="onError"
         @detect="onDetect"
         :paused="isPaused"
+        :torch="isTorchOn"
       >
-        <div
-          class="flex h-full items-end justify-center p-4 text-white opacity-40"
-        >
-          {{ result }}
+        <div class="flex h-full items-end justify-center p-4 text-white">
+          <button
+            :class="{ 'opacity-40': !isTorchOn }"
+            @click="isTorchOn = !isTorchOn"
+          >
+            <span class="material-symbols-outlined text-4xl"
+              >flashlight_on</span
+            >
+          </button>
         </div>
       </qrcode-stream>
     </div>
@@ -95,6 +101,7 @@ const resultItem = ref(null)
 const isNotFound = ref(false)
 const isPaused = ref(false)
 const isLoading = ref(false)
+const isTorchOn = ref(false)
 
 const store = useCartStore()
 const itemCount = ref(1)
@@ -206,10 +213,10 @@ const barcodeFormats = ref({
   maxi_code: false,
   micro_qr_code: false,
   pdf417: false,
-  qr_code: true,
+  qr_code: false,
   rm_qr_code: false,
-  upc_a: true,
-  upc_e: true,
+  upc_a: false,
+  upc_e: false,
   linear_codes: false,
   matrix_codes: false,
 })
