@@ -8,7 +8,7 @@
       description-field="isClosed"
     >
       <template #title="{ item }">
-        <span class="font-medium">Касса #{{ item.id }}</span>
+        <span class="font-medium">Смена #{{ item.id }}</span>
       </template>
       <template #description="{ item }">
         <span

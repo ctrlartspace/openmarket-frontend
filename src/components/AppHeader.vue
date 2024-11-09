@@ -74,7 +74,7 @@ const menuItems = ref([
     path: "/cart",
   },
   {
-    title: "Касса",
+    title: "Смена",
     path: "/cash-register",
   },
   {

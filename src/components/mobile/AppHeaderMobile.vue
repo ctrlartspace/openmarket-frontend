@@ -47,7 +47,7 @@ const menuItems = ref([
     visible: true,
   },
   {
-    title: "Касса",
+    title: "Смена",
     path: "/cash-register",
     visible: true,
   },

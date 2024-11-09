@@ -58,10 +58,10 @@ const menuItems = ref([
   },
   {
     id: 2,
-    title: "Касса",
+    title: "Смена",
     path: "/cash-register",
     visible: true,
-    icon: "receipt",
+    icon: "group",
   },
   {
     id: 3,

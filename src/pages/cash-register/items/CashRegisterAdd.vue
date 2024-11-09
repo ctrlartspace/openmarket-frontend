@@ -3,7 +3,7 @@
     <template #header>
       <a-modal
         #="{ props }"
-        title="Открыть кассу?"
+        title="Открыть смену?"
         :async-operation="openCashRegister"
       >
         <a-button v-bind="props" primary> Сохранить</a-button>
@@ -12,7 +12,7 @@
     <template #floating>
       <a-modal
         #="{ props }"
-        title="Открыть кассу?"
+        title="Открыть смену?"
         :async-operation="openCashRegister"
       >
         <a-button-floating-text primary v-bind="props">
