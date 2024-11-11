@@ -32,7 +32,7 @@
       <router-link
         v-if="item.storeItem"
         :to="{ path: '/store/items/' + item.storeItem.id }"
-        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg md:border-neutral-200 md:hover:bg-gray-50"
+        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:border-neutral-200 md:hover:bg-gray-50"
         v-press
       >
         <h1 class="text-lg font-medium text-blue-600 md:text-base">
@@ -40,12 +40,15 @@
         </h1>
         <p class="text-sm text-neutral-400">
           Код: {{ item.storeItem.code }}<br />
-          Покупка: {{ item.storeItem.purchasePrice }} ₸ Продажа:
-          {{ item.storeItem.sellingPrice }} ₸
+          <span v-if="item.storeItem.purchasePrice">
+            Покупка: {{ item.storeItem.purchasePrice }} ₸
+          </span>
+          <span> Продажа: {{ item.storeItem.sellingPrice }} ₸ </span>
         </p>
       </router-link>
       <div class="flex gap-2">
         <a-base-input
+          v-if="item.purchasePrice"
           class="w-full"
           id="purchase-price"
           v-model="item.purchasePrice"

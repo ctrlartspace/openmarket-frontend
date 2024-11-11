@@ -6,14 +6,14 @@
           ref="focusableInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:rounded-lg md:border-neutral-200 md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
           :class="
             isSearchError
               ? 'animate-shake text-red-600 will-change-transform'
               : 'text-black'
           "
           placeholder="Код товара, наименование"
-          @input="isSearchError = false"
+          @input="onSearchInput"
         />
         <div
           class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center px-4"
@@ -23,7 +23,7 @@
       </v-form>
       <div
         v-if="!store.isEmpty"
-        class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded-lg md:border-neutral-200"
+        class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-300 bg-white md:border-neutral-200"
       >
         <div
           v-for="(item, i) in store.groupedCartItems"
@@ -41,15 +41,28 @@
               </span>
             </button>
           </div>
-          <div class="w-full truncate px-4 py-2 font-medium">
+          <div class="w-full truncate px-2 py-2 pl-4 font-medium">
             {{ item.name }}
           </div>
-          <div class="w-max whitespace-nowrap px-4 py-2">
+          <div class="w-max whitespace-nowrap px-2">
             <span class="text-neutral-400">{{ item.count }} шт. </span>
-            <span class="font-medium text-green-600">
+            <span class="hidden font-medium text-green-600 md:inline">
               {{ item.count * item.sellingPrice }}
             </span>
-            <span class="font-semibold text-green-600"> ₸ </span>
+            <span class="hidden font-semibold text-green-600 md:inline">
+              ₸
+            </span>
+          </div>
+
+          <div class="flex items-center py-2 pr-4">
+            <button class="flex items-center justify-center" v-press>
+              <span
+                class="material-symbols-outlined select-none rounded bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-700 active:bg-green-200 active:text-green-700"
+                @click.stop="store.addItem(item)"
+              >
+                add
+              </span>
+            </button>
           </div>
         </div>
       </div>
@@ -97,6 +110,10 @@ const addCartItem = async () => {
     isSearchError.value = true
     console.error(error)
   }
+}
+
+const onSearchInput = () => {
+  isSearchError.value = false
 }
 
 const onItemClick = (item) => {

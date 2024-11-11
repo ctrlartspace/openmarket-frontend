@@ -28,7 +28,7 @@
           path: '/point/items',
           query: { selectableMode: true },
         }"
-        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:rounded-lg md:border-neutral-200 md:hover:bg-gray-50"
+        class="rounded-xl border border-neutral-300 bg-white px-4 py-2 md:border-neutral-200 md:hover:bg-gray-50"
       >
         <div v-if="pointItem">
           <h1 class="text-lg font-medium text-blue-600 md:text-base">

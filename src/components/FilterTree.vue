@@ -1,7 +1,7 @@
 <template>
   <ul
     v-if="firstItems.length > 0"
-    class="overflow-auto rounded-xl border border-neutral-300 md:rounded-lg md:border-neutral-200"
+    class="overflow-auto rounded-xl border border-neutral-300 md:border-neutral-200"
   >
     <li
       v-for="(item, i) in firstItems"
@@ -68,7 +68,7 @@
   </ul>
   <div
     v-else
-    class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-center md:rounded-lg md:border-neutral-200"
+    class="rounded-xl border border-neutral-300 bg-white px-4 py-2 text-center md:border-neutral-200"
   >
     <span class="text-lg text-neutral-300 md:text-base"
       >Категории не найдены</span

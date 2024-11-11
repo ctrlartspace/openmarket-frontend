@@ -28,7 +28,7 @@
         <template #title="{ item }"> {{ item.name }} </template>
         <template #action="{ item }">
           <span
-            class="whitespace-nowrap rounded-xl bg-green-50 px-4 text-lg font-medium text-green-500 md:rounded-lg md:text-base"
+            class="whitespace-nowrap rounded-xl bg-green-50 px-4 text-lg font-medium text-green-500 md:text-base"
             >{{ item.totalRevenue }} <span class="font-semibold">₸</span>
           </span>
         </template>

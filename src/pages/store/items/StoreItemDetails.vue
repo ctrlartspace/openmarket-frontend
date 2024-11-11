@@ -63,6 +63,7 @@
       />
       <div class="flex gap-2">
         <a-base-input
+          v-if="itemState.purchasePrice"
           class="w-full"
           id="purchase-price"
           v-model="itemState.purchasePrice"
@@ -150,8 +151,6 @@ const updateStoreItem = async () => {
 const addPointItem = async () => {
   const data = {
     storeItemId: itemState.value.id,
-    sellingPrice: itemState.value.sellingPrice,
-    purchasePrice: itemState.value.purchasePrice,
   }
 
   const response = await sendRequest("post", "/point/items", data)

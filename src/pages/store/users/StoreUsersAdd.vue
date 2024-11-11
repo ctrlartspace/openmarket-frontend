@@ -15,7 +15,9 @@
         title="Добавить сотрудника?"
         :async-operation="addStoreUser"
       >
-        <a-button-floating v-bind="props"> save </a-button-floating>
+        <a-button-floating-text primary v-bind="props">
+          Готово
+        </a-button-floating-text>
       </a-modal>
     </template>
     <div class="flex flex-col gap-2">
@@ -31,7 +33,7 @@
         v-model="storeUser.fullName"
         placeholder="Имя сотрудника"
         type="text"
-        :is-error="validationErrors.name"
+        :is-error="validationErrors.fullName"
       />
       <a-base-input
         id="store-user-password"
@@ -49,7 +51,7 @@ import { ref } from "vue"
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import { useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
-import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import AModal from "@/components/ui/AModal.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 

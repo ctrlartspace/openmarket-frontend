@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden rounded-xl border md:rounded-lg">
+  <div class="overflow-hidden rounded-xl border">
     <div
       v-if="showAction"
       class="flex items-center justify-between gap-2 bg-white px-4 py-2"

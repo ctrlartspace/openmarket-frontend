@@ -4,12 +4,15 @@
       <a-link primary to="/store/users/add">Добавить</a-link>
     </template>
     <template #floating>
-      <a-link-floating primary to="/store/users/add">add</a-link-floating>
+      <a-link-floating-text primary to="/store/users/add"
+        >Добавить</a-link-floating-text
+      >
     </template>
     <a-list
       v-if="storeUsers"
       :items="storeUsers"
       title-field="fullName"
+      description-field="phoneNumber"
       @on-item-click="onItemClick"
     ></a-list>
   </a-page>
@@ -19,7 +22,7 @@
 import { onMounted, ref } from "vue"
 import AList from "@/components/ui/AList.vue"
 import ALink from "@/components/ui/ALink.vue"
-import ALinkFloating from "@/components/ui/ALinkFloating.vue"
+import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useApiRequest } from "@/composables/useApiRequest"
 

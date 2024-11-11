@@ -40,11 +40,9 @@
         "
       >
         <div class="flex h-full w-full flex-col gap-2 p-4">
+          <div class="animate-pulse rounded-xl bg-neutral-200 px-4 py-6"></div>
           <div
-            class="animate-pulse rounded-xl bg-neutral-200 px-4 py-6 md:rounded-lg"
-          ></div>
-          <div
-            class="h-full animate-pulse rounded-xl bg-gradient-to-b from-neutral-200 to-neutral-100 px-4 py-12 md:rounded-lg"
+            class="h-full animate-pulse rounded-xl bg-gradient-to-b from-neutral-200 to-neutral-100 px-4 py-12"
           ></div>
         </div>
         <!-- <div

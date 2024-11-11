@@ -38,7 +38,7 @@
       class="min-h-32 grid grid-cols-2 gap-4 bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:bg-none md:px-4 md:py-4 md:pb-0"
     >
       <p
-        class="flex flex-col md:rounded-lg md:border md:border-neutral-200 md:bg-white md:px-4 md:py-2"
+        class="flex flex-col rounded-xl md:border md:border-neutral-200 md:bg-white md:px-4 md:py-2"
       >
         <span class="text-base text-white/50 md:text-neutral-300">Итого</span>
         <span class="text-3xl font-medium text-green-400">
@@ -47,7 +47,7 @@
         </span>
       </p>
       <p
-        class="flex flex-col md:rounded-lg md:border md:border-neutral-200 md:bg-white md:px-4 md:py-2"
+        class="flex flex-col rounded-xl md:border md:border-neutral-200 md:bg-white md:px-4 md:py-2"
       >
         <span class="text-base text-white/50 md:text-neutral-300">Касса</span>
         <span class="text-3xl font-medium text-white/90 md:text-black/50">

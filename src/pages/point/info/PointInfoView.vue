@@ -1,13 +1,13 @@
 <template>
   <a-page title="Информация о точке" :loading="isLoading">
     <template #header>
-      <!-- <a-modal
+      <a-modal
         #="{ props }"
         title="Сохранить изменения?"
-        :async-operation="updatePointItem"
+        :async-operation="onUpdatePoint"
       >
         <a-button primary v-bind="props"> Сохранить</a-button>
-      </a-modal> -->
+      </a-modal>
       <a-modal
         #="{ props }"
         title="Удалить точку?"
@@ -17,13 +17,13 @@
       </a-modal>
     </template>
     <template #floating>
-      <!-- <a-modal
+      <a-modal
         #="{ props }"
         title="Сохранить изменения?"
-        :async-operation="updatePointItem"
+        :async-operation="onUpdatePoint"
       >
         <a-button-floating v-bind="props"> save</a-button-floating>
-      </a-modal> -->
+      </a-modal>
       <a-modal
         #="{ props }"
         title="Удалить точку?"
@@ -56,6 +56,7 @@ const store = useUserStore()
 
 const { serverData: point, sendRequest, isLoading } = useApiRequest()
 const { sendRequest: deletePoint } = useApiRequest()
+const { sendRequest: updatePoint } = useApiRequest()
 
 const onDeletePointClick = async () => {
   if (!point.value) {
@@ -69,6 +70,12 @@ const onDeletePointClick = async () => {
   if (response) {
     store.logOutFromPoint()
   }
+}
+
+const onUpdatePoint = async () => {
+  await updatePoint("put", "/point", {
+    name: point.value.name,
+  })
 }
 
 onMounted(async () => {

@@ -10,6 +10,7 @@
       v-if="pointUsers"
       :items="pointUsers"
       title-field="fullName"
+      description-field="phoneNumber"
     ></a-list>
   </a-page>
 </template>

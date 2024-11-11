@@ -2,7 +2,7 @@
   <div class="relative rounded-lg">
     <input
       ref="dropdownInput"
-      class="peer block w-full cursor-pointer rounded-xl border px-4 py-2 focus:outline-black md:rounded-lg"
+      class="peer block w-full cursor-pointer rounded-xl border px-4 py-2 focus:outline-black"
       :class="{
         'placeholder:text-gray-300': disabled || loading,
         'animate-pulse': loading,

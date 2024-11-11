@@ -20,16 +20,13 @@
           'animate-shake will-change-transform placeholder:text-red-500':
             isError,
         }"
-        class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 text-lg placeholder:text-neutral-300 focus:outline-black focus:ring-0 md:rounded-lg md:border-neutral-200 md:text-base"
+        class="peer block w-full rounded-xl border border-solid border-neutral-300 px-4 py-2 text-lg placeholder:text-neutral-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
         v-bind="$attrs"
       />
       <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-center gap-1 pr-4"
       >
-        <span
-          v-if="unit"
-          class="text-lg font-medium text-neutral-300 md:text-base"
-        >
+        <span v-if="unit" class="text-lg text-neutral-300 md:text-base">
           {{ unit }}
         </span>
 

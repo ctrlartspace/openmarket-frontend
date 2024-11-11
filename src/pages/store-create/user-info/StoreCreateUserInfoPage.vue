@@ -82,11 +82,11 @@ import AppDialogVue from '@/components/AppDialog.vue';
     </div>
     <div v-if="step === 3" class="flex flex-col gap-4">
       <div
-        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg md:border-neutral-200"
+        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:border-neutral-200"
       >
         <div class="flex items-start gap-4 rounded-xl">
           <div
-            class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-blue-600 p-2 text-white md:rounded-lg"
+            class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-blue-600 p-2 text-white"
           >
             <span class="material-symbols-outlined text-3xl">person</span>
           </div>
@@ -111,12 +111,12 @@ import AppDialogVue from '@/components/AppDialog.vue';
         </div>
       </div> -->
       <div
-        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:rounded-lg md:border-neutral-200"
+        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:border-neutral-200"
       >
         <h1 class="text-lg font-medium md:text-base">Магазин</h1>
         <div class="flex gap-4 rounded-xl">
           <div
-            class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-gray-600 p-2 text-white md:rounded-lg"
+            class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-gray-600 p-2 text-white"
           >
             <span class="material-symbols-outlined text-3xl">store</span>
           </div>

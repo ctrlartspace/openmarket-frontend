@@ -4,7 +4,7 @@
     @click="closeDialog"
   >
     <div
-      class="flex w-80 max-w-lg flex-col overflow-hidden rounded-xl border border-gray-300 bg-white md:rounded-lg"
+      class="flex w-80 max-w-lg flex-col overflow-hidden rounded-xl border border-gray-300 bg-white"
       @click.stop
     >
       <div class="border-b border-gray-200 bg-gray-50 px-4 py-2">

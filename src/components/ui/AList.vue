@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-300 bg-white md:rounded-lg md:border-neutral-200"
+    class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-300 bg-white md:border-neutral-200"
   >
     <div
       v-if="selectedItems.length > 0"
