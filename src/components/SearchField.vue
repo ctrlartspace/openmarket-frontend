@@ -12,7 +12,7 @@
       />
       <div v-if="value" class="absolute inset-y-0 right-2 flex items-center">
         <span
-          class="material-symbols-outlined cursor-pointer text-gray-400 hover:text-gray-800 active:text-gray-800"
+          class="material-symbols-rounded cursor-pointer text-gray-400 hover:text-gray-800 active:text-gray-800"
           @click="onClearClick"
           >close</span
         >

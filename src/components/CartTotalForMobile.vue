@@ -6,7 +6,7 @@
     >
       <div class="absolute">
         <button class="flex items-center" @click="stepBack">
-          <span class="material-symbols-outlined text-xl text-gray-300"
+          <span class="material-symbols-rounded text-xl text-gray-300"
             >arrow_back_ios</span
           >
         </button>
@@ -59,14 +59,14 @@
         <span
           >{{ store.getTotalAmount }} <span class="font-semibold">₸</span></span
         >
-        <span class="material-symbols-outlined self-center font-bold"
+        <span class="material-symbols-rounded self-center font-bold"
           >arrow_forward</span
         >
       </p>
       <p v-if="cartStep === 2 && !isLoading">Готово</p>
       <span
         v-if="isLoading"
-        class="material-symbols-outlined animate-spin text-2xl font-medium"
+        class="material-symbols-rounded animate-spin text-2xl font-medium"
         >progress_activity</span
       >
     </button>

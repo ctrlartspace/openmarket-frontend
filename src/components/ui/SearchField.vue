@@ -7,13 +7,13 @@
       <div
         class="flex cursor-pointer items-center gap-2 hover:text-red-600 active:text-red-600"
       >
-        <span class="material-symbols-outlined md:text-[28px]">remove</span>
+        <span class="material-symbols-rounded md:text-[28px]">remove</span>
         <span class="hidden text-lg md:inline md:text-base">Удалить</span>
       </div>
       <slot name="afterSelect"> </slot>
     </div>
     <div v-else class="flex items-center gap-2 bg-white px-4 py-2">
-      <span class="material-symbols-outlined text-gray-300 md:text-[28px]"
+      <span class="material-symbols-rounded text-gray-300 md:text-[28px]"
         >search</span
       >
 

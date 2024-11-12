@@ -18,7 +18,7 @@
       {{ item.name }}
     </span>
 
-    <span v-if="showExpand" class="material-symbols-outlined md:text-[28px]">
+    <span v-if="showExpand" class="material-symbols-rounded md:text-[28px]">
       {{ isExpand ? "expand_less" : "expand_more" }}
     </span>
   </div>

@@ -19,13 +19,13 @@
     <div
       class="pointer-events-none absolute bottom-0 right-0 top-0 hidden items-center justify-end px-4 peer-focus:flex"
     >
-      <span class="material-symbols-outlined md:text-[28px]">expand_less</span>
+      <span class="material-symbols-rounded md:text-[28px]">expand_less</span>
     </div>
     <div
       class="pointer-events-none absolute bottom-0 right-0 top-0 flex items-center justify-end px-4 peer-focus:hidden"
     >
       <span
-        class="material-symbols-outlined md:text-[28px]"
+        class="material-symbols-rounded md:text-[28px]"
         :class="{ 'text-gray-300': disabled || loading }"
         >expand_more</span
       >

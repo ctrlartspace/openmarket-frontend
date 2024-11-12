@@ -69,7 +69,7 @@
             }"
             @click="store.changePaymentType"
           >
-            <span class="material-symbols-outlined text-4xl">
+            <span class="material-symbols-rounded text-4xl">
               {{ store.getPaymentType.icon }}
             </span>
           </button>
@@ -89,12 +89,12 @@
             >
             <span
               v-if="!isLoading"
-              class="material-symbols-outlined text-4xl font-medium"
+              class="material-symbols-rounded text-4xl font-medium"
               >arrow_forward</span
             >
             <span
               v-else
-              class="material-symbols-outlined animate-spin text-4xl font-medium"
+              class="material-symbols-rounded animate-spin text-4xl font-medium"
               >progress_activity</span
             >
           </button>

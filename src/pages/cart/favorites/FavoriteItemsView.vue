@@ -10,7 +10,7 @@
     >
       <template #title="{ item }">
         <span class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-neutral-300">add </span>
+          <span class="material-symbols-rounded text-neutral-300">add </span>
           {{ item.pointItem.storeItem.name }}
         </span>
       </template>

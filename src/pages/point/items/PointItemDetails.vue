@@ -24,7 +24,11 @@
       <a-button-floating @click="addItemToCart"
         >shopping_cart
       </a-button-floating>
-      <a-button-floating @click="addItemToFavorites">star </a-button-floating>
+      <a-button-floating
+        :loading="isItemAddingToFavoritesLoading"
+        @click="onAddItemToFavorites"
+        >star
+      </a-button-floating>
       <a-button-floating @click="applySelect(item, '/point/arrivals/add')"
         >add
       </a-button-floating>

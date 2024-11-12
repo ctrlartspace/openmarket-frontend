@@ -48,7 +48,7 @@
         <div
           class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
         >
-          <span class="material-symbols-outlined text-gray-300">search</span>
+          <span class="material-symbols-rounded text-gray-300">search</span>
         </div>
         <!-- <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-between gap-2 px-4"

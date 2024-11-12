@@ -49,7 +49,7 @@
           class="flex aspect-square items-center justify-center rounded-full border border-neutral-300 md:border-neutral-200 bg-white p-4"
         >
           <span
-            class="material-symbols-outlined animate-spin text-4xl font-medium"
+            class="material-symbols-rounded animate-spin text-4xl font-medium"
             >progress_activity</span
           >
         </div> -->

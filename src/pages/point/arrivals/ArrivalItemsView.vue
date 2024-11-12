@@ -2,7 +2,7 @@
   <a-page :loading="isLoading">
     <template #header>
       <a-link :to="filterPathMulti" primary>
-        <span class="material-symbols-outlined text-[28px]">menu</span>
+        <span class="material-symbols-rounded text-[28px]">menu</span>
       </a-link>
       <a-link
         primary

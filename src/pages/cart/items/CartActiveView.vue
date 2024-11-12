@@ -21,16 +21,16 @@
         <div
           class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center px-4"
         >
-          <span class="material-symbols-outlined text-neutral-300">search</span>
+          <span class="material-symbols-rounded text-neutral-300">search</span>
           <router-link
             to="/cart/favorite"
             v-if="!isSearchLoading"
             class="pointer-events-auto ml-auto flex items-center"
             v-press
           >
-            <span class="material-symbols-outlined text-neutral-400">bolt</span>
+            <span class="material-symbols-rounded text-neutral-400">star</span>
           </router-link>
-          <span v-else class="material-symbols-outlined ml-auto animate-spin"
+          <span v-else class="material-symbols-rounded ml-auto animate-spin"
             >progress_activity</span
           >
         </div>
@@ -45,7 +45,7 @@
         >
           <template #title="{ item }">
             <span class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-neutral-300"
+              <span class="material-symbols-rounded text-neutral-300"
                 >add
               </span>
               {{ item.storeItem.name }}
@@ -66,7 +66,7 @@
           <div class="flex items-center py-2 pl-4">
             <button class="flex items-center justify-center" v-press>
               <span
-                class="material-symbols-outlined select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
+                class="material-symbols-rounded select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
                 @click.stop="store.removeItem(item.id)"
               >
                 remove
@@ -89,7 +89,7 @@
           <div class="flex items-center py-2 pr-4">
             <button class="flex items-center justify-center" v-press>
               <span
-                class="material-symbols-outlined select-none rounded bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-700 active:bg-green-200 active:text-green-700"
+                class="material-symbols-rounded select-none rounded bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-700 active:bg-green-200 active:text-green-700"
                 @click.stop="store.addItem(item)"
               >
                 add
@@ -116,7 +116,7 @@
     <template #floating>
       <cart-total-for-mobile v-if="!isDesktop" />
       <a-link-floating-text
-        v-if="!isActiveCashExists"
+        v-if="!isActiveCashExists && !isActiveCashLoading"
         primary
         to="/cash-register/active/add"
       >

@@ -14,7 +14,7 @@
       />
       <span
         v-if="modelValue && !$attrs.disabled"
-        class="material-symbols-outlined cursor-pointer text-black hover:text-gray-600 active:text-gray-600 md:text-[28px]"
+        class="material-symbols-rounded cursor-pointer text-black hover:text-gray-600 active:text-gray-600 md:text-[28px]"
         @click=";(modelValue = ''), $emit('update:modelValue', '')"
         >close</span
       >

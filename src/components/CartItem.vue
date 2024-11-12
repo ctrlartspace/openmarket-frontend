@@ -1,7 +1,7 @@
 <template>
   <div class="flex cursor-pointer text-lg">
     <span
-      class="material-symbols-outlined select-none self-center rounded hover:bg-red-100 hover:text-red-700 active:text-red-700"
+      class="material-symbols-rounded select-none self-center rounded hover:bg-red-100 hover:text-red-700 active:text-red-700"
       @click="onRemoveClick"
     >
       remove

@@ -8,15 +8,15 @@
           <div class="absolute left-0 right-0">
             <div class="px- flex justify-between px-4">
               <button class="flex items-center" @click="$router.back" v-press>
-                <span class="material-symbols-outlined">arrow_back</span>
+                <span class="material-symbols-rounded">arrow_back</span>
               </button>
               <button class="flex items-center" @click="toggleSideMenu" v-press>
                 <span
                   v-if="!isSideMenuExpanded"
-                  class="material-symbols-outlined"
+                  class="material-symbols-rounded"
                   >menu</span
                 >
-                <span v-else class="material-symbols-outlined">close</span>
+                <span v-else class="material-symbols-rounded">close</span>
               </button>
             </div>
           </div>

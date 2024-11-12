@@ -4,7 +4,7 @@
     @click="makeSaleFromCart"
   >
     <span>{{ store.getTotalAmount }} ₸</span>
-    <span class="material-symbols-outlined self-center">arrow_forward</span>
+    <span class="material-symbols-rounded self-center">arrow_forward</span>
   </div>
 </template>
 

@@ -6,9 +6,7 @@
       >
         <div class="absolute">
           <button class="flex items-center" @click="goBack">
-            <span class="material-symbols-outlined text-xl"
-              >arrow_back_ios</span
-            >
+            <span class="material-symbols-rounded text-xl">arrow_back_ios</span>
           </button>
         </div>
         <h2 class="w-full text-center text-lg font-medium">

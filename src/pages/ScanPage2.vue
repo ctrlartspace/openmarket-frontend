@@ -16,9 +16,7 @@
             :class="{ 'opacity-40': !isTorchOn }"
             @click="isTorchOn = !isTorchOn"
           >
-            <span class="material-symbols-outlined text-4xl"
-              >flashlight_on</span
-            >
+            <span class="material-symbols-rounded text-4xl">flashlight_on</span>
           </button>
         </div>
       </qrcode-stream>
@@ -54,7 +52,7 @@
               @click="minusItem"
               v-press
             >
-              <span class="material-symbols-outlined">remove</span>
+              <span class="material-symbols-rounded">remove</span>
             </button>
             <div class="w-full text-center">
               <span class="text-2xl">{{ itemCount }}</span>
@@ -64,7 +62,7 @@
               @click="plusItem"
               v-press
             >
-              <span class="material-symbols-outlined">add</span>
+              <span class="material-symbols-rounded">add</span>
             </button>
           </div>
           <button
@@ -75,7 +73,7 @@
             Готово
           </button>
           <button class="absolute right-0 top-0 p-4" @click="resetScanner">
-            <span class="material-symbols-outlined">close</span>
+            <span class="material-symbols-rounded">close</span>
           </button>
         </div>
       </div>

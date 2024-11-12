@@ -6,7 +6,7 @@
     >
       <span
         v-if="isStoreInfoLoading"
-        class="material-symbols-outlined animate-spin text-3xl font-semibold text-white"
+        class="material-symbols-rounded animate-spin text-3xl font-semibold text-white"
         >progress_activity</span
       >
       <div v-else>
@@ -37,7 +37,7 @@
             to="/store/points/add"
             class="flex items-center justify-center gap-2 text-lg text-blue-600 md:text-base"
           >
-            <span class="material-symbols-outlined">add</span>
+            <span class="material-symbols-rounded">add</span>
             Новая точка
           </router-link>
         </template>

@@ -9,7 +9,11 @@
       >
         <a-button danger v-bind="props"> Закрыть смену </a-button>
       </a-modal>
-      <a-link v-if="!isActiveCashExists" primary to="/cash-register/active/add">
+      <a-link
+        v-if="!isActiveCashExists && !isLoading"
+        primary
+        to="/cash-register/active/add"
+      >
         Открыть смену
       </a-link>
     </template>
@@ -25,7 +29,7 @@
         </a-button-floating-text>
       </a-modal>
       <a-link-floating-text
-        v-if="!isActiveCashExists"
+        v-if="!isActiveCashExists && !isLoading"
         primary
         to="/cash-register/active/add"
       >

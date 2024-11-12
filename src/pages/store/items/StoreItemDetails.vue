@@ -50,7 +50,7 @@
             class="flex items-center"
             @click="onGenerateBarcodeClick"
           >
-            <span class="material-symbols-outlined">print</span>
+            <span class="material-symbols-rounded">print</span>
           </button>
         </template></a-base-input
       >

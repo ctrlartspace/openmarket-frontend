@@ -88,7 +88,7 @@ import AppDialogVue from '@/components/AppDialog.vue';
           <div
             class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-blue-600 p-2 text-white"
           >
-            <span class="material-symbols-outlined text-3xl">person</span>
+            <span class="material-symbols-rounded text-3xl">person</span>
           </div>
           <div class="h-full w-full">
             <p class="font-medium">{{ data.user.fullName }}</p>
@@ -100,12 +100,12 @@ import AppDialogVue from '@/components/AppDialog.vue';
         <div
           class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300 bg-white md:border-neutral-200"
         >
-          <span class="material-symbols-outlined text-4xl">unfold_more</span>
+          <span class="material-symbols-rounded text-4xl">unfold_more</span>
         </div>
         <div
           class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300 bg-white md:border-neutral-200"
         >
-          <span class="material-symbols-outlined animate-spin text-4xl"
+          <span class="material-symbols-rounded animate-spin text-4xl"
             >autorenew</span
           >
         </div>
@@ -118,7 +118,7 @@ import AppDialogVue from '@/components/AppDialog.vue';
           <div
             class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-gray-600 p-2 text-white"
           >
-            <span class="material-symbols-outlined text-3xl">store</span>
+            <span class="material-symbols-rounded text-3xl">store</span>
           </div>
           <div class="h-full w-full">
             <p class="font-medium">{{ data.store.fullName }}</p>

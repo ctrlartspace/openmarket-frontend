@@ -21,7 +21,7 @@
       />
       <span
         v-if="!$attrs.disabled"
-        class="material-symbols-outlined md:text-[28px]"
+        class="material-symbols-rounded md:text-[28px]"
         :class="
           selectedItems && selectedItems.length > 0
             ? 'text-black'

@@ -50,7 +50,7 @@
             @click="generateCode"
           >
             <span
-              class="material-symbols-outlined cursor-pointer"
+              class="material-symbols-rounded cursor-pointer"
               :class="codeIsGenerated ? 'text-blue-600' : 'text-black'"
               >bolt</span
             >
@@ -68,7 +68,7 @@
             }"
             class="flex items-center"
           >
-            <span class="material-symbols-outlined">center_focus_strong</span>
+            <span class="material-symbols-rounded">center_focus_strong</span>
           </router-link>
         </template></a-base-input
       >

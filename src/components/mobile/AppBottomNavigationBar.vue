@@ -14,7 +14,7 @@
             >
               <span
                 :class="isActive ? 'text-black' : 'text-neutral-300'"
-                class="material-symbols-outlined"
+                class="material-symbols-rounded"
                 >{{ item.icon }}</span
               >
               <span
