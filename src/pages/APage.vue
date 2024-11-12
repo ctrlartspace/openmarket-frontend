@@ -23,11 +23,11 @@
 
     <div
       :class="{ 'no-padding p-0': noPadding, 'p-4': !noPadding }"
-      class="relative flex-1 overflow-auto pb-20"
+      class="relative flex-1 overflow-auto pb-20 md:pb-4"
     >
       <div
         :class="loading ? 'pointer-events-none opacity-0' : 'opacity-100'"
-        class="transition-opacity duration-200"
+        class="h-full transition-opacity duration-200"
       >
         <slot></slot>
       </div>

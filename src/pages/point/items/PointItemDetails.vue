@@ -98,6 +98,7 @@ const { applySelect } = useSelect()
 const { serverData: item, sendRequest, isLoading } = useApiRequest()
 
 const addItemToCart = () => {
+  console.log(item.value)
   cartStore.addItem(item.value)
   router.push("/cart")
 }

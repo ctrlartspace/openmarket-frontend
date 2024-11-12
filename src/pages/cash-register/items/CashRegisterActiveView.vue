@@ -7,10 +7,10 @@
         title="Закрыть смену?"
         :async-operation="closeActiveCashRegister"
       >
-        <a-button danger v-bind="props"> Закрыть </a-button>
+        <a-button danger v-bind="props"> Закрыть смену </a-button>
       </a-modal>
       <a-link v-if="!isActiveCashExists" primary to="/cash-register/active/add">
-        Открыть
+        Открыть смену
       </a-link>
     </template>
     <template #floating>
@@ -21,7 +21,7 @@
         :async-operation="closeActiveCashRegister"
       >
         <a-button-floating-text danger to="/arrivals/items/add" v-bind="props">
-          Закрыть
+          Закрыть смену
         </a-button-floating-text>
       </a-modal>
       <a-link-floating-text
@@ -29,7 +29,7 @@
         primary
         to="/cash-register/active/add"
       >
-        Открыть
+        Открыть смену
       </a-link-floating-text>
     </template>
 
@@ -74,6 +74,16 @@
           </span>
         </template> -->
       </a-list>
+    </div>
+    <div v-else class="flex h-full items-center justify-center">
+      <div
+        v-if="!isActiveCashLoading"
+        class="flex flex-col items-center justify-center rounded-xl"
+      >
+        <span class="text-lg text-neutral-300 md:text-base"
+          >Смена не найдена</span
+        >
+      </div>
     </div>
   </a-page>
 </template>

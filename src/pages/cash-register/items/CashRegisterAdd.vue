@@ -1,12 +1,12 @@
 <template>
-  <a-page title="Новая касса">
+  <a-page title="Новая смена">
     <template #header>
       <a-modal
         #="{ props }"
         title="Открыть смену?"
         :async-operation="openCashRegister"
       >
-        <a-button v-bind="props" primary> Сохранить</a-button>
+        <a-button v-bind="props" primary> Готово</a-button>
       </a-modal>
     </template>
     <template #floating>
