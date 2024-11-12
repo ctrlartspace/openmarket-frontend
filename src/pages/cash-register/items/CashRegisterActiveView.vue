@@ -77,7 +77,7 @@
     </div>
     <div v-else class="flex h-full items-center justify-center">
       <div
-        v-if="!isActiveCashLoading"
+        v-if="!isLoading"
         class="flex flex-col items-center justify-center rounded-xl"
       >
         <span class="text-lg text-neutral-300 md:text-base"

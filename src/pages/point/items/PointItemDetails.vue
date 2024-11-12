@@ -1,7 +1,14 @@
 <template>
-  <a-page title="Товар" :loading="isLoading">
+  <a-page :loading="isLoading">
     <template #header>
       <a-button neutral @click="addItemToCart"> В корзину </a-button>
+      <a-button
+        :loading="isItemAddingToFavoritesLoading"
+        accent
+        @click="onAddItemToFavorites"
+      >
+        В избранное
+      </a-button>
       <a-button success @click="applySelect(item, '/point/arrivals/add')">
         Приход
       </a-button>
@@ -17,6 +24,7 @@
       <a-button-floating @click="addItemToCart"
         >shopping_cart
       </a-button-floating>
+      <a-button-floating @click="addItemToFavorites">star </a-button-floating>
       <a-button-floating @click="applySelect(item, '/point/arrivals/add')"
         >add
       </a-button-floating>
@@ -28,6 +36,9 @@
         <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
     </template>
+    <template v-if="isItemAddingToFavoritesError" #error>{{
+      errorMessageOfItemAddingToFavorites
+    }}</template>
     <div v-if="item" class="flex flex-col gap-2">
       <router-link
         v-if="item.storeItem"
@@ -96,11 +107,21 @@ const route = useRoute()
 const router = useRouter()
 const { applySelect } = useSelect()
 const { serverData: item, sendRequest, isLoading } = useApiRequest()
+const {
+  sendRequest: addItemToFavorites,
+  isLoading: isItemAddingToFavoritesLoading,
+  isError: isItemAddingToFavoritesError,
+  errorMessage: errorMessageOfItemAddingToFavorites,
+} = useApiRequest()
 
 const addItemToCart = () => {
   console.log(item.value)
   cartStore.addItem(item.value)
   router.push("/cart")
+}
+
+const onAddItemToFavorites = async () => {
+  addItemToFavorites("post", "/point/favorites", { pointItemId: item.value.id })
 }
 
 const updatePointItem = async () => {

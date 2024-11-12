@@ -9,7 +9,7 @@
           ref="focusableInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 pr-12 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
           :class="
             isSearchError
               ? 'animate-shake text-red-600 will-change-transform'
@@ -21,13 +21,16 @@
         <div
           class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center px-4"
         >
-          <span class="material-symbols-outlined text-gray-300">search</span>
-        </div>
-        <div
-          class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center justify-end px-4 transition-opacity"
-          :class="isSearchLoading ? 'opacity-100' : 'opacity-0'"
-        >
-          <span class="material-symbols-outlined animate-spin"
+          <span class="material-symbols-outlined text-neutral-300">search</span>
+          <router-link
+            to="/cart/favorite"
+            v-if="!isSearchLoading"
+            class="pointer-events-auto ml-auto flex items-center"
+            v-press
+          >
+            <span class="material-symbols-outlined text-neutral-400">bolt</span>
+          </router-link>
+          <span v-else class="material-symbols-outlined ml-auto animate-spin"
             >progress_activity</span
           >
         </div>
@@ -40,6 +43,14 @@
           description-hint="₸"
           @on-item-click="onSearchItemClick"
         >
+          <template #title="{ item }">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-neutral-300"
+                >add
+              </span>
+              {{ item.storeItem.name }}
+            </span>
+          </template>
         </a-list>
       </div>
       <div

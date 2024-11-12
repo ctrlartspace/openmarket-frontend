@@ -16,7 +16,7 @@
     v-bind="$attrs"
     v-press
   >
-    <span class="material-symbols-outlined text-3xl">
+    <span class="material-symbols-rounded text-3xl">
       <slot></slot>
     </span>
   </button>

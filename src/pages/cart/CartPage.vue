@@ -18,6 +18,10 @@ const menuItems = ref([
     title: "Новая",
     path: "/cart/active",
   },
+  {
+    title: "Быстрые товары",
+    path: "/cart/favorite",
+  },
 ])
 </script>
 

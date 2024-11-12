@@ -14,13 +14,13 @@
         <slot name="header"></slot>
       </div>
     </div>
-    <div
-      v-if="hasError()"
-      class="border-b border-red-100 bg-red-50 px-4 py-2 md:border-neutral-200"
-    >
-      <p class="text-center text-red-600"><slot name="error"></slot></p>
+    <div class="p-4 pb-0" v-if="hasError()">
+      <div
+        class="animate-shake rounded-lg border border-red-200 bg-red-50 px-4 py-2"
+      >
+        <p class="text-center text-red-500"><slot name="error"></slot></p>
+      </div>
     </div>
-
     <div
       :class="{ 'no-padding p-0': noPadding, 'p-4': !noPadding }"
       class="relative flex-1 overflow-auto pb-20 md:pb-4"

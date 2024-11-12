@@ -20,8 +20,6 @@ import StoreFiltersView from "@/pages/store/filters/StoreFiltersView.vue"
 import StoreFiltersAdd from "@/pages/store/filters/StoreFiltersAdd.vue"
 import ArrivalItemsView from "@/pages/point/arrivals/ArrivalItemsView.vue"
 import ArrivalItemsAdd from "@/pages/point/arrivals/ArrivalItemsAdd.vue"
-import { useUserStore } from "@/stores/user.store"
-import { useRouteStore } from "@/stores/route.store"
 
 import CashRegisterPage from "@/pages/cash-register/CashRegisterPage.vue"
 import CashRegisterActiveView from "@/pages/cash-register/items/CashRegisterActiveView.vue"
@@ -31,10 +29,13 @@ import PageContent from "@/pages/PageContent.vue"
 import SaleItemsView from "@/pages/point/sales/SaleItemsView.vue"
 import CartPage from "@/pages/cart/CartPage.vue"
 import CartActiveView from "@/pages/cart/items/CartActiveView.vue"
-import FiltersAddPage from "@/pages/FiltersAddPage.vue"
+import FavoriteItemsView from "@/pages/cart/favorites/FavoriteItemsView.vue"
 import PointInfoView from "@/pages/point/info/PointInfoView.vue"
 import StoreCreatePage from "@/pages/store-create/StoreCreatePage.vue"
 import StoreCreateUserInfoPage from "@/pages/store-create/user-info/StoreCreateUserInfoPage.vue"
+
+import { useUserStore } from "@/stores/user.store"
+import { useRouteStore } from "@/stores/route.store"
 
 const routes = [
   { path: "/", redirect: "/store" },
@@ -50,6 +51,16 @@ const routes = [
           {
             path: "",
             component: CartActiveView,
+          },
+        ],
+      },
+      {
+        path: "favorite",
+        component: PageContent,
+        children: [
+          {
+            path: "",
+            component: FavoriteItemsView,
           },
         ],
       },
