@@ -25,8 +25,8 @@ export default {
     el.__handleTouchStart__ = handleTouchStart
     el.__handleTouchEnd__ = handleTouchEnd
 
-    el.addEventListener("touchstart", handleTouchStart)
-    el.addEventListener("touchend", handleTouchEnd)
+    el.addEventListener("touchstart", handleTouchStart, { passive: true })
+    el.addEventListener("touchend", handleTouchEnd, { passive: true })
   },
   unmounted(el) {
     // Удаляем слушатели событий при размонтировании

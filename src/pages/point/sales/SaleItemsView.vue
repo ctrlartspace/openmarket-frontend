@@ -14,7 +14,8 @@
       title-field="pointItem.storeItem.name"
       description-field="count"
       description-hint="шт."
-    ></a-list>
+    >
+    </a-list>
   </a-page>
 </template>
 

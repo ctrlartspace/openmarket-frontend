@@ -1,15 +1,12 @@
 <template>
-  <a-page :loading="isActiveCashLoading">
-    <template v-if="!isActiveCashExists && !isActiveCashLoading" #header>
-      <a-link primary to="/cash-register/active/add"> Открыть смену </a-link>
-    </template>
-    <div v-if="isActiveCashExists" class="flex flex-col gap-2 pb-8">
+  <a-page>
+    <div class="flex flex-col gap-2 pb-8">
       <v-form class="relative w-full" @submit.prevent="addCartItem">
         <input
           ref="focusableInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 pr-12 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 pr-16 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
           :class="
             isSearchError
               ? 'animate-shake text-red-600 will-change-transform'
@@ -22,17 +19,78 @@
           class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center px-4"
         >
           <span class="material-symbols-rounded text-neutral-300">search</span>
-          <router-link
-            to="/cart/favorite"
-            v-if="!isSearchLoading"
-            class="pointer-events-auto ml-auto flex items-center"
-            v-press
-          >
-            <span class="material-symbols-rounded text-neutral-400">star</span>
-          </router-link>
-          <span v-else class="material-symbols-rounded ml-auto animate-spin"
-            >progress_activity</span
-          >
+          <div class="pointer-events-auto ml-auto flex gap-2">
+            <router-link
+              to="/cart/favorite"
+              v-if="!isSearchLoading"
+              class="pointer-events-auto flex items-center rounded bg-purple-50 md:hidden"
+              v-press
+            >
+              <span class="material-symbols-rounded text-purple-500">star</span>
+            </router-link>
+            <span v-else class="material-symbols-rounded animate-spin"
+              >progress_activity</span
+            >
+
+            <a-modal
+              hide-yes
+              title="Цена продажи"
+              :async-operation="addFreeItem"
+            >
+              <template #content="{ closeModal }">
+                <a-base-input
+                  class="w-full"
+                  id="selling-price"
+                  v-model.number="freeItem.sellingPrice"
+                  placeholder="0"
+                  type="number"
+                  unit="₸"
+                  v-autofocus
+                />
+                <div class="grid grid-cols-3 gap-2">
+                  <button
+                    v-for="i in 10"
+                    :key="i"
+                    class="rounded-xl border border-neutral-100 bg-neutral-50 p-2 text-lg font-medium md:text-base"
+                    :class="i - 1 === 0 ? 'order-last' : ''"
+                    @click="freeItem.sellingPrice += String(i - 1)"
+                    v-press
+                  >
+                    {{ i - 1 }}
+                  </button>
+                  <button
+                    class="col-span-1 flex items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-2 text-lg font-medium text-red-600 md:text-base"
+                    v-press
+                    @click="freeItem.sellingPrice = ''"
+                  >
+                    C
+                  </button>
+                  <button
+                    class="order-last col-span-1 flex items-center justify-center rounded-xl border border-blue-100 bg-blue-50 p-2 text-lg font-medium text-blue-600 md:text-base"
+                    v-press
+                    @click="addFreeItem(), closeModal()"
+                  >
+                    <span
+                      class="material-symbols-rounded font-semibold md:font-normal"
+                      >arrow_forward</span
+                    >
+                  </button>
+                </div>
+              </template>
+              <template #default="{ props }">
+                <button
+                  v-if="!inputValue"
+                  class="pointer-events-auto flex items-center rounded bg-blue-50"
+                  v-bind="props"
+                  v-press
+                >
+                  <span class="material-symbols-rounded text-blue-500"
+                    >tag</span
+                  >
+                </button>
+              </template>
+            </a-modal>
+          </div>
         </div>
       </v-form>
       <div v-if="pointItems && inputValue.length > 0">
@@ -74,7 +132,7 @@
             </button>
           </div>
           <div class="w-full truncate px-2 py-2 pl-4 font-medium">
-            {{ item.storeItem.name }}
+            {{ item?.storeItem?.name || "Свободный товар" }}
           </div>
           <div class="w-max whitespace-nowrap px-2">
             <span class="text-neutral-400">{{ item.count }} шт. </span>
@@ -102,33 +160,18 @@
         Пусто
       </div>
     </div>
-    <div v-else class="flex h-full items-center justify-center">
-      <div
-        v-if="!isActiveCashLoading"
-        class="flex flex-col items-center justify-center rounded-xl p-4"
-      >
-        <span class="text-lg text-neutral-300 md:text-base"
-          >Смена не найдена</span
-        >
-      </div>
-    </div>
 
     <template #floating>
       <cart-total-for-mobile v-if="!isDesktop" />
-      <a-link-floating-text
-        v-if="!isActiveCashExists && !isActiveCashLoading"
-        primary
-        to="/cash-register/active/add"
-      >
-        Открыть смену
-      </a-link-floating-text>
     </template>
   </a-page>
 </template>
 
 <script setup>
 import AList from "@/components/ui/AList.vue"
-import { ref, onMounted, computed } from "vue"
+import AModal from "@/components/ui/AModal.vue"
+import ABaseInput from "@/components/ui/ABaseInput.vue"
+import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
 import { getPointItem } from "@/services/PointService"
@@ -137,8 +180,6 @@ import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import { useFocusable } from "@/composables/useFocusable"
 import { watchDebounced } from "@vueuse/core"
 import { useApiRequest } from "@/composables/useApiRequest"
-import ALink from "@/components/ui/ALink.vue"
-import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
 
 const { focusableInput } = useFocusable()
 const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -150,6 +191,17 @@ const router = useRouter()
 const inputValue = ref("")
 const isSearchError = ref(false)
 const isSearchLoading = ref(false)
+const freeItem = ref({ sellingPrice: "" })
+
+const addFreeItem = async () => {
+  freeItem.value.sellingPrice = Number(freeItem.value.sellingPrice)
+  if (freeItem.value.sellingPrice <= 0) {
+    freeItem.value = { sellingPrice: "" }
+    return
+  }
+  store.addItem(freeItem.value)
+  freeItem.value = { sellingPrice: "" }
+}
 
 const addCartItem = async () => {
   isSearchError.value = false
@@ -202,7 +254,9 @@ watchDebounced(
 )
 
 const onItemClick = (item) => {
-  router.push(`/point/items/${item.id}`)
+  if (item.id) {
+    router.push(`/point/items/${item.id}`)
+  }
 }
 
 const onSearchItemClick = (item) => {
@@ -210,18 +264,4 @@ const onSearchItemClick = (item) => {
   inputValue.value = ""
   pointItems.value = null
 }
-
-const {
-  serverData: activeCash,
-  sendRequest: fetchActiveCash,
-  isLoading: isActiveCashLoading,
-} = useApiRequest()
-
-const isActiveCashExists = computed(
-  () => !!(activeCash.value && activeCash.value.id),
-)
-
-onMounted(async () => {
-  await fetchActiveCash("get", "/cash-registers/today")
-})
 </script>

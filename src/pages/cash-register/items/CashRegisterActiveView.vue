@@ -39,7 +39,7 @@
 
     <div
       v-if="isActiveCashExists"
-      class="min-h-32 grid grid-cols-2 gap-4 bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:bg-none md:px-4 md:py-4 md:pb-0"
+      class="min-h-32 grid grid-cols-1 gap-4 bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:grid-cols-2 md:bg-none md:px-4 md:py-4 md:pb-0"
     >
       <p
         class="flex flex-col rounded-xl md:border md:border-neutral-200 md:bg-white md:px-4 md:py-2"

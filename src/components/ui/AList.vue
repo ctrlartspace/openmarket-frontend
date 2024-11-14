@@ -80,8 +80,10 @@ const slots = useSlots()
 const hasAction = computed(() => !!slots.action)
 const hasNoItems = computed(() => props.items.length === 0)
 const hasLast = computed(() => !!slots.last)
-const getNestedProperty = (obj, path) =>
-  path.split(".").reduce((acc, key) => acc && acc[key], obj)
+const getNestedProperty = (obj, path) => {
+  const val = path.split(".").reduce((acc, key) => acc && acc[key], obj)
+  return val === null || val === undefined ? "Неизв." : val
+}
 
 const selectAll = (event) => {
   const isChecked = event.target.checked

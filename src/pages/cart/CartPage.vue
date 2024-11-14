@@ -15,7 +15,7 @@ import CartChange from "@/components/CartChange.vue"
 
 const menuItems = ref([
   {
-    title: "Новая",
+    title: "Корзина",
     path: "/cart/active",
   },
   {

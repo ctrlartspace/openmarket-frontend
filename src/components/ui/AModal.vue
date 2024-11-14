@@ -13,8 +13,9 @@
               {{ title }}
             </h1>
             <div class="flex flex-col gap-2">
-              <slot name="content"></slot>
+              <slot name="content" :close-modal="closeModal"></slot>
               <button
+                v-if="!hideYes"
                 class="flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-600 hover:bg-neutral-50 md:border-neutral-200 md:text-base md:active:bg-neutral-100"
                 :disabled="isLoading"
                 @click="onYesClick"
@@ -69,6 +70,10 @@ const props = defineProps({
   asyncOperation: {
     type: Function,
   },
+  hideYes: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const isOpen = ref(false)
@@ -76,6 +81,9 @@ const isLoading = ref(false)
 
 const openModal = () => {
   isOpen.value = true
+}
+const closeModal = () => {
+  isOpen.value = false
 }
 
 const activatorProps = ref({
