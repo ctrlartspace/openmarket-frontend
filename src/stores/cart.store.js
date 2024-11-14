@@ -36,27 +36,29 @@ export const useCartStore = defineStore("cart", () => {
   )
 
   const addItem = (item, count = 1) => {
-    const existingItem = cartItems.value.get(item.id)
+    const itemKey = `${item.id}-${item.sellingPrice}`
+
+    const existingItem = cartItems.value.get(itemKey)
     if (existingItem) {
       existingItem.count += count
       existingItem.totalPrice = existingItem.count * existingItem.sellingPrice
     } else {
-      cartItems.value.set(item.id, {
+      cartItems.value.set(itemKey, {
         ...item,
         count: count,
         totalPrice: item.sellingPrice,
       })
-      console.log(item)
     }
   }
 
-  const removeItem = (id) => {
-    const item = cartItems.value.get(id)
+  const removeItem = (cartItem) => {
+    const itemKey = `${cartItem.id}-${cartItem.sellingPrice}`
+    const item = cartItems.value.get(itemKey)
     if (item && item.count > 1) {
       item.count -= 1
       item.totalPrice = item.count * item.sellingPrice
     } else {
-      cartItems.value.delete(id)
+      cartItems.value.delete(itemKey)
     }
   }
 

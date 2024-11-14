@@ -23,7 +23,7 @@
     </div>
     <div
       :class="{ 'no-padding p-0': noPadding, 'p-4': !noPadding }"
-      class="relative flex-1 overflow-auto pb-20 md:pb-4"
+      class="relative flex-1 overflow-auto"
     >
       <div
         :class="loading ? 'pointer-events-none opacity-0' : 'opacity-100'"
@@ -45,14 +45,6 @@
             class="h-full animate-pulse rounded-xl bg-gradient-to-b from-neutral-200 to-neutral-100 px-4 py-12"
           ></div>
         </div>
-        <!-- <div
-          class="flex aspect-square items-center justify-center rounded-full border border-neutral-300 md:border-neutral-200 bg-white p-4"
-        >
-          <span
-            class="material-symbols-rounded animate-spin text-4xl font-medium"
-            >progress_activity</span
-          >
-        </div> -->
       </div>
     </div>
     <div

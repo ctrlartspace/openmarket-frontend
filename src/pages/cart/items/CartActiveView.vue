@@ -67,7 +67,7 @@
             <button class="flex items-center justify-center" v-press>
               <span
                 class="material-symbols-rounded select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
-                @click.stop="store.removeItem(item.id)"
+                @click.stop="store.removeItem(item)"
               >
                 remove
               </span>

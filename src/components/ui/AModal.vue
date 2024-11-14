@@ -1,6 +1,6 @@
 <template>
   <slot :props="activatorProps"></slot>
-  <div v-if="isOpen" class="modal-window relative z-10">
+  <div v-if="isOpen || isOpenOut" class="modal-window relative z-10">
     <div class="fixed inset-0 bg-black bg-opacity-30" aria-hidden="true">
       <div class="fixed inset-0 z-10 flex w-screen">
         <div class="flex h-full w-full items-center justify-center">
@@ -13,6 +13,7 @@
               {{ title }}
             </h1>
             <div class="flex flex-col gap-2">
+              <slot name="content"></slot>
               <button
                 class="flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-4 py-2 text-lg font-medium text-blue-600 hover:bg-neutral-50 md:border-neutral-200 md:text-base md:active:bg-neutral-100"
                 :disabled="isLoading"
@@ -44,10 +45,15 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, defineProps } from "vue"
+import { ref, defineEmits, defineProps, defineModel } from "vue"
 
+const inputValue = defineModel()
 const emits = defineEmits(["yes", "no", "finish"])
 const props = defineProps({
+  isOpenOut: {
+    type: Boolean,
+    default: false,
+  },
   title: {
     type: String,
     default: "Подтвердите",
@@ -78,11 +84,13 @@ const activatorProps = ref({
 
 const onYesClick = async () => {
   emits("yes")
-  isLoading.value = true
-  await props.asyncOperation()
-  isLoading.value = false
-  isOpen.value = false
-  emits("finish")
+  if (props.asyncOperation) {
+    isLoading.value = true
+    await props.asyncOperation()
+    isLoading.value = false
+    isOpen.value = false
+    emits("finish")
+  }
 }
 
 const onNoClick = () => {
