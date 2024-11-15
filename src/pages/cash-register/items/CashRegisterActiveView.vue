@@ -39,13 +39,20 @@
 
     <div
       v-if="isActiveCashExists"
-      class="min-h-32 grid grid-cols-1 gap-4 bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:grid-cols-2 md:bg-none md:px-4 md:py-4 md:pb-0"
+      class="min-h-32 grid grid-cols-1 gap-2 bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:hidden md:grid-cols-2 md:bg-none md:px-4 md:py-4 md:pb-0"
     >
       <p
         class="flex flex-col rounded-xl md:border md:border-neutral-200 md:bg-white md:px-4 md:py-2"
       >
+        <span class="text-base text-white/50 md:text-neutral-300">
+          {{ formatDate(activeCash.createdAt, "DD.MM.YYYY HH:MM") }}</span
+        >
+      </p>
+      <p
+        class="flex flex-col rounded-xl md:border md:border-neutral-200 md:bg-white md:px-4 md:py-2"
+      >
         <span class="text-base text-white/50 md:text-neutral-300">Итого</span>
-        <span class="text-3xl font-medium text-green-400">
+        <span class="text-3xl font-medium text-blue-400">
           {{ activeCash.total }}
           <span class="font-semibold">₸</span>
         </span>
@@ -61,6 +68,30 @@
       </p>
     </div>
 
+    <div
+      v-if="isActiveCashExists"
+      class="hidden flex-col gap-2 border-b border-neutral-200 bg-white p-4 md:flex"
+    >
+      <p class="px-4 pb-0 text-base text-white/50 md:text-neutral-300">
+        {{ formatDate(activeCash.createdAt, "DD.MM.YYYY HH:MM") }}
+      </p>
+      <div class="grid grid-cols-2 gap-4">
+        <p class="flex flex-col rounded-xl border border-neutral-100 px-4 py-2">
+          <span class="text-base text-white/50 md:text-neutral-300">Итого</span>
+          <span class="text-3xl font-medium text-blue-600">
+            {{ activeCash.total }}
+            <span class="font-semibold">₸</span>
+          </span>
+        </p>
+        <p class="flex flex-col rounded-xl border border-neutral-100 px-4 py-2">
+          <span class="text-base text-white/50 md:text-neutral-300">Касса</span>
+          <span class="text-3xl font-medium text-white/90 md:text-black">
+            {{ cashAmount }}
+            <span class="font-semibold">₸</span>
+          </span>
+        </p>
+      </div>
+    </div>
     <div v-if="isActiveCashExists" class="-mt-10 p-4 md:m-0">
       <a-list
         :items="activeCash.totalsPaymentType"
@@ -101,6 +132,7 @@ import AModal from "@/components/ui/AModal.vue"
 import AList from "@/components/ui/AList.vue"
 import { computed, onMounted } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { formatDate } from "@/utils/format-date"
 
 const { serverData: activeCash, sendRequest, isLoading } = useApiRequest()
 
