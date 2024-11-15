@@ -30,6 +30,7 @@ import SaleItemsView from "@/pages/point/sales/SaleItemsView.vue"
 import CartPage from "@/pages/cart/CartPage.vue"
 import CartActiveView from "@/pages/cart/items/CartActiveView.vue"
 import FavoriteItemsView from "@/pages/cart/favorites/FavoriteItemsView.vue"
+import FreeSaleView from "@/pages/cart/free/FreeSaleView.vue"
 import PointInfoView from "@/pages/point/info/PointInfoView.vue"
 import StoreCreatePage from "@/pages/store-create/StoreCreatePage.vue"
 import StoreCreateUserInfoPage from "@/pages/store-create/user-info/StoreCreateUserInfoPage.vue"
@@ -61,6 +62,16 @@ const routes = [
           {
             path: "",
             component: FavoriteItemsView,
+          },
+        ],
+      },
+      {
+        path: "free",
+        component: PageContent,
+        children: [
+          {
+            path: "",
+            component: FreeSaleView,
           },
         ],
       },
@@ -142,7 +153,7 @@ const routes = [
   {
     path: "/point",
     component: PointPage,
-    redirect: "/point/items",
+    redirect: "/point/sales",
     children: [
       {
         path: "info",

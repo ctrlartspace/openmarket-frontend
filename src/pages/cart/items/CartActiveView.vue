@@ -26,70 +26,19 @@
               class="pointer-events-auto flex items-center rounded bg-purple-50 md:hidden"
               v-press
             >
-              <span class="material-symbols-rounded text-purple-500">star</span>
+              <span class="material-symbols-rounded text-purple-600">star</span>
             </router-link>
             <span v-else class="material-symbols-rounded animate-spin"
               >progress_activity</span
             >
-
-            <a-modal
-              hide-yes
-              title="Цена продажи"
-              :async-operation="addFreeItem"
+            <router-link
+              to="/cart/free"
+              v-if="!isSearchLoading"
+              class="pointer-events-auto flex items-center rounded bg-blue-50 md:hidden"
+              v-press
             >
-              <template #content="{ closeModal }">
-                <a-base-input
-                  class="w-full"
-                  id="selling-price"
-                  v-model.number="freeItem.sellingPrice"
-                  placeholder="0"
-                  type="number"
-                  unit="₸"
-                  v-autofocus
-                />
-                <div class="grid grid-cols-3 gap-2">
-                  <button
-                    v-for="i in 10"
-                    :key="i"
-                    class="rounded-xl border border-neutral-100 bg-neutral-50 p-2 text-lg font-medium md:text-base"
-                    :class="i - 1 === 0 ? 'order-last' : ''"
-                    @click="freeItem.sellingPrice += String(i - 1)"
-                    v-press
-                  >
-                    {{ i - 1 }}
-                  </button>
-                  <button
-                    class="col-span-1 flex items-center justify-center rounded-xl border border-neutral-100 bg-neutral-50 p-2 text-lg font-medium text-red-600 md:text-base"
-                    v-press
-                    @click="freeItem.sellingPrice = ''"
-                  >
-                    C
-                  </button>
-                  <button
-                    class="order-last col-span-1 flex items-center justify-center rounded-xl border border-blue-100 bg-blue-50 p-2 text-lg font-medium text-blue-600 md:text-base"
-                    v-press
-                    @click="addFreeItem(), closeModal()"
-                  >
-                    <span
-                      class="material-symbols-rounded font-semibold md:font-normal"
-                      >arrow_forward</span
-                    >
-                  </button>
-                </div>
-              </template>
-              <template #default="{ props }">
-                <button
-                  v-if="!inputValue"
-                  class="pointer-events-auto flex items-center rounded bg-blue-50"
-                  v-bind="props"
-                  v-press
-                >
-                  <span class="material-symbols-rounded text-blue-500"
-                    >tag</span
-                  >
-                </button>
-              </template>
-            </a-modal>
+              <span class="material-symbols-rounded text-blue-600">add</span>
+            </router-link>
           </div>
         </div>
       </v-form>
@@ -192,16 +141,6 @@ const inputValue = ref("")
 const isSearchError = ref(false)
 const isSearchLoading = ref(false)
 const freeItem = ref({ sellingPrice: "" })
-
-const addFreeItem = async () => {
-  freeItem.value.sellingPrice = Number(freeItem.value.sellingPrice)
-  if (freeItem.value.sellingPrice <= 0) {
-    freeItem.value = { sellingPrice: "" }
-    return
-  }
-  store.addItem(freeItem.value)
-  freeItem.value = { sellingPrice: "" }
-}
 
 const addCartItem = async () => {
   isSearchError.value = false

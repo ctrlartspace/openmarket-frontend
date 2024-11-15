@@ -44,13 +44,6 @@
       <p
         class="flex flex-col rounded-xl md:border md:border-neutral-200 md:bg-white md:px-4 md:py-2"
       >
-        <span class="text-base text-white/50 md:text-neutral-300">
-          {{ formatDate(activeCash.createdAt, "DD.MM.YYYY HH:MM") }}</span
-        >
-      </p>
-      <p
-        class="flex flex-col rounded-xl md:border md:border-neutral-200 md:bg-white md:px-4 md:py-2"
-      >
         <span class="text-base text-white/50 md:text-neutral-300">Итого</span>
         <span class="text-3xl font-medium text-blue-400">
           {{ activeCash.total }}
@@ -66,33 +59,51 @@
           <span class="font-semibold">₸</span>
         </span>
       </p>
+
+      <p class="flex items-center">
+        <span class="mr-2 truncate text-base text-white/50">
+          {{ activeCash.point.name }}</span
+        >
+        <span class="material-symbols-rounded text-base text-white/50"
+          >schedule</span
+        >
+        <span class="ml-1 text-base text-white/50">{{
+          formatDate(activeCash.createdAt, "HH:MM")
+        }}</span>
+      </p>
     </div>
 
     <div
       v-if="isActiveCashExists"
       class="hidden flex-col gap-2 border-b border-neutral-200 bg-white p-4 md:flex"
     >
-      <p class="px-4 pb-0 text-base text-white/50 md:text-neutral-300">
-        {{ formatDate(activeCash.createdAt, "DD.MM.YYYY HH:MM") }}
-      </p>
       <div class="grid grid-cols-2 gap-4">
-        <p class="flex flex-col rounded-xl border border-neutral-100 px-4 py-2">
-          <span class="text-base text-white/50 md:text-neutral-300">Итого</span>
+        <p class="flex flex-col rounded-xl px-4">
+          <span class="text-base text-neutral-300">Итого</span>
           <span class="text-3xl font-medium text-blue-600">
             {{ activeCash.total }}
             <span class="font-semibold">₸</span>
           </span>
         </p>
-        <p class="flex flex-col rounded-xl border border-neutral-100 px-4 py-2">
-          <span class="text-base text-white/50 md:text-neutral-300">Касса</span>
-          <span class="text-3xl font-medium text-white/90 md:text-black">
+        <p class="flex flex-col rounded-xl px-4">
+          <span class="text-base text-neutral-300">Касса</span>
+          <span class="text-3xl font-medium text-black">
             {{ cashAmount }}
             <span class="font-semibold">₸</span>
           </span>
         </p>
       </div>
+
+      <p
+        class="inline-flex w-max items-center gap-1 rounded-xl px-4 pb-0 text-base text-neutral-300"
+      >
+        <span>
+          {{ "Время открытия: " + formatDate(activeCash.createdAt, " HH:MM") }}
+        </span>
+        <span>({{ activeCash.user.fullName }})</span>
+      </p>
     </div>
-    <div v-if="isActiveCashExists" class="-mt-10 p-4 md:m-0">
+    <div v-if="isActiveCashExists" class="p-4">
       <a-list
         :items="activeCash.totalsPaymentType"
         title-field="paymentType"
@@ -113,7 +124,7 @@
     <div v-else class="flex h-full items-center justify-center">
       <div
         v-if="!isLoading"
-        class="flex flex-col items-center justify-center rounded-xl"
+        class="flex flex-col items-center justify-center rounded-xl p-4"
       >
         <span class="text-lg text-neutral-300 md:text-base"
           >Смена не найдена</span
