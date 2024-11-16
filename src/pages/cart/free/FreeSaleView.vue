@@ -14,28 +14,30 @@
         ref="focusableInput"
         class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
         v-model.number="freeItem.sellingPrice"
-        placeholder="0"
+        placeholder="Цена продажи"
         type="number"
       />
     </form>
-    <div class="mt-4 grid grid-cols-3 gap-2">
-      <button
-        v-for="i in 10"
-        :key="i"
-        class="md:tet-base rounded-xl border border-neutral-300 bg-white p-2 text-2xl font-medium md:border-neutral-200 md:text-base"
-        :class="i - 1 === 0 ? 'order-last' : ''"
-        @click="onNumberClick(i - 1)"
-        v-press
-      >
-        {{ i - 1 }}
-      </button>
-      <button
-        class="order-last col-span-2 flex items-center justify-center rounded-xl border border-neutral-300 bg-white p-2 text-2xl font-medium text-red-600 md:border-neutral-200 md:text-base"
-        v-press
-        @click="freeItem.sellingPrice = ''"
-      >
-        C
-      </button>
+    <div class="flex w-full justify-center">
+      <div class="mt-4 grid w-full grid-cols-3 gap-2 md:max-w-[14rem]">
+        <button
+          v-for="i in 10"
+          :key="i"
+          class="md:tet-base rounded-xl border border-neutral-300 bg-white p-2 text-2xl font-medium md:border-neutral-200 md:text-base"
+          :class="i - 1 === 0 ? 'order-last' : ''"
+          @click="onNumberClick(i - 1)"
+          v-press
+        >
+          {{ i - 1 }}
+        </button>
+        <button
+          class="order-last col-span-2 flex items-center justify-center rounded-xl border border-neutral-300 bg-white p-2 text-2xl font-medium text-red-600 md:border-neutral-200 md:text-base"
+          v-press
+          @click="freeItem.sellingPrice = ''"
+        >
+          C
+        </button>
+      </div>
     </div>
   </a-page>
 </template>

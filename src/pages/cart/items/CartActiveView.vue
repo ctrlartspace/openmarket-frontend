@@ -6,39 +6,48 @@
           ref="focusableInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 pr-16 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 pr-20 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
           :class="
             isSearchError
               ? 'animate-shake text-red-600 will-change-transform'
               : 'text-black'
           "
-          placeholder="Код товара, наименование"
+          placeholder="Наименование, код товара"
           @input="onSearchInput"
         />
         <div
-          class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center px-4"
+          class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center"
         >
-          <span class="material-symbols-rounded text-neutral-300">search</span>
-          <div class="pointer-events-auto ml-auto flex gap-2">
+          <span class="material-symbols-rounded pl-4 text-neutral-300"
+            >search</span
+          >
+          <div class="pointer-events-auto ml-auto flex h-full px-2">
             <router-link
               to="/cart/favorite"
               v-if="!isSearchLoading"
-              class="pointer-events-auto flex items-center rounded bg-purple-50 md:hidden"
+              class="pointer-events-auto flex items-center rounded pl-2 md:hidden"
               v-press
             >
-              <span class="material-symbols-rounded text-purple-600">star</span>
+              <span class="material-symbols-rounded text-neutral-300"
+                >star</span
+              >
             </router-link>
-            <span v-else class="material-symbols-rounded animate-spin"
-              >progress_activity</span
-            >
             <router-link
               to="/cart/free"
               v-if="!isSearchLoading"
-              class="pointer-events-auto flex items-center rounded bg-blue-50 md:hidden"
+              class="pointer-events-auto flex items-center rounded px-2 md:hidden"
               v-press
             >
-              <span class="material-symbols-rounded text-blue-600">add</span>
+              <span class="material-symbols-rounded text-neutral-300"
+                >apps</span
+              >
             </router-link>
+
+            <span v-else class="flex items-center px-2">
+              <span class="material-symbols-rounded animate-spin"
+                >progress_activity</span
+              >
+            </span>
           </div>
         </div>
       </v-form>

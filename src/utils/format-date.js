@@ -1,5 +1,5 @@
 import moment from "moment"
-import "moment/locale/ru"
+import "moment/dist/locale/ru"
 moment.locale("ru")
 
 export const formatDate = (

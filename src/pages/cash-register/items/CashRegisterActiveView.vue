@@ -67,8 +67,11 @@
         <span class="material-symbols-rounded text-base text-white/50"
           >schedule</span
         >
-        <span class="ml-1 text-base text-white/50">{{
-          formatDate(activeCash.createdAt, "HH:MM")
+        <span class="ml-1 truncate text-base text-white/50">{{
+          formatDate(activeCash.createdAt, "HH:MM") +
+          " (" +
+          fromNow(activeCash.createdAt) +
+          ")"
         }}</span>
       </p>
     </div>
@@ -98,12 +101,16 @@
         class="inline-flex w-max items-center gap-1 rounded-xl px-4 pb-0 text-base text-neutral-300"
       >
         <span>
-          {{ "Время открытия: " + formatDate(activeCash.createdAt, " HH:MM") }}
+          {{
+            fromNow(activeCash.createdAt) +
+            ", " +
+            formatDate(activeCash.createdAt, " HH:MM")
+          }}
         </span>
         <span>({{ activeCash.user.fullName }})</span>
       </p>
     </div>
-    <div v-if="isActiveCashExists" class="p-4">
+    <div v-if="isActiveCashExists" class="-mt-10 p-4 md:mt-0">
       <a-list
         :items="activeCash.totalsPaymentType"
         title-field="paymentType"
@@ -143,7 +150,7 @@ import AModal from "@/components/ui/AModal.vue"
 import AList from "@/components/ui/AList.vue"
 import { computed, onMounted } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest"
-import { formatDate } from "@/utils/format-date"
+import { formatDate, fromNow } from "@/utils/format-date"
 
 const { serverData: activeCash, sendRequest, isLoading } = useApiRequest()
 

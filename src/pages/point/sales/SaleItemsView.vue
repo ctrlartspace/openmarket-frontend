@@ -22,6 +22,11 @@
         </a-list>
       </div>
     </div>
+    <div v-else>
+      <h1 class="text-center text-lg text-neutral-300 md:text-base">
+        Нет продаж
+      </h1>
+    </div>
   </a-page>
 </template>
 
