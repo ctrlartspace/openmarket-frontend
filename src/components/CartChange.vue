@@ -1,31 +1,12 @@
 <template>
   <div class="grid h-full grid-cols-10 bg-neutral-100">
     <div
-      class="col-span-3 border-r border-t border-neutral-300 bg-white p-4 md:border-neutral-200"
-    >
+      class="col-span-3 border-r border-t border-neutral-200 bg-white p-4"
+      id="keyboard-container"
+    ></div>
+    <div class="col-span-7 flex items-end p-4">
       <div
-        v-if="store.getPaymentType.code === 'cash'"
-        class="grid h-full grid-cols-3 gap-2"
-      >
-        <div
-          v-for="i in 10"
-          :key="i"
-          class="bg-text-white rounded-xl bg-neutral-100 transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
-          :class="
-            i - 1 === 0
-              ? 'order-last col-span-3 aspect-[unset] py-2'
-              : 'aspect-square'
-          "
-        >
-          <button class="h-full w-full text-2xl font-medium">
-            {{ i - 1 }}
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col-span-7 h-full p-4">
-      <div
-        class="flex h-full flex-col justify-between gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:border-neutral-200"
+        class="flex h-max w-full flex-col justify-between gap-2 rounded-xl border border-neutral-200 bg-white p-4"
       >
         <div
           v-if="store.getPaymentType.code === 'cash'"
@@ -34,13 +15,19 @@
           <div class="grid grid-cols-2 gap-2">
             <input
               v-model="inputAmount"
-              class="appearance-none rounded-xl border border-neutral-300 px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black md:border-neutral-200 md:text-base"
+              class="appearance-none rounded-xl border border-neutral-200 px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black md:text-base"
               :class="inputAmount ? 'text-end' : 'text-start'"
               placeholder="Внесено"
               type="text"
+              @blur="isKeyboardVisible = false"
+              @focus="isKeyboardVisible = true"
+              v-autofocus
             />
+            <teleport v-if="isKeyboardVisible" defer to="#keyboard-container">
+              <a-number-keyboard v-model.number="inputAmount" />
+            </teleport>
             <div
-              class="flex rounded-xl border border-neutral-300 bg-white px-4 py-2 md:border-neutral-200"
+              class="flex rounded-xl border border-neutral-200 bg-white px-4 py-2"
             >
               <span class="flex-auto text-base text-gray-300">Сдача</span>
               <span
@@ -51,7 +38,7 @@
             </div>
           </div>
           <textarea
-            class="rounded-xl border border-neutral-300 px-4 py-2 placeholder:text-gray-300 md:border-neutral-200"
+            class="rounded-xl border border-neutral-200 px-4 py-2 placeholder:text-gray-300"
             rows="2"
             placeholder="Комментарий"
           ></textarea>
@@ -67,7 +54,7 @@
               'bg-green-50 text-green-600':
                 store.getPaymentType.code === 'cash',
             }"
-            @click="store.changePaymentType"
+            @click="changePaymentType"
           >
             <span class="material-symbols-rounded text-4xl">
               {{ store.getPaymentType.icon }}
@@ -105,6 +92,7 @@
 </template>
 
 <script setup>
+import ANumberKeyboard from "@/components/ui/ANumberKeyboard.vue"
 import { ref, computed } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"
@@ -112,6 +100,8 @@ import { useApiRequest } from "@/composables/useApiRequest"
 const store = useCartStore()
 const inputAmount = ref("")
 const { sendRequest, isLoading } = useApiRequest()
+
+const isKeyboardVisible = ref(false)
 
 const makeSaleFromCart = async () => {
   const response = await sendRequest("post", "/sales", {
@@ -126,11 +116,7 @@ const makeSaleFromCart = async () => {
 const cartChange = computed(() =>
   inputAmount.value ? inputAmount.value - store.getTotalAmount : 0,
 )
-
-const onKeyboardClick = (value) => {
-  inputAmount.value = inputAmount.value + "" + value
-}
-const onClearClick = () => {
-  inputAmount.value = ""
+const changePaymentType = () => {
+  store.changePaymentType()
 }
 </script>

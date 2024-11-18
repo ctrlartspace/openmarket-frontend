@@ -15,13 +15,11 @@ export function useFocusable() {
   onMounted(async () => {
     if (isDesktop.value) {
       window.addEventListener("keypress", setInputFocus)
-      console.log("add")
     }
   })
   onBeforeUnmount(() => {
     if (isDesktop.value) {
       window.removeEventListener("keypress", setInputFocus)
-      console.log("remove")
     }
   })
   return { focusableInput }

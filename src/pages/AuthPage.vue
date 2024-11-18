@@ -3,7 +3,7 @@
     class="flex h-full w-full flex-col items-center justify-center gap-4 bg-neutral-100"
   >
     <form
-      class="flex w-64 flex-col gap-2 rounded-xl border border-neutral-300 bg-white p-4 md:border-neutral-200"
+      class="flex w-64 flex-col gap-2 rounded-xl border border-neutral-200 bg-white p-4"
       @submit.prevent="loginToStore"
     >
       <a-base-input

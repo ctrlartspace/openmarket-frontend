@@ -2,7 +2,7 @@
   <a-page :loading="isStorePointsLoading" no-padding>
     <div
       v-if="storeInfo"
-      class="min-h-32 flex flex-col bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:border-b md:border-neutral-200 md:from-white/50 md:to-white/50"
+      class="min-h-32 flex flex-col bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:border-b md:from-white/50 md:to-white/50"
     >
       <span
         v-if="isStoreInfoLoading"

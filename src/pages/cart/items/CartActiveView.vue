@@ -6,7 +6,7 @@
           ref="focusableInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-300 bg-white px-4 py-2 pl-12 pr-20 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-neutral-200 md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 pl-12 pr-20 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:text-base"
           :class="
             isSearchError
               ? 'animate-shake text-red-600 will-change-transform'
@@ -71,12 +71,12 @@
       </div>
       <div
         v-if="!store.isEmpty"
-        class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-300 bg-white md:border-neutral-200"
+        class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white"
       >
         <div
           v-for="(item, i) in store.groupedCartItems"
           :key="i"
-          class="flex w-full cursor-pointer items-center border-b border-neutral-300 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:border-neutral-200 md:text-base"
+          class="flex w-full cursor-pointer items-center border-b border-neutral-200 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:text-base"
           @click="onItemClick(item)"
         >
           <div class="flex items-center py-2 pl-4">
@@ -114,9 +114,6 @@
           </div>
         </div>
       </div>
-      <div v-else class="flex justify-center p-4 text-lg text-neutral-300">
-        Пусто
-      </div>
     </div>
 
     <template #floating>
@@ -127,8 +124,6 @@
 
 <script setup>
 import AList from "@/components/ui/AList.vue"
-import AModal from "@/components/ui/AModal.vue"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"

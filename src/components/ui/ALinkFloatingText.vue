@@ -14,7 +14,7 @@
         'text-green-600 hover:bg-gray-50 hover:text-green-700': success,
       }"
       :disabled="loading"
-      class="flex w-full items-center justify-center gap-2 px-4 py-2 text-center text-xl font-medium md:text-base"
+      class="flex w-full items-center justify-center gap-2 p-4 text-center text-2xl font-medium md:text-base"
       v-bind="$attrs"
       v-press
     >

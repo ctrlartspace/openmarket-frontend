@@ -2,7 +2,7 @@
   <div v-if="!store.isEmpty" class="absolute bottom-0 left-0 right-0 p-4">
     <div
       v-if="cartStep === 2"
-      class="relative rounded-xl border border-neutral-300 bg-white p-4 shadow-lg md:border-neutral-200"
+      class="relative rounded-xl border border-neutral-200 bg-white p-4 shadow-sm"
     >
       <div class="absolute">
         <button class="flex items-center" @click="stepBack">
@@ -31,7 +31,7 @@
           </div>
           <input
             v-model="inputAmount"
-            class="w-full appearance-none rounded-xl border border-neutral-300 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0 md:border-neutral-200"
+            class="w-full appearance-none rounded-xl border border-neutral-200 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
             placeholder="Внесено"
             type="number"
           />
@@ -51,7 +51,7 @@
       </button>
     </div>
     <button
-      class="mt-2 flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl border border-black bg-gradient-to-b from-black/80 to-black p-4 text-2xl font-medium text-white shadow-xl"
+      class="mt-2 flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl border border-black bg-gradient-to-b from-neutral-800 to-black p-4 text-2xl font-medium text-white shadow-xl"
       @click="onNextClick"
       v-press
     >

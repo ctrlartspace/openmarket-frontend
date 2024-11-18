@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="border-b border-neutral-300 bg-white md:border-neutral-200"
+    class="border-b border-neutral-200 bg-white"
     v-if="store.isAuthorizedPoint"
   >
     <!-- Desktop -->
@@ -38,10 +38,7 @@
       </li>
     </ul>
   </nav>
-  <nav
-    class="border-b border-neutral-300 bg-white md:border-neutral-200"
-    v-else
-  >
+  <nav class="border-b border-neutral-200 bg-white" v-else>
     <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
       <li class="ml-auto"></li>
       <li class="inline">
