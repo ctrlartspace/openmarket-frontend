@@ -19,6 +19,13 @@
           description-field="count"
           description-hint="шт."
         >
+          <template #description="{ item }">
+            {{
+              item.pointItem
+                ? item.count + " шт."
+                : item.count + " шт. " + item.sellingPrice + " ₸ "
+            }}
+          </template>
         </a-list>
       </div>
     </div>

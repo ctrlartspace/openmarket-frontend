@@ -13,7 +13,7 @@
       'w-full justify-center': block,
     }"
     :disabled="loading"
-    class="flex w-screen items-center justify-center gap-2 p-4 text-center text-2xl font-medium md:text-base"
+    class="flex w-screen items-center justify-center gap-2 overflow-hidden rounded-xl p-4 text-center text-2xl font-medium"
     v-bind="$attrs"
     v-press
   >

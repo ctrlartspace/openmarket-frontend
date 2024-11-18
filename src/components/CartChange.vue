@@ -43,9 +43,9 @@
             placeholder="Комментарий"
           ></textarea>
         </div>
-        <div class="mt-auto flex gap-2">
+        <div class="flex gap-2">
           <button
-            class="flex aspect-square h-full select-none items-center justify-center gap-2 rounded-xl px-4 py-2 text-center font-medium transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
+            class="flex select-none items-center justify-center gap-2 rounded-xl px-4 py-2 text-center font-medium transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
             :class="{
               'bg-blue-50 text-blue-600':
                 store.getPaymentType.code === 'online',
@@ -61,7 +61,7 @@
             </span>
           </button>
           <button
-            class="flex w-full select-none items-center justify-between gap-4 rounded-xl bg-blue-100 px-6 py-4 text-3xl font-medium uppercase"
+            class="flex flex-1 select-none items-center justify-between gap-4 rounded-xl bg-blue-100 px-6 py-4 text-3xl font-medium uppercase"
             :class="
               store.isEmpty
                 ? 'bg-gray-100 text-gray-600'

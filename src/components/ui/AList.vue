@@ -48,10 +48,7 @@
         <slot name="action" :item="item"></slot>
       </div>
     </div>
-    <div
-      v-if="hasNoItems"
-      class="border-b border-neutral-200 px-4 py-2 last:border-none"
-    >
+    <div v-if="hasNoItems" class="px-4 py-2">
       <p class="text-center text-lg text-neutral-300 md:text-base">
         Нет данных
       </p>
