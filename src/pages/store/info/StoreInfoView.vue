@@ -23,7 +23,7 @@
         :items="storePoints"
         title-field="name"
         @on-item-click="loginToStorePoint"
-        class="-mt-10"
+        class="-mt-10 md:mt-0"
       >
         <template #title="{ item }"> {{ item.name }} </template>
         <template #action="{ item }">

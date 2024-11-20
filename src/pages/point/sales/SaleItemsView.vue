@@ -87,7 +87,7 @@ const groupedDataByDate = computed(() => {
 })
 
 onMounted(async () => {
-  await sendRequest("get", "/sales", { filters: joinedFilters.value })
+  await sendRequest("get", "/point/sales", { filters: joinedFilters.value })
 })
 </script>
 

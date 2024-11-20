@@ -68,7 +68,7 @@ const deleteFilter = async (id) => {
 
 const makeSale = async (data) => {
   try {
-    const response = await axios.post(`/sales`, data)
+    const response = await axios.post(`/point/sales`, data)
     return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)
@@ -77,7 +77,7 @@ const makeSale = async (data) => {
 
 const getSales = async (queryParams = "") => {
   try {
-    const response = await axios.get(`/sales?filters=${queryParams}`)
+    const response = await axios.get(`/point/sales?filters=${queryParams}`)
     return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)
@@ -86,7 +86,7 @@ const getSales = async (queryParams = "") => {
 
 const updateSales = async (data, ids = "") => {
   try {
-    const response = await axios.put(`/sales?ids=${ids}`, data)
+    const response = await axios.put(`/point/sales?ids=${ids}`, data)
     return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)

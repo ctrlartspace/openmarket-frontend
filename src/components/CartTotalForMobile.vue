@@ -93,7 +93,7 @@ const stepBack = () => {
 }
 
 const makeSaleFromCart = async () => {
-  const response = await sendRequest("post", "/sales", {
+  const response = await sendRequest("post", "/point/sales", {
     items: store.getItemsForSale,
     changeAmount: cartChange.value,
   })
