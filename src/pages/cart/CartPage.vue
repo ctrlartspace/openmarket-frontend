@@ -23,7 +23,7 @@ const menuItems = ref([
     path: "/cart/favorite",
   },
   {
-    title: "Свободный товар",
+    title: "Свободная продажа",
     path: "/cart/free",
   },
 ])

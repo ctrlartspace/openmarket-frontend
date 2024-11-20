@@ -23,7 +23,7 @@
     </div>
     <div
       :class="{ 'no-padding p-0': noPadding, 'p-4': !noPadding }"
-      class="relative h-full flex-1 overflow-auto pb-24"
+      class="relative h-full flex-1 overflow-auto pb-24 md:pb-4"
     >
       <!-- <div
         :class="loading ? 'pointer-events-none opacity-0' : 'opacity-100'"

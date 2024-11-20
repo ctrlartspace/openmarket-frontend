@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
+
 import AuthPage from "@/pages/AuthPage.vue"
 import ScanPage2 from "@/pages/ScanPage2.vue"
 import StorePage from "@/pages/store/StorePage.vue"
@@ -34,11 +35,13 @@ import FreeSaleView from "@/pages/cart/free/FreeSaleView.vue"
 import PointInfoView from "@/pages/point/info/PointInfoView.vue"
 import StoreCreatePage from "@/pages/store-create/StoreCreatePage.vue"
 import StoreCreateUserInfoPage from "@/pages/store-create/user-info/StoreCreateUserInfoPage.vue"
+import NoInternetPage from "@/pages/NoInternetPage.vue"
 
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
 
 const routes = [
+  { path: "/no-internet", component: NoInternetPage },
   { path: "/", redirect: "/store" },
   {
     path: "/cart",

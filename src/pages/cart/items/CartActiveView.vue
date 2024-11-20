@@ -64,6 +64,7 @@
               <span class="material-symbols-rounded text-neutral-300"
                 >add
               </span>
+
               {{ item.storeItem.name }}
             </span>
           </template>
@@ -90,7 +91,10 @@
             </button>
           </div>
           <div class="w-full truncate px-2 py-2 pl-4 font-medium">
-            {{ item?.storeItem?.name || "Свободный товар" }}
+            {{
+              item?.storeItem?.name ||
+              (item.comment || "") + " Свободная продажа"
+            }}
           </div>
           <div class="w-max whitespace-nowrap px-2">
             <span class="text-neutral-400">{{ item.count }} шт. </span>

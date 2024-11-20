@@ -19,6 +19,15 @@
           description-field="count"
           description-hint="шт."
         >
+          <template #title="{ item }">
+            <span v-if="item.pointItem">{{
+              item.pointItem?.storeItem?.name
+            }}</span>
+            <span v-else
+              >{{ item.comment || "" }}
+              <span class="">Свободная продажа</span></span
+            >
+          </template>
           <template #description="{ item }">
             {{
               item.pointItem

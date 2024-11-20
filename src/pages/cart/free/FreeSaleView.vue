@@ -1,18 +1,17 @@
 <template>
-  <a-page title="Свободный товар ">
+  <a-page title="Свободная продажа" no-padding>
     <template #header>
-      <a-button primary @click="addFreeItem"> Готово</a-button>
+      <a-button primary @click="addFreeItem"> Добавить в корзину</a-button>
     </template>
     <template #floating>
       <a-button-floating-text black @click="addFreeItem">
         Готово
       </a-button-floating-text>
     </template>
-    <div class="flex h-full flex-col">
-      <form @submit.prevent="addFreeItem">
+    <div class="flex h-full flex-col gap-2 overflow-auto p-4 pb-0">
+      <form class="flex flex-col gap-2" @submit.prevent="addFreeItem">
         <input
-          ref="focusableInput"
-          class="block w-full text-ellipsis rounded-xl border-neutral-200 bg-white px-4 py-4 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:py-2 md:text-left md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-none border-neutral-200 bg-white px-4 py-4 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-solid md:py-2 md:text-left md:text-base"
           v-model.number="freeItem.sellingPrice"
           placeholder="0 ₸"
           type="number"
@@ -20,6 +19,13 @@
           @focus="isKeyboardVisible = true"
           v-autofocus
         />
+        <input
+          class="block w-full text-ellipsis rounded-xl border border-none border-neutral-200 bg-white px-4 py-4 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-solid md:py-2 md:text-left md:text-base"
+          v-model.trim="freeItem.comment"
+          placeholder="Комментарий"
+          type="text"
+        />
+        <button type="submit" style="display: none"></button>
       </form>
       <teleport
         v-if="isKeyboardVisible && isDesktop"
@@ -61,19 +67,18 @@ import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import ANumberKeyboard from "@/components/ui/ANumberKeyboard.vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
-import { useFocusable } from "@/composables/useFocusable"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm") // only smaller than lg
 
-const { focusableInput } = useFocusable()
 const isKeyboardVisible = ref(false)
 
 const router = useRouter()
 const store = useCartStore()
 
-const freeItem = ref({ sellingPrice: "" })
+const freeItem = ref({ sellingPrice: "", comment: "" })
+const comment = ref("")
 
 const addFreeItem = async () => {
   freeItem.value.sellingPrice = Number(freeItem.value.sellingPrice)

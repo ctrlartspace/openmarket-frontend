@@ -37,11 +37,6 @@
               >
             </div>
           </div>
-          <textarea
-            class="rounded-xl border border-neutral-200 px-4 py-2 placeholder:text-gray-300"
-            rows="2"
-            placeholder="Комментарий"
-          ></textarea>
         </div>
         <div class="flex gap-2">
           <button

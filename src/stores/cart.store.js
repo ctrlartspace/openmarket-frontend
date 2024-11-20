@@ -31,6 +31,7 @@ export const useCartStore = defineStore("cart", () => {
         sellingPrice: item.sellingPrice,
         count: item.count,
         paymentType: getPaymentType.value.code,
+        comment: item.comment,
       }
     }),
   )
