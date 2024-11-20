@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@vueuse/core": "^11.1.0",
+    "apexcharts": "^4.0.0",
     "axios": "^1.6.5",
+    "chart.js": "^4.4.6",
     "js-sha256": "^0.11.0",
     "jsbarcode": "^3.11.6",
     "jspdf": "^2.5.2",
@@ -21,11 +23,13 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persist": "^1.0.0",
     "pinia-plugin-persistedstate": "^3.2.1",
-    "quagga": "^0.12.1",
+    "quagga": "^0.6.16",
     "receiptline": "^1.16.1",
     "vue": "^3.5.10",
+    "vue-chartjs": "^5.3.2",
     "vue-qrcode-reader": "^5.5.10",
     "vue-router": "^4.4.5",
+    "vue3-apexcharts": "^1.7.0",
     "vuetify": "^3.4.0"
   },
   "devDependencies": {

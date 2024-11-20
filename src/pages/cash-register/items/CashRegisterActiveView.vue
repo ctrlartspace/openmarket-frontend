@@ -1,5 +1,5 @@
 <template>
-  <a-page :title="getCashTitle" :loading="isLoading" no-padding>
+  <a-page :title="getCashTitle" :loading="isActiveCashLoading" no-padding>
     <template #header>
       <a-modal
         v-if="isActiveCashExists"
@@ -10,7 +10,7 @@
         <a-button danger v-bind="props"> Закрыть смену </a-button>
       </a-modal>
       <a-link
-        v-if="!isActiveCashExists && !isLoading"
+        v-if="!isActiveCashExists && !isActiveCashLoading"
         primary
         to="/cash-register/active/add"
       >
@@ -29,7 +29,7 @@
         </a-button-floating-text>
       </a-modal>
       <a-link-floating-text
-        v-if="!isActiveCashExists && !isLoading"
+        v-if="!isActiveCashExists && !isActiveCashLoading"
         primary
         to="/cash-register/active/add"
       >
@@ -126,7 +126,7 @@
     </div>
     <div v-else class="flex h-full items-center justify-center">
       <div
-        v-if="!isLoading"
+        v-if="!isActiveCashLoading"
         class="flex flex-col items-center justify-center rounded-xl p-4"
       >
         <span class="text-lg text-neutral-300 md:text-base"
@@ -148,7 +148,17 @@ import { computed, onMounted } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatDate, fromNow } from "@/utils/format-date"
 
-const { serverData: activeCash, sendRequest, isLoading } = useApiRequest()
+const {
+  serverData: activeCash,
+  sendRequest: fetchActiveCash,
+  isLoading: isActiveCashLoading,
+} = useApiRequest()
+const { sendRequest: closeActiveCash } = useApiRequest()
+// const {
+//   serverData: hourlySales,
+//   sendRequest: fetchHourlySales,
+//   isLoading: isHourlySalesLoading,
+// } = useApiRequest()
 
 const getCashTitle = computed(() => {
   if (isActiveCashExists.value) {
@@ -159,10 +169,10 @@ const getCashTitle = computed(() => {
 
 const closeActiveCashRegister = async () => {
   if (isActiveCashExists.value) {
-    await sendRequest("put", "/cash-registers/" + activeCash.value.id, {
+    await closeActiveCash("put", "/cash-registers/" + activeCash.value.id, {
       isClosed: true,
     })
-    await sendRequest("get", "/cash-registers/today")
+    await fetchActiveCash("get", "/cash-registers/today")
   }
 }
 
@@ -192,7 +202,8 @@ const formatPaymentType = (paymentType) => {
 }
 
 onMounted(async () => {
-  await sendRequest("get", "/cash-registers/today")
+  await fetchActiveCash("get", "/cash-registers/today")
+  // await fetchHourlySales("get", "/point/sales/hourly")
 })
 </script>
 

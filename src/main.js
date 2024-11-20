@@ -10,6 +10,7 @@ import * as VueQrcodeReader from "vue-qrcode-reader"
 import vPress from "./directives/v-press"
 import vMask from "./directives/v-mask"
 import vAutofocus from "./directives/v-autofocus"
+import VueApexCharts from "vue3-apexcharts"
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
@@ -20,7 +21,9 @@ createApp(App)
   .directive("autofocus", vAutofocus)
   .component("a-page", APage)
   .use(VueQrcodeReader)
+  .use(VueApexCharts)
   .use(router)
   .use(pinia)
   .use(vuetify)
+
   .mount("#app")
