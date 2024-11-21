@@ -1,48 +1,50 @@
 <template>
   <slot :props="activatorProps"></slot>
-  <div v-if="isOpen || isOpenOut" class="modal-window relative z-10">
-    <div class="fixed inset-0 bg-black bg-opacity-30" aria-hidden="true">
-      <div class="fixed inset-0 z-10 flex w-screen">
-        <div class="flex h-full w-full items-center justify-center">
-          <div
-            class="w-4/5 rounded-xl border border-neutral-400 bg-white p-4 md:max-w-xs"
-          >
-            <h1
-              class="mb-4 whitespace-break-spaces text-center text-xl font-medium md:text-lg"
+  <teleport to="body">
+    <div v-if="isOpen || isOpenOut" class="modal-window relative z-10">
+      <div class="fixed inset-0 bg-black bg-opacity-30" aria-hidden="true">
+        <div class="fixed inset-0 z-10 flex w-screen">
+          <div class="flex h-full w-full items-center justify-center">
+            <div
+              class="w-4/5 rounded-xl border border-neutral-400 bg-white p-4 md:max-w-xs"
             >
-              {{ title }}
-            </h1>
-            <div class="flex flex-col gap-2">
-              <slot name="content" :close-modal="closeModal"></slot>
-              <button
-                v-if="!hideYes"
-                class="flex items-center justify-center rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium text-blue-600 hover:bg-neutral-50 md:text-base md:active:bg-neutral-100"
-                :disabled="isLoading"
-                @click="onYesClick"
-                v-press
+              <h1
+                class="mb-4 whitespace-break-spaces text-center text-xl font-medium md:text-lg"
               >
-                <span
-                  v-if="isLoading"
-                  class="material-symbols-rounded animate-spin text-lg font-semibold"
-                  >progress_activity</span
+                {{ title }}
+              </h1>
+              <div class="flex flex-col gap-2">
+                <slot name="content" :close-modal="closeModal"></slot>
+                <button
+                  v-if="!hideYes"
+                  class="pointer-events-auto flex items-center justify-center rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium text-blue-600 hover:bg-neutral-50 md:text-base md:active:bg-neutral-100"
+                  :disabled="isLoading"
+                  @click="onYesClick"
+                  v-press
                 >
-                <span v-else>
-                  {{ yesCaption }}
-                </span>
-              </button>
-              <button
-                class="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium text-black hover:bg-neutral-50 md:text-base md:active:bg-neutral-100"
-                @click="onNoClick"
-                v-press
-              >
-                {{ noCaption }}
-              </button>
+                  <span
+                    v-if="isLoading"
+                    class="material-symbols-rounded animate-spin text-lg font-semibold"
+                    >progress_activity</span
+                  >
+                  <span v-else>
+                    {{ yesCaption }}
+                  </span>
+                </button>
+                <button
+                  class="pointer-events-auto rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium text-black hover:bg-neutral-50 md:text-base md:active:bg-neutral-100"
+                  @click="onNoClick"
+                  v-press
+                >
+                  {{ noCaption }}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </teleport>
 </template>
 
 <script setup>

@@ -2,7 +2,7 @@
   <div v-if="!store.isEmpty" class="absolute bottom-0 left-0 right-0 p-4">
     <div
       v-if="cartStep === 2"
-      class="relative rounded-xl border border-neutral-200 bg-white p-4 shadow-sm"
+      class="pointer-events-auto relative rounded-xl border border-neutral-200 bg-white p-4 shadow-sm"
     >
       <div class="absolute">
         <button class="flex items-center" @click="stepBack">
@@ -50,7 +50,30 @@
         {{ store.getPaymentType.label }}
       </button>
     </div>
-    <button
+
+    <a-button-floating-text
+      class="mt-2"
+      rounded
+      black
+      @click="onNextClick"
+      :disabled="isLoading"
+    >
+      <p v-if="cartStep === 1 && !isLoading" class="flex justify-center gap-4">
+        <span
+          >{{ store.getTotalAmount }} <span class="font-semibold">₸</span></span
+        >
+        <span class="material-symbols-rounded self-center font-bold"
+          >arrow_forward</span
+        >
+      </p>
+      <p v-if="cartStep === 2 && !isLoading">Готово</p>
+      <span
+        v-if="isLoading"
+        class="material-symbols-rounded animate-spin text-2xl font-medium"
+        >progress_activity</span
+      >
+    </a-button-floating-text>
+    <!-- <button
       class="mt-2 flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl border border-black bg-gradient-to-b from-neutral-800 to-black p-4 text-2xl font-medium text-white shadow-xl"
       @click="onNextClick"
       v-press
@@ -69,11 +92,12 @@
         class="material-symbols-rounded animate-spin text-2xl font-medium"
         >progress_activity</span
       >
-    </button>
+    </button> -->
   </div>
 </template>
 
 <script setup>
+import AButtonFloatingText from "./ui/AButtonFloatingText.vue"
 import { computed, ref } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"

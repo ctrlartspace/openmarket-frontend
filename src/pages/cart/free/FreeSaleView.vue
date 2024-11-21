@@ -11,7 +11,7 @@
     <div class="flex h-full flex-col gap-2 overflow-auto p-4 pb-0">
       <form class="flex flex-col gap-2" @submit.prevent="addFreeItem">
         <input
-          class="block w-full text-ellipsis rounded-xl border border-none border-neutral-200 bg-white px-4 py-4 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-solid md:py-2 md:text-left md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-4 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:py-2 md:text-left md:text-base"
           v-model.number="freeItem.sellingPrice"
           placeholder="0 ₸"
           type="number"
@@ -20,7 +20,7 @@
           v-autofocus
         />
         <input
-          class="block w-full text-ellipsis rounded-xl border border-none border-neutral-200 bg-white px-4 py-4 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:border-solid md:py-2 md:text-left md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-4 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:py-2 md:text-left md:text-base"
           v-model.trim="freeItem.comment"
           placeholder="Комментарий"
           type="text"
@@ -41,7 +41,7 @@
         <button
           v-for="i in 10"
           :key="i"
-          class="md:tet-base rounded-xl bg-white p-2 text-2xl font-medium md:border-neutral-200"
+          class="rounded-xl border border-neutral-200 bg-white p-2 text-2xl font-medium"
           :class="i - 1 === 0 ? 'order-last' : ''"
           @click="onNumberClick(i - 1)"
           v-press
@@ -49,7 +49,7 @@
           {{ i - 1 }}
         </button>
         <button
-          class="order-last col-span-2 flex items-center justify-center rounded-xl bg-white p-2 text-2xl font-medium text-red-600"
+          class="order-last col-span-2 flex items-center justify-center rounded-xl border border-neutral-200 bg-white p-2 text-2xl font-medium text-red-600"
           v-press
           @click="onBackspaceClick"
         >

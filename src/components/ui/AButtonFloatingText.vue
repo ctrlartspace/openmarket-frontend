@@ -11,9 +11,10 @@
       'border border-black bg-gradient-to-b from-neutral-800 to-black text-white':
         black,
       'w-full justify-center': block,
+      'rounded-xl border': rounded,
     }"
     :disabled="loading"
-    class="flex w-screen items-center justify-center gap-2 overflow-hidden rounded-xl p-4 text-center text-2xl font-medium"
+    class="pointer-events-auto flex h-16 w-full items-center justify-center gap-2 border-b border-l border-t border-neutral-200 bg-white p-4 px-3 text-2xl font-medium shadow-sm first:rounded-l-xl last:rounded-r-xl last:border-r"
     v-bind="$attrs"
     v-press
   >
@@ -32,6 +33,7 @@ defineProps({
   accent: { type: Boolean },
   black: { type: Boolean },
   block: { type: Boolean },
+  rounded: { type: Boolean },
 })
 </script>
 

@@ -10,9 +10,10 @@
       'text-pink-500 hover:bg-gray-50 hover:text-pink-700': accent,
       'bg-black text-white hover:bg-neutral-900': black,
       'w-full justify-center': block,
+      'rounded-xl border': rounded,
     }"
     :disabled="loading"
-    class="flex aspect-square w-full items-center gap-2 px-3 text-base font-medium"
+    class="pointer-events-auto flex aspect-square h-16 w-max items-center justify-center gap-2 border-b border-l border-t border-neutral-200 bg-white p-4 px-3 text-base font-medium shadow-sm first:rounded-l-xl last:rounded-r-xl last:border-r"
     v-bind="$attrs"
     v-press
   >
@@ -33,6 +34,7 @@ defineProps({
   accent: { type: Boolean },
   black: { type: Boolean },
   block: { type: Boolean },
+  rounded: { type: Boolean },
 })
 </script>
 
