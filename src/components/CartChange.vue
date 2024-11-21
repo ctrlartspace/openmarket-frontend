@@ -46,7 +46,7 @@
                 store.getPaymentType.code === 'online',
               'bg-red-50 text-red-600':
                 store.getPaymentType.code === 'kaspi_qr',
-              'bg-green-50 text-green-600':
+              'bg-green-50 text-green-500':
                 store.getPaymentType.code === 'cash',
             }"
             @click="changePaymentType"

@@ -6,9 +6,9 @@
       'text-blue-600 hover:bg-gray-50 hover:text-blue-700': primary,
       'text-red-600 hover:bg-gray-50 hover:text-red-700': danger,
       'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700': info,
-      'text-green-600 hover:bg-gray-50 hover:text-green-700': success,
+      'text-green-500 hover:bg-gray-50 hover:text-green-700': success,
       'text-pink-500 hover:bg-gray-50 hover:text-pink-700': accent,
-      'border border-black bg-gradient-to-b from-neutral-800 to-black text-white':
+      'border !border-black bg-gradient-to-b from-neutral-800 to-black text-white':
         black,
       'w-full justify-center': block,
       'rounded-xl border': rounded,

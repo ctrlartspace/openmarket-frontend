@@ -10,7 +10,7 @@
         danger,
       'bg-yellow-50 text-yellow-600 hover:bg-yellow-100 hover:text-yellow-700 active:bg-yellow-100':
         info,
-      'bg-green-50 text-green-600 hover:bg-green-100 hover:text-green-700 active:bg-green-100':
+      'bg-green-50 text-green-500 hover:bg-green-100 hover:text-green-700 active:bg-green-100':
         success,
       'bg-pink-50 text-pink-500 hover:bg-pink-100 hover:text-pink-700 active:bg-pink-100':
         accent,

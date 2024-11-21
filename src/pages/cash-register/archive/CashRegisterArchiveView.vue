@@ -18,7 +18,7 @@
         >
         <span
           v-else
-          class="rounded bg-green-50 px-4 py-1 text-lg font-medium text-green-600 md:text-base"
+          class="rounded bg-green-50 px-4 py-1 text-lg font-medium text-green-500 md:text-base"
           >Открыта</span
         >
       </template>

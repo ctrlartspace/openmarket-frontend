@@ -36,7 +36,7 @@
       </teleport>
       <div
         v-if="!isDesktop"
-        class="mt-auto grid w-full grid-cols-3 gap-2 md:max-w-[14rem]"
+        class="mt-auto grid w-full grid-cols-3 gap-1 md:max-w-[14rem]"
       >
         <button
           v-for="i in 10"

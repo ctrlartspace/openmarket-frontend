@@ -6,7 +6,7 @@
       'text-blue-600 hover:bg-gray-50 hover:text-blue-700': primary,
       'text-red-600 hover:bg-gray-50 hover:text-red-700': danger,
       'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700': info,
-      'text-green-600 hover:bg-gray-50 hover:text-green-700': success,
+      'text-green-500 hover:bg-gray-50 hover:text-green-700': success,
       'text-pink-500 hover:bg-gray-50 hover:text-pink-700': accent,
       'bg-black text-white hover:bg-neutral-900': black,
       'w-full justify-center': block,

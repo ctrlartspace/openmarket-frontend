@@ -1,5 +1,10 @@
 <template>
-  <router-link class="flex items-center" custom v-bind="$props">
+  <router-link
+    class="pointer-events-auto flex aspect-square h-16 w-max items-center justify-center gap-2 border-b border-l border-t border-neutral-200 bg-white p-4 px-3 text-base font-medium shadow-sm first:rounded-l-xl last:rounded-r-xl last:border-r"
+    custom
+    v-bind="$props"
+    v-press
+  >
     <button
       :class="{
         'animate-pulse': loading,
@@ -7,13 +12,12 @@
         'text-blue-600 hover:bg-gray-50 hover:text-blue-700': primary,
         'text-red-600 hover:bg-gray-50 hover:text-red-700': danger,
         'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700': info,
-        'text-green-600 hover:bg-gray-50 hover:text-green-700': success,
+        'text-green-500 hover:bg-gray-50 hover:text-green-700': success,
         'rounded-xl border': rounded,
       }"
       :disabled="loading"
-      class="pointer-events-auto flex aspect-square h-16 w-max items-center justify-center gap-2 border-b border-l border-t border-neutral-200 bg-white p-4 px-3 text-base font-medium shadow-sm first:rounded-l-xl last:rounded-r-xl last:border-r"
       v-bind="$attrs"
-      v-press
+      class="flex items-center justify-center"
     >
       <span class="material-symbols-rounded text-3xl">
         <slot></slot>

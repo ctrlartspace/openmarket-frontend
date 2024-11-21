@@ -9,7 +9,7 @@
         'bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700': danger,
         'bg-yellow-50 text-yellow-600 hover:bg-yellow-100 hover:text-yellow-700':
           info,
-        'bg-green-50 text-green-600 hover:bg-green-100 hover:text-green-700':
+        'bg-green-50 text-green-500 hover:bg-green-100 hover:text-green-700':
           success,
       }"
       :disabled="loading"

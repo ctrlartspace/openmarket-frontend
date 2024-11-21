@@ -6,7 +6,7 @@
           ref="focusableInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 pl-12 pr-20 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 pl-14 pr-24 text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12 md:text-base"
           :class="
             isSearchError
               ? 'animate-shake text-red-600 will-change-transform'
@@ -18,7 +18,8 @@
         <div
           class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center"
         >
-          <span class="material-symbols-rounded pl-4 text-neutral-300"
+          <span
+            class="material-symbols-rounded pl-4 text-3xl text-neutral-300 md:text-2xl"
             >search</span
           >
           <div class="pointer-events-auto ml-auto flex h-full px-2">
@@ -28,7 +29,8 @@
               class="pointer-events-auto flex items-center rounded pl-2 md:hidden"
               v-press
             >
-              <span class="material-symbols-rounded text-neutral-300"
+              <span
+                class="material-symbols-rounded text-3xl text-neutral-300 md:text-2xl"
                 >star</span
               >
             </router-link>
@@ -38,13 +40,15 @@
               class="pointer-events-auto flex items-center rounded px-2 md:hidden"
               v-press
             >
-              <span class="material-symbols-rounded text-neutral-300"
+              <span
+                class="material-symbols-rounded text-3xl text-neutral-300 md:text-2xl"
                 >apps</span
               >
             </router-link>
 
             <span v-else class="flex items-center px-2">
-              <span class="material-symbols-rounded animate-spin"
+              <span
+                class="material-symbols-rounded animate-spin text-3xl md:text-2xl"
                 >progress_activity</span
               >
             </span>
@@ -81,35 +85,43 @@
           @click="onItemClick(item)"
         >
           <div class="flex items-center py-2 pl-4">
-            <button class="flex items-center justify-center" v-press>
+            <button
+              class="flex aspect-square h-full select-none items-center justify-center rounded-md bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700 md:rounded"
+              v-press
+            >
               <span
-                class="material-symbols-rounded select-none rounded bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700"
+                class="material-symbols-rounded text-3xl md:text-2xl"
                 @click.stop="store.removeItem(item)"
               >
                 remove
               </span>
             </button>
           </div>
-          <div class="w-full truncate px-2 py-2 pl-4 font-medium">
+          <div
+            class="w-full truncate px-2 py-2 pl-4 text-2xl font-medium md:text-base"
+          >
             {{
               item?.storeItem?.name ||
               (item.comment || "") + " Свободная продажа"
             }}
           </div>
-          <div class="w-max whitespace-nowrap px-2">
-            <span class="text-neutral-400">{{ item.count }} шт. </span>
-            <span class="hidden font-medium text-green-600 md:inline">
+          <div class="w-max whitespace-nowrap px-2 text-2xl md:text-base">
+            <span class="text-neutral-300">{{ item.count }} шт. </span>
+            <span class="hidden font-medium text-green-500 md:inline">
               {{ item.count * item.sellingPrice }}
             </span>
-            <span class="hidden font-semibold text-green-600 md:inline">
+            <span class="hidden font-semibold text-green-500 md:inline">
               ₸
             </span>
           </div>
 
           <div class="flex items-center py-2 pr-4">
-            <button class="flex items-center justify-center" v-press>
+            <button
+              class="flex aspect-square h-full select-none items-center justify-center rounded-md bg-green-100 text-green-500 hover:bg-green-200 hover:text-green-700 active:bg-green-200 active:text-green-700 md:rounded"
+              v-press
+            >
               <span
-                class="material-symbols-rounded select-none rounded bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-700 active:bg-green-200 active:text-green-700"
+                class="material-symbols-rounded text-3xl md:text-2xl"
                 @click.stop="store.addItem(item)"
               >
                 add

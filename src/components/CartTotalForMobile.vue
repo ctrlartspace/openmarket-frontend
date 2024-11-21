@@ -6,12 +6,12 @@
     >
       <div class="absolute">
         <button class="flex items-center" @click="stepBack">
-          <span class="material-symbols-rounded text-xl text-gray-300"
+          <span class="material-symbols-rounded text-2xl text-gray-300"
             >arrow_back_ios</span
           >
         </button>
       </div>
-      <p class="mb-2 text-center text-lg text-gray-300">Способ оплаты</p>
+      <p class="mb-2 text-center text-2xl text-gray-300">Способ оплаты</p>
       <div
         class="grid transition-all"
         :class="
@@ -20,29 +20,37 @@
             : 'grid-rows-[0fr] opacity-0'
         "
       >
-        <div class="flex flex-col gap-2 overflow-hidden">
-          <div
-            class="flex items-center justify-between rounded-xl bg-neutral-50 px-4 py-2"
+        <div class="flex gap-2 overflow-hidden">
+          <!-- <div
+            class="flex items-center justify-between rounded-xl bg-neutral-50 px-4 py-2 text-neutral-500"
           >
-            <span class="text-lg font-medium">Сдача</span>
-            <span class="text-lg font-medium"
+            <span class="text-2xl font-medium">Сдача</span>
+            <span class="text-2xl font-medium"
               >{{ cartChange }} <span class="font-semibold">₸</span></span
             >
-          </div>
+          </div> -->
+
           <input
             v-model="inputAmount"
-            class="w-full appearance-none rounded-xl border border-neutral-200 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
+            class="w-full appearance-none truncate rounded-xl border border-neutral-200 px-4 py-2 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
             placeholder="Внесено"
             type="number"
+          />
+          <input
+            class="w-full appearance-none truncate rounded-xl border border-neutral-200 px-4 py-2 text-center text-2xl font-medium text-green-500 placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
+            placeholder="Сдача"
+            type="number"
+            :value="cartChange"
+            readonly
           />
         </div>
       </div>
       <button
-        class="mt-2 w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
+        class="mt-2 w-full rounded-xl bg-blue-100 px-4 py-2 text-2xl font-medium text-blue-600"
         :class="{
           'bg-blue-100 text-blue-600': store.getPaymentType.code === 'online',
           'bg-red-100 text-red-600': store.getPaymentType.code === 'kaspi_qr',
-          'bg-green-100 text-green-600': store.getPaymentType.code === 'cash',
+          'bg-green-100 text-green-500': store.getPaymentType.code === 'cash',
         }"
         @click="store.changePaymentType"
         v-press
@@ -73,26 +81,6 @@
         >progress_activity</span
       >
     </a-button-floating-text>
-    <!-- <button
-      class="mt-2 flex w-full cursor-pointer select-none items-center justify-center gap-4 rounded-xl border border-black bg-gradient-to-b from-neutral-800 to-black p-4 text-2xl font-medium text-white shadow-xl"
-      @click="onNextClick"
-      v-press
-    >
-      <p v-if="cartStep === 1 && !isLoading" class="flex justify-center gap-4">
-        <span
-          >{{ store.getTotalAmount }} <span class="font-semibold">₸</span></span
-        >
-        <span class="material-symbols-rounded self-center font-bold"
-          >arrow_forward</span
-        >
-      </p>
-      <p v-if="cartStep === 2 && !isLoading">Готово</p>
-      <span
-        v-if="isLoading"
-        class="material-symbols-rounded animate-spin text-2xl font-medium"
-        >progress_activity</span
-      >
-    </button> -->
   </div>
 </template>
 
@@ -109,7 +97,7 @@ const cartStep = ref(1)
 const inputAmount = ref("")
 
 const cartChange = computed(() =>
-  inputAmount.value ? inputAmount.value - store.getTotalAmount : 0,
+  inputAmount.value ? inputAmount.value - store.getTotalAmount : "",
 )
 
 const stepBack = () => {
