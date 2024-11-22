@@ -19,7 +19,19 @@
         @focus="isKeyboardVisible = true"
         v-autofocus
       />
-
+      <p>sdf</p>
+      <div class="no-scrollbar mb-2 flex gap-2 overflow-auto md:flex-wrap">
+        <button
+          type="button"
+          v-for="price in [800, 1000, 1500, 2000, 2500, 3000]"
+          :key="price"
+          class="whitespace-nowrap rounded-full bg-white px-4 py-1 text-lg font-medium md:text-base"
+          @click="freeItem.sellingPrice = price"
+          v-press
+        >
+          {{ price }} <span class="font-semibold"> ₸</span>
+        </button>
+      </div>
       <textarea
         class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:text-base"
         v-model.trim="freeItem.comment"
