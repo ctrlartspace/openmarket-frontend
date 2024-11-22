@@ -6,38 +6,30 @@
     >
       <div class="absolute">
         <button class="flex items-center" @click="stepBack">
-          <span class="material-symbols-rounded text-2xl text-gray-300"
+          <span class="material-symbols-rounded text-xl text-gray-300"
             >arrow_back_ios</span
           >
         </button>
       </div>
-      <p class="mb-2 text-center text-2xl text-gray-300">Способ оплаты</p>
+      <p class="mb-2 text-center text-lg text-gray-300">Способ оплаты</p>
       <div
         class="grid transition-all"
         :class="
           store.getPaymentType.code === 'cash'
-            ? 'grid-rows-[1fr] opacity-100'
+            ? 'mb-2 grid-rows-[1fr] opacity-100'
             : 'grid-rows-[0fr] opacity-0'
         "
       >
         <div class="flex gap-2 overflow-hidden">
-          <!-- <div
-            class="flex items-center justify-between rounded-xl bg-neutral-50 px-4 py-2 text-neutral-500"
-          >
-            <span class="text-2xl font-medium">Сдача</span>
-            <span class="text-2xl font-medium"
-              >{{ cartChange }} <span class="font-semibold">₸</span></span
-            >
-          </div> -->
-
           <input
             v-model="inputAmount"
-            class="w-full appearance-none truncate rounded-xl border border-neutral-200 px-4 py-2 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
+            class="w-full appearance-none truncate rounded-xl bg-neutral-50 px-4 py-2 text-center text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
             placeholder="Внесено"
-            type="number"
+            type="text"
+            inputmode="numeric"
           />
           <input
-            class="w-full appearance-none truncate rounded-xl border border-neutral-200 px-4 py-2 text-center text-2xl font-medium text-green-500 placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
+            class="w-full appearance-none truncate rounded-xl bg-neutral-50 px-4 py-2 text-center text-lg font-medium text-green-500 placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-black focus:ring-0"
             placeholder="Сдача"
             type="number"
             :value="cartChange"
@@ -46,7 +38,7 @@
         </div>
       </div>
       <button
-        class="mt-2 w-full rounded-xl bg-blue-100 px-4 py-2 text-2xl font-medium text-blue-600"
+        class="w-full rounded-xl bg-blue-100 px-4 py-2 text-lg font-medium text-blue-600"
         :class="{
           'bg-blue-100 text-blue-600': store.getPaymentType.code === 'online',
           'bg-red-100 text-red-600': store.getPaymentType.code === 'kaspi_qr',

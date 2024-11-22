@@ -1,5 +1,5 @@
 <template>
-  <a-page title="Свободная продажа" no-padding>
+  <a-page title="Свободная продажа">
     <template #header>
       <a-button primary @click="addFreeItem"> Добавить в корзину</a-button>
     </template>
@@ -8,55 +8,33 @@
         Готово
       </a-button-floating-text>
     </template>
-    <div class="flex h-full flex-col gap-2 overflow-auto p-4 pb-0">
-      <form class="flex flex-col gap-2" @submit.prevent="addFreeItem">
-        <input
-          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-4 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:py-2 md:text-left md:text-base"
-          v-model.number="freeItem.sellingPrice"
-          placeholder="0 ₸"
-          type="number"
-          @blur="isKeyboardVisible = false"
-          @focus="isKeyboardVisible = true"
-          v-autofocus
-        />
-        <input
-          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-4 text-center text-2xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:py-2 md:text-left md:text-base"
-          v-model.trim="freeItem.comment"
-          placeholder="Комментарий"
-          type="text"
-        />
-        <button type="submit" style="display: none"></button>
-      </form>
-      <teleport
-        v-if="isKeyboardVisible && isDesktop"
-        defer
-        to="#keyboard-container"
-      >
-        <a-number-keyboard v-model.number="freeItem.sellingPrice" />
-      </teleport>
-      <div
-        v-if="!isDesktop"
-        class="mt-auto grid w-full grid-cols-3 gap-1 md:max-w-[14rem]"
-      >
-        <button
-          v-for="i in 10"
-          :key="i"
-          class="rounded-xl border border-neutral-200 bg-white p-2 text-2xl font-medium"
-          :class="i - 1 === 0 ? 'order-last' : ''"
-          @click="onNumberClick(i - 1)"
-          v-press
-        >
-          {{ i - 1 }}
-        </button>
-        <button
-          class="order-last col-span-2 flex items-center justify-center rounded-xl border border-neutral-200 bg-white p-2 text-2xl font-medium text-red-600"
-          v-press
-          @click="onBackspaceClick"
-        >
-          <span class="material-symbols-rounded text-3xl">backspace</span>
-        </button>
-      </div>
-    </div>
+    <form class="flex flex-col gap-2" @submit.prevent="addFreeItem">
+      <input
+        class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:text-base"
+        v-model.number="freeItem.sellingPrice"
+        placeholder="0 ₸"
+        type="text"
+        inputmode="numeric"
+        @blur="isKeyboardVisible = false"
+        @focus="isKeyboardVisible = true"
+        v-autofocus
+      />
+
+      <textarea
+        class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:text-base"
+        v-model.trim="freeItem.comment"
+        placeholder="Комментарий"
+        type="text"
+      />
+      <button type="submit" style="display: none"></button>
+    </form>
+    <teleport
+      v-if="isKeyboardVisible && isDesktop"
+      defer
+      to="#keyboard-container"
+    >
+      <a-number-keyboard v-model.number="freeItem.sellingPrice" />
+    </teleport>
   </a-page>
 </template>
 
@@ -78,25 +56,17 @@ const router = useRouter()
 const store = useCartStore()
 
 const freeItem = ref({ sellingPrice: "", comment: "" })
-const comment = ref("")
 
 const addFreeItem = async () => {
   freeItem.value.sellingPrice = Number(freeItem.value.sellingPrice)
   if (freeItem.value.sellingPrice <= 0) {
     freeItem.value = { sellingPrice: "" }
+    router.push("/cart")
     return
   }
   store.addItem(freeItem.value)
   freeItem.value = { sellingPrice: "" }
   router.push("/cart")
-}
-
-const onNumberClick = (number) => {
-  freeItem.value.sellingPrice += String(number)
-}
-
-const onBackspaceClick = () => {
-  freeItem.value.sellingPrice = String(freeItem.value.sellingPrice).slice(0, -1)
 }
 </script>
 

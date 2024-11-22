@@ -13,7 +13,7 @@
       'rounded-xl border': rounded,
     }"
     :disabled="loading"
-    class="pointer-events-auto flex aspect-square h-16 w-max items-center justify-center gap-2 border-b border-l border-t border-neutral-200 bg-white p-4 px-3 text-base font-medium shadow-sm first:rounded-l-xl last:rounded-r-xl last:border-r"
+    class="pointer-events-auto flex aspect-square h-14 w-max items-center justify-center gap-2 border-b border-l border-t border-neutral-200 bg-white p-4 px-3 font-medium shadow-sm first:rounded-l-xl last:rounded-r-xl last:border-r"
     v-bind="$attrs"
     v-press
   >
