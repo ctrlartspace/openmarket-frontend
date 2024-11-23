@@ -42,14 +42,14 @@
       class="min-h-32 grid grid-cols-1 gap-2 bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:hidden md:grid-cols-2 md:bg-none md:px-4 md:py-4 md:pb-0"
     >
       <p class="flex flex-col rounded-xl md:border md:bg-white md:px-4 md:py-2">
-        <span class="text-base text-white/50 md:text-neutral-300">Итого</span>
+        <span class="text-white/50 md:text-neutral-300">Итого</span>
         <span class="text-3xl font-medium text-blue-400">
           {{ activeCash.total }}
           <span class="font-semibold">₸</span>
         </span>
       </p>
       <p class="flex flex-col rounded-xl md:border md:bg-white md:px-4 md:py-2">
-        <span class="text-base text-white/50 md:text-neutral-300">Касса</span>
+        <span class="text-white/50 md:text-neutral-300">Касса</span>
         <span class="text-3xl font-medium text-white/90 md:text-black/50">
           {{ cashAmount }}
           <span class="font-semibold">₸</span>
@@ -57,13 +57,11 @@
       </p>
 
       <p class="flex items-center">
-        <span class="mr-2 truncate text-base text-white/50">
+        <span class="mr-2 truncate text-white/50">
           {{ activeCash.point.name }}</span
         >
-        <span class="material-symbols-rounded text-base text-white/50"
-          >schedule</span
-        >
-        <span class="ml-1 truncate text-base text-white/50">{{
+        <span class="material-symbols-rounded text-white/50">schedule</span>
+        <span class="ml-1 truncate text-white/50">{{
           formatDate(activeCash.createdAt, "HH:MM") +
           " (" +
           fromNow(activeCash.createdAt) +
@@ -78,14 +76,14 @@
     >
       <div class="grid grid-cols-2 gap-4">
         <p class="flex flex-col rounded-xl px-4">
-          <span class="text-base text-neutral-300">Итого</span>
+          <span class="text-neutral-300">Итого</span>
           <span class="text-3xl font-medium text-blue-600">
             {{ activeCash.total }}
             <span class="font-semibold">₸</span>
           </span>
         </p>
         <p class="flex flex-col rounded-xl px-4">
-          <span class="text-base text-neutral-300">Касса</span>
+          <span class="text-neutral-300">Касса</span>
           <span class="text-3xl font-medium text-black">
             {{ cashAmount }}
             <span class="font-semibold">₸</span>
@@ -94,7 +92,7 @@
       </div>
 
       <p
-        class="inline-flex w-max items-center gap-1 rounded-xl px-4 pb-0 text-base text-neutral-300"
+        class="inline-flex w-max items-center gap-1 rounded-xl px-4 pb-0 text-neutral-300"
       >
         <span>
           {{
@@ -129,9 +127,7 @@
         v-if="!isActiveCashLoading"
         class="flex flex-col items-center justify-center rounded-xl p-4"
       >
-        <span class="text-lg text-neutral-300 md:text-base"
-          >Смена не найдена</span
-        >
+        <span class="text-neutral-300">Смена не найдена</span>
       </div>
     </div>
   </a-page>

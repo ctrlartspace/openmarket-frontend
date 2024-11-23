@@ -42,7 +42,7 @@
           ref="focusableInput"
           v-model.trim="searchInput"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 pl-12 text-lg font-medium outline-black placeholder:font-normal placeholder:text-neutral-300 md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 pl-12 font-medium outline-black placeholder:font-normal placeholder:text-neutral-300"
           placeholder="Код товара, наименование"
         />
         <div
@@ -61,7 +61,7 @@
           path: '/store/items/add',
           query: { scannedCode: searchInput },
         }"
-        class="mb-2 block w-full rounded-xl border border-neutral-200 bg-white px-4 py-2 text-center text-lg font-medium text-blue-600 md:text-base"
+        class="mb-2 block w-full rounded-xl border border-neutral-200 bg-white px-4 py-2 text-center font-medium text-blue-600"
         >Создать новый товар
       </router-link>
 

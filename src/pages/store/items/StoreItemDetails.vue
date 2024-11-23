@@ -94,7 +94,7 @@
         class="flex flex-col gap-1"
         v-if="itemState.availability?.length > 0"
       >
-        <label class="text-lg font-medium md:text-base">Наличие в точках</label>
+        <label class="font-medium">Наличие в точках</label>
         <a-list
           :items="itemState.availability"
           title-field="pointName"

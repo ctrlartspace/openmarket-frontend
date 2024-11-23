@@ -10,7 +10,7 @@
     </template>
     <form class="flex flex-col gap-2" @submit.prevent="addFreeItem">
       <input
-        class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:text-base"
+        class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         v-model.number="freeItem.sellingPrice"
         placeholder="0 ₸"
         type="text"
@@ -19,13 +19,12 @@
         @focus="isKeyboardVisible = true"
         v-autofocus
       />
-      <p>sdf</p>
-      <div class="no-scrollbar mb-2 flex gap-2 overflow-auto md:flex-wrap">
+      <div class="no-scrollbar mb-2 flex gap-2 overflow-auto">
         <button
           type="button"
           v-for="price in [800, 1000, 1500, 2000, 2500, 3000]"
           :key="price"
-          class="whitespace-nowrap rounded-full bg-white px-4 py-1 text-lg font-medium md:text-base"
+          class="whitespace-nowrap rounded-full bg-white px-4 py-1 font-medium"
           @click="freeItem.sellingPrice = price"
           v-press
         >
@@ -33,7 +32,7 @@
         </button>
       </div>
       <textarea
-        class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:text-base"
+        class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         v-model.trim="freeItem.comment"
         placeholder="Комментарий"
         type="text"

@@ -29,7 +29,7 @@
         v-press
       >
         <div v-if="storeItem">
-          <h1 class="text-lg font-medium text-blue-600 md:text-base">
+          <h1 class="font-medium text-blue-600">
             {{ storeItem.name }}
           </h1>
           <p class="text-sm text-neutral-400">
@@ -38,7 +38,7 @@
             {{ storeItem.sellingPrice }} ₸
           </p>
         </div>
-        <p class="text-lg md:text-base" v-else>Выбрать товар...</p>
+        <p class=" " v-else>Выбрать товар...</p>
       </router-link>
       <div v-if="storeItem" class="flex flex-col gap-2">
         <a-base-input

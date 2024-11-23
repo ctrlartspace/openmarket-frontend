@@ -9,7 +9,7 @@
         <router-link v-slot="{ isActive }" :to="item.path">
           <span
             :class="isActive ? 'text-black' : 'text-gray-300'"
-            class="text-base font-medium"
+            class="font-medium"
           >
             {{ item.title }}
           </span>
@@ -20,7 +20,7 @@
         <router-link v-slot="{ isActive }" to="/point">
           <span
             :class="isActive ? 'text-pink-500' : 'text-pink-300'"
-            class="text-base font-medium"
+            class="font-medium"
           >
             {{ store.point.name }}
           </span>
@@ -30,7 +30,7 @@
         <router-link v-slot="{ isActive }" to="/store">
           <span
             :class="isActive ? 'text-black' : 'text-gray-300'"
-            class="text-base font-medium"
+            class="font-medium"
           >
             Магазин
           </span>
@@ -45,7 +45,7 @@
         <router-link v-slot="{ isActive }" to="/store">
           <span
             :class="isActive ? 'text-black' : 'text-gray-300'"
-            class="text-base font-medium"
+            class="font-medium"
           >
             {{ getStoreTitle }}
           </span>

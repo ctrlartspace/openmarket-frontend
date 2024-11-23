@@ -21,12 +21,10 @@
     <div class="flex flex-col gap-2">
       <div
         v-if="filters"
-        class="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg md:text-base"
+        class="rounded-xl border border-neutral-200 bg-white px-4 py-2"
       >
         Добавить в
-        <span
-          class="rounded bg-blue-50 px-2 py-1 text-lg font-medium text-blue-600 md:text-base"
-        >
+        <span class="rounded bg-blue-50 px-2 py-1 font-medium text-blue-600">
           {{ filters }}
         </span>
       </div>

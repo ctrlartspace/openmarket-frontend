@@ -10,7 +10,7 @@
       <div class="border-b border-gray-200 bg-gray-50 px-4 py-2">
         <slot name="header">
           <div class="flex items-center justify-between">
-            <span class="text-lg">{{ title }}</span>
+            <span class=" ">{{ title }}</span>
             <button
               class="flex items-center rounded border border-gray-200 text-black hover:bg-gray-200 hover:text-black active:bg-gray-200 active:text-black"
               @click="closeDialog"

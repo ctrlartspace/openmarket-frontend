@@ -13,7 +13,7 @@
       />
     </div>
     <span
-      class="w-full overflow-hidden bg-inherit text-lg placeholder:text-gray-300 focus:outline-none md:text-base"
+      class="w-full overflow-hidden bg-inherit placeholder:text-gray-300 focus:outline-none"
     >
       {{ item.name }}
     </span>

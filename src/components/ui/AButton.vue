@@ -18,7 +18,7 @@
       'w-full justify-center': block,
     }"
     :disabled="loading"
-    class="flex items-center gap-2 rounded-xl px-4 text-lg font-medium md:text-base"
+    class="flex items-center gap-2 rounded-xl px-4 font-medium"
     v-bind="$attrs"
   >
     <slot></slot>

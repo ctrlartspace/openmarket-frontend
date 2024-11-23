@@ -9,7 +9,7 @@
               class="w-4/5 rounded-xl border border-neutral-400 bg-white p-4 md:max-w-xs"
             >
               <h1
-                class="mb-4 whitespace-break-spaces text-center text-xl font-medium md:text-lg"
+                class="md: mb-4 whitespace-break-spaces text-center text-xl font-medium"
               >
                 {{ title }}
               </h1>
@@ -17,14 +17,14 @@
                 <slot name="content" :close-modal="closeModal"></slot>
                 <button
                   v-if="!hideYes"
-                  class="pointer-events-auto flex items-center justify-center rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium text-blue-600 hover:bg-neutral-50 md:text-base md:active:bg-neutral-100"
+                  class="pointer-events-auto flex items-center justify-center rounded-xl border border-neutral-200 bg-white px-4 py-2 font-medium text-blue-600 hover:bg-neutral-50 md:active:bg-neutral-100"
                   :disabled="isLoading"
                   @click="onYesClick"
                   v-press
                 >
                   <span
                     v-if="isLoading"
-                    class="material-symbols-rounded animate-spin text-lg font-semibold"
+                    class="material-symbols-rounded animate-spin font-semibold"
                     >progress_activity</span
                   >
                   <span v-else>
@@ -32,7 +32,7 @@
                   </span>
                 </button>
                 <button
-                  class="pointer-events-auto rounded-xl border border-neutral-200 bg-white px-4 py-2 text-lg font-medium text-black hover:bg-neutral-50 md:text-base md:active:bg-neutral-100"
+                  class="pointer-events-auto rounded-xl border border-neutral-200 bg-white px-4 py-2 font-medium text-black hover:bg-neutral-50 md:active:bg-neutral-100"
                   @click="onNoClick"
                   v-press
                 >

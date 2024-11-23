@@ -1,12 +1,12 @@
 <template>
   <div class="border-b border-gray-200 px-4 py-2 last:border-none">
-    <span v-if="modelValue" class="flex-1 text-lg text-gray-300 md:text-base">{{
+    <span v-if="modelValue" class="flex-1 text-gray-300">{{
       $attrs.placeholder
     }}</span>
     <div class="flex items-center">
       <input
         type="text"
-        class="block w-full appearance-none bg-inherit text-lg placeholder:font-normal placeholder:text-gray-300 focus:outline-none md:text-base"
+        class="block w-full appearance-none bg-inherit placeholder:font-normal placeholder:text-gray-300 focus:outline-none"
         :class="$attrs.disabled ? 'text-black' : 'text-blue-600'"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"

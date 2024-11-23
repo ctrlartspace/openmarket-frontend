@@ -2,27 +2,27 @@
   <footer class="@bottom-navigation pb-safe">
     <nav v-if="store.isAuthorizedPoint">
       <div class="border-t border-neutral-200 bg-white px-4 py-1">
-        <ul class="flex justify-around gap-2">
+        <ul class="flex justify-between">
           <li class="relative" v-for="(item, i) in menuItems" :key="i">
             <router-link
               v-slot="{ isActive }"
               :to="item.path"
-              class="flex w-12 flex-col items-center justify-center active:brightness-90"
+              class="flex w-10 flex-col items-center justify-center active:brightness-90"
               v-press
             >
               <span
                 :class="isActive ? 'text-black' : 'text-neutral-300'"
-                class="material-symbols-rounded"
+                class="material-symbols-rounded sm:text-md"
                 >{{ item.icon }}</span
               >
               <span
                 :class="isActive ? 'text-black' : 'text-neutral-300'"
-                class="text-[12px]"
+                class="truncate text-[12px]"
                 >{{ item.title }}</span
               >
               <div
                 v-if="item.id === 1 && !cartStore.isEmpty"
-                class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-start justify-end pr-2"
+                class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-start justify-end pr-1"
               >
                 <span
                   class="flex aspect-square h-3 items-center justify-center rounded-full text-[0.5rem] font-medium text-white"

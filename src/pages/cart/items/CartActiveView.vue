@@ -6,7 +6,7 @@
           ref="focusableInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 pl-12 pr-20 text-xl font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12 md:text-base"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 pl-12 pr-20 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12"
           :class="
             isSearchError
               ? 'animate-shake text-red-600 will-change-transform'
@@ -77,7 +77,7 @@
         <div
           v-for="(item, i) in store.groupedCartItems"
           :key="i"
-          class="flex w-full cursor-pointer items-center border-b border-neutral-200 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:text-base"
+          class="flex w-full cursor-pointer items-center border-b border-neutral-200 bg-white last:border-none hover:bg-neutral-50 active:bg-neutral-100"
           @click="onItemClick(item)"
         >
           <div class="flex items-center py-2 pl-4">
@@ -93,15 +93,13 @@
               </span>
             </button>
           </div>
-          <div
-            class="w-full truncate px-2 py-2 pl-4 text-lg font-medium md:text-base"
-          >
+          <div class="w-full truncate px-2 py-2 pl-4 font-medium">
             {{
               item?.storeItem?.name ||
               (item.comment || "") + " Свободная продажа"
             }}
           </div>
-          <div class="w-max whitespace-nowrap px-2 text-lg md:text-base">
+          <div class="w-max whitespace-nowrap px-2">
             <span class="text-neutral-300">{{ item.count }} шт. </span>
             <span class="hidden font-medium text-green-500 md:inline">
               {{ item.count * item.sellingPrice }}

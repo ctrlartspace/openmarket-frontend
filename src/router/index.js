@@ -93,6 +93,11 @@ const routes = [
             path: "",
             component: StoreInfoView,
           },
+
+          {
+            path: "new-point",
+            component: StorePointsAdd,
+          },
         ],
       },
       {
@@ -106,16 +111,6 @@ const routes = [
           {
             path: "add",
             component: StoreUsersAdd,
-          },
-        ],
-      },
-      {
-        path: "points",
-        component: PageContent,
-        children: [
-          {
-            path: "add",
-            component: StorePointsAdd,
           },
         ],
       },

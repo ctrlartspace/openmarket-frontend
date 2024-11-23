@@ -13,12 +13,12 @@
       <template #description="{ item }">
         <span
           v-if="item.isClosed"
-          class="rounded bg-neutral-50 px-4 py-1 text-lg font-medium text-neutral-500 md:text-base"
+          class="rounded bg-neutral-50 px-4 py-1 font-medium text-neutral-500"
           >Закрыта</span
         >
         <span
           v-else
-          class="rounded bg-green-50 px-4 py-1 text-lg font-medium text-green-500 md:text-base"
+          class="rounded bg-green-50 px-4 py-1 font-medium text-green-500"
           >Открыта</span
         >
       </template>

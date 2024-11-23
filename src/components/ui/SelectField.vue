@@ -3,14 +3,12 @@
     ref="selectField"
     class="relative cursor-pointer border-b border-gray-200 px-4 py-2 last:border-none"
   >
-    <span
-      v-if="selectedItems.length > 0"
-      class="flex-1 text-lg text-gray-300 md:text-base"
-      >{{ placeholder }}</span
-    >
+    <span v-if="selectedItems.length > 0" class="flex-1 text-gray-300">{{
+      placeholder
+    }}</span>
     <div class="flex items-center">
       <input
-        class="block w-full cursor-pointer appearance-none bg-inherit text-lg placeholder:font-normal placeholder:text-gray-300 focus:outline-none md:text-base"
+        class="block w-full cursor-pointer appearance-none bg-inherit placeholder:font-normal placeholder:text-gray-300 focus:outline-none"
         :class="$attrs.disabled ? 'text-black' : 'text-blue-600'"
         type="text"
         :value="selectedItems"
@@ -35,7 +33,7 @@
         class="absolute left-0 top-full z-10 w-full overflow-auto rounded-b border-t border-gray-200 bg-white shadow-xl"
       >
         <slot :is-active="isActive">
-          <ul class="text-lg md:text-base">
+          <ul class=" ">
             <li
               v-for="(item, i) in items"
               class="cursor-pointer px-4 py-2 hover:bg-gray-100 active:bg-gray-100"

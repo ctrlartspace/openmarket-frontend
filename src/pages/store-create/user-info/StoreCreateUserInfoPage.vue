@@ -88,7 +88,7 @@ import AppDialogVue from '@/components/AppDialog.vue';
           <div
             class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-blue-600 p-2 text-white"
           >
-            <span class="material-symbols-rounded text-3xl">person</span>
+            <span class="material-symbols-rounded text-xl">person</span>
           </div>
           <div class="h-full w-full">
             <p class="font-medium">{{ data.user.fullName }}</p>
@@ -113,12 +113,12 @@ import AppDialogVue from '@/components/AppDialog.vue';
       <div
         class="flex w-full flex-col gap-2 rounded-xl border border-neutral-200 bg-white p-4"
       >
-        <h1 class="text-lg font-medium md:text-base">Магазин</h1>
+        <h1 class="font-medium">Магазин</h1>
         <div class="flex gap-4 rounded-xl">
           <div
             class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-gray-600 p-2 text-white"
           >
-            <span class="material-symbols-rounded text-3xl">store</span>
+            <span class="material-symbols-rounded text-xl">store</span>
           </div>
           <div class="h-full w-full">
             <p class="font-medium">{{ data.store.fullName }}</p>

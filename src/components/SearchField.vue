@@ -1,10 +1,10 @@
 <template>
   <v-form @submit.prevent="submit">
-    <div class="relative text-lg">
+    <div class="relative">
       <input
         ref="searchInput"
         v-model="value"
-        class="mb-0 w-full appearance-none rounded border border-neutral-200 px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
+        class="mb-0 w-full appearance-none rounded border border-neutral-200 px-4 py-2 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
         placeholder="Код товара, название, модель"
         type="text"
         v-bind="$attrs"

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex text-lg cursor-pointer hover:underline">
+  <div class="flex cursor-pointer hover:underline">
     <span class="font-medium">
       {{ `${item.name}` }}
     </span>

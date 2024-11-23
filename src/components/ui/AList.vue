@@ -4,7 +4,7 @@
   >
     <div
       v-if="selectedItems.length > 0"
-      class="flex w-full cursor-pointer items-center border-b border-neutral-200 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:text-base"
+      class="flex w-full cursor-pointer items-center border-b border-neutral-200 bg-white last:border-none hover:bg-neutral-50 active:bg-neutral-100"
     >
       <div v-if="selectable" class="flex items-center py-2 pl-4">
         <input
@@ -20,7 +20,7 @@
     <div
       v-for="(item, i) in items"
       :key="i"
-      class="flex w-full cursor-pointer items-center border-b border-neutral-200 bg-white text-lg last:border-none hover:bg-neutral-50 active:bg-neutral-100 md:text-base"
+      class="flex w-full cursor-pointer items-center border-b border-neutral-200 bg-white last:border-none hover:bg-neutral-50 active:bg-neutral-100"
       @click="emits('onItemClick', item)"
     >
       <div v-if="selectable" class="flex items-center py-2 pl-4">
@@ -49,9 +49,7 @@
       </div>
     </div>
     <div v-if="hasNoItems" class="px-4 py-2">
-      <p class="text-center text-lg text-neutral-300 md:text-base">
-        Нет данных
-      </p>
+      <p class="text-center text-neutral-300">Нет данных</p>
     </div>
     <div v-if="hasLast" class="px-4 py-2"><slot name="last"></slot></div>
   </div>

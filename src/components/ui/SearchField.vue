@@ -8,7 +8,7 @@
         class="flex cursor-pointer items-center gap-2 hover:text-red-600 active:text-red-600"
       >
         <span class="material-symbols-rounded md:text-[28px]">remove</span>
-        <span class="hidden text-lg md:inline md:text-base">Удалить</span>
+        <span class="hidden md:inline">Удалить</span>
       </div>
       <slot name="afterSelect"> </slot>
     </div>
@@ -19,7 +19,7 @@
 
       <input
         type="text"
-        class="h-full w-full text-ellipsis text-lg placeholder:text-gray-300 focus:outline-none md:text-base"
+        class="h-full w-full text-ellipsis placeholder:text-gray-300 focus:outline-none"
         placeholder="Код товара, наименование"
       />
       <slot name="action"></slot>

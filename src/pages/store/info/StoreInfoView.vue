@@ -6,14 +6,14 @@
     >
       <span
         v-if="isStoreInfoLoading"
-        class="material-symbols-rounded animate-spin text-3xl font-semibold text-white"
+        class="material-symbols-rounded animate-spin text-xl font-semibold text-white"
         >progress_activity</span
       >
       <div v-else>
         <h1 class="text-2xl text-white md:text-black">
           {{ storeInfo.fullName }}
         </h1>
-        <p class="text-lg text-white/80 md:text-base md:text-black/80">
+        <p class="text-white/80 md:text-black/80">
           {{ storeInfo.address }}
         </p>
       </div>
@@ -28,14 +28,14 @@
         <template #title="{ item }"> {{ item.name }} </template>
         <template #action="{ item }">
           <span
-            class="whitespace-nowrap rounded-xl bg-green-50 px-4 text-lg font-medium text-green-500 md:text-base"
+            class="whitespace-nowrap rounded-xl bg-green-50 px-4 font-medium text-green-500"
             >{{ item.totalRevenue }} <span class="font-semibold">₸</span>
           </span>
         </template>
         <template #last>
           <router-link
-            to="/store/points/add"
-            class="flex items-center justify-center gap-2 text-lg text-blue-600 md:text-base"
+            to="/store/info/new-point"
+            class="flex items-center justify-center gap-2 text-blue-600"
           >
             <span class="material-symbols-rounded">add</span>
             Новая точка

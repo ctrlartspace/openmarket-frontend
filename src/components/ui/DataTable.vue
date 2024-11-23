@@ -1,9 +1,7 @@
 <template>
   <div class="flex flex-col gap-2">
     <div class="overflow-auto rounded-xl border border-neutral-200">
-      <table
-        class="w-full whitespace-nowrap bg-white text-left text-lg md:text-base"
-      >
+      <table class="w-full whitespace-nowrap bg-white text-left">
         <thead>
           <tr
             v-if="selectedItems.length > 0"

@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex h-full w-full items-center justify-center text-lg md:text-base"
-  >
+  <div class="flex h-full w-full items-center justify-center">
     Нет подключения к интернету
   </div>
 </template>

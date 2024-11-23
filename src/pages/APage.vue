@@ -4,10 +4,7 @@
       v-if="isDesktop && hasHeader()"
       class="flex items-center gap-4 overflow-x-auto overflow-y-hidden border-b border-neutral-200 bg-white px-4 py-2 md:py-1"
     >
-      <h1
-        v-if="title"
-        class="flex items-center whitespace-nowrap text-base font-medium"
-      >
+      <h1 v-if="title" class="flex items-center whitespace-nowrap font-medium">
         {{ title }}
       </h1>
       <div class="ml-auto flex items-center gap-2 whitespace-nowrap">

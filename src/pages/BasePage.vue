@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="absolute"></div>
-          <h2 class="w-full text-center text-lg font-medium">
+          <h2 class="w-full text-center font-medium">
             {{ headerTitle }}
           </h2>
         </div>
@@ -52,7 +52,7 @@
             >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="text-lg font-medium md:text-base"
+                class="font-medium"
               >
                 {{ item.title }}
               </span>
@@ -89,7 +89,7 @@
               <router-link v-slot="{ isActive }" :to="item.path">
                 <span
                   :class="isActive ? 'text-black' : 'text-gray-300'"
-                  class="text-base font-medium"
+                  class="font-medium"
                 >
                   {{ item.title }}
                 </span>
@@ -98,7 +98,7 @@
           </ul>
           <ul v-if="hasAction()">
             <li
-              class="border-t border-neutral-200 bg-white px-4 py-1 text-base font-medium text-gray-300"
+              class="border-t border-neutral-200 bg-white px-4 py-1 font-medium text-gray-300"
             >
               <slot name="action"></slot>
             </li>

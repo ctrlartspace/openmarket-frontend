@@ -25,7 +25,7 @@
         :to="{ path: '/store/items/' + storeItem.id }"
         class="rounded-xl border border-neutral-200 bg-white px-4 py-2 md:hover:bg-gray-50"
       >
-        <h1 class="text-lg font-medium text-blue-600 md:text-base">
+        <h1 class="font-medium text-blue-600">
           {{ storeItem.name }}
         </h1>
         <p class="text-sm text-neutral-400">

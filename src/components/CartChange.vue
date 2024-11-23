@@ -15,7 +15,7 @@
           <div class="grid grid-cols-2 gap-2">
             <input
               v-model="inputAmount"
-              class="appearance-none rounded-xl border border-neutral-200 px-4 py-2 text-lg font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black md:text-base"
+              class="appearance-none rounded-xl border border-neutral-200 px-4 py-2 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
               :class="inputAmount ? 'text-end' : 'text-start'"
               placeholder="Внесено"
               type="text"
@@ -23,15 +23,15 @@
               @focus="isKeyboardVisible = true"
               v-autofocus
             />
-            <teleport v-if="isKeyboardVisible" defer to="#keyboard-container">
+            <teleport v-if="isKeyboardVisible" to="#keyboard-container" defer>
               <a-number-keyboard v-model.number="inputAmount" />
             </teleport>
             <div
               class="flex rounded-xl border border-neutral-200 bg-white px-4 py-2"
             >
-              <span class="flex-auto text-base text-gray-300">Сдача</span>
+              <span class="flex-auto text-gray-300">Сдача</span>
               <span
-                class="text-base font-medium"
+                class="font-medium"
                 :class="cartChange > 0 ? 'text-black' : 'text-gray-300'"
                 >{{ cartChange }}</span
               >
