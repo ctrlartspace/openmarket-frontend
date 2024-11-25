@@ -1,5 +1,5 @@
 <template>
-  <div class="relative rounded-lg">
+  <div class="relative rounded-xl">
     <input
       ref="dropdownInput"
       class="peer block w-full cursor-pointer rounded-xl border px-4 py-2 focus:outline-black"
@@ -34,7 +34,7 @@
       <div class="absolute left-0 right-0" :class="dropdownDirection">
         <div
           ref="dropdownList"
-          class="mb-2 mt-2 max-h-64 overflow-auto rounded-lg border bg-white shadow-xl"
+          class="mb-2 mt-2 max-h-64 overflow-auto rounded-xl border bg-white shadow-xl"
         >
           <slot>
             <ul>

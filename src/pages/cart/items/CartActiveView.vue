@@ -1,12 +1,12 @@
 <template>
-  <a-page>
+  <a-page solid-floating :padding-floating="false">
     <div class="flex flex-col gap-2 pb-8">
       <v-form class="relative w-full" @submit.prevent="addCartItem">
         <input
           ref="focusableInput"
           v-model.trim="inputValue"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 pl-12 pr-20 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-2 pl-12 pr-20 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12"
           :class="
             isSearchError
               ? 'animate-shake text-red-600 will-change-transform'
@@ -61,9 +61,11 @@
         >
           <template #title="{ item }">
             <span class="flex items-center gap-2">
-              <span class="material-symbols-rounded text-neutral-300"
-                >add
-              </span>
+              <button
+                class="flex h-full select-none items-center justify-center rounded-md bg-neutral-100 text-black hover:bg-neutral-200 hover:text-neutral-700 active:bg-neutral-200 active:text-neutral-700 md:rounded"
+              >
+                <span class="material-symbols-rounded"> add </span>
+              </button>
 
               {{ item.storeItem.name }}
             </span>
@@ -72,50 +74,48 @@
       </div>
       <div
         v-if="!store.isEmpty"
-        class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white"
+        class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-100 bg-white"
       >
         <div
           v-for="(item, i) in store.groupedCartItems"
           :key="i"
-          class="flex w-full cursor-pointer items-center border-b border-neutral-200 bg-white last:border-none hover:bg-neutral-50 active:bg-neutral-100"
+          class="flex w-full cursor-pointer items-center border-b-4 border-neutral-50 bg-white last:border-none md:hover:bg-neutral-50 md:active:bg-neutral-100"
           @click="onItemClick(item)"
         >
-          <div class="flex items-center py-2 pl-4">
+          <div class="flex items-center">
             <button
-              class="flex aspect-square h-full select-none items-center justify-center rounded-md bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 active:bg-red-200 active:text-red-700 md:rounded"
+              class="flex h-full select-none items-center justify-center rounded-md px-4 py-2"
               v-press
             >
               <span
-                class="material-symbols-rounded"
+                class="material-symbols-rounded rounded bg-red-100 text-red-600"
                 @click.stop="store.removeItem(item)"
               >
                 remove
               </span>
             </button>
           </div>
-          <div class="w-full truncate px-2 py-2 pl-4 font-medium">
+          <div class="w-full truncate py-2 font-medium">
             {{
               item?.storeItem?.name ||
               (item.comment || "") + " Свободная продажа"
             }}
           </div>
-          <div class="w-max whitespace-nowrap px-2">
+          <div class="w-max whitespace-nowrap px-2 pr-0">
             <span class="text-neutral-300">{{ item.count }} шт. </span>
-            <span class="hidden font-medium text-green-500 md:inline">
+            <span class="font-medium">
               {{ item.count * item.sellingPrice }}
             </span>
-            <span class="hidden font-semibold text-green-500 md:inline">
-              ₸
-            </span>
+            <span class="font-semibold"> ₸ </span>
           </div>
 
-          <div class="flex items-center py-2 pr-4">
+          <div class="flex items-center">
             <button
-              class="flex aspect-square h-full select-none items-center justify-center rounded-md bg-green-100 text-green-500 hover:bg-green-200 hover:text-green-700 active:bg-green-200 active:text-green-700 md:rounded"
+              class="flex h-full select-none items-center justify-center rounded-md px-4 py-2 text-black"
               v-press
             >
               <span
-                class="material-symbols-rounded"
+                class="material-symbols-rounded rounded bg-neutral-100 text-black"
                 @click.stop="store.addItem(item)"
               >
                 add
@@ -139,6 +139,7 @@ import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
 import { getPointItem } from "@/services/PointService"
 import CartTotalForMobile from "@/components/CartTotalForMobile.vue"
+import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import { useFocusable } from "@/composables/useFocusable"
 import { watchDebounced } from "@vueuse/core"

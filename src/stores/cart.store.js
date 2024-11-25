@@ -86,5 +86,6 @@ export const useCartStore = defineStore("cart", () => {
     clearCart,
     changePaymentType,
     getPaymentType,
+    paymentTypes,
   }
 })

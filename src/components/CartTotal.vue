@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex cursor-pointer select-none justify-center gap-4 rounded-2xl bg-black p-4 text-2xl font-medium text-white shadow-xl hover:brightness-50 active:brightness-50"
+    class="flex cursor-pointer select-none justify-center gap-4 rounded-xl bg-black p-4 text-2xl font-medium text-white shadow-xl hover:brightness-50 active:brightness-50"
     @click="makeSaleFromCart"
   >
     <span>{{ store.getTotalAmount }} ₸</span>

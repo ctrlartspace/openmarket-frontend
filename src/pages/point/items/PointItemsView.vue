@@ -42,7 +42,7 @@
           ref="focusableInput"
           v-model.trim="searchInput"
           type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-200 bg-white px-4 py-2 pl-12 font-medium outline-black placeholder:font-normal placeholder:text-neutral-300"
+          class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-2 pl-12 font-medium outline-black placeholder:font-normal placeholder:text-neutral-300"
           placeholder="Код товара, наименование"
         />
         <div

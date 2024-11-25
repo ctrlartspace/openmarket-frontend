@@ -82,7 +82,7 @@ import AppDialogVue from '@/components/AppDialog.vue';
     </div>
     <div v-if="step === 3" class="flex flex-col gap-4">
       <div
-        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-200 bg-white p-4"
+        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-100 bg-white p-4"
       >
         <div class="flex items-start gap-4 rounded-xl">
           <div
@@ -98,12 +98,12 @@ import AppDialogVue from '@/components/AppDialog.vue';
       </div>
       <!-- <div class="flex items-center justify-center">
         <div
-          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-200 bg-white  "
+          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-100 bg-white  "
         >
           <span class="material-symbols-rounded text-4xl">unfold_more</span>
         </div>
         <div
-          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-200 bg-white  "
+          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-100 bg-white  "
         >
           <span class="material-symbols-rounded animate-spin text-4xl"
             >autorenew</span
@@ -111,7 +111,7 @@ import AppDialogVue from '@/components/AppDialog.vue';
         </div>
       </div> -->
       <div
-        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-200 bg-white p-4"
+        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-100 bg-white p-4"
       >
         <h1 class="font-medium">Магазин</h1>
         <div class="flex gap-4 rounded-xl">

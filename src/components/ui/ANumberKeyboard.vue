@@ -4,15 +4,11 @@
       v-for="i in 10"
       :key="i"
       class="bg-text-white rounded-xl bg-neutral-100 transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
-      :class="
-        i - 1 === 0
-          ? 'order-last col-span-3 aspect-[unset] py-2'
-          : 'aspect-square'
-      "
+      :class="i - 1 === 0 ? 'order-last col-span-3' : ''"
     >
       <button
         @mousedown.prevent="onKeyboardClick(i - 1)"
-        class="h-full w-full text-2xl font-medium"
+        class="h-full w-full py-4 text-xl font-medium"
       >
         {{ i - 1 }}
       </button>

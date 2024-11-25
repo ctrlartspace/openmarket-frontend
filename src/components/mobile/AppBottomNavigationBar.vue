@@ -1,8 +1,10 @@
 <template>
   <footer class="@bottom-navigation pb-safe">
     <nav v-if="store.isAuthorizedPoint">
-      <div class="border-t border-neutral-200 bg-white px-4 py-1">
-        <ul class="flex justify-between">
+      <div
+        class="flex items-center border-t border-neutral-100 bg-white px-4 py-1"
+      >
+        <ul class="flex w-full items-center justify-around">
           <li class="relative" v-for="(item, i) in menuItems" :key="i">
             <router-link
               v-slot="{ isActive }"
@@ -12,7 +14,7 @@
             >
               <span
                 :class="isActive ? 'text-black' : 'text-neutral-300'"
-                class="material-symbols-rounded sm:text-md"
+                class="material-symbols-rounded"
                 >{{ item.icon }}</span
               >
               <span
@@ -57,7 +59,7 @@ const menuItems = ref([
   {
     id: 2,
     title: "Смена",
-    path: "/cash-register",
+    path: "/shift",
     visible: true,
     icon: "group",
   },

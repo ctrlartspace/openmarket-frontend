@@ -3,7 +3,7 @@
     <header>
       <nav>
         <div
-          class="flex items-center border-b border-neutral-200 bg-white px-4 py-2"
+          class="flex h-[55px] items-center border-b border-neutral-100 bg-white px-4 py-2"
         >
           <div class="absolute left-0 right-0">
             <div class="px- flex justify-between px-4">
@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="absolute"></div>
-          <h2 class="w-full text-center font-medium">
+          <h2 class="w-full text-center text-xl font-medium">
             {{ headerTitle }}
           </h2>
         </div>
@@ -42,7 +42,7 @@
           <li
             v-for="item in menuItems"
             :key="item"
-            class="whitespace-nowrap rounded-xl border border-neutral-200 bg-white px-4 py-2"
+            class="whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-2"
           >
             <router-link
               class="block w-full"
@@ -61,7 +61,7 @@
         </ul>
         <ul v-if="hasAction()" class="flex flex-col gap-2">
           <li
-            class="whitespace-nowrap rounded-xl border border-neutral-200 bg-white px-4 py-2 font-medium"
+            class="whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-2 font-medium"
           >
             <slot name="action"></slot>
           </li>
@@ -78,13 +78,13 @@
 
   <div v-if="isDesktop" class="flex w-full flex-col bg-neutral-50">
     <div class="grid w-full flex-grow grid-cols-10 overflow-hidden">
-      <div class="col-span-3 border-r border-neutral-200">
+      <div class="col-span-3 border-r border-neutral-100">
         <div class="flex h-full flex-col justify-between">
           <ul class="">
             <li
               v-for="item in menuItems"
               :key="item"
-              class="border-b border-neutral-200 bg-white px-4 py-1"
+              class="border-b border-neutral-100 bg-white px-4 py-1"
             >
               <router-link v-slot="{ isActive }" :to="item.path">
                 <span
@@ -98,7 +98,7 @@
           </ul>
           <ul v-if="hasAction()">
             <li
-              class="border-t border-neutral-200 bg-white px-4 py-1 font-medium text-gray-300"
+              class="border-t border-neutral-100 bg-white px-4 py-1 font-medium text-gray-300"
             >
               <slot name="action"></slot>
             </li>

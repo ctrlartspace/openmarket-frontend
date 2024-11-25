@@ -1,12 +1,12 @@
 <template>
   <ul
     v-if="firstItems.length > 0"
-    class="overflow-auto rounded-xl border border-neutral-200"
+    class="overflow-auto rounded-xl border border-neutral-100"
   >
     <li
       v-for="(item, i) in firstItems"
       :key="i"
-      class="border-t border-neutral-200 first:border-none"
+      class="border-t border-neutral-100 first:border-none"
     >
       <filter-item
         :key="item.id"
@@ -68,7 +68,7 @@
   </ul>
   <div
     v-else
-    class="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-center"
+    class="rounded-xl border border-neutral-100 bg-white px-4 py-2 text-center"
   >
     <span class="text-neutral-300">Категории не найдены</span>
   </div>

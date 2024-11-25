@@ -21,7 +21,7 @@
     <div class="flex flex-col gap-2">
       <div
         v-if="filters"
-        class="rounded-xl border border-neutral-200 bg-white px-4 py-2"
+        class="rounded-xl border border-neutral-100 bg-white px-4 py-2"
       >
         Добавить в
         <span class="rounded bg-blue-50 px-2 py-1 font-medium text-blue-600">

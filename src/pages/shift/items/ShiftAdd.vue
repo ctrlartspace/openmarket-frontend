@@ -48,7 +48,7 @@ const openCashRegister = async () => {
     startAmount: startAmount.value,
   })
   if (response) {
-    await router.push("/cash-register/active")
+    await router.push("/shift/last")
   }
 }
 </script>

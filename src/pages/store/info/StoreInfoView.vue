@@ -1,48 +1,45 @@
 <template>
-  <a-page :loading="isStorePointsLoading" no-padding>
+  <a-page :loading="isStorePointsLoading">
     <div
       v-if="storeInfo"
-      class="min-h-32 flex flex-col bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:border-b md:from-white/50 md:to-white/50"
+      class="min-h-32 mb-2 flex flex-col rounded-xl bg-white p-4"
     >
       <span
         v-if="isStoreInfoLoading"
-        class="material-symbols-rounded animate-spin text-xl font-semibold text-white"
+        class="material-symbols-rounded animate-spin text-xl font-semibold"
         >progress_activity</span
       >
       <div v-else>
-        <h1 class="text-2xl text-white md:text-black">
+        <h1 class="text-2xl">
           {{ storeInfo.fullName }}
         </h1>
-        <p class="text-white/80 md:text-black/80">
+        <p class="text-neutral-600">
           {{ storeInfo.address }}
         </p>
       </div>
     </div>
-    <div v-if="storePoints" class="p-4">
-      <a-list
-        :items="storePoints"
-        title-field="name"
-        @on-item-click="loginToStorePoint"
-        class="-mt-10 md:mt-0"
-      >
-        <template #title="{ item }"> {{ item.name }} </template>
-        <template #action="{ item }">
-          <span
-            class="whitespace-nowrap rounded-xl bg-green-50 px-4 font-medium text-green-500"
-            >{{ item.totalRevenue }} <span class="font-semibold">₸</span>
-          </span>
-        </template>
-        <template #last>
-          <router-link
-            to="/store/info/new-point"
-            class="flex items-center justify-center gap-2 text-blue-600"
-          >
-            <span class="material-symbols-rounded">add</span>
-            Новая точка
-          </router-link>
-        </template>
-      </a-list>
-    </div>
+    <a-list
+      v-if="storePoints"
+      :items="storePoints"
+      title-field="name"
+      @on-item-click="loginToStorePoint"
+    >
+      <template #title="{ item }"> {{ item.name }} </template>
+      <template #action="{ item }">
+        <span class="whitespace-nowrap rounded-xl font-medium text-green-500"
+          >{{ item.totalRevenue }} <span class="font-semibold">₸</span>
+        </span>
+      </template>
+      <template #last>
+        <router-link
+          to="/store/info/new-point"
+          class="flex items-center justify-center gap-2 text-blue-600"
+        >
+          <span class="material-symbols-rounded">add</span>
+          Новая точка
+        </router-link>
+      </template>
+    </a-list>
   </a-page>
 </template>
 

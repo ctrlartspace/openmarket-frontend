@@ -13,12 +13,15 @@
       'rounded-xl border': rounded,
     }"
     :disabled="loading"
-    class="pointer-events-auto flex aspect-square h-12 w-max items-center justify-center gap-2 border-b border-l border-t border-neutral-200 bg-white p-4 px-3 font-medium shadow-sm first:rounded-l-xl last:rounded-r-xl last:border-r"
+    class="pointer-events-auto flex h-[55px] w-max items-center justify-center gap-2 border-b border-l border-t border-neutral-100 bg-white p-4 px-4 font-medium first:rounded-l-2xl last:rounded-r-2xl last:border-r"
     v-bind="$attrs"
     v-press
   >
-    <span class="material-symbols-rounded">
-      <slot></slot>
+    <span v-if="loading" class="material-symbols-rounded animate-spin">
+      progress_activity
+    </span>
+    <span v-else class="material-symbols-rounded">
+      <slot> </slot>
     </span>
   </button>
 </template>

@@ -14,12 +14,12 @@
         <span
           v-if="item.isClosed"
           class="rounded bg-neutral-50 px-4 py-1 font-medium text-neutral-500"
-          >Закрыта</span
+          >{{ item.total }} <span class="font-semibold">₸</span></span
         >
         <span
           v-else
           class="rounded bg-green-50 px-4 py-1 font-medium text-green-500"
-          >Открыта</span
+          >{{ item.total }} <span class="font-semibold">₸</span></span
         >
       </template>
     </a-list>

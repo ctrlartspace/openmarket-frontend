@@ -22,10 +22,10 @@ import StoreFiltersAdd from "@/pages/store/filters/StoreFiltersAdd.vue"
 import ArrivalItemsView from "@/pages/point/arrivals/ArrivalItemsView.vue"
 import ArrivalItemsAdd from "@/pages/point/arrivals/ArrivalItemsAdd.vue"
 
-import CashRegisterPage from "@/pages/cash-register/CashRegisterPage.vue"
-import CashRegisterActiveView from "@/pages/cash-register/items/CashRegisterActiveView.vue"
-import CashRegisterAdd from "@/pages/cash-register/items/CashRegisterAdd.vue"
-import CashRegisterArchiveView from "@/pages/cash-register/archive/CashRegisterArchiveView.vue"
+import ShiftPage from "@/pages/shift/ShiftPage.vue"
+import ShiftLastView from "@/pages/shift/items/ShiftLastView.vue"
+import ShiftAdd from "@/pages/shift/items/ShiftAdd.vue"
+import ShiftArchiveView from "@/pages/shift/archive/ShiftArchiveView.vue"
 import PageContent from "@/pages/PageContent.vue"
 import SaleItemsView from "@/pages/point/sales/SaleItemsView.vue"
 import CartPage from "@/pages/cart/CartPage.vue"
@@ -222,23 +222,28 @@ const routes = [
     ],
   },
   {
-    path: "/cash-register",
-    component: CashRegisterPage,
-    redirect: "/cash-register/active",
+    path: "/shift",
+    component: ShiftPage,
+    redirect: "/shift/last",
     children: [
       {
-        path: "active",
+        path: "last",
         component: PageContent,
         children: [
           {
             path: "",
-            component: CashRegisterActiveView,
+            component: ShiftLastView,
           },
           {
             path: "add",
-            component: CashRegisterAdd,
+            component: ShiftAdd,
           },
         ],
+      },
+      {
+        path: "add",
+        component: PageContent,
+        component: ShiftAdd,
       },
       {
         path: "archive",
@@ -246,7 +251,7 @@ const routes = [
         children: [
           {
             path: "",
-            component: CashRegisterArchiveView,
+            component: ShiftArchiveView,
           },
         ],
       },

@@ -3,7 +3,7 @@
     class="flex h-full w-full flex-col items-center justify-center gap-4 bg-neutral-100"
   >
     <form
-      class="flex w-5/6 flex-col gap-2 rounded-xl border border-neutral-200 bg-white p-4 md:w-64"
+      class="flex w-5/6 flex-col gap-2 rounded-xl border border-neutral-100 bg-white p-4 md:w-64"
       @submit.prevent="loginToStore"
     >
       <a-base-input
@@ -16,7 +16,7 @@
         type="password"
       />
       <button
-        class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-black bg-gradient-to-b from-black/80 to-black px-4 py-2 font-medium text-white shadow-sm"
+        class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-2 font-medium text-white shadow-sm"
         type="submit"
         v-press
       >

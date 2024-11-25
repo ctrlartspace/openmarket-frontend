@@ -25,7 +25,7 @@
           path: '/store/items',
           query: { selectableMode: true, nextPath: '/point/items/add' },
         }"
-        class="rounded-xl border border-neutral-200 bg-white px-4 py-2 hover:border-neutral-500"
+        class="rounded-xl border border-neutral-100 bg-white px-4 py-2 hover:border-neutral-500"
         v-press
       >
         <div v-if="storeItem">

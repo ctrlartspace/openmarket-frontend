@@ -26,7 +26,7 @@
         class="flex justify-center font-medium"
         v-if="!resultItem && !isNotFound"
       >
-        <span class="rounded-lg bg-neutral-50 px-4 py-2 text-black">
+        <span class="rounded-xl bg-neutral-50 px-4 py-2 text-black">
           Сканируйте штрихкод
         </span>
       </div>
@@ -34,7 +34,7 @@
         v-if="isNotFound && !isScannableMode"
         class="flex justify-center font-medium"
       >
-        <span class="rounded-lg bg-red-50 px-4 py-2 text-red-500">
+        <span class="rounded-xl bg-red-50 px-4 py-2 text-red-500">
           Товар не найден ({{ resultCount }})
         </span>
       </div>

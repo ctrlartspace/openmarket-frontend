@@ -1,12 +1,5 @@
 <template>
   <a-page :loading="isLoading">
-    <template #header>
-      <a-link :to="filterPathMulti" primary> Категории </a-link>
-    </template>
-    <template #floating>
-      <a-link-floating :to="filterPathMulti"> page_info </a-link-floating>
-    </template>
-
     <div class="flex flex-col gap-2" v-if="sales">
       <div v-for="data in groupedDataByDate" :key="data.date">
         <h1 class="mb-2 px-4 text-sm text-neutral-300">
@@ -20,20 +13,26 @@
           description-hint="шт."
         >
           <template #title="{ item }">
-            <span v-if="item.pointItem">{{
+            <span class="font-medium" v-if="item.pointItem">{{
               item.pointItem?.storeItem?.name
             }}</span>
-            <span v-else
+            <span class="font-medium" v-else
               >{{ item.comment || "" }}
               <span class="">Свободная продажа</span></span
             >
           </template>
           <template #description="{ item }">
-            {{
-              item.pointItem
-                ? item.count + " шт."
-                : item.count + " шт. " + item.sellingPrice + " ₸ "
-            }}
+            <span class="text-neutral-300">{{ item.count }} шт. </span>
+            <span class="font-medium">
+              {{ item.count * item.sellingPrice }}
+            </span>
+            <span class="font-semibold"> ₸ </span>
+          </template>
+          <template #sub="{ item }">
+            <div class="flex justify-between text-neutral-300">
+              <span>{{ formatPaymentType(item.paymentType) }}</span>
+              <span>{{ formatDate(item.createdAt, "HH:mm") }}</span>
+            </div>
           </template>
         </a-list>
       </div>
@@ -52,7 +51,8 @@ import { onMounted, computed } from "vue"
 import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"
 import { useApiRequest } from "@/composables/useApiRequest"
-import { fromNow } from "@/utils/format-date"
+import { fromNow, formatDate } from "@/utils/format-date"
+import { formatPaymentType } from "@/utils/format-payment-type"
 
 const router = useRouter()
 const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =

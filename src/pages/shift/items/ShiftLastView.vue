@@ -1,5 +1,5 @@
 <template>
-  <a-page :title="getCashTitle" :loading="isActiveCashLoading" no-padding>
+  <a-page :title="getCashTitle" :loading="isActiveCashLoading">
     <template #header>
       <a-modal
         v-if="isActiveCashExists"
@@ -10,9 +10,10 @@
         <a-button danger v-bind="props"> Закрыть смену </a-button>
       </a-modal>
       <a-link
-        v-if="!isActiveCashExists && !isActiveCashLoading"
+        v-if="!isActiveCashExists"
+        :loading="isActiveCashLoading"
         primary
-        to="/cash-register/active/add"
+        to="/shift/add"
       >
         Открыть смену
       </a-link>
@@ -31,7 +32,7 @@
       <a-link-floating-text
         v-if="!isActiveCashExists && !isActiveCashLoading"
         primary
-        to="/cash-register/active/add"
+        to="/shift/add"
       >
         Открыть смену
       </a-link-floating-text>
@@ -39,7 +40,7 @@
 
     <div
       v-if="isActiveCashExists"
-      class="min-h-32 grid grid-cols-1 gap-2 bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:hidden md:grid-cols-2 md:bg-none md:px-4 md:py-4 md:pb-0"
+      class="min-h-32 grid grid-cols-1 gap-2 rounded-xl bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:hidden md:grid-cols-2 md:bg-none md:px-4 md:py-4 md:pb-0"
     >
       <p class="flex flex-col rounded-xl md:border md:bg-white md:px-4 md:py-2">
         <span class="text-white/50 md:text-neutral-300">Итого</span>
@@ -72,7 +73,7 @@
 
     <div
       v-if="isActiveCashExists"
-      class="hidden flex-col gap-2 border-b border-neutral-200 bg-white p-4 md:flex"
+      class="hidden flex-col gap-2 rounded-xl border-b border-neutral-100 bg-white p-4 md:flex"
     >
       <div class="grid grid-cols-2 gap-4">
         <p class="flex flex-col rounded-xl px-4">
@@ -104,22 +105,24 @@
         <span>({{ activeCash.user.fullName }})</span>
       </p>
     </div>
-    <div v-if="isActiveCashExists" class="-mt-10 p-4 md:mt-0">
+    <div v-if="isActiveCashExists" class="-mt-10 p-4 md:mt-4 md:p-0">
       <a-list
         :items="activeCash.totalsPaymentType"
         title-field="paymentType"
         description-field="total"
         description-hint="₸"
       >
-        <template #title="{ item }">{{
-          formatPaymentType(item.paymentType)
-        }}</template>
-        <!-- <template #description="{ item }">
+        <template #title="{ item }">
+          <span class="">
+            {{ formatPaymentType(item.paymentType) }}
+          </span>
+        </template>
+        <template #description="{ item }">
           <span class="font-medium"
             >{{ item.total }}
             <span class="font-semibold">₸</span>
           </span>
-        </template> -->
+        </template>
       </a-list>
     </div>
     <div v-else class="flex h-full items-center justify-center">
