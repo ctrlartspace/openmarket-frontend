@@ -22,16 +22,19 @@
             >
           </template>
           <template #description="{ item }">
-            <span class="text-neutral-300">{{ item.count }} шт. </span>
             <span class="font-medium">
-              {{ item.count * item.sellingPrice }}
+              {{ formatMoney(item.count * item.sellingPrice) }}
             </span>
             <span class="font-semibold"> ₸ </span>
           </template>
           <template #sub="{ item }">
-            <div class="flex justify-between text-neutral-300">
-              <span>{{ formatPaymentType(item.paymentType) }}</span>
-              <span>{{ formatDate(item.createdAt, "HH:mm") }}</span>
+            <div class="flex justify-between text-sm text-neutral-300">
+              <div>
+                <span>{{ formatPaymentType(item.paymentType) + " " }}</span>
+                <span>{{ formatDate(item.createdAt, "HH:mm") }}</span>
+              </div>
+
+              <span>{{ item.count }} шт.</span>
             </div>
           </template>
         </a-list>
@@ -53,6 +56,7 @@ import { useFilters } from "@/composables/filters.js"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { fromNow, formatDate } from "@/utils/format-date"
 import { formatPaymentType } from "@/utils/format-payment-type"
+import { formatMoney } from "@/utils/format-money"
 
 const router = useRouter()
 const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =

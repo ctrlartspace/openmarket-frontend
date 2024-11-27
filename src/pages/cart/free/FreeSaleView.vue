@@ -10,7 +10,7 @@
     </template>
     <form class="flex flex-col gap-2" @submit.prevent="addFreeItem">
       <input
-        class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-2 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
+        class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         v-model.number="freeItem.sellingPrice"
         placeholder="0 ₸"
         type="text"
@@ -34,7 +34,7 @@
         </button>
       </div>
       <textarea
-        class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-2 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
+        class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         v-model.trim="freeItem.comment"
         placeholder="Комментарий"
         type="text"

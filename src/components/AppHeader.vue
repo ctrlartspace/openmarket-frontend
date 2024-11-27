@@ -16,10 +16,10 @@
         </router-link>
       </li>
       <li class="ml-auto"></li>
-      <li v-if="store.point" class="inline w-auto truncate text-pink-300">
+      <li v-if="store.point" class="inline w-auto truncate text-blue-300">
         <router-link v-slot="{ isActive }" to="/point">
           <span
-            :class="isActive ? 'text-pink-500' : 'text-pink-300'"
+            :class="isActive ? 'text-blue-600' : 'text-blue-300'"
             class="font-medium"
           >
             {{ store.point.name }}

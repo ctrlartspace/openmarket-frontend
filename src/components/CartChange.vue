@@ -15,7 +15,7 @@
           <div class="grid grid-cols-2 gap-2">
             <input
               v-model="inputAmount"
-              class="appearance-none rounded-xl border border-neutral-100 px-4 py-2 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
+              class="appearance-none rounded-xl border border-neutral-100 px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
               :class="inputAmount ? 'text-end' : 'text-start'"
               placeholder="Внесено"
               type="text"
@@ -27,7 +27,7 @@
               <a-number-keyboard v-model.number="inputAmount" />
             </teleport>
             <div
-              class="flex rounded-xl border border-neutral-100 bg-white px-4 py-2"
+              class="flex rounded-xl border border-neutral-100 bg-white px-4 py-3"
             >
               <span class="flex-auto text-gray-300">Сдача</span>
               <span
@@ -40,15 +40,7 @@
         </div>
         <div class="flex gap-2">
           <button
-            class="flex aspect-square select-none items-center justify-center gap-2 rounded-xl px-4 py-2 text-center font-medium transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
-            :class="{
-              'bg-blue-50 text-blue-600':
-                store.getPaymentType.code === 'online',
-              'bg-red-50 text-red-600':
-                store.getPaymentType.code === 'kaspi_qr',
-              'bg-green-50 text-green-500':
-                store.getPaymentType.code === 'cash',
-            }"
+            class="flex aspect-square select-none items-center justify-center gap-2 rounded-xl bg-neutral-100 px-4 py-3 text-center font-medium text-black transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
             @click="changePaymentType"
           >
             <span class="material-symbols-rounded text-3xl font-medium">
@@ -56,25 +48,26 @@
             </span>
           </button>
           <button
-            class="flex flex-1 select-none items-center justify-between gap-4 rounded-xl bg-blue-100 px-6 py-4 text-2xl font-medium uppercase"
+            class="flex flex-1 select-none items-center justify-between gap-4 rounded-xl px-6 py-4 text-2xl font-medium uppercase"
             :class="
               store.isEmpty
-                ? 'bg-gray-100 text-gray-600'
-                : 'bg-blue-100 text-blue-600 transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90'
+                ? 'bg-neutral-100 text-neutral-300'
+                : 'bg-black text-white transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90'
             "
             @click="makeSaleFromCart"
             :disabled="store.isEmpty || isLoading"
           >
-            <span
-              >{{ store.getTotalAmount }}
-              <span class="font-semibold">₸</span></span
-            >
             <span
               v-if="isLoading"
               class="material-symbols-rounded animate-spin font-semibold"
               >progress_activity</span
             >
             <span v-else>Оплата</span>
+
+            <span
+              >{{ store.getTotalAmount }}
+              <span class="font-semibold">₸</span></span
+            >
           </button>
         </div>
       </div>

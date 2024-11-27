@@ -15,7 +15,8 @@
           'animate-shake will-change-transform placeholder:text-red-500':
             isError,
         }"
-        class="peer block w-full rounded-xl border border-solid border-neutral-100 px-4 py-2 placeholder:text-neutral-300 focus:outline-black focus:ring-0"
+        class="peer block w-full rounded-xl border border-solid border-neutral-100 px-4 py-3 placeholder:text-neutral-300 focus:outline-black focus:ring-0"
+        rounded-xl
         v-bind="$attrs"
       />
       <div

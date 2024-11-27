@@ -2,7 +2,7 @@
   <div class="relative rounded-xl">
     <input
       ref="dropdownInput"
-      class="peer block w-full cursor-pointer rounded-xl border px-4 py-2 focus:outline-black"
+      class="peer block w-full cursor-pointer rounded-xl border px-4 py-3 focus:outline-black"
       :class="{
         'placeholder:text-gray-300': disabled || loading,
         'animate-pulse': loading,
@@ -40,7 +40,7 @@
             <ul>
               <li v-if="selectedItemTitle">
                 <button
-                  class="w-full px-4 py-2 text-left text-gray-400 hover:bg-gray-50"
+                  class="w-full px-4 py-3 text-left text-gray-400 hover:bg-gray-50"
                   @mousedown="clearInput"
                 >
                   Сбросить
@@ -48,7 +48,7 @@
               </li>
               <li v-for="item in items" :key="item.id">
                 <button
-                  class="w-full px-4 py-2 text-left hover:bg-gray-50"
+                  class="w-full px-4 py-3 text-left hover:bg-gray-50"
                   @mousedown="selectItem(item)"
                 >
                   {{ item.name }}
@@ -56,14 +56,14 @@
               </li>
               <li v-if="inputValue && items.length === 0">
                 <button
-                  class="w-full px-4 py-2 text-left text-blue-500 hover:bg-gray-50"
+                  class="w-full px-4 py-3 text-left text-blue-500 hover:bg-gray-50"
                   @mousedown="selectItem(inputValue)"
                 >
                   {{ inputValue }}
                 </button>
               </li>
 
-              <li v-if="items.length === 0" class="px-4 py-2 text-gray-300">
+              <li v-if="items.length === 0" class="px-4 py-3 text-gray-300">
                 Не найдено
               </li>
             </ul>

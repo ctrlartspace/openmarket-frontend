@@ -7,7 +7,7 @@
       class="flex w-80 max-w-lg flex-col overflow-hidden rounded-xl border border-gray-300 bg-white"
       @click.stop
     >
-      <div class="border-b border-gray-200 bg-gray-50 px-4 py-2">
+      <div class="border-b border-gray-200 bg-gray-50 px-4 py-3">
         <slot name="header">
           <div class="flex items-center justify-between">
             <span class=" ">{{ title }}</span>

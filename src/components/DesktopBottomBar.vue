@@ -25,7 +25,7 @@
       </div>
       <div>
         <button
-          class="mt-2 flex w-full items-center justify-center gap-2 rounded border border-gray-200 px-4 py-2 font-medium text-gray-300 hover:border-black hover:text-black"
+          class="mt-2 flex w-full items-center justify-center gap-2 rounded border border-gray-200 px-4 py-3 font-medium text-gray-300 hover:border-black hover:text-black"
         >
           Заблокировать
           <span class="material-symbols-rounded md:text-[24px]">lock</span>

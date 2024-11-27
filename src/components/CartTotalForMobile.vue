@@ -1,8 +1,8 @@
 <template>
   <div class="flex w-full flex-col gap-4 p-4">
     <div class="flex gap-2">
-      <p class="text-center font-medium">
-        Итого: {{ store.getTotalAmount }}
+      <p class="pl-2 text-center font-medium">
+        Итого: {{ formatMoney(store.getTotalAmount) }}
         <span class="font-semibold">₸ </span>
       </p>
       <p>
@@ -11,7 +11,7 @@
     </div>
     <div class="flex gap-2">
       <button
-        class="pointer-events-auto flex h-12 w-12 select-none items-center justify-center gap-2 rounded-xl bg-neutral-100 px-4 py-2 text-center font-medium"
+        class="pointer-events-auto flex h-[55px] w-[55px] select-none items-center justify-center gap-2 rounded-xl bg-neutral-100 px-4 py-3 text-center font-medium"
         @click="store.changePaymentType"
         v-press
       >
@@ -22,7 +22,7 @@
       <a-button-floating-text
         rounded
         black
-        @click="onNextClick"
+        @click="makeSaleFromCart"
         :disabled="isLoading"
       >
         <span class="text-white">Оплата</span>
@@ -36,6 +36,7 @@ import AButtonFloatingText from "./ui/AButtonFloatingText.vue"
 import { computed, ref } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { formatMoney } from "@/utils/format-money"
 
 const store = useCartStore()
 const { sendRequest, isLoading } = useApiRequest()
@@ -48,6 +49,9 @@ const cartChange = computed(() =>
 )
 
 const makeSaleFromCart = async () => {
+  if (store.isEmpty) {
+    return
+  }
   const response = await sendRequest("post", "/point/sales", {
     items: store.getItemsForSale,
     changeAmount: cartChange.value,

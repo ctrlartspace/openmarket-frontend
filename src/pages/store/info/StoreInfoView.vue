@@ -26,8 +26,9 @@
     >
       <template #title="{ item }"> {{ item.name }} </template>
       <template #action="{ item }">
-        <span class="whitespace-nowrap rounded-xl font-medium text-green-500"
-          >{{ item.totalRevenue }} <span class="font-semibold">₸</span>
+        <span class="whitespace-nowrap rounded-xl font-medium"
+          >{{ formatMoney(item.totalRevenue) }}
+          <span class="font-semibold">₸</span>
         </span>
       </template>
       <template #last>
@@ -49,6 +50,7 @@ import { useUserStore } from "@/stores/user.store"
 import { useRouter } from "vue-router"
 import AList from "@/components/ui/AList.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { formatMoney } from "@/utils/format-money"
 
 const {
   serverData: storeInfo,

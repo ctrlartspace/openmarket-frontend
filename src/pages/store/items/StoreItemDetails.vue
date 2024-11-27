@@ -25,7 +25,7 @@
         :async-operation="addPointItem"
       >
         <a-button-floating v-if="point" accent v-bind="props"
-          >add_circle
+          >add
         </a-button-floating>
       </a-modal>
       <a-modal

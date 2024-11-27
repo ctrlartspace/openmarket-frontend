@@ -40,72 +40,42 @@
 
     <div
       v-if="isActiveCashExists"
-      class="min-h-32 grid grid-cols-1 gap-2 rounded-xl bg-gradient-to-b from-black to-black/80 px-8 py-6 pb-10 md:hidden md:grid-cols-2 md:bg-none md:px-4 md:py-4 md:pb-0"
+      class="mb-2 flex-col gap-2 rounded-xl border-b border-neutral-100 bg-white p-4"
     >
-      <p class="flex flex-col rounded-xl md:border md:bg-white md:px-4 md:py-2">
-        <span class="text-white/50 md:text-neutral-300">Итого</span>
-        <span class="text-3xl font-medium text-blue-400">
-          {{ activeCash.total }}
-          <span class="font-semibold">₸</span>
-        </span>
-      </p>
-      <p class="flex flex-col rounded-xl md:border md:bg-white md:px-4 md:py-2">
-        <span class="text-white/50 md:text-neutral-300">Касса</span>
-        <span class="text-3xl font-medium text-white/90 md:text-black/50">
-          {{ cashAmount }}
-          <span class="font-semibold">₸</span>
-        </span>
-      </p>
-
-      <p class="flex items-center">
-        <span class="mr-2 truncate text-white/50">
-          {{ activeCash.point.name }}</span
-        >
-        <span class="material-symbols-rounded text-white/50">schedule</span>
-        <span class="ml-1 truncate text-white/50">{{
-          formatDate(activeCash.createdAt, "HH:MM") +
-          " (" +
-          fromNow(activeCash.createdAt) +
-          ")"
-        }}</span>
-      </p>
-    </div>
-
-    <div
-      v-if="isActiveCashExists"
-      class="hidden flex-col gap-2 rounded-xl border-b border-neutral-100 bg-white p-4 md:flex"
-    >
-      <div class="grid grid-cols-2 gap-4">
-        <p class="flex flex-col rounded-xl px-4">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <p class="flex flex-col rounded-xl">
           <span class="text-neutral-300">Итого</span>
-          <span class="text-3xl font-medium text-blue-600">
-            {{ activeCash.total }}
+          <span class="text-2xl font-medium text-blue-600">
+            {{ formatMoney(activeCash.total) }}
             <span class="font-semibold">₸</span>
           </span>
         </p>
-        <p class="flex flex-col rounded-xl px-4">
+        <p class="flex flex-col rounded-xl">
           <span class="text-neutral-300">Касса</span>
-          <span class="text-3xl font-medium text-black">
-            {{ cashAmount }}
+          <span class="text-2xl font-medium text-black">
+            {{ formatMoney(cashAmount) }}
             <span class="font-semibold">₸</span>
           </span>
         </p>
       </div>
 
-      <p
-        class="inline-flex w-max items-center gap-1 rounded-xl px-4 pb-0 text-neutral-300"
-      >
+      <p class="mt-2 text-neutral-300">
+        <span>
+          {{ activeCash.point.name }}
+        </span>
+        <br />
         <span>
           {{
             fromNow(activeCash.createdAt) +
-            ", " +
-            formatDate(activeCash.createdAt, " HH:MM")
+            " " +
+            formatDate(activeCash.createdAt, " HH:MM") +
+            " "
           }}
         </span>
-        <span>({{ activeCash.user.fullName }})</span>
+        <span>{{ activeCash.user.fullName }}</span>
       </p>
     </div>
-    <div v-if="isActiveCashExists" class="-mt-10 p-4 md:mt-4 md:p-0">
+    <div v-if="isActiveCashExists" class="">
       <a-list
         :items="activeCash.totalsPaymentType"
         title-field="paymentType"
@@ -119,7 +89,7 @@
         </template>
         <template #description="{ item }">
           <span class="font-medium"
-            >{{ item.total }}
+            >{{ formatMoney(item.total) }}
             <span class="font-semibold">₸</span>
           </span>
         </template>
@@ -146,6 +116,7 @@ import AList from "@/components/ui/AList.vue"
 import { computed, onMounted } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatDate, fromNow } from "@/utils/format-date"
+import { formatMoney } from "@/utils/format-money"
 
 const {
   serverData: activeCash,

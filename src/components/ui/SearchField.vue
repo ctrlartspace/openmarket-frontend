@@ -2,7 +2,7 @@
   <div class="overflow-hidden rounded-xl border">
     <div
       v-if="showAction"
-      class="flex items-center justify-between gap-2 bg-white px-4 py-2"
+      class="flex items-center justify-between gap-2 bg-white px-4 py-3"
     >
       <div
         class="flex cursor-pointer items-center gap-2 hover:text-red-600 active:text-red-600"
@@ -12,7 +12,7 @@
       </div>
       <slot name="afterSelect"> </slot>
     </div>
-    <div v-else class="flex items-center gap-2 bg-white px-4 py-2">
+    <div v-else class="flex items-center gap-2 bg-white px-4 py-3">
       <span class="material-symbols-rounded text-gray-300 md:text-[28px]"
         >search</span
       >

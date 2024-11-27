@@ -3,7 +3,7 @@
     <header>
       <nav>
         <div
-          class="flex h-[55px] items-center border-b border-neutral-100 bg-white px-4 py-2"
+          class="flex h-[55px] items-center border-b border-neutral-100 bg-white px-4 py-3"
         >
           <div class="absolute left-0 right-0">
             <div class="px- flex justify-between px-4">
@@ -42,7 +42,7 @@
           <li
             v-for="item in menuItems"
             :key="item"
-            class="whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-2"
+            class="whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3"
           >
             <router-link
               class="block w-full"
@@ -61,7 +61,7 @@
         </ul>
         <ul v-if="hasAction()" class="flex flex-col gap-2">
           <li
-            class="whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-2 font-medium"
+            class="whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium"
           >
             <slot name="action"></slot>
           </li>

@@ -47,7 +47,7 @@
       <router-link
         v-if="item.storeItem"
         :to="{ path: '/store/items/' + item.storeItem.id }"
-        class="rounded-xl border border-neutral-100 bg-white px-4 py-2 md:hover:bg-gray-50"
+        class="rounded-xl border border-neutral-100 bg-white px-4 py-3 md:hover:bg-gray-50"
         v-press
       >
         <h1 class="font-medium text-blue-600">

@@ -1,6 +1,6 @@
 <template>
   <router-link
-    class="pointer-events-auto flex aspect-square h-12 w-max items-center justify-center gap-2 border-b border-l border-t border-neutral-100 bg-white p-4 px-3 font-medium first:rounded-l-2xl last:rounded-r-2xl last:border-r"
+    class="pointer-events-auto ml-2 flex aspect-square h-[55px] w-max items-center justify-center gap-2 rounded-xl border-b border-l border-t border-neutral-100 bg-white p-4 px-3 font-medium shadow-lg shadow-neutral-300/20 first:ml-0"
     custom
     v-bind="$props"
     v-press

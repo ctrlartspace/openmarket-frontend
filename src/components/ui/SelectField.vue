@@ -1,7 +1,7 @@
 <template>
   <div
     ref="selectField"
-    class="relative cursor-pointer border-b border-gray-200 px-4 py-2 last:border-none"
+    class="relative cursor-pointer border-b border-gray-200 px-4 py-3 last:border-none"
   >
     <span v-if="selectedItems.length > 0" class="flex-1 text-gray-300">{{
       placeholder
@@ -36,7 +36,7 @@
           <ul class=" ">
             <li
               v-for="(item, i) in items"
-              class="cursor-pointer px-4 py-2 hover:bg-gray-100 active:bg-gray-100"
+              class="cursor-pointer px-4 py-3 hover:bg-gray-100 active:bg-gray-100"
               @click.stop="onItemClick(item)"
               :key="i"
             >

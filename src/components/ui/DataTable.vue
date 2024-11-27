@@ -7,7 +7,7 @@
             v-if="selectedItems.length > 0"
             class="border-b border-neutral-100"
           >
-            <th class="w-2 py-2 pl-4">
+            <th class="w-2 py-3 pl-4">
               <div
                 class="flex h-5 w-5 items-center justify-center md:h-4 md:w-4"
               >
@@ -18,7 +18,7 @@
                 />
               </div>
             </th>
-            <th class="px-4 py-2">Выбрано: {{ selectedItems.length }}</th>
+            <th class="px-4 py-3">Выбрано: {{ selectedItems.length }}</th>
           </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
             class="cursor-pointer border-b border-neutral-100 last:border-none hover:bg-gray-50 active:bg-gray-50"
             @click="emit('onItemClick', item)"
           >
-            <td v-if="selectable" class="w-2 py-2 pl-4">
+            <td v-if="selectable" class="w-2 py-3 pl-4">
               <div
                 class="flex h-5 w-5 items-center justify-center md:h-4 md:w-4"
               >
@@ -45,7 +45,7 @@
               v-for="field in tableFields"
               :key="field.name"
               :class="field.className"
-              class="px-4 py-2"
+              class="px-4 py-3"
             >
               <slot :item="item" :name="field.name">
                 <span>
@@ -60,7 +60,7 @@
             v-if="tableData.length === 0"
             class="cursor-pointer border-b border-neutral-100 p-4 last:border-none hover:bg-gray-50 active:bg-gray-50"
           >
-            <td class="px-4 py-2 text-center">
+            <td class="px-4 py-3 text-center">
               <span class="text-gray-300"> Нет данных </span>
             </td>
           </tr>

@@ -57,7 +57,7 @@
 
     <li v-if="isItemsMore" class="border-t">
       <button
-        class="flex w-full items-center justify-center px-4 py-2 text-start hover:bg-gray-50 active:bg-gray-50"
+        class="flex w-full items-center justify-center px-4 py-3 text-start hover:bg-gray-50 active:bg-gray-50"
         @click="isShowFull = !isShowFull"
       >
         <span class="material-symbols-rounded">{{
@@ -68,7 +68,7 @@
   </ul>
   <div
     v-else
-    class="rounded-xl border border-neutral-100 bg-white px-4 py-2 text-center"
+    class="rounded-xl border border-neutral-100 bg-white px-4 py-3 text-center"
   >
     <span class="text-neutral-300">Категории не найдены</span>
   </div>

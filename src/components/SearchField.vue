@@ -4,7 +4,7 @@
       <input
         ref="searchInput"
         v-model="value"
-        class="mb-0 w-full appearance-none rounded border border-neutral-100 px-4 py-2 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
+        class="mb-0 w-full appearance-none rounded border border-neutral-100 px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
         placeholder="Код товара, название, модель"
         type="text"
         v-bind="$attrs"
@@ -19,21 +19,21 @@
       </div>
       <div
         :class="value ? 'block' : 'hidden'"
-        class="absolute mt-2 w-full rounded border border-neutral-100 bg-white py-2 shadow-sm"
+        class="absolute mt-2 w-full rounded border border-neutral-100 bg-white py-3 shadow-sm"
       >
         <ul v-if="searchItems && searchItems.length > 0">
           <li
             v-for="(item, index) in searchItems"
             :key="index"
             :value="index"
-            class="cursor-pointer px-4 py-2 hover:bg-gray-100 active:bg-gray-100"
+            class="cursor-pointer px-4 py-3 hover:bg-gray-100 active:bg-gray-100"
             @click="onSearchItemClick(item.id)"
           >
             {{ item.name }}
           </li>
         </ul>
         <ul v-else>
-          <li class="px-4 py-2 text-gray-300">Ничего не найдено</li>
+          <li class="px-4 py-3 text-gray-300">Ничего не найдено</li>
         </ul>
       </div>
     </div>

@@ -2,7 +2,7 @@
   <header class="sticky top-0 z-10">
     <nav>
       <div
-        class="flex items-center border-b border-gray-200 bg-white px-4 py-2"
+        class="flex items-center border-b border-gray-200 bg-white px-4 py-3"
       >
         <div class="absolute">
           <button class="flex items-center" @click="goBack">

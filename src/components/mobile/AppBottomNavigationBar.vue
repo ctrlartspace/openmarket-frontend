@@ -63,13 +63,13 @@ const menuItems = ref([
     visible: true,
     icon: "group",
   },
-  {
-    id: 3,
-    title: "Сканер",
-    path: "/scan2",
-    visible: true,
-    icon: "center_focus_strong",
-  },
+  // {
+  //   id: 3,
+  //   title: "Сканер",
+  //   path: "/scan2",
+  //   visible: true,
+  //   icon: "center_focus_strong",
+  // },
   {
     id: 4,
     title: "Точка",

@@ -17,7 +17,7 @@
                 <slot name="content" :close-modal="closeModal"></slot>
                 <button
                   v-if="!hideYes"
-                  class="pointer-events-auto flex items-center justify-center rounded-xl border border-neutral-100 bg-white px-4 py-2 font-medium text-blue-600 hover:bg-neutral-50 md:active:bg-neutral-100"
+                  class="pointer-events-auto flex items-center justify-center rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium text-blue-600 hover:bg-neutral-50 md:active:bg-neutral-100"
                   :disabled="isLoading"
                   @click="onYesClick"
                   v-press
@@ -32,7 +32,7 @@
                   </span>
                 </button>
                 <button
-                  class="pointer-events-auto rounded-xl border border-neutral-100 bg-white px-4 py-2 font-medium text-black hover:bg-neutral-50 md:active:bg-neutral-100"
+                  class="pointer-events-auto rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium text-black hover:bg-neutral-50 md:active:bg-neutral-100"
                   @click="onNoClick"
                   v-press
                 >

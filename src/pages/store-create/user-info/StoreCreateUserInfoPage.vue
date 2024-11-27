@@ -86,7 +86,7 @@ import AppDialogVue from '@/components/AppDialog.vue';
       >
         <div class="flex items-start gap-4 rounded-xl">
           <div
-            class="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-blue-600 p-2 text-white"
+            class="flex aspect-square h-[55px] w-[55px] items-center justify-center rounded-xl bg-blue-600 p-2 text-white"
           >
             <span class="material-symbols-rounded text-xl">person</span>
           </div>

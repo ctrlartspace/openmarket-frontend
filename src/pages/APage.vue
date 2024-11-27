@@ -2,7 +2,7 @@
   <div class="flex h-full w-full flex-col bg-neutral-100">
     <div
       v-if="isDesktop && hasHeader()"
-      class="flex items-center gap-4 overflow-x-auto overflow-y-hidden border-b border-neutral-100 bg-white px-4 py-2 md:py-1"
+      class="flex items-center gap-4 overflow-x-auto overflow-y-hidden border-b border-neutral-100 bg-white px-4 py-3 md:py-1"
     >
       <h1 v-if="title" class="flex items-center whitespace-nowrap font-medium">
         {{ title }}
@@ -13,7 +13,7 @@
     </div>
     <div class="p-4 pb-0" v-if="hasError()">
       <div
-        class="animate-shake rounded-xl border border-red-200 bg-red-50 px-4 py-2"
+        class="animate-shake rounded-xl border border-red-200 bg-red-50 px-4 py-3"
       >
         <p class="text-center text-red-500"><slot name="error"></slot></p>
       </div>
@@ -23,7 +23,7 @@
     </div>
     <div
       :class="{ 'no-padding p-0': noPadding, 'p-4': !noPadding }"
-      class="relative h-full flex-1 overflow-auto pb-24 md:pb-4"
+      class="no-scrollbar relative h-full flex-1 overflow-auto pb-24 md:pb-4"
     >
       <slot></slot>
       <div

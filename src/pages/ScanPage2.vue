@@ -26,7 +26,7 @@
         class="flex justify-center font-medium"
         v-if="!resultItem && !isNotFound"
       >
-        <span class="rounded-xl bg-neutral-50 px-4 py-2 text-black">
+        <span class="rounded-xl bg-neutral-50 px-4 py-3 text-black">
           Сканируйте штрихкод
         </span>
       </div>
@@ -34,7 +34,7 @@
         v-if="isNotFound && !isScannableMode"
         class="flex justify-center font-medium"
       >
-        <span class="rounded-xl bg-red-50 px-4 py-2 text-red-500">
+        <span class="rounded-xl bg-red-50 px-4 py-3 text-red-500">
           Товар не найден ({{ resultCount }})
         </span>
       </div>
@@ -66,7 +66,7 @@
             </button>
           </div>
           <button
-            class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-2 text-center text-2xl font-medium text-white hover:brightness-95 active:brightness-95"
+            class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-3 text-center text-2xl font-medium text-white hover:brightness-95 active:brightness-95"
             @click="onApplyClick"
             v-press
           >

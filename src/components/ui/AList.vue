@@ -4,23 +4,23 @@
   >
     <div
       v-if="selectedItems.length > 0"
-      class="flex w-full cursor-pointer items-center border-b border-neutral-100 bg-white last:border-none hover:bg-neutral-50 active:bg-neutral-100"
+      class="flex w-full cursor-pointer items-center border-b border-neutral-100 bg-white last:border-none md:hover:bg-neutral-50/50 md:active:bg-neutral-100"
     >
-      <div v-if="selectable" class="flex items-center py-2 pl-4">
+      <div v-if="selectable" class="flex items-center py-3 pl-4">
         <input
           class="h-5 w-5 md:h-4 md:w-4"
           type="checkbox"
           @input="selectAll"
         />
       </div>
-      <div class="w-full truncate px-4 py-2 font-medium">
+      <div class="w-full truncate px-4 py-3 font-medium">
         Выбрано: {{ selectedItems.length }}
       </div>
     </div>
     <div
       v-for="(item, i) in items"
       :key="i"
-      class="flex w-full cursor-pointer flex-col items-center border-b border-neutral-50 bg-white px-4 py-2 last:border-none hover:bg-neutral-50 active:bg-neutral-100"
+      class="flex w-full cursor-pointer flex-col items-center border-b border-neutral-50 bg-white px-4 py-3 last:border-none hover:bg-neutral-50 active:bg-neutral-100"
       @click="emits('onItemClick', item)"
     >
       <div class="flex w-full gap-2">
@@ -53,9 +53,9 @@
         <slot name="sub" :item="item"><span></span></slot>
       </div>
     </div>
-    <div v-if="hasLast" class="px-4 py-2"><slot name="last"></slot></div>
+    <div v-if="hasLast" class="px-4 py-3"><slot name="last"></slot></div>
 
-    <div v-if="hasNoItems" class="px-4 py-2">
+    <div v-if="hasNoItems" class="px-4 py-3">
       <p class="text-center text-neutral-300">Нет данных</p>
     </div>
   </div>

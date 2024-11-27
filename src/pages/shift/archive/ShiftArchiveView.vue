@@ -8,19 +8,24 @@
       description-field="isClosed"
     >
       <template #title="{ item }">
-        <span class="font-medium">Смена #{{ item.id }}</span>
+        <span class="font-medium">Смена {{ item.id }}</span>
       </template>
       <template #description="{ item }">
-        <span
-          v-if="item.isClosed"
-          class="rounded bg-neutral-50 px-4 py-1 font-medium text-neutral-500"
-          >{{ item.total }} <span class="font-semibold">₸</span></span
+        <span v-if="item.isClosed" class="font-medium text-neutral-400"
+          >{{ formatMoney(item.total) }}
+          <span class="font-semibold">₸</span></span
         >
-        <span
-          v-else
-          class="rounded bg-green-50 px-4 py-1 font-medium text-green-500"
-          >{{ item.total }} <span class="font-semibold">₸</span></span
+        <span v-else class="font-medium text-black"
+          >{{ formatMoney(item.total) }}
+          <span class="font-semibold">₸</span></span
         >
+      </template>
+
+      <template #sub="{ item }">
+        <span class="text-sm text-neutral-300">{{
+          formatDate(item.createdAt, "DD.MM.YYYY HH:mm") +
+          (item.isClosed ? " - " + formatDate(item.updatedAt, "HH:mm") : "")
+        }}</span>
       </template>
     </a-list>
   </a-page>
@@ -29,6 +34,9 @@
 <script setup>
 import { getCashRegisters } from "@/services/CashService.js"
 import { onMounted, ref } from "vue"
+import { formatDate } from "@/utils/format-date"
+import { formatMoney } from "@/utils/format-money"
+
 import AList from "@/components/ui/AList.vue"
 
 const cashRegisters = ref([])

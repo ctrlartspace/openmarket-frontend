@@ -1,9 +1,6 @@
 <template>
   <a-page :loading="isLoading">
     <template #header>
-      <a-link :to="filterPathMulti" primary>
-        <span class="material-symbols-rounded text-[28px]">menu</span>
-      </a-link>
       <a-link
         primary
         :to="{
@@ -15,7 +12,6 @@
       >
     </template>
     <template #floating>
-      <a-link-floating :to="filterPathMulti"> page_info </a-link-floating>
       <a-link-floating
         primary
         :to="{

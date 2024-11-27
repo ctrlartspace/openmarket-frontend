@@ -16,7 +16,7 @@
         type="password"
       />
       <button
-        class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-2 font-medium text-white shadow-sm"
+        class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-3 font-medium text-white shadow-sm"
         type="submit"
         v-press
       >

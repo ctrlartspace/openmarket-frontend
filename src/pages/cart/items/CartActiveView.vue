@@ -1,57 +1,24 @@
 <template>
   <a-page solid-floating :padding-floating="false">
-    <div class="flex flex-col gap-2 pb-8">
-      <v-form class="relative w-full" @submit.prevent="addCartItem">
-        <input
-          ref="focusableInput"
-          v-model.trim="inputValue"
-          type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-2 pl-12 pr-20 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12"
-          :class="
-            isSearchError
-              ? 'animate-shake text-red-600 will-change-transform'
-              : 'text-black'
-          "
-          placeholder="Наименование, код товара"
-          @input="onSearchInput"
-        />
-        <div
-          class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-center"
-        >
-          <span class="material-symbols-rounded pl-4 text-neutral-300"
-            >search</span
-          >
-          <div class="pointer-events-auto ml-auto flex h-full px-2">
-            <router-link
-              to="/cart/favorite"
-              v-if="!isSearchLoading"
-              class="pointer-events-auto flex items-center rounded pl-2 md:hidden"
-              v-press
-            >
-              <span class="material-symbols-rounded text-neutral-300"
-                >star</span
-              >
-            </router-link>
-            <router-link
-              to="/cart/free"
-              v-if="!isSearchLoading"
-              class="pointer-events-auto flex items-center rounded px-2 md:hidden"
-              v-press
-            >
-              <span class="material-symbols-rounded text-neutral-300"
-                >apps</span
-              >
-            </router-link>
-
-            <span v-else class="flex items-center px-2">
-              <span class="material-symbols-rounded animate-spin"
-                >progress_activity</span
-              >
-            </span>
-          </div>
-        </div>
-      </v-form>
-      <div v-if="pointItems && inputValue.length > 0">
+    <v-form v-if="isDesktop || inputIsFocused" @submit.prevent="addCartItem">
+      <input
+        ref="focusableInput"
+        v-model.trim="inputValue"
+        type="text"
+        class="mb-2 w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
+        :class="
+          isSearchError
+            ? 'animate-shake text-red-600 will-change-transform'
+            : 'text-black'
+        "
+        placeholder="Наименование"
+        @input="onSearchInput"
+        @blur="unsetFocusFromInput"
+      />
+    </v-form>
+    <div class="no-scrollbar flex h-full flex-col gap-2 pb-8">
+      <div class="pb-32 md:pb-0" v-if="pointItems && inputValue.length > 0">
+        <p class="mb-2 px-4 text-neutral-300">Выберите товар</p>
         <a-list
           :items="pointItems"
           title-field="storeItem.name"
@@ -61,41 +28,35 @@
         >
           <template #title="{ item }">
             <span class="flex items-center gap-2">
-              <button
-                class="flex h-full select-none items-center justify-center rounded-md bg-neutral-100 text-black hover:bg-neutral-200 hover:text-neutral-700 active:bg-neutral-200 active:text-neutral-700 md:rounded"
-              >
-                <span class="material-symbols-rounded"> add </span>
-              </button>
-
               {{ item.storeItem.name }}
             </span>
           </template>
         </a-list>
       </div>
       <div
-        v-if="!store.isEmpty"
-        class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-100 bg-white"
+        v-if="!store.isEmpty && inputValue.length === 0"
+        class="flex w-full flex-col overflow-auto rounded-xl border border-neutral-100 bg-white"
       >
         <div
           v-for="(item, i) in store.groupedCartItems"
           :key="i"
-          class="flex w-full cursor-pointer items-center border-b-4 border-neutral-50 bg-white last:border-none md:hover:bg-neutral-50 md:active:bg-neutral-100"
+          class="flex w-full cursor-pointer items-center border-b border-neutral-50 bg-white last:border-none md:hover:bg-neutral-50/50"
           @click="onItemClick(item)"
         >
           <div class="flex items-center">
             <button
-              class="flex h-full select-none items-center justify-center rounded-md px-4 py-2"
+              class="flex h-full select-none items-center justify-center rounded-xl px-4 py-3"
               v-press
             >
               <span
-                class="material-symbols-rounded rounded bg-red-100 text-red-600"
+                class="material-symbols-rounded rounded-full bg-red-50 text-red-600"
                 @click.stop="store.removeItem(item)"
               >
                 remove
               </span>
             </button>
           </div>
-          <div class="w-full truncate py-2 font-medium">
+          <div class="w-full truncate py-3 font-medium">
             {{
               item?.storeItem?.name ||
               (item.comment || "") + " Свободная продажа"
@@ -104,18 +65,18 @@
           <div class="w-max whitespace-nowrap px-2 pr-0">
             <span class="text-neutral-300">{{ item.count }} шт. </span>
             <span class="font-medium">
-              {{ item.count * item.sellingPrice }}
+              {{ formatMoney(item.count * item.sellingPrice) }}
             </span>
             <span class="font-semibold"> ₸ </span>
           </div>
 
           <div class="flex items-center">
             <button
-              class="flex h-full select-none items-center justify-center rounded-md px-4 py-2 text-black"
+              class="flex h-full select-none items-center justify-center rounded-xl px-4 py-3 text-black"
               v-press
             >
               <span
-                class="material-symbols-rounded rounded bg-neutral-100 text-black"
+                class="material-symbols-rounded rounded-full bg-neutral-50 text-black"
                 @click.stop="store.addItem(item)"
               >
                 add
@@ -123,6 +84,38 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <div v-if="!isDesktop" class="sticky bottom-8 mt-auto flex gap-2 pb-2">
+        <button
+          class="w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 text-left text-neutral-300 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12"
+          @click="setFocusToInput"
+        >
+          Наименование
+        </button>
+        <router-link
+          to="/scan2"
+          class="pointer-events-auto flex aspect-square h-full items-center justify-center rounded-xl border border-neutral-100 bg-white md:hidden"
+          v-press
+        >
+          <span class="material-symbols-rounded text-black"
+            >center_focus_strong</span
+          >
+        </router-link>
+        <router-link
+          to="/cart/favorite"
+          class="pointer-events-auto flex aspect-square h-full items-center justify-center rounded-xl border border-neutral-100 bg-white md:hidden"
+          v-press
+        >
+          <span class="material-symbols-rounded text-black">star</span>
+        </router-link>
+        <router-link
+          to="/cart/free"
+          class="pointer-events-auto flex aspect-square h-full items-center justify-center rounded-xl border border-neutral-100 bg-white md:hidden"
+          v-press
+        >
+          <span class="material-symbols-rounded text-black">apps</span>
+        </router-link>
       </div>
     </div>
 
@@ -134,20 +127,21 @@
 
 <script setup>
 import AList from "@/components/ui/AList.vue"
-import { ref } from "vue"
+import { ref, nextTick } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
 import { getPointItem } from "@/services/PointService"
 import CartTotalForMobile from "@/components/CartTotalForMobile.vue"
-import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import { useFocusable } from "@/composables/useFocusable"
 import { watchDebounced } from "@vueuse/core"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { formatMoney } from "@/utils/format-money"
 
 const { focusableInput } = useFocusable()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm") // only smaller than lg
+const inputIsFocused = ref(false)
 
 const store = useCartStore()
 const router = useRouter()
@@ -155,7 +149,6 @@ const router = useRouter()
 const inputValue = ref("")
 const isSearchError = ref(false)
 const isSearchLoading = ref(false)
-const freeItem = ref({ sellingPrice: "" })
 
 const addCartItem = async () => {
   isSearchError.value = false
@@ -179,6 +172,36 @@ const addCartItem = async () => {
 
 const onSearchInput = () => {
   isSearchError.value = false
+}
+
+const setFocusToInput = async () => {
+  inputIsFocused.value = true
+  await nextTick()
+  focusableInput.value.focus()
+}
+const unsetFocusFromInput = async () => {
+  /**
+   * Сбрасывает фокус с инпута.
+   *
+   * Используется `setTimeout` с минимальной задержкой, чтобы гарантировать,
+   * что события `click` на элементах списка обработаются до изменения состояния `inputIsFocused`.
+   *
+   * Причина:
+   * При клике на элемент списка обработчик `blur` для инпута срабатывает раньше,
+   * чем завершится добавление элемента в корзину. Это приводит к тому, что
+   * состояние обновляется некорректно, и список скрывается.
+   *
+   * Решение:
+   * Используем минимальную задержку в `setTimeout`, чтобы дать событию `click` завершиться
+   * до изменения состояния интерфейса.
+   */
+  setTimeout(() => {
+    if (input.value === "") {
+      inputIsFocused.value = false
+    }
+  }, 0)
+  // await nextTick()
+  // inputIsFocused.value = false
 }
 
 const {
@@ -214,8 +237,10 @@ const onItemClick = (item) => {
 }
 
 const onSearchItemClick = (item) => {
+  console.log("click")
   store.addItem(item)
   inputValue.value = ""
   pointItems.value = null
+  unsetFocusFromInput()
 }
 </script>

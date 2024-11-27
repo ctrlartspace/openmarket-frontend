@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex cursor-pointer items-center gap-3 bg-white px-4 py-2 hover:bg-gray-50 active:bg-gray-50"
+    class="flex cursor-pointer items-center gap-3 bg-white px-4 py-3 hover:bg-gray-50 active:bg-gray-50"
     @mousedown.prevent="expandClick"
   >
     <div v-if="selectRoot || item.parentId" class="flex items-center">
