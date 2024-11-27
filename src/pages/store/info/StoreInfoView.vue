@@ -1,5 +1,13 @@
 <template>
-  <a-page :loading="isStorePointsLoading">
+  <a-page title="Информация" :loading="isStorePointsLoading">
+    <template #header>
+      <a-link primary to="/store/info/new-point">Новая точка </a-link>
+    </template>
+    <template #floating>
+      <a-link-floating-text to="/store/info/new-point"
+        >Новая точка</a-link-floating-text
+      >
+    </template>
     <div
       v-if="storeInfo"
       class="min-h-32 mb-2 flex flex-col rounded-xl bg-white p-4"
@@ -31,20 +39,13 @@
           <span class="font-semibold">₸</span>
         </span>
       </template>
-      <template #last>
-        <router-link
-          to="/store/info/new-point"
-          class="flex items-center justify-center gap-2 text-blue-600"
-        >
-          <span class="material-symbols-rounded">add</span>
-          Новая точка
-        </router-link>
-      </template>
     </a-list>
   </a-page>
 </template>
 
 <script setup>
+import ALink from "@/components/ui/ALink.vue"
+import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
 import { onMounted, ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouter } from "vue-router"
