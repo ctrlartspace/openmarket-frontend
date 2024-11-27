@@ -7,15 +7,15 @@
       <h1 v-if="title" class="flex items-center whitespace-nowrap font-medium">
         {{ title }}
       </h1>
-      <div class="ml-auto flex items-center gap-2 whitespace-nowrap">
+      <div class="ml-auto flex items-center gap-4 whitespace-nowrap">
         <slot name="header"></slot>
       </div>
     </div>
     <div class="p-4 pb-0" v-if="hasError()">
-      <div
-        class="animate-shake rounded-xl border border-red-200 bg-red-50 px-4 py-3"
-      >
-        <p class="text-center text-red-500"><slot name="error"></slot></p>
+      <div class="animate-shake">
+        <p class="text-center text-red-500 md:text-start">
+          <slot name="error"></slot>
+        </p>
       </div>
     </div>
     <div v-if="hasTop()" class="bg-white p-4">

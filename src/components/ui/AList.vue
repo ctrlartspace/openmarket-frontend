@@ -20,7 +20,7 @@
     <div
       v-for="(item, i) in items"
       :key="i"
-      class="flex w-full cursor-pointer flex-col items-center border-b border-neutral-50 bg-white px-4 py-3 last:border-none hover:bg-neutral-50 active:bg-neutral-100"
+      class="flex w-full cursor-pointer flex-col items-center border-b border-neutral-100 bg-white px-4 py-3 last:border-none hover:bg-neutral-50 active:bg-neutral-100"
       @click="emits('onItemClick', item)"
     >
       <div class="flex w-full gap-2">

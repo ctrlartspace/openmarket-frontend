@@ -42,24 +42,19 @@
       v-if="isActiveCashExists"
       class="mb-2 flex-col gap-2 rounded-xl border-b border-neutral-100 bg-white p-4"
     >
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <p class="flex flex-col rounded-xl">
-          <span class="text-neutral-300">Итого</span>
-          <span class="text-2xl font-medium text-blue-600">
-            {{ formatMoney(activeCash.total) }}
-            <span class="font-semibold">₸</span>
-          </span>
-        </p>
-        <p class="flex flex-col rounded-xl">
-          <span class="text-neutral-300">Касса</span>
-          <span class="text-2xl font-medium text-black">
-            {{ formatMoney(cashAmount) }}
-            <span class="font-semibold">₸</span>
-          </span>
-        </p>
-      </div>
-
+      <p class="flex flex-col rounded-xl">
+        <span class="text-neutral-300">Итого</span>
+        <span class="text-2xl font-medium text-blue-600">
+          {{ formatMoney(activeCash.total) }}
+          <span class="font-semibold">₸</span>
+        </span>
+      </p>
+      <p>
+        На кассе: {{ formatMoney(cashAmount) }}
+        ₸
+      </p>
       <p class="mt-2 text-neutral-300">
+        <br />
         <span>
           {{ activeCash.point.name }}
         </span>

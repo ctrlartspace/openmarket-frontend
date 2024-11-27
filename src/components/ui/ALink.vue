@@ -3,17 +3,17 @@
     <button
       :class="{
         'animate-pulse': loading,
-        'bg-gray-50 text-black hover:bg-gray-100 hover:text-gray-700': neutral,
-        'bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700':
-          primary,
-        'bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700': danger,
-        'bg-yellow-50 text-yellow-600 hover:bg-yellow-100 hover:text-yellow-700':
-          info,
-        'bg-green-50 text-green-500 hover:bg-green-100 hover:text-green-700':
-          success,
+        'text-neutral-800 hover:text-neutral-700': neutral,
+        'text-blue-600 hover:text-blue-700': primary,
+        'text-red-600 hover:text-red-700': danger,
+        'text-yellow-600 hover:text-yellow-700': info,
+        'text-green-500 hover:text-green-700': success,
+        'text-pink-500 hover:text-pink-700': accent,
+        'text-white': black,
+        'w-full justify-center': block,
       }"
       :disabled="loading"
-      class="flex items-center gap-2 rounded-xl px-4 font-medium"
+      class="flex items-center gap-2 font-medium"
       v-bind="$attrs"
     >
       <slot></slot>
