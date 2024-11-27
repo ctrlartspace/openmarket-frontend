@@ -47,7 +47,7 @@
       <router-link
         v-if="item.storeItem"
         :to="{ path: '/store/items/' + item.storeItem.id }"
-        class="rounded-xl border border-neutral-100 bg-white px-4 py-3 md:hover:bg-gray-50"
+        class="rounded-xl border border-neutral-100 bg-white px-4 py-3 md:hover:border-neutral-300"
         v-press
       >
         <h1 class="font-medium text-blue-600">
@@ -85,11 +85,11 @@
       <a-base-input
         id="count"
         v-model="item.count"
-        label="Количество"
-        placeholder="Количество"
+        label="В наличии"
+        placeholder="В наличии"
         readonly
         type="text"
-        unit="Шт."
+        unit="шт."
       />
     </div>
   </a-page>

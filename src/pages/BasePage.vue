@@ -86,7 +86,11 @@
               :key="item"
               class="border-b border-neutral-100 bg-white px-4 py-1"
             >
-              <router-link v-slot="{ isActive }" :to="item.path">
+              <router-link
+                class="block w-full"
+                v-slot="{ isActive }"
+                :to="item.path"
+              >
                 <span
                   :class="isActive ? 'text-black' : 'text-gray-300'"
                   class="font-medium"
