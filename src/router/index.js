@@ -151,7 +151,7 @@ const routes = [
   {
     path: "/point",
     component: PointPage,
-    redirect: "/point/sales",
+    redirect: "/point/items",
     children: [
       {
         path: "info",

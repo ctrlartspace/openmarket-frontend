@@ -1,29 +1,32 @@
 <template>
   <div v-if="!isDesktop" class="@base-page z-50 flex h-full flex-col">
     <header>
-      <nav>
-        <div
-          class="flex h-[55px] items-center border-b border-neutral-100 bg-white px-4 py-3"
-        >
-          <div class="absolute left-0 right-0">
-            <div class="px- flex justify-between px-4">
-              <button class="flex items-center" @click="$router.back" v-press>
-                <span class="material-symbols-rounded">arrow_back</span>
-              </button>
-              <button class="flex items-center" @click="toggleSideMenu" v-press>
-                <span
-                  v-if="!isSideMenuExpanded"
-                  class="material-symbols-rounded"
-                  >menu</span
-                >
-                <span v-else class="material-symbols-rounded">close</span>
-              </button>
-            </div>
+      <nav class="flex flex-col">
+        <div class="flex justify-between px-4 py-2">
+          <div class="flex items-center">
+            <button
+              v-if="route.path !== '/cart/active'"
+              class="flex items-center justify-center"
+            >
+              <span class="material-symbols-rounded">arrow_back_ios</span>
+            </button>
+
+            <h1 class="truncate whitespace-nowrap px-4 text-2xl font-medium">
+              {{ headerTitle }}
+            </h1>
           </div>
-          <div class="absolute"></div>
-          <h2 class="w-full text-center text-xl font-medium">
-            {{ headerTitle }}
-          </h2>
+          <button
+            class="pointer-events-auto flex h-[55px] w-[55px] select-none items-center justify-center gap-2 rounded-xl bg-white text-center font-medium"
+            @click="toggleSideMenu"
+            v-press
+          >
+            <span v-if="isSideMenuExpanded" class="material-symbols-rounded"
+              >close</span
+            >
+            <span v-else class="material-symbols-rounded font-medium">
+              menu
+            </span>
+          </button>
         </div>
       </nav>
     </header>
@@ -40,9 +43,9 @@
       >
         <ul class="flex h-full flex-col gap-2">
           <li
-            v-for="item in menuItems"
+            v-for="item in menuItemsFiltered"
             :key="item"
-            class="whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3"
+            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3"
           >
             <router-link
               class="block w-full"
@@ -61,7 +64,7 @@
         </ul>
         <ul v-if="hasAction()" class="flex flex-col gap-2">
           <li
-            class="whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium"
+            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium"
           >
             <slot name="action"></slot>
           </li>
@@ -82,7 +85,7 @@
         <div class="flex h-full flex-col justify-between">
           <ul class="">
             <li
-              v-for="item in menuItems"
+              v-for="item in menuItemsFiltered"
               :key="item"
               class="border-b border-neutral-100 bg-white px-4 py-1"
             >
@@ -137,6 +140,10 @@ const props = defineProps({
     required: true,
   },
 })
+
+const menuItemsFiltered = computed(() =>
+  props.menuItems.filter((item) => !item.hide),
+)
 
 const slots = useSlots()
 const hasAction = () => !!slots.action

@@ -65,7 +65,7 @@
             <span v-else>Оплата</span>
 
             <span
-              >{{ store.getTotalAmount }}
+              >{{ formatMoney(store.getTotalAmount) }}
               <span class="font-semibold">₸</span></span
             >
           </button>
@@ -80,6 +80,7 @@ import ANumberKeyboard from "@/components/ui/ANumberKeyboard.vue"
 import { ref, computed } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { formatMoney } from "@/utils/format-money"
 
 const store = useCartStore()
 const inputAmount = ref("")

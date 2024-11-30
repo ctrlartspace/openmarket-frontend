@@ -23,12 +23,12 @@
       class="flex w-full cursor-pointer flex-col items-center border-b border-neutral-100 bg-white px-4 py-3 last:border-none hover:bg-neutral-50 active:bg-neutral-100"
       @click="emits('onItemClick', item)"
     >
-      <div class="flex w-full gap-2">
+      <div class="flex w-full gap-4">
         <div v-if="selectable" class="flex items-center">
           <input
             v-model="selectedItems"
             :value="item.id"
-            class="h-5 w-5 md:h-4 md:w-4"
+            class="h-4 w-4 md:h-4 md:w-4"
             type="checkbox"
             @click.stop
           />
@@ -38,7 +38,10 @@
             {{ getNestedProperty(item, titleField) }}
           </slot>
         </div>
-        <div v-if="descriptionField" class="w-max whitespace-nowrap">
+        <div
+          v-if="descriptionField"
+          class="w-max whitespace-nowrap font-medium"
+        >
           <slot name="description" :item="item">
             {{
               `${getNestedProperty(item, descriptionField)}  ${descriptionHint}`

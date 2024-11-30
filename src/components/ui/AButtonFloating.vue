@@ -13,7 +13,7 @@
       'rounded-xl border': rounded,
     }"
     :disabled="loading"
-    class="pointer-events-auto ml-2 flex h-[55px] w-max items-center justify-center gap-2 rounded-xl border-b border-l border-t border-neutral-100 bg-white p-4 px-4 font-medium shadow-lg shadow-neutral-300/20 first:ml-0"
+    class="pointer-events-auto ml-2 flex h-[55px] w-[55px] items-center justify-center gap-2 rounded-xl border border-neutral-100 bg-white p-4 px-4 font-medium shadow-neutral-300/20 first:ml-0"
     v-bind="$attrs"
     v-press
   >

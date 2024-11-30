@@ -6,6 +6,7 @@
           {{ fromNow(data.date) }}
         </h1>
         <a-list
+          class="mb-4"
           @on-item-click="onItemClick"
           :items="data.items"
           title-field="pointItem.storeItem.name"
@@ -13,10 +14,10 @@
           description-hint="шт."
         >
           <template #title="{ item }">
-            <span class="font-medium" v-if="item.pointItem">{{
+            <span class="" v-if="item.pointItem">{{
               item.pointItem?.storeItem?.name
             }}</span>
-            <span class="font-medium" v-else
+            <span class="" v-else
               >{{ item.comment || "" }}
               <span class="">Свободная продажа</span></span
             >

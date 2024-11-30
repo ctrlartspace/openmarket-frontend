@@ -15,6 +15,11 @@ const menuItems = ref([
     title: "История",
     path: "/shift/archive",
   },
+  {
+    title: "Открытие смены",
+    path: "/shift/add",
+    hide: true,
+  },
 ])
 </script>
 

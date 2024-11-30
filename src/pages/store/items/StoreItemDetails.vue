@@ -91,10 +91,10 @@
         @click="$router.push(filterPathMulti)"
       />
       <div
-        class="flex flex-col gap-1"
+        class="flex flex-col gap-2"
         v-if="itemState.availability?.length > 0"
       >
-        <label class="font-medium">Наличие в точках</label>
+        <label class="">Наличие в точках</label>
         <a-list
           :items="itemState.availability"
           title-field="pointName"

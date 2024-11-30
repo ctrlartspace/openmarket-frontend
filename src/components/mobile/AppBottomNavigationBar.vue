@@ -72,10 +72,10 @@ const menuItems = ref([
   // },
   {
     id: 4,
-    title: "Точка",
-    path: "/point",
+    title: "Продажи",
+    path: "/point/sales",
     visible: true,
-    icon: "adjust",
+    icon: "receipt_long",
   },
   {
     id: 5,

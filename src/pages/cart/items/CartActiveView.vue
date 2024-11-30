@@ -16,8 +16,8 @@
         @blur="unsetFocusFromInput"
       />
     </v-form>
-    <div class="no-scrollbar flex h-full flex-col gap-2 pb-8">
-      <div class="pb-32 md:pb-0" v-if="pointItems && inputValue.length > 0">
+    <div class="no-scrollbar flex h-full flex-col gap-2 pb-28 md:pb-0">
+      <div class="" v-if="pointItems && inputValue.length > 0">
         <p class="mb-2 px-4 text-neutral-300">Выберите товар</p>
         <a-list
           :items="pointItems"
@@ -40,7 +40,7 @@
         <div
           v-for="(item, i) in store.groupedCartItems"
           :key="i"
-          class="flex w-full cursor-pointer items-center border-b border-neutral-50 bg-white last:border-none md:hover:bg-neutral-50/50"
+          class="flex w-full cursor-pointer items-center border-b border-neutral-100 bg-white last:border-none md:hover:bg-neutral-50/50"
           @click="onItemClick(item)"
         >
           <div class="flex items-center">
@@ -76,7 +76,7 @@
               v-press
             >
               <span
-                class="material-symbols-rounded rounded-full bg-neutral-50 text-black"
+                class="material-symbols-rounded rounded-full bg-neutral-100 text-black"
                 @click.stop="store.addItem(item)"
               >
                 add
@@ -85,42 +85,13 @@
           </div>
         </div>
       </div>
-
-      <div v-if="!isDesktop" class="sticky bottom-8 mt-auto flex gap-2 pb-2">
-        <button
-          class="w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 text-left text-neutral-300 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12"
-          @click="setFocusToInput"
-        >
-          Наименование
-        </button>
-        <router-link
-          to="/scan2"
-          class="pointer-events-auto flex aspect-square h-full items-center justify-center rounded-xl border border-neutral-100 bg-white md:hidden"
-          v-press
-        >
-          <span class="material-symbols-rounded text-black"
-            >center_focus_strong</span
-          >
-        </router-link>
-        <router-link
-          to="/cart/favorite"
-          class="pointer-events-auto flex aspect-square h-full items-center justify-center rounded-xl border border-neutral-100 bg-white md:hidden"
-          v-press
-        >
-          <span class="material-symbols-rounded text-black">star</span>
-        </router-link>
-        <router-link
-          to="/cart/free"
-          class="pointer-events-auto flex aspect-square h-full items-center justify-center rounded-xl border border-neutral-100 bg-white md:hidden"
-          v-press
-        >
-          <span class="material-symbols-rounded text-black">apps</span>
-        </router-link>
-      </div>
     </div>
 
     <template #floating>
-      <cart-total-for-mobile v-if="!isDesktop" />
+      <cart-total-for-mobile
+        v-if="!isDesktop"
+        @on-search-click="setFocusToInput"
+      />
     </template>
   </a-page>
 </template>
@@ -196,7 +167,7 @@ const unsetFocusFromInput = async () => {
    * до изменения состояния интерфейса.
    */
   setTimeout(() => {
-    if (input.value === "") {
+    if (inputValue.value === "") {
       inputIsFocused.value = false
     }
   }, 0)

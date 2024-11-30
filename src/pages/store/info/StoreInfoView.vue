@@ -4,7 +4,7 @@
       <a-link primary to="/store/info/new-point">Новая точка </a-link>
     </template>
     <template #floating>
-      <a-link-floating-text to="/store/info/new-point"
+      <a-link-floating-text primary to="/store/info/new-point"
         >Новая точка</a-link-floating-text
       >
     </template>

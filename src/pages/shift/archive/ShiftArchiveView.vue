@@ -8,7 +8,7 @@
       description-field="isClosed"
     >
       <template #title="{ item }">
-        <span class="font-medium">Смена {{ item.id }}</span>
+        <span class="">Смена {{ item.id }}</span>
       </template>
       <template #description="{ item }">
         <span v-if="item.isClosed" class="font-medium text-neutral-400"
