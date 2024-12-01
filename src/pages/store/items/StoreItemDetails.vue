@@ -24,9 +24,7 @@
         title="Добавить в точку?"
         :async-operation="addPointItem"
       >
-        <a-button-floating v-if="point" accent v-bind="props"
-          >add
-        </a-button-floating>
+        <a-button-floating v-if="point" v-bind="props">add</a-button-floating>
       </a-modal>
       <a-modal
         #="{ props }"

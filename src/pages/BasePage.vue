@@ -1,22 +1,19 @@
 <template>
   <div v-if="!isDesktop" class="@base-page z-50 flex h-full flex-col">
     <header>
-      <nav class="flex flex-col">
-        <div class="flex justify-between px-4 py-2">
+      <nav class="flex flex-col gap-2 border-b border-neutral-100 px-8 py-4">
+        <div class="flex justify-between">
           <div class="flex items-center">
-            <button
-              v-if="route.path !== '/cart/active'"
-              class="flex items-center justify-center"
-            >
-              <span class="material-symbols-rounded">arrow_back_ios</span>
-            </button>
+            <!-- <button class="flex items-center justify-center">
+              <span class="material-symbols-rounded">arrow_back</span>
+            </button> -->
 
-            <h1 class="truncate whitespace-nowrap px-4 text-2xl font-medium">
+            <h1 class="truncate whitespace-nowrap text-2xl font-medium">
               {{ headerTitle }}
             </h1>
           </div>
           <button
-            class="pointer-events-auto flex h-[55px] w-[55px] select-none items-center justify-center gap-2 rounded-xl bg-white text-center font-medium"
+            class="pointer-events-auto flex select-none items-center justify-center gap-2 rounded-xl bg-white text-center font-medium"
             @click="toggleSideMenu"
             v-press
           >
@@ -55,7 +52,7 @@
             >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="font-medium"
+                class="text-xl font-medium"
               >
                 {{ item.title }}
               </span>
@@ -64,7 +61,7 @@
         </ul>
         <ul v-if="hasAction()" class="flex flex-col gap-2">
           <li
-            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium"
+            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3 text-xl font-medium"
           >
             <slot name="action"></slot>
           </li>

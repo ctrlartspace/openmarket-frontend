@@ -8,12 +8,12 @@
       'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700': info,
       'text-green-500 hover:bg-gray-50 hover:text-green-700': success,
       'text-pink-500 hover:bg-gray-50 hover:text-pink-700': accent,
-      'bg-black text-white hover:bg-neutral-900': black,
+      '!bg-black text-white hover:bg-neutral-900': black,
       'w-full justify-center': block,
       'rounded-xl border': rounded,
     }"
     :disabled="loading"
-    class="pointer-events-auto ml-2 flex h-[55px] w-[55px] items-center justify-center gap-2 rounded-xl border border-neutral-100 bg-white p-4 px-4 font-medium shadow-neutral-300/20 first:ml-0"
+    class="pointer-events-auto ml-2 flex h-[55px] w-[55px] items-center justify-center gap-2 rounded-xl border-neutral-100 bg-white p-4 px-4 font-medium shadow-xl shadow-neutral-300/20 first:ml-0"
     v-bind="$attrs"
     v-press
   >
