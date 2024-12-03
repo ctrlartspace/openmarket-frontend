@@ -51,6 +51,12 @@
             {{ store.getPaymentType.icon }}
           </span>
         </button>
+        <button
+          class="pointer-events-auto flex h-[55px] w-[55px] select-none items-center justify-center gap-2 rounded-xl bg-neutral-100 px-4 py-3 text-center font-medium"
+          v-press
+        >
+          <span class="material-symbols-rounded font-medium"> percent </span>
+        </button>
         <a-button-floating-text
           rounded
           black

@@ -12,20 +12,40 @@
           v-if="store.getPaymentType.code === 'cash'"
           class="flex flex-col gap-2"
         >
-          <div class="grid grid-cols-2 gap-2">
+          <div class="grid grid-cols-1 gap-2">
+            <p
+              class="flex items-center gap-2 text-2xl font-medium"
+              :class="cartChange > 0 ? 'text-black' : 'text-gray-300'"
+            >
+              <span class="material-symbols-rounded font-semibold"
+                >arrow_forward</span
+              >
+              {{ formatMoney(cartChange) }}
+              <span class="font-semibold">₸</span>
+            </p>
+
             <input
               v-model="inputAmount"
               class="appearance-none rounded-xl border border-neutral-100 px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
-              :class="inputAmount ? 'text-end' : 'text-start'"
               placeholder="Внесено"
               type="text"
               @blur="isKeyboardVisible = false"
               @focus="isKeyboardVisible = true"
               v-autofocus
             />
-            <teleport v-if="isKeyboardVisible" to="#keyboard-container" defer>
-              <a-number-keyboard v-model.number="inputAmount" />
-            </teleport>
+          </div>
+        </div>
+        <div v-if="hasDiscount" class="flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <input
+              v-model="store.getTotalAmount"
+              class="appearance-none rounded-xl border border-neutral-100 px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
+              placeholder="Цена со скидкой"
+              type="text"
+              @blur="isKeyboardVisible = false"
+              @focus="isKeyboardVisible = true"
+              v-autofocus
+            />
             <div
               class="flex rounded-xl border border-neutral-100 bg-white px-4 py-3"
             >
@@ -45,6 +65,17 @@
           >
             <span class="material-symbols-rounded text-3xl font-medium">
               {{ store.getPaymentType.icon }}
+            </span>
+          </button>
+          <button
+            class="flex aspect-square select-none items-center justify-center gap-2 rounded-xl bg-neutral-100 px-4 py-3 text-center font-medium text-black transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
+            @click="setDiscount"
+          >
+            <span
+              class="material-symbols-rounded text-3xl font-medium"
+              :class="{ 'text-blue-600': hasDiscount }"
+            >
+              percent
             </span>
           </button>
           <button
@@ -73,6 +104,10 @@
       </div>
     </div>
   </div>
+
+  <teleport v-if="isKeyboardVisible" to="#keyboard-container" defer>
+    <a-number-keyboard v-model.number="inputAmount" />
+  </teleport>
 </template>
 
 <script setup>
@@ -81,9 +116,11 @@ import { ref, computed } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
+import { hasOwn } from "@vueuse/core"
 
 const store = useCartStore()
 const inputAmount = ref("")
+const hasDiscount = ref(false)
 const { sendRequest, isLoading } = useApiRequest()
 
 const isKeyboardVisible = ref(false)
@@ -103,5 +140,9 @@ const cartChange = computed(() =>
 )
 const changePaymentType = () => {
   store.changePaymentType()
+}
+
+const setDiscount = () => {
+  hasDiscount.value = !hasDiscount.value
 }
 </script>

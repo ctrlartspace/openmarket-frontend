@@ -8,7 +8,7 @@
     >
       <button
         @mousedown.prevent="onKeyboardClick(i - 1)"
-        class="h-full w-full py-6 text-2xl font-medium"
+        class="flex h-full w-full items-center justify-center py-6 text-2xl font-medium"
         :class="{ 'aspect-square': i - 1 > 0 }"
       >
         {{ i - 1 }}
