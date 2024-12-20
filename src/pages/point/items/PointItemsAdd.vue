@@ -3,8 +3,8 @@
     <template #header>
       <a-modal
         #="{ props }"
-        title="Добавить товар?"
         :async-operation="addPointItem"
+        title="Добавить товар?"
       >
         <a-button primary v-bind="props"> Сохранить</a-button>
       </a-modal>
@@ -12,8 +12,8 @@
     <template #floating>
       <a-modal
         #="{ props }"
-        title="Добавить товар?"
         :async-operation="addPointItem"
+        title="Добавить товар?"
       >
         <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
@@ -21,24 +21,24 @@
     <template v-if="isError" #error>{{ errorMessage }}</template>
     <div class="flex flex-col gap-2">
       <router-link
+        v-press
         :to="{
           path: '/store/items',
           query: { selectableMode: true, nextPath: '/point/items/add' },
         }"
-        class="rounded-xl border border-neutral-100 bg-white px-4 py-3 hover:border-neutral-500"
-        v-press
+        class="rounded-xl border border-gray-100 bg-white px-4 py-3 hover:border-gray-500"
       >
         <div v-if="storeItem">
           <h1 class="font-medium text-blue-600">
             {{ storeItem.name }}
           </h1>
-          <p class="text-sm text-neutral-400">
+          <p class="text-sm text-gray-400">
             Код: {{ storeItem.code }}<br />
             Покупка: {{ storeItem.purchasePrice }} ₸ Продажа:
             {{ storeItem.sellingPrice }} ₸
           </p>
         </div>
-        <p class=" " v-else>Выбрать товар...</p>
+        <p v-else class=" ">Выбрать товар...</p>
       </router-link>
       <div v-if="storeItem" class="flex flex-col gap-2">
         <a-base-input

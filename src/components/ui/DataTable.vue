@@ -1,12 +1,9 @@
 <template>
   <div class="flex flex-col gap-2">
-    <div class="overflow-auto rounded-xl border border-neutral-100">
+    <div class="overflow-auto rounded-xl border border-gray-100">
       <table class="w-full whitespace-nowrap bg-white text-left">
         <thead>
-          <tr
-            v-if="selectedItems.length > 0"
-            class="border-b border-neutral-100"
-          >
+          <tr v-if="selectedItems.length > 0" class="border-b border-gray-100">
             <th class="w-2 py-3 pl-4">
               <div
                 class="flex h-5 w-5 items-center justify-center md:h-4 md:w-4"
@@ -25,7 +22,7 @@
           <tr
             v-for="item in tableData"
             :key="item.id"
-            class="cursor-pointer border-b border-neutral-100 last:border-none hover:bg-gray-50 active:bg-gray-50"
+            class="cursor-pointer border-b border-gray-100 last:border-none hover:bg-gray-50 active:bg-gray-50"
             @click="emit('onItemClick', item)"
           >
             <td v-if="selectable" class="w-2 py-3 pl-4">
@@ -58,7 +55,7 @@
           </tr>
           <tr
             v-if="tableData.length === 0"
-            class="cursor-pointer border-b border-neutral-100 p-4 last:border-none hover:bg-gray-50 active:bg-gray-50"
+            class="cursor-pointer border-b border-gray-100 p-4 last:border-none hover:bg-gray-50 active:bg-gray-50"
           >
             <td class="px-4 py-3 text-center">
               <span class="text-gray-300"> Нет данных </span>
@@ -71,7 +68,7 @@
 </template>
 
 <script setup>
-import { ref, defineModel } from "vue"
+import { defineModel } from "vue"
 
 const selectedItems = defineModel({ default: [] })
 const props = defineProps({

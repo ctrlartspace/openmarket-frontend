@@ -2,14 +2,14 @@
   <div class="flex h-full flex-col">
     <div class="aspect-square w-full p-2">
       <qrcode-stream
-        class="overflow-hidden rounded-xl border-4 border-neutral-100"
         :constraints="selectedConstraints"
-        :track="paintOutline"
         :formats="selectedBarcodeFormats"
-        @error="onError"
-        @detect="onDetect"
         :paused="isPaused"
         :torch="isTorchOn"
+        :track="paintOutline"
+        class="overflow-hidden rounded-xl border-4 border-gray-100"
+        @detect="onDetect"
+        @error="onError"
       >
         <div class="flex h-full items-end justify-center p-4 text-white">
           <button
@@ -23,10 +23,10 @@
     </div>
     <div class="relative flex-1 p-4">
       <div
-        class="flex justify-center font-medium"
         v-if="!resultItem && !isNotFound"
+        class="flex justify-center font-medium"
       >
-        <span class="rounded-xl bg-neutral-50 px-4 py-3 text-black">
+        <span class="rounded-xl bg-gray-50 px-4 py-3 text-black">
           Сканируйте штрихкод
         </span>
       </div>
@@ -48,9 +48,9 @@
           <p class="text-2xl">{{ resultItem.sellingPrice }} ₸</p>
           <div class="mt-2 flex items-center justify-between gap-2">
             <button
+              v-press
               class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"
               @click="minusItem"
-              v-press
             >
               <span class="material-symbols-rounded">remove</span>
             </button>
@@ -58,17 +58,17 @@
               <span class="text-2xl">{{ itemCount }}</span>
             </div>
             <button
+              v-press
               class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"
               @click="plusItem"
-              v-press
             >
               <span class="material-symbols-rounded">add</span>
             </button>
           </div>
           <button
+            v-press
             class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-3 text-center text-2xl font-medium text-white hover:brightness-95 active:brightness-95"
             @click="onApplyClick"
-            v-press
           >
             Готово
           </button>
@@ -82,8 +82,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, computed } from "vue"
+<script lang="ts" setup>
+import { computed, ref } from "vue"
 import { QrcodeStream } from "vue-qrcode-reader"
 import { useCartStore } from "@/stores/cart.store"
 import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.vue"
@@ -257,6 +257,7 @@ function onError(err) {
   font-weight: bold;
   color: red;
 }
+
 .barcode-format-checkbox {
   margin-right: 10px;
   white-space: nowrap;

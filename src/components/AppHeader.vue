@@ -1,7 +1,7 @@
 <template>
   <nav
-    class="border-b border-neutral-100 bg-white"
     v-if="store.isAuthorizedPoint"
+    class="border-b border-neutral-100 bg-white"
   >
     <!-- Desktop -->
     <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
@@ -38,7 +38,7 @@
       </li>
     </ul>
   </nav>
-  <nav class="border-b border-neutral-100 bg-white" v-else>
+  <nav v-else class="border-b border-gray-100 bg-white">
     <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
       <li class="ml-auto"></li>
       <li class="inline">
@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { computed, ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
 
 const store = useUserStore()

@@ -1,7 +1,7 @@
 <template>
   <a-page :loading="isLoading">
     <template #header>
-      <a-button neutral @click="addItemToCart"> В корзину </a-button>
+      <a-button gray @click="addItemToCart"> В корзину</a-button>
       <a-button
         :loading="isItemAddingToFavoritesLoading"
         accent
@@ -14,8 +14,8 @@
       </a-button>
       <a-modal
         #="{ props }"
-        title="Сохранить изменения?"
         :async-operation="updatePointItem"
+        title="Сохранить изменения?"
       >
         <a-button primary v-bind="props"> Сохранить</a-button>
       </a-modal>
@@ -34,26 +34,26 @@
       </a-button-floating>
       <a-modal
         #="{ props }"
-        title="Сохранить изменения?"
         :async-operation="updatePointItem"
+        title="Сохранить изменения?"
       >
         <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
     </template>
-    <template v-if="isItemAddingToFavoritesError" #error>{{
-      errorMessageOfItemAddingToFavorites
-    }}</template>
+    <template v-if="isItemAddingToFavoritesError" #error
+      >{{ errorMessageOfItemAddingToFavorites }}
+    </template>
     <div v-if="item" class="flex flex-col gap-2">
       <router-link
         v-if="item.storeItem"
-        :to="{ path: '/store/items/' + item.storeItem.id }"
-        class="rounded-xl border border-neutral-100 bg-white px-4 py-3 md:hover:border-neutral-300"
         v-press
+        :to="{ path: '/store/items/' + item.storeItem.id }"
+        class="rounded-xl border border-gray-100 bg-white px-4 py-3 md:hover:border-gray-300"
       >
         <h1 class="font-medium text-blue-600">
           {{ item.storeItem.name }}
         </h1>
-        <p class="text-sm text-neutral-400">
+        <p class="text-sm text-gray-400">
           Код: {{ item.storeItem.code }}<br />
           <span v-if="item.storeItem.purchasePrice">
             Покупка: {{ item.storeItem.purchasePrice }} ₸
@@ -64,18 +64,18 @@
       <div class="flex gap-2">
         <a-base-input
           v-if="item.purchasePrice"
-          class="w-full"
           id="purchase-price"
           v-model="item.purchasePrice"
+          class="w-full"
           label="Покупка"
           placeholder="Цена покупки"
           type="text"
           unit="₸"
         />
         <a-base-input
-          class="w-full"
           id="selling-price"
           v-model="item.sellingPrice"
+          class="w-full"
           label="Продажа"
           placeholder="Цена продажи"
           type="text"

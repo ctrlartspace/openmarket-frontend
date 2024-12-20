@@ -1,29 +1,29 @@
 <template>
-  <a-page solid-floating :padding-floating="false">
+  <a-page :padding-floating="false" solid-floating>
     <v-form v-if="isDesktop || inputIsFocused" @submit.prevent="addCartItem">
       <input
         ref="focusableInput"
         v-model.trim="inputValue"
-        type="text"
-        class="mb-2 w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         :class="
           isSearchError
             ? 'animate-shake text-red-600 will-change-transform'
             : 'text-black'
         "
+        class="mb-2 w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         placeholder="Наименование"
-        @input="onSearchInput"
+        type="text"
         @blur="unsetFocusFromInput"
+        @input="onSearchInput"
       />
     </v-form>
     <div class="no-scrollbar flex h-full flex-col gap-2 pb-28 md:pb-0">
-      <div class="" v-if="pointItems && inputValue.length > 0">
-        <p class="mb-2 px-4 text-neutral-300">Выберите товар</p>
+      <div v-if="pointItems && inputValue.length > 0" class="">
+        <p class="mb-2 px-4 text-gray-300">Выберите товар</p>
         <a-list
           :items="pointItems"
-          title-field="storeItem.name"
           description-field="sellingPrice"
           description-hint="₸"
+          title-field="storeItem.name"
           @on-item-click="onSearchItemClick"
         >
           <template #title="{ item }">
@@ -35,18 +35,18 @@
       </div>
       <div
         v-if="!store.isEmpty && inputValue.length === 0"
-        class="flex w-full flex-col overflow-auto rounded-xl border border-neutral-100 bg-white"
+        class="flex w-full flex-col overflow-auto rounded-xl border border-gray-100 bg-white"
       >
         <div
           v-for="(item, i) in store.groupedCartItems"
           :key="i"
-          class="flex w-full cursor-pointer items-center border-b border-neutral-100 bg-white last:border-none md:hover:bg-neutral-50/50"
+          class="flex w-full cursor-pointer items-center border-b border-gray-100 bg-white last:border-none md:hover:bg-gray-50/50"
           @click="onItemClick(item)"
         >
           <div class="flex items-center">
             <button
-              class="flex h-full select-none items-center justify-center rounded-xl px-4 py-3"
               v-press
+              class="flex h-full select-none items-center justify-center rounded-xl px-4 py-3"
             >
               <span
                 class="material-symbols-rounded rounded-full bg-red-50 text-red-600"
@@ -63,7 +63,7 @@
             }}
           </div>
           <div class="w-max whitespace-nowrap px-2 pr-0">
-            <span class="text-neutral-300">{{ item.count }} шт. </span>
+            <span class="text-gray-300">{{ item.count }} шт. </span>
             <span class="font-medium">
               {{ formatMoney(item.count * item.sellingPrice) }}
             </span>
@@ -72,11 +72,11 @@
 
           <div class="flex items-center">
             <button
-              class="flex h-full select-none items-center justify-center rounded-xl px-4 py-3 text-black"
               v-press
+              class="flex h-full select-none items-center justify-center rounded-xl px-4 py-3 text-black"
             >
               <span
-                class="material-symbols-rounded rounded-full bg-neutral-100 text-black"
+                class="material-symbols-rounded rounded-full bg-gray-100 text-black"
                 @click.stop="store.addItem(item)"
               >
                 add
@@ -98,14 +98,17 @@
 
 <script setup>
 import AList from "@/components/ui/AList.vue"
-import { ref, nextTick } from "vue"
+import { nextTick, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
 import { getPointItem } from "@/services/PointService"
 import CartTotalForMobile from "@/components/CartTotalForMobile.vue"
-import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
+import {
+  breakpointsTailwind,
+  useBreakpoints,
+  watchDebounced,
+} from "@vueuse/core"
 import { useFocusable } from "@/composables/useFocusable"
-import { watchDebounced } from "@vueuse/core"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
 

@@ -1,7 +1,7 @@
 <template>
   <div v-if="!isDesktop" class="@base-page z-50 flex h-full flex-col">
     <header>
-      <nav class="flex flex-col gap-2 border-b border-neutral-100 px-8 py-4">
+      <nav class="flex flex-col gap-2 border-b border-gray-100 px-8 py-4">
         <div class="flex justify-between">
           <div class="flex items-center">
             <!-- <button class="flex items-center justify-center">
@@ -13,9 +13,9 @@
             </h1>
           </div>
           <button
+            v-press
             class="pointer-events-auto flex select-none items-center justify-center gap-2 rounded-xl bg-white text-center font-medium"
             @click="toggleSideMenu"
-            v-press
           >
             <span v-if="isSideMenuExpanded" class="material-symbols-rounded"
               >close</span
@@ -35,19 +35,19 @@
             ? 'pointer-events-auto opacity-100'
             : 'pointer-events-none opacity-0'
         "
-        class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-50 flex flex-col bg-neutral-100 p-4 opacity-0 transition-opacity duration-100 ease-in-out will-change-transform"
+        class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-50 flex flex-col bg-gray-100 p-4 opacity-0 transition-opacity duration-100 ease-in-out will-change-transform"
         @click="toggleSideMenu"
       >
         <ul class="flex h-full flex-col gap-2">
           <li
             v-for="item in menuItemsFiltered"
             :key="item"
-            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3"
+            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3"
           >
             <router-link
-              class="block w-full"
               v-slot="{ isActive }"
               :to="item.path"
+              class="block w-full"
               @click.stop="onMenuItemClick(item)"
             >
               <span
@@ -61,7 +61,7 @@
         </ul>
         <ul v-if="hasAction()" class="flex flex-col gap-2">
           <li
-            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-neutral-100 bg-white px-4 py-3 text-xl font-medium"
+            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3 text-xl font-medium"
           >
             <slot name="action"></slot>
           </li>
@@ -87,9 +87,9 @@
               class="border-b border-neutral-100 bg-white px-4 py-1"
             >
               <router-link
-                class="block w-full"
                 v-slot="{ isActive }"
                 :to="item.path"
+                class="block w-full"
               >
                 <span
                   :class="isActive ? 'text-black' : 'text-gray-300'"
@@ -102,7 +102,7 @@
           </ul>
           <ul v-if="hasAction()">
             <li
-              class="border-t border-neutral-100 bg-white px-4 py-1 font-medium text-gray-300"
+              class="border-t border-gray-100 bg-white px-4 py-1 font-medium text-gray-300"
             >
               <slot name="action"></slot>
             </li>

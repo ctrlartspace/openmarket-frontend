@@ -1,13 +1,13 @@
 <template>
-  <a-page :title="getCashTitle" :loading="isActiveCashLoading">
+  <a-page :loading="isActiveCashLoading" :title="getCashTitle">
     <template #header>
       <a-modal
         v-if="isActiveCashExists"
         #="{ props }"
-        title="Закрыть смену?"
         :async-operation="closeActiveCashRegister"
+        title="Закрыть смену?"
       >
-        <a-button danger v-bind="props"> Закрыть смену </a-button>
+        <a-button danger v-bind="props"> Закрыть смену</a-button>
       </a-modal>
       <a-link
         v-if="!isActiveCashExists"
@@ -22,8 +22,8 @@
       <a-modal
         v-if="isActiveCashExists"
         #="{ props }"
-        title="Закрыть смену?"
         :async-operation="closeActiveCashRegister"
+        title="Закрыть смену?"
       >
         <a-button-floating-text danger to="/arrivals/items/add" v-bind="props">
           Закрыть смену
@@ -40,7 +40,7 @@
 
     <div
       v-if="isActiveCashExists"
-      class="mb-2 flex-col gap-2 rounded-xl border-b border-neutral-100 bg-white p-4"
+      class="mb-4 flex-col gap-2 rounded-xl border-b border-gray-100 bg-white p-4"
     >
       <div class="grid grid-cols-2">
         <p class="flex flex-col rounded-xl">
@@ -58,7 +58,7 @@
           </span>
         </p>
       </div>
-      <p class="mt-2 text-neutral-300">
+      <p class="mt-2 text-gray-300">
         <span>
           {{ activeCash.point.name }}
         </span>
@@ -77,9 +77,9 @@
     <div v-if="isActiveCashExists" class="">
       <a-list
         :items="activeCash.totalsPaymentType"
-        title-field="paymentType"
         description-field="total"
         description-hint="₸"
+        title-field="paymentType"
       >
         <template #title="{ item }">
           <span class="">
@@ -99,7 +99,7 @@
         v-if="!isActiveCashLoading"
         class="flex flex-col items-center justify-center rounded-xl p-4"
       >
-        <span class="text-neutral-300">Смена не найдена</span>
+        <span class="text-gray-300">Смена не найдена</span>
       </div>
     </div>
   </a-page>

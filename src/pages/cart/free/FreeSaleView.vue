@@ -1,5 +1,5 @@
 <template>
-  <a-page title="Свободная продажа" solid-floating>
+  <a-page solid-floating title="Свободная продажа">
     <template #header>
       <a-button primary @click="addFreeItem"> Добавить в корзину</a-button>
     </template>
@@ -10,36 +10,36 @@
     </template>
     <form class="flex flex-col gap-2" @submit.prevent="addFreeItem">
       <input
-        class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
+        v-autofocus
         v-model.number="freeItem.sellingPrice"
+        class="block w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
+        inputmode="numeric"
         placeholder="0 ₸"
         type="text"
-        inputmode="numeric"
         @blur="isKeyboardVisible = false"
         @focus="isKeyboardVisible = true"
-        v-autofocus
       />
       <div class="no-scrollbar mb-2 flex gap-2 overflow-auto">
         <button
-          type="button"
           v-for="price in [
             800, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000,
           ]"
           :key="price"
-          class="whitespace-nowrap rounded-full bg-white px-4 py-1 font-medium"
-          @click="freeItem.sellingPrice = price"
           v-press
+          class="whitespace-nowrap rounded-full bg-white px-4 py-1 font-medium"
+          type="button"
+          @click="freeItem.sellingPrice = price"
         >
           {{ price }} <span class="font-semibold"> ₸</span>
         </button>
       </div>
       <textarea
-        class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         v-model.trim="freeItem.comment"
+        class="block w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         placeholder="Комментарий"
         type="text"
       />
-      <button type="submit" style="display: none"></button>
+      <button style="display: none" type="submit"></button>
     </form>
     <teleport
       v-if="isKeyboardVisible && isDesktop"

@@ -2,11 +2,11 @@
   <slot :props="activatorProps"></slot>
   <teleport to="body">
     <div v-if="isOpen || isOpenOut" class="modal-window relative z-10">
-      <div class="fixed inset-0 bg-black bg-opacity-30" aria-hidden="true">
+      <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-30">
         <div class="fixed inset-0 z-10 flex w-screen">
           <div class="flex h-full w-full items-center justify-center">
             <div
-              class="w-4/5 rounded-xl border border-neutral-400 bg-white p-4 md:max-w-xs"
+              class="w-4/5 rounded-xl border border-gray-400 bg-white p-4 md:max-w-xs"
             >
               <h1
                 class="md: mb-4 whitespace-break-spaces text-center text-xl font-medium"
@@ -14,13 +14,13 @@
                 {{ title }}
               </h1>
               <div class="flex flex-col gap-2">
-                <slot name="content" :close-modal="closeModal"></slot>
+                <slot :close-modal="closeModal" name="content"></slot>
                 <button
                   v-if="!hideYes"
-                  class="pointer-events-auto flex items-center justify-center rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium text-blue-600 hover:bg-neutral-50 md:active:bg-neutral-100"
-                  :disabled="isLoading"
-                  @click="onYesClick"
                   v-press
+                  :disabled="isLoading"
+                  class="pointer-events-auto flex items-center justify-center rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-blue-600 hover:bg-gray-50 md:active:bg-gray-100"
+                  @click="onYesClick"
                 >
                   <span
                     v-if="isLoading"
@@ -32,9 +32,9 @@
                   </span>
                 </button>
                 <button
-                  class="pointer-events-auto rounded-xl border border-neutral-100 bg-white px-4 py-3 font-medium text-black hover:bg-neutral-50 md:active:bg-neutral-100"
-                  @click="onNoClick"
                   v-press
+                  class="pointer-events-auto rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-black hover:bg-gray-50 md:active:bg-gray-100"
+                  @click="onNoClick"
                 >
                   {{ noCaption }}
                 </button>
@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, defineProps, defineModel } from "vue"
+import { defineEmits, defineModel, defineProps, ref } from "vue"
 
 const inputValue = defineModel()
 const emits = defineEmits(["yes", "no", "finish"])

@@ -15,14 +15,14 @@
           'animate-shake will-change-transform placeholder:text-red-500':
             isError,
         }"
-        class="peer block w-full rounded-xl border border-solid border-neutral-100 px-4 py-3 placeholder:text-neutral-300 focus:outline-black focus:ring-0"
+        class="peer block w-full rounded-xl border border-solid border-gray-100 px-4 py-3 placeholder:text-gray-300 focus:outline-black focus:ring-0"
         rounded-xl
         v-bind="$attrs"
       />
       <div
         class="absolute bottom-0 right-0 top-0 flex items-center justify-center gap-1 pr-4"
       >
-        <span v-if="unit" class="text-neutral-300">
+        <span v-if="unit" class="text-gray-300">
           {{ unit }}
         </span>
 

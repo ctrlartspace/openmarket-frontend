@@ -1,7 +1,7 @@
 <template>
   <a-page
-    :title="isSelectableMode ? 'Выбрать...' : ''"
     :loading="isStoreItemsFetching"
+    :title="isSelectableMode ? 'Выбрать...' : ''"
   >
     <template #header>
       <a-button
@@ -19,10 +19,10 @@
       <a-modal
         v-if="selectedItems.length > 0 && point"
         #="{ props }"
-        title="Добавить товары в точку?"
         :async-operation="onAddItemsToPointClick"
+        title="Добавить товары в точку?"
       >
-        <a-button-floating accent v-bind="props">add_circle </a-button-floating>
+        <a-button-floating accent v-bind="props">add_circle</a-button-floating>
       </a-modal>
       <a-link-floating
         :to="{
@@ -37,13 +37,13 @@
       </a-link-floating>
     </template>
     <div v-if="storeItems">
-      <v-form class="relative mb-2 w-full" @submit.prevent>
+      <v-form class="relative mb-4 w-full" @submit.prevent>
         <input
           ref="focusableInput"
           v-model.trim="searchInput"
-          type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 pl-12 font-medium outline-black placeholder:font-normal placeholder:text-neutral-300"
+          class="block w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 pl-12 font-medium outline-black placeholder:font-normal placeholder:text-gray-300"
           placeholder="Код товара, наименование"
+          type="text"
         />
         <div
           class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
@@ -61,22 +61,22 @@
           path: '/store/items/add',
           query: { scannedCode: searchInput },
         }"
-        class="mb-2 block w-full rounded-xl border border-neutral-100 bg-white px-4 py-3 text-center font-medium text-blue-600"
+        class="mb-2 block w-full rounded-xl border border-gray-100 bg-white px-4 py-3 text-center font-medium text-blue-600"
         >Создать новый товар
       </router-link>
 
       <a-list
         v-model="selectedItems"
         :items="storeItems"
-        title-field="name"
+        :selectable="point"
         description-field="purchasePrice"
         description-hint="₸"
+        title-field="name"
         @on-item-click="onItemClick"
-        :selectable="point"
       >
       </a-list>
       <div v-if="storeItems && storeItems.length === 0 && isSelectableMode">
-        <h1 class="p-4 text-center text-neutral-300">Не найдено</h1>
+        <h1 class="p-4 text-center text-gray-300">Не найдено</h1>
       </div>
     </div>
   </a-page>

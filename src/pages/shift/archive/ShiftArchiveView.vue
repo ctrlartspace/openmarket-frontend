@@ -4,14 +4,14 @@
     <a-list
       v-if="cashRegisters"
       :items="cashRegisters"
-      title-field="id"
       description-field="isClosed"
+      title-field="id"
     >
       <template #title="{ item }">
         <span class="">Смена {{ item.id }}</span>
       </template>
       <template #description="{ item }">
-        <span v-if="item.isClosed" class="font-medium text-neutral-400"
+        <span v-if="item.isClosed" class="font-medium text-gray-400"
           >{{ formatMoney(item.total) }}
           <span class="font-semibold">₸</span></span
         >
@@ -22,7 +22,7 @@
       </template>
 
       <template #sub="{ item }">
-        <span class="text-sm text-neutral-300">{{
+        <span class="text-sm text-gray-300">{{
           formatDate(item.createdAt, "DD.MM.YYYY HH:mm") +
           (item.isClosed ? " - " + formatDate(item.updatedAt, "HH:mm") : "")
         }}</span>

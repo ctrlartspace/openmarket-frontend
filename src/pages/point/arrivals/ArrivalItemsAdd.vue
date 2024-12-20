@@ -4,8 +4,8 @@
       <a-modal
         v-if="pointItem"
         #="{ props }"
-        title="Сделать приход?"
         :async-operation="addArrival"
+        title="Сделать приход?"
       >
         <a-button primary v-bind="props">Сохранить</a-button>
       </a-modal>
@@ -14,12 +14,12 @@
       <a-modal
         v-if="pointItem"
         #="{ props }"
-        title="Сделать приход?"
         :async-operation="addArrival"
+        title="Сделать приход?"
       >
         <a-button-floating-text primary v-bind="props"
-          >Готово</a-button-floating-text
-        >
+          >Готово
+        </a-button-floating-text>
       </a-modal>
     </template>
     <div class="flex flex-col gap-2">
@@ -28,19 +28,19 @@
           path: '/point/items',
           query: { selectableMode: true },
         }"
-        class="rounded-xl border border-neutral-100 bg-white px-4 py-3 md:hover:border-neutral-300"
+        class="rounded-xl border border-gray-100 bg-white px-4 py-3 md:hover:border-gray-300"
       >
         <div v-if="pointItem">
           <h1 class="font-medium text-blue-600">
             {{ pointItem.storeItem.name }}
           </h1>
-          <p class="text-sm text-neutral-400">
+          <p class="text-sm text-gray-400">
             Код: {{ pointItem.storeItem.code }} <br />
             Покупка: {{ pointItem.purchasePrice }} ₸ Продажа:
             {{ pointItem.sellingPrice }} ₸
           </p>
         </div>
-        <p class=" " v-else>Выбрать товар...</p>
+        <p v-else class=" ">Выбрать товар...</p>
       </router-link>
       <a-base-input
         v-if="pointItem"

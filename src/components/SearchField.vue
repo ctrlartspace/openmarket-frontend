@@ -4,7 +4,7 @@
       <input
         ref="searchInput"
         v-model="value"
-        class="mb-0 w-full appearance-none rounded border border-neutral-100 px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
+        class="mb-0 w-full appearance-none rounded border border-gray-100 px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
         placeholder="Код товара, название, модель"
         type="text"
         v-bind="$attrs"
@@ -19,7 +19,7 @@
       </div>
       <div
         :class="value ? 'block' : 'hidden'"
-        class="absolute mt-2 w-full rounded border border-neutral-100 bg-white py-3 shadow-sm"
+        class="absolute mt-2 w-full rounded border border-gray-100 bg-white py-3 shadow-sm"
       >
         <ul v-if="searchItems && searchItems.length > 0">
           <li

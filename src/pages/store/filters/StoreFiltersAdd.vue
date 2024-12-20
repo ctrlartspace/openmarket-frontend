@@ -3,8 +3,8 @@
     <template #header>
       <a-modal
         #="{ props }"
-        title="Добавить категорию?"
         :async-operation="addFilter"
+        title="Добавить категорию?"
       >
         <a-button primary v-bind="props">Сохранить</a-button>
       </a-modal>
@@ -12,8 +12,8 @@
     <template #floating>
       <a-modal
         #="{ props }"
-        title="Добавить категорию?"
         :async-operation="addFilter"
+        title="Добавить категорию?"
       >
         <a-button-floating v-bind="props">save</a-button-floating>
       </a-modal>
@@ -21,7 +21,7 @@
     <div class="flex flex-col gap-2">
       <div
         v-if="filters"
-        class="rounded-xl border border-neutral-100 bg-white px-4 py-3"
+        class="rounded-xl border border-gray-100 bg-white px-4 py-3"
       >
         Добавить в
         <span class="rounded bg-blue-50 px-2 py-1 font-medium text-blue-600">
@@ -31,9 +31,9 @@
       <a-base-input
         id="filter-name"
         v-model="filterName"
+        :is-error="validationErrors.name"
         placeholder="Название"
         type="text"
-        :is-error="validationErrors.name"
       />
     </div>
   </a-page>

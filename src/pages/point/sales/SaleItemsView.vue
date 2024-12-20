@@ -1,23 +1,23 @@
 <template>
   <a-page :loading="isLoading">
-    <div class="flex flex-col gap-2" v-if="sales">
+    <div v-if="sales" class="flex flex-col gap-2">
       <div v-for="data in groupedDataByDate" :key="data.date">
-        <h1 class="mb-2 px-4 text-sm text-neutral-300">
+        <h1 class="mb-2 px-4 text-gray-300">
           {{ fromNow(data.date) }}
         </h1>
         <a-list
-          class="mb-4"
-          @on-item-click="onItemClick"
           :items="data.items"
-          title-field="pointItem.storeItem.name"
+          class="mb-4"
           description-field="count"
           description-hint="шт."
+          title-field="pointItem.storeItem.name"
+          @on-item-click="onItemClick"
         >
           <template #title="{ item }">
-            <span class="" v-if="item.pointItem">{{
+            <span v-if="item.pointItem" class="">{{
               item.pointItem?.storeItem?.name
             }}</span>
-            <span class="" v-else
+            <span v-else class=""
               >{{ item.comment || "" }}
               <span class="">Свободная продажа</span></span
             >
@@ -29,10 +29,10 @@
             <span class="font-semibold"> ₸ </span>
           </template>
           <template #sub="{ item }">
-            <div class="flex justify-between text-sm text-neutral-300">
+            <div class="flex justify-between text-xs text-gray-300">
               <div>
-                <span>{{ formatPaymentType(item.paymentType) + " " }}</span>
-                <span>{{ formatDate(item.createdAt, "HH:mm") }}</span>
+                <span>{{ formatDate(item.createdAt, "HH:mm") + ", " }}</span>
+                <span>{{ formatPaymentType(item.paymentType) }}</span>
               </div>
 
               <span>{{ item.count }} шт.</span>
@@ -42,20 +42,18 @@
       </div>
     </div>
     <div v-else>
-      <h1 class="text-center text-neutral-300">Нет продаж</h1>
+      <h1 class="text-center text-gray-300">Нет продаж</h1>
     </div>
   </a-page>
 </template>
 
 <script setup>
 import AList from "@/components/ui/AList.vue"
-import ALink from "@/components/ui/ALink.vue"
-import ALinkFloating from "@/components/ui/ALinkFloating.vue"
-import { onMounted, computed } from "vue"
+import { computed, onMounted } from "vue"
 import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"
 import { useApiRequest } from "@/composables/useApiRequest"
-import { fromNow, formatDate } from "@/utils/format-date"
+import { formatDate, fromNow } from "@/utils/format-date"
 import { formatPaymentType } from "@/utils/format-payment-type"
 import { formatMoney } from "@/utils/format-money"
 

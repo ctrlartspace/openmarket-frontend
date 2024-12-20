@@ -1,16 +1,16 @@
 <template>
-  <a-page title="Информация" :loading="isStorePointsLoading">
+  <a-page :loading="isStorePointsLoading" title="Информация">
     <template #header>
-      <a-link primary to="/store/info/new-point">Новая точка </a-link>
+      <a-link primary to="/store/info/new-point">Новая точка</a-link>
     </template>
     <template #floating>
       <a-link-floating-text primary to="/store/info/new-point"
-        >Новая точка</a-link-floating-text
-      >
+        >Новая точка
+      </a-link-floating-text>
     </template>
     <div
       v-if="storeInfo"
-      class="min-h-32 mb-2 flex flex-col rounded-xl bg-white p-4"
+      class="min-h-32 mb-4 flex flex-col rounded-xl bg-white p-4"
     >
       <span
         v-if="isStoreInfoLoading"
@@ -21,7 +21,7 @@
         <h1 class="text-2xl">
           {{ storeInfo.fullName }}
         </h1>
-        <p class="text-neutral-600">
+        <p class="text-gray-600">
           {{ storeInfo.address }}
         </p>
       </div>
@@ -32,7 +32,7 @@
       title-field="name"
       @on-item-click="loginToStorePoint"
     >
-      <template #title="{ item }"> {{ item.name }} </template>
+      <template #title="{ item }"> {{ item.name }}</template>
       <template #action="{ item }">
         <span class="whitespace-nowrap rounded-xl font-medium"
           >{{ formatMoney(item.totalRevenue) }}
@@ -46,7 +46,7 @@
 <script setup>
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
-import { onMounted, ref } from "vue"
+import { onMounted } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouter } from "vue-router"
 import AList from "@/components/ui/AList.vue"

@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex h-full w-full flex-col items-center justify-center gap-4 bg-neutral-100"
+    class="flex h-full w-full flex-col items-center justify-center gap-4 bg-gray-100"
   >
     <form
-      class="flex w-5/6 flex-col gap-2 rounded-xl border border-neutral-100 bg-white p-4 md:w-64"
+      class="flex w-5/6 flex-col gap-2 rounded-xl border border-gray-100 bg-white p-4 md:w-64"
       @submit.prevent="loginToStore"
     >
       <a-base-input
@@ -16,9 +16,9 @@
         type="password"
       />
       <button
+        v-press
         class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-3 font-medium text-white shadow-sm"
         type="submit"
-        v-press
       >
         <span
           v-if="isLoading"
@@ -27,11 +27,11 @@
         >
         <span v-else> Продолжить </span>
       </button>
-      <p class="mt-2 text-center text-neutral-400">
+      <p class="mt-2 text-center text-gray-400">
         Нет магазина?
         <router-link
-          class="font-medium text-blue-500"
           :to="{ path: '/store-create' }"
+          class="font-medium text-blue-500"
           >Создать
         </router-link>
       </p>

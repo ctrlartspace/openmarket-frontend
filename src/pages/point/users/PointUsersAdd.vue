@@ -4,8 +4,8 @@
       <a-modal
         v-if="selectedUser"
         #="{ props }"
-        title="Добавить сотрудника?"
         :async-operation="addPointUser"
+        title="Добавить сотрудника?"
       >
         <a-button primary v-bind="props"> Сохранить</a-button>
       </a-modal>
@@ -14,8 +14,8 @@
       <a-modal
         v-if="selectedUser"
         #="{ props }"
-        title="Добавить сотрудника?"
         :async-operation="addPointUser"
+        title="Добавить сотрудника?"
       >
         <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
@@ -26,14 +26,14 @@
           path: '/store/users',
           query: { selectableMode: true },
         }"
-        class="rounded-xl border border-neutral-100 bg-white px-4 py-3 hover:border-neutral-500"
+        class="rounded-xl border border-gray-100 bg-white px-4 py-3 hover:border-gray-500"
       >
         <div v-if="selectedUser">
           <h1 class="font-medium">
             {{ selectedUser.fullName }}
           </h1>
         </div>
-        <p class=" " v-else>Выбрать сотрудника...</p>
+        <p v-else class=" ">Выбрать сотрудника...</p>
       </router-link>
     </div>
   </a-page>

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="flex w-full flex-col overflow-hidden rounded-xl border border-neutral-100 bg-white"
+    class="flex w-full flex-col overflow-hidden rounded-xl border border-gray-100 bg-white"
   >
     <div
       v-if="selectedItems.length > 0"
-      class="flex w-full cursor-pointer items-center border-b border-neutral-100 bg-white last:border-none md:hover:bg-neutral-50/50 md:active:bg-neutral-100"
+      class="flex w-full cursor-pointer items-center border-b border-gray-100 bg-white last:border-none md:hover:bg-gray-50/50 md:active:bg-gray-100"
     >
       <div v-if="selectable" class="flex items-center py-3 pl-4">
         <input
@@ -20,7 +20,7 @@
     <div
       v-for="(item, i) in items"
       :key="i"
-      class="flex w-full cursor-pointer flex-col items-center border-b border-neutral-100 bg-white px-4 py-3 last:border-none hover:bg-neutral-50 active:bg-neutral-100"
+      class="flex w-full cursor-pointer flex-col items-center border-b border-gray-100 bg-white px-4 py-3 last:border-none hover:bg-gray-50 active:bg-gray-100"
       @click="emits('onItemClick', item)"
     >
       <div class="flex w-full gap-4">
@@ -34,7 +34,7 @@
           />
         </div>
         <div v-if="titleField" class="w-full truncate">
-          <slot name="title" :item="item">
+          <slot :item="item" name="title">
             {{ getNestedProperty(item, titleField) }}
           </slot>
         </div>
@@ -42,32 +42,32 @@
           v-if="descriptionField"
           class="w-max whitespace-nowrap font-medium"
         >
-          <slot name="description" :item="item">
+          <slot :item="item" name="description">
             {{
               `${getNestedProperty(item, descriptionField)}  ${descriptionHint}`
             }}
           </slot>
         </div>
         <div v-if="hasAction" class="flex items-center gap-2">
-          <slot name="action" :item="item"></slot>
+          <slot :item="item" name="action"></slot>
         </div>
       </div>
       <div v-if="hasSub" class="w-full">
-        <slot name="sub" :item="item"><span></span></slot>
+        <slot :item="item" name="sub"><span></span></slot>
       </div>
     </div>
-    <div v-if="hasLast" class="px-4 py-3"><slot name="last"></slot></div>
+    <div v-if="hasLast" class="px-4 py-3">
+      <slot name="last"></slot>
+    </div>
 
     <div v-if="hasNoItems" class="px-4 py-3">
-      <p class="text-center text-neutral-300">Нет данных</p>
+      <p class="text-center text-gray-300">Нет данных</p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useSlots } from "vue"
-import { computed } from "vue"
-import { defineModel } from "vue"
+import { computed, defineModel, useSlots } from "vue"
 
 const props = defineProps({
   items: { type: Array, required: true, default: () => [] },

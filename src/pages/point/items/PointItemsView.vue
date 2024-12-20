@@ -1,22 +1,22 @@
 <template>
   <a-page
-    :title="isSelectableMode ? 'Выбрать...' : ''"
     :loading="isPointItemsFetching"
+    :title="isSelectableMode ? 'Выбрать...' : ''"
   >
     <template #header>
-      <a-link :to="filterPathMulti" primary> Категории </a-link>
+      <a-link :to="filterPathMulti" primary> Категории</a-link>
       <a-link
         v-if="!isSelectableMode"
-        primary
         :to="{
           path: '/store/items',
           query: { selectableMode: true, nextPath: '/point/items/add' },
         }"
+        primary
         >Добавить
       </a-link>
     </template>
     <template #floating>
-      <a-link-floating :to="filterPathMulti"> page_info </a-link-floating>
+      <a-link-floating :to="filterPathMulti"> page_info</a-link-floating>
       <a-link-floating
         :to="{
           path: '/scan2',
@@ -27,23 +27,23 @@
       </a-link-floating>
       <a-link-floating
         v-if="!isSelectableMode"
-        primary
         :to="{
           path: '/store/items',
           query: { selectableMode: true, nextPath: '/point/items/add' },
         }"
+        primary
         >add
       </a-link-floating>
     </template>
 
     <div v-if="pointItems">
-      <v-form class="relative mb-2 w-full" @submit.prevent>
+      <v-form class="relative mb-4 w-full" @submit.prevent>
         <input
           ref="focusableInput"
           v-model.trim="searchInput"
-          type="text"
-          class="block w-full text-ellipsis rounded-xl border border-neutral-100 bg-white px-4 py-3 pl-12 font-medium outline-black placeholder:font-normal placeholder:text-neutral-300"
+          class="block w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 pl-12 font-medium outline-black placeholder:font-normal placeholder:text-gray-300"
           placeholder="Код товара, наименование"
+          type="text"
         />
         <div
           class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
@@ -58,9 +58,9 @@
 
       <a-list
         :items="pointItems"
-        title-field="storeItem.name"
         description-field="count"
         description-hint="шт."
+        title-field="storeItem.name"
         @on-item-click="onItemClick"
       >
       </a-list>

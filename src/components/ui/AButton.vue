@@ -2,7 +2,7 @@
   <button
     :class="{
       'animate-pulse': loading,
-      'text-neutral-800 hover:text-neutral-700': neutral,
+      'text-gray-800 hover:text-gray-700': gray,
       'text-blue-600 hover:text-blue-700': primary,
       'text-red-600 hover:text-red-700': danger,
       'text-yellow-600 hover:text-yellow-700': info,
@@ -22,7 +22,7 @@
 <script setup>
 defineProps({
   loading: { type: Boolean },
-  neutral: { type: Boolean },
+  gray: { type: Boolean },
   primary: { type: Boolean },
   danger: { type: Boolean },
   info: { type: Boolean },

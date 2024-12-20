@@ -3,8 +3,8 @@
     <template #header>
       <a-modal
         #="{ props }"
-        title="Создать товар?"
         :async-operation="onAddStoreItemClick"
+        title="Создать товар?"
       >
         <a-button primary v-bind="props"> Сохранить</a-button>
       </a-modal>
@@ -12,23 +12,23 @@
     <template #floating>
       <a-modal
         #="{ props }"
-        title="Создать товар?"
         :async-operation="onAddStoreItemClick"
+        title="Создать товар?"
       >
         <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
     </template>
-    <template v-if="isError" #error>{{ errorMessage }} </template>
+    <template v-if="isError" #error>{{ errorMessage }}</template>
     <div class="flex flex-col gap-2">
       <router-link
         v-if="storeItem"
         :to="{ path: '/store/items/' + storeItem.id }"
-        class="rounded-xl border border-neutral-100 bg-white px-4 py-3 md:hover:bg-gray-50"
+        class="rounded-xl border border-gray-100 bg-white px-4 py-3 md:hover:bg-gray-50"
       >
         <h1 class="font-medium text-blue-600">
           {{ storeItem.name }}
         </h1>
-        <p class="text-sm text-neutral-400">
+        <p class="text-sm text-gray-400">
           Код: {{ storeItem.code }}<br />
           Покупка: {{ storeItem.purchasePrice }} ₸ Продажа:
           {{ storeItem.sellingPrice }} ₸
@@ -37,11 +37,11 @@
       <a-base-input
         id="article"
         v-model="itemState.code"
+        :disabled="codeIsGenerated"
+        :is-error="validationErrors.code"
         label="Код товара"
         placeholder="Код товара"
         type="text"
-        :is-error="validationErrors.code"
-        :disabled="codeIsGenerated"
       >
         <template #action>
           <label
@@ -50,15 +50,15 @@
             @click="generateCode"
           >
             <span
-              class="material-symbols-rounded cursor-pointer"
               :class="codeIsGenerated ? 'text-blue-600' : 'text-black'"
+              class="material-symbols-rounded cursor-pointer"
               >bolt</span
             >
           </label>
           <input
-            class="hidden"
-            v-model="codeIsGenerated"
             id="generateCodeCheckbox"
+            v-model="codeIsGenerated"
+            class="hidden"
             type="checkbox"
           />
           <router-link
@@ -70,34 +70,34 @@
           >
             <span class="material-symbols-rounded">center_focus_strong</span>
           </router-link>
-        </template></a-base-input
-      >
+        </template>
+      </a-base-input>
 
       <a-base-input
         id="name"
         v-model="itemState.name"
+        :is-error="validationErrors.name"
         label="Наименование"
         placeholder="Наименование"
         type="text"
-        :is-error="validationErrors.name"
       />
       <a-base-input
         id="purchase-price"
         v-model="itemState.purchasePrice"
+        :is-error="validationErrors.purchasePrice"
         label="Цена покупки"
         placeholder="Цена покупки"
         type="text"
         unit="₸"
-        :is-error="validationErrors.purchasePrice"
       />
       <a-base-input
         id="selling-price"
         v-model="itemState.sellingPrice"
+        :is-error="validationErrors.sellingPrice"
         label="Цена продажи"
         placeholder="Цена продажи"
         type="text"
         unit="₸"
-        :is-error="validationErrors.sellingPrice"
       />
       <a-base-input
         id="filters"
@@ -116,7 +116,7 @@ import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AModal from "@/components/ui/AModal.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
-import { computed, ref, watch } from "vue"
+import { ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"
 import { useScan } from "@/composables/useScan"

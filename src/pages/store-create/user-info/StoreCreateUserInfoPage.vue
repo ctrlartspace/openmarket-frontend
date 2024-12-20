@@ -2,23 +2,21 @@ import AppDialogVue from '@/components/AppDialog.vue';
 <template>
   <a-page title="Информация">
     <template #header>
-      <a-button neutral v-if="step > 1" @click="step = step - 1">
-        Назад
-      </a-button>
-      <a-button primary v-if="step < 3" @click="step = step + 1">
+      <a-button v-if="step > 1" gray @click="step = step - 1"> Назад </a-button>
+      <a-button v-if="step < 3" primary @click="step = step + 1">
         Далее
       </a-button>
       <a-modal
         v-if="step > 2"
         #="{ props }"
-        title="Создать магазин?"
         :async-operation="createData"
+        title="Создать магазин?"
       >
-        <a-button primary v-bind="props"> Готово </a-button>
+        <a-button primary v-bind="props"> Готово</a-button>
       </a-modal>
     </template>
     <template #floating>
-      <a-button-floating-text neutral v-if="step > 1" @click="step = step - 1">
+      <a-button-floating-text v-if="step > 1" gray @click="step = step - 1">
         Назад
       </a-button-floating-text>
       <a-button-floating-text v-if="step < 3" primary @click="step = step + 1">
@@ -27,10 +25,10 @@ import AppDialogVue from '@/components/AppDialog.vue';
       <a-modal
         v-if="step > 2"
         #="{ props }"
-        title="Создать магазин?"
         :async-operation="createData"
+        title="Создать магазин?"
       >
-        <a-button-floating-text v-bind="props" primary>
+        <a-button-floating-text primary v-bind="props">
           Готово
         </a-button-floating-text>
       </a-modal>
@@ -42,47 +40,47 @@ import AppDialogVue from '@/components/AppDialog.vue';
     <div v-if="step === 1" class="flex flex-col gap-2">
       <a-base-input
         v-model="data.user.phoneNumber"
+        :is-error="validationErrors?.userInfo?.phoneNumber"
         label="Номер телефона"
         placeholder="Номер телефона"
         type="text"
-        :is-error="validationErrors?.userInfo?.phoneNumber"
       />
       <a-base-input
         v-model="data.user.fullName"
+        :is-error="validationErrors?.userInfo?.fullName"
+        autocomplete="new-text"
         label="Имя"
         placeholder="Имя"
         type="text"
-        autocomplete="new-text"
-        :is-error="validationErrors?.userInfo?.fullName"
       />
       <a-base-input
         v-model="data.user.password"
+        :is-error="validationErrors?.userInfo?.password"
+        autocomplete="new-password"
         label="Пароль"
         placeholder="Пароль"
         type="password"
-        autocomplete="new-password"
-        :is-error="validationErrors?.userInfo?.password"
       />
     </div>
     <div v-if="step === 2" class="flex flex-col gap-2">
       <a-base-input
         v-model="data.store.fullName"
+        :is-error="validationErrors?.storeInfo?.fullName"
         label="Название магазина"
         placeholder="Название магазина"
         type="text"
-        :is-error="validationErrors?.storeInfo?.fullName"
       />
       <a-base-input
         v-model="data.store.address"
+        :is-error="validationErrors?.storeInfo?.address"
         label="Адрес"
         placeholder="Адрес"
         type="text"
-        :is-error="validationErrors?.storeInfo?.address"
       />
     </div>
     <div v-if="step === 3" class="flex flex-col gap-4">
       <div
-        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-100 bg-white p-4"
+        class="flex w-full flex-col gap-2 rounded-xl border border-gray-100 bg-white p-4"
       >
         <div class="flex items-start gap-4 rounded-xl">
           <div
@@ -98,12 +96,12 @@ import AppDialogVue from '@/components/AppDialog.vue';
       </div>
       <!-- <div class="flex items-center justify-center">
         <div
-          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-100 bg-white  "
+          class="flex h-12 w-12 items-center justify-center rounded-full border border-gray-100 bg-white  "
         >
           <span class="material-symbols-rounded text-4xl">unfold_more</span>
         </div>
         <div
-          class="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-100 bg-white  "
+          class="flex h-12 w-12 items-center justify-center rounded-full border border-gray-100 bg-white  "
         >
           <span class="material-symbols-rounded animate-spin text-4xl"
             >autorenew</span
@@ -111,7 +109,7 @@ import AppDialogVue from '@/components/AppDialog.vue';
         </div>
       </div> -->
       <div
-        class="flex w-full flex-col gap-2 rounded-xl border border-neutral-100 bg-white p-4"
+        class="flex w-full flex-col gap-2 rounded-xl border border-gray-100 bg-white p-4"
       >
         <h1 class="font-medium">Магазин</h1>
         <div class="flex gap-4 rounded-xl">

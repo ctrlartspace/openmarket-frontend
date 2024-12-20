@@ -1,8 +1,9 @@
 <template>
   <button
+    v-press
     :class="{
       'animate-pulse': loading,
-      'text-neutral-800 hover:bg-neutral-100 hover:text-neutral-700': neutral,
+      'text-gray-800 hover:bg-gray-100 hover:text-gray-700': gray,
       'text-blue-600 hover:bg-gray-50 hover:text-blue-700': primary,
       'text-red-600 hover:bg-gray-50 hover:text-red-700': danger,
       'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700': info,
@@ -13,9 +14,8 @@
       'rounded-xl border': rounded,
     }"
     :disabled="loading"
-    class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-neutral-100 bg-white p-4 text-xl font-medium first:rounded-l-xl last:rounded-r-xl last:border-r"
+    class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-gray-100 bg-white p-4 text-xl font-medium first:rounded-l-xl last:rounded-r-xl last:border-r"
     v-bind="$attrs"
-    v-press
   >
     <slot></slot>
   </button>
@@ -24,7 +24,7 @@
 <script setup>
 defineProps({
   loading: { type: Boolean },
-  neutral: { type: Boolean },
+  gray: { type: Boolean },
   primary: { type: Boolean },
   danger: { type: Boolean },
   info: { type: Boolean },

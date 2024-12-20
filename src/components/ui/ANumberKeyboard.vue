@@ -3,13 +3,13 @@
     <div
       v-for="i in 10"
       :key="i"
-      class="bg-text-white rounded-xl bg-neutral-100 transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
       :class="i - 1 === 0 ? 'order-last col-span-3' : ''"
+      class="bg-text-white rounded-xl bg-gray-100 transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
     >
       <button
-        @mousedown.prevent="onKeyboardClick(i - 1)"
-        class="flex h-full w-full items-center justify-center py-6 text-2xl font-medium"
         :class="{ 'aspect-square': i - 1 > 0 }"
+        class="flex h-full w-full items-center justify-center py-6 text-2xl font-medium"
+        @mousedown.prevent="onKeyboardClick(i - 1)"
       >
         {{ i - 1 }}
       </button>
