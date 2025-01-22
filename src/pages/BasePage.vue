@@ -8,7 +8,7 @@
               <span class="material-symbols-rounded">arrow_back</span>
             </button> -->
 
-            <h1 class="truncate whitespace-nowrap text-2xl font-medium">
+            <h1 class="truncate whitespace-nowrap text-xl font-medium">
               {{ headerTitle }}
             </h1>
           </div>
@@ -35,7 +35,7 @@
             ? 'pointer-events-auto opacity-100'
             : 'pointer-events-none opacity-0'
         "
-        class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-50 flex flex-col bg-gray-100 p-4 opacity-0 transition-opacity duration-100 ease-in-out will-change-transform"
+        class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-50 flex flex-col bg-gray-100 p-6 opacity-0 transition-opacity duration-100 ease-in-out will-change-transform"
         @click="toggleSideMenu"
       >
         <ul class="flex h-full flex-col gap-2">
@@ -76,15 +76,15 @@
     </footer>
   </div>
 
-  <div v-if="isDesktop" class="flex w-full flex-col bg-neutral-50">
+  <div v-if="isDesktop" class="flex w-full flex-col bg-gray-50">
     <div class="grid w-full flex-grow grid-cols-10 overflow-hidden">
-      <div class="col-span-3 border-r border-neutral-100">
+      <div class="col-span-3 border-r border-gray-100">
         <div class="flex h-full flex-col justify-between">
           <ul class="">
             <li
               v-for="item in menuItemsFiltered"
               :key="item"
-              class="border-b border-neutral-100 bg-white px-4 py-1"
+              class="border-b border-gray-100 bg-white px-4 py-1"
             >
               <router-link
                 v-slot="{ isActive }"

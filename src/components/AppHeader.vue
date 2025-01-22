@@ -1,8 +1,5 @@
 <template>
-  <nav
-    v-if="store.isAuthorizedPoint"
-    class="border-b border-neutral-100 bg-white"
-  >
+  <nav v-if="store.isAuthorizedPoint" class="border-b border-gray-100 bg-white">
     <!-- Desktop -->
     <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
       <li v-for="(item, i) in menuItems" :key="i" class="inline">

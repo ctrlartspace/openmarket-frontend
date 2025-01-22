@@ -19,7 +19,7 @@
               >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="truncate text-[12px]"
+                class="truncate text-sm"
                 >{{ item.title }}</span
               >
               <div

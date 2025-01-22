@@ -14,30 +14,31 @@
                 {{ title }}
               </h1>
               <div class="flex flex-col gap-2">
-                <slot :close-modal="closeModal" name="content"></slot>
-                <button
-                  v-if="!hideYes"
-                  v-press
-                  :disabled="isLoading"
-                  class="pointer-events-auto flex items-center justify-center rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-blue-600 hover:bg-gray-50 md:active:bg-gray-100"
-                  @click="onYesClick"
-                >
-                  <span
-                    v-if="isLoading"
-                    class="material-symbols-rounded animate-spin font-semibold"
-                    >progress_activity</span
+                <slot :close-modal="closeModal" name="content">
+                  <button
+                    v-if="!hideYes"
+                    v-press
+                    :disabled="isLoading"
+                    class="pointer-events-auto flex items-center justify-center rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-blue-600 hover:bg-gray-50 md:active:bg-gray-100"
+                    @click="onYesClick"
                   >
-                  <span v-else>
-                    {{ yesCaption }}
-                  </span>
-                </button>
-                <button
-                  v-press
-                  class="pointer-events-auto rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-black hover:bg-gray-50 md:active:bg-gray-100"
-                  @click="onNoClick"
-                >
-                  {{ noCaption }}
-                </button>
+                    <span
+                      v-if="isLoading"
+                      class="material-symbols-rounded animate-spin font-semibold"
+                      >progress_activity</span
+                    >
+                    <span v-else>
+                      {{ yesCaption }}
+                    </span>
+                  </button>
+                  <button
+                    v-press
+                    class="pointer-events-auto rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-black hover:bg-gray-50 md:active:bg-gray-100"
+                    @click="onNoClick"
+                  >
+                    {{ noCaption }}
+                  </button>
+                </slot>
               </div>
             </div>
           </div>
@@ -48,10 +49,9 @@
 </template>
 
 <script setup>
-import { defineEmits, defineModel, defineProps, ref } from "vue"
+import { defineEmits, defineProps, ref, watch } from "vue"
 
-const inputValue = defineModel()
-const emits = defineEmits(["yes", "no", "finish"])
+const emits = defineEmits(["yes", "no", "finish", "handle"])
 const props = defineProps({
   isOpenOut: {
     type: Boolean,
@@ -107,6 +107,10 @@ const onNoClick = () => {
   isOpen.value = false
   emits("no")
 }
+
+watch(isOpen, (newValue, oldValue) => {
+  emits("handle", newValue)
+})
 </script>
 
 <style lang="scss" scoped></style>

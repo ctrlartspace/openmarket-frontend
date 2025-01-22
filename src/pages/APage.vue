@@ -2,7 +2,7 @@
   <div class="flex h-full w-full flex-col bg-gray-100">
     <div
       v-if="isDesktop && hasHeader()"
-      class="flex items-center gap-4 overflow-x-auto overflow-y-hidden border-b border-gray-100 bg-white px-4 py-3 md:py-1"
+      class="flex items-center gap-4 overflow-x-auto overflow-y-hidden border-b border-gray-100 bg-white px-4 py-1"
     >
       <h1 v-if="title" class="flex items-center whitespace-nowrap font-medium">
         {{ title }}
@@ -11,7 +11,10 @@
         <slot name="header"></slot>
       </div>
     </div>
-    <div v-if="hasError()" class="p-4 pb-0">
+    <div
+      v-if="hasError()"
+      class="border-b border-gray-100 bg-gray-50 px-4 py-1"
+    >
       <div class="animate-shake">
         <p class="text-center text-red-500 md:text-start">
           <slot name="error"></slot>

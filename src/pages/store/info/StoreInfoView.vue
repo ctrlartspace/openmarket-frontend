@@ -18,7 +18,7 @@
         >progress_activity</span
       >
       <div v-else>
-        <h1 class="text-2xl">
+        <h1 class="text-xl">
           {{ storeInfo.fullName }}
         </h1>
         <p class="text-gray-600">

@@ -19,6 +19,7 @@
     <div class="no-scrollbar flex h-full flex-col gap-2 pb-28 md:pb-0">
       <div v-if="pointItems && inputValue.length > 0" class="">
         <p class="mb-2 px-4 text-gray-300">Выберите товар</p>
+
         <a-list
           :items="pointItems"
           description-field="sellingPrice"
@@ -47,10 +48,10 @@
             <button
               v-press
               class="flex h-full select-none items-center justify-center rounded-xl px-4 py-3"
+              @click.stop="store.removeItem(item)"
             >
               <span
                 class="material-symbols-rounded rounded-full bg-red-50 text-red-600"
-                @click.stop="store.removeItem(item)"
               >
                 remove
               </span>
@@ -62,10 +63,13 @@
               (item.comment || "") + " Свободная продажа"
             }}
           </div>
-          <div class="w-max whitespace-nowrap px-2 pr-0">
+          <div
+            :class="{ 'text-rose-500': item.discount }"
+            class="w-max whitespace-nowrap px-2 pr-0"
+          >
             <span class="text-gray-300">{{ item.count }} шт. </span>
             <span class="font-medium">
-              {{ formatMoney(item.count * item.sellingPrice) }}
+              {{ formatMoney(item.totalPrice) }}
             </span>
             <span class="font-semibold"> ₸ </span>
           </div>
@@ -74,10 +78,10 @@
             <button
               v-press
               class="flex h-full select-none items-center justify-center rounded-xl px-4 py-3 text-black"
+              @click.stop="store.addItem(item)"
             >
               <span
                 class="material-symbols-rounded rounded-full bg-gray-100 text-black"
-                @click.stop="store.addItem(item)"
               >
                 add
               </span>

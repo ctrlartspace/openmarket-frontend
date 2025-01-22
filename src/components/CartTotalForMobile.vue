@@ -32,10 +32,20 @@
       </router-link>
     </div>
     <div class="flex w-full flex-col gap-4 px-6 py-6">
-      <div class="flex gap-2">
-        <p class="pl-2 text-center font-medium">
-          Итого: {{ formatMoney(store.getTotalAmount) }}
-          <span class="font-semibold">₸ </span>
+      <div class="flex flex-col">
+        <p class="font-medium">
+          Итого:
+          <span>
+            {{ " " + formatMoney(store.getTotalDiscountAmount) }}
+            <span class="font-semibold">₸ </span>
+            <span
+              v-if="store.hasDiscount"
+              class="rounded bg-rose-50 px-2 py-1 text-rose-500"
+            >
+              {{ formatMoney(store.getDiscountAmount) }}
+              <span class="font-semibold">₸</span>
+            </span>
+          </span>
         </p>
         <p>
           <span class="text-gray-300">{{ store.getPaymentType.label }}</span>
@@ -60,12 +70,16 @@
         >
           <span class="text-white">Оплата</span>
         </a-button-floating-text>
-        <button
-          v-press
-          class="pointer-events-auto flex h-[55px] w-[55px] select-none items-center justify-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-center font-medium"
-        >
-          <span class="material-symbols-rounded font-medium"> percent </span>
-        </button>
+        <discount-dialog #="{ props }">
+          <button
+            v-press
+            :class="{ 'bg-rose-100 text-rose-500': store.hasDiscount }"
+            class="pointer-events-auto flex h-[55px] w-[55px] select-none items-center justify-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-center font-medium"
+            v-bind="props"
+          >
+            <span class="material-symbols-rounded font-medium"> percent </span>
+          </button>
+        </discount-dialog>
       </div>
     </div>
   </div>
@@ -73,6 +87,7 @@
 
 <script setup>
 import AButtonFloatingText from "./ui/AButtonFloatingText.vue"
+import DiscountDialog from "@/components/DiscountDialog.vue"
 import { computed, defineEmits, ref } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"

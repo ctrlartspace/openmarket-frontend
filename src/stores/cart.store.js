@@ -9,6 +9,9 @@ export const useCartStore = defineStore("cart", () => {
     { code: "cash", label: "Наличные", icon: "payments", color: "green" },
   ])
   const currentPaymentType = ref(0)
+  const discount = ref(0)
+  const hasDiscount = ref(false)
+
   const getPaymentType = computed(
     () => paymentTypes.value[currentPaymentType.value],
   )
@@ -21,14 +24,27 @@ export const useCartStore = defineStore("cart", () => {
   const isEmpty = computed(() => itemsCount.value === 0)
 
   const getTotalAmount = computed(() =>
-    groupedCartItems.value.reduce((total, item) => total + item.totalPrice, 0),
+    Math.round(
+      groupedCartItems.value.reduce(
+        (total, item) => total + item.sellingPrice * item.count,
+        0,
+      ),
+    ),
+  )
+  const getTotalDiscountAmount = computed(() =>
+    Math.round(
+      groupedCartItems.value.reduce(
+        (total, item) => total + item.totalPrice,
+        0,
+      ),
+    ),
   )
 
   const getItemsForSale = computed(() =>
     groupedCartItems.value.map((item) => {
       return {
         pointItemId: item.id,
-        sellingPrice: item.sellingPrice,
+        sellingPrice: item.totalPrice,
         count: item.count,
         paymentType: getPaymentType.value.code,
         comment: item.comment,
@@ -50,6 +66,7 @@ export const useCartStore = defineStore("cart", () => {
         totalPrice: item.sellingPrice,
       })
     }
+    applyDiscount()
   }
 
   const removeItem = (cartItem) => {
@@ -65,6 +82,7 @@ export const useCartStore = defineStore("cart", () => {
 
   const clearCart = () => {
     cartItems.value.clear()
+    clearDiscount()
   }
 
   const changePaymentType = () => {
@@ -72,6 +90,44 @@ export const useCartStore = defineStore("cart", () => {
       currentPaymentType.value < paymentTypes.value.length - 1
         ? currentPaymentType.value + 1
         : 0
+  }
+
+  const applyDiscount = () => {
+    cartItems.value.forEach((item, key) => {
+      const discountedPrice = item.sellingPrice * (1 - discount.value / 100)
+      item.totalPrice = discountedPrice * item.count // Итоговая цена с учётом количества
+      item.discount = discount.value // Сохраняем текущую скидку
+      cartItems.value.set(key, item) // Обновляем элемент в Map
+    })
+
+    hasDiscount.value = discount.value !== 0
+  }
+
+  const removeDiscount = (cartItem) => {
+    const itemKey = `${cartItem.id}-${cartItem.sellingPrice}`
+    const item = cartItems.value.get(itemKey)
+    item.discount = 0
+    item.totalPrice = item.sellingPrice * item.count
+    cartItems.value.set(itemKey, item) // Обновляем элемент в Map
+  }
+
+  const setDiscount = (discountPercent) => {
+    discount.value = discountPercent
+  }
+
+  const setDiscountByAmount = (amount) => {
+    discount.value =
+      ((getTotalAmount.value - amount) / getTotalAmount.value) * 100
+  }
+
+  const getDiscountAmount = computed(
+    () => getTotalAmount.value - getTotalDiscountAmount.value,
+  )
+
+  const clearDiscount = () => {
+    setDiscount(0)
+    applyDiscount()
+    hasDiscount.value = false
   }
 
   return {
@@ -87,5 +143,14 @@ export const useCartStore = defineStore("cart", () => {
     changePaymentType,
     getPaymentType,
     paymentTypes,
+    applyDiscount,
+    setDiscount,
+    hasDiscount,
+    getDiscountAmount,
+    getTotalDiscountAmount,
+    discount,
+    setDiscountByAmount,
+    removeDiscount,
+    clearDiscount,
   }
 })
