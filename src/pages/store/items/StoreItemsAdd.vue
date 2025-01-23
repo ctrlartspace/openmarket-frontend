@@ -15,7 +15,9 @@
         :async-operation="onAddStoreItemClick"
         title="Создать товар?"
       >
-        <a-button-floating v-bind="props"> save</a-button-floating>
+        <a-button-floating-text primary v-bind="props">
+          Сохранить
+        </a-button-floating-text>
       </a-modal>
     </template>
     <template v-if="isError" #error>{{ errorMessage }}</template>
@@ -115,7 +117,7 @@
 import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AModal from "@/components/ui/AModal.vue"
 import AButton from "@/components/ui/AButton.vue"
-import AButtonFloating from "@/components/ui/AButtonFloating.vue"
+import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import { ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import { useFilters } from "@/composables/filters.js"

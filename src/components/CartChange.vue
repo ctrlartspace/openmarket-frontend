@@ -8,8 +8,11 @@
       <div
         class="flex h-max w-full flex-col justify-between gap-4 rounded-xl border border-gray-100 bg-white p-4"
       >
-        <div class="flex flex-col gap-2">
-          <div class="flex gap-4">
+        <div
+          v-if="store.getPaymentType.code === 'cash' || store.hasDiscount"
+          class="flex flex-col gap-2"
+        >
+          <div class="flex gap-2">
             <p
               v-if="inputAmount"
               class="inline-flex w-max flex-col items-start rounded-xl bg-gray-50 px-4 py-2 text-2xl font-medium"
@@ -118,7 +121,7 @@ import { formatMoney } from "@/utils/format-money"
 import DiscountDialog from "@/components/DiscountDialog.vue"
 
 const store = useCartStore()
-const inputAmount = ref("")
+const inputAmount = ref(0)
 const { sendRequest, isLoading } = useApiRequest()
 
 const isKeyboardVisible = ref(false)
@@ -134,9 +137,10 @@ const makeSaleFromCart = async () => {
 }
 
 const cartChange = computed(() =>
-  inputAmount.value ? inputAmount.value - store.getTotalAmount : 0,
+  inputAmount.value ? inputAmount.value - store.getTotalDiscountAmount : 0,
 )
 const changePaymentType = () => {
   store.changePaymentType()
+  inputAmount.value = 0
 }
 </script>

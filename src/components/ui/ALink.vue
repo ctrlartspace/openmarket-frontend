@@ -32,6 +32,9 @@ defineProps({
   danger: { type: Boolean },
   info: { type: Boolean },
   success: { type: Boolean },
+  accent: { type: Boolean },
+  black: { type: Boolean },
+  block: { type: Boolean },
 })
 </script>
 

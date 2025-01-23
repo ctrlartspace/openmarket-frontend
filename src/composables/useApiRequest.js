@@ -1,4 +1,4 @@
-import { ref, computed, nextTick } from "vue"
+import { computed, ref } from "vue"
 import apiService from "@/services/ApiService"
 
 export function useApiRequest() {
@@ -10,6 +10,7 @@ export function useApiRequest() {
   const hasValidationErrors = computed(
     () => Object.keys(validationErrors.value).length > 0,
   )
+
   function timeout(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms))
   }
@@ -26,7 +27,6 @@ export function useApiRequest() {
 
       // await timeout(3000)
       const response = await apiService[method](url, payload)
-      console.log(response)
 
       // Успешный ответ
       if (response.data.success) {

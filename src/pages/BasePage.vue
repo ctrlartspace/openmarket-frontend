@@ -1,13 +1,11 @@
 <template>
   <div v-if="!isDesktop" class="@base-page z-50 flex h-full flex-col">
     <header>
-      <nav class="flex flex-col gap-2 border-b border-gray-100 px-8 py-4">
-        <div class="flex justify-between">
+      <nav
+        class="flex h-[55px] flex-col justify-center gap-2 border-b border-gray-100 px-8 py-3"
+      >
+        <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <!-- <button class="flex items-center justify-center">
-              <span class="material-symbols-rounded">arrow_back</span>
-            </button> -->
-
             <h1 class="truncate whitespace-nowrap text-xl font-medium">
               {{ headerTitle }}
             </h1>

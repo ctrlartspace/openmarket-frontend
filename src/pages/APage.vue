@@ -11,10 +11,7 @@
         <slot name="header"></slot>
       </div>
     </div>
-    <div
-      v-if="hasError()"
-      class="border-b border-gray-100 bg-gray-50 px-4 py-1"
-    >
+    <div v-if="hasError()" class="border-b border-gray-100 bg-white px-4 py-1">
       <div class="animate-shake">
         <p class="text-center text-red-500 md:text-start">
           <slot name="error"></slot>

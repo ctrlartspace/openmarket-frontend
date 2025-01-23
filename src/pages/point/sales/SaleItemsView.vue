@@ -64,15 +64,13 @@ const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =
 const { serverData: sales, sendRequest, isLoading } = useApiRequest()
 
 const onItemClick = (item) => {
-  router.push(`/point/items/${item.pointItem.id}`)
-  console.log("dsf")
+  // router.push(`/point/items/${item.pointItem.id}`)
 }
 
 const groupedDataByDate = computed(() => {
   const groupedData = {}
   sales.value.forEach((item) => {
     const date = item.createdAt.split("T")[0]
-    console.log(date)
 
     if (groupedData[date]) {
       groupedData[date].items.push(item)
@@ -83,7 +81,6 @@ const groupedDataByDate = computed(() => {
       }
     }
   })
-  console.log(groupedData)
   return Object.values(groupedData)
 })
 

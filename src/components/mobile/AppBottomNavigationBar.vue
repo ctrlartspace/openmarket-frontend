@@ -2,7 +2,7 @@
   <footer class="@bottom-navigation pb-safe">
     <nav v-if="store.isAuthorizedPoint">
       <div
-        class="flex items-center border-t border-gray-100 bg-white px-4 py-1"
+        class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1"
       >
         <ul class="flex w-full items-center justify-around">
           <li v-for="(item, i) in menuItems" :key="i" class="relative">
