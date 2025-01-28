@@ -42,7 +42,7 @@
               v-if="store.hasDiscount"
               class="rounded bg-rose-50 px-2 py-1 text-rose-500"
             >
-              {{ formatMoney(store.getDiscountAmount) }}
+              -{{ formatMoney(store.getDiscountAmount) }}
               <span class="font-semibold">₸</span>
             </span>
           </span>
@@ -62,14 +62,20 @@
           </span>
         </button>
 
-        <a-button-floating-text
-          :disabled="isLoading"
-          black
-          rounded
-          @click="makeSaleFromCart"
+        <a-modal
+          #="{ props }"
+          :async-operation="makeSaleFromCart"
+          title="Подтвердите оплату"
         >
-          <span class="text-white">Оплата</span>
-        </a-button-floating-text>
+          <a-button-floating-text
+            :disabled="isLoading"
+            black
+            rounded
+            v-bind="props"
+          >
+            <span class="text-white">Оплата</span>
+          </a-button-floating-text>
+        </a-modal>
         <discount-dialog #="{ props }">
           <button
             v-press
@@ -92,6 +98,7 @@ import { computed, defineEmits, ref } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
+import AModal from "@/components/ui/AModal.vue"
 
 const emits = defineEmits(["onSearchClick"])
 

@@ -1,12 +1,12 @@
-import { breakpointsTailwind, isDef, useBreakpoints } from "@vueuse/core"
-
 export default {
   mounted(el) {
-    const breakpoints = useBreakpoints(breakpointsTailwind)
-    const isDesktop = breakpoints.greater("sm") // only smaller than lg
-    // if (isDesktop.value) {
-    //   el.focus()
-    // }
     el.focus()
+    // Находим все вложенные input элементы
+    const inputs = el.querySelectorAll("input")
+
+    // Перебираем их и ставим фокус на каждый
+    inputs.forEach((input) => {
+      input.focus()
+    })
   },
 }

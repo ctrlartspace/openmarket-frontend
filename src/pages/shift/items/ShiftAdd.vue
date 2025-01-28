@@ -3,37 +3,40 @@
     <template #header>
       <a-modal
         #="{ props }"
-        title="Открыть смену?"
         :async-operation="openCashRegister"
+        title="Открыть смену?"
       >
-        <a-button v-bind="props" primary> Готово</a-button>
+        <a-button primary v-bind="props"> Готово</a-button>
       </a-modal>
     </template>
     <template #floating>
       <a-modal
         #="{ props }"
-        title="Открыть смену?"
         :async-operation="openCashRegister"
+        title="Открыть смену?"
       >
         <a-button-floating-text primary v-bind="props">
-          Готово</a-button-floating-text
-        >
+          Готово
+        </a-button-floating-text>
       </a-modal>
     </template>
-    <a-base-input
-      v-model="startAmount"
-      placeholder="Сумма на начало"
-      type="text"
-      unit="₸"
-      :is-error="validationErrors.startAmount"
-    />
+
+    <div class="flex-auto">
+      <label class="mb-2 block font-medium"> Сумма на начало</label>
+      <InputNumber
+        v-model="startAmount"
+        :invalid="validationErrors.startAmount"
+        fluid
+        placeholder="0 ₸"
+        suffix=" ₸"
+      />
+    </div>
   </a-page>
 </template>
 
 <script setup>
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AModal from "@/components/ui/AModal.vue"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
@@ -41,7 +44,7 @@ import { useApiRequest } from "@/composables/useApiRequest"
 
 const { sendRequest, validationErrors } = useApiRequest()
 const router = useRouter()
-const startAmount = ref("")
+const startAmount = ref(null)
 
 const openCashRegister = async () => {
   const response = await sendRequest("post", "/cash-registers", {

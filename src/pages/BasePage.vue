@@ -6,7 +6,7 @@
       >
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <h1 class="truncate whitespace-nowrap text-xl font-medium">
+            <h1 class="truncate whitespace-nowrap font-medium">
               {{ headerTitle }}
             </h1>
           </div>
@@ -50,7 +50,7 @@
             >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="text-xl font-medium"
+                class="font-medium"
               >
                 {{ item.title }}
               </span>

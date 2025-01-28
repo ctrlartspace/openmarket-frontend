@@ -36,85 +36,103 @@
           {{ storeItem.sellingPrice }} ₸
         </p>
       </router-link>
-      <a-base-input
-        id="article"
-        v-model="itemState.code"
-        :disabled="codeIsGenerated"
-        :is-error="validationErrors.code"
-        label="Код товара"
-        placeholder="Код товара"
-        type="text"
-      >
-        <template #action>
-          <label
-            class="flex items-center"
-            for="generateCodeCheckbox"
-            @click="generateCode"
-          >
-            <span
-              :class="codeIsGenerated ? 'text-blue-600' : 'text-black'"
-              class="material-symbols-rounded cursor-pointer"
-              >bolt</span
-            >
-          </label>
-          <input
-            id="generateCodeCheckbox"
-            v-model="codeIsGenerated"
-            class="hidden"
-            type="checkbox"
-          />
-          <router-link
-            :to="{
-              path: '/scan2',
-              query: { scannableMode: true },
-            }"
-            class="flex items-center"
-          >
-            <span class="material-symbols-rounded">center_focus_strong</span>
-          </router-link>
-        </template>
-      </a-base-input>
 
-      <a-base-input
-        id="name"
-        v-model="itemState.name"
-        :is-error="validationErrors.name"
-        label="Наименование"
-        placeholder="Наименование"
-        type="text"
-      />
-      <a-base-input
-        id="purchase-price"
-        v-model="itemState.purchasePrice"
-        :is-error="validationErrors.purchasePrice"
-        label="Цена покупки"
-        placeholder="Цена покупки"
-        type="text"
-        unit="₸"
-      />
-      <a-base-input
-        id="selling-price"
-        v-model="itemState.sellingPrice"
-        :is-error="validationErrors.sellingPrice"
-        label="Цена продажи"
-        placeholder="Цена продажи"
-        type="text"
-        unit="₸"
-      />
-      <a-base-input
-        id="filters"
-        v-model="filters"
-        label="Категории"
-        placeholder="Выбрать"
-        type="text"
-        @click="$router.push(filterPathMulti)"
-      />
+      <div class="flex-auto">
+        <label class="mb-2 block font-medium"> Код товара </label>
+        <InputGroup>
+          <InputText
+            v-model="itemState.code"
+            :invalid="validationErrors.code"
+            placeholder="Код товара"
+            type="text"
+          />
+          <InputGroupAddon>
+            <Button severity="secondary" variant="text" @click="generateCode">
+              <template #icon>
+                <label
+                  class="flex items-center"
+                  for="generateCodeCheckbox"
+                  @click="generateCode"
+                >
+                  <span
+                    :class="codeIsGenerated ? 'text-blue-600' : 'text-black'"
+                    class="material-symbols-rounded cursor-pointer"
+                    >bolt</span
+                  >
+                </label>
+                <input
+                  id="generateCodeCheckbox"
+                  v-model="codeIsGenerated"
+                  class="hidden"
+                  type="checkbox"
+                />
+              </template>
+            </Button>
+            <Button
+              :to="{
+                path: '/scan2',
+                query: { scannableMode: true },
+              }"
+              as="router-link"
+              severity="secondary"
+              variant="text"
+            >
+              <template #icon>
+                <span class="material-symbols-rounded text-black"
+                  >center_focus_strong</span
+                >
+              </template>
+            </Button>
+          </InputGroupAddon>
+        </InputGroup>
+      </div>
+
+      <div class="flex-auto">
+        <label class="mb-2 block font-medium"> Наименование</label>
+        <InputText
+          v-model="itemState.name"
+          :invalid="validationErrors.name"
+          fluid
+          placeholder="Наименование"
+          type="text"
+        />
+      </div>
+
+      <div class="flex gap-2">
+        <div class="flex-auto">
+          <label class="mb-2 block font-medium"> Покупка </label>
+          <InputNumber
+            v-model="itemState.purchasePrice"
+            :invalid="validationErrors.purchasePrice"
+            fluid
+            placeholder="Цена покупки"
+            suffix=" ₸"
+          />
+        </div>
+        <div class="flex-auto">
+          <label class="mb-2 block font-medium"> Продажа </label>
+          <InputNumber
+            v-model="itemState.sellingPrice"
+            :invalid="validationErrors.sellingPrice"
+            fluid
+            placeholder="Цена продажи"
+            suffix=" ₸"
+          />
+        </div>
+      </div>
+      <!--      <a-base-input-->
+      <!--        id="filters"-->
+      <!--        v-model="filters"-->
+      <!--        label="Категории"-->
+      <!--        placeholder="Выбрать"-->
+      <!--        type="text"-->
+      <!--        @click="$router.push(filterPathMulti)"-->
+      <!--      />-->
     </div>
   </a-page>
 </template>
 
 <script setup>
-import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AModal from "@/components/ui/AModal.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"

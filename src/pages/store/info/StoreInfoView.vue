@@ -18,7 +18,7 @@
         >progress_activity</span
       >
       <div v-else>
-        <h1 class="text-xl">
+        <h1 class="">
           {{ storeInfo.fullName }}
         </h1>
         <p class="text-gray-600">
@@ -26,6 +26,7 @@
         </p>
       </div>
     </div>
+    <h1 class="mb-2 px-4 text-gray-300">Точки продаж</h1>
     <a-list
       v-if="storePoints"
       :items="storePoints"

@@ -42,15 +42,16 @@
         </div>
         <p v-else class=" ">Выбрать товар...</p>
       </router-link>
-      <a-base-input
-        v-if="pointItem"
-        id="purchase-price"
-        v-model="item.count"
-        label="Количество"
-        placeholder="Количество"
-        type="text"
-        unit="Шт."
-      />
+
+      <div v-if="pointItem" class="flex-auto">
+        <label class="mb-2 block font-medium"> Количество</label>
+        <InputNumber
+          v-model="item.count"
+          fluid
+          placeholder="0 шт"
+          suffix=" шт"
+        />
+      </div>
     </div>
   </a-page>
 </template>
@@ -59,7 +60,6 @@
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import AModal from "@/components/ui/AModal.vue"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
 import { ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import { useSelect } from "@/composables/useSelect2.js"

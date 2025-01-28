@@ -40,25 +40,26 @@
         </div>
         <p v-else class=" ">Выбрать товар...</p>
       </router-link>
-      <div v-if="storeItem" class="flex flex-col gap-2">
-        <a-base-input
-          id="purchase-price"
-          v-model="item.purchasePrice"
-          :disabled="!storeItem"
-          label="Цена покупки"
-          placeholder="Цена покупки"
-          type="text"
-          unit="₸"
-        />
-        <a-base-input
-          id="selling-price"
-          v-model="item.sellingPrice"
-          :disabled="!storeItem"
-          label="Цена продажи"
-          placeholder="Цена продажи"
-          type="text"
-          unit="₸"
-        />
+
+      <div v-if="storeItem" class="flex gap-2">
+        <div class="flex-auto">
+          <label class="mb-2 block font-medium"> Покупка </label>
+          <InputNumber
+            v-model="item.purchasePrice"
+            fluid
+            placeholder="Цена покупки"
+            suffix=" ₸"
+          />
+        </div>
+        <div class="flex-auto">
+          <label class="mb-2 block font-medium"> Продажа </label>
+          <InputNumber
+            v-model="item.sellingPrice"
+            fluid
+            placeholder="Цена продажи"
+            suffix=" ₸"
+          />
+        </div>
       </div>
     </div>
   </a-page>
@@ -68,7 +69,6 @@
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
 import { ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import { useSelect } from "@/composables/useSelect2.js"

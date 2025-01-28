@@ -15,7 +15,7 @@
           <div class="flex gap-2">
             <p
               v-if="inputAmount"
-              class="inline-flex w-max flex-col items-start rounded-xl bg-gray-50 px-4 py-2 text-2xl font-medium"
+              class="inline-flex w-max flex-col items-start rounded-xl bg-gray-50 px-4 py-2 font-medium"
             >
               <span class="text-sm"> Сдача </span>
               <span>
@@ -26,7 +26,7 @@
             <button
               v-if="store.hasDiscount"
               v-press
-              class="group relative inline-flex w-max flex-col items-start rounded-xl bg-rose-50 px-4 py-2 text-2xl font-medium text-rose-500"
+              class="group relative inline-flex w-max flex-col items-start rounded-xl bg-rose-50 px-4 py-2 font-medium text-rose-500"
               @click="store.clearDiscount()"
             >
               <span class="text-sm"> Скидка </span>
@@ -58,7 +58,7 @@
             class="flex aspect-square select-none items-center justify-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-center font-medium text-black transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
             @click="changePaymentType"
           >
-            <span class="material-symbols-rounded text-3xl font-medium">
+            <span class="material-symbols-rounded font-medium">
               {{ store.getPaymentType.icon }}
             </span>
           </button>
@@ -68,40 +68,46 @@
               class="flex aspect-square select-none items-center justify-center gap-2 rounded-xl bg-gray-100 px-4 py-3 text-center font-medium text-black transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90"
               v-bind="props"
             >
-              <span class="material-symbols-rounded text-3xl font-medium">
+              <span class="material-symbols-rounded font-medium">
                 percent
               </span>
             </button>
           </discount-dialog>
 
-          <button
-            :class="
-              store.isEmpty
-                ? 'bg-gray-100 text-gray-300'
-                : 'bg-black text-white transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90'
-            "
-            :disabled="store.isEmpty || isLoading"
-            class="flex flex-1 select-none items-center justify-between gap-4 truncate rounded-xl px-6 py-4 text-2xl font-medium uppercase"
-            @click="makeSaleFromCart"
+          <a-modal
+            #="{ props }"
+            :async-operation="makeSaleFromCart"
+            title="Подтвердите оплату"
           >
-            <span
-              v-if="isLoading"
-              class="material-symbols-rounded animate-spin font-semibold"
-              >progress_activity</span
+            <button
+              :class="
+                store.isEmpty
+                  ? 'bg-gray-100 text-gray-300'
+                  : 'bg-black text-white transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90'
+              "
+              :disabled="store.isEmpty || isLoading"
+              class="flex flex-1 select-none items-center justify-between gap-4 truncate rounded-xl px-6 py-4 font-medium uppercase"
+              v-bind="props"
             >
-            <span v-else>Оплата</span>
+              <span
+                v-if="isLoading"
+                class="material-symbols-rounded animate-spin font-semibold"
+                >progress_activity</span
+              >
+              <span v-else>Оплата</span>
 
-            <span>
-              <span v-if="store.hasDiscount" class="ml-2"
-                >{{ formatMoney(store.getTotalDiscountAmount) }}
-                <span class="font-semibold">₸</span></span
-              >
-              <span v-else>
-                {{ formatMoney(store.getTotalAmount) }}
-                <span class="font-semibold">₸</span></span
-              >
-            </span>
-          </button>
+              <span>
+                <span v-if="store.hasDiscount" class="ml-2"
+                  >{{ formatMoney(store.getTotalDiscountAmount) }}
+                  <span class="font-semibold">₸</span></span
+                >
+                <span v-else>
+                  {{ formatMoney(store.getTotalAmount) }}
+                  <span class="font-semibold">₸</span></span
+                >
+              </span>
+            </button>
+          </a-modal>
         </div>
       </div>
     </div>
@@ -119,9 +125,10 @@ import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
 import DiscountDialog from "@/components/DiscountDialog.vue"
+import AModal from "@/components/ui/AModal.vue"
 
 const store = useCartStore()
-const inputAmount = ref(0)
+const inputAmount = ref(null)
 const { sendRequest, isLoading } = useApiRequest()
 
 const isKeyboardVisible = ref(false)

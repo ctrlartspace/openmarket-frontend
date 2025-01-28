@@ -1,26 +1,47 @@
-import { onMounted, onBeforeUnmount, ref, nextTick } from "vue"
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 
 export function useFocusable() {
   const breakpoints = useBreakpoints(breakpointsTailwind)
-  const isDesktop = breakpoints.greater("sm") // only smaller than lg
-
+  const isDesktop = breakpoints.greater("sm") // Only greater than "sm"
   const focusableInput = ref(null)
+
   const setInputFocus = async () => {
+    // Проверяем, есть ли сфокусированный элемент на странице
+    if (document.activeElement && document.activeElement !== document.body) {
+      return
+    }
     if (focusableInput.value) {
       await nextTick()
       focusableInput.value.focus()
     }
   }
-  onMounted(async () => {
+
+  const addEventListeners = () => {
+    window.addEventListener("keypress", setInputFocus)
+  }
+
+  const removeEventListeners = () => {
+    window.removeEventListener("keypress", setInputFocus)
+  }
+
+  onMounted(() => {
     if (isDesktop.value) {
-      window.addEventListener("keypress", setInputFocus)
+      addEventListeners()
     }
   })
+
+  watch(isDesktop, (isNowDesktop, wasDesktop) => {
+    if (isNowDesktop && !wasDesktop) {
+      addEventListeners()
+    } else if (!isNowDesktop && wasDesktop) {
+      removeEventListeners()
+    }
+  })
+
   onBeforeUnmount(() => {
-    if (isDesktop.value) {
-      window.removeEventListener("keypress", setInputFocus)
-    }
+    removeEventListeners()
   })
+
   return { focusableInput }
 }

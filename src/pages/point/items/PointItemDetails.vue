@@ -61,42 +61,43 @@
           <span> Продажа: {{ item.storeItem.sellingPrice }} ₸ </span>
         </p>
       </router-link>
+
       <div class="flex gap-2">
-        <a-base-input
-          v-if="item.purchasePrice"
-          id="purchase-price"
-          v-model="item.purchasePrice"
-          class="w-full"
-          label="Покупка"
-          placeholder="Цена покупки"
-          type="text"
-          unit="₸"
-        />
-        <a-base-input
-          id="selling-price"
-          v-model="item.sellingPrice"
-          class="w-full"
-          label="Продажа"
-          placeholder="Цена продажи"
-          type="text"
-          unit="₸"
+        <div v-if="item.purchasePrice" class="flex-auto">
+          <label class="mb-2 block font-medium"> Покупка </label>
+          <InputNumber
+            v-model="item.purchasePrice"
+            fluid
+            placeholder="Цена покупки"
+            suffix=" ₸"
+          />
+        </div>
+        <div class="flex-auto">
+          <label class="mb-2 block font-medium"> Продажа </label>
+          <InputNumber
+            v-model="item.sellingPrice"
+            fluid
+            placeholder="Цена продажи"
+            suffix=" ₸"
+          />
+        </div>
+      </div>
+
+      <div class="flex-auto">
+        <label class="mb-2 block font-medium"> В наличии </label>
+        <InputNumber
+          v-model="item.count"
+          fluid
+          placeholder="0 шт"
+          readonly
+          suffix=" шт"
         />
       </div>
-      <a-base-input
-        id="count"
-        v-model="item.count"
-        label="В наличии"
-        placeholder="В наличии"
-        readonly
-        type="text"
-        unit="шт."
-      />
     </div>
   </a-page>
 </template>
 
 <script setup>
-import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"

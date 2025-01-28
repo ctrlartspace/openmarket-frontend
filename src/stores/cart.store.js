@@ -116,8 +116,13 @@ export const useCartStore = defineStore("cart", () => {
   }
 
   const setDiscountByAmount = (amount) => {
-    discount.value =
-      ((getTotalAmount.value - amount) / getTotalAmount.value) * 100
+    if (getTotalAmount.value > 0) {
+      discount.value =
+        ((getTotalAmount.value - amount) / getTotalAmount.value) * 100
+      console.log("setDiscount", discount.value)
+      console.log(getTotalDiscountAmount.value)
+      console.log(getTotalAmount.value)
+    }
   }
 
   const getDiscountAmount = computed(

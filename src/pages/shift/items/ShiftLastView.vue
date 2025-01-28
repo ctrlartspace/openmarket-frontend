@@ -38,43 +38,42 @@
       </a-link-floating-text>
     </template>
 
-    <div
-      v-if="isActiveCashExists"
-      class="mb-4 flex-col gap-2 rounded-xl border-b border-gray-100 bg-white p-4"
-    >
-      <div class="grid grid-cols-2">
-        <p class="flex flex-col rounded-xl">
+    <div v-if="isActiveCashExists" class="flex flex-col gap-4">
+      <div class="rounded-xl bg-white p-4">
+        <span class="">
+          {{ activeCash.point.name }}
+        </span>
+        <p class="text-gray-400">
+          <span>
+            {{
+              formatDate(activeCash.createdAt, " HH:mm") +
+              ", " +
+              fromNow(activeCash.createdAt) +
+              " "
+            }}
+          </span>
+          <span class="rounded bg-gray-50 px-2">
+            {{ activeCash.user.fullName }}</span
+          >
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col rounded-xl bg-white p-4">
           <span class="">Итого</span>
-          <span class="text-2xl font-medium text-blue-600">
+          <span class="font-medium text-blue-600">
             {{ formatMoney(activeCash.total) }}
             <span class="font-semibold">₸</span>
           </span>
-        </p>
-        <p class="flex flex-col rounded-xl">
+        </div>
+        <div class="flex flex-col rounded-xl bg-white p-4">
           <span class="">На кассе</span>
-          <span class="text-2xl font-medium">
+          <span class="font-medium">
             {{ formatMoney(cashAmount) }}
             <span class="font-semibold">₸</span>
           </span>
-        </p>
+        </div>
       </div>
-      <p class="mt-2 text-gray-300">
-        <span>
-          {{ activeCash.point.name }}
-        </span>
-        <br />
-        <span>
-          {{
-            fromNow(activeCash.createdAt) +
-            " " +
-            formatDate(activeCash.createdAt, " HH:mm") +
-            " "
-          }}
-        </span>
-        <span>{{ activeCash.user.fullName }}</span>
-      </p>
-    </div>
-    <div v-if="isActiveCashExists" class="">
+
       <a-list
         :items="activeCash.totalsPaymentType"
         description-field="total"

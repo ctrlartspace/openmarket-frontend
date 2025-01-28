@@ -16,7 +16,7 @@
         'rounded-xl border': rounded,
       }"
       :disabled="loading"
-      class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-gray-100 bg-white p-4 px-3 text-xl font-medium first:rounded-l-xl last:rounded-r-xl last:border-r"
+      class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-gray-100 bg-white p-4 px-3 font-medium first:rounded-l-xl last:rounded-r-xl last:border-r"
       v-bind="$attrs"
     >
       <slot></slot>

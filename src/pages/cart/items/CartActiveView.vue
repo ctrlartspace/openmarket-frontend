@@ -215,7 +215,6 @@ const onItemClick = (item) => {
 }
 
 const onSearchItemClick = (item) => {
-  console.log("click")
   store.addItem(item)
   inputValue.value = ""
   pointItems.value = null

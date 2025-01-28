@@ -15,7 +15,7 @@
             :class="{
               '!border-rose-500': i * 5 === store.discount,
             }"
-            class="flex items-center justify-center rounded-xl border-2 border-rose-100 bg-rose-100 px-4 py-2 font-medium text-rose-500 hover:brightness-95"
+            class="flex items-center justify-center rounded-xl border-2 border-rose-50 bg-rose-50 px-4 py-2 font-medium text-rose-500 hover:brightness-95"
             type="button"
             @click="
               store.setDiscount(i * 5), store.applyDiscount(), closeModal()
@@ -24,14 +24,17 @@
             {{ i * 5 }}%
           </button>
         </div>
-        <input
-          v-model="totalAmountWithDiscount"
-          v-autofocus
-          class="appearance-none rounded-xl border border-gray-100 px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
-          inputmode="numeric"
-          placeholder="Цена со скидкой"
-          @input="onDiscountValueChange"
-        />
+
+        <!--        <label class="text-gray-300">Цена со скидкой</label>-->
+        <FloatLabel variant="in">
+          <InputNumber
+            v-model="totalAmountWithDiscount"
+            fluid
+            suffix=" ₸"
+            @input="onDiscountValueChange"
+          />
+          <label class="text-gray-300">Цена со скидкой</label>
+        </FloatLabel>
         <button
           v-press
           class="pointer-events-auto mt-2 flex items-center justify-center rounded-xl border border-gray-100 px-4 py-3 font-medium text-rose-500 hover:brightness-95"
@@ -49,15 +52,15 @@ import { useCartStore } from "@/stores/cart.store.js"
 import { ref } from "vue"
 
 const store = useCartStore()
-const totalAmountWithDiscount = ref(100)
+const totalAmountWithDiscount = ref(0)
 const onDiscountDialogOpen = (isOpen) => {
   if (isOpen) {
-    totalAmountWithDiscount.value = store.getTotalDiscountAmount
+    totalAmountWithDiscount.value = store.getTotalDiscountAmount || null
   }
 }
 
 const onDiscountValueChange = (event) => {
-  const discountAmount = Number(event.target.value)
+  const discountAmount = Number(event.value)
   store.setDiscountByAmount(discountAmount)
 }
 </script>

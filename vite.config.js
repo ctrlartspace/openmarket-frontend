@@ -3,12 +3,17 @@ import { resolve } from "path"
 import vue from "@vitejs/plugin-vue"
 import mkcert from "vite-plugin-mkcert"
 import { VitePWA } from "vite-plugin-pwa"
+import Components from "unplugin-vue-components/vite"
+import { PrimeVueResolver } from "@primevue/auto-import-resolver"
 
 export default defineConfig({
   server: { https: false },
   base: "/",
   plugins: [
     vue(),
+    Components({
+      resolvers: [PrimeVueResolver()],
+    }),
     mkcert(),
     VitePWA({
       injectRegister: "auto",
