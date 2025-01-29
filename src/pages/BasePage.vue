@@ -1,5 +1,11 @@
 <template>
   <div v-if="!isDesktop" class="@base-page z-50 flex h-full flex-col">
+    <div
+      v-if="!onlineStore.isOnline"
+      class="animate-pulse bg-rose-50 py-1 text-center text-rose-500"
+    >
+      Нет подключения к интернету
+    </div>
     <header>
       <nav
         class="flex h-[55px] flex-col justify-center gap-2 border-b border-gray-100 px-8 py-3"
@@ -59,7 +65,7 @@
         </ul>
         <ul v-if="hasAction()" class="flex flex-col gap-2">
           <li
-            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3 text-xl font-medium"
+            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium"
           >
             <slot name="action"></slot>
           </li>
@@ -123,11 +129,13 @@ import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.v
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import { useRoute } from "vue-router"
 import { useSelect } from "@/composables/useSelect2"
+import { useOnlineStore } from "@/stores/online.store.js"
 
 const route = useRoute()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm") // only smaller than lg
 const { isSelectableMode } = useSelect()
+const onlineStore = useOnlineStore()
 
 const props = defineProps({
   menuItems: {

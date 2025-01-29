@@ -27,11 +27,16 @@
       </div>
     </div>
     <h1 class="mb-2 px-4 text-gray-300">Точки продаж</h1>
+    <a-modal
+      v-model="selectedPoint"
+      :async-operation="loginToStorePoint"
+      title="Открыть точку?"
+    ></a-modal>
     <a-list
       v-if="storePoints"
       :items="storePoints"
       title-field="name"
-      @on-item-click="loginToStorePoint"
+      @on-item-click="selectPoint"
     >
       <template #title="{ item }"
         ><span
@@ -58,12 +63,16 @@
 <script setup>
 import ALink from "@/components/ui/ALink.vue"
 import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
-import { onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouter } from "vue-router"
 import AList from "@/components/ui/AList.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
+import AModal from "@/components/ui/AModal.vue"
+
+const dialogOpen = ref(true)
+const selectedPoint = ref(null)
 
 const {
   serverData: storeInfo,
@@ -80,13 +89,18 @@ const {
 const store = useUserStore()
 const router = useRouter()
 
-const loginToStorePoint = async (item) => {
+const loginToStorePoint = async () => {
   try {
-    await store.loginToStorePoint(item.id)
-    router.push("/point")
+    await store.loginToStorePoint(selectedPoint.value.id)
+    await router.push("/point")
+    selectPoint(null)
   } catch (error) {
     console.log(error)
   }
+}
+
+const selectPoint = (item) => {
+  selectedPoint.value = item
 }
 
 onMounted(async () => {

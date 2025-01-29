@@ -9,6 +9,7 @@
       <button
         :class="{ 'aspect-square': i - 1 > 0 }"
         class="flex h-full w-full items-center justify-center py-6 text-xl font-medium"
+        type="button"
         @mousedown.prevent="onKeyboardClick(i - 1)"
       >
         {{ i - 1 }}

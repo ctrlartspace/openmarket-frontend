@@ -77,7 +77,7 @@
           <a-modal
             #="{ props }"
             :async-operation="makeSaleFromCart"
-            title="Подтвердите оплату"
+            title="Подтвердить оплату?"
           >
             <button
               :class="

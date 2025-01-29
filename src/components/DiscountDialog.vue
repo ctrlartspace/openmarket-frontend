@@ -36,9 +36,10 @@
           />
           <label class="text-gray-300">Цена со скидкой</label>
         </FloatLabel>
+
         <button
           v-press
-          class="pointer-events-auto mt-2 flex items-center justify-center rounded-xl border border-gray-100 px-4 py-3 font-medium text-rose-500 hover:brightness-95"
+          class="pointer-events-auto mt-2 flex items-center justify-center rounded-xl bg-rose-50 px-4 py-3 font-medium text-rose-500 hover:brightness-95"
           type="submit"
         >
           Применить скидку

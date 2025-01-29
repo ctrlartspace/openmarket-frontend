@@ -75,6 +75,7 @@ const hasAction = computed(() => !!slots.action)
 const hasNoItems = computed(() => props.items.length === 0)
 const hasLast = computed(() => !!slots.last)
 const hasSub = computed(() => !!slots.sub)
+
 const getNestedProperty = (obj, path) => {
   const val = path.split(".").reduce((acc, key) => acc && acc[key], obj)
   return val === null || val === undefined ? "Неизв." : val

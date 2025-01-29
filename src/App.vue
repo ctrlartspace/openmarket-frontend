@@ -5,27 +5,27 @@
 <script setup>
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import { onBeforeUnmount, onMounted } from "vue"
-import { useRouter } from "vue-router"
 import MobileLayout from "@/components/layouts/MobileLayout.vue"
 import DesktopLayout from "@/components/layouts/DesktopLayout.vue"
+import { useOnlineStore } from "@/stores/online.store.js"
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm") // only smaller than lg
 
-const router = useRouter()
+const onlineStore = useOnlineStore()
 
 const checkOnline = (e) => {
-  // const { type } = e
-  // if (type === "online") {
-  //   router.push("/")
-  // } else {
-  //   router.push("/no-internet")
-  // }
+  const { type } = e
+  if (type === "online") {
+    onlineStore.setOnline()
+  } else {
+    onlineStore.setOffline()
+  }
 }
 
 onMounted(() => {
   if (!navigator.onLine) {
-    router.push("/no-internet")
+    onlineStore.setOffline()
   }
   window.addEventListener("online", checkOnline)
   window.addEventListener("offline", checkOnline)

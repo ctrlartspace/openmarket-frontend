@@ -7,7 +7,7 @@
         :paused="isPaused"
         :torch="isTorchOn"
         :track="paintOutline"
-        class="overflow-hidden rounded-xl border-4 border-gray-100"
+        class="overflow-hidden rounded-xl border border-gray-100 bg-gray-100"
         @detect="onDetect"
         @error="onError"
       >
@@ -21,12 +21,15 @@
         </div>
       </qrcode-stream>
     </div>
-    <div class="relative flex-1 p-4">
+    <div class="relative flex-1 p-8">
       <div
         v-if="!resultItem && !isNotFound"
         class="flex justify-center font-medium"
       >
-        <span class="rounded-xl bg-gray-50 px-4 py-3 text-black">
+        <span
+          class="rounded-xl bg-gray-50 px-4 py-3 text-black"
+          @click="onDetect([{ rawValue: 6974443385731 }])"
+        >
           Сканируйте штрихкод
         </span>
       </div>
@@ -38,14 +41,14 @@
           Товар не найден ({{ resultCount }})
         </span>
       </div>
-      <div class="absolute bottom-0 left-0 right-0 p-4">
+      <div class="absolute bottom-0 left-0 right-0 p-6">
         <div
           v-if="resultItem"
-          class="relative rounded-xl border border-gray-200 bg-white p-4 shadow-lg"
+          class="relative rounded-xl border border-gray-100 bg-white p-4"
         >
           <p class="text-sm">{{ resultItem.code }}</p>
-          <p class="text-2xl">{{ resultItem.name }}</p>
-          <p class="text-2xl">{{ resultItem.sellingPrice }} ₸</p>
+          <p class="text-2xl">{{ resultItem.storeItem.name }}</p>
+          <p class="text-2xl">{{ formatMoney(resultItem.sellingPrice) }} ₸</p>
           <div class="mt-2 flex items-center justify-between gap-2">
             <button
               v-press
@@ -55,7 +58,7 @@
               <span class="material-symbols-rounded">remove</span>
             </button>
             <div class="w-full text-center">
-              <span class="text-2xl">{{ itemCount }}</span>
+              <span class="text-2xl">{{ itemCount }} шт.</span>
             </div>
             <button
               v-press
@@ -67,7 +70,7 @@
           </div>
           <button
             v-press
-            class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-3 text-center text-2xl font-medium text-white hover:brightness-95 active:brightness-95"
+            class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-3 text-center font-medium text-white hover:brightness-95 active:brightness-95"
             @click="onApplyClick"
           >
             Готово
@@ -89,6 +92,7 @@ import { useCartStore } from "@/stores/cart.store"
 import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.vue"
 import { getPointItem } from "@/services/PointService"
 import { useScan } from "@/composables/useScan"
+import { formatMoney } from "@/utils/format-money"
 
 const sound = new Audio("/beep.wav")
 const { isScannableMode, applyScan } = useScan()

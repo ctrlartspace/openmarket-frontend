@@ -1,6 +1,12 @@
 <template>
   <nav v-if="store.isAuthorizedPoint" class="border-b border-gray-100 bg-white">
     <!-- Desktop -->
+    <div
+      v-if="!onlineStore.isOnline"
+      class="animate-pulse bg-rose-50 py-1 text-center text-rose-500"
+    >
+      Нет подключения к интернету
+    </div>
     <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
       <li v-for="(item, i) in menuItems" :key="i" class="inline">
         <router-link v-slot="{ isActive }" :to="item.path">
@@ -55,7 +61,9 @@
 <script setup>
 import { computed, ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
+import { useOnlineStore } from "@/stores/online.store.js"
 
+const onlineStore = useOnlineStore()
 const store = useUserStore()
 
 const getStoreTitle = computed(() =>

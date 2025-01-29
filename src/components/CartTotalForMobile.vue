@@ -66,7 +66,7 @@
         <a-modal
           #="{ props }"
           :async-operation="makeSaleFromCart"
-          title="Подтвердите оплату"
+          title="Подтвердить оплату?"
         >
           <a-button-floating-text
             :disabled="isLoading"

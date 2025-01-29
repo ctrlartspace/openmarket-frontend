@@ -8,7 +8,14 @@ export function useFocusable() {
 
   const setInputFocus = async () => {
     // Проверяем, есть ли сфокусированный элемент на странице
-    if (document.activeElement && document.activeElement !== document.body) {
+    if (
+      (document.activeElement &&
+        document.activeElement !== document.body &&
+        ["INPUT", "TEXTAREA", "SELECT"].includes(
+          document.activeElement.tagName,
+        )) ||
+      document.activeElement.isContentEditable
+    ) {
       return
     }
     if (focusableInput.value) {
