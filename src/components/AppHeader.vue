@@ -16,10 +16,10 @@
       <li v-if="store.point" class="inline w-auto truncate text-gray-300">
         <router-link v-slot="{ isActive }" to="/point">
           <span
-            :class="isActive ? 'text-blue-600' : 'text-gray-300'"
+            :class="isActive ? 'text-black' : 'text-gray-300'"
             class="font-medium"
           >
-            Точка продаж
+            {{ store.point.name }}
           </span>
         </router-link>
       </li>

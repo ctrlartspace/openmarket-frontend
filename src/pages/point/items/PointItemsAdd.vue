@@ -47,6 +47,7 @@
           <InputNumber
             v-model="item.purchasePrice"
             fluid
+            locale="ru-RU"
             placeholder="Цена покупки"
             suffix=" ₸"
           />
@@ -56,6 +57,7 @@
           <InputNumber
             v-model="item.sellingPrice"
             fluid
+            locale="ru-RU"
             placeholder="Цена продажи"
             suffix=" ₸"
           />

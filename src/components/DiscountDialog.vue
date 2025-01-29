@@ -30,6 +30,7 @@
           <InputNumber
             v-model="totalAmountWithDiscount"
             fluid
+            locale="ru-RU"
             suffix=" ₸"
             @input="onDiscountValueChange"
           />

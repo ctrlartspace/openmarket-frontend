@@ -105,6 +105,7 @@
             v-model="itemState.purchasePrice"
             :invalid="validationErrors.purchasePrice"
             fluid
+            locale="ru-RU"
             placeholder="Цена покупки"
             suffix=" ₸"
           />
@@ -115,6 +116,7 @@
             v-model="itemState.sellingPrice"
             :invalid="validationErrors.sellingPrice"
             fluid
+            locale="ru-RU"
             placeholder="Цена продажи"
             suffix=" ₸"
           />

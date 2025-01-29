@@ -4,13 +4,20 @@
     :title="isSelectableMode ? 'Выбрать...' : ''"
   >
     <template #header>
-      <a-button
+      <a-modal
         v-if="selectedItems.length > 0 && point"
-        accent
-        @click="onAddItemsToPointClick"
-        >Добавить в точку
-      </a-button>
-      <a-link v-if="!isSelectableMode" primary to="/store/items/add"
+        #="{ props }"
+        :async-operation="onAddItemsToPointClick"
+        title="Добавить товары в точку?"
+      >
+        <a-button accent v-bind="props">Добавить в точку </a-button>
+      </a-modal>
+      <a-link
+        :to="{
+          path: '/store/items/add',
+          query: { scannedCode: searchInput },
+        }"
+        primary
         >Добавить
       </a-link>
     </template>
@@ -32,7 +39,12 @@
       >
         center_focus_strong
       </a-link-floating>
-      <a-link-floating v-if="!isSelectableMode" primary to="/store/items/add"
+      <a-link-floating
+        :to="{
+          path: '/store/items/add',
+          query: { scannedCode: searchInput },
+        }"
+        primary
         >add
       </a-link-floating>
     </template>
@@ -50,20 +62,7 @@
         >
           <span class="material-symbols-rounded text-gray-300">search</span>
         </div>
-        <!-- <div
-        class="absolute bottom-0 right-0 top-0 flex items-center justify-between px-4"
-      >
-      </div> -->
       </v-form>
-      <router-link
-        v-if="isSelectableMode"
-        :to="{
-          path: '/store/items/add',
-          query: { scannedCode: searchInput },
-        }"
-        class="mb-2 block w-full rounded-xl border border-gray-100 bg-white px-4 py-3 text-center font-medium text-blue-600"
-        >Создать новый товар
-      </router-link>
 
       <a-list
         v-model="selectedItems"

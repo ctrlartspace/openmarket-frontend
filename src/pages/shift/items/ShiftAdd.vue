@@ -27,6 +27,7 @@
         v-model="startAmount"
         :invalid="validationErrors.startAmount"
         fluid
+        locale="ru-RU"
         placeholder="0 ₸"
         suffix=" ₸"
       />

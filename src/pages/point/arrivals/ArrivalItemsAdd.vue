@@ -48,6 +48,7 @@
         <InputNumber
           v-model="item.count"
           fluid
+          locale="ru-RU"
           placeholder="0 шт"
           suffix=" шт"
         />

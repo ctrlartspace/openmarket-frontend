@@ -1,11 +1,12 @@
 <template>
-  <div class="w-full">
-    <div class="flex gap-2 bg-gray-100 px-6 py-4">
+  <div class="w-full bg-gray-100 px-6 py-6 pt-2">
+    <div class="mb-2 flex gap-2 bg-gray-100">
       <button
-        class="pointer-events-auto w-full truncate text-ellipsis whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3 text-left text-gray-300 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12"
+        class="pointer-events-auto flex w-full items-center justify-between gap-2 truncate text-ellipsis whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3 text-left text-gray-300 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 md:pl-12"
         @click="onSearchClick"
       >
         Найти
+        <span class="material-symbols-rounded">search</span>
       </button>
       <router-link
         v-press
@@ -31,7 +32,7 @@
         <span class="material-symbols-rounded text-black">apps</span>
       </router-link>
     </div>
-    <div class="flex w-full flex-col gap-4 px-6 py-6">
+    <div class="flex w-full flex-col gap-4 rounded-xl bg-white px-6 py-6">
       <div class="flex flex-col">
         <p class="font-medium">
           Итого:

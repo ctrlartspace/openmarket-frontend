@@ -33,9 +33,20 @@
       title-field="name"
       @on-item-click="loginToStorePoint"
     >
-      <template #title="{ item }"> {{ item.name }}</template>
+      <template #title="{ item }"
+        ><span
+          :class="{
+            'text-blue-500': store.point && store.point.id === item.id,
+          }"
+          >{{ item.name }}</span
+        >
+      </template>
       <template #action="{ item }">
-        <span class="whitespace-nowrap rounded-xl font-medium"
+        <span
+          :class="{
+            'text-blue-500': store.point && store.point.id === item.id,
+          }"
+          class="whitespace-nowrap rounded-xl font-medium"
           >{{ formatMoney(item.totalRevenue) }}
           <span class="font-semibold">₸</span>
         </span>

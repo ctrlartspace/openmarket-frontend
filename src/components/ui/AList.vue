@@ -7,11 +7,7 @@
       class="flex w-full cursor-pointer items-center border-b border-gray-100 bg-white last:border-none md:hover:bg-gray-50/50 md:active:bg-gray-100"
     >
       <div v-if="selectable" class="flex items-center py-3 pl-4">
-        <input
-          class="h-5 w-5 md:h-4 md:w-4"
-          type="checkbox"
-          @input="selectAll"
-        />
+        <Checkbox binary @input="selectAll" />
       </div>
       <div class="w-full truncate px-4 py-3 font-medium">
         Выбрано: {{ selectedItems.length }}
@@ -25,13 +21,7 @@
     >
       <div class="flex w-full gap-4">
         <div v-if="selectable" class="flex items-center">
-          <input
-            v-model="selectedItems"
-            :value="item.id"
-            class="h-4 w-4 md:h-4 md:w-4"
-            type="checkbox"
-            @click.stop
-          />
+          <Checkbox v-model="selectedItems" :value="item.id" @click.stop />
         </div>
         <div v-if="titleField" class="w-full truncate">
           <slot :item="item" name="title">

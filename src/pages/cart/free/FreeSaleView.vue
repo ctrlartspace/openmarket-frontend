@@ -9,16 +9,27 @@
       </a-button-floating-text>
     </template>
     <form class="flex flex-col gap-2" @submit.prevent="addFreeItem">
-      <input
+      <InputNumber
+        v-model="freeItem.sellingPrice"
         v-autofocus
-        v-model.number="freeItem.sellingPrice"
-        class="block w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
+        fluid
         inputmode="numeric"
+        locale="ru-RU"
         placeholder="0 ₸"
-        type="text"
+        suffix=" ₸"
         @blur="isKeyboardVisible = false"
         @focus="isKeyboardVisible = true"
       />
+      <!--      <input-->
+      <!--        v-autofocus-->
+      <!--        v-model.number="freeItem.sellingPrice"-->
+      <!--        class="block w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"-->
+      <!--        inputmode="numeric"-->
+      <!--        placeholder="0 ₸"-->
+      <!--        type="text"-->
+      <!--        @blur="isKeyboardVisible = false"-->
+      <!--        @focus="isKeyboardVisible = true"-->
+      <!--      />-->
       <div class="no-scrollbar mb-2 flex gap-2 overflow-auto">
         <button
           v-for="price in [

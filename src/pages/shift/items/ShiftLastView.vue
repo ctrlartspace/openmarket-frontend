@@ -52,7 +52,9 @@
               " "
             }}
           </span>
-          <span class="rounded bg-gray-50 px-2">
+          <span
+            class="rounded border border-gray-100 bg-gray-50 px-1 text-gray-600"
+          >
             {{ activeCash.user.fullName }}</span
           >
         </p>

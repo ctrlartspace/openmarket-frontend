@@ -19,7 +19,7 @@
                     v-if="!hideYes"
                     v-press
                     :disabled="isLoading"
-                    class="pointer-events-auto flex items-center justify-center rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-blue-600 hover:bg-gray-50 md:active:bg-gray-100"
+                    class="pointer-events-auto flex items-center justify-center rounded-xl bg-blue-50 px-4 py-3 font-medium text-blue-600 hover:brightness-95"
                     @click="onYesClick"
                   >
                     <span
@@ -33,7 +33,7 @@
                   </button>
                   <button
                     v-press
-                    class="pointer-events-auto rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-black hover:bg-gray-50 md:active:bg-gray-100"
+                    class="pointer-events-auto rounded-xl bg-gray-50 px-4 py-3 font-medium text-black hover:brightness-95"
                     @click="onNoClick"
                   >
                     {{ noCaption }}
