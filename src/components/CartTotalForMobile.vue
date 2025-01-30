@@ -34,7 +34,7 @@
     </div>
     <div class="flex w-full flex-col gap-4 rounded-xl bg-white px-6 py-6">
       <div class="flex flex-col">
-        <p class="font-medium">
+        <p v-if="!store.isEmpty" class="font-medium">
           Итого:
           <span>
             {{ " " + formatMoney(store.getTotalDiscountAmount) }}
@@ -48,6 +48,7 @@
             </span>
           </span>
         </p>
+        <p v-else class="font-medium">Нет товаров в корзине</p>
         <p>
           <span class="text-gray-300">{{ store.getPaymentType.label }}</span>
         </p>

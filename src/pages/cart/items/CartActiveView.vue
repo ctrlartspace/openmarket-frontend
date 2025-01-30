@@ -32,6 +32,12 @@
               {{ item.storeItem.name }}
             </span>
           </template>
+          <template #description="{ item }">
+            <span>
+              {{ item.sellingPrice }}
+              <span class="font-semibold">₸</span>
+            </span>
+          </template>
         </a-list>
       </div>
       <div

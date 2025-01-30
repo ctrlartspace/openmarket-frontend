@@ -2,10 +2,14 @@
   <slot :props="activatorProps"></slot>
   <teleport to="body">
     <div v-if="isOpen || isOpenOut" class="modal-window relative z-10">
-      <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-30">
+      <div
+        :aria-hidden="!isOpen"
+        class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-md"
+        @click="closeModal"
+      >
         <div class="fixed inset-0 z-10 flex w-screen">
           <div class="flex h-full w-full items-center justify-center">
-            <div class="w-4/5 rounded-xl bg-white p-4 md:max-w-xs">
+            <div class="w-4/5 rounded-xl bg-white p-4 md:max-w-xs" @click.stop>
               <h1
                 class="md: mb-4 whitespace-break-spaces text-center text-xl font-medium"
               >

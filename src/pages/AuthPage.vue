@@ -27,14 +27,21 @@
         >
         <span v-else> Продолжить </span>
       </button>
-      <p class="mt-2 text-center text-gray-400">
-        Нет магазина?
-        <router-link
-          :to="{ path: '/store-create' }"
-          class="font-medium text-blue-500"
-          >Создать
-        </router-link>
-      </p>
+      <!--      <p class="mt-2 text-center text-gray-400">-->
+      <!--        Нет магазина?-->
+      <!--        <router-link-->
+      <!--          :to="{ path: '/store-create' }"-->
+      <!--          class="font-medium text-blue-500"-->
+      <!--          >Создать-->
+      <!--        </router-link>-->
+      <!--      </p>-->
+      <button
+        class="font-medium text-blue-500"
+        type="button"
+        @click="loginAsGuest"
+      >
+        Войти как гость
+      </button>
     </form>
   </div>
 </template>
@@ -55,13 +62,19 @@ const loginToStore = async () => {
     isLoading.value = true
     const response = await store.loginToStore(authData.value)
     if (response) {
-      router.push("/store")
+      await router.push("/store")
     }
   } catch (error) {
     console.log(error)
   } finally {
     isLoading.value = false
   }
+}
+
+const loginAsGuest = async () => {
+  authData.value.phoneNumber = "123"
+  authData.value.password = "123123"
+  await loginToStore()
 }
 </script>
 

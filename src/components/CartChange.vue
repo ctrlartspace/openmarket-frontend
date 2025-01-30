@@ -8,50 +8,25 @@
       <div
         class="flex h-max w-full flex-col justify-between gap-4 rounded-xl border border-gray-100 bg-white p-4"
       >
-        <div
-          v-if="store.getPaymentType.code === 'cash' || store.hasDiscount"
-          class="flex flex-col gap-2"
-        >
-          <div class="flex gap-2">
-            <p
-              v-if="inputAmount"
-              class="inline-flex w-max flex-col items-start rounded-xl bg-gray-50 px-4 py-2 font-medium"
-            >
-              <span class="text-sm"> Сдача </span>
-              <span>
-                {{ formatMoney(cartChange) }}
-                <span class="font-semibold">₸</span>
-              </span>
-            </p>
-            <button
-              v-if="store.hasDiscount"
-              v-press
-              class="group relative inline-flex w-max flex-col items-start rounded-xl bg-rose-50 px-4 py-2 font-medium text-rose-500"
-              @click="store.clearDiscount()"
-            >
-              <span class="text-sm"> Скидка </span>
-              <span>
-                {{ formatMoney(store.getDiscountAmount) }}
-                <span class="font-semibold">₸</span>
-              </span>
-
+        <div class="flex flex-1 flex-col">
+          <p>
+            <span class="text-gray-300">{{ store.getPaymentType.label }}</span>
+          </p>
+          <p v-if="!store.isEmpty" class="font-medium">
+            Итого:
+            <span>
+              {{ " " + formatMoney(store.getTotalDiscountAmount) }}
+              <span class="font-semibold">₸ </span>
               <span
-                class="material-symbols-rounded absolute right-0 top-0 px-2 py-2 text-[18px] opacity-0 transition-opacity group-hover:opacity-100"
-                >close</span
+                v-if="store.hasDiscount"
+                class="rounded bg-rose-50 px-2 py-1 text-rose-500"
               >
-            </button>
-          </div>
-
-          <input
-            v-if="store.getPaymentType.code === 'cash'"
-            v-model="inputAmount"
-            v-autofocus
-            class="appearance-none rounded-xl border border-gray-100 px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:bg-white focus:outline-2 focus:outline-black"
-            placeholder="Внесено"
-            type="text"
-            @blur="isKeyboardVisible = false"
-            @focus="isKeyboardVisible = true"
-          />
+                -{{ formatMoney(store.getDiscountAmount) }}
+                <span class="font-semibold">₸</span>
+              </span>
+            </span>
+          </p>
+          <p v-else class="font-medium">Нет товаров в корзине</p>
         </div>
         <div class="flex gap-2">
           <button
@@ -86,7 +61,7 @@
                   : 'bg-black text-white transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90'
               "
               :disabled="store.isEmpty || isLoading"
-              class="flex flex-1 select-none items-center justify-between gap-4 truncate rounded-xl px-6 py-4 font-medium uppercase"
+              class="flex w-full select-none items-center justify-center gap-4 truncate rounded-xl px-6 py-4 font-medium"
               v-bind="props"
             >
               <span
@@ -95,17 +70,6 @@
                 >progress_activity</span
               >
               <span v-else>Оплата</span>
-
-              <span>
-                <span v-if="store.hasDiscount" class="ml-2"
-                  >{{ formatMoney(store.getTotalDiscountAmount) }}
-                  <span class="font-semibold">₸</span></span
-                >
-                <span v-else>
-                  {{ formatMoney(store.getTotalAmount) }}
-                  <span class="font-semibold">₸</span></span
-                >
-              </span>
             </button>
           </a-modal>
         </div>

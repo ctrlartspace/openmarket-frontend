@@ -15,7 +15,7 @@
             :class="{
               '!border-rose-500': i * 5 === store.discount,
             }"
-            class="flex items-center justify-center rounded-xl border-2 border-rose-50 bg-rose-50 px-4 py-2 font-medium text-rose-500 hover:brightness-95"
+            class="flex items-center justify-center rounded-xl border-2 border-rose-50 bg-rose-50 px-4 py-2 font-medium text-rose-500 hover:border-rose-100 hover:bg-rose-100"
             type="button"
             @click="
               store.setDiscount(i * 5), store.applyDiscount(), closeModal()
@@ -25,7 +25,16 @@
           </button>
         </div>
 
-        <!--        <label class="text-gray-300">Цена со скидкой</label>-->
+        <FloatLabel variant="in">
+          <InputNumber
+            v-model="store.getTotalAmount"
+            fluid
+            locale="ru-RU"
+            readonly
+            suffix=" ₸"
+          />
+          <label class="text-gray-300">Цена без скидки</label>
+        </FloatLabel>
         <FloatLabel variant="in">
           <InputNumber
             v-model="totalAmountWithDiscount"
@@ -34,12 +43,12 @@
             suffix=" ₸"
             @input="onDiscountValueChange"
           />
-          <label class="text-gray-300">Цена со скидкой</label>
+          <label class="text-gray-300">Цена со скидкой </label>
         </FloatLabel>
 
         <button
           v-press
-          class="pointer-events-auto mt-2 flex items-center justify-center rounded-xl bg-rose-50 px-4 py-3 font-medium text-rose-500 hover:brightness-95"
+          class="pointer-events-auto mt-2 flex items-center justify-center rounded-xl bg-rose-50 px-4 py-3 font-medium text-rose-500 hover:bg-rose-100"
           type="submit"
         >
           Применить скидку

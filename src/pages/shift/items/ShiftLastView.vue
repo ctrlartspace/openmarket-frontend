@@ -49,12 +49,10 @@
               formatDate(activeCash.createdAt, " HH:mm") +
               ", " +
               fromNow(activeCash.createdAt) +
-              " "
+              ", "
             }}
           </span>
-          <span class="rounded bg-gray-50 px-1">
-            {{ activeCash.user.fullName }}</span
-          >
+          <span class=""> {{ activeCash.user.fullName }}</span>
         </p>
       </div>
       <div class="grid grid-cols-2 gap-4">

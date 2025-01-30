@@ -10,7 +10,7 @@
         :async-operation="onAddItemsToPointClick"
         title="Добавить товары в точку?"
       >
-        <a-button accent v-bind="props">Добавить в точку </a-button>
+        <a-button accent v-bind="props">Добавить в точку</a-button>
       </a-modal>
       <a-link
         :to="{
@@ -18,7 +18,7 @@
           query: { scannedCode: searchInput },
         }"
         primary
-        >Добавить
+        >Новый товар
       </a-link>
     </template>
 
@@ -73,6 +73,12 @@
         title-field="name"
         @on-item-click="onItemClick"
       >
+        <template #description="{ item }">
+          <span>
+            {{ item.sellingPrice }}
+            <span class="font-semibold">₸</span>
+          </span>
+        </template>
       </a-list>
       <div v-if="storeItems && storeItems.length === 0 && isSelectableMode">
         <h1 class="p-4 text-center text-gray-300">Не найдено</h1>

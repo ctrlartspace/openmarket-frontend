@@ -3,17 +3,17 @@
     <template #header>
       <a-modal
         #="{ props }"
-        title="Создать новую точку?"
         :async-operation="onSaveClick"
+        title="Создать новую точку?"
       >
-        <a-button primary v-bind="props"> Сохранить </a-button>
+        <a-button primary v-bind="props"> Сохранить</a-button>
       </a-modal>
     </template>
     <template #floating>
       <a-modal
         #="{ props }"
-        title="Создать новую точку?"
         :async-operation="onSaveClick"
+        title="Создать новую точку?"
       >
         <a-button-floating-text primary v-bind="props">
           Готово
@@ -23,9 +23,9 @@
     <a-base-input
       id="store-point-name"
       v-model="storePointName"
+      :is-error="validationErrors.name"
       placeholder="Название точки"
       type="text"
-      :is-error="validationErrors.name"
     />
   </a-page>
 </template>
@@ -49,7 +49,7 @@ const onSaveClick = async () => {
     name: storePointName.value,
   })
   if (response) {
-    router.push("/store/points")
+    await router.push("/store/info")
   }
 }
 </script>
