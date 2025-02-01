@@ -10,6 +10,7 @@
       'text-pink-500 hover:text-pink-700': accent,
       'text-white': black,
       'w-full justify-center': block,
+      'text-opacity-50 hover:text-opacity-50': $attrs.disabled,
     }"
     :disabled="loading"
     class="flex items-center gap-2 font-medium"

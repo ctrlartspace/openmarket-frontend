@@ -12,6 +12,9 @@
       <div class="w-full truncate px-4 py-3 font-medium">
         Выбрано: {{ selectedItems.length }}
       </div>
+      <div class="whitespace-nowrap">
+        <slot name="selectAction"></slot>
+      </div>
     </div>
     <div
       v-for="(item, i) in items"
@@ -21,7 +24,11 @@
     >
       <div class="flex w-full gap-4">
         <div v-if="selectable" class="flex items-center">
-          <Checkbox v-model="selectedItems" :value="item.id" @click.stop />
+          <Checkbox
+            v-model="selectedItems"
+            :value="item[idField]"
+            @click.stop
+          />
         </div>
         <div v-if="titleField" class="w-full truncate">
           <slot :item="item" name="title">
@@ -61,6 +68,7 @@ import { computed, defineModel, useSlots } from "vue"
 
 const props = defineProps({
   items: { type: Array, required: true, default: () => [] },
+  idField: { type: String, default: "id" },
   titleField: { type: String, default: null },
   descriptionField: { type: String, default: null },
   descriptionHint: { type: String, default: "" },
@@ -85,8 +93,8 @@ const selectAll = (event) => {
   const isChecked = event.target.checked
   if (isChecked) {
     props.items.forEach((item) => {
-      if (!selectedItems.value.includes(item.id)) {
-        selectedItems.value.push(item.id)
+      if (!selectedItems.value.includes(item[props.idField])) {
+        selectedItems.value.push(item[props.idField])
       }
     })
   } else {

@@ -54,26 +54,21 @@ const Noir = definePreset(Aura, {
         light: {
           root: {
             primary: {
-              background: "{primary.500}",
+              color: "{primary.500}",
+              background: "#FFF",
               border: {
-                color: "{primary.500}",
+                color: "#FFF",
               },
               hover: {
-                background: "{primary.600}",
+                color: "{primary.500}",
+                background: "#FFF",
                 border: {
-                  color: "{primary.600}",
+                  color: "{gray.200}",
                 },
               },
-            },
-
-            secondary: {
-              color: "{black}",
-              background: "{white}",
-              border: {
-                color: "{gray.100}",
-              },
-              hover: {
-                background: "{gray.50}",
+              active: {
+                color: "{primary.500}",
+                background: "#FFF",
                 border: {
                   color: "{gray.300}",
                 },
@@ -106,6 +101,7 @@ const Noir = definePreset(Aura, {
         },
       },
     },
+
     inputgroup: {
       colorScheme: {
         light: {
@@ -144,6 +140,15 @@ const Noir = definePreset(Aura, {
             },
           },
         },
+      },
+    },
+
+    message: {
+      content: {
+        padding: "0.75rem 1rem",
+      },
+      border: {
+        radius: "{border.radius.xl}",
       },
     },
   },

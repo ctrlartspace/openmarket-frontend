@@ -36,6 +36,7 @@ import PointInfoView from "@/pages/point/info/PointInfoView.vue"
 import StoreCreatePage from "@/pages/store-create/StoreCreatePage.vue"
 import StoreCreateUserInfoPage from "@/pages/store-create/user-info/StoreCreateUserInfoPage.vue"
 import NoInternetPage from "@/pages/NoInternetPage.vue"
+import StoreItemsImport from "@/pages/store/items/StoreItemsImport.vue"
 
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
@@ -125,6 +126,10 @@ const routes = [
           {
             path: "add",
             component: StoreItemsAdd,
+          },
+          {
+            path: "import",
+            component: StoreItemsImport,
           },
           {
             path: ":id",

@@ -12,6 +12,14 @@
       >
         <a-button accent v-bind="props">Добавить в точку</a-button>
       </a-modal>
+
+      <a-link
+        :to="{
+          path: '/store/items/import',
+        }"
+        success
+        >Импорт товаров
+      </a-link>
       <a-link
         :to="{
           path: '/store/items/add',
@@ -38,6 +46,13 @@
         }"
       >
         center_focus_strong
+      </a-link-floating>
+      <a-link-floating
+        :to="{
+          path: '/store/items/import',
+        }"
+        success
+        >upload
       </a-link-floating>
       <a-link-floating
         :to="{
