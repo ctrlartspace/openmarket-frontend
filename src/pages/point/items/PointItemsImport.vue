@@ -152,7 +152,9 @@ import AList from "@/components/ui/AList.vue"
 import { formatMoney } from "@/utils/format-money.js"
 import { generateEAN13 } from "@/utils/barcodeGenerator.js"
 import { useApiRequest } from "@/composables/useApiRequest.js"
+import { useRouter } from "vue-router"
 
+const router = useRouter()
 const selectedFile = ref(null)
 const selectedItems = ref([])
 const selectedDublicateItems = ref([])
@@ -165,14 +167,15 @@ const requiredHeaders = [
   "Цена продажи",
 ]
 
-const { sendRequest, isLoading, isError, errorMessage } = useApiRequest()
+const { sendRequest, isError, errorMessage } = useApiRequest()
 
 const uploadProducts = async () => {
   console.log("upload", duplicateProducts.value)
 
   if (duplicateProducts.value.length === 0) {
-    await sendRequest("post", "/store/items/many", products.value)
+    await sendRequest("post", "/point/items/many", products.value)
     clearFile()
+    await router.push("/point/items")
   }
 }
 

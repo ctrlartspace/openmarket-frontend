@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { getCashRegisters } from "@/services/CashService.js"
+import { getWorkShifts } from "@/services/CashService.js"
 import { onMounted, ref } from "vue"
 import { formatDate } from "@/utils/format-date"
 import { formatMoney } from "@/utils/format-money"
@@ -42,7 +42,7 @@ import AList from "@/components/ui/AList.vue"
 const cashRegisters = ref([])
 
 const fetchCashRegisters = async () => {
-  cashRegisters.value = await getCashRegisters()
+  cashRegisters.value = await getWorkShifts()
 }
 
 onMounted(async () => {

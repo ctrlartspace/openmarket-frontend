@@ -10,7 +10,7 @@ import DesktopLayout from "@/components/layouts/DesktopLayout.vue"
 import { useOnlineStore } from "@/stores/online.store.js"
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
-const isDesktop = breakpoints.greater("sm") // only smaller than lg
+const isDesktop = breakpoints.greater("sm")
 
 const onlineStore = useOnlineStore()
 

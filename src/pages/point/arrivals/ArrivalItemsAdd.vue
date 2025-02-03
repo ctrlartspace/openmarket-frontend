@@ -32,10 +32,10 @@
       >
         <div v-if="pointItem">
           <h1 class="font-medium text-blue-600">
-            {{ pointItem.storeItem.name }}
+            {{ pointItem.name }}
           </h1>
           <p class="text-sm text-gray-400">
-            Код: {{ pointItem.storeItem.code }} <br />
+            Код: {{ pointItem.code }} <br />
             Покупка: {{ pointItem.purchasePrice }} ₸ Продажа:
             {{ pointItem.sellingPrice }} ₸
           </p>
@@ -46,7 +46,7 @@
       <div v-if="pointItem" class="flex-auto">
         <label class="mb-2 block font-medium"> Количество</label>
         <InputNumber
-          v-model="item.count"
+          v-model="arrivalData.count"
           fluid
           locale="ru-RU"
           placeholder="0 шт"
@@ -61,28 +61,27 @@
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import AModal from "@/components/ui/AModal.vue"
-import { ref, watch } from "vue"
+import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useApiRequest } from "@/composables/useApiRequest"
 
 const router = useRouter()
-const item = ref({ count: 1 })
+const arrivalData = ref({ count: 1 })
 const { selectedItem: pointItem } = useSelect()
 const { sendRequest } = useApiRequest()
 
 const addArrival = async () => {
-  const response = await sendRequest("post", "/arrivals", item.value)
+  arrivalData.value.pointItemId = pointItem.value.id
+  const response = await sendRequest(
+    "post",
+    "/point/arrivals",
+    arrivalData.value,
+  )
   if (response) {
     await router.push(`/point/items/${pointItem.value.id}`)
   }
 }
-
-watch(pointItem, (newStoreItem) => {
-  if (newStoreItem) {
-    item.value.pointItemId = newStoreItem.id
-  }
-})
 </script>
 
 <style lang="scss" scoped></style>

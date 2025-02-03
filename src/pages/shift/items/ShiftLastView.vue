@@ -13,7 +13,7 @@
         v-if="!isActiveCashExists"
         :loading="isActiveCashLoading"
         primary
-        to="/shift/add"
+        to="/work-shifts/add"
       >
         Открыть смену
       </a-link>
@@ -32,7 +32,7 @@
       <a-link-floating-text
         v-if="!isActiveCashExists && !isActiveCashLoading"
         primary
-        to="/shift/add"
+        to="/work-shifts/add"
       >
         Открыть смену
       </a-link-floating-text>
@@ -135,10 +135,10 @@ const getCashTitle = computed(() => {
 
 const closeActiveCashRegister = async () => {
   if (isActiveCashExists.value) {
-    await closeActiveCash("put", "/cash-registers/" + activeCash.value.id, {
+    await closeActiveCash("put", "/work-shifts/" + activeCash.value.id, {
       isClosed: true,
     })
-    await fetchActiveCash("get", "/cash-registers/today")
+    await fetchActiveCash("get", "/work-shifts/today")
   }
 }
 
@@ -168,8 +168,7 @@ const formatPaymentType = (paymentType) => {
 }
 
 onMounted(async () => {
-  await fetchActiveCash("get", "/cash-registers/today")
-  // await fetchHourlySales("get", "/point/sales/hourly")
+  await fetchActiveCash("get", "/point/work-shifts/today")
 })
 </script>
 

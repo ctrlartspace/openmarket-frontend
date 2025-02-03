@@ -48,6 +48,7 @@ export const useCartStore = defineStore("cart", () => {
         count: item.count,
         paymentType: getPaymentType.value.code,
         comment: item.comment,
+        discount: item.discount,
       }
     }),
   )
@@ -94,9 +95,10 @@ export const useCartStore = defineStore("cart", () => {
 
   const applyDiscount = () => {
     cartItems.value.forEach((item, key) => {
-      const discountedPrice = item.sellingPrice * (1 - discount.value / 100)
+      const roundDiscount = 1 - discount.value / 100
+      const discountedPrice = item.sellingPrice * roundDiscount
       item.totalPrice = discountedPrice * item.count // Итоговая цена с учётом количества
-      item.discount = discount.value // Сохраняем текущую скидку
+      item.discount = roundDiscount // Сохраняем текущую скидку
       cartItems.value.set(key, item) // Обновляем элемент в Map
     })
 

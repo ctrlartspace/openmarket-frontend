@@ -47,7 +47,7 @@
           class="relative rounded-xl border border-gray-100 bg-white p-4"
         >
           <p class="text-sm">{{ resultItem.code }}</p>
-          <p class="text-2xl">{{ resultItem.storeItem.name }}</p>
+          <p class="text-2xl">{{ resultItem.name }}</p>
           <p class="text-2xl">{{ formatMoney(resultItem.sellingPrice) }} ₸</p>
           <div class="mt-2 flex items-center justify-between gap-2">
             <button

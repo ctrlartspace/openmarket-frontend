@@ -9,15 +9,15 @@ import BasePage from "@/pages/BasePage.vue"
 const menuItems = ref([
   {
     title: "Сегодня",
-    path: "/shift/last",
+    path: "/work-shifts/last",
   },
   {
     title: "История",
-    path: "/shift/archive",
+    path: "/work-shifts/archive",
   },
   {
     title: "Открытие смены",
-    path: "/shift/add",
+    path: "/work-shifts/add",
     hide: true,
   },
 ])

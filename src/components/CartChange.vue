@@ -84,7 +84,7 @@
 
 <script setup>
 import ANumberKeyboard from "@/components/ui/ANumberKeyboard.vue"
-import { computed, ref } from "vue"
+import { ref } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
@@ -100,16 +100,12 @@ const isKeyboardVisible = ref(false)
 const makeSaleFromCart = async () => {
   const response = await sendRequest("post", "/point/sales", {
     items: store.getItemsForSale,
-    changeAmount: cartChange.value,
   })
   if (response) {
     store.clearCart()
   }
 }
 
-const cartChange = computed(() =>
-  inputAmount.value ? inputAmount.value - store.getTotalDiscountAmount : 0,
-)
 const changePaymentType = () => {
   store.changePaymentType()
   inputAmount.value = 0

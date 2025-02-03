@@ -1,26 +1,26 @@
 import axios from "@/plugins/axios"
 
-export const getCashRegisters = async (params) => {
+export const getWorkShifts = async (params) => {
   try {
-    const response = await axios.get("cash-registers", { params })
+    const response = await axios.get("/point/work-shifts", { params })
     return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)
   }
 }
 
-export const getActiveCash = async (params) => {
+export const getWorkShift = async (params) => {
   try {
-    const response = await axios.get("/cash-registers/active", { params })
+    const response = await axios.get("/work-shifts/active", { params })
     return Promise.resolve(response.data.data)
   } catch (error) {
     return Promise.reject(error)
   }
 }
 
-export const closeCashRegister = async (id) => {
+export const closeWorkShift = async (id) => {
   try {
-    const response = await axios.put("/cash-registers/" + id, {
+    const response = await axios.put("/work-shifts/" + id, {
       isClosed: true,
     })
     return Promise.resolve(response.data.data)
@@ -29,9 +29,9 @@ export const closeCashRegister = async (id) => {
   }
 }
 
-export const openCashRegister = async (startAmount) => {
+export const openWorkShift = async (startAmount) => {
   try {
-    const response = await axios.post("/cash-registers", {
+    const response = await axios.post("/work-shifts", {
       startAmount,
     })
     return Promise.resolve(response.data.data)
@@ -41,8 +41,8 @@ export const openCashRegister = async (startAmount) => {
 }
 
 export default {
-  getCashRegisters,
-  getActiveCash,
-  closeCashRegister,
-  openCashRegister,
+  getWorkShifts,
+  getWorkShift,
+  closeWorkShift,
+  openWorkShift,
 }

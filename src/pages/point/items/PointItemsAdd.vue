@@ -3,8 +3,8 @@
     <template #header>
       <a-modal
         #="{ props }"
-        :async-operation="addPointItem"
-        title="Добавить товар?"
+        :async-operation="onAddStoreItemClick"
+        title="Создать товар?"
       >
         <a-button primary v-bind="props"> Сохранить</a-button>
       </a-modal>
@@ -12,40 +12,98 @@
     <template #floating>
       <a-modal
         #="{ props }"
-        :async-operation="addPointItem"
-        title="Добавить товар?"
+        :async-operation="onAddStoreItemClick"
+        title="Создать товар?"
       >
-        <a-button-floating v-bind="props"> save</a-button-floating>
+        <a-button-floating-text primary v-bind="props">
+          Сохранить
+        </a-button-floating-text>
       </a-modal>
     </template>
     <template v-if="isError" #error>{{ errorMessage }}</template>
     <div class="flex flex-col gap-2">
       <router-link
-        v-press
-        :to="{
-          path: '/store/items',
-          query: { selectableMode: true, nextPath: '/point/items/add' },
-        }"
-        class="rounded-xl border border-gray-100 bg-white px-4 py-3 hover:border-gray-500"
+        v-if="existPointItem"
+        :to="{ path: '/point/items/' + existPointItem.id }"
+        class="rounded-xl border border-gray-100 bg-white px-4 py-3 md:hover:bg-gray-50"
       >
-        <div v-if="storeItem">
-          <h1 class="font-medium text-blue-600">
-            {{ storeItem.name }}
-          </h1>
-          <p class="text-sm text-gray-400">
-            Код: {{ storeItem.code }}<br />
-            Покупка: {{ storeItem.purchasePrice }} ₸ Продажа:
-            {{ storeItem.sellingPrice }} ₸
-          </p>
-        </div>
-        <p v-else class=" ">Выбрать товар...</p>
+        <h1 class="font-medium text-blue-600">
+          {{ existPointItem.name }}
+        </h1>
+        <p class="text-sm text-gray-400">
+          Код: {{ existPointItem.code }}<br />
+          Покупка: {{ existPointItem.purchasePrice }} ₸ Продажа:
+          {{ existPointItem.sellingPrice }} ₸
+        </p>
       </router-link>
 
-      <div v-if="storeItem" class="flex gap-2">
+      <div class="flex-auto">
+        <label class="mb-2 block font-medium"> Код товара </label>
+        <InputGroup>
+          <InputText
+            v-model="pointItem.code"
+            :invalid="validationErrors.code"
+            placeholder="Код товара"
+            type="text"
+          />
+          <InputGroupAddon>
+            <Button severity="secondary" variant="text" @click="generateCode">
+              <template #icon>
+                <label
+                  class="flex items-center"
+                  for="generateCodeCheckbox"
+                  @click="generateCode"
+                >
+                  <span
+                    :class="codeIsGenerated ? 'text-blue-600' : 'text-black'"
+                    class="material-symbols-rounded cursor-pointer"
+                    >bolt</span
+                  >
+                </label>
+                <input
+                  id="generateCodeCheckbox"
+                  v-model="codeIsGenerated"
+                  class="hidden"
+                  type="checkbox"
+                />
+              </template>
+            </Button>
+            <Button
+              :to="{
+                path: '/scan2',
+                query: { scannableMode: true },
+              }"
+              as="router-link"
+              severity="secondary"
+              variant="text"
+            >
+              <template #icon>
+                <span class="material-symbols-rounded text-black"
+                  >center_focus_strong</span
+                >
+              </template>
+            </Button>
+          </InputGroupAddon>
+        </InputGroup>
+      </div>
+
+      <div class="flex-auto">
+        <label class="mb-2 block font-medium"> Наименование</label>
+        <InputText
+          v-model="pointItem.name"
+          :invalid="validationErrors.name"
+          fluid
+          placeholder="Наименование"
+          type="text"
+        />
+      </div>
+
+      <div class="flex gap-2">
         <div class="flex-auto">
           <label class="mb-2 block font-medium"> Покупка </label>
           <InputNumber
-            v-model="item.purchasePrice"
+            v-model="pointItem.purchasePrice"
+            :invalid="validationErrors.purchasePrice"
             fluid
             locale="ru-RU"
             placeholder="Цена покупки"
@@ -55,7 +113,8 @@
         <div class="flex-auto">
           <label class="mb-2 block font-medium"> Продажа </label>
           <InputNumber
-            v-model="item.sellingPrice"
+            v-model="pointItem.sellingPrice"
+            :invalid="validationErrors.sellingPrice"
             fluid
             locale="ru-RU"
             placeholder="Цена продажи"
@@ -68,39 +127,78 @@
 </template>
 
 <script setup>
-import AButton from "@/components/ui/AButton.vue"
-import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
+import AButton from "@/components/ui/AButton.vue"
+import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import { ref, watch } from "vue"
 import { useRouter } from "vue-router"
-import { useSelect } from "@/composables/useSelect2.js"
+import { useScan } from "@/composables/useScan"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { generateEAN13 } from "@/utils/barcodeGenerator"
+import { watchDebounced } from "@vueuse/core"
 
 const router = useRouter()
-const item = ref({})
-const { selectedItem: storeItem } = useSelect()
-const { sendRequest, errorMessage, isError } = useApiRequest()
+const pointItem = ref({})
+const { scannedCode } = useScan()
+const {
+  validationErrors,
+  sendRequest: addStoreItem,
+  isError,
+  errorMessage,
+} = useApiRequest()
+const codeIsGenerated = ref(false)
+const { serverData: existPointItem, sendRequest: checkStoreItem } =
+  useApiRequest()
 
-const addPointItem = async () => {
-  const response = await sendRequest("post", "/point/items", item.value)
+const onAddStoreItemClick = async () => {
+  const response = await addStoreItem("post", "/point/items", pointItem.value)
   if (response) {
-    onCancelNewItemClick()
-    await router.push({ path: "/point/items/" + response.data.data.id })
+    await router.push("/point/items/" + response.data.data.id)
   }
 }
 
-const onCancelNewItemClick = () => {
-  item.value = {}
-  storeItem.value = null
+const generateCode = () => {
+  pointItem.value.code = generateEAN13(
+    pointItem.value.name,
+    pointItem.value.sellingPrice,
+  )
 }
 
-watch(storeItem, (newStoreItem) => {
-  if (newStoreItem) {
-    item.value.storeItemId = newStoreItem.id
-    item.value.purchasePrice = newStoreItem.purchasePrice
-    item.value.sellingPrice = newStoreItem.sellingPrice
+watch(scannedCode, (newScannedCode) => {
+  if (newScannedCode) {
+    pointItem.value.code = newScannedCode
   }
 })
+
+watchDebounced(
+  [() => pointItem.value.name, () => pointItem.value.sellingPrice],
+  async () => {
+    if (codeIsGenerated.value) {
+      generateCode()
+      await checkStoreItem(
+        "get",
+        "/point/items/" + pointItem.value.code + "?searchBy=code",
+      )
+    }
+  },
+  { debounce: 1200, deep: true },
+)
+
+watchDebounced(
+  () => pointItem.value.code,
+  async () => {
+    if (!pointItem.value.code) {
+      existPointItem.value = null
+      return
+    }
+    if (!codeIsGenerated.value) {
+      await checkStoreItem("get", "/point/items/" + pointItem.value.code, {
+        searchBy: "code",
+      })
+    }
+  },
+  { debounce: 1200, deep: true },
+)
 </script>
 
 <style lang="scss" scoped></style>

@@ -4,19 +4,30 @@
     :title="isSelectableMode ? 'Выбрать...' : ''"
   >
     <template #header>
-      <a-link :to="filterPathMulti" primary> Категории</a-link>
+      <a-link
+        :to="{
+          path: '/point/items/import',
+        }"
+        success
+        >Импорт товаров
+      </a-link>
       <a-link
         v-if="!isSelectableMode"
         :to="{
-          path: '/store/items',
-          query: { selectableMode: true, nextPath: '/point/items/add' },
+          path: '/point/items/add',
         }"
         primary
         >Добавить
       </a-link>
     </template>
     <template #floating>
-      <a-link-floating :to="filterPathMulti"> page_info</a-link-floating>
+      <a-link-floating
+        :to="{
+          path: '/point/items/import',
+        }"
+        success
+        >upload
+      </a-link-floating>
       <a-link-floating
         :to="{
           path: '/scan2',
@@ -28,8 +39,7 @@
       <a-link-floating
         v-if="!isSelectableMode"
         :to="{
-          path: '/store/items',
-          query: { selectableMode: true, nextPath: '/point/items/add' },
+          path: '/point/items/add',
         }"
         primary
         >add
@@ -50,17 +60,13 @@
         >
           <span class="material-symbols-rounded text-gray-300">search</span>
         </div>
-        <!-- <div
-        class="absolute bottom-0 right-0 top-0 flex items-center justify-between gap-2 px-4"
-      >
-      </div> -->
       </v-form>
 
       <a-list
         :items="pointItems"
         description-field="count"
         description-hint="шт."
-        title-field="storeItem.name"
+        title-field="name"
         @on-item-click="onItemClick"
       >
       </a-list>
@@ -74,7 +80,6 @@ import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AList from "@/components/ui/AList.vue"
 import { onMounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
-import { useFilters } from "@/composables/filters.js"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useScan } from "@/composables/useScan"
 import { useFocusable } from "@/composables/useFocusable"
@@ -83,7 +88,6 @@ import { useApiRequest } from "@/composables/useApiRequest"
 
 const { focusableInput } = useFocusable()
 const router = useRouter()
-const { filterPathMulti, joinedFilters } = useFilters()
 const { isSelectableMode, applySelect } = useSelect()
 const { scannedCode } = useScan()
 const searchInput = ref("")
@@ -95,7 +99,6 @@ const {
 
 const getPointItems = async () => {
   await fetchPointItems("get", "/point/items", {
-    filters: joinedFilters.value,
     q: searchInput.value,
   })
 }

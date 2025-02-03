@@ -48,11 +48,11 @@ const router = useRouter()
 const startAmount = ref(null)
 
 const openCashRegister = async () => {
-  const response = await sendRequest("post", "/cash-registers", {
+  const response = await sendRequest("post", "/point/work-shifts", {
     startAmount: startAmount.value,
   })
   if (response) {
-    await router.push("/shift/last")
+    await router.push("/work-shifts/last")
   }
 }
 </script>

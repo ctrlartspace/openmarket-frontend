@@ -5,7 +5,7 @@
       :items="favoriteItems"
       description-field="pointItem.sellingPrice"
       description-hint="₸"
-      title-field="pointItem.storeItem.name"
+      title-field="pointItem.name"
       @on-item-click="onItemClick"
     >
       <template #description="{ item }">

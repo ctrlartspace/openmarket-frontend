@@ -10,12 +10,11 @@
           class="mb-4"
           description-field="count"
           description-hint="шт."
-          title-field="pointItem.storeItem.name"
-          @on-item-click="onItemClick"
+          title-field="pointItem.name"
         >
           <template #title="{ item }">
             <span v-if="item.pointItem" class="">{{
-              item.pointItem?.storeItem?.name
+              item.pointItem?.name
             }}</span>
             <span v-else class=""
               >{{ item.comment || "" }}
@@ -29,7 +28,7 @@
             <span class="font-semibold"> ₸ </span>
           </template>
           <template #sub="{ item }">
-            <div class="flex justify-between text-xs text-gray-300">
+            <div class="flex justify-between text-gray-300">
               <div>
                 <span>{{ formatDate(item.createdAt, "HH:mm") + ", " }}</span>
                 <span>{{ formatPaymentType(item.paymentType) }}</span>
@@ -50,22 +49,12 @@
 <script setup>
 import AList from "@/components/ui/AList.vue"
 import { computed, onMounted } from "vue"
-import { useRouter } from "vue-router"
-import { useFilters } from "@/composables/filters.js"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatDate, fromNow } from "@/utils/format-date"
 import { formatPaymentType } from "@/utils/format-payment-type"
 import { formatMoney } from "@/utils/format-money"
 
-const router = useRouter()
-const { filters, filterPathMulti, selectedFiltersLength, joinedFilters } =
-  useFilters()
-
 const { serverData: sales, sendRequest, isLoading } = useApiRequest()
-
-const onItemClick = (item) => {
-  // router.push(`/point/items/${item.pointItem.id}`)
-}
 
 const groupedDataByDate = computed(() => {
   const groupedData = {}
@@ -85,7 +74,7 @@ const groupedDataByDate = computed(() => {
 })
 
 onMounted(async () => {
-  await sendRequest("get", "/point/sales", { filters: joinedFilters.value })
+  await sendRequest("get", "/point/sales")
 })
 </script>
 

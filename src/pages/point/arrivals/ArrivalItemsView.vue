@@ -2,33 +2,33 @@
   <a-page :loading="isLoading">
     <template #header>
       <a-link
-        primary
         :to="{
           path: '/point/items',
           query: { selectableMode: true, nextPath: '/point/arrivals/add' },
         }"
+        primary
       >
-        Добавить</a-link
-      >
+        Добавить
+      </a-link>
     </template>
     <template #floating>
       <a-link-floating
-        primary
         :to="{
           path: '/point/items',
           query: { selectableMode: true, nextPath: '/point/arrivals/add' },
         }"
+        primary
       >
-        add</a-link-floating
-      >
+        add
+      </a-link-floating>
     </template>
 
     <a-list
       v-if="pointItems"
       :items="pointItems"
-      title-field="pointItem.storeItem.name"
       description-field="count"
       description-hint="шт."
+      title-field="pointItem.name"
       @on-item-click="onItemClick"
     >
     </a-list>
@@ -41,11 +41,9 @@ import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { onMounted } from "vue"
 import { useRouter } from "vue-router"
-import { useFilters } from "@/composables/filters.js"
 import { useApiRequest } from "@/composables/useApiRequest"
 
 const router = useRouter()
-const { filterPathMulti, joinedFilters } = useFilters()
 const { serverData: pointItems, sendRequest, isLoading } = useApiRequest()
 
 const onItemClick = (item) => {
@@ -53,9 +51,7 @@ const onItemClick = (item) => {
 }
 
 onMounted(async () => {
-  await sendRequest("get", "/arrivals", {
-    filters: joinedFilters.value,
-  })
+  await sendRequest("get", "/point/arrivals")
 })
 </script>
 

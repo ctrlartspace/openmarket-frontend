@@ -6,9 +6,6 @@ import StorePage from "@/pages/store/StorePage.vue"
 import StoreInfoView from "@/pages/store/info/StoreInfoView.vue"
 import StoreUsersAdd from "@/pages/store/users/StoreUsersAdd.vue"
 import StoreUsersView from "@/pages/store/users/StoreUsersView.vue"
-import StoreItemsAdd from "@/pages/store/items/StoreItemsAdd.vue"
-import StoreItemsView from "@/pages/store/items/StoreItemsView.vue"
-import StoreItemDetails from "@/pages/store/items/StoreItemDetails.vue"
 import StorePointsAdd from "@/pages/store/points/StorePointsAdd.vue"
 
 import PointPage from "@/pages/point/PointPage.vue"
@@ -17,8 +14,6 @@ import PointUsersView from "@/pages/point/users/PointUsersView.vue"
 import PointItemsView from "@/pages/point/items/PointItemsView.vue"
 import PointItemsAdd from "@/pages/point/items/PointItemsAdd.vue"
 import PointItemDetails from "@/pages/point/items/PointItemDetails.vue"
-import StoreFiltersView from "@/pages/store/filters/StoreFiltersView.vue"
-import StoreFiltersAdd from "@/pages/store/filters/StoreFiltersAdd.vue"
 import ArrivalItemsView from "@/pages/point/arrivals/ArrivalItemsView.vue"
 import ArrivalItemsAdd from "@/pages/point/arrivals/ArrivalItemsAdd.vue"
 
@@ -36,7 +31,7 @@ import PointInfoView from "@/pages/point/info/PointInfoView.vue"
 import StoreCreatePage from "@/pages/store-create/StoreCreatePage.vue"
 import StoreCreateUserInfoPage from "@/pages/store-create/user-info/StoreCreateUserInfoPage.vue"
 import NoInternetPage from "@/pages/NoInternetPage.vue"
-import StoreItemsImport from "@/pages/store/items/StoreItemsImport.vue"
+import PointItemsImport from "@/pages/point/items/PointItemsImport.vue"
 
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
@@ -115,42 +110,6 @@ const routes = [
           },
         ],
       },
-      {
-        path: "items",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: StoreItemsView,
-          },
-          {
-            path: "add",
-            component: StoreItemsAdd,
-          },
-          {
-            path: "import",
-            component: StoreItemsImport,
-          },
-          {
-            path: ":id",
-            component: StoreItemDetails,
-          },
-        ],
-      },
-      {
-        path: "filters",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: StoreFiltersView,
-          },
-          {
-            path: "add",
-            component: StoreFiltersAdd,
-          },
-        ],
-      },
     ],
   },
   {
@@ -190,6 +149,11 @@ const routes = [
             path: "",
             component: PointItemsView,
           },
+
+          {
+            path: "import",
+            component: PointItemsImport,
+          },
           {
             path: "add",
             component: PointItemsAdd,
@@ -227,9 +191,9 @@ const routes = [
     ],
   },
   {
-    path: "/shift",
+    path: "/work-shifts",
     component: ShiftPage,
-    redirect: "/shift/last",
+    redirect: "/work-shifts/last",
     children: [
       {
         path: "last",
@@ -247,7 +211,6 @@ const routes = [
       },
       {
         path: "add",
-        component: PageContent,
         component: ShiftAdd,
       },
       {

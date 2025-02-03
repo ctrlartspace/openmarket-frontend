@@ -1,5 +1,5 @@
 <template>
-  <a-page :loading="isLoading">
+  <a-page :loading="isLoading" title="Товар">
     <template #header>
       <a-button gray @click="addItemToCart"> В корзину</a-button>
       <a-button
@@ -9,7 +9,7 @@
       >
         В избранное
       </a-button>
-      <a-button success @click="applySelect(item, '/point/arrivals/add')">
+      <a-button success @click="applySelect(pointItem, '/point/arrivals/add')">
         Приход
       </a-button>
       <a-modal
@@ -29,7 +29,7 @@
         @click="onAddItemToFavorites"
         >star
       </a-button-floating>
-      <a-button-floating @click="applySelect(item, '/point/arrivals/add')"
+      <a-button-floating @click="applySelect(pointItem, '/point/arrivals/add')"
         >add
       </a-button-floating>
       <a-modal
@@ -43,30 +43,34 @@
     <template v-if="isItemAddingToFavoritesError" #error
       >{{ errorMessageOfItemAddingToFavorites }}
     </template>
-    <div v-if="item" class="flex flex-col gap-2">
-      <router-link
-        v-if="item.storeItem"
-        v-press
-        :to="{ path: '/store/items/' + item.storeItem.id }"
-        class="rounded-xl border border-gray-100 bg-white px-4 py-3 md:hover:border-gray-300"
-      >
-        <h1 class="font-medium text-blue-600">
-          {{ item.storeItem.name }}
-        </h1>
-        <p class="text-sm text-gray-400">
-          Код: {{ item.storeItem.code }}<br />
-          <span v-if="item.storeItem.purchasePrice">
-            Покупка: {{ item.storeItem.purchasePrice }} ₸
-          </span>
-          <span> Продажа: {{ item.storeItem.sellingPrice }} ₸ </span>
-        </p>
-      </router-link>
-
+    <template v-if="isError" #error>{{ errorMessage }}</template>
+    <div v-if="pointItem" class="flex flex-col gap-2">
+      <div class="flex-auto">
+        <label class="mb-2 block font-medium"> Код товара </label>
+        <InputGroup>
+          <InputText v-model="pointItem.code" type="text" />
+          <InputGroupAddon>
+            <Button
+              severity="secondary"
+              variant="text"
+              @click="onGenerateBarcodeClick"
+            >
+              <template #icon>
+                <span class="material-symbols-rounded">print</span>
+              </template>
+            </Button>
+          </InputGroupAddon>
+        </InputGroup>
+      </div>
+      <div class="flex-auto">
+        <label class="mb-2 block font-medium"> Наименование </label>
+        <InputText v-model="pointItem.name" fluid type="text" />
+      </div>
       <div class="flex gap-2">
-        <div v-if="item.purchasePrice" class="flex-auto">
+        <div v-if="pointItem.purchasePrice" class="flex-auto">
           <label class="mb-2 block font-medium"> Покупка </label>
           <InputNumber
-            v-model="item.purchasePrice"
+            v-model="pointItem.purchasePrice"
             fluid
             locale="ru-RU"
             placeholder="Цена покупки"
@@ -76,7 +80,7 @@
         <div class="flex-auto">
           <label class="mb-2 block font-medium"> Продажа </label>
           <InputNumber
-            v-model="item.sellingPrice"
+            v-model="pointItem.sellingPrice"
             fluid
             locale="ru-RU"
             placeholder="Цена продажи"
@@ -84,16 +88,13 @@
           />
         </div>
       </div>
-
-      <div class="flex-auto">
-        <label class="mb-2 block font-medium"> В наличии </label>
-        <InputNumber
-          v-model="item.count"
-          fluid
-          locale="ru-RU"
-          placeholder="0 шт"
-          readonly
-          suffix=" шт"
+      <div v-if="pointItem.availability?.length > 0" class="mt-4 flex-auto">
+        <label class="mb-2 block font-medium">Наличие в точках</label>
+        <a-list
+          :items="pointItem.availability"
+          description-field="count"
+          description-hint="шт."
+          title-field="pointName"
         />
       </div>
     </div>
@@ -101,20 +102,28 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue"
+import { useRoute, useRouter } from "vue-router"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
-import { onMounted } from "vue"
-import { useRoute, useRouter } from "vue-router"
-import { useSelect } from "@/composables/useSelect2"
-import { useCartStore } from "@/stores/cart.store"
+import { generateBarcodePDF } from "@/utils/barcodeGenerator"
 import { useApiRequest } from "@/composables/useApiRequest"
+import AList from "@/components/ui/AList.vue"
+import { useSelect } from "@/composables/useSelect2.js"
+import { useCartStore } from "@/stores/cart.store.js"
 
 const cartStore = useCartStore()
 const route = useRoute()
 const router = useRouter()
 const { applySelect } = useSelect()
-const { serverData: item, sendRequest, isLoading } = useApiRequest()
+const {
+  serverData: pointItem,
+  sendRequest,
+  isLoading,
+  isError,
+  errorMessage,
+} = useApiRequest()
 const {
   sendRequest: addItemToFavorites,
   isLoading: isItemAddingToFavoritesLoading,
@@ -122,36 +131,34 @@ const {
   errorMessage: errorMessageOfItemAddingToFavorites,
 } = useApiRequest()
 
+const fetchPointItem = async (id) => {
+  await sendRequest("get", "/point/items/" + id)
+}
+const onAddItemToFavorites = async () => {
+  await addItemToFavorites("post", "/point/favorites", {
+    pointItemId: pointItem.value.id,
+  })
+}
 const addItemToCart = () => {
-  console.log(item.value)
-  cartStore.addItem(item.value)
+  cartStore.addItem(pointItem.value)
   router.push("/cart")
 }
 
-const onAddItemToFavorites = async () => {
-  addItemToFavorites("post", "/point/favorites", { pointItemId: item.value.id })
-}
-
 const updatePointItem = async () => {
-  const id = item.value.id
-  if (!id) {
-    return
-  }
-  const response = await sendRequest(
-    "put",
-    "/point/items/" + item.value.id,
-    item.value,
-  )
-
-  if (response) {
-    await sendRequest("get", "/point/items/" + response.data.data.id)
+  const id = pointItem.value.id
+  if (id) {
+    await sendRequest("put", "/point/items/" + id, pointItem.value)
   }
 }
 
-onMounted(async () => {
+const onGenerateBarcodeClick = () => {
+  generateBarcodePDF(pointItem.value.code)
+}
+
+onMounted(() => {
   const id = route.params.id
   if (id) {
-    await sendRequest("get", "/point/items/" + id)
+    fetchPointItem(id)
   }
 })
 </script>

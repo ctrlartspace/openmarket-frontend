@@ -24,12 +24,12 @@
           :items="pointItems"
           description-field="sellingPrice"
           description-hint="₸"
-          title-field="storeItem.name"
+          title-field="name"
           @on-item-click="onSearchItemClick"
         >
           <template #title="{ item }">
             <span class="flex items-center gap-2">
-              {{ item.storeItem.name }}
+              {{ item.name }}
             </span>
           </template>
           <template #description="{ item }">
@@ -64,10 +64,7 @@
             </button>
           </div>
           <div class="w-full truncate py-3 font-medium">
-            {{
-              item?.storeItem?.name ||
-              (item.comment || "") + " Свободная продажа"
-            }}
+            {{ item.name || (item.comment || "") + " (свободная продажа)" }}
           </div>
           <div
             :class="{ 'text-rose-500': item.discount }"

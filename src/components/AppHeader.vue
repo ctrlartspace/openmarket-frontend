@@ -1,6 +1,5 @@
 <template>
   <nav v-if="store.isAuthorizedPoint" class="border-b border-gray-100 bg-white">
-    <!-- Desktop -->
     <div
       v-if="!onlineStore.isOnline"
       class="animate-pulse bg-rose-50 py-1 text-center text-rose-500"
@@ -30,6 +29,23 @@
         </router-link>
       </li>
       <li class="inline">
+        <a-modal
+          #="{ props }"
+          :async-operation="store.logOutFromPoint"
+          title="Выйти из точки?"
+        >
+          <a-button danger v-bind="props"> Выход </a-button>
+        </a-modal>
+      </li>
+    </ul>
+  </nav>
+  <nav
+    v-else-if="store.isAuthorizedStore"
+    class="border-b border-gray-100 bg-white"
+  >
+    <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
+      <li class="ml-auto"></li>
+      <li>
         <router-link v-slot="{ isActive }" to="/store">
           <span
             :class="isActive ? 'text-black' : 'text-gray-300'"
@@ -39,36 +55,36 @@
           </span>
         </router-link>
       </li>
+
+      <li class="inline">
+        <a-modal
+          #="{ props }"
+          :async-operation="store.logOut"
+          title="Завершить работу и выйти?"
+        >
+          <a-button danger v-bind="props">Завершить работу</a-button>
+        </a-modal>
+      </li>
     </ul>
   </nav>
+
   <nav v-else class="border-b border-gray-100 bg-white">
     <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
       <li class="ml-auto"></li>
-      <li class="inline">
-        <router-link v-slot="{ isActive }" to="/store">
-          <span
-            :class="isActive ? 'text-black' : 'text-gray-300'"
-            class="font-medium"
-          >
-            {{ getStoreTitle }}
-          </span>
-        </router-link>
-      </li>
+      <li class="font-medium">Open Kassa</li>
     </ul>
   </nav>
 </template>
 
 <script setup>
-import { computed, ref } from "vue"
+import { ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useOnlineStore } from "@/stores/online.store.js"
+import AButton from "@/components/ui/AButton.vue"
+import AModal from "@/components/ui/AModal.vue"
 
 const onlineStore = useOnlineStore()
 const store = useUserStore()
-
-const getStoreTitle = computed(() =>
-  store.isAuthorizedStore ? "Магазин" : "Open Kassa",
-)
 
 const menuItems = ref([
   {
@@ -77,7 +93,7 @@ const menuItems = ref([
   },
   {
     title: "Смена",
-    path: "/shift",
+    path: "/work-shifts",
   },
   {
     title: "Продажи",

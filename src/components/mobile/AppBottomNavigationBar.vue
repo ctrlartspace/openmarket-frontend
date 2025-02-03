@@ -37,6 +37,20 @@
         </ul>
       </div>
     </nav>
+
+    <nav v-else>
+      <div
+        class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1"
+      >
+        <ul class="flex w-full items-center justify-around">
+          <li
+            class="flex w-10 flex-col items-center justify-center active:brightness-90"
+          >
+            sdf
+          </li>
+        </ul>
+      </div>
+    </nav>
   </footer>
 </template>
 
@@ -59,7 +73,7 @@ const menuItems = ref([
   {
     id: 2,
     title: "Смена",
-    path: "/shift",
+    path: "/work-shifts",
     visible: true,
     icon: "group",
   },
@@ -79,10 +93,10 @@ const menuItems = ref([
   },
   {
     id: 5,
-    title: "Магазин",
-    path: "/store",
+    title: "Товары",
+    path: "/point/items",
     visible: true,
-    icon: "store",
+    icon: "format_list_bulleted",
   },
 ])
 </script>
