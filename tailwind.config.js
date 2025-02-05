@@ -1,6 +1,6 @@
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
-  darkMode: "media", // или удалите эту строку
+  darkMode: "media",
   theme: {
     extend: {
       keyframes: {
@@ -11,6 +11,11 @@ export default {
       },
       animation: {
         shake: "shake 0.1s linear",
+      },
+      colors: {
+        gray: {
+          100: "#EDF1F3",
+        },
       },
     },
   },

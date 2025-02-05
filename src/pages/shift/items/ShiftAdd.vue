@@ -25,6 +25,7 @@
       <label class="mb-2 block font-medium"> Сумма на начало</label>
       <InputNumber
         v-model="startAmount"
+        v-autofocus
         :invalid="validationErrors.startAmount"
         fluid
         locale="ru-RU"

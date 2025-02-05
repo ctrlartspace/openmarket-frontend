@@ -5,7 +5,7 @@
         class="w-full text-center text-red-600 hover:text-black md:text-start md:text-gray-300"
         @click="store.logOutFromPoint()"
       >
-        Завершить работу
+        Выйти из точки
       </button>
     </template>
   </base-page>
