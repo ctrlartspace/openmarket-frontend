@@ -6,15 +6,25 @@
       class="flex w-5/6 flex-col gap-2 rounded-xl border border-gray-100 bg-white p-4 md:w-64"
       @submit.prevent="loginToStore"
     >
-      <a-base-input
-        v-model.trim="authData.phoneNumber"
-        placeholder="Номер телефона"
-      />
-      <a-base-input
-        v-model.trim="authData.password"
-        placeholder="Пароль"
-        type="password"
-      />
+      <div class="flex-auto">
+        <InputMask
+          v-model="authData.phoneNumber"
+          :invalid="validationErrors?.phoneNumber"
+          fluid
+          mask="+7(999)999-99-99"
+          placeholder="Номер телефона"
+          unmask
+        />
+      </div>
+
+      <div class="flex-auto">
+        <InputText
+          v-model="authData.password"
+          fluid
+          placeholder="Пароль"
+          type="password"
+        />
+      </div>
       <button
         v-press
         class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-3 font-medium text-white shadow-sm"
@@ -50,7 +60,6 @@
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useUserStore } from "@/stores/user.store"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
 
 const store = useUserStore()
 const router = useRouter()

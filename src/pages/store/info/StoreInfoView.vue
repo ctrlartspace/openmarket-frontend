@@ -8,6 +8,7 @@
         >Новая точка
       </a-link-floating-text>
     </template>
+    <template v-if="isStorePointsError" #error>{{ errorMessage }}</template>
     <div
       v-if="storeInfo"
       class="min-h-32 mb-4 flex flex-col rounded-xl bg-white p-4"
@@ -84,6 +85,8 @@ const {
   serverData: storePoints,
   sendRequest: fetchStorePoints,
   isLoading: isStorePointsLoading,
+  isError: isStorePointsError,
+  errorMessage: errorMessage,
 } = useApiRequest()
 
 const store = useUserStore()

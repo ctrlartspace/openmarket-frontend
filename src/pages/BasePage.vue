@@ -43,15 +43,11 @@
         @click="toggleSideMenu"
       >
         <ul class="flex h-full flex-col gap-2">
-          <li
-            v-for="item in menuItemsFiltered"
-            :key="item"
-            class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3"
-          >
+          <li v-for="item in menuItemsFiltered" :key="item">
             <router-link
               v-slot="{ isActive }"
               :to="item.path"
-              class="block w-full"
+              class="flex h-[55px] items-center whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3"
               @click.stop="onMenuItemClick(item)"
             >
               <span

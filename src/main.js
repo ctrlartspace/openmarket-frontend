@@ -102,6 +102,29 @@ const Noir = definePreset(Aura, {
       },
     },
 
+    multiselect: {
+      colorScheme: {
+        light: {
+          root: {
+            color: "{black}",
+            shadow: "none",
+            border: {
+              color: "{gray.100}",
+            },
+            focus: {
+              border: {
+                color: "{gray.600}",
+              },
+            },
+            hover: {
+              border: {
+                color: "{gray.300}",
+              },
+            },
+          },
+        },
+      },
+    },
     inputgroup: {
       colorScheme: {
         light: {

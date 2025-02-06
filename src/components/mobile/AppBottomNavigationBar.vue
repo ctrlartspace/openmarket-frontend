@@ -45,9 +45,7 @@
         <ul class="flex w-full items-center justify-around">
           <li
             class="flex w-10 flex-col items-center justify-center active:brightness-90"
-          >
-            sdf
-          </li>
+          ></li>
         </ul>
       </div>
     </nav>

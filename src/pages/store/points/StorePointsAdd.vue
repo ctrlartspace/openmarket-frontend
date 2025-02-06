@@ -20,10 +20,11 @@
         </a-button-floating-text>
       </a-modal>
     </template>
+    <template v-if="isError" #error>{{ errorMessage }}</template>
     <a-base-input
       id="store-point-name"
       v-model="storePointName"
-      :is-error="validationErrors.name"
+      :is-error="validationErrors?.name"
       placeholder="Название точки"
       type="text"
     />
@@ -39,7 +40,12 @@ import AButton from "@/components/ui/AButton.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 
-const { validationErrors, sendRequest: addStorePoint } = useApiRequest()
+const {
+  validationErrors,
+  sendRequest: addStorePoint,
+  isError,
+  errorMessage,
+} = useApiRequest()
 
 const router = useRouter()
 const storePointName = ref("")

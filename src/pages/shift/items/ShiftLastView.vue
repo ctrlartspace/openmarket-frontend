@@ -135,10 +135,10 @@ const getCashTitle = computed(() => {
 
 const closeActiveCashRegister = async () => {
   if (isActiveCashExists.value) {
-    await closeActiveCash("put", "/work-shifts/" + activeCash.value.id, {
+    await closeActiveCash("put", "/point/work-shifts/" + activeCash.value.id, {
       isClosed: true,
     })
-    await fetchActiveCash("get", "/work-shifts/today")
+    await fetchActiveCash("get", "/point/work-shifts/today")
   }
 }
 
