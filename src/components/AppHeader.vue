@@ -18,12 +18,28 @@
         </router-link>
       </li>
       <li class="ml-auto"></li>
-      <li v-if="store.point" class="inline w-auto truncate text-gray-300">
-        <router-link v-slot="{ isActive }" to="/point">
+      <li
+        v-if="store.user"
+        class="inline-flex w-auto items-center gap-1 truncate font-medium text-gray-300"
+      >
+        <span class="material-symbols-rounded">id_card</span>
+        {{ store?.user?.fullName }}
+      </li>
+      <li
+        v-if="store.point"
+        class="inline-flex w-auto truncate font-medium text-gray-300"
+      >
+        <router-link
+          v-slot="{ isActive }"
+          class="inline-flex items-center gap-1"
+          to="/point"
+        >
           <span
             :class="isActive ? 'text-black' : 'text-gray-300'"
-            class="font-medium"
+            class="material-symbols-rounded"
+            >store</span
           >
+          <span :class="isActive ? 'text-black' : 'text-gray-300'">
             {{ store.point.name }}
           </span>
         </router-link>
@@ -34,7 +50,7 @@
           :async-operation="store.logOutFromPoint"
           title="Выйти из точки?"
         >
-          <a-button danger v-bind="props"> Выход </a-button>
+          <a-button danger v-bind="props"> Закрыть</a-button>
         </a-modal>
       </li>
     </ul>
@@ -45,6 +61,14 @@
   >
     <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
       <li class="ml-auto"></li>
+
+      <li
+        v-if="store.user"
+        class="inline-flex w-auto items-center gap-1 truncate font-medium text-gray-300"
+      >
+        <span class="material-symbols-rounded">id_card</span>
+        {{ store?.user?.fullName }}
+      </li>
       <li>
         <router-link v-slot="{ isActive }" to="/store">
           <span
@@ -86,20 +110,20 @@ import AModal from "@/components/ui/AModal.vue"
 const onlineStore = useOnlineStore()
 const store = useUserStore()
 
-const menuItems = ref([
-  {
-    title: "Корзина",
-    path: "/cart",
-  },
-  {
-    title: "Смена",
-    path: "/work-shifts",
-  },
-  {
-    title: "Продажи",
-    path: "/point/sales",
-  },
-])
+const menuItems = ref(
+  [
+    {
+      title: "Корзина",
+      path: "/cart",
+      permission: "view_sales",
+    },
+    {
+      title: "Смена",
+      path: "/work-shifts",
+      permission: "view_shifts",
+    },
+  ].filter((item) => store.hasPermission(item.permission)),
+)
 </script>
 
 <style scoped></style>

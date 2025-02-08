@@ -5,22 +5,30 @@
 <script setup>
 import { ref } from "vue"
 import BasePage from "@/pages/BasePage.vue"
+import { useUserStore } from "@/stores/user.store.js"
 
-const menuItems = ref([
-  {
-    title: "Сегодня",
-    path: "/work-shifts/last",
-  },
-  {
-    title: "История",
-    path: "/work-shifts/archive",
-  },
-  {
-    title: "Открытие смены",
-    path: "/work-shifts/add",
-    hide: true,
-  },
-])
+const store = useUserStore()
+
+const menuItems = ref(
+  [
+    {
+      title: "Сегодня",
+      path: "/work-shifts/last",
+      permission: "view_shifts",
+    },
+    {
+      title: "История",
+      path: "/work-shifts/archive",
+      permission: "view_shifts",
+    },
+    {
+      title: "Открытие смены",
+      path: "/work-shifts/add",
+      hide: true,
+      permission: "view_shifts",
+    },
+  ].filter((item) => store.hasPermission(item.permission)),
+)
 </script>
 
 <style></style>

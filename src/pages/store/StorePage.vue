@@ -21,16 +21,20 @@ const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm")
 const store = useUserStore()
 
-const menuItems = ref([
-  {
-    title: "Обзор магазина",
-    path: "/store/info",
-  },
-  {
-    title: "Сотрудники",
-    path: "/store/users",
-  },
-])
+const menuItems = ref(
+  [
+    {
+      title: "Обзор магазина",
+      path: "/store/info",
+      permission: "view_stores",
+    },
+    {
+      title: "Сотрудники",
+      path: "/store/users",
+      permission: "view_users",
+    },
+  ].filter((item) => store.hasPermission(item.permission)),
+)
 </script>
 
 <style></style>

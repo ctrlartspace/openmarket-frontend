@@ -4,9 +4,8 @@ import { computed, ref } from "vue"
 export const useCartStore = defineStore("cart", () => {
   const cartItems = ref(new Map())
   const paymentTypes = ref([
-    { code: "online", label: "Перевод", icon: "smartphone", color: "blue" },
-    { code: "kaspi_qr", label: "Kaspi QR", icon: "qr_code", color: "red" },
-    { code: "cash", label: "Наличные", icon: "payments", color: "green" },
+    { code: 1, label: "Наличными", icon: "payments" },
+    { code: 2, label: "Безналичный расчет", icon: "credit_card" },
   ])
   const currentPaymentType = ref(0)
   const discount = ref(0)
@@ -98,10 +97,11 @@ export const useCartStore = defineStore("cart", () => {
       const roundDiscount = 1 - discount.value / 100
       const discountedPrice = item.sellingPrice * roundDiscount
       item.totalPrice = discountedPrice * item.count // Итоговая цена с учётом количества
-      item.discount = roundDiscount // Сохраняем текущую скидку
+      item.discount = Math.round(discount.value * 10) / 10 // Сохраняем текущую скидку
       cartItems.value.set(key, item) // Обновляем элемент в Map
+      console.log(item.discount)
     })
-
+    console.log(discount.value)
     hasDiscount.value = discount.value !== 0
   }
 

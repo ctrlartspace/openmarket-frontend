@@ -10,12 +10,23 @@
       <nav
         class="flex h-[55px] flex-col justify-center gap-2 border-b border-gray-100 px-8 py-3"
       >
-        <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
           <div class="flex items-center">
             <h1 class="truncate whitespace-nowrap font-medium">
               {{ headerTitle }}
             </h1>
           </div>
+
+          <span class="ml-auto"></span>
+          <router-link
+            v-if="userStore.isAuthorizedPoint"
+            v-press
+            class="pointer-events-auto flex select-none items-center justify-center gap-2 rounded-xl bg-white text-center font-medium"
+            to="/point/info"
+          >
+            <span class="material-symbols-rounded font-medium"> store </span>
+          </router-link>
+
           <button
             v-press
             class="pointer-events-auto flex select-none items-center justify-center gap-2 rounded-xl bg-white text-center font-medium"
@@ -126,12 +137,14 @@ import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import { useRoute } from "vue-router"
 import { useSelect } from "@/composables/useSelect2"
 import { useOnlineStore } from "@/stores/online.store.js"
+import { useUserStore } from "@/stores/user.store.js"
 
 const route = useRoute()
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm") // only smaller than lg
 const { isSelectableMode } = useSelect()
 const onlineStore = useOnlineStore()
+const userStore = useUserStore()
 
 const props = defineProps({
   menuItems: {

@@ -22,12 +22,12 @@
         <h1 class="">
           {{ storeInfo.fullName }}
         </h1>
-        <p class="text-gray-600">
+        <p class="text-gray-400">
           {{ storeInfo.address }}
         </p>
       </div>
     </div>
-    <h1 class="mb-2 px-4 text-gray-300">Точки продаж</h1>
+    <h1 class="mb-2 px-4 text-gray-400">Выберите точку продаж</h1>
     <a-modal
       v-model="selectedPoint"
       :async-operation="loginToStorePoint"
@@ -72,7 +72,6 @@ import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
 import AModal from "@/components/ui/AModal.vue"
 
-const dialogOpen = ref(true)
 const selectedPoint = ref(null)
 
 const {
@@ -111,8 +110,6 @@ onMounted(async () => {
     fetchStoreInfo("get", "/store"),
     fetchStorePoints("get", "/store/points"),
   ])
-  // await fetchStoreInfo("get", "/store")
-  // await fetchStorePoints("get", "/store/points")
 })
 </script>
 

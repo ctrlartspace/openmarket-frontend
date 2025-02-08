@@ -64,7 +64,14 @@
             </button>
           </div>
           <div class="w-full truncate py-3 font-medium">
-            {{ item.name || (item.comment || "") + " (свободная продажа)" }}
+            <span v-if="item.name">{{ item.name }}</span>
+
+            <span v-else
+              >{{ item.comment }}
+              <span class="rounded font-normal text-yellow-500"
+                >Свободная продажа</span
+              ></span
+            >
           </div>
           <div
             :class="{ 'text-rose-500': item.discount }"

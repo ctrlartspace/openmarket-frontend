@@ -1,6 +1,6 @@
 <template>
   <a-page :loading="isLoading">
-    <template #header>
+    <template v-if="store.hasPermission('create_arrival')" #header>
       <a-link
         :to="{
           path: '/point/items',
@@ -11,7 +11,7 @@
         Добавить
       </a-link>
     </template>
-    <template #floating>
+    <template v-if="store.hasPermission('create_arrival')" #floating>
       <a-link-floating
         :to="{
           path: '/point/items',
@@ -42,9 +42,11 @@ import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { onMounted } from "vue"
 import { useRouter } from "vue-router"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { useUserStore } from "@/stores/user.store.js"
 
 const router = useRouter()
 const { serverData: pointItems, sendRequest, isLoading } = useApiRequest()
+const store = useUserStore()
 
 const onItemClick = (item) => {
   router.push(`/point/items/${item.pointItem.id}`)

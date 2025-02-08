@@ -19,7 +19,7 @@
               >
               <span
                 :class="isActive ? 'text-black' : 'text-gray-300'"
-                class="truncate text-sm"
+                class="w-20 truncate text-center text-sm"
                 >{{ item.title }}</span
               >
               <div
@@ -84,18 +84,18 @@ const menuItems = ref([
   // },
   {
     id: 4,
-    title: "Продажи",
-    path: "/point/sales",
-    visible: true,
-    icon: "receipt_long",
-  },
-  {
-    id: 5,
     title: "Товары",
     path: "/point/items",
     visible: true,
     icon: "format_list_bulleted",
   },
+  // {
+  //   id: 5,
+  //   title: store.point?.name,
+  //   path: "/point/items",
+  //   visible: true,
+  //   icon: "store",
+  // },
 ])
 </script>
 

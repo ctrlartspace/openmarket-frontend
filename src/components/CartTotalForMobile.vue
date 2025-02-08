@@ -96,7 +96,7 @@
 <script setup>
 import AButtonFloatingText from "./ui/AButtonFloatingText.vue"
 import DiscountDialog from "@/components/DiscountDialog.vue"
-import { computed, defineEmits, ref } from "vue"
+import { defineEmits } from "vue"
 import { useCartStore } from "@/stores/cart.store"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
@@ -107,24 +107,15 @@ const emits = defineEmits(["onSearchClick"])
 const store = useCartStore()
 const { sendRequest, isLoading } = useApiRequest()
 
-const cartStep = ref(1)
-const inputAmount = ref("")
-
-const cartChange = computed(() =>
-  inputAmount.value ? inputAmount.value - store.getTotalAmount : "",
-)
-
 const makeSaleFromCart = async () => {
   if (store.isEmpty) {
     return
   }
   const response = await sendRequest("post", "/point/sales", {
     items: store.getItemsForSale,
-    changeAmount: cartChange.value,
   })
   if (response) {
     store.clearCart()
-    cartStep.value = 1
   }
 }
 

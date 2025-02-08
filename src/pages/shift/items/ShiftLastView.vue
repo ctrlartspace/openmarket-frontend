@@ -1,8 +1,8 @@
 <template>
-  <a-page :loading="isActiveCashLoading" :title="getCashTitle">
+  <a-page :loading="isWorkShiftLoading" :title="getCashTitle">
     <template #header>
       <a-modal
-        v-if="isActiveCashExists"
+        v-if="isWorkShiftOpen"
         #="{ props }"
         :async-operation="closeActiveCashRegister"
         title="Закрыть смену?"
@@ -10,8 +10,8 @@
         <a-button danger v-bind="props"> Закрыть смену</a-button>
       </a-modal>
       <a-link
-        v-if="!isActiveCashExists"
-        :loading="isActiveCashLoading"
+        v-if="!isWorkShiftOpen"
+        :loading="isWorkShiftLoading"
         primary
         to="/work-shifts/add"
       >
@@ -20,7 +20,7 @@
     </template>
     <template #floating>
       <a-modal
-        v-if="isActiveCashExists"
+        v-if="isWorkShiftOpen"
         #="{ props }"
         :async-operation="closeActiveCashRegister"
         title="Закрыть смену?"
@@ -30,7 +30,7 @@
         </a-button-floating-text>
       </a-modal>
       <a-link-floating-text
-        v-if="!isActiveCashExists && !isActiveCashLoading"
+        v-if="!isWorkShiftOpen && !isWorkShiftLoading"
         primary
         to="/work-shifts/add"
       >
@@ -38,28 +38,28 @@
       </a-link-floating-text>
     </template>
 
-    <div v-if="isActiveCashExists" class="flex flex-col gap-4">
+    <div v-if="isWorkShiftOpen" class="flex flex-col gap-4">
       <div class="rounded-xl bg-white p-4">
         <span class="">
-          {{ activeCash.point.name }}
+          {{ workShift.point.name }}
         </span>
         <p class="text-gray-400">
           <span>
             {{
-              formatDate(activeCash.createdAt, " HH:mm") +
+              formatDate(workShift.createdAt, " HH:mm") +
               ", " +
-              fromNow(activeCash.createdAt) +
+              fromNow(workShift.createdAt) +
               ", "
             }}
           </span>
-          <span class=""> {{ activeCash.user.fullName }}</span>
+          <span class=""> {{ workShift.user.fullName }}</span>
         </p>
       </div>
       <div class="grid grid-cols-2 gap-4">
         <div class="flex flex-col rounded-xl bg-white p-4">
           <span class="">Итого</span>
           <span class="font-medium text-blue-600">
-            {{ formatMoney(activeCash.total) }}
+            {{ formatMoney(workShift.total) }}
             <span class="font-semibold">₸</span>
           </span>
         </div>
@@ -73,7 +73,7 @@
       </div>
 
       <a-list
-        :items="activeCash.totalsPaymentType"
+        :items="workShift.totalsPaymentType"
         description-field="total"
         description-hint="₸"
         title-field="paymentType"
@@ -90,10 +90,50 @@
           </span>
         </template>
       </a-list>
+
+      <div>
+        <h1 class="mb-2 px-4 text-gray-400">Продажи</h1>
+        <a-list
+          :items="workShift.sales"
+          class="mb-4"
+          description-field="count"
+          description-hint="шт."
+          title-field="pointItem.name"
+        >
+          <template #title="{ item }">
+            <span v-if="item.pointItem" class="">{{
+              item.pointItem?.name
+            }}</span>
+
+            <span v-else
+              >{{ item.comment }}
+              <span class="rounded font-normal text-yellow-500"
+                >Свободная продажа</span
+              ></span
+            >
+          </template>
+          <template #description="{ item }">
+            <span class="font-medium">
+              {{ formatMoney(item.count * item.sellingPrice) }}
+            </span>
+            <span class="font-semibold"> ₸ </span>
+          </template>
+          <template #sub="{ item }">
+            <div class="flex justify-between text-gray-300">
+              <div>
+                <span>{{ formatDate(item.createdAt, "HH:mm") + ", " }}</span>
+                <span>{{ formatPaymentType(item.paymentType) }}</span>
+              </div>
+
+              <span>{{ item.count }} шт.</span>
+            </div>
+          </template>
+        </a-list>
+      </div>
     </div>
     <div v-else class="flex h-full items-center justify-center">
       <div
-        v-if="!isActiveCashLoading"
+        v-if="!isWorkShiftLoading"
         class="flex flex-col items-center justify-center rounded-xl p-4"
       >
         <span class="text-gray-300">Смена не найдена</span>
@@ -115,9 +155,9 @@ import { formatDate, fromNow } from "@/utils/format-date"
 import { formatMoney } from "@/utils/format-money"
 
 const {
-  serverData: activeCash,
-  sendRequest: fetchActiveCash,
-  isLoading: isActiveCashLoading,
+  serverData: workShift,
+  sendRequest: fetchWorkShift,
+  isLoading: isWorkShiftLoading,
 } = useApiRequest()
 const { sendRequest: closeActiveCash } = useApiRequest()
 // const {
@@ -127,48 +167,46 @@ const { sendRequest: closeActiveCash } = useApiRequest()
 // } = useApiRequest()
 
 const getCashTitle = computed(() => {
-  if (isActiveCashExists.value) {
-    return "Смена #" + activeCash.value.id
+  if (isWorkShiftOpen.value) {
+    return "Смена #" + workShift.value.id
   }
   return ""
 })
 
 const closeActiveCashRegister = async () => {
-  if (isActiveCashExists.value) {
-    await closeActiveCash("put", "/point/work-shifts/" + activeCash.value.id, {
+  if (isWorkShiftOpen.value) {
+    await closeActiveCash("put", "/point/work-shifts/" + workShift.value.id, {
       isClosed: true,
     })
-    await fetchActiveCash("get", "/point/work-shifts/today")
+    await fetchWorkShift("get", "/point/work-shifts/today")
   }
 }
 
-const isActiveCashExists = computed(
-  () => !!(activeCash.value && activeCash.value.id),
+const isWorkShiftOpen = computed(
+  () => !!(workShift.value && workShift.value.id),
 )
 
-const totalCashAmount = computed(
+const totalWorkShiftAmount = computed(
   () =>
-    activeCash.value.totalsPaymentType.find(
-      (item) => item.paymentType === "cash",
-    )?.total || 0,
+    workShift.value.totalsPaymentType.find((item) => item.paymentType === 1)
+      ?.total || 0,
 )
 
 const cashAmount = computed(
-  () => activeCash.value.startAmount + totalCashAmount.value,
+  () => workShift.value.startAmount + totalWorkShiftAmount.value,
 )
 
 const formatPaymentType = (paymentType) => {
   const types = {
-    cash: "Наличные",
-    kaspi_qr: "Kaspi QR",
-    online: "Перевод",
+    1: "Наличными",
+    2: "Безналичный расчет",
   }
 
   return types[paymentType] || "Другое"
 }
 
 onMounted(async () => {
-  await fetchActiveCash("get", "/point/work-shifts/today")
+  await fetchWorkShift("get", "/point/work-shifts/today")
 })
 </script>
 

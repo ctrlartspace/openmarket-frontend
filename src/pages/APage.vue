@@ -44,7 +44,7 @@
     </div>
     <div
       v-if="!isDesktop && hasFloating()"
-      :class="{ 'bg-white': solidFloating, 'p-6': paddingFloating }"
+      :class="{ 'bg-white': solidFloating, 'px-10 py-6': paddingFloating }"
       class="pointer-events-none absolute bottom-0 left-0 right-0 flex items-center justify-center"
     >
       <!-- <div
