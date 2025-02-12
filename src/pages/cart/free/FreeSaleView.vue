@@ -4,7 +4,7 @@
       <a-button primary @click="addFreeItem"> Добавить в корзину</a-button>
     </template>
     <template #floating>
-      <a-button-floating-text black @click="addFreeItem">
+      <a-button-floating-text black solid @click="addFreeItem">
         Готово
       </a-button-floating-text>
     </template>

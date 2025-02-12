@@ -29,6 +29,9 @@
     <template v-if="isError" #error>
       {{ errorMessage }}
     </template>
+    <template v-if="isHeadersNotValid" #error>
+      Проверьте названия столбцов
+    </template>
     <div class="mb-4 flex">
       <FileUpload
         v-if="!selectedFile"
@@ -131,12 +134,16 @@
         </span>
       </template>
 
-      <template #sub="{ item }"
-        ><span
-          :class="{ 'text-green-500': !item.hasCode }"
-          class="text-gray-400"
-          >{{ item.code || "Нет штрихкода" }}</span
-        >
+      <template #sub="{ item }">
+        <div class="flex justify-between text-gray-300">
+          <span
+            :class="{ 'text-green-500': !item.hasCode }"
+            class="text-gray-400"
+            >{{ item.code || "Нет штрихкода" }}</span
+          >
+
+          <span>{{ item.count }} шт.</span>
+        </div>
       </template>
     </a-list>
   </a-page>
@@ -165,9 +172,11 @@ const requiredHeaders = [
   "Наименование",
   "Цена закупки",
   "Цена продажи",
+  "Количество",
 ]
 
 const { sendRequest, isError, errorMessage } = useApiRequest()
+const isHeadersNotValid = ref(false)
 
 const uploadProducts = async () => {
   console.log("upload", duplicateProducts.value)
@@ -201,8 +210,10 @@ const validateAndProcessExcelData = (data) => {
   const headers = data[0]
 
   if (!validateHeaders(headers)) {
+    isHeadersNotValid.value = true
     return
   }
+  isHeadersNotValid.value = false
 
   const headerIndexes = requiredHeaders.reduce((acc, header) => {
     acc[header] = headers.indexOf(header)
@@ -216,12 +227,14 @@ const validateAndProcessExcelData = (data) => {
     const code =
       row[headerIndexes["Штрихкод"]] || generateEAN13(name, purchasePrice, i)
     const hasCode = !!row[headerIndexes["Штрихкод"]]
+    const count = parseInt(row[headerIndexes["Количество"]]) || 0
     return {
       id: i,
       code,
       name,
       purchasePrice,
       sellingPrice,
+      count,
       hasCode,
     }
   })

@@ -25,7 +25,12 @@
         :async-operation="closeActiveCashRegister"
         title="Закрыть смену?"
       >
-        <a-button-floating-text danger to="/arrivals/items/add" v-bind="props">
+        <a-button-floating-text
+          black
+          solid
+          to="/arrivals/items/add"
+          v-bind="props"
+        >
           Закрыть смену
         </a-button-floating-text>
       </a-modal>
@@ -43,7 +48,7 @@
         <span class="">
           {{ workShift.point.name }}
         </span>
-        <p class="text-gray-400">
+        <p class="text-gray-300">
           <span>
             {{
               formatDate(workShift.createdAt, " HH:mm") +
@@ -92,12 +97,14 @@
       </a-list>
 
       <div>
-        <h1 class="mb-2 px-4 text-gray-400">Продажи</h1>
+        <h1 class="mb-2 px-4 text-gray-400">История продаж</h1>
         <a-list
           :items="workShift.sales"
           class="mb-4"
           description-field="count"
           description-hint="шт."
+          sort-field="updatedAt"
+          sort-order="desc"
           title-field="pointItem.name"
         >
           <template #title="{ item }">
@@ -114,7 +121,21 @@
           </template>
           <template #description="{ item }">
             <span class="font-medium">
-              {{ formatMoney(item.count * item.sellingPrice) }}
+              <span
+                v-if="item.discount > 0"
+                class="mr-2 rounded bg-rose-50 px-2 py-1 text-rose-500"
+              >
+                -{{
+                  formatMoney(
+                    (item.pointItem.sellingPrice - item.sellingPrice) *
+                      item.count,
+                  )
+                }}
+                <span class="font-semibold">₸</span>
+              </span>
+              <span>
+                {{ formatMoney(item.count * item.sellingPrice) }}
+              </span>
             </span>
             <span class="font-semibold"> ₸ </span>
           </template>
@@ -198,7 +219,7 @@ const cashAmount = computed(
 
 const formatPaymentType = (paymentType) => {
   const types = {
-    1: "Наличными",
+    1: "Наличный расчет",
     2: "Безналичный расчет",
   }
 

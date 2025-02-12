@@ -17,7 +17,7 @@
       </div>
     </div>
     <div
-      v-for="(item, i) in items"
+      v-for="(item, i) in sortedItems"
       :key="i"
       class="flex w-full cursor-pointer flex-col items-center border-b border-gray-100 bg-white px-4 py-3 last:border-none hover:bg-gray-50 active:bg-gray-100"
       @click="emits('onItemClick', item)"
@@ -73,10 +73,11 @@ const props = defineProps({
   descriptionField: { type: String, default: null },
   descriptionHint: { type: String, default: "" },
   selectable: { type: Boolean },
+  sortField: { type: String, default: null },
+  sortOrder: { type: String, default: "asc" }, // asc или desc
 })
 
 const emits = defineEmits(["onItemClick"])
-
 const selectedItems = defineModel({ default: [] })
 const slots = useSlots()
 const hasAction = computed(() => !!slots.action)
@@ -85,9 +86,24 @@ const hasLast = computed(() => !!slots.last)
 const hasSub = computed(() => !!slots.sub)
 
 const getNestedProperty = (obj, path) => {
-  const val = path.split(".").reduce((acc, key) => acc && acc[key], obj)
+  const val = path?.split(".").reduce((acc, key) => acc && acc[key], obj)
   return val === null || val === undefined ? "Неизв." : val
 }
+
+const sortedItems = computed(() => {
+  if (!props.sortField) return props.items
+  return [...props.items].sort((a, b) => {
+    const valA = getNestedProperty(a, props.sortField)
+    const valB = getNestedProperty(b, props.sortField)
+    return props.sortOrder === "asc"
+      ? valA > valB
+        ? 1
+        : -1
+      : valA < valB
+        ? 1
+        : -1
+  })
+})
 
 const selectAll = (event) => {
   const isChecked = event.target.checked

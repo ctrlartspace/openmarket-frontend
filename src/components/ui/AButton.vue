@@ -31,6 +31,7 @@ defineProps({
   accent: { type: Boolean },
   black: { type: Boolean },
   block: { type: Boolean },
+  solid: { type: Boolean },
 })
 </script>
 

@@ -88,6 +88,18 @@
           />
         </div>
       </div>
+
+      <div class="flex-auto">
+        <label class="mb-2 block font-medium"> В наличии </label>
+        <InputNumber
+          v-model="pointItem.count"
+          fluid
+          locale="ru-RU"
+          placeholder="Количество"
+          readonly
+          suffix=" шт."
+        />
+      </div>
       <div v-if="pointItem.availability?.length > 0" class="mt-4 flex-auto">
         <label class="mb-2 block font-medium">Наличие в точках</label>
         <a-list

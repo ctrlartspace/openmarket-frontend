@@ -32,7 +32,7 @@
             ? 'opacity-100 duration-[1000ms]'
             : 'pointer-events-none opacity-0 duration-200'
         "
-        class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-gray-100 transition-opacity"
+        class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-gray-100 transition-opacity will-change-auto"
       >
         <div class="flex h-full w-full flex-col gap-2 p-4">
           <div class="animate-pulse rounded-xl bg-gray-200 px-4 py-6"></div>
@@ -47,11 +47,6 @@
       :class="{ 'bg-white': solidFloating, 'px-10 py-6': paddingFloating }"
       class="pointer-events-none absolute bottom-0 left-0 right-0 flex items-center justify-center"
     >
-      <!-- <div
-        class="pointer-events-auto flex overflow-hidden whitespace-nowrap rounded-xl border border-gray-100 bg-white shadow-sm [&>*:first-child]:border-none [&>*]:rounded-none [&>*]:border-l [&>*]:border-gray-100"
-      >
-        <slot name="floating" :floating="true"></slot>
-      </div> -->
       <slot name="floating"></slot>
     </div>
   </div>

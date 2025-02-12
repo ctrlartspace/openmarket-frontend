@@ -73,9 +73,10 @@
             :disabled="isLoading"
             black
             rounded
+            solid
             v-bind="props"
           >
-            <span class="text-white">Оплата</span>
+            <span>Оплата</span>
           </a-button-floating-text>
         </a-modal>
         <discount-dialog #="{ props }">

@@ -68,7 +68,7 @@
 
             <span v-else
               >{{ item.comment }}
-              <span class="rounded font-normal text-yellow-500"
+              <span class="rounded text-yellow-500"
                 >Свободная продажа</span
               ></span
             >

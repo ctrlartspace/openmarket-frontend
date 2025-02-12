@@ -17,7 +17,7 @@ export function useApiRequest() {
 
   const sendRequest = async (method, url, payload = null) => {
     try {
-      await timeout(1)
+      // await timeout(1)
       isLoading.value = true
       isError.value = false
       errorMessage.value = ""
@@ -25,7 +25,7 @@ export function useApiRequest() {
 
       // Вызов API с динамическим методом
 
-      await timeout(3000)
+      await timeout(100)
       const response = await apiService[method](url, payload)
 
       // Успешный ответ

@@ -5,6 +5,7 @@
   >
     <template #header>
       <a-link
+        v-if="!isSelectableMode"
         :to="{
           path: '/point/items/import',
         }"
@@ -22,6 +23,7 @@
     </template>
     <template #floating>
       <a-link-floating
+        v-if="!isSelectableMode"
         :to="{
           path: '/point/items/import',
         }"
