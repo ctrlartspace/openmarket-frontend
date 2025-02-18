@@ -3,13 +3,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { computed } from "vue"
 import BasePage from "@/pages/BasePage.vue"
 import { useUserStore } from "@/stores/user.store.js"
 
 const store = useUserStore()
 
-const menuItems = ref(
+const menuItems = computed(() =>
   [
     {
       title: "Сегодня",

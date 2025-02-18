@@ -1,6 +1,6 @@
 <template>
   <a-page :loading="isLoading">
-    <div v-if="sales" class="flex flex-col gap-2">
+    <div v-if="sales && sales.length > 0" class="flex flex-col gap-2">
       <div v-for="data in groupedDataByDate" :key="data.date">
         <h1 class="mb-2 px-4 text-gray-300">
           {{ fromNow(data.date) }}

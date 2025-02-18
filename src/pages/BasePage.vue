@@ -90,35 +90,35 @@
   <div v-if="isDesktop" class="flex w-full flex-col bg-gray-50">
     <div class="grid w-full flex-grow grid-cols-10 overflow-hidden">
       <div class="col-span-3 border-r border-gray-100">
-        <div class="flex h-full flex-col justify-between">
-          <ul class="">
-            <li
-              v-for="item in menuItemsFiltered"
-              :key="item"
-              class="border-b border-gray-100 bg-white px-4 py-1"
-            >
-              <router-link
-                v-slot="{ isActive }"
-                :to="item.path"
-                class="block w-full"
-              >
-                <span
-                  :class="isActive ? 'text-black' : 'text-gray-300'"
-                  class="font-medium"
-                >
-                  {{ item.title }}
-                </span>
-              </router-link>
-            </li>
-          </ul>
-          <ul v-if="hasAction()">
-            <li
-              class="border-t border-gray-100 bg-white px-4 py-1 font-medium text-gray-300"
-            >
-              <slot name="action"></slot>
-            </li>
-          </ul>
-        </div>
+        <!--        <div class="flex h-full flex-col justify-between">-->
+        <!--          <ul class="">-->
+        <!--            <li-->
+        <!--              v-for="item in menuItemsFiltered"-->
+        <!--              :key="item"-->
+        <!--              class="border-b border-gray-100 bg-white px-4 py-1"-->
+        <!--            >-->
+        <!--              <router-link-->
+        <!--                v-slot="{ isActive }"-->
+        <!--                :to="item.path"-->
+        <!--                class="block w-full"-->
+        <!--              >-->
+        <!--                <span-->
+        <!--                  :class="isActive ? 'text-black' : 'text-gray-300'"-->
+        <!--                  class="font-medium"-->
+        <!--                >-->
+        <!--                  {{ item.title }}-->
+        <!--                </span>-->
+        <!--              </router-link>-->
+        <!--            </li>-->
+        <!--          </ul>-->
+        <!--          <ul v-if="hasAction()">-->
+        <!--            <li-->
+        <!--              class="border-t border-gray-100 bg-white px-4 py-1 font-medium text-gray-300"-->
+        <!--            >-->
+        <!--              <slot name="action"></slot>-->
+        <!--            </li>-->
+        <!--          </ul>-->
+        <!--        </div>-->
       </div>
       <div class="col-span-7 flex-col overflow-hidden">
         <router-view></router-view>

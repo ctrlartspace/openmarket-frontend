@@ -2,6 +2,7 @@
   <a-page title="Импорт товаров">
     <template #header>
       <a-modal
+        v-if="selectedFile"
         #="{ props }"
         :async-operation="uploadProducts"
         title="Загрузить товары?"
@@ -13,6 +14,7 @@
     </template>
     <template #floating>
       <a-modal
+        v-if="selectedFile"
         #="{ props }"
         :async-operation="uploadProducts"
         title="Загрузить товары?"
@@ -29,20 +31,39 @@
     <template v-if="isError" #error>
       {{ errorMessage }}
     </template>
-    <template v-if="isHeadersNotValid" #error>
-      Проверьте названия столбцов
-    </template>
     <div class="mb-4 flex">
-      <FileUpload
+      <div
         v-if="!selectedFile"
-        auto
-        choose-label="Выбрать файл"
-        custom-upload
-        mode="basic"
-        severity="secondary"
-        @select="handleFileUpload"
+        class="flex w-full flex-col gap-2 rounded-xl bg-white p-4"
       >
-      </FileUpload>
+        <message severity="success">
+          <p class="mb-2">
+            Для импорта товаров загрузите Excel-файл, содержащий следующие
+            столбцы:
+          </p>
+          <ul class="mb-2 list-disc pl-4 font-normal">
+            <li>Штрихкод</li>
+            <li>Наименование</li>
+            <li>Цена закупки</li>
+            <li>Цена продажи</li>
+            <li>Количество</li>
+          </ul>
+          <p>
+            Файл может содержать и другие столбцы, но эти должны быть
+            обязательно.
+          </p>
+        </message>
+        <FileUpload
+          auto
+          choose-label="Выбрать файл"
+          class="w-full"
+          custom-upload
+          mode="basic"
+          severity="secondary"
+          @select="handleFileUpload"
+        >
+        </FileUpload>
+      </div>
 
       <InputGroup v-else>
         <InputText v-model="selectedFile.name" readonly type="text" />
@@ -57,11 +78,30 @@
     </div>
 
     <div v-if="hasDublicates" class="mb-2">
-      <Message class="mb-2" severity="warn">
-        <p>Одинаковые штрихкоды: {{ duplicateProducts.length }}</p>
-        <p>Удалите лишние товары</p>
+      <Message class="mb-2" severity="error">
+        <template #container>
+          <div class="p-4">
+            <p>Одинаковые штрихкоды: {{ duplicateProducts.length }}</p>
+            <p>Удалите лишние товары</p>
+
+            <a-modal
+              #="{ props }"
+              :async-operation="removeDuplicateProducts"
+              title="Удалить дубликаты?"
+            >
+              <button
+                v-press
+                class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-4 py-3 font-medium text-white shadow-sm"
+                v-bind="props"
+              >
+                <span> Удалить автоматически </span>
+              </button>
+            </a-modal>
+          </div>
+        </template>
       </Message>
 
+      <h1 class="mb-2 px-4 text-gray-300">Выберите лишние товары</h1>
       <a-list
         v-model="selectedDublicateItems"
         :items="duplicateProducts"
@@ -94,7 +134,7 @@
         <template #sub="{ item }"
           ><span
             :class="{ 'text-green-500': !item.hasCode }"
-            class="text-gray-400"
+            class="text-red-400"
             >{{ item.code || "Нет штрихкода" }}</span
           ><span v-if="!item.hasCode"> (сгенерирован)</span></template
         >
@@ -160,6 +200,7 @@ import { formatMoney } from "@/utils/format-money.js"
 import { generateEAN13 } from "@/utils/barcodeGenerator.js"
 import { useApiRequest } from "@/composables/useApiRequest.js"
 import { useRouter } from "vue-router"
+import { useModalStore } from "@/stores/modal.store.js"
 
 const router = useRouter()
 const selectedFile = ref(null)
@@ -167,20 +208,20 @@ const selectedItems = ref([])
 const selectedDublicateItems = ref([])
 const products = ref([])
 const duplicateProducts = ref([])
-const requiredHeaders = [
+const requiredHeaders = ref([
   "Штрихкод",
   "Наименование",
   "Цена закупки",
   "Цена продажи",
   "Количество",
-]
+])
+
+const notValideHeaders = ref([])
 
 const { sendRequest, isError, errorMessage } = useApiRequest()
-const isHeadersNotValid = ref(false)
+const modal = useModalStore()
 
 const uploadProducts = async () => {
-  console.log("upload", duplicateProducts.value)
-
   if (duplicateProducts.value.length === 0) {
     await sendRequest("post", "/point/items/many", products.value)
     clearFile()
@@ -210,12 +251,16 @@ const validateAndProcessExcelData = (data) => {
   const headers = data[0]
 
   if (!validateHeaders(headers)) {
-    isHeadersNotValid.value = true
+    modal.show(
+      "Неверный формат",
+      "Неправильно заданы названия столбцов: " +
+        notValideHeaders.value.join(", "),
+    )
+    clearFile()
     return
   }
-  isHeadersNotValid.value = false
 
-  const headerIndexes = requiredHeaders.reduce((acc, header) => {
+  const headerIndexes = requiredHeaders.value.reduce((acc, header) => {
     acc[header] = headers.indexOf(header)
     return acc
   }, {})
@@ -240,10 +285,15 @@ const validateAndProcessExcelData = (data) => {
   })
 
   duplicateProducts.value = findDuplicates(products.value)
+  console.log(duplicateProducts.value)
 }
 
 const validateHeaders = (headers) => {
-  return requiredHeaders.every((header) => headers.includes(header))
+  return requiredHeaders.value.every((header) => {
+    const isValid = headers.includes(String(header).trim())
+    notValideHeaders.value.push(header)
+    return isValid
+  })
 }
 
 function findDuplicates(arr) {
@@ -260,7 +310,7 @@ function findDuplicates(arr) {
     }
   })
 
-  return duplicates
+  return duplicates.sort((a, b) => String(a.code).localeCompare(String(b.code)))
 }
 
 const hasDublicates = computed(() => duplicateProducts.value.length > 0)
@@ -280,10 +330,24 @@ const removeSelectedItems = () => {
   selectedDublicateItems.value = []
 }
 
+const removeDuplicateProducts = () => {
+  const uniqueProducts = new Map()
+
+  products.value.forEach((product) => {
+    if (!uniqueProducts.has(product.code)) {
+      uniqueProducts.set(product.code, product)
+    }
+  })
+
+  products.value = Array.from(uniqueProducts.values())
+  duplicateProducts.value = [] // Очищаем список дубликатов
+}
+
 const clearFile = () => {
   selectedFile.value = null
   products.value = []
   duplicateProducts.value = []
+  notValideHeaders.value = []
 }
 </script>
 

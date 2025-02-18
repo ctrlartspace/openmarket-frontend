@@ -8,15 +8,26 @@
       v-press
       :class="{
         'animate-pulse': loading,
-        'text-black hover:bg-gray-50 hover:text-gray-700': gray,
-        'text-blue-600 hover:bg-gray-50 hover:text-blue-700': primary,
-        'text-red-600 hover:bg-gray-50 hover:text-red-700': danger,
-        'text-yellow-600 hover:bg-gray-50 hover:text-yellow-700': info,
-        'text-green-500 hover:bg-gray-50 hover:text-green-700': success,
+        'bg-white text-gray-800': gray && !solid,
+        'bg-white text-blue-600': primary && !solid,
+        'bg-white text-red-600': danger && !solid,
+        'bg-white text-yellow-600': info && !solid,
+        'bg-white text-green-500': success && !solid,
+        'bg-white text-pink-500': accent && !solid,
+        'bg-white text-black': black && !solid,
+        'bg-gray-800 text-white': gray && solid,
+        'bg-blue-600 text-white': primary && solid,
+        'border-none bg-rose-500 text-white': danger && solid,
+        'bg-yellow-600 text-white': info && solid,
+        'bg-green-500 text-white': success && solid,
+        'bg-pink-500 text-white': accent && solid,
+        'bg-black text-white': black && solid,
+        'w-full justify-center': block,
         'rounded-xl border': rounded,
+        'text-opacity-50 hover:text-opacity-50': $attrs.disabled,
       }"
       :disabled="loading"
-      class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-gray-100 bg-white p-4 font-medium shadow-2xl shadow-gray-500/20 first:rounded-l-xl last:rounded-r-xl last:border-r"
+      class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-gray-100 p-4 font-medium shadow-2xl shadow-gray-500/20 first:rounded-l-xl last:rounded-r-xl last:border-r"
       v-bind="$attrs"
     >
       <slot></slot>
@@ -35,7 +46,11 @@ defineProps({
   danger: { type: Boolean },
   info: { type: Boolean },
   success: { type: Boolean },
+  accent: { type: Boolean },
+  black: { type: Boolean },
+  block: { type: Boolean },
   rounded: { type: Boolean },
+  solid: { type: Boolean },
 })
 </script>
 

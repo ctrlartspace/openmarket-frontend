@@ -50,7 +50,9 @@
           :async-operation="store.logOutFromPoint"
           title="Выйти из точки?"
         >
-          <a-button danger v-bind="props"> Закрыть</a-button>
+          <a-button danger v-bind="props"
+            ><span class="material-symbols-rounded">exit_to_app</span></a-button
+          >
         </a-modal>
       </li>
     </ul>
@@ -86,7 +88,9 @@
           :async-operation="store.logOut"
           title="Завершить работу и выйти?"
         >
-          <a-button danger v-bind="props">Завершить работу</a-button>
+          <a-button danger v-bind="props"
+            ><span class="material-symbols-rounded">exit_to_app</span></a-button
+          >
         </a-modal>
       </li>
     </ul>
@@ -101,7 +105,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { computed } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useOnlineStore } from "@/stores/online.store.js"
 import AButton from "@/components/ui/AButton.vue"
@@ -110,7 +114,7 @@ import AModal from "@/components/ui/AModal.vue"
 const onlineStore = useOnlineStore()
 const store = useUserStore()
 
-const menuItems = ref(
+const menuItems = computed(() =>
   [
     {
       title: "Корзина",

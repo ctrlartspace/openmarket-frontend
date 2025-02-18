@@ -1,5 +1,7 @@
 import { defineStore } from "pinia"
 import { computed, ref } from "vue"
+import { useApiRequest } from "@/composables/useApiRequest.js"
+import { useModalStore } from "@/stores/modal.store.js"
 
 export const useCartStore = defineStore("cart", () => {
   const cartItems = ref(new Map())
@@ -134,6 +136,24 @@ export const useCartStore = defineStore("cart", () => {
     hasDiscount.value = false
   }
 
+  const { sendRequest, isError, errorMessage } = useApiRequest()
+  const modal = useModalStore()
+
+  const makeSale = async () => {
+    if (isEmpty.value) {
+      return
+    }
+    const response = await sendRequest("post", "/point/sales", {
+      items: getItemsForSale.value,
+    })
+    if (response) {
+      clearCart()
+    }
+    if (isError.value) {
+      modal.show("Ошибка", errorMessage.value)
+    }
+  }
+
   return {
     cartItems,
     groupedCartItems,
@@ -156,5 +176,6 @@ export const useCartStore = defineStore("cart", () => {
     setDiscountByAmount,
     removeDiscount,
     clearDiscount,
+    makeSale,
   }
 })

@@ -26,7 +26,7 @@
       <InputNumber
         v-model="startAmount"
         v-autofocus
-        :invalid="validationErrors.startAmount"
+        :invalid="validationErrors?.startAmount"
         fluid
         locale="ru-RU"
         placeholder="0 ₸"
@@ -43,18 +43,23 @@ import AModal from "@/components/ui/AModal.vue"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useApiRequest } from "@/composables/useApiRequest"
+import { useModalStore } from "@/stores/modal.store.js"
 
-const { sendRequest, validationErrors } = useApiRequest()
+const { sendRequest, isError, errorMessage, validationErrors } = useApiRequest()
 const router = useRouter()
 const startAmount = ref(null)
+const modal = useModalStore()
 
 const openCashRegister = async () => {
-  const response = await sendRequest("post", "/point/work-shifts", {
+  await sendRequest("post", "/point/work-shifts", {
     startAmount: startAmount.value,
   })
-  if (response) {
-    await router.push("/work-shifts/last")
+  if (isError.value) {
+    modal.show("Ошибка", errorMessage.value)
+    return
   }
+
+  await router.push("/work-shifts/last")
 }
 </script>
 

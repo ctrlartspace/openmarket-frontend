@@ -20,16 +20,6 @@
         @blur="isKeyboardVisible = false"
         @focus="isKeyboardVisible = true"
       />
-      <!--      <input-->
-      <!--        v-autofocus-->
-      <!--        v-model.number="freeItem.sellingPrice"-->
-      <!--        class="block w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"-->
-      <!--        inputmode="numeric"-->
-      <!--        placeholder="0 ₸"-->
-      <!--        type="text"-->
-      <!--        @blur="isKeyboardVisible = false"-->
-      <!--        @focus="isKeyboardVisible = true"-->
-      <!--      />-->
       <div class="no-scrollbar mb-2 flex gap-2 overflow-auto">
         <button
           v-for="price in [
@@ -52,13 +42,13 @@
       />
       <button style="display: none" type="submit"></button>
     </form>
-    <teleport
-      v-if="isKeyboardVisible && isDesktop"
-      defer
-      to="#keyboard-container"
-    >
-      <a-number-keyboard v-model.number="freeItem.sellingPrice" />
-    </teleport>
+    <!--    <teleport-->
+    <!--      v-if="isKeyboardVisible && isDesktop"-->
+    <!--      defer-->
+    <!--      to="#keyboard-container"-->
+    <!--    >-->
+    <!--      <a-number-keyboard v-model.number="freeItem.sellingPrice" />-->
+    <!--    </teleport>-->
   </a-page>
 </template>
 
@@ -66,7 +56,6 @@
 import { ref } from "vue"
 import AButton from "@/components/ui/AButton.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
-import ANumberKeyboard from "@/components/ui/ANumberKeyboard.vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"

@@ -2,13 +2,13 @@
   <a-page :loading="isLoading" title="Товар">
     <template #header>
       <a-button gray @click="addItemToCart"> В корзину</a-button>
-      <a-button
-        :loading="isItemAddingToFavoritesLoading"
-        accent
-        @click="onAddItemToFavorites"
+      <a-modal
+        #="{ props }"
+        :async-operation="onAddItemToFavorites"
+        title="Добавить товар в избранное?"
       >
-        В избранное
-      </a-button>
+        <a-button accent v-bind="props"> В избранное </a-button>
+      </a-modal>
       <a-button success @click="applySelect(pointItem, '/point/arrivals/add')">
         Приход
       </a-button>
@@ -24,11 +24,13 @@
       <a-button-floating @click="addItemToCart"
         >shopping_cart
       </a-button-floating>
-      <a-button-floating
-        :loading="isItemAddingToFavoritesLoading"
-        @click="onAddItemToFavorites"
-        >star
-      </a-button-floating>
+      <a-modal
+        #="{ props }"
+        :async-operation="onAddItemToFavorites"
+        title="Добавить товар в избранное?"
+      >
+        <a-button-floating v-bind="props">star </a-button-floating>
+      </a-modal>
       <a-button-floating @click="applySelect(pointItem, '/point/arrivals/add')"
         >add
       </a-button-floating>
@@ -39,9 +41,6 @@
       >
         <a-button-floating v-bind="props"> save</a-button-floating>
       </a-modal>
-    </template>
-    <template v-if="isItemAddingToFavoritesError" #error
-      >{{ errorMessageOfItemAddingToFavorites }}
     </template>
     <template v-if="isError" #error>{{ errorMessage }}</template>
     <div v-if="pointItem" class="flex flex-col gap-2">
@@ -124,10 +123,12 @@ import { useApiRequest } from "@/composables/useApiRequest"
 import AList from "@/components/ui/AList.vue"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useCartStore } from "@/stores/cart.store.js"
+import { useModalStore } from "@/stores/modal.store.js"
 
 const cartStore = useCartStore()
 const route = useRoute()
 const router = useRouter()
+const modal = useModalStore()
 const { applySelect } = useSelect()
 const {
   serverData: pointItem,
@@ -150,6 +151,9 @@ const onAddItemToFavorites = async () => {
   await addItemToFavorites("post", "/point/favorites", {
     pointItemId: pointItem.value.id,
   })
+  if (isItemAddingToFavoritesError.value) {
+    modal.show("Ошибка", errorMessageOfItemAddingToFavorites.value)
+  }
 }
 const addItemToCart = () => {
   cartStore.addItem(pointItem.value)

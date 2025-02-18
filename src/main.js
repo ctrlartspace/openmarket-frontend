@@ -55,22 +55,22 @@ const Noir = definePreset(Aura, {
           root: {
             primary: {
               color: "{primary.500}",
-              background: "#FFF",
+              background: "{primary.50}",
               border: {
                 color: "#FFF",
               },
               hover: {
                 color: "{primary.500}",
-                background: "#FFF",
+                background: "{primary.100}",
                 border: {
-                  color: "{gray.200}",
+                  color: "{primary.200}",
                 },
               },
               active: {
                 color: "{primary.500}",
-                background: "#FFF",
+                background: "{primary.100}",
                 border: {
-                  color: "{gray.300}",
+                  color: "{primary.400}",
                 },
               },
             },
@@ -171,6 +171,8 @@ const Noir = definePreset(Aura, {
         padding: "0.75rem 1rem",
       },
       border: {
+        width: "0",
+
         radius: "{border.radius.xl}",
       },
     },

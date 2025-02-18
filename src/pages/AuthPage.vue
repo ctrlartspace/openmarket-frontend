@@ -9,10 +9,10 @@
       <div class="flex-auto">
         <InputMask
           v-model="authData.phoneNumber"
-          :invalid="validationErrors?.phoneNumber"
           fluid
           mask="+7(999)999-99-99"
           placeholder="Номер телефона"
+          type="tel"
           unmask
         />
       </div>

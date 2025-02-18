@@ -22,7 +22,7 @@
       </template>
 
       <template #sub="{ item }">
-        <span class="text-sm text-gray-300">{{
+        <span class="text-gray-300">{{
           formatDate(item.createdAt, "DD.MM.YYYY HH:mm") +
           (item.isClosed ? " - " + formatDate(item.updatedAt, "HH:mm") : "")
         }}</span>

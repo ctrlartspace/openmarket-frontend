@@ -66,16 +66,10 @@
 
         <a-modal
           #="{ props }"
-          :async-operation="makeSaleFromCart"
+          :async-operation="store.makeSale"
           title="Подтвердить оплату?"
         >
-          <a-button-floating-text
-            :disabled="isLoading"
-            black
-            rounded
-            solid
-            v-bind="props"
-          >
+          <a-button-floating-text black rounded solid v-bind="props">
             <span>Оплата</span>
           </a-button-floating-text>
         </a-modal>
@@ -99,26 +93,12 @@ import AButtonFloatingText from "./ui/AButtonFloatingText.vue"
 import DiscountDialog from "@/components/DiscountDialog.vue"
 import { defineEmits } from "vue"
 import { useCartStore } from "@/stores/cart.store"
-import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
 import AModal from "@/components/ui/AModal.vue"
 
 const emits = defineEmits(["onSearchClick"])
 
 const store = useCartStore()
-const { sendRequest, isLoading } = useApiRequest()
-
-const makeSaleFromCart = async () => {
-  if (store.isEmpty) {
-    return
-  }
-  const response = await sendRequest("post", "/point/sales", {
-    items: store.getItemsForSale,
-  })
-  if (response) {
-    store.clearCart()
-  }
-}
 
 const onSearchClick = () => {
   emits("onSearchClick")

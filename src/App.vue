@@ -1,6 +1,7 @@
 <template>
   <desktop-layout v-if="isDesktop" />
   <mobile-layout v-else />
+  <AMessageModal />
 </template>
 <script setup>
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
@@ -8,6 +9,7 @@ import { onBeforeUnmount, onMounted } from "vue"
 import MobileLayout from "@/components/layouts/MobileLayout.vue"
 import DesktopLayout from "@/components/layouts/DesktopLayout.vue"
 import { useOnlineStore } from "@/stores/online.store.js"
+import AMessageModal from "@/components/ui/AMessageModal.vue"
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm")
@@ -27,6 +29,7 @@ onMounted(() => {
   if (!navigator.onLine) {
     onlineStore.setOffline()
   }
+
   window.addEventListener("online", checkOnline)
   window.addEventListener("offline", checkOnline)
 })

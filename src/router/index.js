@@ -115,7 +115,7 @@ const routes = [
   {
     path: "/point",
     component: PointPage,
-    redirect: "/point/items",
+    redirect: "/point/info",
     children: [
       {
         path: "info",

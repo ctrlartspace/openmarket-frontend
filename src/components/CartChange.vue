@@ -51,7 +51,7 @@
 
           <a-modal
             #="{ props }"
-            :async-operation="makeSaleFromCart"
+            :async-operation="store.makeSale"
             title="Подтвердить оплату?"
           >
             <button
@@ -60,16 +60,11 @@
                   ? 'bg-gray-100 text-gray-300'
                   : 'bg-black text-white transition-all will-change-transform hover:brightness-95 active:scale-95 active:brightness-90'
               "
-              :disabled="store.isEmpty || isLoading"
+              :disabled="store.isEmpty"
               class="flex w-full select-none items-center justify-center gap-4 truncate rounded-xl px-6 py-4 font-medium"
               v-bind="props"
             >
-              <span
-                v-if="isLoading"
-                class="material-symbols-rounded animate-spin font-semibold"
-                >progress_activity</span
-              >
-              <span v-else>Оплата</span>
+              <span>Оплата</span>
             </button>
           </a-modal>
         </div>
@@ -86,25 +81,14 @@
 import ANumberKeyboard from "@/components/ui/ANumberKeyboard.vue"
 import { ref } from "vue"
 import { useCartStore } from "@/stores/cart.store"
-import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
 import DiscountDialog from "@/components/DiscountDialog.vue"
 import AModal from "@/components/ui/AModal.vue"
 
 const store = useCartStore()
 const inputAmount = ref(null)
-const { sendRequest, isLoading } = useApiRequest()
 
 const isKeyboardVisible = ref(false)
-
-const makeSaleFromCart = async () => {
-  const response = await sendRequest("post", "/point/sales", {
-    items: store.getItemsForSale,
-  })
-  if (response) {
-    store.clearCart()
-  }
-}
 
 const changePaymentType = () => {
   store.changePaymentType()
