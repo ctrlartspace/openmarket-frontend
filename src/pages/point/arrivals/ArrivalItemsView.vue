@@ -1,15 +1,24 @@
 <template>
-  <a-page :loading="isLoading">
+  <a-page :loading="isLoading" title="Поступления">
     <template v-if="store.hasPermission('create_arrival')" #header>
-      <a-link
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="$router.back()"
+      >
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span class="font-medium"> Назад</span>
+      </button>
+      <router-link
         :to="{
           path: '/point/items',
           query: { selectableMode: true, nextPath: '/point/arrivals/add' },
         }"
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
         primary
       >
-        Добавить
-      </a-link>
+        <span class="material-symbols-rounded">add</span>
+        <span class="font-medium"> Создать</span>
+      </router-link>
     </template>
     <template v-if="store.hasPermission('create_arrival')" #floating>
       <a-link-floating
@@ -37,7 +46,6 @@
 
 <script setup>
 import AList from "@/components/ui/AList.vue"
-import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import { onMounted } from "vue"
 import { useRouter } from "vue-router"

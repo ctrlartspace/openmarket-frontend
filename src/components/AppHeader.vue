@@ -44,17 +44,6 @@
           </span>
         </router-link>
       </li>
-      <li class="inline">
-        <a-modal
-          #="{ props }"
-          :async-operation="store.logOutFromPoint"
-          title="Выйти из точки?"
-        >
-          <a-button danger v-bind="props"
-            ><span class="material-symbols-rounded">exit_to_app</span></a-button
-          >
-        </a-modal>
-      </li>
     </ul>
   </nav>
   <nav
@@ -81,18 +70,6 @@
           </span>
         </router-link>
       </li>
-
-      <li class="inline">
-        <a-modal
-          #="{ props }"
-          :async-operation="store.logOut"
-          title="Завершить работу и выйти?"
-        >
-          <a-button danger v-bind="props"
-            ><span class="material-symbols-rounded">exit_to_app</span></a-button
-          >
-        </a-modal>
-      </li>
     </ul>
   </nav>
 
@@ -108,8 +85,6 @@
 import { computed } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useOnlineStore } from "@/stores/online.store.js"
-import AButton from "@/components/ui/AButton.vue"
-import AModal from "@/components/ui/AModal.vue"
 
 const onlineStore = useOnlineStore()
 const store = useUserStore()

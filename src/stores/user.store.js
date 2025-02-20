@@ -43,6 +43,7 @@ export const useUserStore = defineStore(
     }
 
     const logOutFromPoint = async () => {
+      await UserService.logoutFromPoint()
       isAuthorizedPoint.value = false
       point.value = null
       cartStore.clearCart()
@@ -50,6 +51,7 @@ export const useUserStore = defineStore(
     }
 
     const logOut = async () => {
+      await UserService.logoutFromStore()
       isAuthorizedStore.value = false
       isAuthorizedPoint.value = false
       point.value = null

@@ -1,7 +1,20 @@
 <template>
-  <a-page solid-floating title="Свободная продажа">
+  <a-page title="Свободная продажа">
     <template #header>
-      <a-button primary @click="addFreeItem"> Добавить в корзину</a-button>
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="$router.back()"
+      >
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span class="font-medium"> Назад</span>
+      </button>
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-600"
+        @click="addFreeItem"
+      >
+        <span class="material-symbols-rounded">shopping_cart</span>
+        <span class="font-medium"> Добавить</span>
+      </button>
     </template>
     <template #floating>
       <a-button-floating-text black solid @click="addFreeItem">
@@ -54,14 +67,9 @@
 
 <script setup>
 import { ref } from "vue"
-import AButton from "@/components/ui/AButton.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
-import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
-
-const breakpoints = useBreakpoints(breakpointsTailwind)
-const isDesktop = breakpoints.greater("sm") // only smaller than lg
 
 const isKeyboardVisible = ref(false)
 
@@ -74,12 +82,12 @@ const addFreeItem = async () => {
   freeItem.value.sellingPrice = Number(freeItem.value.sellingPrice)
   if (freeItem.value.sellingPrice <= 0) {
     freeItem.value = { sellingPrice: "" }
-    router.push("/cart")
+    await router.push("/cart")
     return
   }
   store.addItem(freeItem.value)
   freeItem.value = { sellingPrice: "" }
-  router.push("/cart")
+  await router.push("/cart")
 }
 </script>
 

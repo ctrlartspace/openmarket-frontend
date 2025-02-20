@@ -38,7 +38,7 @@ import { useRouteStore } from "@/stores/route.store"
 
 const routes = [
   { path: "/no-internet", component: NoInternetPage },
-  { path: "/", redirect: "/store" },
+  { path: "/", redirect: "/point" },
   {
     path: "/cart",
     component: CartPage,
@@ -252,19 +252,19 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const routeStore = useRouteStore()
 
   routeStore.setPreviousRoute(from)
-  console.log(to.path)
+
   if (
     to.path !== "/auth" &&
     to.path !== "/store-create" &&
     to.path !== "/store-create/user-info" &&
     !userStore.isAuthorizedStore
   ) {
-    userStore.logOut()
+    await userStore.logOut()
   } else {
     next()
   }

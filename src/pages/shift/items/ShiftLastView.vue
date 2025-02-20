@@ -2,21 +2,27 @@
   <a-page :loading="isWorkShiftLoading" :title="getCashTitle">
     <template #header>
       <a-modal
-        v-if="isWorkShiftOpen"
+        v-if="isWorkShiftOpen && !isWorkShiftLoading"
         #="{ props }"
         :async-operation="closeActiveCashRegister"
         title="Закрыть смену?"
       >
-        <a-button danger v-bind="props"> Закрыть смену</a-button>
+        <button
+          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-red-600"
+          v-bind="props"
+        >
+          <span class="material-symbols-rounded">close</span>
+          <span class="font-medium"> Закрыть смену</span>
+        </button>
       </a-modal>
-      <a-link
-        v-if="!isWorkShiftOpen"
-        :loading="isWorkShiftLoading"
-        primary
+      <router-link
+        v-if="!isWorkShiftOpen && !isWorkShiftLoading"
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-600"
         to="/work-shifts/add"
       >
-        Открыть смену
-      </a-link>
+        <span class="material-symbols-rounded">add</span>
+        <span class="font-medium"> Открыть смену</span>
+      </router-link>
     </template>
     <template #floating>
       <a-modal
@@ -100,7 +106,6 @@
         <h1 class="mb-2 px-4 text-gray-400">История продаж</h1>
         <a-list
           :items="workShift.sales"
-          class="mb-4"
           description-field="count"
           description-hint="шт."
           sort-field="updatedAt"
@@ -122,7 +127,7 @@
           <template #description="{ item }">
             <span class="font-medium">
               <span
-                v-if="item.discount > 0"
+                v-if="item.discount > 0 && item.pointItem"
                 class="mr-2 rounded bg-rose-50 px-2 py-1 text-rose-500"
               >
                 -{{
@@ -151,6 +156,22 @@
           </template>
         </a-list>
       </div>
+
+      <div>
+        <a-list :items="menuItems" title-field="title">
+          <template #title="{ item }">
+            <router-link :to="item.path" class="flex items-center gap-4">
+              <span class="material-symbols-rounded">{{ item.icon }}</span>
+              <span class="font-medium">
+                {{ item.title }}
+              </span>
+              <span class="material-symbols-rounded ml-auto"
+                >chevron_right</span
+              >
+            </router-link>
+          </template>
+        </a-list>
+      </div>
     </div>
     <div v-else class="flex h-full items-center justify-center">
       <div
@@ -164,8 +185,6 @@
 </template>
 
 <script setup>
-import ALink from "@/components/ui/ALink.vue"
-import AButton from "@/components/ui/AButton.vue"
 import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"
 import AModal from "@/components/ui/AModal.vue"
@@ -174,6 +193,7 @@ import { computed, onMounted } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatDate, fromNow } from "@/utils/format-date"
 import { formatMoney } from "@/utils/format-money"
+import { useUserStore } from "@/stores/user.store.js"
 
 const {
   serverData: workShift,
@@ -181,6 +201,7 @@ const {
   isLoading: isWorkShiftLoading,
 } = useApiRequest()
 const { sendRequest: closeActiveCash } = useApiRequest()
+const store = useUserStore()
 // const {
 //   serverData: hourlySales,
 //   sendRequest: fetchHourlySales,
@@ -225,6 +246,17 @@ const formatPaymentType = (paymentType) => {
 
   return types[paymentType] || "Другое"
 }
+
+const menuItems = computed(() =>
+  [
+    {
+      title: "Предыдущие смены",
+      icon: "history",
+      path: "/work-shifts/archive",
+      permission: "view_shifts",
+    },
+  ].filter((item) => store.hasPermission(item.permission)),
+)
 
 onMounted(async () => {
   await fetchWorkShift("get", "/point/work-shifts/today")

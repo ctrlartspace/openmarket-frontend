@@ -24,7 +24,7 @@ const store = useUserStore()
 const menuItems = computed(() =>
   [
     {
-      title: "Информация",
+      title: "Магазин",
       path: "/point/info",
       permission: "view_points",
     },
@@ -44,7 +44,7 @@ const menuItems = computed(() =>
       permission: "view_sales",
     },
     {
-      title: "Приход",
+      title: "Поступления",
       path: "/point/arrivals",
       permission: "view_arrivals",
     },

@@ -1,6 +1,14 @@
 <template>
   <a-page title="История">
-    <template #header></template>
+    <template #header>
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="$router.back()"
+      >
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span class="font-medium"> Назад</span>
+      </button>
+    </template>
     <a-list
       v-if="cashRegisters"
       :items="cashRegisters"

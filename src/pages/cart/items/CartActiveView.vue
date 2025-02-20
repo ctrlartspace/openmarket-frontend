@@ -1,5 +1,24 @@
 <template>
   <a-page :padding-floating="false" solid-floating>
+    <template #header>
+      <router-link
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        primary
+        to="/cart/favorite"
+      >
+        <span class="material-symbols-rounded">star</span>
+        <span class="font-medium"> Быстрые товары</span>
+      </router-link>
+
+      <router-link
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        primary
+        to="/cart/free"
+      >
+        <span class="material-symbols-rounded">apps</span>
+        <span class="font-medium"> Свободная продажа</span>
+      </router-link>
+    </template>
     <v-form v-if="isDesktop || inputIsFocused" @submit.prevent="addCartItem">
       <input
         ref="focusableInput"

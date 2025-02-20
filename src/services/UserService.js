@@ -18,11 +18,22 @@ const loginToStorePoint = async (id) => {
   }
 }
 
-const getProfile = async () => {
+const logoutFromStore = async () => {
   try {
-    const response = await axios.get("/profile")
+    const response = await axios.post("/logout/store")
     return Promise.resolve(response.data.data)
-  } catch (error) {}
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }
 
-export { loginToStore, loginToStorePoint, getProfile }
+const logoutFromPoint = async () => {
+  try {
+    const response = await axios.post("/logout/point/")
+    return Promise.resolve(response.data.data)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}
+
+export { loginToStore, loginToStorePoint, logoutFromStore, logoutFromPoint }

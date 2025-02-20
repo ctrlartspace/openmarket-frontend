@@ -4,17 +4,17 @@
     <div v-if="isOpen || isOpenOut" class="modal-window relative z-10">
       <div
         :aria-hidden="!isOpen"
-        class="animate-fade fixed inset-0 bg-black bg-opacity-30 backdrop-blur-md"
+        class="fixed inset-0 animate-fade bg-black bg-opacity-30 backdrop-blur-md"
         @click="closeModal"
       >
         <div class="fixed inset-0 z-10 flex w-screen">
           <div class="flex h-full w-full items-center justify-center">
             <div
-              class="animate-popIn w-4/5 rounded-xl bg-white p-4 md:max-w-xs"
+              class="w-4/5 animate-popIn rounded-xl bg-white p-4 md:max-w-xs"
               @click.stop
             >
               <h1
-                class="md: mb-4 whitespace-break-spaces text-center text-xl font-medium"
+                class="mb-4 whitespace-break-spaces px-4 text-center text-xl font-medium"
               >
                 {{ title }}
               </h1>

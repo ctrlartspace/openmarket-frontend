@@ -1,40 +1,51 @@
 <template>
   <a-page :loading="isLoading" title="Информация о точке">
-    <template #header>
-      <a-modal
-        #="{ props }"
-        :async-operation="onUpdatePoint"
-        title="Сохранить изменения?"
-      >
-        <a-button primary v-bind="props"> Сохранить</a-button>
-      </a-modal>
-      <a-modal
-        #="{ props }"
-        :async-operation="onDeletePointClick"
-        title="Удалить точку?"
-      >
-        <a-button danger v-bind="props"> Удалить</a-button>
-      </a-modal>
-    </template>
-    <template #floating>
-      <a-modal
-        #="{ props }"
-        :async-operation="onUpdatePoint"
-        title="Сохранить изменения?"
-      >
-        <a-button-floating v-bind="props"> save</a-button-floating>
-      </a-modal>
-      <a-modal
-        #="{ props }"
-        :async-operation="onDeletePointClick"
-        title="Удалить точку?"
-      >
-        <a-button-floating danger v-bind="props"> delete</a-button-floating>
-      </a-modal>
-    </template>
+    <!--    <template #header>-->
+    <!--      <a-modal-->
+    <!--        #="{ props }"-->
+    <!--        :async-operation="onUpdatePoint"-->
+    <!--        title="Сохранить изменения?"-->
+    <!--      >-->
+    <!--        <button-->
+    <!--          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"-->
+    <!--          v-bind="props"-->
+    <!--        >-->
+    <!--          <span class="material-symbols-rounded">save</span>-->
+    <!--          <span class="font-medium"> Сохранить </span>-->
+    <!--        </button>-->
+    <!--      </a-modal>-->
+    <!--      <a-modal-->
+    <!--        #="{ props }"-->
+    <!--        :async-operation="onDeletePointClick"-->
+    <!--        title="Удалить точку?"-->
+    <!--      >-->
+    <!--        <button-->
+    <!--          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-red-500"-->
+    <!--          v-bind="props"-->
+    <!--        >-->
+    <!--          <span class="material-symbols-rounded">delete</span>-->
+    <!--          <span class="font-medium"> Удалить </span>-->
+    <!--        </button>-->
+    <!--      </a-modal>-->
+    <!--    </template>-->
+    <!--    <template #floating>-->
+    <!--      <a-modal-->
+    <!--        #="{ props }"-->
+    <!--        :async-operation="onUpdatePoint"-->
+    <!--        title="Сохранить изменения?"-->
+    <!--      >-->
+    <!--        <a-button-floating v-bind="props"> save</a-button-floating>-->
+    <!--      </a-modal>-->
+    <!--      <a-modal-->
+    <!--        #="{ props }"-->
+    <!--        :async-operation="onDeletePointClick"-->
+    <!--        title="Удалить точку?"-->
+    <!--      >-->
+    <!--        <a-button-floating danger v-bind="props"> delete</a-button-floating>-->
+    <!--      </a-modal>-->
+    <!--    </template>-->
     <div v-if="point" class="flex flex-col gap-4">
       <div class="flex-auto">
-        <label class="mb-2 block font-medium"> Название точки</label>
         <InputText
           v-model="point.name"
           fluid
@@ -42,32 +53,41 @@
           type="text"
         />
       </div>
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <router-link
-          v-for="item in menuItems"
-          :key="item.id"
-          v-press
-          :to="item.path"
-          class="flex flex-col items-center gap-2 rounded-xl bg-white p-4"
+      <a-list :items="menuItems" title-field="title">
+        <template #title="{ item }">
+          <router-link :to="item.path" class="flex items-center gap-4">
+            <span class="material-symbols-rounded">{{ item.icon }}</span>
+            <span class="font-medium">
+              {{ item.title }}
+            </span>
+            <span class="material-symbols-rounded ml-auto">chevron_right</span>
+          </router-link>
+        </template>
+      </a-list>
+
+      <a-modal
+        #="{ props }"
+        :async-operation="store.logOutFromPoint"
+        title="Выйти из точки?"
+      >
+        <button
+          class="flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 text-red-500"
+          v-bind="props"
         >
-          <span
-            class="material-symbols-rounded rounded-xl bg-blue-50 p-2 text-blue-500"
-            >{{ item.icon }}</span
-          >
-          <span>{{ item.title }}</span>
-        </router-link>
-      </div>
+          <span class="material-symbols-rounded">exit_to_app</span>
+          <span class="font-medium"> Выход из точки</span>
+        </button>
+      </a-modal>
     </div>
   </a-page>
 </template>
 
 <script setup>
-import AButton from "@/components/ui/AButton.vue"
-import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
 import { computed, onMounted } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { useUserStore } from "@/stores/user.store"
+import AList from "@/components/ui/AList.vue"
 
 const store = useUserStore()
 
@@ -91,15 +111,9 @@ const onDeletePointClick = async () => {
 
 const menuItems = computed(() =>
   [
-    // {
-    //   title: "Информация",
-    //   icon: "info",
-    //   path: "/point/info",
-    //   permission: "view_points",
-    // },
     {
       title: "Сотрудники",
-      icon: "person",
+      icon: "group",
       path: "/point/users",
       permission: "view_users",
     },
@@ -116,7 +130,7 @@ const menuItems = computed(() =>
       permission: "view_sales",
     },
     {
-      title: "Приход",
+      title: "Поступления",
       icon: "arrow_downward",
       path: "/point/arrivals",
       permission: "view_arrivals",

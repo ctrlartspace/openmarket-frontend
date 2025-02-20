@@ -1,11 +1,27 @@
 <template>
   <a-page>
     <template #header>
-      <a-link primary to="/store/users/add">Добавить</a-link>
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="$router.back()"
+      >
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span class="font-medium"> Назад</span>
+      </button>
+      <router-link
+        :to="{
+          path: '/store/users/add',
+        }"
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        primary
+      >
+        <span class="material-symbols-rounded">add</span>
+        <span class="font-medium"> Создать</span>
+      </router-link>
     </template>
     <template #floating>
       <a-link-floating-text primary to="/store/users/add"
-        >Добавить
+        >Создать
       </a-link-floating-text>
     </template>
     <template v-if="isError" #error>
@@ -24,7 +40,6 @@
 <script setup>
 import { onMounted } from "vue"
 import AList from "@/components/ui/AList.vue"
-import ALink from "@/components/ui/ALink.vue"
 import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useApiRequest } from "@/composables/useApiRequest"

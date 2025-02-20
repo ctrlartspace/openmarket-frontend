@@ -82,20 +82,20 @@ const menuItems = ref([
   //   visible: true,
   //   icon: "center_focus_strong",
   // },
-  {
-    id: 4,
-    title: "Товары",
-    path: "/point/items",
-    visible: true,
-    icon: "format_list_bulleted",
-  },
   // {
-  //   id: 5,
-  //   title: store.point?.name,
+  //   id: 4,
+  //   title: "Товары",
   //   path: "/point/items",
   //   visible: true,
-  //   icon: "store",
+  //   icon: "format_list_bulleted",
   // },
+  {
+    id: 5,
+    title: "Магазин",
+    path: "/point",
+    visible: true,
+    icon: "store",
+  },
 ])
 </script>
 

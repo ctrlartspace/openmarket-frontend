@@ -1,23 +1,52 @@
 <template>
   <a-page :loading="isLoading" title="Товар">
     <template #header>
-      <a-button gray @click="addItemToCart"> В корзину</a-button>
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="$router.back()"
+      >
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span class="font-medium"> Назад</span>
+      </button>
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="addItemToCart"
+      >
+        <span class="material-symbols-rounded">shopping_cart</span>
+        <span class="font-medium"> В корзину </span>
+      </button>
       <a-modal
         #="{ props }"
         :async-operation="onAddItemToFavorites"
         title="Добавить товар в избранное?"
       >
-        <a-button accent v-bind="props"> В избранное </a-button>
+        <button
+          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+          v-bind="props"
+        >
+          <span class="material-symbols-rounded">star</span>
+          <span class="font-medium"> В избранное </span>
+        </button>
       </a-modal>
-      <a-button success @click="applySelect(pointItem, '/point/arrivals/add')">
-        Приход
-      </a-button>
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="applySelect(pointItem, '/point/arrivals/add')"
+      >
+        <span class="material-symbols-rounded">add</span>
+        <span class="font-medium"> Приход</span>
+      </button>
       <a-modal
         #="{ props }"
         :async-operation="updatePointItem"
         title="Сохранить изменения?"
       >
-        <a-button primary v-bind="props"> Сохранить</a-button>
+        <button
+          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-600"
+          v-bind="props"
+        >
+          <span class="material-symbols-rounded">save</span>
+          <span class="font-medium"> Сохранить</span>
+        </button>
       </a-modal>
     </template>
     <template #floating>
@@ -29,7 +58,7 @@
         :async-operation="onAddItemToFavorites"
         title="Добавить товар в избранное?"
       >
-        <a-button-floating v-bind="props">star </a-button-floating>
+        <a-button-floating v-bind="props">star</a-button-floating>
       </a-modal>
       <a-button-floating @click="applySelect(pointItem, '/point/arrivals/add')"
         >add
@@ -115,7 +144,6 @@
 <script setup>
 import { onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
-import AButton from "@/components/ui/AButton.vue"
 import AButtonFloating from "@/components/ui/AButtonFloating.vue"
 import AModal from "@/components/ui/AModal.vue"
 import { generateBarcodePDF } from "@/utils/barcodeGenerator"

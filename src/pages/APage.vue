@@ -1,47 +1,57 @@
 <template>
-  <div class="flex h-full w-full flex-col bg-gray-100">
+  <div class="grid h-full w-full grid-cols-1 bg-gray-100 md:grid-cols-10">
     <div
-      v-if="isDesktop && hasHeader()"
-      class="flex items-center gap-4 overflow-x-auto overflow-y-hidden border-b border-gray-100 bg-white px-4 py-1"
+      v-if="isDesktop"
+      class="col-span-3 border-r border-gray-200 bg-gray-50/60"
     >
-      <h1 v-if="title" class="flex items-center whitespace-nowrap font-medium">
-        {{ title }}
-      </h1>
-      <div class="ml-auto flex items-center gap-4 whitespace-nowrap">
+      <div v-if="title" class="border-b border-gray-100 bg-white px-4 py-1">
+        <h1 class="font-medium">
+          {{ title }}
+        </h1>
+      </div>
+      <div class="flex flex-col gap-2 p-6">
         <slot name="header"></slot>
       </div>
     </div>
-    <div v-if="hasError()" class="border-b border-gray-100 bg-white px-4 py-1">
-      <div class="animate-shake">
-        <p class="text-center text-red-500 md:text-start">
-          <slot name="error"></slot>
-        </p>
-      </div>
-    </div>
-    <div v-if="hasTop()" class="bg-white p-4">
-      <slot name="top"></slot>
-    </div>
     <div
-      :class="{ 'no-padding p-0': noPadding, 'p-6': !noPadding }"
-      class="no-scrollbar relative h-full flex-1 overflow-auto pb-24 md:pb-4"
+      class="no-scrollbar col-span-1 flex h-full w-full flex-col overflow-auto md:col-span-7"
     >
-      <slot></slot>
       <div
-        :class="
-          loading
-            ? 'opacity-100 duration-[1000ms]'
-            : 'pointer-events-none opacity-0 duration-200'
-        "
-        class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-gray-100 transition-opacity will-change-auto"
+        v-if="hasError()"
+        class="border-b border-gray-100 bg-white px-4 py-1"
       >
-        <div class="flex h-full w-full flex-col gap-2 p-4">
-          <div class="animate-pulse rounded-xl bg-gray-200 px-4 py-6"></div>
-          <div
-            class="h-full animate-pulse rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 px-4 py-12 will-change-auto"
-          ></div>
+        <div class="animate-shake">
+          <p class="text-center text-red-500 md:text-start">
+            <slot name="error"></slot>
+          </p>
+        </div>
+      </div>
+      <div v-if="hasTop()" class="bg-white p-4">
+        <slot name="top"></slot>
+      </div>
+      <div
+        :class="{ 'no-padding p-0': noPadding, 'p-6 pb-24': !noPadding }"
+        class="no-scrollbar relative h-full w-full overflow-auto"
+      >
+        <slot></slot>
+        <div
+          :class="
+            loading
+              ? 'opacity-100 duration-[1000ms]'
+              : 'pointer-events-none opacity-0 duration-200'
+          "
+          class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-gray-100 transition-opacity will-change-auto"
+        >
+          <div class="flex h-full w-full flex-col gap-2 p-4">
+            <div class="animate-pulse rounded-xl bg-gray-200 px-4 py-6"></div>
+            <div
+              class="h-full animate-pulse rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 px-4 py-12 will-change-auto"
+            ></div>
+          </div>
         </div>
       </div>
     </div>
+
     <div
       v-if="!isDesktop && hasFloating()"
       :class="{ 'bg-white': solidFloating, 'px-10 py-6': paddingFloating }"

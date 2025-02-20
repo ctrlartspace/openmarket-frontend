@@ -1,15 +1,27 @@
 <template>
   <a-page title="Импорт товаров">
     <template #header>
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="$router.back()"
+      >
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span class="font-medium"> Назад</span>
+      </button>
       <a-modal
         v-if="selectedFile"
         #="{ props }"
         :async-operation="uploadProducts"
         title="Загрузить товары?"
       >
-        <a-button :disabled="hasDublicates" primary v-bind="props">
-          Готово
-        </a-button>
+        <button
+          v-if="!hasDublicates"
+          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-600"
+          v-bind="props"
+        >
+          <span class="material-symbols-rounded">upload</span>
+          <span class="font-medium"> Загрузить</span>
+        </button>
       </a-modal>
     </template>
     <template #floating>

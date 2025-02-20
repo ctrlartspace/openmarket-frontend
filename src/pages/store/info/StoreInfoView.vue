@@ -1,7 +1,15 @@
 <template>
   <a-page :loading="isStorePointsLoading" title="Информация">
     <template #header>
-      <a-link primary to="/store/info/new-point">Новая точка</a-link>
+      <router-link
+        :to="{
+          path: '/store/info/new-point',
+        }"
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-600"
+      >
+        <span class="material-symbols-rounded">add</span>
+        <span class="font-medium"> Новая точка</span>
+      </router-link>
     </template>
     <template #floating>
       <a-link-floating-text primary to="/store/info/new-point"
@@ -36,6 +44,7 @@
     <a-list
       v-if="storePoints"
       :items="storePoints"
+      class="mb-4"
       title-field="name"
       @on-item-click="selectPoint"
     >
@@ -58,13 +67,38 @@
         </span>
       </template>
     </a-list>
+
+    <a-list :items="menuItems" class="mb-4" title-field="title">
+      <template #title="{ item }">
+        <router-link :to="item.path" class="flex items-center gap-4">
+          <span class="material-symbols-rounded">{{ item.icon }}</span>
+          <span class="font-medium">
+            {{ item.title }}
+          </span>
+          <span class="material-symbols-rounded ml-auto">chevron_right</span>
+        </router-link>
+      </template>
+    </a-list>
+
+    <a-modal
+      #="{ props }"
+      :async-operation="store.logOut"
+      title="Выйти из приложения?"
+    >
+      <button
+        class="flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 text-red-500"
+        v-bind="props"
+      >
+        <span class="material-symbols-rounded">exit_to_app</span>
+        <span class="font-medium"> Выход</span>
+      </button>
+    </a-modal>
   </a-page>
 </template>
 
 <script setup>
-import ALink from "@/components/ui/ALink.vue"
 import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
-import { onMounted, ref } from "vue"
+import { computed, onMounted, ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouter } from "vue-router"
 import AList from "@/components/ui/AList.vue"
@@ -104,6 +138,17 @@ const loginToStorePoint = async () => {
 const selectPoint = (item) => {
   selectedPoint.value = item
 }
+
+const menuItems = computed(() =>
+  [
+    {
+      title: "Сотрудники",
+      icon: "group",
+      path: "/store/users",
+      permission: "view_users",
+    },
+  ].filter((item) => store.hasPermission(item.permission)),
+)
 
 onMounted(async () => {
   await Promise.all([

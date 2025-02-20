@@ -13,7 +13,7 @@ axiosClient.interceptors.response.use(
   (response) => {
     return Promise.resolve(response)
   },
-  (error) => {
+  async (error) => {
     if (!error.response) {
       console.error(error)
       return
@@ -22,7 +22,15 @@ axiosClient.interceptors.response.use(
       console.error(error)
     } else if (error.response.status === 401) {
       const store = useUserStore()
-      store.logOut()
+      if (error.response.data.type && error.response.data.type === "store") {
+        await store.logOut()
+        return
+      }
+      if (error.response.data.type && error.response.data.type === "point") {
+        await store.logOutFromPoint()
+        return
+      }
+      await store.logOut()
     } else if (error.response.status === 403) {
       console.error(error)
     } else {

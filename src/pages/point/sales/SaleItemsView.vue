@@ -1,5 +1,14 @@
 <template>
-  <a-page :loading="isLoading">
+  <a-page :loading="isLoading" title="Продажи">
+    <template #header>
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="$router.back()"
+      >
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span class="font-medium"> Назад</span>
+      </button>
+    </template>
     <div v-if="sales && sales.length > 0" class="flex flex-col gap-2">
       <div v-for="data in groupedDataByDate" :key="data.date">
         <h1 class="mb-2 px-4 text-gray-300">

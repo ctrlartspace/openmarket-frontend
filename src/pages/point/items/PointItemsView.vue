@@ -1,25 +1,36 @@
 <template>
   <a-page
     :loading="isPointItemsFetching"
-    :title="isSelectableMode ? 'Выбрать...' : ''"
+    :title="isSelectableMode ? 'Выбрать...' : 'Товары'"
   >
     <template #header>
-      <a-link
+      <button
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        @click="$router.back()"
+      >
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span class="font-medium"> Назад</span>
+      </button>
+      <router-link
         v-if="!isSelectableMode"
         :to="{
           path: '/point/items/import',
         }"
-        success
-        >Импорт товаров
-      </a-link>
-      <a-link
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-green-500"
+      >
+        <span class="material-symbols-rounded">upload</span>
+        <span class="font-medium"> Импорт товаров </span>
+      </router-link>
+      <router-link
         v-if="!isSelectableMode"
         :to="{
           path: '/point/items/add',
         }"
-        primary
-        >Добавить
-      </a-link>
+        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+      >
+        <span class="material-symbols-rounded">add</span>
+        <span class="font-medium"> Создать товар</span>
+      </router-link>
     </template>
     <template #floating>
       <a-link-floating
@@ -43,7 +54,6 @@
         :to="{
           path: '/point/items/add',
         }"
-        primary
         >add
       </a-link-floating>
     </template>
@@ -77,7 +87,6 @@
 </template>
 
 <script setup>
-import ALink from "@/components/ui/ALink.vue"
 import ALinkFloating from "@/components/ui/ALinkFloating.vue"
 import AList from "@/components/ui/AList.vue"
 import { onMounted, ref, watch } from "vue"
