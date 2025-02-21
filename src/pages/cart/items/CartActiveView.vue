@@ -18,16 +18,43 @@
         <span class="material-symbols-rounded">apps</span>
         <span class="font-medium"> Свободная продажа</span>
       </router-link>
+
+      <div v-if="isSearchError">
+        <div
+          :class="
+            isSearchError
+              ? 'animate-shake text-red-600 will-change-transform'
+              : 'text-black'
+          "
+          class="mt-4 flex w-full flex-col justify-between text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
+        >
+          <div class="rounded-xl bg-red-50 p-4">
+            <p class="flex items-center gap-2">
+              <span class="material-symbols-rounded">error</span
+              >{{ notFountInputValue }}
+            </p>
+            <span class="text-sm font-normal">Штрихкод не найден</span>
+          </div>
+          <cart-item-dialog
+            #="{ props }"
+            :code="notFountInputValue"
+            @success="onNewItemCreated"
+          >
+            <button
+              class="mt-2 flex justify-center gap-2 rounded-xl bg-blue-50 px-4 py-3 text-blue-600"
+              v-bind="props"
+            >
+              <span class="material-symbols-rounded">add_shopping_cart</span>
+              <span class="font-medium"> Создать </span>
+            </button>
+          </cart-item-dialog>
+        </div>
+      </div>
     </template>
     <v-form v-if="isDesktop || inputIsFocused" @submit.prevent="addCartItem">
       <input
         ref="focusableInput"
         v-model.trim="inputValue"
-        :class="
-          isSearchError
-            ? 'animate-shake text-red-600 will-change-transform'
-            : 'text-black'
-        "
         class="mb-2 w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         placeholder="Наименование"
         type="text"
@@ -36,7 +63,10 @@
       />
     </v-form>
     <div class="no-scrollbar flex h-full flex-col gap-2 pb-28 md:pb-0">
-      <div v-if="pointItems && inputValue.length > 0" class="">
+      <div
+        v-if="!isSearchError && pointItems && inputValue.length > 0"
+        class=""
+      >
         <p class="mb-2 px-4 text-gray-300">Выберите товар</p>
 
         <a-list
@@ -134,7 +164,6 @@ import AList from "@/components/ui/AList.vue"
 import { nextTick, ref } from "vue"
 import { useRouter } from "vue-router"
 import { useCartStore } from "@/stores/cart.store"
-import { getPointItem } from "@/services/PointService"
 import CartTotalForMobile from "@/components/CartTotalForMobile.vue"
 import {
   breakpointsTailwind,
@@ -144,6 +173,7 @@ import {
 import { useFocusable } from "@/composables/useFocusable"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
+import CartItemDialog from "@/components/CartItemDialog.vue"
 
 const { focusableInput } = useFocusable()
 const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -154,31 +184,43 @@ const store = useCartStore()
 const router = useRouter()
 
 const inputValue = ref("")
-const isSearchError = ref(false)
-const isSearchLoading = ref(false)
+const notFountInputValue = ref("")
+
+const {
+  serverData: searchItem,
+  sendRequest: fetchPointItem,
+  isError: isSearchError,
+  isLoading: isSearchLoading,
+  errorMessage: isSearchErrorMessage,
+} = useApiRequest()
 
 const addCartItem = async () => {
   isSearchError.value = false
   if (!inputValue.value) {
     return
   }
-
-  try {
-    isSearchLoading.value = true
-    const item = await getPointItem(inputValue.value, { searchBy: "code" })
-    store.addItem(item)
-    inputValue.value = ""
+  isSearchLoading.value = true
+  await fetchPointItem("get", "/point/items/" + inputValue.value, {
+    searchBy: "code",
+  })
+  if (!isSearchError.value) {
+    store.addItem(searchItem.value)
     isSearchError.value = false
-  } catch (error) {
-    isSearchError.value = true
-    console.error(error)
-  } finally {
-    isSearchLoading.value = false
+    notFountInputValue.value = ""
   }
+  notFountInputValue.value = inputValue.value
+  inputValue.value = ""
+}
+
+const onNewItemCreated = () => {
+  inputValue.value = ""
+  notFountInputValue.value = ""
+  isSearchError.value = false
 }
 
 const onSearchInput = () => {
   isSearchError.value = false
+  notFountInputValue.value = ""
 }
 
 const setFocusToInput = async () => {

@@ -154,7 +154,7 @@ const pointItem = ref({})
 const { scannedCode } = useScan()
 const {
   validationErrors,
-  sendRequest: addStoreItem,
+  sendRequest: addPointItem,
   isError,
   errorMessage,
 } = useApiRequest()
@@ -163,7 +163,7 @@ const { serverData: existPointItem, sendRequest: checkStoreItem } =
   useApiRequest()
 
 const onAddStoreItemClick = async () => {
-  const response = await addStoreItem("post", "/point/items", pointItem.value)
+  const response = await addPointItem("post", "/point/items", pointItem.value)
   if (response) {
     await router.push("/point/items/" + response.data.data.id)
   }

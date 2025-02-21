@@ -1,6 +1,6 @@
 <template>
   <teleport to="body">
-    <div v-if="modal.isOpen" class="modal-window relative z-10">
+    <div v-if="modal.isOpen" class="modal-window relative z-50">
       <div
         :aria-hidden="!modal.isOpen"
         class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-md"
