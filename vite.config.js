@@ -19,6 +19,16 @@ export default defineConfig({
       injectRegister: "auto",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,jpg,png,svg,gif,webmanifest}"],
+        cleanupOutdatedCaches: true,
+        runtimeCaching: [
+          {
+            urlPattern: /\.(?:js|css|html)$/,
+            handler: "NetworkFirst", // Приоритет сети над кэшем
+            options: {
+              cacheName: "runtime-cache",
+            },
+          },
+        ],
       },
       includeAssets: ["**/*.{png}"],
       manifest: {

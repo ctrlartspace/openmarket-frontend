@@ -27,7 +27,7 @@
         'text-opacity-50 hover:text-opacity-50': $attrs.disabled,
       }"
       :disabled="loading"
-      class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-gray-100 p-4 font-medium shadow-2xl shadow-gray-500/20 first:rounded-l-xl last:rounded-r-xl last:border-r"
+      class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-gray-100 p-4 font-medium shadow-2xl shadow-gray-500/10 first:rounded-l-xl last:rounded-r-xl last:border-r"
       v-bind="$attrs"
     >
       <slot></slot>

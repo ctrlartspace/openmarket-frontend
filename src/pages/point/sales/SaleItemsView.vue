@@ -50,7 +50,9 @@
       </div>
     </div>
     <div v-else>
-      <h1 class="text-center text-gray-300">Нет продаж</h1>
+      <h1 class="rounded-xl bg-gray-50 px-4 py-3 text-center text-gray-300">
+        Нет продаж
+      </h1>
     </div>
   </a-page>
 </template>

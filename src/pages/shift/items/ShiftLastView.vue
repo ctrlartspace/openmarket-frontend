@@ -178,7 +178,9 @@
         v-if="!isWorkShiftLoading"
         class="flex flex-col items-center justify-center rounded-xl p-4"
       >
-        <span class="text-gray-300">Смена не найдена</span>
+        <span class="rounded-xl bg-gray-50 px-4 py-3 text-gray-300"
+          >Смена не найдена</span
+        >
       </div>
     </div>
   </a-page>

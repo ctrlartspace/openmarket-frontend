@@ -13,9 +13,7 @@
         class="pointer-events-auto flex aspect-square h-[55px] items-center justify-center rounded-xl border border-gray-100 bg-white md:hidden"
         to="/scan2"
       >
-        <span class="material-symbols-rounded text-black"
-          >center_focus_strong</span
-        >
+        <span class="material-symbols-rounded text-black">barcode_scanner</span>
       </router-link>
       <router-link
         v-press

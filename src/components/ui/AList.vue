@@ -57,7 +57,7 @@
       <slot name="last"></slot>
     </div>
 
-    <div v-if="hasNoItems" class="px-4 py-3">
+    <div v-if="hasNoItems" class="bg-gray-50 px-4 py-3">
       <p class="text-center text-gray-300">Нет данных</p>
     </div>
   </div>
