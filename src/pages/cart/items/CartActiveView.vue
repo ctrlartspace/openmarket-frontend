@@ -30,8 +30,7 @@
         >
           <div class="rounded-xl bg-red-50 p-4">
             <p class="flex items-center gap-2">
-              <span class="material-symbols-rounded">barcode_scanner</span
-              >{{ notFountInputValue }}
+              {{ notFountInputValue }}
             </p>
             <span class="text-sm font-normal">Штрихкод не найден</span>
           </div>

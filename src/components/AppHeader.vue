@@ -22,7 +22,6 @@
         v-if="store.user"
         class="inline-flex w-auto items-center gap-1 truncate font-medium text-gray-300"
       >
-        <span class="material-symbols-rounded">id_card</span>
         {{ store?.user?.fullName }}
       </li>
       <li
@@ -57,7 +56,6 @@
         v-if="store.user"
         class="inline-flex w-auto items-center gap-1 truncate font-medium text-gray-300"
       >
-        <span class="material-symbols-rounded">id_card</span>
         {{ store?.user?.fullName }}
       </li>
       <li>
