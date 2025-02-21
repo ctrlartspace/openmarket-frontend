@@ -1,33 +1,38 @@
 <template>
-  <a-modal title="Скидка на покупку" @handle="onDiscountDialogOpen">
+  <a-modal title="Скидка на покупку" @handle="resetDiscountOnOpen">
     <template #default="{ props }">
       <slot :props="props"></slot>
     </template>
     <template #content="{ closeModal }">
       <form
-        class="flex flex-col gap-2"
-        @submit.prevent="store.applyDiscount(), closeModal()"
+        class="flex flex-col gap-4"
+        @submit.prevent="handleSubmit(closeModal)"
       >
-        <div class="no-scrollbar flex gap-2 overflow-auto">
+        <!-- Секция выбора процента скидки -->
+        <div
+          class="no-scrollbar flex snap-x snap-mandatory gap-2 overflow-x-auto whitespace-nowrap pr-8 [mask-image:linear-gradient(to_right,black_80%,transparent_100%)]"
+        >
           <button
-            v-for="(n, i) in 21"
+            v-for="(_, index) in 21"
+            :key="index"
             v-press
-            :class="{
-              '!border-rose-500': i * 5 === store.discount,
-            }"
-            class="flex items-center justify-center rounded-xl border-2 border-rose-50 bg-rose-50 px-4 py-2 font-medium text-rose-500 hover:border-rose-100 hover:bg-rose-100"
+            :class="[
+              'flex snap-start items-center justify-center rounded-xl border-2 px-4 py-2 font-medium',
+              'border-rose-50 bg-rose-50 text-rose-500',
+              'hover:border-rose-100 hover:bg-rose-100',
+              { '!border-rose-500': index * 5 === store.discount },
+            ]"
             type="button"
-            @click="
-              store.setDiscount(i * 5), store.applyDiscount(), closeModal()
-            "
+            @click="applyPercentageDiscount(index * 5, closeModal)"
           >
-            {{ i * 5 }}%
+            {{ index * 5 }}%
           </button>
         </div>
 
-        <FloatLabel variant="in">
+        <!-- Поля ввода -->
+        <FloatLabel class="w-full" variant="in">
           <InputNumber
-            v-model="store.getTotalAmount"
+            :defaultValue="store.getTotalAmount"
             fluid
             locale="ru-RU"
             readonly
@@ -35,20 +40,27 @@
           />
           <label class="text-gray-300">Цена без скидки</label>
         </FloatLabel>
-        <FloatLabel variant="in">
+
+        <FloatLabel class="w-full" variant="in">
           <InputNumber
-            v-model="totalAmountWithDiscount"
+            v-model="customDiscountAmount"
+            :class="{ 'p-invalid': !isDiscountValid }"
+            :invalid="!isDiscountValid"
+            :max="store.getTotalAmount"
+            :min="0"
             fluid
             locale="ru-RU"
             suffix=" ₸"
-            @input="onDiscountValueChange"
+            @input="applyCustomDiscount"
           />
-          <label class="text-gray-300">Цена со скидкой </label>
+          <label class="text-gray-300">Цена со скидкой</label>
         </FloatLabel>
 
+        <!-- Кнопка submit -->
         <button
           v-press
-          class="pointer-events-auto mt-2 flex items-center justify-center rounded-xl bg-rose-50 px-4 py-3 font-medium text-rose-500 hover:bg-rose-100"
+          :disabled="!isDiscountValid"
+          class="mt-2 flex w-full items-center justify-center rounded-xl bg-rose-50 px-4 py-3 font-medium text-rose-500 hover:bg-rose-100 disabled:opacity-50"
           type="submit"
         >
           Применить скидку
@@ -57,21 +69,51 @@
     </template>
   </a-modal>
 </template>
+
 <script setup>
 import AModal from "@/components/ui/AModal.vue"
 import { useCartStore } from "@/stores/cart.store.js"
-import { ref } from "vue"
+import { computed, ref } from "vue" // Store и состояние
 
+// Store и состояние
 const store = useCartStore()
-const totalAmountWithDiscount = ref(0)
-const onDiscountDialogOpen = (isOpen) => {
+const customDiscountAmount = ref(store.getTotalDiscountAmount || 0)
+
+// Вычисляемые свойства
+
+const isDiscountValid = computed(() => {
+  const amount = Number(customDiscountAmount.value)
+  return (
+    !isNaN(amount) && // Должно быть числом
+    amount >= 0 && // Не отрицательное
+    amount <= store.getTotalAmount // Не больше общей суммы
+  )
+})
+
+// Методы
+const resetDiscountOnOpen = (isOpen) => {
   if (isOpen) {
-    totalAmountWithDiscount.value = store.getTotalDiscountAmount || null
+    customDiscountAmount.value = store.getTotalDiscountAmount || 0
   }
 }
 
-const onDiscountValueChange = (event) => {
-  const discountAmount = Number(event.value)
-  store.setDiscountByAmount(discountAmount)
+const applyPercentageDiscount = (percentage, closeModal) => {
+  store.setDiscount(percentage)
+  store.applyDiscount()
+  closeModal()
+}
+
+const applyCustomDiscount = (event) => {
+  const amount = Number(event.value)
+  if (isDiscountValid.value) {
+    store.setDiscountByAmount(amount)
+  }
+}
+
+const handleSubmit = (closeModal) => {
+  if (isDiscountValid.value) {
+    store.applyDiscount()
+    closeModal()
+  }
 }
 </script>
