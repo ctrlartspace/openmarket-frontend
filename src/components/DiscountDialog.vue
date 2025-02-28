@@ -18,9 +18,12 @@
             v-press
             :class="[
               'flex snap-start items-center justify-center rounded-xl border-2 px-4 py-2 font-medium',
-              'border-rose-50 bg-rose-50 text-rose-500',
-              'hover:border-rose-100 hover:bg-rose-100',
-              { '!border-rose-500': index * 5 === store.discount },
+              'border-rose-50 bg-rose-50 text-rose-500 dark:border-rose-500/20 dark:bg-rose-500/20 dark:text-rose-200',
+              'hover:border-rose-100 hover:bg-rose-100 dark:hover:border-rose-600 dark:hover:bg-rose-600/20',
+              {
+                '!border-rose-500 dark:!border-rose-600':
+                  index * 5 === store.discount,
+              },
             ]"
             type="button"
             @click="applyPercentageDiscount(index * 5, closeModal)"
@@ -60,7 +63,7 @@
         <button
           v-press
           :disabled="!isDiscountValid"
-          class="mt-2 flex w-full items-center justify-center rounded-xl bg-rose-50 px-4 py-3 font-medium text-rose-500 hover:bg-rose-100 disabled:opacity-50"
+          class="mt-2 flex w-full items-center justify-center rounded-xl bg-rose-50 px-4 py-3 font-medium text-rose-500 hover:bg-rose-100 disabled:opacity-50 dark:bg-rose-500/20 dark:text-rose-200 dark:hover:bg-rose-600/20"
           type="submit"
         >
           Применить скидку

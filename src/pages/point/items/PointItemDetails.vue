@@ -1,52 +1,37 @@
 <template>
   <a-page :loading="isLoading" title="Товар">
     <template #header>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="$router.back()"
-      >
+      <Button fluid @click="$router.back()">
         <span class="material-symbols-rounded">arrow_back</span>
         <span class="font-medium"> Назад</span>
-      </button>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="addItemToCart"
-      >
+      </Button>
+      <Button fluid @click="addItemToCart">
         <span class="material-symbols-rounded">shopping_cart</span>
         <span class="font-medium"> В корзину </span>
-      </button>
+      </Button>
       <a-modal
         #="{ props }"
         :async-operation="onAddItemToFavorites"
         title="Добавить товар в избранное?"
       >
-        <button
-          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-          v-bind="props"
-        >
+        <Button fluid v-bind="props">
           <span class="material-symbols-rounded">star</span>
           <span class="font-medium"> В избранное </span>
-        </button>
+        </Button>
       </a-modal>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="applySelect(pointItem, '/point/arrivals/add')"
-      >
+      <Button fluid @click="applySelect(pointItem, '/point/arrivals/add')">
         <span class="material-symbols-rounded">add</span>
         <span class="font-medium"> Приход</span>
-      </button>
+      </Button>
       <a-modal
         #="{ props }"
         :async-operation="updatePointItem"
         title="Сохранить изменения?"
       >
-        <button
-          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-600"
-          v-bind="props"
-        >
+        <Button fluid severity="help" v-bind="props">
           <span class="material-symbols-rounded">save</span>
           <span class="font-medium"> Сохранить</span>
-        </button>
+        </Button>
       </a-modal>
     </template>
     <template #floating>

@@ -1,24 +1,22 @@
 <template>
   <a-page :loading="isLoading" title="Поступления">
     <template v-if="store.hasPermission('create_arrival')" #header>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="$router.back()"
-      >
+      <Button fluid @click="$router.back()">
         <span class="material-symbols-rounded">arrow_back</span>
         <span class="font-medium"> Назад</span>
-      </button>
-      <router-link
+      </Button>
+
+      <Button
         :to="{
           path: '/point/items',
           query: { selectableMode: true, nextPath: '/point/arrivals/add' },
         }"
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        primary
+        as="router-link"
+        fluid
       >
         <span class="material-symbols-rounded">add</span>
         <span class="font-medium"> Создать</span>
-      </router-link>
+      </Button>
     </template>
     <template v-if="store.hasPermission('create_arrival')" #floating>
       <a-link-floating

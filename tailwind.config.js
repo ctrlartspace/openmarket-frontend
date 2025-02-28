@@ -1,6 +1,6 @@
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
-  darkMode: "media",
+  darkMode: "class",
   theme: {
     extend: {
       keyframes: {
@@ -20,11 +20,22 @@ export default {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
         },
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+
+        fadeOut: {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0 },
+        },
       },
       animation: {
         shake: "shake 0.3s ease-in-out",
         popIn: "popIn 0.2s ease-out",
         fade: "fade 0.1s ease-in-out",
+        "fade-in": "fadeIn 1s ease-in-out forwards",
+        "fade-out": "fadeOut 0.2s ease-in-out forwards",
       },
       colors: {
         gray: {

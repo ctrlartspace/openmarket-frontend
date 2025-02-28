@@ -7,22 +7,22 @@
         :async-operation="closeActiveCashRegister"
         title="Закрыть смену?"
       >
-        <button
-          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-red-600"
-          v-bind="props"
-        >
+        <Button fluid severity="danger" v-bind="props">
           <span class="material-symbols-rounded">close</span>
           <span class="font-medium"> Закрыть смену</span>
-        </button>
+        </Button>
       </a-modal>
-      <router-link
+      <Button
         v-if="!isWorkShiftOpen && !isWorkShiftLoading"
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-600"
+        as="router-link"
+        fluid
+        severity="help"
         to="/work-shifts/add"
+        v-bind="props"
       >
         <span class="material-symbols-rounded">add</span>
         <span class="font-medium"> Открыть смену</span>
-      </router-link>
+      </Button>
     </template>
     <template #floating>
       <a-modal
@@ -50,11 +50,11 @@
     </template>
 
     <div v-if="isWorkShiftOpen" class="flex flex-col gap-4">
-      <div class="rounded-xl bg-white p-4">
-        <span class="">
+      <div class="rounded-xl bg-white p-4 dark:bg-neutral-900">
+        <span class="text-black dark:text-neutral-200">
           {{ workShift.point.name }}
         </span>
-        <p class="text-gray-300">
+        <p class="text-gray-300 dark:text-neutral-600">
           <span>
             {{
               formatDate(workShift.createdAt, " HH:mm") +
@@ -67,16 +67,16 @@
         </p>
       </div>
       <div class="grid grid-cols-2 gap-4">
-        <div class="flex flex-col rounded-xl bg-white p-4">
-          <span class="">Итого</span>
-          <span class="font-medium text-blue-600">
+        <div class="flex flex-col rounded-xl bg-white p-4 dark:bg-neutral-900">
+          <span class="text-black dark:text-neutral-200">Итого</span>
+          <span class="font-medium text-blue-600 dark:text-blue-400">
             {{ formatMoney(workShift.total) }}
             <span class="font-semibold">₸</span>
           </span>
         </div>
-        <div class="flex flex-col rounded-xl bg-white p-4">
-          <span class="">На кассе</span>
-          <span class="font-medium">
+        <div class="flex flex-col rounded-xl bg-white p-4 dark:bg-neutral-900">
+          <span class="text-black dark:text-neutral-200">На кассе</span>
+          <span class="font-medium text-black dark:text-neutral-400">
             {{ formatMoney(cashAmount) }}
             <span class="font-semibold">₸</span>
           </span>
@@ -103,7 +103,9 @@
       </a-list>
 
       <div>
-        <h1 class="mb-2 px-4 text-gray-400">История продаж</h1>
+        <h1 class="mb-2 px-4 text-gray-400 dark:text-neutral-600">
+          История продаж
+        </h1>
         <a-list
           :items="workShift.sales"
           description-field="count"
@@ -128,7 +130,7 @@
             <span class="font-medium">
               <span
                 v-if="item.discount > 0 && item.pointItem"
-                class="mr-2 rounded bg-rose-50 px-2 py-1 text-rose-500"
+                class="mr-2 rounded bg-rose-50 px-2 py-1 text-rose-500 dark:bg-rose-500/20 dark:text-rose-200"
               >
                 -{{
                   formatMoney(
@@ -145,7 +147,9 @@
             <span class="font-semibold"> ₸ </span>
           </template>
           <template #sub="{ item }">
-            <div class="flex justify-between text-gray-300">
+            <div
+              class="flex justify-between text-gray-300 dark:text-neutral-500"
+            >
               <div>
                 <span>{{ formatDate(item.createdAt, "HH:mm") + ", " }}</span>
                 <span>{{ formatPaymentType(item.paymentType) }}</span>
@@ -176,9 +180,11 @@
     <div v-else class="">
       <div
         v-if="!isWorkShiftLoading"
-        class="rounded-xl bg-gray-50 px-4 py-3 text-center"
+        class="rounded-xl bg-gray-50 px-4 py-3 text-center dark:bg-neutral-900"
       >
-        <span class="text-gray-300">Смена не найдена</span>
+        <span class="text-gray-300 dark:text-neutral-600"
+          >Смена не найдена</span
+        >
       </div>
     </div>
   </a-page>

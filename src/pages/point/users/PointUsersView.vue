@@ -1,21 +1,15 @@
 <template>
   <a-page :loading="isPointUsersFetching" title="Сотрудники">
     <template #header>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="$router.back()"
-      >
+      <Button fluid @click="$router.back()">
         <span class="material-symbols-rounded">arrow_back</span>
         <span class="font-medium"> Назад</span>
-      </button>
-      <router-link
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        primary
-        to="/point/users/add"
-      >
+      </Button>
+
+      <Button as="router-link" fluid to="/point/users/add">
         <span class="material-symbols-rounded">add</span>
         <span class="font-medium"> Добавить</span>
-      </router-link>
+      </Button>
     </template>
     <template #floating>
       <a-link-floating primary to="/point/users/add">add</a-link-floating>

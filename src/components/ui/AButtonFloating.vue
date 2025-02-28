@@ -14,7 +14,7 @@
       'rounded-xl border': rounded,
     }"
     :disabled="loading"
-    class="pointer-events-auto ml-2 flex h-[55px] w-[55px] items-center justify-center gap-2 rounded-xl border border-gray-100 bg-white p-4 px-4 font-medium first:ml-0"
+    class="pointer-events-auto ml-2 flex h-[55px] w-[55px] items-center justify-center gap-2 rounded-xl border border-gray-100 bg-white p-4 px-4 font-medium first:ml-0 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
     v-bind="$attrs"
   >
     <span v-if="loading" class="material-symbols-rounded animate-spin">

@@ -1,25 +1,19 @@
 <template>
   <a-page title="Новый товар">
     <template #header>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="$router.back()"
-      >
+      <Button fluid @click="$router.back()">
         <span class="material-symbols-rounded">arrow_back</span>
         <span class="font-medium"> Назад</span>
-      </button>
+      </Button>
       <a-modal
         #="{ props }"
         :async-operation="onAddStoreItemClick"
         title="Создать товар?"
       >
-        <button
-          class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-500"
-          v-bind="props"
-        >
+        <Button fluid severity="help" v-bind="props">
           <span class="material-symbols-rounded">save</span>
           <span class="font-medium"> Сохранить</span>
-        </button>
+        </Button>
       </a-modal>
     </template>
     <template #floating>
@@ -68,7 +62,11 @@
                   @click="generateCode"
                 >
                   <span
-                    :class="codeIsGenerated ? 'text-blue-600' : 'text-black'"
+                    :class="
+                      codeIsGenerated
+                        ? 'text-blue-600'
+                        : 'text-black dark:text-neutral-200'
+                    "
                     class="material-symbols-rounded cursor-pointer"
                     >bolt</span
                   >
@@ -91,7 +89,8 @@
               variant="text"
             >
               <template #icon>
-                <span class="material-symbols-rounded text-black"
+                <span
+                  class="material-symbols-rounded text-black dark:text-neutral-200"
                   >center_focus_strong</span
                 >
               </template>

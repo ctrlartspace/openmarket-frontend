@@ -20,7 +20,7 @@ export function useFocusable() {
     }
     if (focusableInput.value) {
       await nextTick()
-      focusableInput.value.focus()
+      focusableInput.value.$el.focus()
     }
   }
 

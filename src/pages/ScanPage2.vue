@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full flex-col">
+  <div class="flex h-full flex-col bg-gray-100 dark:bg-black">
     <div class="aspect-square w-full p-2">
       <qrcode-stream
         :constraints="selectedConstraints"
@@ -7,7 +7,7 @@
         :paused="isPaused"
         :torch="isTorchOn"
         :track="paintOutline"
-        class="overflow-hidden rounded-xl border border-gray-100 bg-gray-100"
+        class="overflow-hidden rounded-xl bg-gray-100 dark:bg-neutral-900"
         @detect="onDetect"
         @error="onError"
       >
@@ -24,35 +24,59 @@
     <div class="relative flex-1 p-8">
       <div
         v-if="!resultItem && !isNotFound"
-        class="flex justify-center font-medium"
+        class="w-full rounded-xl bg-white p-4 text-center font-medium dark:bg-neutral-900"
       >
         <span
-          class="rounded-xl bg-gray-50 px-4 py-3 text-black"
+          class="text-black dark:text-neutral-200"
           @click="onDetect([{ rawValue: 6974443385731 }])"
         >
           Сканируйте штрихкод
         </span>
       </div>
-      <div
-        v-if="isNotFound && !isScannableMode"
-        class="flex justify-center font-medium"
-      >
-        <span class="rounded-xl bg-red-50 px-4 py-3 text-red-500">
-          Товар не найден ({{ resultCount }})
-        </span>
+      <div v-if="isNotFound && !isScannableMode">
+        <div
+          :class="[
+            isNotFound ? 'animate-shake will-change-transform' : 'text-black',
+            'flex w-full flex-col justify-between text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-red-600 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 dark:border-neutral-800 dark:bg-neutral-900 dark:text-red-400',
+          ]"
+        >
+          <div class="rounded-xl bg-red-50 p-4 dark:bg-red-900/20">
+            <p class="flex items-center gap-2">
+              {{ result }}
+            </p>
+            <span class="font-normal">Штрихкод не найден</span>
+          </div>
+          <cart-item-dialog
+            #="{ props }"
+            :code="result"
+            @success="checkItem(result)"
+          >
+            <button
+              v-press
+              class="mt-2 flex justify-center gap-2 rounded-xl bg-blue-50 px-4 py-3 text-blue-600 dark:bg-blue-950/30 dark:text-blue-300"
+              v-bind="props"
+            >
+              <span class="material-symbols-rounded">add_shopping_cart</span>
+              <span class="font-medium">Создать</span>
+            </button>
+          </cart-item-dialog>
+        </div>
       </div>
+
       <div class="absolute bottom-0 left-0 right-0 p-6">
         <div
           v-if="resultItem"
-          class="relative rounded-xl border border-gray-100 bg-white p-4"
+          class="relative rounded-xl border border-gray-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
         >
-          <p class="text-sm">{{ resultItem.code }}</p>
-          <p class="text-2xl">{{ resultItem.name }}</p>
+          <p class="text-sm text-gray-300 dark:text-neutral-600">
+            {{ resultItem.code }}
+          </p>
+          <p class="mt-2 text-2xl font-medium">{{ resultItem.name }}</p>
           <p class="text-2xl">{{ formatMoney(resultItem.sellingPrice) }} ₸</p>
           <div class="mt-2 flex items-center justify-between gap-2">
             <button
               v-press
-              class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"
+              class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2 dark:bg-neutral-800"
               @click="minusItem"
             >
               <span class="material-symbols-rounded">remove</span>
@@ -62,7 +86,7 @@
             </div>
             <button
               v-press
-              class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2"
+              class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2 dark:bg-neutral-800"
               @click="plusItem"
             >
               <span class="material-symbols-rounded">add</span>
@@ -70,13 +94,16 @@
           </div>
           <button
             v-press
-            class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-3 text-center font-medium text-white hover:brightness-95 active:brightness-95"
+            class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-3 text-center font-medium text-white hover:brightness-95 active:brightness-95 dark:border dark:border-neutral-800"
             @click="onApplyClick"
           >
             Готово
           </button>
           <button class="absolute right-0 top-0 p-4" @click="resetScanner">
-            <span class="material-symbols-rounded">close</span>
+            <span
+              class="material-symbols-rounded text-gray-300 dark:text-neutral-600"
+              >close</span
+            >
           </button>
         </div>
       </div>
@@ -93,6 +120,7 @@ import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.v
 import { getPointItem } from "@/services/PointService"
 import { useScan } from "@/composables/useScan"
 import { formatMoney } from "@/utils/format-money"
+import CartItemDialog from "@/components/CartItemDialog.vue"
 
 const sound = new Audio("/beep.wav")
 const { isScannableMode, applyScan } = useScan()

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="flex w-full flex-col overflow-hidden rounded-xl border border-gray-100 bg-white"
+    class="flex w-full flex-col overflow-hidden rounded-xl bg-white dark:bg-neutral-900"
   >
     <div
       v-if="selectedItems.length > 0"
-      class="flex w-full cursor-pointer items-center border-b border-gray-100 bg-white last:border-none md:hover:bg-gray-50/50 md:active:bg-gray-100"
+      class="flex w-full cursor-pointer items-center border-b border-gray-100 bg-white last:border-none dark:border-neutral-800 dark:bg-neutral-900 md:hover:bg-gray-50/50 dark:md:hover:bg-neutral-800/50"
     >
       <div v-if="selectable" class="flex items-center py-3 pl-4">
         <Checkbox binary @input="selectAll" />
@@ -19,7 +19,7 @@
     <div
       v-for="(item, i) in sortedItems"
       :key="i"
-      class="flex w-full cursor-pointer flex-col items-center border-b border-gray-100 bg-white px-4 py-3 last:border-none hover:bg-gray-50 active:bg-gray-100"
+      class="flex w-full cursor-pointer flex-col items-center border-b border-gray-100 bg-white px-4 py-3 text-black last:border-none hover:bg-gray-50 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 dark:md:hover:bg-neutral-800/50"
       @click="emits('onItemClick', item)"
     >
       <div class="flex w-full gap-4">
@@ -57,8 +57,8 @@
       <slot name="last"></slot>
     </div>
 
-    <div v-if="hasNoItems" class="bg-gray-50 px-4 py-3">
-      <p class="text-center text-gray-300">Нет данных</p>
+    <div v-if="hasNoItems" class="bg-gray-50 px-4 py-3 dark:bg-neutral-900">
+      <p class="text-center text-gray-300 dark:text-neutral-600">Нет данных</p>
     </div>
   </div>
 </template>

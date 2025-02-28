@@ -1,10 +1,15 @@
 <template>
-  <div class="grid h-full w-full grid-cols-1 bg-gray-100 md:grid-cols-10">
+  <div
+    class="grid h-full w-full grid-cols-1 bg-gray-100 dark:bg-black md:grid-cols-10"
+  >
     <div
       v-if="isDesktop"
-      class="col-span-3 border-r border-gray-200 bg-gray-50/60"
+      class="col-span-3 border-r border-gray-200 bg-gray-50/60 dark:border-neutral-800 dark:bg-neutral-800/60"
     >
-      <div v-if="title" class="border-b border-gray-100 bg-white px-4 py-1">
+      <div
+        v-if="title"
+        class="border-b border-gray-100 bg-white px-4 py-1 dark:border-neutral-800 dark:bg-black dark:text-neutral-200"
+      >
         <h1 class="font-medium">
           {{ title }}
         </h1>
@@ -18,7 +23,7 @@
     >
       <div
         v-if="hasError()"
-        class="border-b border-gray-100 bg-white px-4 py-1"
+        class="border-b border-gray-100 bg-white px-4 py-1 dark:border-neutral-800 dark:bg-black"
       >
         <div class="animate-shake">
           <p class="text-center text-red-500 md:text-start">
@@ -34,18 +39,26 @@
         class="no-scrollbar relative h-full w-full overflow-auto"
       >
         <slot></slot>
+
         <div
-          :class="
-            loading
-              ? 'opacity-100 duration-[1000ms]'
-              : 'pointer-events-none opacity-0 duration-200'
-          "
-          class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-gray-100 transition-opacity will-change-auto"
+          :class="{
+            'opacity-100': loading,
+            'pointer-events-none opacity-0 duration-200': !loading,
+          }"
+          class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-gray-100 transition-opacity will-change-auto dark:bg-black"
         >
-          <div class="flex h-full w-full flex-col gap-2 p-4">
-            <div class="animate-pulse rounded-xl bg-gray-200 px-4 py-6"></div>
+          <div
+            :class="{
+              'animate-fade-in opacity-0 [animation-delay:0.5s]': loading,
+              'pointer-events-none opacity-0 duration-200': !loading,
+            }"
+            class="flex h-full w-full flex-col gap-4 p-4"
+          >
             <div
-              class="h-full animate-pulse rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 px-4 py-12 will-change-auto"
+              class="animate-pulse rounded-xl bg-gray-200 px-4 py-6 dark:bg-neutral-900/80"
+            ></div>
+            <div
+              class="h-full animate-pulse rounded-xl bg-gradient-to-b from-gray-200 to-gray-100 px-4 py-12 will-change-auto dark:from-neutral-900/80 dark:to-black"
             ></div>
           </div>
         </div>

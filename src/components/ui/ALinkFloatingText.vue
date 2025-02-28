@@ -9,7 +9,8 @@
       :class="{
         'animate-pulse': loading,
         'bg-white text-gray-800': gray && !solid,
-        'bg-white text-blue-600': primary && !solid,
+        'bg-white text-blue-600 dark:bg-neutral-900 dark:text-blue-400':
+          primary && !solid,
         'bg-white text-red-600': danger && !solid,
         'bg-white text-yellow-600': info && !solid,
         'bg-white text-green-500': success && !solid,
@@ -27,7 +28,7 @@
         'text-opacity-50 hover:text-opacity-50': $attrs.disabled,
       }"
       :disabled="loading"
-      class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-gray-100 p-4 font-medium shadow-2xl shadow-gray-500/10 first:rounded-l-xl last:rounded-r-xl last:border-r"
+      class="pointer-events-auto flex h-[55px] w-full items-center justify-center gap-2 border-b border-l border-t border-gray-100 p-4 font-medium shadow-2xl shadow-gray-500/10 first:rounded-l-xl last:rounded-r-xl last:border-r dark:border-neutral-800"
       v-bind="$attrs"
     >
       <slot></slot>

@@ -1,38 +1,31 @@
 <template>
   <a-page :padding-floating="false" solid-floating>
     <template #header>
-      <router-link
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        primary
-        to="/cart/favorite"
-      >
+      <Button as="router-link" fluid to="/cart/favorite">
         <span class="material-symbols-rounded">star</span>
-        <span class="font-medium"> Быстрые товары</span>
-      </router-link>
-
-      <router-link
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        primary
-        to="/cart/free"
-      >
+        Быстрые товары
+      </Button>
+      <Button as="router-link" fluid to="/cart/free">
         <span class="material-symbols-rounded">apps</span>
         <span class="font-medium"> Свободная продажа</span>
-      </router-link>
+      </Button>
 
       <div v-if="isSearchError">
         <div
-          :class="
+          :class="[
             isSearchError
-              ? 'animate-shake text-red-600 will-change-transform'
-              : 'text-black'
-          "
-          class="mt-4 flex w-full flex-col justify-between text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
+              ? 'animate-shake will-change-transform'
+              : 'text-black',
+            'mt-4 flex w-full flex-col justify-between text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-red-600 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 dark:border-neutral-800 dark:bg-black dark:text-red-400',
+          ]"
         >
-          <div class="rounded-xl bg-red-50 p-4">
+          <div class="rounded-xl bg-red-50 p-4 dark:bg-red-900/20">
             <p class="flex items-center gap-2">
               {{ notFountInputValue }}
             </p>
-            <span class="text-sm font-normal">Штрихкод не найден</span>
+            <span class="text-sm font-normal dark:text-neutral-300"
+              >Штрихкод не найден</span
+            >
           </div>
           <cart-item-dialog
             #="{ props }"
@@ -40,21 +33,22 @@
             @success="onNewItemCreated"
           >
             <button
-              class="mt-2 flex justify-center gap-2 rounded-xl bg-blue-50 px-4 py-3 text-blue-600"
+              class="mt-2 flex justify-center gap-2 rounded-xl bg-blue-50 px-4 py-3 text-blue-600 dark:bg-blue-950/30 dark:text-blue-300"
               v-bind="props"
             >
               <span class="material-symbols-rounded">add_shopping_cart</span>
-              <span class="font-medium"> Создать </span>
+              <span class="font-medium">Создать</span>
             </button>
           </cart-item-dialog>
         </div>
       </div>
     </template>
     <v-form v-if="isDesktop || inputIsFocused" @submit.prevent="addCartItem">
-      <input
+      <InputText
         ref="focusableInput"
         v-model.trim="inputValue"
-        class="mb-2 w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
+        class="mb-2"
+        fluid
         placeholder="Наименование"
         type="text"
         @blur="unsetFocusFromInput"
@@ -66,7 +60,9 @@
         v-if="!isSearchError && pointItems && inputValue.length > 0"
         class=""
       >
-        <p class="mb-2 px-4 text-gray-300">Выберите товар</p>
+        <p class="mb-2 px-4 text-gray-300 dark:text-neutral-600">
+          Выберите товар
+        </p>
 
         <a-list
           :items="pointItems"
@@ -90,12 +86,12 @@
       </div>
       <div
         v-if="!store.isEmpty && inputValue.length === 0"
-        class="flex w-full flex-col overflow-auto rounded-xl border border-gray-100 bg-white"
+        class="flex w-full flex-col overflow-auto rounded-xl border border-gray-100 bg-white dark:border-neutral-900 dark:bg-neutral-900"
       >
         <div
           v-for="(item, i) in store.groupedCartItems"
           :key="i"
-          class="flex w-full cursor-pointer items-center border-b border-gray-100 bg-white last:border-none md:hover:bg-gray-50/50"
+          class="flex w-full cursor-pointer items-center border-b border-gray-100 bg-white text-black last:border-none dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 md:hover:bg-gray-50/50 dark:md:hover:bg-neutral-800/50"
           @click="onItemClick(item)"
         >
           <div class="flex items-center">
@@ -105,7 +101,7 @@
               @click.stop="store.removeItem(item)"
             >
               <span
-                class="material-symbols-rounded rounded-full bg-red-50 text-red-600"
+                class="material-symbols-rounded rounded-full bg-red-50 text-red-600 dark:bg-red-500/20 dark:text-red-400"
               >
                 remove
               </span>
@@ -122,10 +118,12 @@
             >
           </div>
           <div
-            :class="{ 'text-rose-500': item.discount }"
-            class="w-max whitespace-nowrap px-2 pr-0"
+            :class="{ 'text-rose-500 dark:text-rose-400': item.discount }"
+            class="w-max whitespace-nowrap px-2 pr-0 dark:text-neutral-200"
           >
-            <span class="text-gray-300">{{ item.count }} шт. </span>
+            <span class="text-gray-300 dark:text-neutral-600"
+              >{{ item.count }} шт.
+            </span>
             <span class="font-medium">
               {{ formatMoney(item.totalPrice) }}
             </span>
@@ -139,7 +137,7 @@
               @click.stop="store.addItem(item)"
             >
               <span
-                class="material-symbols-rounded rounded-full bg-gray-100 text-black"
+                class="material-symbols-rounded rounded-full bg-gray-100 text-black dark:bg-black dark:text-neutral-200"
               >
                 add
               </span>
@@ -225,7 +223,7 @@ const onSearchInput = () => {
 const setFocusToInput = async () => {
   inputIsFocused.value = true
   await nextTick()
-  focusableInput.value.focus()
+  focusableInput.value.$el.focus()
 }
 const unsetFocusFromInput = async () => {
   /**

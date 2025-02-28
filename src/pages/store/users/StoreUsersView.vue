@@ -1,23 +1,15 @@
 <template>
   <a-page>
     <template #header>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="$router.back()"
-      >
+      <Button fluid @click="$router.back()">
         <span class="material-symbols-rounded">arrow_back</span>
         <span class="font-medium"> Назад</span>
-      </button>
-      <router-link
-        :to="{
-          path: '/store/users/add',
-        }"
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        primary
-      >
+      </Button>
+
+      <Button as="router-link" fluid severity="help " to="/store/users/add">
         <span class="material-symbols-rounded">add</span>
         <span class="font-medium"> Создать</span>
-      </router-link>
+      </Button>
     </template>
     <template #floating>
       <a-link-floating-text primary to="/store/users/add"

@@ -1,15 +1,16 @@
 <template>
   <a-page :loading="isStorePointsLoading" title="Информация">
     <template #header>
-      <router-link
+      <Button
         :to="{
           path: '/store/info/new-point',
         }"
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-600"
+        as="router-link"
+        fluid
       >
         <span class="material-symbols-rounded">add</span>
         <span class="font-medium"> Новая точка</span>
-      </router-link>
+      </Button>
     </template>
     <template #floating>
       <a-link-floating-text primary to="/store/info/new-point"
@@ -19,23 +20,33 @@
     <template v-if="isStorePointsError" #error>{{ errorMessage }}</template>
     <div
       v-if="storeInfo"
-      class="min-h-32 mb-4 flex flex-col rounded-xl bg-white p-4"
+      class="min-h-32 mb-4 flex flex-col rounded-xl bg-white p-4 dark:bg-neutral-900"
     >
-      <span
-        v-if="isStoreInfoLoading"
-        class="material-symbols-rounded animate-spin text-xl font-semibold"
-        >progress_activity</span
-      >
-      <div v-else>
-        <h1 class="">
-          {{ storeInfo.fullName }}
-        </h1>
-        <p class="text-gray-400">
-          {{ storeInfo.address }}
-        </p>
+      <div class="flex gap-4">
+        <div
+          class="flex aspect-square items-center justify-center rounded-xl bg-blue-50 p-4 text-blue-600 dark:bg-blue-600/10 dark:text-blue-400"
+        >
+          <span class="material-symbols-rounded">storefront</span>
+        </div>
+        <div class="flex-1">
+          <h1 class="font-medium">
+            {{ storeInfo.fullName }}
+          </h1>
+          <p
+            v-if="storeInfo.address"
+            class="text-gray-300 dark:text-neutral-600"
+          >
+            {{ storeInfo.address }}
+          </p>
+          <p v-else class="text-gray-300 dark:text-neutral-600">
+            Нет дополнительной информации
+          </p>
+        </div>
       </div>
     </div>
-    <h1 class="mb-2 px-4 text-gray-400">Выберите точку продаж</h1>
+    <h1 class="mb-2 px-4 text-gray-400 dark:text-neutral-600">
+      Выберите точку продаж
+    </h1>
     <a-modal
       v-model="selectedPoint"
       :async-operation="loginToStorePoint"
@@ -80,13 +91,31 @@
       </template>
     </a-list>
 
+    <button
+      v-if="themeStore.isDark"
+      class="mb-4 flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 dark:border-neutral-900 dark:bg-neutral-900 dark:text-neutral-200"
+      @click="themeStore.toggleTheme"
+    >
+      <span class="material-symbols-rounded">light_mode</span>
+      <span class="font-medium"> Светлая тема</span>
+    </button>
+
+    <button
+      v-else
+      class="mb-4 flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 dark:border-neutral-900 dark:bg-neutral-900 dark:text-neutral-200"
+      @click="themeStore.toggleTheme"
+    >
+      <span class="material-symbols-rounded">dark_mode</span>
+      <span class="font-medium"> Темная тема</span>
+    </button>
+
     <a-modal
       #="{ props }"
       :async-operation="store.logOut"
       title="Выйти из приложения?"
     >
       <button
-        class="flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 text-red-500"
+        class="flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 text-red-500 dark:border-neutral-900 dark:bg-neutral-900 dark:text-red-400"
         v-bind="props"
       >
         <span class="material-symbols-rounded">exit_to_app</span>
@@ -105,8 +134,11 @@ import AList from "@/components/ui/AList.vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
 import AModal from "@/components/ui/AModal.vue"
+import { useThemeStore } from "@/stores/theme.store.js"
 
 const selectedPoint = ref(null)
+
+const themeStore = useThemeStore()
 
 const {
   serverData: storeInfo,

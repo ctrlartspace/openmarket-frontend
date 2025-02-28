@@ -65,13 +65,31 @@
         </template>
       </a-list>
 
+      <button
+        v-if="themeStore.isDark"
+        class="flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 dark:border-neutral-900 dark:bg-neutral-900 dark:text-neutral-200"
+        @click="themeStore.toggleTheme"
+      >
+        <span class="material-symbols-rounded">light_mode</span>
+        <span class="font-medium"> Светлая тема</span>
+      </button>
+
+      <button
+        v-else
+        class="flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 dark:border-neutral-900 dark:bg-neutral-900 dark:text-neutral-200"
+        @click="themeStore.toggleTheme"
+      >
+        <span class="material-symbols-rounded">dark_mode</span>
+        <span class="font-medium"> Темная тема</span>
+      </button>
+
       <a-modal
         #="{ props }"
         :async-operation="store.logOutFromPoint"
         title="Выйти из точки?"
       >
         <button
-          class="flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 text-red-500"
+          class="flex w-full gap-4 rounded-xl border border-gray-100 bg-white px-4 py-3 text-red-500 dark:border-neutral-900 dark:bg-neutral-900 dark:text-red-400"
           v-bind="props"
         >
           <span class="material-symbols-rounded">exit_to_app</span>
@@ -88,8 +106,10 @@ import { computed, onMounted } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { useUserStore } from "@/stores/user.store"
 import AList from "@/components/ui/AList.vue"
+import { useThemeStore } from "@/stores/theme.store.js"
 
 const store = useUserStore()
+const themeStore = useThemeStore()
 
 const { serverData: point, sendRequest, isLoading } = useApiRequest()
 const { sendRequest: deletePoint } = useApiRequest()

@@ -9,17 +9,17 @@
         <div class="fixed inset-0 z-10 flex w-screen">
           <div class="flex h-full w-full items-center justify-center">
             <div
-              class="flex w-4/5 animate-shake flex-col gap-2 rounded-xl bg-white p-4 md:max-w-xs"
+              class="flex w-4/5 animate-shake flex-col gap-2 rounded-xl bg-white p-4 dark:border dark:border-neutral-800 dark:bg-neutral-900 md:max-w-xs"
               @click.stop
             >
               <h1
-                class="whitespace-break-spaces text-center text-xl font-medium"
+                class="whitespace-break-spaces text-center text-xl font-medium dark:text-neutral-200"
               >
                 {{ modal.title }}
               </h1>
               <p
                 v-if="modal.message"
-                class="rounded-xl bg-rose-50 p-4 text-center text-rose-600"
+                class="rounded-xl bg-rose-50 p-4 text-center text-rose-600 dark:bg-rose-500/20 dark:text-rose-400"
               >
                 {{ modal.message }}
               </p>
@@ -27,7 +27,7 @@
                 <slot :close-modal="modal.close" name="content">
                   <button
                     v-press
-                    class="pointer-events-auto rounded-xl bg-gray-50 px-4 py-3 font-medium text-black hover:brightness-95"
+                    class="pointer-events-auto rounded-xl bg-gray-50 px-4 py-3 font-medium text-black hover:brightness-95 dark:bg-black dark:text-neutral-200"
                     @click="onNoClick"
                   >
                     {{ noCaption }}

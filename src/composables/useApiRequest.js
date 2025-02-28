@@ -26,6 +26,7 @@ export function useApiRequest() {
       // Вызов API с динамическим методом
 
       await timeout(100)
+      // await timeout(8000)
       const response = await apiService[method](url, payload)
 
       // Успешный ответ

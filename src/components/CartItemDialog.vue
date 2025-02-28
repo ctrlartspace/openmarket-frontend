@@ -39,7 +39,7 @@
         <button
           v-press
           :disabled="isLoading"
-          class="pointer-events-auto flex items-center justify-center rounded-xl bg-blue-50 px-4 py-3 font-medium text-blue-600 hover:brightness-95"
+          class="pointer-events-auto flex items-center justify-center rounded-xl bg-blue-50 px-4 py-3 font-medium text-blue-600 hover:brightness-95 dark:bg-blue-500/20 dark:text-neutral-200"
           type="submit"
         >
           <span
@@ -52,7 +52,7 @@
 
         <button
           v-press
-          class="pointer-events-auto rounded-xl bg-gray-50 px-4 py-3 font-medium text-black hover:brightness-95"
+          class="pointer-events-auto rounded-xl bg-gray-50 px-4 py-3 font-medium text-black hover:brightness-95 dark:bg-black dark:text-neutral-200"
           @click="closeModal"
         >
           Отмена

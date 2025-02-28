@@ -1,13 +1,10 @@
 <template>
   <a-page title="Импорт товаров">
     <template #header>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="$router.back()"
-      >
+      <Button fluid @click="$router.back()">
         <span class="material-symbols-rounded">arrow_back</span>
         <span class="font-medium"> Назад</span>
-      </button>
+      </Button>
       <a-modal
         v-if="selectedFile"
         #="{ props }"
@@ -46,10 +43,12 @@
     <div class="mb-4 flex">
       <div
         v-if="!selectedFile"
-        class="flex w-full flex-col gap-2 rounded-xl bg-white p-4"
+        class="flex w-full flex-col gap-2 rounded-xl bg-white p-4 dark:bg-neutral-900"
       >
-        <message severity="success">
-          <p class="mb-2">
+        <div
+          class="rounded-xl bg-green-50 p-4 text-green-500 dark:bg-green-900/30 dark:text-green-100"
+        >
+          <p class="mb-2 font-medium">
             Для импорта товаров загрузите Excel-файл, содержащий следующие
             столбцы:
           </p>
@@ -60,11 +59,11 @@
             <li>Цена продажи</li>
             <li>Количество</li>
           </ul>
-          <p>
+          <p class="font-medium">
             Файл может содержать и другие столбцы, но эти должны быть
             обязательно.
           </p>
-        </message>
+        </div>
         <FileUpload
           auto
           choose-label="Выбрать файл"

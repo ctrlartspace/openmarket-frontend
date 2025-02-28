@@ -8,10 +8,12 @@
     </div>
     <header>
       <nav
-        class="flex h-[55px] flex-col justify-center gap-2 border-b border-gray-100 px-8 py-3"
+        class="flex h-[55px] flex-col justify-center gap-2 border-b border-gray-100 px-8 py-3 dark:border-neutral-800 dark:bg-neutral-900"
       >
         <div class="flex items-center gap-4">
-          <h1 class="truncate whitespace-nowrap font-medium">
+          <h1
+            class="truncate whitespace-nowrap font-medium dark:text-neutral-200"
+          >
             {{ headerTitle }}
           </h1>
         </div>

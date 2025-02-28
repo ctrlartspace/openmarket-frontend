@@ -15,170 +15,10 @@ import PrimeVue from "primevue/config"
 import Aura from "@primevue/themes/aura"
 import { definePreset } from "@primevue/themes"
 import { FocusTrap } from "primevue"
+import appTheme from "@/utils/appTheme.js"
 
 console.log(Aura)
-const Noir = definePreset(Aura, {
-  semantic: {
-    primary: {
-      50: "{blue.50}",
-      100: "{blue.100}",
-      200: "{blue.200}",
-      300: "{blue.300}",
-      400: "{blue.400}",
-      500: "{blue.500}",
-      600: "{blue.600}",
-      700: "{blue.700}",
-      800: "{blue.800}",
-      900: "{blue.900}",
-      950: "{blue.950}",
-    },
-    colorScheme: {
-      light: {},
-
-      form: {
-        field: {
-          border: {
-            radius: "{border.radius.xl}",
-          },
-          padding: {
-            y: "0.75rem",
-            x: "1rem",
-          },
-        },
-      },
-    },
-  },
-  components: {
-    button: {
-      colorScheme: {
-        light: {
-          root: {
-            primary: {
-              color: "{primary.500}",
-              background: "{primary.50}",
-              border: {
-                color: "#FFF",
-              },
-              hover: {
-                color: "{primary.500}",
-                background: "{primary.100}",
-                border: {
-                  color: "{primary.200}",
-                },
-              },
-              active: {
-                color: "{primary.500}",
-                background: "{primary.100}",
-                border: {
-                  color: "{primary.400}",
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    inputtext: {
-      colorScheme: {
-        light: {
-          root: {
-            color: "{black}",
-            shadow: "none",
-            border: {
-              color: "{gray.100}",
-            },
-            focus: {
-              border: {
-                color: "{gray.600}",
-              },
-            },
-            hover: {
-              border: {
-                color: "{gray.300}",
-              },
-            },
-          },
-        },
-      },
-    },
-
-    multiselect: {
-      colorScheme: {
-        light: {
-          root: {
-            color: "{black}",
-            shadow: "none",
-            border: {
-              color: "{gray.100}",
-            },
-            focus: {
-              border: {
-                color: "{gray.600}",
-              },
-            },
-            hover: {
-              border: {
-                color: "{gray.300}",
-              },
-            },
-          },
-        },
-      },
-    },
-    inputgroup: {
-      colorScheme: {
-        light: {
-          addon: {
-            shadow: "none",
-            border: {
-              color: "{gray.100}",
-            },
-            focus: {
-              border: {
-                color: "{gray.600}",
-              },
-            },
-            hover: {
-              border: {
-                color: "{gray.300}",
-              },
-            },
-          },
-        },
-      },
-    },
-    floatlabel: {
-      colorScheme: {
-        light: {
-          root: {
-            color: "{gray.300}",
-            font: {
-              weight: "medium",
-            },
-            focus: {
-              color: "{gray.300}",
-            },
-            active: {
-              color: "{gray.300}",
-            },
-          },
-        },
-      },
-    },
-
-    message: {
-      content: {
-        padding: "0.75rem 1rem",
-      },
-      border: {
-        width: "0",
-
-        radius: "{border.radius.xl}",
-      },
-    },
-  },
-})
-
+const Noir = definePreset(Aura, appTheme)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
@@ -192,7 +32,7 @@ createApp(App)
     theme: {
       preset: Noir,
       options: {
-        darkModeSelector: false || "none",
+        darkModeSelector: ".dark",
       },
     },
   })

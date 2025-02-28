@@ -1,13 +1,10 @@
 <template>
   <a-page title="История">
     <template #header>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="$router.back()"
-      >
+      <Button fluid @click="$router.back()">
         <span class="material-symbols-rounded">arrow_back</span>
         <span class="font-medium"> Назад</span>
-      </button>
+      </Button>
     </template>
     <a-list
       v-if="cashRegisters"
@@ -19,18 +16,20 @@
         <span class="">Смена {{ item.id }}</span>
       </template>
       <template #description="{ item }">
-        <span v-if="item.isClosed" class="font-medium text-gray-400"
+        <span
+          v-if="item.isClosed"
+          class="font-medium text-gray-400 dark:text-neutral-600"
           >{{ formatMoney(item.total) }}
           <span class="font-semibold">₸</span></span
         >
-        <span v-else class="font-medium text-black"
+        <span v-else class="font-medium text-black dark:text-neutral-200"
           >{{ formatMoney(item.total) }}
           <span class="font-semibold">₸</span></span
         >
       </template>
 
       <template #sub="{ item }">
-        <span class="text-gray-300">{{
+        <span class="text-gray-300 dark:text-neutral-600">{{
           formatDate(item.createdAt, "DD.MM.YYYY HH:mm") +
           (item.isClosed ? " - " + formatDate(item.updatedAt, "HH:mm") : "")
         }}</span>

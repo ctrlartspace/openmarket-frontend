@@ -10,11 +10,13 @@ import MobileLayout from "@/components/layouts/MobileLayout.vue"
 import DesktopLayout from "@/components/layouts/DesktopLayout.vue"
 import { useOnlineStore } from "@/stores/online.store.js"
 import AMessageModal from "@/components/ui/AMessageModal.vue"
+import { useThemeStore } from "@/stores/theme.store.js"
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const isDesktop = breakpoints.greater("sm")
 
 const onlineStore = useOnlineStore()
+const themeStore = useThemeStore()
 
 const checkOnline = (e) => {
   const { type } = e
@@ -26,6 +28,8 @@ const checkOnline = (e) => {
 }
 
 onMounted(() => {
+  themeStore.initializeTheme()
+
   if (!navigator.onLine) {
     onlineStore.setOffline()
   }

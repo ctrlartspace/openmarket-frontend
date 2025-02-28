@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex h-full w-full flex-col items-center justify-center gap-4 bg-gray-100"
+    class="flex h-full w-full flex-col items-center justify-center gap-4 bg-gray-100 dark:bg-black"
   >
     <form
-      class="flex w-5/6 flex-col gap-2 rounded-xl border border-gray-100 bg-white p-4 md:w-64"
+      class="flex w-5/6 flex-col gap-2 rounded-xl border border-gray-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900 md:w-64"
       @submit.prevent="loginToStore"
     >
       <div class="flex-auto">
@@ -27,7 +27,7 @@
       </div>
       <button
         v-press
-        class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-3 font-medium text-white shadow-sm"
+        class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-3 font-medium text-white shadow-sm dark:border dark:border-neutral-800 dark:text-neutral-200"
         type="submit"
       >
         <span
@@ -46,7 +46,7 @@
       <!--        </router-link>-->
       <!--      </p>-->
       <button
-        class="font-medium text-blue-500"
+        class="font-medium text-blue-500 dark:text-blue-400"
         type="button"
         @click="loginAsGuest"
       >

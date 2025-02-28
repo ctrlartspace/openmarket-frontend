@@ -2,7 +2,7 @@
   <footer class="@bottom-navigation pb-safe">
     <nav v-if="store.isAuthorizedPoint">
       <div
-        class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1"
+        class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1 dark:border-neutral-800 dark:bg-neutral-900"
       >
         <ul class="flex w-full items-center justify-around">
           <li v-for="(item, i) in menuItems" :key="i" class="relative">
@@ -13,12 +13,20 @@
               class="flex w-10 flex-col items-center justify-center active:brightness-90"
             >
               <span
-                :class="isActive ? 'text-black' : 'text-gray-300'"
+                :class="
+                  isActive
+                    ? 'text-black dark:text-neutral-200'
+                    : 'text-gray-300 dark:text-neutral-600'
+                "
                 class="material-symbols-rounded"
                 >{{ item.icon }}</span
               >
               <span
-                :class="isActive ? 'text-black' : 'text-gray-300'"
+                :class="
+                  isActive
+                    ? 'text-black dark:text-neutral-200'
+                    : 'text-gray-300 dark:text-neutral-600'
+                "
                 class="w-20 truncate text-center text-sm"
                 >{{ item.title }}</span
               >
@@ -27,8 +35,12 @@
                 class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 flex items-start justify-end pr-1"
               >
                 <span
-                  :class="isActive ? 'bg-black' : 'bg-gray-300'"
-                  class="flex aspect-square h-3 items-center justify-center rounded-full text-[0.5rem] font-medium text-white"
+                  :class="
+                    isActive
+                      ? 'bg-black text-white dark:bg-neutral-200 dark:text-black'
+                      : 'bg-gray-300 text-white dark:bg-neutral-600 dark:text-black'
+                  "
+                  class="flex aspect-square h-3 items-center justify-center rounded-full text-[0.5rem] font-medium"
                   >{{ cartStore.itemsCount }}</span
                 >
               </div>
@@ -40,7 +52,7 @@
 
     <nav v-else>
       <div
-        class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1"
+        class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1 dark:border-neutral-800 dark:bg-neutral-900"
       >
         <ul class="flex w-full items-center justify-around">
           <li

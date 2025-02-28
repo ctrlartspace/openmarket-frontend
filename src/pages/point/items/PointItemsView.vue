@@ -4,33 +4,28 @@
     :title="isSelectableMode ? 'Выбрать...' : 'Товары'"
   >
     <template #header>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="$router.back()"
-      >
+      <Button fluid @click="$router.back()">
         <span class="material-symbols-rounded">arrow_back</span>
         <span class="font-medium"> Назад</span>
-      </button>
-      <router-link
+      </Button>
+      <Button
         v-if="!isSelectableMode"
-        :to="{
-          path: '/point/items/import',
-        }"
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-green-500"
+        as="router-link"
+        fluid
+        to="/point/items/import"
       >
         <span class="material-symbols-rounded">upload</span>
         <span class="font-medium"> Импорт товаров </span>
-      </router-link>
-      <router-link
+      </Button>
+      <Button
         v-if="!isSelectableMode"
-        :to="{
-          path: '/point/items/add',
-        }"
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
+        as="router-link"
+        fluid
+        to="/point/items/add"
       >
         <span class="material-symbols-rounded">add</span>
         <span class="font-medium"> Создать товар</span>
-      </router-link>
+      </Button>
     </template>
     <template #floating>
       <a-link-floating
@@ -59,20 +54,14 @@
     </template>
 
     <div v-if="pointItems">
-      <v-form class="relative mb-4 w-full" @submit.prevent>
-        <input
-          ref="focusableInput"
-          v-model.trim="searchInput"
-          class="block w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 pl-12 font-medium outline-black placeholder:font-normal placeholder:text-gray-300"
-          placeholder="Код товара, наименование"
-          type="text"
-        />
-        <div
-          class="absolute bottom-0 left-0 top-0 flex items-center justify-between px-4"
-        >
-          <span class="material-symbols-rounded text-gray-300">search</span>
-        </div>
-      </v-form>
+      <InputText
+        ref="focusableInput"
+        v-model.trim="searchInput"
+        class="mb-4"
+        fluid
+        placeholder="Наименование"
+        type="text"
+      />
 
       <a-list
         :items="pointItems"

@@ -1,20 +1,19 @@
 <template>
   <a-page title="Свободная продажа">
     <template #header>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3"
-        @click="$router.back()"
-      >
+      <Button fluid @click="$router.back()">
         <span class="material-symbols-rounded">arrow_back</span>
         <span class="font-medium"> Назад</span>
-      </button>
-      <button
-        class="flex w-full gap-2 rounded-xl border border-gray-100 bg-white px-4 py-3 text-blue-600"
+      </Button>
+      <Button
+        :disabled="!freeItem.sellingPrice"
+        fluid
+        severity="help"
         @click="addFreeItem"
       >
         <span class="material-symbols-rounded">shopping_cart</span>
         <span class="font-medium"> Добавить</span>
-      </button>
+      </Button>
     </template>
     <template #floating>
       <a-button-floating-text black solid @click="addFreeItem">
@@ -40,14 +39,14 @@
           ]"
           :key="price"
           v-press
-          class="whitespace-nowrap rounded-full bg-white px-4 py-1 font-medium"
+          class="whitespace-nowrap rounded-full bg-white px-4 py-1 font-medium dark:bg-neutral-900 dark:text-neutral-200"
           type="button"
           @click="freeItem.sellingPrice = price"
         >
           {{ price }} <span class="font-semibold"> ₸</span>
         </button>
       </div>
-      <textarea
+      <Textarea
         v-model.trim="freeItem.comment"
         class="block w-full text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0"
         placeholder="Комментарий"

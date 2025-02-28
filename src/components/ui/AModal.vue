@@ -10,7 +10,7 @@
         <div class="fixed inset-0 z-10 flex w-screen">
           <div class="flex h-full w-full items-center justify-center">
             <div
-              class="w-4/5 animate-popIn rounded-xl bg-white p-4 md:max-w-xs"
+              class="w-4/5 animate-popIn rounded-xl bg-white p-4 dark:border dark:border-neutral-800 dark:bg-neutral-900 md:max-w-xs"
               @click.stop
             >
               <h1
@@ -24,7 +24,7 @@
                     v-if="!hideYes"
                     v-press
                     :disabled="isLoading"
-                    class="pointer-events-auto flex items-center justify-center rounded-xl bg-blue-50 px-4 py-3 font-medium text-blue-600 hover:brightness-95"
+                    class="pointer-events-auto flex items-center justify-center rounded-xl bg-blue-50 px-4 py-3 font-medium text-blue-600 hover:brightness-95 dark:bg-neutral-800 dark:text-neutral-200"
                     @click="onYesClick"
                   >
                     <span
@@ -38,7 +38,7 @@
                   </button>
                   <button
                     v-press
-                    class="pointer-events-auto rounded-xl bg-gray-50 px-4 py-3 font-medium text-black hover:brightness-95"
+                    class="pointer-events-auto rounded-xl bg-gray-50 px-4 py-3 font-medium text-black hover:brightness-95 dark:bg-black dark:text-neutral-200"
                     @click="onNoClick"
                   >
                     {{ noCaption }}
