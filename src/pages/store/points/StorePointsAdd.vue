@@ -1,6 +1,10 @@
 <template>
   <a-page title="Новая точка">
     <template #header>
+      <Button fluid @click="$router.back()">
+        <span class="material-symbols-rounded">arrow_back</span>
+        <span class="font-medium"> Назад</span>
+      </Button>
       <a-modal
         #="{ props }"
         :async-operation="onSaveClick"

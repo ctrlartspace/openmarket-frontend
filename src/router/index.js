@@ -35,6 +35,8 @@ import PointItemsImport from "@/pages/point/items/PointItemsImport.vue"
 
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
+import AIPage from "@/pages/ai/AIPage.vue"
+import AIHelpPage from "@/pages/ai/AIHelpPage.vue"
 
 const routes = [
   { path: "/no-internet", component: NoInternetPage },
@@ -220,6 +222,24 @@ const routes = [
           {
             path: "",
             component: ShiftArchiveView,
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    path: "/ai",
+    component: AIPage,
+    redirect: "/ai/help",
+    children: [
+      {
+        path: "help",
+        component: PageContent,
+        children: [
+          {
+            path: "",
+            component: AIHelpPage,
           },
         ],
       },

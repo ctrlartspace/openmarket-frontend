@@ -1,22 +1,5 @@
 <template>
   <a-page :loading="isStorePointsLoading" title="Информация">
-    <template #header>
-      <Button
-        :to="{
-          path: '/store/info/new-point',
-        }"
-        as="router-link"
-        fluid
-      >
-        <span class="material-symbols-rounded">add</span>
-        <span class="font-medium"> Новая точка</span>
-      </Button>
-    </template>
-    <template #floating>
-      <a-link-floating-text primary to="/store/info/new-point"
-        >Новая точка
-      </a-link-floating-text>
-    </template>
     <template v-if="isStorePointsError" #error>{{ errorMessage }}</template>
     <div
       v-if="storeInfo"
@@ -24,7 +7,7 @@
     >
       <div class="flex gap-4">
         <div
-          class="flex aspect-square items-center justify-center rounded-xl bg-blue-50 p-4 text-blue-600 dark:bg-blue-600/10 dark:text-blue-400"
+          class="flex aspect-square h-full items-center justify-center rounded-xl bg-blue-50 p-4 text-blue-600 dark:bg-blue-600/10 dark:text-blue-400"
         >
           <span class="material-symbols-rounded">storefront</span>
         </div>
@@ -77,6 +60,13 @@
           <span class="font-semibold">₸</span>
         </span>
       </template>
+      <template v-if="store.hasPermission('add_point')" #last>
+        <router-link class="flex items-center gap-4" to="/store/info/new-point">
+          <span class="material-symbols-rounded">add</span>
+          <span class="font-medium"> Новая точка </span>
+          <span class="material-symbols-rounded ml-auto">chevron_right</span>
+        </router-link>
+      </template>
     </a-list>
 
     <a-list :items="menuItems" class="mb-4" title-field="title">
@@ -126,7 +116,6 @@
 </template>
 
 <script setup>
-import ALinkFloatingText from "@/components/ui/ALinkFloatingText.vue"
 import { computed, onMounted, ref } from "vue"
 import { useUserStore } from "@/stores/user.store"
 import { useRouter } from "vue-router"

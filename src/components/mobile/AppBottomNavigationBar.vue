@@ -1,6 +1,6 @@
 <template>
   <footer class="@bottom-navigation pb-safe">
-    <nav v-if="store.isAuthorizedPoint">
+    <nav>
       <div
         class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1 dark:border-neutral-800 dark:bg-neutral-900"
       >
@@ -50,17 +50,17 @@
       </div>
     </nav>
 
-    <nav v-else>
-      <div
-        class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1 dark:border-neutral-800 dark:bg-neutral-900"
-      >
-        <ul class="flex w-full items-center justify-around">
-          <li
-            class="flex w-10 flex-col items-center justify-center active:brightness-90"
-          ></li>
-        </ul>
-      </div>
-    </nav>
+    <!--    <nav v-else>-->
+    <!--      <div-->
+    <!--        class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1 dark:border-neutral-800 dark:bg-neutral-900"-->
+    <!--      >-->
+    <!--        <ul class="flex w-full items-center justify-around">-->
+    <!--          <li-->
+    <!--            class="flex w-10 flex-col items-center justify-center active:brightness-90"-->
+    <!--          ></li>-->
+    <!--        </ul>-->
+    <!--      </div>-->
+    <!--    </nav>-->
   </footer>
 </template>
 
@@ -72,43 +72,54 @@ import { useCartStore } from "@/stores/cart.store"
 const store = useUserStore()
 const cartStore = useCartStore()
 
-const menuItems = ref([
-  {
-    id: 1,
-    title: "Корзина",
-    path: "/cart",
-    visible: true,
-    icon: "shopping_cart",
-  },
-  {
-    id: 2,
-    title: "Смена",
-    path: "/work-shifts",
-    visible: true,
-    icon: "group",
-  },
-  // {
-  //   id: 3,
-  //   title: "Сканер",
-  //   path: "/scan2",
-  //   visible: true,
-  //   icon: "center_focus_strong",
-  // },
-  // {
-  //   id: 4,
-  //   title: "Товары",
-  //   path: "/point/items",
-  //   visible: true,
-  //   icon: "format_list_bulleted",
-  // },
-  {
-    id: 5,
-    title: "Магазин",
-    path: "/point",
-    visible: true,
-    icon: "store",
-  },
-])
+const menuItems = ref(
+  [
+    {
+      id: 1,
+      title: "Корзина",
+      path: "/cart",
+      visible: store.isAuthorizedPoint,
+      icon: "shopping_cart",
+    },
+    {
+      id: 2,
+      title: "Смена",
+      path: "/work-shifts",
+      visible: store.isAuthorizedPoint,
+      icon: "group",
+    },
+    // {
+    //   id: 3,
+    //   title: "Сканер",
+    //   path: "/scan2",
+    //   visible: true,
+    //   icon: "center_focus_strong",
+    // },
+
+    {
+      id: 4,
+      title: "Чат-бот",
+      path: "/ai",
+      visible: true,
+      icon: "chat",
+    },
+    {
+      id: 5,
+      title: "Магазин",
+      path: "/point",
+      visible: store.isAuthorizedPoint,
+      icon: "store",
+    },
+
+    {
+      id: 5,
+      title: "Магазин",
+      path: "/store",
+      visible: store.isAuthorizedStore && !store.isAuthorizedPoint,
+      icon: "store",
+    },
+  ].filter((item) => item.visible),
+)
 </script>
 
 <style scoped></style>

@@ -11,6 +11,9 @@
         class="flex h-[55px] flex-col justify-center gap-2 border-b border-gray-100 px-8 py-3 dark:border-neutral-800 dark:bg-neutral-900"
       >
         <div class="flex items-center gap-4">
+          <button class="flex items-center" @click="$router.back()">
+            <span class="material-symbols-rounded">chevron_left</span>
+          </button>
           <h1
             class="truncate whitespace-nowrap font-medium dark:text-neutral-200"
           >
@@ -60,7 +63,6 @@ const onlineStore = useOnlineStore()
 const props = defineProps({
   menuItems: {
     type: Array,
-    required: true,
   },
 })
 
@@ -68,7 +70,10 @@ const headerTitle = computed(() => {
   if (isSelectableMode.value) {
     return "Выберите..."
   }
-  return props.menuItems.find((item) => route.path.includes(item.path))?.title
+  return (
+    props.menuItems.find((item) => route.path.includes(item.path))?.title ||
+    "Open Kassa"
+  )
 })
 </script>
 

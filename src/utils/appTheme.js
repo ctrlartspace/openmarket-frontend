@@ -118,6 +118,31 @@ export default {
                 },
               },
             },
+
+            secondary: {
+              font: {
+                weight: "500",
+              },
+              color: "{black}",
+              background: "{gray.50}",
+              border: {
+                color: "{gray.50}",
+              },
+              hover: {
+                color: "{black}",
+                background: "{gray.100}",
+                border: {
+                  color: "{gray.200}",
+                },
+              },
+              active: {
+                color: "{black}",
+                background: "{gray.100}",
+                border: {
+                  color: "{gray.300}",
+                },
+              },
+            },
             danger: {
               font: {
                 weight: "500",
@@ -167,6 +192,31 @@ export default {
                 },
               },
             },
+
+            contrast: {
+              font: {
+                weight: "500",
+              },
+              color: "{white}",
+              background: "{black}",
+              border: {
+                color: "{black}",
+              },
+              hover: {
+                color: "{white}",
+                background: "{gray.900}",
+                border: {
+                  color: "{gray.900}",
+                },
+              },
+              active: {
+                color: "{white}",
+                background: "{black}",
+                border: {
+                  color: "{black}",
+                },
+              },
+            },
           },
         },
         dark: {
@@ -190,6 +240,31 @@ export default {
               active: {
                 color: "{neutral.200}",
                 background: "{neutral.950}",
+                border: {
+                  color: "{neutral.700}",
+                },
+              },
+            },
+
+            secondary: {
+              font: {
+                weight: "500",
+              },
+              color: "{neutral.200}",
+              background: "{neutral.800}",
+              border: {
+                color: "{neutral.800}",
+              },
+              hover: {
+                color: "{neutral.200}",
+                background: "{neutral.800}",
+                border: {
+                  color: "{neutral.700}",
+                },
+              },
+              active: {
+                color: "{neutral.200}",
+                background: "{neutral.800}",
                 border: {
                   color: "{neutral.700}",
                 },
@@ -241,6 +316,31 @@ export default {
                 background: "{neutral.950}",
                 border: {
                   color: "{neutral.700}",
+                },
+              },
+            },
+
+            contrast: {
+              font: {
+                weight: "500",
+              },
+              color: "{neutral.200}",
+              background: "{black}",
+              border: {
+                color: "{black}",
+              },
+              hover: {
+                color: "{neutral.200}",
+                background: "{black}",
+                border: {
+                  color: "{black}",
+                },
+              },
+              active: {
+                color: "{neutral.200}",
+                background: "{black}",
+                border: {
+                  color: "{black}",
                 },
               },
             },

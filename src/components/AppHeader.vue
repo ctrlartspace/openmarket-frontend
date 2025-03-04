@@ -9,7 +9,7 @@
     >
       Нет подключения к интернету
     </div>
-    <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
+    <ul class="mx-auto flex w-full max-w-[900px] gap-3 px-4 py-1">
       <li v-for="(item, i) in menuItems" :key="i" class="inline">
         <router-link v-slot="{ isActive }" :to="item.path">
           <span
@@ -30,6 +30,21 @@
         class="inline-flex w-auto items-center gap-1 truncate font-medium text-gray-300 dark:text-neutral-600"
       >
         {{ store?.user?.fullName }}
+      </li>
+
+      <li>
+        <router-link v-slot="{ isActive }" to="/ai">
+          <span
+            :class="
+              isActive
+                ? 'text-blue-600 dark:text-blue-400'
+                : 'text-gray-300 dark:text-neutral-600'
+            "
+            class="font-medium"
+          >
+            Чат-бот
+          </span>
+        </router-link>
       </li>
       <li
         v-if="store.point"
@@ -66,7 +81,7 @@
     v-else-if="store.isAuthorizedStore"
     class="border-b border-gray-100 bg-white dark:border-neutral-800 dark:bg-black"
   >
-    <ul class="mx-auto flex w-full max-w-[900px] gap-4 px-4 py-1">
+    <ul class="mx-auto flex w-full max-w-[900px] gap-3 px-4 py-1">
       <li class="ml-auto"></li>
 
       <li
@@ -74,6 +89,21 @@
         class="inline-flex w-auto items-center gap-1 truncate font-medium text-gray-300 dark:text-neutral-600"
       >
         {{ store?.user?.fullName }}
+      </li>
+
+      <li>
+        <router-link v-slot="{ isActive }" to="/ai">
+          <span
+            :class="
+              isActive
+                ? 'text-blue-600 dark:text-blue-400'
+                : 'text-gray-300 dark:text-neutral-600'
+            "
+            class="font-medium"
+          >
+            Чат-бот
+          </span>
+        </router-link>
       </li>
       <li>
         <router-link v-slot="{ isActive }" to="/store">
