@@ -13,6 +13,7 @@ export const useCartStore = defineStore("cart", () => {
   const currentPaymentType = ref(0)
   const discount = ref(0)
   const hasDiscount = computed(() => discount.value > 0)
+  const comment = ref("") // Добавляем поле для комментария
 
   // Вычисляемые свойства
   const getPaymentType = computed(
@@ -44,16 +45,17 @@ export const useCartStore = defineStore("cart", () => {
     () => getTotalAmount.value - getTotalDiscountAmount.value,
   )
 
-  const getItemsForSale = computed(() =>
-    groupedCartItems.value.map((item) => ({
-      pointItemId: item.id,
-      sellingPrice: item.totalPrice,
+  // Формируем данные для отправки на сервер
+  const getItemsForSale = computed(() => ({
+    items: groupedCartItems.value.map((item) => ({
+      pointItemId: item.id || null, // Поддержка "свободной продажи" (null, если нет товара)
+      sellingPrice: item.totalPrice / item.count, // Цена за единицу
       count: item.count,
-      paymentType: getPaymentType.value.code,
-      comment: item.comment,
-      discount: item.discount,
     })),
-  )
+    paymentType: getPaymentType.value.code,
+    comment: comment.value || undefined, // Комментарий опционален
+    discount: discount.value > 0 ? discount.value : undefined, // Скидка опциональна
+  }))
 
   // Вспомогательная функция для округления
   const roundTo = (number, decimals = 0) =>
@@ -61,7 +63,7 @@ export const useCartStore = defineStore("cart", () => {
 
   // Методы управления корзиной
   const addItem = (item, count = 1) => {
-    const itemKey = `${item.id}-${item.sellingPrice}`
+    const itemKey = `${item.id || "free"}-${item.sellingPrice}` // Уникальный ключ для "свободной продажи"
     const existingItem = cartItems.value.get(itemKey)
 
     if (existingItem) {
@@ -70,16 +72,17 @@ export const useCartStore = defineStore("cart", () => {
     } else {
       cartItems.value.set(itemKey, {
         ...item,
+        id: item.id || null, // null для "свободной продажи"
         count,
         totalPrice: item.sellingPrice * count,
         discount: 0,
       })
     }
-    applyDiscount() // Оставляем здесь, так как это связано с добавлением товара
+    applyDiscount()
   }
 
   const removeItem = (cartItem) => {
-    const itemKey = `${cartItem.id}-${cartItem.sellingPrice}`
+    const itemKey = `${cartItem.id || "free"}-${cartItem.sellingPrice}`
     const item = cartItems.value.get(itemKey)
     if (!item) return
 
@@ -90,12 +93,13 @@ export const useCartStore = defineStore("cart", () => {
     } else {
       cartItems.value.delete(itemKey)
     }
-    applyDiscount() // Оставляем здесь, так как это связано с удалением товара
+    applyDiscount()
   }
 
   const clearCart = () => {
     cartItems.value.clear()
     clearDiscount()
+    comment.value = "" // Очищаем комментарий
   }
 
   // Методы оплаты
@@ -143,7 +147,7 @@ export const useCartStore = defineStore("cart", () => {
 
   const setDiscount = (discountPercent) => {
     discount.value = Math.max(0, Math.min(100, discountPercent))
-    // Не вызываем applyDiscount, ждём явного вызова
+    // Не вызываем applyDiscount, ждем явного вызова
   }
 
   const setDiscountByAmount = (amount) => {
@@ -155,17 +159,17 @@ export const useCartStore = defineStore("cart", () => {
       return
     discount.value =
       ((getTotalAmount.value - amount) / getTotalAmount.value) * 100
-    // Не вызываем applyDiscount, ждём явного вызова
+    // Не вызываем applyDiscount, ждем явного вызова
   }
 
   const removeDiscount = (cartItem) => {
-    const itemKey = `${cartItem.id}-${cartItem.sellingPrice}`
+    const itemKey = `${cartItem.id || "free"}-${cartItem.sellingPrice}`
     const item = cartItems.value.get(itemKey)
     if (item) {
       item.discount = 0
       item.totalPrice = item.sellingPrice * item.count
       cartItems.value.set(itemKey, item)
-      applyDiscount() // Здесь оставляем, чтобы пересчитать после удаления скидки
+      applyDiscount()
     }
   }
 
@@ -174,15 +178,22 @@ export const useCartStore = defineStore("cart", () => {
     applyDiscount()
   }
 
+  // Метод для установки комментария
+  const setComment = (newComment) => {
+    comment.value = newComment
+  }
+
   // API методы
   const { sendRequest, isError, errorMessage } = useApiRequest()
   const modal = useModalStore()
 
   const makeSale = async () => {
     if (isEmpty.value) return
-    const response = await sendRequest("post", "/point/sales", {
-      items: getItemsForSale.value,
-    })
+    const response = await sendRequest(
+      "post",
+      "/point/sales",
+      getItemsForSale.value,
+    )
     if (response) {
       clearCart()
     } else if (isError.value) {
@@ -213,5 +224,7 @@ export const useCartStore = defineStore("cart", () => {
     makeSale,
     discount,
     hasDiscount,
+    comment,
+    setComment, // Экспортируем метод для установки комментария
   }
 })

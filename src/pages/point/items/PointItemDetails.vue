@@ -19,7 +19,7 @@
           <span class="font-medium"> В избранное </span>
         </Button>
       </a-modal>
-      <Button fluid @click="applySelect(pointItem, '/point/arrivals/add')">
+      <Button fluid @click="addItemToArrival">
         <span class="material-symbols-rounded">add</span>
         <span class="font-medium"> Приход</span>
       </Button>
@@ -45,9 +45,7 @@
       >
         <a-button-floating v-bind="props">star</a-button-floating>
       </a-modal>
-      <a-button-floating @click="applySelect(pointItem, '/point/arrivals/add')"
-        >add
-      </a-button-floating>
+      <a-button-floating @click="addItemToArrival"> >add </a-button-floating>
       <a-modal
         #="{ props }"
         :async-operation="updatePointItem"
@@ -137,6 +135,7 @@ import AList from "@/components/ui/AList.vue"
 import { useSelect } from "@/composables/useSelect2.js"
 import { useCartStore } from "@/stores/cart.store.js"
 import { useModalStore } from "@/stores/modal.store.js"
+import { useArrivalStore } from "@/stores/arrival.store.js"
 
 const cartStore = useCartStore()
 const route = useRoute()
@@ -156,6 +155,8 @@ const {
   isError: isItemAddingToFavoritesError,
   errorMessage: errorMessageOfItemAddingToFavorites,
 } = useApiRequest()
+
+const arrivalStore = useArrivalStore()
 
 const fetchPointItem = async (id) => {
   await sendRequest("get", "/point/items/" + id)
@@ -182,6 +183,11 @@ const updatePointItem = async () => {
 
 const onGenerateBarcodeClick = () => {
   generateBarcodePDF(pointItem.value.code)
+}
+
+const addItemToArrival = () => {
+  arrivalStore.addItem(pointItem.value)
+  router.push("/point/arrivals/add")
 }
 
 onMounted(() => {

@@ -25,6 +25,17 @@
           />
           <label class="text-gray-300">Наименование</label>
         </FloatLabel>
+
+        <FloatLabel v-if="fields.includes('purchasePrice')" variant="in">
+          <InputNumber
+            v-model="item.purchasePrice"
+            :invalid="validationErrors.purchasePrice"
+            fluid
+            locale="ru-RU"
+            suffix=" ₸"
+          />
+          <label class="text-gray-300">Цена закупки</label>
+        </FloatLabel>
         <FloatLabel variant="in">
           <InputNumber
             v-model="item.sellingPrice"
@@ -63,7 +74,6 @@
 </template>
 <script setup>
 import AModal from "@/components/ui/AModal.vue"
-import { useCartStore } from "@/stores/cart.store.js"
 import { ref } from "vue"
 import { useApiRequest } from "@/composables/useApiRequest.js"
 import { useModalStore } from "@/stores/modal.store.js"
@@ -73,12 +83,17 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  fields: {
+    type: Array,
+    default() {
+      return []
+    },
+  },
 })
 
 const emits = defineEmits(["success"])
 
 const item = ref({})
-const store = useCartStore()
 const modal = useModalStore()
 
 const {
@@ -96,9 +111,8 @@ const submitModal = async (closeModal) => {
     modal.show("Ошибка", errorMessage.value)
     return
   }
-  store.addItem(pointItem.value)
   closeModal()
-  emits("success")
+  emits("success", pointItem.value)
 }
 const onDialogOpen = () => {
   validationErrors.value = []

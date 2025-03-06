@@ -27,7 +27,7 @@
               >Штрихкод не найден</span
             >
           </div>
-          <cart-item-dialog
+          <new-item-dialog
             #="{ props }"
             :code="notFountInputValue"
             @success="onNewItemCreated"
@@ -39,7 +39,7 @@
               <span class="material-symbols-rounded">add_shopping_cart</span>
               <span class="font-medium">Создать</span>
             </button>
-          </cart-item-dialog>
+          </new-item-dialog>
         </div>
       </div>
     </template>
@@ -170,7 +170,7 @@ import {
 import { useFocusable } from "@/composables/useFocusable"
 import { useApiRequest } from "@/composables/useApiRequest"
 import { formatMoney } from "@/utils/format-money"
-import CartItemDialog from "@/components/CartItemDialog.vue"
+import NewItemDialog from "@/components/NewItemDialog.vue"
 
 const { focusableInput } = useFocusable()
 const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -209,10 +209,11 @@ const addCartItem = async () => {
   inputValue.value = ""
 }
 
-const onNewItemCreated = () => {
+const onNewItemCreated = (newItem) => {
   inputValue.value = ""
   notFountInputValue.value = ""
   isSearchError.value = false
+  store.addItem(newItem)
 }
 
 const onSearchInput = () => {

@@ -120,7 +120,7 @@ import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.v
 import { getPointItem } from "@/services/PointService"
 import { useScan } from "@/composables/useScan"
 import { formatMoney } from "@/utils/format-money"
-import CartItemDialog from "@/components/CartItemDialog.vue"
+import CartItemDialog from "@/components/NewItemDialog.vue"
 
 const sound = new Audio("/beep.wav")
 const { isScannableMode, applyScan } = useScan()

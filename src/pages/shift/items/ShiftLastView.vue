@@ -18,7 +18,6 @@
         fluid
         severity="help"
         to="/work-shifts/add"
-        v-bind="props"
       >
         <span class="material-symbols-rounded">add</span>
         <span class="font-medium"> Открыть смену</span>
@@ -31,12 +30,7 @@
         :async-operation="closeActiveCashRegister"
         title="Закрыть смену?"
       >
-        <a-button-floating-text
-          black
-          solid
-          to="/arrivals/items/add"
-          v-bind="props"
-        >
+        <a-button-floating-text black solid v-bind="props">
           Закрыть смену
         </a-button-floating-text>
       </a-modal>
@@ -95,8 +89,8 @@
           </span>
         </template>
         <template #description="{ item }">
-          <span class="font-medium"
-            >{{ formatMoney(item.total) }}
+          <span class="font-medium">
+            {{ formatMoney(item.total) }}
             <span class="font-semibold">₸</span>
           </span>
         </template>
@@ -108,40 +102,34 @@
         </h1>
         <a-list
           :items="workShift.sales"
-          description-field="count"
+          description-field="totalCount"
           description-hint="шт."
           sort-field="updatedAt"
           sort-order="desc"
-          title-field="pointItem.name"
+          title-field="summaryTitle"
         >
           <template #title="{ item }">
-            <span v-if="item.pointItem" class="">{{
-              item.pointItem?.name
-            }}</span>
-
-            <span v-else
-              >{{ item.comment }}
+            <span v-if="item.items && item.items.length > 0">
+              {{ getSummaryTitle(item) }}
+            </span>
+            <span v-else>
+              {{ item.comment || "" }}
               <span class="rounded font-normal text-yellow-500"
                 >Свободная продажа</span
-              ></span
-            >
+              >
+            </span>
           </template>
           <template #description="{ item }">
             <span class="font-medium">
               <span
-                v-if="item.discount > 0 && item.pointItem"
+                v-if="item.discount > 0"
                 class="mr-2 rounded bg-rose-50 px-2 py-1 text-rose-500 dark:bg-rose-500/20 dark:text-rose-200"
               >
-                -{{
-                  formatMoney(
-                    (item.pointItem.sellingPrice - item.sellingPrice) *
-                      item.count,
-                  )
-                }}
+                -{{ formatMoney(getDiscountAmount(item)) }}
                 <span class="font-semibold">₸</span>
               </span>
               <span>
-                {{ formatMoney(item.count * item.sellingPrice) }}
+                {{ formatMoney(getTotalPrice(item)) }}
               </span>
             </span>
             <span class="font-semibold"> ₸ </span>
@@ -154,8 +142,7 @@
                 <span>{{ formatDate(item.createdAt, "HH:mm") + ", " }}</span>
                 <span>{{ formatPaymentType(item.paymentType) }}</span>
               </div>
-
-              <span>{{ item.count }} шт.</span>
+              <span>{{ getTotalCount(item) }} шт.</span>
             </div>
           </template>
         </a-list>
@@ -208,11 +195,6 @@ const {
 } = useApiRequest()
 const { sendRequest: closeActiveCash } = useApiRequest()
 const store = useUserStore()
-// const {
-//   serverData: hourlySales,
-//   sendRequest: fetchHourlySales,
-//   isLoading: isHourlySalesLoading,
-// } = useApiRequest()
 
 const getCashTitle = computed(() => {
   if (isWorkShiftOpen.value) {
@@ -244,12 +226,47 @@ const cashAmount = computed(
   () => workShift.value.startAmount + totalWorkShiftAmount.value,
 )
 
+// Вычисление заголовка для продажи
+const getSummaryTitle = (sale) => {
+  const items = sale.items || []
+  if (items.length === 0) return "Свободная продажа"
+  const firstItem = items[0].pointItem
+  const remainingCount = items.length - 1
+  const firstName = firstItem ? firstItem.name : "Свободная продажа"
+  return remainingCount > 0
+    ? `${firstName} и еще ${remainingCount} `
+    : firstName
+}
+
+// Вычисление общей цены продажи
+const getTotalPrice = (sale) => {
+  return sale.items.reduce(
+    (total, item) => total + item.sellingPrice * item.count,
+    0,
+  )
+}
+
+// Вычисление общего количества товаров
+const getTotalCount = (sale) => {
+  return sale.items.reduce((total, item) => total + item.count, 0)
+}
+
+// Вычисление суммы скидки
+const getDiscountAmount = (sale) => {
+  if (!sale.discount) return 0
+  const originalTotal = sale.items.reduce((total, item) => {
+    const pointItem = item.pointItem
+    const originalPrice = pointItem ? pointItem.sellingPrice : item.sellingPrice
+    return total + originalPrice * item.count
+  }, 0)
+  return originalTotal - getTotalPrice(sale)
+}
+
 const formatPaymentType = (paymentType) => {
   const types = {
     1: "Наличный расчет",
     2: "Безналичный расчет",
   }
-
   return types[paymentType] || "Другое"
 }
 

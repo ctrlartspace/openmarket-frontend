@@ -285,9 +285,9 @@ router.beforeEach(async (to, from, next) => {
     !userStore.isAuthorizedStore
   ) {
     await userStore.logOut()
-  } else {
-    next()
+    return
   }
+  next()
 })
 
 router.afterEach(() => {
