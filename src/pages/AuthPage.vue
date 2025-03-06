@@ -81,8 +81,8 @@ const loginToStore = async () => {
 }
 
 const loginAsGuest = async () => {
-  authData.value.phoneNumber = "123"
-  authData.value.password = "123123"
+  authData.value.phoneNumber = "0000000000"
+  authData.value.password = "guest"
   await loginToStore()
 }
 </script>

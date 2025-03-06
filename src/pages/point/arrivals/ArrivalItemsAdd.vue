@@ -30,7 +30,7 @@
             <p class="flex items-center gap-2">
               {{ notFoundInputValue }}
             </p>
-            <span class="text-sm font-normal dark:text-neutral-300"
+            <span class="font-normal dark:text-neutral-300"
               >Штрихкод не найден</span
             >
           </div>
@@ -63,15 +63,33 @@
       </a-modal>
     </template>
     <div class="flex flex-col gap-2">
-      <v-form @submit.prevent="addItemByCode">
-        <InputText
-          ref="focusableInput"
-          v-model.trim="inputValue"
-          class="mb-2"
-          fluid
-          placeholder="Наименование"
-          type="text"
-        />
+      <v-form class="mb-2" @submit.prevent="addItemByCode">
+        <div class="relative">
+          <InputText
+            ref="focusableInput"
+            v-model.trim="inputValue"
+            fluid
+            placeholder="Наименование, код товара"
+            type="text"
+          />
+          <div
+            class="absolute bottom-0 right-0 top-0 flex items-center justify-center p-4"
+          >
+            <span
+              v-if="isPointItemsFetching || isSearchLoading"
+              class="material-symbols-rounded animate-spin font-black"
+            >
+              progress_activity
+            </span>
+
+            <span
+              v-else
+              class="material-symbols-rounded text-gray-300 dark:text-neutral-600"
+            >
+              search
+            </span>
+          </div>
+        </div>
       </v-form>
 
       <div v-if="pointItems && inputValue.length > 0" class="">

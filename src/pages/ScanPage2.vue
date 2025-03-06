@@ -1,110 +1,114 @@
 <template>
-  <div class="flex h-full flex-col bg-gray-100 dark:bg-black">
-    <div class="aspect-square w-full p-2">
-      <qrcode-stream
-        :constraints="selectedConstraints"
-        :formats="selectedBarcodeFormats"
-        :paused="isPaused"
-        :torch="isTorchOn"
-        :track="paintOutline"
-        class="overflow-hidden rounded-xl bg-gray-100 dark:bg-neutral-900"
-        @detect="onDetect"
-        @error="onError"
-      >
-        <div class="flex h-full items-end justify-center p-4 text-white">
-          <button
-            :class="{ 'opacity-40': !isTorchOn }"
-            @click="isTorchOn = !isTorchOn"
-          >
-            <span class="material-symbols-rounded text-4xl">flashlight_on</span>
-          </button>
-        </div>
-      </qrcode-stream>
-    </div>
-    <div class="relative flex-1 p-8">
-      <div
-        v-if="!resultItem && !isNotFound"
-        class="w-full rounded-xl bg-white p-4 text-center font-medium dark:bg-neutral-900"
-      >
-        <span
-          class="text-black dark:text-neutral-200"
-          @click="onDetect([{ rawValue: 6974443385731 }])"
+  <div class="flex h-full flex-col bg-white dark:bg-neutral-900">
+    <div class="relative flex flex-1 flex-col">
+      <div class="aspect-square w-full bg-gray-100 p-2 dark:bg-black">
+        <qrcode-stream
+          :constraints="selectedConstraints"
+          :formats="selectedBarcodeFormats"
+          :paused="isPaused"
+          :torch="isTorchOn"
+          :track="paintOutline"
+          class="overflow-hidden rounded-xl bg-gray-200 dark:bg-neutral-900"
+          @detect="onDetect"
+          @error="onError"
         >
-          Сканируйте штрихкод
-        </span>
-      </div>
-      <div v-if="isNotFound && !isScannableMode">
-        <div
-          :class="[
-            isNotFound ? 'animate-shake will-change-transform' : 'text-black',
-            'flex w-full flex-col justify-between text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-red-600 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 dark:border-neutral-800 dark:bg-neutral-900 dark:text-red-400',
-          ]"
-        >
-          <div class="rounded-xl bg-red-50 p-4 dark:bg-red-900/20">
-            <p class="flex items-center gap-2">
-              {{ result }}
-            </p>
-            <span class="font-normal">Штрихкод не найден</span>
-          </div>
-          <cart-item-dialog
-            #="{ props }"
-            :code="result"
-            @success="checkItem(result)"
-          >
+          <div class="flex h-full items-end justify-center p-4 text-white">
             <button
-              v-press
-              class="mt-2 flex justify-center gap-2 rounded-xl bg-blue-50 px-4 py-3 text-blue-600 dark:bg-blue-950/30 dark:text-blue-300"
-              v-bind="props"
+              :class="{ 'opacity-40': !isTorchOn }"
+              @click="isTorchOn = !isTorchOn"
             >
-              <span class="material-symbols-rounded">add_shopping_cart</span>
-              <span class="font-medium">Создать</span>
+              <span class="material-symbols-rounded text-4xl"
+                >flashlight_on</span
+              >
             </button>
-          </cart-item-dialog>
-        </div>
+          </div>
+        </qrcode-stream>
       </div>
+      <div class="flex-1 bg-gray-100 p-8 dark:bg-black">
+        <div
+          v-if="!resultItem && !isNotFound"
+          class="w-full rounded-xl bg-white p-4 text-center font-medium dark:bg-neutral-900"
+        >
+          <span class="text-black dark:text-neutral-200">
+            Сканируйте штрихкод
+          </span>
+          <!--          @click="onDetect([{ rawValue: 6974443385731 }])"-->
+        </div>
+        <div v-if="isNotFound && !isScannableMode">
+          <div
+            :class="[
+              isNotFound ? 'animate-shake will-change-transform' : 'text-black',
+              'flex w-full flex-col justify-between text-ellipsis rounded-xl border border-gray-100 bg-white px-4 py-3 font-medium text-red-600 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 dark:border-neutral-800 dark:bg-neutral-900 dark:text-red-400',
+            ]"
+          >
+            <div class="rounded-xl bg-red-50 p-6 dark:bg-red-900/20">
+              <p class="flex items-center gap-2">
+                {{ result }}
+              </p>
+              <span class="font-normal">Штрихкод не найден</span>
+            </div>
+            <cart-item-dialog
+              #="{ props }"
+              :code="result"
+              @success="checkItem(result)"
+            >
+              <button
+                v-press
+                class="mt-2 flex justify-center gap-2 rounded-xl bg-blue-50 px-4 py-3 text-blue-600 dark:bg-blue-950/30 dark:text-blue-300"
+                v-bind="props"
+              >
+                <span class="material-symbols-rounded">add_shopping_cart</span>
+                <span class="font-medium">Создать</span>
+              </button>
+            </cart-item-dialog>
+          </div>
+        </div>
 
-      <div class="absolute bottom-0 left-0 right-0 p-6">
         <div
           v-if="resultItem"
-          class="relative rounded-xl border border-gray-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
+          class="absolute bottom-0 left-0 right-0 flex h-full animate-fade items-end justify-center bg-black bg-opacity-30 p-6 backdrop-blur-md"
         >
-          <p class="text-sm text-gray-300 dark:text-neutral-600">
-            {{ resultItem.code }}
-          </p>
-          <p class="mt-2 text-2xl font-medium">{{ resultItem.name }}</p>
-          <p class="text-2xl">{{ formatMoney(resultItem.sellingPrice) }} ₸</p>
-          <div class="mt-2 flex items-center justify-between gap-2">
-            <button
-              v-press
-              class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2 dark:bg-neutral-800"
-              @click="minusItem"
-            >
-              <span class="material-symbols-rounded">remove</span>
-            </button>
-            <div class="w-full text-center">
-              <span class="text-2xl">{{ itemCount }} шт.</span>
+          <div
+            class="relative w-full rounded-xl border border-white bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
+          >
+            <p class="text-gray-300 dark:text-neutral-600">
+              {{ resultItem.code }}
+            </p>
+            <p class="mt-2 text-2xl font-medium">{{ resultItem.name }}</p>
+            <p class="text-2xl">{{ formatMoney(resultItem.sellingPrice) }} ₸</p>
+            <div class="mt-2 flex items-center justify-between gap-2">
+              <button
+                v-press
+                class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2 dark:bg-neutral-800"
+                @click="minusItem"
+              >
+                <span class="material-symbols-rounded">remove</span>
+              </button>
+              <div class="w-full text-center">
+                <span class="text-2xl">{{ itemCount }} шт.</span>
+              </div>
+              <button
+                v-press
+                class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2 dark:bg-neutral-800"
+                @click="plusItem"
+              >
+                <span class="material-symbols-rounded">add</span>
+              </button>
             </div>
             <button
               v-press
-              class="flex w-full items-center justify-center rounded-xl bg-gray-100 p-2 dark:bg-neutral-800"
-              @click="plusItem"
+              class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-3 text-center font-medium text-white hover:brightness-95 active:brightness-95 dark:border dark:border-neutral-800"
+              @click="onApplyClick"
             >
-              <span class="material-symbols-rounded">add</span>
+              Готово
+            </button>
+            <button class="absolute right-0 top-0 p-6" @click="resetScanner">
+              <span
+                class="material-symbols-rounded text-gray-300 dark:text-neutral-600"
+                >close</span
+              >
             </button>
           </div>
-          <button
-            v-press
-            class="mt-4 flex w-full items-center justify-center gap-4 rounded-xl bg-black px-4 py-3 text-center font-medium text-white hover:brightness-95 active:brightness-95 dark:border dark:border-neutral-800"
-            @click="onApplyClick"
-          >
-            Готово
-          </button>
-          <button class="absolute right-0 top-0 p-4" @click="resetScanner">
-            <span
-              class="material-symbols-rounded text-gray-300 dark:text-neutral-600"
-              >close</span
-            >
-          </button>
         </div>
       </div>
     </div>

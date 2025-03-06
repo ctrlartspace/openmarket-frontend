@@ -53,12 +53,13 @@
         <slot :item="item" name="sub"><span></span></slot>
       </div>
     </div>
-    <div v-if="hasLast" class="px-4 py-3">
-      <slot name="last"></slot>
-    </div>
 
     <div v-if="hasNoItems" class="bg-gray-50 px-4 py-3 dark:bg-neutral-900">
       <p class="text-center text-gray-300 dark:text-neutral-600">Нет данных</p>
+    </div>
+
+    <div v-if="hasLast" class="px-4 py-3">
+      <slot name="last"></slot>
     </div>
   </div>
 </template>

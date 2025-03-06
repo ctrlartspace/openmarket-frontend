@@ -2,7 +2,7 @@
   <div class="w-full bg-gray-100 px-6 py-6 pt-2 dark:bg-black">
     <div class="mb-2 flex gap-2 bg-gray-100 dark:bg-black">
       <button
-        class="pointer-events-auto flex w-full items-center justify-between gap-2 truncate text-ellipsis whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3 text-left text-gray-300 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 md:pl-12"
+        class="pointer-events-auto flex w-full items-center justify-between gap-2 truncate text-ellipsis whitespace-nowrap rounded-xl border border-gray-100 bg-white px-4 py-3 text-left text-gray-300 placeholder:font-normal placeholder:text-gray-300 focus:outline-black focus:ring-0 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-600 md:pl-12"
         @click="onSearchClick"
       >
         Найти

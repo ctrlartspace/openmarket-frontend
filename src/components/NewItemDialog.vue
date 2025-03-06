@@ -118,8 +118,7 @@ const onDialogOpen = () => {
   validationErrors.value = []
   item.value.code = props.code
   item.value.name = props.name
-  item.value.purchasePrice = 1
-  item.value.sellingPrice = props.sellingPrice
+  item.value.purchasePrice = props.fields.includes("purchasePrice") ? 0 : 1
   item.value.count = 1
 }
 </script>

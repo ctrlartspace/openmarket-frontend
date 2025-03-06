@@ -31,19 +31,21 @@
       </a-modal>
     </template>
     <template v-if="isError" #error>{{ errorMessage }}</template>
-    <a-base-input
-      id="store-point-name"
-      v-model="storePointName"
-      :is-error="validationErrors?.name"
-      placeholder="Название точки"
-      type="text"
-    />
+
+    <div class="flex-auto">
+      <label class="mb-2 block font-medium"> Полное имя</label>
+      <InputText
+        v-model="storePointName"
+        :invalid="validationErrors?.name"
+        fluid
+        placeholder="Название точки"
+      />
+    </div>
   </a-page>
 </template>
 
 <script setup>
 import { ref } from "vue"
-import ABaseInput from "@/components/ui/ABaseInput.vue"
 import AModal from "@/components/ui/AModal.vue"
 import { useRouter } from "vue-router"
 import AButtonFloatingText from "@/components/ui/AButtonFloatingText.vue"

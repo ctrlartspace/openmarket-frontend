@@ -45,7 +45,7 @@
       >
         <a-button-floating v-bind="props">star</a-button-floating>
       </a-modal>
-      <a-button-floating @click="addItemToArrival"> >add </a-button-floating>
+      <a-button-floating @click="addItemToArrival"> add</a-button-floating>
       <a-modal
         #="{ props }"
         :async-operation="updatePointItem"
