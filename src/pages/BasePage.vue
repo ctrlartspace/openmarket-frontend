@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isDesktop" class="@base-page z-50 flex h-screen flex-col">
+  <div v-if="!isDesktop" class="@base-page z-50 flex min-h-screen flex-col">
     <div
       v-if="!onlineStore.isOnline"
       class="animate-pulse bg-rose-50 py-1 text-center text-rose-500 dark:bg-rose-500/10 dark:text-rose-200"
@@ -11,7 +11,11 @@
         class="flex h-[55px] flex-col justify-center gap-2 border-b border-gray-100 px-8 py-3 dark:border-neutral-800 dark:bg-neutral-900"
       >
         <div class="flex items-center gap-4">
-          <button class="flex items-center" @click="$router.back()">
+          <button
+            v-if="!isDesktop"
+            class="flex items-center"
+            @click="$router.back()"
+          >
             <span class="material-symbols-rounded">chevron_left</span>
           </button>
           <h1
@@ -23,10 +27,8 @@
       </nav>
     </header>
 
-    <section class="relative flex flex-1 flex-col overflow-auto">
-      <div class="flex h-full flex-col">
-        <router-view></router-view>
-      </div>
+    <section class="relative flex flex-1 flex-col overflow-auto pb-safe">
+      <router-view />
     </section>
 
     <footer class="pb-safe">
@@ -34,12 +36,8 @@
     </footer>
   </div>
 
-  <div v-if="isDesktop" class="flex w-full flex-col bg-gray-50">
-    <div class="grid w-full flex-grow grid-cols-10 overflow-hidden">
-      <div class="col-span-10 flex-col overflow-hidden">
-        <router-view></router-view>
-      </div>
-    </div>
+  <div v-else class="flex min-h-screen w-full flex-col bg-gray-50">
+    <router-view />
     <section class="w-full">
       <slot name="bottom"></slot>
     </section>
@@ -52,29 +50,22 @@ import AppBottomNavigationBar from "@/components/mobile/AppBottomNavigationBar.v
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import { useRoute } from "vue-router"
 import { useSelect } from "@/composables/useSelect2"
-import { useOnlineStore } from "@/stores/online.store.js"
+import { useOnlineStore } from "@/stores/online.store"
 
 const route = useRoute()
 const breakpoints = useBreakpoints(breakpointsTailwind)
-const isDesktop = breakpoints.greater("sm") // only smaller than lg
+const isDesktop = breakpoints.greater("sm")
 const { isSelectableMode } = useSelect()
 const onlineStore = useOnlineStore()
 
-const props = defineProps({
-  menuItems: {
-    type: Array,
-  },
-})
-
 const headerTitle = computed(() => {
-  if (isSelectableMode.value) {
-    return "Выберите..."
-  }
-  return (
-    props.menuItems.find((item) => route.path.includes(item.path))?.title ||
-    "Open Kassa"
-  )
+  if (isSelectableMode.value) return "Выберите..."
+  return route.meta.title || "Open Kassa"
 })
 </script>
 
-<style></style>
+<style scoped>
+.min-h-screen {
+  box-sizing: border-box;
+}
+</style>

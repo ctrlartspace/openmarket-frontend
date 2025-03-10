@@ -1,13 +1,6 @@
 <template>
-  <a-page
-    :loading="isPointItemsFetching"
-    :title="isSelectableMode ? 'Выбрать...' : 'Товары'"
-  >
+  <div>
     <template #header>
-      <Button fluid @click="$router.back()">
-        <span class="material-symbols-rounded">arrow_back</span>
-        <span class="font-medium"> Назад</span>
-      </Button>
       <Button
         v-if="!isSelectableMode"
         as="router-link"
@@ -15,7 +8,7 @@
         to="/point/items/import"
       >
         <span class="material-symbols-rounded">upload</span>
-        <span class="font-medium"> Импорт товаров </span>
+        <span class="font-medium">Импорт товаров</span>
       </Button>
       <Button
         v-if="!isSelectableMode"
@@ -24,32 +17,25 @@
         to="/point/items/add"
       >
         <span class="material-symbols-rounded">add</span>
-        <span class="font-medium"> Создать товар</span>
+        <span class="font-medium">Создать товар</span>
       </Button>
     </template>
     <template #floating>
       <a-link-floating
         v-if="!isSelectableMode"
-        :to="{
-          path: '/point/items/import',
-        }"
+        :to="{ path: '/point/items/import' }"
         success
-        >upload
-      </a-link-floating>
-      <a-link-floating
-        :to="{
-          path: '/scan2',
-          query: { scannableMode: true },
-        }"
       >
+        upload
+      </a-link-floating>
+      <a-link-floating :to="{ path: '/scan2', query: { scannableMode: true } }">
         center_focus_strong
       </a-link-floating>
       <a-link-floating
         v-if="!isSelectableMode"
-        :to="{
-          path: '/point/items/add',
-        }"
-        >add
+        :to="{ path: '/point/items/add' }"
+      >
+        add
       </a-link-floating>
     </template>
 
@@ -62,17 +48,17 @@
         placeholder="Наименование"
         type="text"
       />
-
       <a-list
         :items="pointItems"
         description-field="count"
         description-hint="шт."
         title-field="name"
         @on-item-click="onItemClick"
-      >
-      </a-list>
+      />
     </div>
-  </a-page>
+    <!-- Отладочная информация -->
+    <div v-if="isPointItemsFetching" class="text-red-500">Loading...</div>
+  </div>
 </template>
 
 <script setup>
@@ -98,9 +84,7 @@ const {
 } = useApiRequest()
 
 const getPointItems = async () => {
-  await fetchPointItems("get", "/point/items", {
-    q: searchInput.value,
-  })
+  await fetchPointItems("get", "/point/items", { q: searchInput.value })
 }
 
 const onItemClick = (item) => {
@@ -111,22 +95,17 @@ const onItemClick = (item) => {
   }
 }
 
-watchDebounced(
-  searchInput,
-  async () => {
-    await getPointItems()
-  },
-  { debounce: 500, maxWait: 1000 },
-)
+watchDebounced(searchInput, getPointItems, { debounce: 500, maxWait: 1000 })
 
 watch(scannedCode, (newScannedCode) => {
-  if (newScannedCode) {
-    searchInput.value = newScannedCode
-  }
+  if (newScannedCode) searchInput.value = newScannedCode
 })
 
-onMounted(() => {
-  getPointItems()
+onMounted(getPointItems)
+
+// Предоставляем значение для лоадера
+defineExpose({
+  loading: isPointItemsFetching,
 })
 </script>
 

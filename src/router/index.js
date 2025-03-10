@@ -1,270 +1,163 @@
 import { createRouter, createWebHistory } from "vue-router"
-
-import AuthPage from "@/pages/AuthPage.vue"
-import ScanPage2 from "@/pages/ScanPage2.vue"
-import StorePage from "@/pages/store/StorePage.vue"
-import StoreInfoView from "@/pages/store/info/StoreInfoView.vue"
-import StoreUsersAdd from "@/pages/store/users/StoreUsersAdd.vue"
-import StoreUsersView from "@/pages/store/users/StoreUsersView.vue"
-import StorePointsAdd from "@/pages/store/points/StorePointsAdd.vue"
-
-import PointPage from "@/pages/point/PointPage.vue"
-import PointUsersAdd from "@/pages/point/users/PointUsersAdd.vue"
-import PointUsersView from "@/pages/point/users/PointUsersView.vue"
-import PointItemsView from "@/pages/point/items/PointItemsView.vue"
-import PointItemsAdd from "@/pages/point/items/PointItemsAdd.vue"
-import PointItemDetails from "@/pages/point/items/PointItemDetails.vue"
-import ArrivalItemsView from "@/pages/point/arrivals/ArrivalItemsView.vue"
-import ArrivalItemsAdd from "@/pages/point/arrivals/ArrivalItemsAdd.vue"
-
-import ShiftPage from "@/pages/shift/ShiftPage.vue"
-import ShiftLastView from "@/pages/shift/items/ShiftLastView.vue"
-import ShiftAdd from "@/pages/shift/items/ShiftAdd.vue"
-import ShiftArchiveView from "@/pages/shift/archive/ShiftArchiveView.vue"
-import PageContent from "@/pages/PageContent.vue"
-import SaleItemsView from "@/pages/point/sales/SaleItemsView.vue"
-import CartPage from "@/pages/cart/CartPage.vue"
-import CartActiveView from "@/pages/cart/items/CartActiveView.vue"
-import FavoriteItemsView from "@/pages/cart/favorites/FavoriteItemsView.vue"
-import FreeSaleView from "@/pages/cart/free/FreeSaleView.vue"
-import PointInfoView from "@/pages/point/info/PointInfoView.vue"
-import StoreCreatePage from "@/pages/store-create/StoreCreatePage.vue"
-import StoreCreateUserInfoPage from "@/pages/store-create/user-info/StoreCreateUserInfoPage.vue"
-import NoInternetPage from "@/pages/NoInternetPage.vue"
-import PointItemsImport from "@/pages/point/items/PointItemsImport.vue"
-
 import { useUserStore } from "@/stores/user.store"
 import { useRouteStore } from "@/stores/route.store"
-import AIPage from "@/pages/ai/AIPage.vue"
-import AIHelpPage from "@/pages/ai/AIHelpPage.vue"
+import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
+import DesktopLayout from "@/components/layouts/DesktopLayout.vue"
+import MobileLayout from "@/components/layouts/MobileLayout.vue"
+
+// Определяем макет на основе размера экрана
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const getLayout = () =>
+  breakpoints.greater("sm").value ? DesktopLayout : MobileLayout
 
 const routes = [
-  { path: "/no-internet", component: NoInternetPage },
-  { path: "/", redirect: "/point" },
+  {
+    path: "/no-internet",
+    component: () => import("@/pages/NoInternetPage.vue"),
+  },
+  { path: "/", redirect: "/point/items" },
   {
     path: "/cart",
-    component: CartPage,
+    component: () => Promise.resolve(getLayout()), // Используем Promise для совместимости
+    meta: { title: "Корзина", requiresAuth: true },
     redirect: "/cart/active",
     children: [
       {
         path: "active",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: CartActiveView,
-          },
-        ],
+        component: () => import("@/pages/cart/items/CartActiveView.vue"),
+        meta: { title: "Корзина", requiresAuth: true },
       },
       {
         path: "favorite",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: FavoriteItemsView,
-          },
-        ],
+        component: () => import("@/pages/cart/favorites/FavoriteItemsView.vue"),
+        meta: { title: "Быстрые товары", requiresAuth: true },
       },
       {
         path: "free",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: FreeSaleView,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    path: "/store",
-    component: StorePage,
-    redirect: "/store/info",
-    children: [
-      {
-        path: "info",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: StoreInfoView,
-          },
-
-          {
-            path: "new-point",
-            component: StorePointsAdd,
-          },
-        ],
-      },
-      {
-        path: "users",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: StoreUsersView,
-          },
-          {
-            path: "add",
-            component: StoreUsersAdd,
-          },
-        ],
+        component: () => import("@/pages/cart/free/FreeSaleView.vue"),
+        meta: { title: "Свободная продажа", requiresAuth: true },
       },
     ],
   },
   {
     path: "/point",
-    component: PointPage,
-    redirect: "/point/info",
+    component: () => Promise.resolve(getLayout()), // Используем Promise для совместимости
+    meta: { title: "Точка", requiresAuth: true },
+    redirect: "/point/items",
     children: [
       {
         path: "info",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: PointInfoView,
-          },
-        ],
+        component: () => import("@/pages/point/info/PointInfoView.vue"),
+        meta: { title: "Точка", requiresAuth: true },
       },
       {
         path: "users",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: PointUsersView,
-          },
-          {
-            path: "add",
-            component: PointUsersAdd,
-          },
-        ],
+        component: () => import("@/pages/point/users/PointUsersView.vue"),
+        meta: { title: "Сотрудники", requiresAuth: true },
+      },
+      {
+        path: "users/add",
+        component: () => import("@/pages/point/users/PointUsersAdd.vue"),
+        meta: { title: "Добавить сотрудника", requiresAuth: true },
       },
       {
         path: "items",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: PointItemsView,
-          },
-
-          {
-            path: "import",
-            component: PointItemsImport,
-          },
-          {
-            path: "add",
-            component: PointItemsAdd,
-          },
-          {
-            path: ":id",
-            component: PointItemDetails,
-          },
-        ],
+        component: () => import("@/pages/point/items/PointItemsView.vue"),
+        meta: { title: "Товары", requiresAuth: true },
+      },
+      {
+        path: "items/import",
+        component: () => import("@/pages/point/items/PointItemsImport.vue"),
+        meta: { title: "Импорт товаров", requiresAuth: true },
+      },
+      {
+        path: "items/add",
+        component: () => import("@/pages/point/items/PointItemsAdd.vue"),
+        meta: { title: "Создать товар", requiresAuth: true },
+      },
+      {
+        path: "items/:id",
+        component: () => import("@/pages/point/items/PointItemDetails.vue"),
+        meta: { title: "Детали товара", requiresAuth: true },
       },
       {
         path: "arrivals",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: ArrivalItemsView,
-          },
-          {
-            path: "add",
-            component: ArrivalItemsAdd,
-          },
-        ],
+        component: () => import("@/pages/point/arrivals/ArrivalItemsView.vue"),
+        meta: { title: "Поступления", requiresAuth: true },
+      },
+      {
+        path: "arrivals/add",
+        component: () => import("@/pages/point/arrivals/ArrivalItemsAdd.vue"),
+        meta: { title: "Добавить поступление", requiresAuth: true },
       },
       {
         path: "sales",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: SaleItemsView,
-          },
-        ],
+        component: () => import("@/pages/point/sales/SaleItemsView.vue"),
+        meta: { title: "Продажи", requiresAuth: true },
       },
     ],
   },
   {
     path: "/work-shifts",
-    component: ShiftPage,
+    component: () => Promise.resolve(getLayout()), // Используем Promise для совместимости
+    meta: { title: "Смены", requiresAuth: true },
     redirect: "/work-shifts/last",
     children: [
       {
         path: "last",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: ShiftLastView,
-          },
-          {
-            path: "add",
-            component: ShiftAdd,
-          },
-        ],
+        component: () => import("@/pages/shift/items/ShiftLastView.vue"),
+        meta: { title: "Сегодня", requiresAuth: true },
+      },
+      {
+        path: "last/add",
+        component: () => import("@/pages/shift/items/ShiftAdd.vue"),
+        meta: { title: "Открытие смены", requiresAuth: true },
       },
       {
         path: "add",
-        component: ShiftAdd,
+        component: () => import("@/pages/shift/items/ShiftAdd.vue"),
+        meta: { title: "Открытие смены", requiresAuth: true },
       },
       {
         path: "archive",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: ShiftArchiveView,
-          },
-        ],
+        component: () => import("@/pages/shift/archive/ShiftArchiveView.vue"),
+        meta: { title: "История", requiresAuth: true },
       },
     ],
   },
-
   {
     path: "/ai",
-    component: AIPage,
+    component: () => Promise.resolve(getLayout()), // Используем Promise для совместимости
+    meta: { title: "AI", requiresAuth: true },
     redirect: "/ai/help",
     children: [
       {
         path: "help",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: AIHelpPage,
-          },
-        ],
+        component: () => import("@/pages/ai/AIHelpPage.vue"),
+        meta: { title: "Помощь AI", requiresAuth: true },
       },
     ],
   },
   {
     path: "/store-create",
-    component: StoreCreatePage,
+    component: () => import("@/pages/store-create/StoreCreatePage.vue"),
     redirect: "/store-create/user-info",
+    meta: { requiresAuth: false },
     children: [
       {
         path: "user-info",
-        component: PageContent,
-        children: [
-          {
-            path: "",
-            component: StoreCreateUserInfoPage,
-          },
-        ],
+        component: () =>
+          import("@/pages/store-create/user-info/StoreCreateUserInfoPage.vue"),
+        meta: { requiresAuth: false },
       },
     ],
   },
-  { path: "/auth", component: AuthPage },
-  { path: "/store/create", component: StoreCreatePage },
-  { path: "/scan2", component: ScanPage2 },
+  {
+    path: "/auth",
+    component: () => import("@/pages/AuthPage.vue"),
+    meta: { requiresAuth: false },
+  },
+  { path: "/scan2", component: () => import("@/pages/ScanPage2.vue") },
 ]
 
 const router = createRouter({
@@ -278,15 +171,11 @@ router.beforeEach(async (to, from, next) => {
 
   routeStore.setPreviousRoute(from)
 
-  if (
-    to.path !== "/auth" &&
-    to.path !== "/store-create" &&
-    to.path !== "/store-create/user-info" &&
-    !userStore.isAuthorizedStore
-  ) {
+  if (!to.meta.requiresAuth && !userStore.isAuthorizedStore) {
     await userStore.logOut()
-    return
+    return next("/auth")
   }
+
   next()
 })
 

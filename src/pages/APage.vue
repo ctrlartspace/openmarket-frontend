@@ -80,7 +80,7 @@ import { useSlots } from "vue"
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
-const isDesktop = breakpoints.greater("sm") // only smaller than lg
+const isDesktop = breakpoints.greater("sm")
 
 defineProps({
   title: {
