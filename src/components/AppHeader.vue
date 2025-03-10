@@ -5,7 +5,7 @@
   >
     <div
       v-if="!onlineStore.isOnline"
-      class="animate-pulse bg-rose-50 py-1 text-center text-rose-500"
+      class="animate-pulse bg-rose-50 py-1 text-center text-rose-500 dark:bg-neutral-400/50 dark:text-neutral-300"
     >
       Нет подключения к интернету
     </div>

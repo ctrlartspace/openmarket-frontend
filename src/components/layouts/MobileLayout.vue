@@ -1,7 +1,5 @@
 <template>
-  <div class="@mobile-layout h-full">
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script setup></script>

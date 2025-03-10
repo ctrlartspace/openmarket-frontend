@@ -59,6 +59,10 @@
           </span>
           <span class=""> {{ workShift.user.fullName }}</span>
         </p>
+        <hourly-sales-chart
+          v-if="workShift.sales.length > 1"
+          :sales="workShift.sales"
+        />
       </div>
       <div class="grid grid-cols-2 gap-4">
         <div class="flex flex-col rounded-xl bg-white p-4 dark:bg-neutral-900">
@@ -187,6 +191,7 @@ import { useApiRequest } from "@/composables/useApiRequest"
 import { formatDate, fromNow } from "@/utils/format-date"
 import { formatMoney } from "@/utils/format-money"
 import { useUserStore } from "@/stores/user.store.js"
+import HourlySalesChart from "@/components/ui/HourlySalesChart.vue"
 
 const {
   serverData: workShift,
@@ -283,6 +288,7 @@ const menuItems = computed(() =>
 
 onMounted(async () => {
   await fetchWorkShift("get", "/point/work-shifts/today")
+  console.log(workShift.value.sales)
 })
 </script>
 

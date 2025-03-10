@@ -49,25 +49,13 @@ import { defineEmits, defineProps } from "vue"
 const modal = useModalStore()
 const emits = defineEmits(["yes", "no", "finish", "handle"])
 const props = defineProps({
-  isOpenOut: {
-    type: Boolean,
-    default: false,
-  },
   title: {
     type: String,
     default: "Ошибка",
   },
-  yesCaption: {
-    type: String,
-    default: "Да",
-  },
   noCaption: {
     type: String,
     default: "Закрыть",
-  },
-  hideYes: {
-    type: Boolean,
-    default: false,
   },
 })
 

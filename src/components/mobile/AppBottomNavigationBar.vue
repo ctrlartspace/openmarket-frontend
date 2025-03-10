@@ -1,5 +1,5 @@
 <template>
-  <footer class="@bottom-navigation pb-safe">
+  <footer class="@bottom-navigation">
     <nav>
       <div
         class="flex h-[55px] items-center border-t border-gray-100 bg-white px-4 py-1 dark:border-neutral-800 dark:bg-neutral-900"

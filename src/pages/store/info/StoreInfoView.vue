@@ -68,7 +68,6 @@
         </router-link>
       </template>
     </a-list>
-
     <a-list :items="menuItems" class="mb-4" title-field="title">
       <template #title="{ item }">
         <router-link :to="item.path" class="flex items-center gap-4">

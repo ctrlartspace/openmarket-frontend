@@ -7,6 +7,7 @@
       </Button>
     </template>
     <div v-if="sales && sales.length > 0" class="flex flex-col gap-2">
+      <daily-sales-chart :sales="sales" />
       <div v-for="data in groupedDataByDate" :key="data.date">
         <h1 class="mb-2 px-4 text-gray-300 dark:text-neutral-600">
           {{ fromNow(data.date) }}
@@ -64,6 +65,7 @@ import { useApiRequest } from "@/composables/useApiRequest"
 import { formatDate, fromNow } from "@/utils/format-date"
 import { formatPaymentType } from "@/utils/format-payment-type"
 import { formatMoney } from "@/utils/format-money"
+import DailySalesChart from "@/components/ui/DailySalesChart.vue"
 
 const { serverData: sales, sendRequest, isLoading } = useApiRequest()
 

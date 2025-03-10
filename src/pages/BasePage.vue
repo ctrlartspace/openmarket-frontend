@@ -1,12 +1,12 @@
 <template>
-  <div v-if="!isDesktop" class="@base-page z-50 flex h-full flex-col">
+  <div v-if="!isDesktop" class="@base-page z-50 flex h-screen flex-col">
     <div
       v-if="!onlineStore.isOnline"
-      class="animate-pulse bg-rose-50 py-1 text-center text-rose-500"
+      class="animate-pulse bg-rose-50 py-1 text-center text-rose-500 dark:bg-rose-500/10 dark:text-rose-200"
     >
       Нет подключения к интернету
     </div>
-    <header>
+    <header class="pt-safe">
       <nav
         class="flex h-[55px] flex-col justify-center gap-2 border-b border-gray-100 px-8 py-3 dark:border-neutral-800 dark:bg-neutral-900"
       >
@@ -29,7 +29,7 @@
       </div>
     </section>
 
-    <footer>
+    <footer class="pb-safe">
       <app-bottom-navigation-bar />
     </footer>
   </div>

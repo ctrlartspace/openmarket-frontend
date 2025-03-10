@@ -16,7 +16,7 @@ export default defineConfig({
     }),
     mkcert(),
     VitePWA({
-      injectRegister: "auto",
+      injectRegister: null,
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,jpg,png,svg,gif,webmanifest}"],
         cleanupOutdatedCaches: true,
@@ -32,9 +32,9 @@ export default defineConfig({
       },
       includeAssets: ["**/*.{png}"],
       manifest: {
-        name: "Open Kassa",
-        short_name: "Open Kassa",
-        description: "Open Kassa",
+        name: "Учет товаров",
+        short_name: "Учет товаров",
+        description: "Система учета товаров ",
         theme_color: "#ffffff",
         display: "standalone",
         icons: [

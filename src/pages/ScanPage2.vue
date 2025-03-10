@@ -159,15 +159,14 @@ const onApplyClick = () => {
 
 const addToCart = () => {
   store.addItem(resultItem.value, itemCount.value)
-  resultItem.value = null
-  itemCount.value = 1
-  isPaused.value = false
+  resetScanner()
 }
 
 const resetScanner = () => {
   resultItem.value = null
   isNotFound.value = false
   isPaused.value = false
+  itemCount.value = 1
 }
 
 async function onDetect(detectedCodes) {
@@ -175,7 +174,7 @@ async function onDetect(detectedCodes) {
   resultCount.value = resultCount.value + 1
   if (isScannableMode.value) {
     playSound()
-    applyScan(result.value)
+    await applyScan(result.value)
   } else {
     await checkItem(result.value)
   }

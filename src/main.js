@@ -16,6 +16,7 @@ import Aura from "@primevue/themes/aura"
 import { definePreset } from "@primevue/themes"
 import { FocusTrap } from "primevue"
 import appTheme from "@/utils/appTheme.js"
+import "./registerServiceWorker" // Импорт для регистрации сервис-воркера
 
 console.log(Aura)
 const Noir = definePreset(Aura, appTheme)

@@ -27,6 +27,7 @@
     "primevue": "^4.2.5",
     "quagga": "^0.6.16",
     "receiptline": "^1.16.1",
+    "register-service-worker": "^1.7.2",
     "vue": "^3.5.10",
     "vue-chartjs": "^5.3.2",
     "vue-qrcode-reader": "^5.5.10",
